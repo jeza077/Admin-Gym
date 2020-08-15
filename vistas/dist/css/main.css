@@ -1,0 +1,152 @@
+:root{
+    --btnPrimario: orange;
+}
+
+.login-page {
+    background: rgb(255, 158, 30);
+    color: white;
+}
+.login-box{
+    width: 400px;   
+}
+.card {
+    padding: 45px 10px;
+    display: block;
+    height: 100%;
+}
+.login-logo a{
+    font-weight: 400;
+}
+.login-logo a b{
+    color: var(--btnPrimario);
+}
+.btn-orange {
+    background-color: var(--btnPrimario);
+    color: #fff;
+    border-color: var(--btnPrimario);
+    box-shadow: none;
+}
+
+/* SLIDE DE, LOGIN, VERIFICAR EMAIL, PREGUNTAS, CAMBIAR CONTRASEÑA */
+.login-page .login-box{
+    position: relative;
+    width: 400px;
+    height: 500px;
+    /* margin: 6.5% 35%; */
+    overflow: hidden;
+    background: var(--secuandario);
+    border-radius: 4px;
+    transition: 0.5s;
+}
+.login-card-body{
+    position: absolute;
+    width: 100%;
+    padding: 25px 30px 95px 30px;
+    transition: 0.5s;
+}
+.login-page .login-box .card .login-card-body .login-box-msg{
+    position: relative;
+    width: 100%;
+    text-align: center;
+}
+
+/* .login-page .login-box .login-card-body form{
+    position: relative;
+    width: 100%;
+    height: 100%;
+} */
+/* .login-page .login-box .login-card-body form .form-control{
+    background: rgb(78, 77, 77);
+    border: none;
+    color: white;
+    border-radius: 2px;
+    margin-bottom: 20px;
+} */
+/* .login-box .login-card-body form .row .link{
+    padding: 50px 0 0 20px;
+} */
+
+.login-page .login-box .login-card-body form input{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-image: none!important;
+}
+
+.login-card-body form .btn{
+    border-radius: 2px;
+}
+
+/* CONTENEDOR Recuperar contraseña */
+.login-card-body .verificarEmail{
+    pointer-events: none;
+}
+.verificarEmail{
+    left: 100%;
+}
+.login-box.active .verificarEmail{
+    left: 0;
+}
+
+.iniciarSesion{
+    left: 0;
+}
+.login-box.active .iniciarSesion{
+    left: 100%;
+}
+
+/* CONTENEDOR PREGUNTAS / QUESTIONS */
+.questionsBx{
+    left: 100%;
+}
+.login-box.quest .questionsBx{
+    left: 0;
+}
+.login-box.active.quest .verificarEmail{
+    left: 100%;
+}
+.login-box.active.quest{
+    margin: 5% 35%;
+    height: 550px;
+    /* width: 450px; */
+}
+.login-box.active.quest .login-card-body{
+    padding: 25px 35px 95px 35px;
+    transition: 0.5s;
+}
+
+/* CONTENEDOR: CAMBIAR CONTRASEÑA */
+.cambiarPassword{
+    left: 100%;
+}
+.login-box.changePassword .cambiarPassword{
+    left: 0;
+}
+.login-box.active.quest.changePassword .questionsBx{
+    left: 100%;
+}
+.login-box.active.quest.changePassword{
+    margin: 6.5% 35%;
+    height: 500px;
+}
+
+/* BARRA */
+.user-menu a{
+    color: rgba(0,0,0,.5);
+    font-weight: 600;
+    transition: 0.5s;
+}
+.user-menu a:hover{
+    color: #212529;
+}
+.user-header{
+    background:#212529!important;
+    color: #C2C7D0;
+}
+
+
+/* SIDEBAR */
+.main-sidebar{
+    background-color: #212529;
+}
+
