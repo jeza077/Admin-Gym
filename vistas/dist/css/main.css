@@ -1,7 +1,13 @@
 :root{
     --btnPrimario: orange;
 }
-
+/* ------------------------------------------------------------------- */
+.btn-orange {
+    background-color: var(--btnPrimario);
+    color: #fff;
+    border-color: var(--btnPrimario);
+    box-shadow: none;
+}
 .login-page {
     background: rgb(255, 158, 30);
     color: white;
@@ -20,11 +26,8 @@
 .login-logo a b{
     color: var(--btnPrimario);
 }
-.btn-orange {
-    background-color: var(--btnPrimario);
-    color: #fff;
-    border-color: var(--btnPrimario);
-    box-shadow: none;
+.content-wrapper{
+    margin-top: 3.5rem;
 }
 
 /* SLIDE DE, LOGIN, VERIFICAR EMAIL, PREGUNTAS, CAMBIAR CONTRASEÑA */
@@ -131,6 +134,12 @@
 }
 
 /* BARRA */
+.main-header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+}
 .user-menu a{
     color: rgba(0,0,0,.5);
     font-weight: 600;
@@ -143,10 +152,18 @@
     background:#212529!important;
     color: #C2C7D0;
 }
-
-
+body::-webkit-scrollbar{
+    width: 10px!important;
+    background-color: rgba(0,0,0,.03);
+}
+body::-webkit-scrollbar-thumb{
+    background: #212529!important;
+    border-radius: 5px;
+    border-right: 4px solid #0000000e;
+}
 /* SIDEBAR */
 .main-sidebar{
+    position: fixed!important;
     background-color: #212529;
 }
 
