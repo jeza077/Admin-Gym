@@ -41,37 +41,37 @@
           CONTENIDO
       =============================================*/
 
-      // if(isset($_GET["ruta"])){
+      if(isset($_GET["ruta"])){
 
-      //   if($_GET["ruta"] == "inicio" ||
-      //     $_GET["ruta"] == "usuarios" ||
-      //     $_GET["ruta"] == "categorias" ||
-      //     $_GET["ruta"] == "empleados" ||
-      //     $_GET["ruta"] == "productos" ||
-      //     $_GET["ruta"] == "clientes" ||
-      //     $_GET["ruta"] == "ventas" ||
-      //     $_GET["ruta"] == "crear-venta" ||
-      //     $_GET["ruta"] == "editar-venta" ||
-      //     $_GET["ruta"] == "reportes" ||
-      //     $_GET["ruta"] == "mensajeria" ||
-      //     $_GET["ruta"] == "proveedores" ||
-      //     $_GET["ruta"] == "auditoria" ||
-      //     $_GET["ruta"] == "configuracion" ||
-      //     $_GET["ruta"] == "salir"){
+        if($_GET["ruta"] == "inicio" ||
+          $_GET["ruta"] == "usuarios" ||
+          $_GET["ruta"] == "categorias" ||
+          $_GET["ruta"] == "empleados" ||
+          $_GET["ruta"] == "productos" ||
+          $_GET["ruta"] == "clientes" ||
+          $_GET["ruta"] == "ventas" ||
+          $_GET["ruta"] == "crear-venta" ||
+          $_GET["ruta"] == "editar-venta" ||
+          $_GET["ruta"] == "reportes" ||
+          $_GET["ruta"] == "mensajeria" ||
+          $_GET["ruta"] == "proveedores" ||
+          $_GET["ruta"] == "auditoria" ||
+          $_GET["ruta"] == "configuracion" ||
+          $_GET["ruta"] == "salir"){
 
-      //     include "modulos/".$_GET["ruta"].".php";
+          include "modulos/".$_GET["ruta"].".php";
 
-      //   }else{
+        }else{
 
-      //     include "modulos/404.php";
+          include "modulos/404.php";
 
-      //   }
+        }
 
-      // } else{
+      } else{
 
         include "modulos/inicio.php";
 
-      // }
+      }
 
       /*=============================================
           FOOTER

@@ -2,4 +2,4 @@
 SideBar Menu
 =============================================*/
 
-$('.sidebar-menu').tree()
+// $('.sidebar-menu').tree()

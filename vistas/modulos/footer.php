@@ -7,7 +7,6 @@
     reserved.
   </footer>
 
-</div>  
 
   
 
