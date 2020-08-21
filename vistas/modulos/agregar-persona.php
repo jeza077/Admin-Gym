@@ -81,16 +81,16 @@
             </div>
             <div class="form-group col-md-4">
               <label>Tipo de persona</label>
-              <select class="form-control select2" style="width: 100%;" id="tipo-persona" name="nuevoTipoPersona">
+              <select class="form-control select2" style="width: 100%;" id="tipoPersona" name="nuevoTipoPersona">
                 <option selected="selected">Seleccionar...</option>
-                <option value="Empleado">Empleado</option>
-                <option value="Cliente">Cliente</option>
+                <option value="empleado">Empleado</option>
+                <option value="cliente">Cliente</option>
               </select>
             </div>
           </div>
 
-          <div class="form-group">
-            <a href="#" class="btn btn-primary float-right" onclick="toggleUser();">Siguiente</a>
+          <div class="form-group" id="btnSiguiente">
+            <!-- <a href="#" class="btn btn-primary float-right" onclick="toggleUser();">Siguiente</a> -->
             <!-- <button id="btnSiguiente" onclick="toggleUser();" class="btn btn-primary float-right">Siguiente</button> -->
           </div>
         </div>
@@ -124,6 +124,14 @@
           </div>
           <div class="form-group">
             <a href="#" class="btn btn-danger float-left" onclick="toggleUser();">Atras</a>
+            <button type="submit" class="btn btn-primary float-right">Guardar</button>
+          </div>
+        </div>
+
+        <div class="card-body contenedor agregarCliente">
+         
+          <div class="form-group">
+            <a href="#" class="btn btn-danger float-left" onclick="toggleCliente();">Atras</a>
             <button type="submit" class="btn btn-primary float-right">Guardar</button>
           </div>
         </div>

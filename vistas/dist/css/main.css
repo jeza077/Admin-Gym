@@ -187,9 +187,18 @@ body::-webkit-scrollbar-thumb{
 .card .agregarEmpleado{
     left: 100%;
 }
-.card.active .agregarEmpleado{
+.card .agregarCliente{
+    left: 100%;
+}
+.card.emplea .agregarEmpleado{
     left: 0;
 }
-.card.active .agregarPersona{
+.card.emplea .agregarPersona{
+    left: 100%;
+}
+.card.clien .agregarCliente{
+    left: 0;
+}
+.card.clien .agregarPersona{
     left: 100%;
 }

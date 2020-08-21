@@ -76,10 +76,10 @@ class ControladorUsuarios{
 
 		if(isset($_POST["nuevoNombre"])){
 
-			if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevoNombre"])
-			//    preg_match('/^[A-Z0-9]+$/', $_POST["nuevoUsuario"]) 
+			if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevoNombre"]) &&
+			   preg_match('/^[A-Z0-9]+$/', $_POST["nuevoUsuario"]) &&
 			//    preg_match('/^[a-zA-Z0-9]+$/', $_POST["nuevoPassword"])
-			//    preg_match('/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{8,16}$/', $_POST["nuevoPassword"])
+			   preg_match('/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{8,16}$/', $_POST["nuevoPassword"])
 			   ){
 
 			   	/*=============================================
