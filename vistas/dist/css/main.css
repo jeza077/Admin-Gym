@@ -2,6 +2,15 @@
     --btnPrimario: orange;
 }
 /* ------------------------------------------------------------------- */
+body::-webkit-scrollbar{
+    width: 12px!important;
+    background-color: rgba(0,0,0,.03);
+}
+body::-webkit-scrollbar-thumb{
+    background: #212529!important;
+    border-radius: 5px;
+    border-right: 1px solid gainsboro;
+}
 .btn-orange {
     background-color: var(--btnPrimario);
     color: #fff;
@@ -152,15 +161,7 @@
     background:#212529!important;
     color: #C2C7D0;
 }
-body::-webkit-scrollbar{
-    width: 10px!important;
-    background-color: rgba(0,0,0,.03);
-}
-body::-webkit-scrollbar-thumb{
-    background: #212529!important;
-    border-radius: 5px;
-    border-right: 4px solid #0000000e;
-}
+
 /* SIDEBAR */
 .main-sidebar{
     position: fixed!important;
