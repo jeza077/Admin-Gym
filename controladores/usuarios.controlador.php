@@ -8,7 +8,7 @@ class ControladorUsuarios{
 
 	static public function ctrMostrarUsuarios($item, $valor) {
 
-		$tabla = "usuarios";
+		$tabla = "personas";
 		$respuesta = ModeloUsuarios::mdlMostrarUsuarios($tabla, $item, $valor);
 
 		return $respuesta;
@@ -162,23 +162,35 @@ class ControladorUsuarios{
 							   "foto" => $_POST["nuevaFoto"]);
 
 				$respuesta = ModeloUsuarios::mdlIngresarPersona($tabla, $datos);
-		
-					echo "Respuesta" . $respuesta["respuesta"];
-					if($respuesta["respuesta"] == "ok"){
+				
+					if($respuesta == "ok"){
+						
+						$totalId = array();
+						$item = null;
+						$valor = null;
 
-						$id = $respuesta["id_insertado"];
+						$personasTotal = ModeloUsuarios::mdlMostrarUsuarios($tabla, $item, $valor);
+						foreach($personasTotal as $keyPersonas => $valuePersonas){
+							array_push($totalId, $valuePersonas["id"]);
+						}
 
-						$tabla = "empleados";
+						$idPersona = end($totalId);
+
+						echo $idPersona;
+					
+
+
+						$tabla2 = "empleados";
 
 						/*================== ENCRIPTAMOS LA CONTRASEÑA ===================*/
 						$encriptar = crypt($_POST["nuevoPassword"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
 
-						$datos = array("id_persona" => $id,
+						$datos = array("id_persona" => $idPersona,
 									   "usuario" => $_POST["nuevoUsuario"],
-									   "password" => $_POST["nuevoPassword"],
+									   "password" => $encriptar,
 									   "rol" => $_POST["nuevoRol"]);
 
-						$respuesta2 = ModeloUsuarios::mdlIngresarUsuarioEmpleado($tabla, $datos);
+						$respuesta2 = ModeloUsuarios::mdlIngresarUsuarioEmpleado($tabla2, $datos);
 
 						if($respuesta2 = "ok"){
 								
@@ -192,9 +204,7 @@ class ControladorUsuarios{
 							</script>';
 
 						}
-
-				
-					
+						
 					} else {
 						echo '<script>
 						Swal.fire(

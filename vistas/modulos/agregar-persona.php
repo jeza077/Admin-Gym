@@ -90,7 +90,7 @@
           </div>
 
           <div class="form-group">
-            <a href="#" class="float-right" onclick="toggleUser();">Siguiente</a>
+            <a href="#" class="btn btn-primary float-right" onclick="toggleUser();">Siguiente</a>
             <!-- <button id="btnSiguiente" onclick="toggleUser();" class="btn btn-primary float-right">Siguiente</button> -->
           </div>
         </div>
@@ -123,9 +123,8 @@
             </div>
           </div>
           <div class="form-group">
-            <!-- <a href="#" class="float-left" onclick="toggelUser();">Atras</a> -->
-            <button type="submit" class="btn btn-primary float-risght">Guardar</button>
-            <button type="" onclick="toggleUser();" class="btn btn-danger float-right mr-2">Atras</button>
+            <a href="#" class="btn btn-danger float-left" onclick="toggleUser();">Atras</a>
+            <button type="submit" class="btn btn-primary float-right">Guardar</button>
           </div>
         </div>
       </div>

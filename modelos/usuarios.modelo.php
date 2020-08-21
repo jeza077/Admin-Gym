@@ -80,24 +80,24 @@ class ModeloUsuarios{
 		if($stmt->execute()){
 
 
-			$id_registro = $stmt->lastInsertId();
-			// $id_registro = $stmt->insert_id;
+			// $id_registro = $stmt->lastInsertId();
+			// // $id_registro = $stmt->insert_id;
 
 			
-			if($id_registro > 0){
-				$respuesta = array(
-					'respuesta' => 'ok',
-					'id_insertado' => $id_registro 
-				);
-			} else {
-				$respuesta = array(
-					'respuesta' => 'error'
-				);
-			}
+			// if($id_registro > 0){
+			// 	$respuesta = array(
+			// 		'respuesta' => 'ok',
+			// 		'id_insertado' => $id_registro 
+			// 	);
+			// } else {
+			// 	$respuesta = array(
+			// 		'respuesta' => 'error'
+			// 	);
+			// }
 			
-			return $respuesta;	
+			// return $respuesta;	
 
-			// return "ok";
+			return "ok";
 
 		}else{
 
@@ -122,7 +122,7 @@ class ModeloUsuarios{
 		$stmt->bindParam(":id_persona", $datos["id_persona"], PDO::PARAM_INT);
 		$stmt->bindParam(":usuario", $datos["usuario"], PDO::PARAM_STR);
 		$stmt->bindParam(":password", $datos["password"], PDO::PARAM_STR);
-		$stmt->bindParam(":rol", $datos["rol"], PDO::PARAM_INT);
+		$stmt->bindParam(":id_rol", $datos["rol"], PDO::PARAM_INT);
 
 		if($stmt->execute()){
 
