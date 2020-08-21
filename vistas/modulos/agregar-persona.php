@@ -21,6 +21,7 @@
     <!-- Main content -->
     <section class="content">
 
+    <form role="form" method="post">
       <!-- Default box -->
       <div class="card">
         
@@ -89,8 +90,8 @@
           </div>
 
           <div class="form-group">
-            <!-- <a href="#" class="float-right" onclick="toggelUser();">Siguiente</a> -->
-            <button type="submit" onclick="toggleUser();" class="btn btn-primary float-right">Siguiente</button>
+            <a href="#" class="float-right" onclick="toggleUser();">Siguiente</a>
+            <!-- <button id="btnSiguiente" onclick="toggleUser();" class="btn btn-primary float-right">Siguiente</button> -->
           </div>
         </div>
 
@@ -106,21 +107,34 @@
             </div>
             <div class="form-group col-md-12">
               <label>Rol</label>
-              <select class="form-control select2" style="width: 100%;" id="tipo-persona" name="nuevoRol">
+              <select class="form-control select2" style="width: 100%;" name="nuevoRol">
                 <option selected="selected">Seleccionar...</option>
-                <option value="Admin">Admin</option>
-                <option value="Especial">Especial</option>
+                  <?php 
+                      $item = null;
+                      $valor = null;
+
+                      $roles = ControladorUsuarios::ctrMostrarRoles($item, $valor);
+
+                      foreach ($roles as $key => $value) {
+                        echo '<option value="'.$value["id"].'">'.$value["rol"].'</option>';
+                      }
+                  ?>
               </select>
             </div>
           </div>
           <div class="form-group">
             <!-- <a href="#" class="float-left" onclick="toggelUser();">Atras</a> -->
             <button type="submit" class="btn btn-primary float-risght">Guardar</button>
-            <button type="submit" onclick="toggleUser();" class="btn btn-danger float-right mr-2">Atras</button>
+            <button type="" onclick="toggleUser();" class="btn btn-danger float-right mr-2">Atras</button>
           </div>
         </div>
       </div>
       <!-- /.card -->
+      </form>
+      <?php
+        $ingresarPersona = new ControladorUsuarios();
+        $ingresarPersona->ctrCrearUsuario();
+      ?>
 
     </section>
     <!-- /.content -->

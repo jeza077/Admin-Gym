@@ -3,6 +3,32 @@
 class ControladorUsuarios{
 
 	/*=============================================
+				MOSTRAR USUARIOS
+	=============================================*/
+
+	static public function ctrMostrarUsuarios($item, $valor) {
+
+		$tabla = "usuarios";
+		$respuesta = ModeloUsuarios::mdlMostrarUsuarios($tabla, $item, $valor);
+
+		return $respuesta;
+
+	}
+
+	/*=============================================
+				MOSTRAR ROLES
+	=============================================*/
+
+	static public function ctrMostrarRoles($item, $valor) {
+
+		$tabla = "roles";
+		$respuesta = ModeloUsuarios::mdlMostrarRoles($tabla, $item, $valor);
+
+		return $respuesta;
+
+	}
+
+	/*=============================================
 	INGRESO DE USUARIO
 	=============================================*/
 
@@ -42,18 +68,19 @@ class ControladorUsuarios{
 
 	}
 
-	    /*=============================================
-	REGISTRO DE USUARIO
+	/*=============================================
+		REGISTRO DE USUARIO
 	=============================================*/
 
 	static public function ctrCrearUsuario(){
 
-		if(isset($_POST["nuevoUsuario"])){
+		if(isset($_POST["nuevoNombre"])){
 
-			if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevoNombre"]) &&
-			   preg_match('/^[A-Z0-9]+$/', $_POST["nuevoUsuario"]) &&
+			if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevoNombre"])
+			//    preg_match('/^[A-Z0-9]+$/', $_POST["nuevoUsuario"]) 
 			//    preg_match('/^[a-zA-Z0-9]+$/', $_POST["nuevoPassword"])
-			   preg_match('/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{8,16}$/', $_POST["nuevoPassword"])){
+			//    preg_match('/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{8,16}$/', $_POST["nuevoPassword"])
+			   ){
 
 			   	/*=============================================
 				VALIDAR IMAGEN
@@ -122,52 +149,62 @@ class ControladorUsuarios{
 
 				// }
 
-				$tabla = "usuarios";
+				$tabla = "personas";
 
-    			/*================== ENCRIPTAMOS LA CONTRASEÑA ===================*/
-				$encriptar = crypt($_POST["nuevoPassword"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
-
-
-				$datos = array("identidad" => $_POST["nuevaIdentidad"],
-							   "nombre" => $_POST["nuevoNombre"],
+				$datos = array("nombre" => $_POST["nuevoNombre"],
 							   "apellido" => $_POST["nuevoApellido"],
-							   "nombre" => $_POST["nuevoEmail"],
-							   "nombre" => $_POST["nuevoTelefono"],
-							   "nombre" => $_POST["nuevaFechaNacimiento"],
-							   "nombre" => $_POST["nuevaDireccion"],
-							   "nombre" => $_POST["nuevoSexo"],
-							   "nombre" => $_POST["nuevaFoto"],
-					           "usuario" => $_POST["nuevoUsuario"],
-					           "password" => $encriptar,
-					           "perfil" => $_POST["nuevoPerfil"],
-					           "foto"=>$ruta);
+							   "identidad" => $_POST["nuevaIdentidad"],
+							   "fecha_nacimiento" => $_POST["nuevaFechaNacimiento"],
+							   "sexo" => $_POST["nuevoSexo"],
+							   "telefono" => $_POST["nuevoTelefono"],
+							   "direccion" => $_POST["nuevaDireccion"],
+							   "email" => $_POST["nuevoEmail"],
+							   "foto" => $_POST["nuevaFoto"]);
 
-				// $respuesta = ModeloUsuarios::mdlIngresarUsuario($tabla, $datos);
+				$respuesta = ModeloUsuarios::mdlIngresarPersona($tabla, $datos);
 		
-				if($respuesta == "ok"){
+					echo "Respuesta" . $respuesta["respuesta"];
+					if($respuesta["respuesta"] == "ok"){
 
-					echo '<script>
-					swal({
-						type: "success",
-						title: "¡El usuario ha sido guardado correctamente!",
-						showConfirmButton: true,
-						confirmButtonText: "Cerrar",
-						closeOnConfirm: false
-					}).then((result)=>{
-						if(result.value){
-							window.location = "usuarios";
+						$id = $respuesta["id_insertado"];
+
+						$tabla = "empleados";
+
+						/*================== ENCRIPTAMOS LA CONTRASEÑA ===================*/
+						$encriptar = crypt($_POST["nuevoPassword"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
+
+						$datos = array("id_persona" => $id,
+									   "usuario" => $_POST["nuevoUsuario"],
+									   "password" => $_POST["nuevoPassword"],
+									   "rol" => $_POST["nuevoRol"]);
+
+						$respuesta2 = ModeloUsuarios::mdlIngresarUsuarioEmpleado($tabla, $datos);
+
+						if($respuesta2 = "ok"){
+								
+							echo '<script>
+								Swal.fire(
+									"Usuario guardado correctamente!",
+									"You clicked the button!",
+									"success"
+								),
+						
+							</script>';
+
 						}
-					});
-					</script>';
-					
-					
-										// Swal.fire(
-										// 	"Good job!",
-										// 	"You clicked the button!",
-										// 	"success"
-										//   )
 
-				}
+				
+					
+					} else {
+						echo '<script>
+						Swal.fire(
+							"Error!",
+							"You clicked the button!",
+							"error"
+						)
+				
+					</script>';
+					}
 
 
 			}else{
@@ -181,7 +218,7 @@ class ControladorUsuarios{
 						closeOnConfirm: false
 					}).then((result)=>{
 						if(result.value){
-							window.location = "usuarios";
+							window.location = "inicio";
 						}
 					});
 				</script>';
