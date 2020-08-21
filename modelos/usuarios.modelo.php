@@ -140,5 +140,30 @@ class ModeloUsuarios{
 
 	}
 
+	/*=============================================
+			INGRESAR CLIENTES	
+	=============================================*/
+	 
+	static public function mdlIngresarCliente($tabla, $datos){
+
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(id_persona) VALUES (:id_persona)");
+
+		$stmt->bindParam(":id_persona", $datos["id_persona"], PDO::PARAM_INT);
+
+		if($stmt->execute()){
+
+			return "ok";	
+
+		}else{
+
+			return "error";
+		
+		}
+
+		$stmt->close();
+		
+		$stmt = null;
+
+	}
 
 }

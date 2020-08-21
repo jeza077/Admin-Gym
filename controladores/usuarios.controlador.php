@@ -76,10 +76,10 @@ class ControladorUsuarios{
 
 		if(isset($_POST["nuevoNombre"])){
 
-			if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevoNombre"]) &&
-			   preg_match('/^[A-Z0-9]+$/', $_POST["nuevoUsuario"]) &&
+			if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevoNombre"])
+			//    preg_match('/^[A-Z0-9]+$/', $_POST["nuevoUsuario"]) &&
 			//    preg_match('/^[a-zA-Z0-9]+$/', $_POST["nuevoPassword"])
-			   preg_match('/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{8,16}$/', $_POST["nuevoPassword"])
+			//    preg_match('/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{8,16}$/', $_POST["nuevoPassword"])
 			   ){
 
 			   	/*=============================================
@@ -164,47 +164,67 @@ class ControladorUsuarios{
 				$respuesta = ModeloUsuarios::mdlIngresarPersona($tabla, $datos);
 				
 					if($respuesta == "ok"){
-						
+
 						$totalId = array();
 						$item = null;
 						$valor = null;
 
 						$personasTotal = ModeloUsuarios::mdlMostrarUsuarios($tabla, $item, $valor);
+
 						foreach($personasTotal as $keyPersonas => $valuePersonas){
 							array_push($totalId, $valuePersonas["id"]);
 						}
 
 						$idPersona = end($totalId);
 
-						echo $idPersona;
-					
-
-
-						$tabla2 = "empleados";
-
-						/*================== ENCRIPTAMOS LA CONTRASEÑA ===================*/
-						$encriptar = crypt($_POST["nuevoPassword"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
-
-						$datos = array("id_persona" => $idPersona,
-									   "usuario" => $_POST["nuevoUsuario"],
-									   "password" => $encriptar,
-									   "rol" => $_POST["nuevoRol"]);
-
-						$respuesta2 = ModeloUsuarios::mdlIngresarUsuarioEmpleado($tabla2, $datos);
-
-						if($respuesta2 = "ok"){
-								
-							echo '<script>
-								Swal.fire(
-									"Usuario guardado correctamente!",
-									"You clicked the button!",
-									"success"
-								),
+						if(isset($_POST["nuevoTipoPersona"]) && $_POST["nuevoTipoPersona"]  == "empleado"){
 						
-							</script>';
+								$tabla2 = "empleados";
+
+								/*================== ENCRIPTAMOS LA CONTRASEÑA ===================*/
+								$encriptar = crypt($_POST["nuevoPassword"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
+
+								$datos = array("id_persona" => $idPersona,
+											"usuario" => $_POST["nuevoUsuario"],
+											"password" => $encriptar,
+											"rol" => $_POST["nuevoRol"]);
+
+								$respuesta2 = ModeloUsuarios::mdlIngresarUsuarioEmpleado($tabla2, $datos);
+
+								if($respuesta2 = "ok"){
+										
+									echo '<script>
+										Swal.fire(
+											"Empleado guardado correctamente!",
+											"You clicked the button!",
+											"success"
+										)
+								
+									</script>';
+
+								}
+						} else {
+							$tabla3 = "clientes";
+							
+							$datos = array("id_persona" => $idPersona);
+
+							$respuesta3 = ModeloUsuarios::mdlIngresarCliente($tabla3, $datos);
+
+							if($respuesta3 = "ok"){
+										
+								echo '<script>
+									Swal.fire(
+										"Cliente guardado correctamente!",
+										"You clicked the button!",
+										"success"
+									)
+							
+								</script>';
+
+							}
 
 						}
-						
+
 					} else {
 						echo '<script>
 						Swal.fire(
@@ -219,19 +239,24 @@ class ControladorUsuarios{
 
 			}else{
 
-				echo '<script>
-					swal({
-						type: "error",
-						title: "¡Llenar campos correctamente!",
-						showConfirmButton: true,
-						confirmButtonText: "Cerrar",
-						closeOnConfirm: false
-					}).then((result)=>{
-						if(result.value){
-							window.location = "inicio";
-						}
-					});
-				</script>';
+				echo "<script>
+					Swal.fire({
+						icon: 'error',
+						title: '¡Llenar campos correctamente!',
+					})
+				</script>";
+
+						// swal({
+						// 	type: "error",
+						// 	title: "¡Llenar campos correctamente!",
+						// 	showConfirmButton: true,
+						// 	confirmButtonText: "Cerrar",
+						// 	closeOnConfirm: false
+						// }).then((result)=>{
+						// 	if(result.value){
+						// 		window.location = "inicio";
+						// 	}
+						// });
 
 			}
 

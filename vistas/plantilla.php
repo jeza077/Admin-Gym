@@ -17,6 +17,8 @@
   <link rel="stylesheet" href="vistas/dist/css/main.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <!-- SweetAlert2 CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 </head>
 <body class="hold-transition sidebar-mini">
 <?php
@@ -97,7 +99,7 @@
 <!-- Bootstrap 4 -->
 <script src="vistas/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- SweetAlert 2 -->
-<script src="vistas/plugins/sweetalert2/sweetalert2.all.min.js"></script>
+<!-- <script src="vistas/plugins/sweetalert2/sweetalert2.all.js"></script> -->
 <!-- AdminLTE App -->
 <script src="vistas/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
