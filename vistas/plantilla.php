@@ -96,6 +96,8 @@
 <script src="vistas/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
 <script src="vistas/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- SweetAlert 2 -->
+<script src="vistas/plugins/sweetalert2/sweetalert2.all.min.js"></script>
 <!-- AdminLTE App -->
 <script src="vistas/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
