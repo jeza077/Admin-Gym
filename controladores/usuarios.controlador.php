@@ -179,7 +179,10 @@ class ControladorUsuarios{
 
 						if(isset($_POST["nuevoTipoPersona"]) && $_POST["nuevoTipoPersona"]  == "empleado"){
 						
-								$tabla2 = "empleados";
+							$tabla2 = "empleados";
+
+							if(preg_match('/^[A-Z0-9]+$/', $_POST["nuevoUsuario"]) &&
+								preg_match('/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{8,16}$/', $_POST["nuevoPassword"])){
 
 								/*================== ENCRIPTAMOS LA CONTRASEÑA ===================*/
 								$encriptar = crypt($_POST["nuevoPassword"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
@@ -203,6 +206,17 @@ class ControladorUsuarios{
 									</script>';
 
 								}
+							} else {
+
+								echo "<script>
+								Swal.fire({
+										icon: 'error',
+										title: '¡Llenar campos correctamente!',
+									})
+								</script>";
+
+							}
+
 						} else {
 							$tabla3 = "clientes";
 							

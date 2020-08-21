@@ -145,21 +145,30 @@ body::-webkit-scrollbar-thumb{
     height: 500px;
 }
 
-/* BARRA */
+/* BARRA O HEADER*/
+.navbar-nav{
+    align-items: center;
+}
+.navbar-nav span{
+    color: rgba(0,0,0,.5);
+    font-weight: 600;
+    transition: 0.5s;
+}
+.navbar-nav span:hover{
+    color: #212529;
+}
 .main-header{
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
 }
-.user-menu a{
-    color: rgba(0,0,0,.5);
-    font-weight: 600;
+/* .user-menu a{
     transition: 0.5s;
-}
-.user-menu a:hover{
+} */
+/* .user-menu a:hover{
     color: #212529;
-}
+} */
 .user-header{
     background:#212529!important;
     color: #C2C7D0;

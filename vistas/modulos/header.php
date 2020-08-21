@@ -20,6 +20,12 @@
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="agregar-persona">
+            <i class="fas fa-user-plus"></i>
+            <span class="hidden-xs">Agregar persona</span>
+          </a>
+        </li>
         <li class="dropdown nav-item user user-menu" style="margin-right:1em">
           <a href="#"  data-toggle="dropdown">
             <img src="vistas/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
