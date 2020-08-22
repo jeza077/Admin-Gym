@@ -78,24 +78,6 @@ class ModeloUsuarios{
 
 		if($stmt->execute()){
 
-
-			// $id_registro = $stmt->lastInsertId();
-			// // $id_registro = $stmt->insert_id;
-
-			
-			// if($id_registro > 0){
-			// 	$respuesta = array(
-			// 		'respuesta' => 'ok',
-			// 		'id_insertado' => $id_registro 
-			// 	);
-			// } else {
-			// 	$respuesta = array(
-			// 		'respuesta' => 'error'
-			// 	);
-			// }
-			
-			// return $respuesta;	
-
 			return "ok";
 
 		}else{

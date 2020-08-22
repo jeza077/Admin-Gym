@@ -7,19 +7,21 @@ function toggleCliente(){
     container.classList.toggle('clien');
 }
 
-// $("#btnSiguiente").click(function(event){  
-//     event.prevenDefault();
-// })
+$(".btnGuardar").on("click", function (e) {
+    e.preventDefault();
+});
 
 $(".agregarEmpleado").hide();
+
 $("#tipoPersona").change(function(){
     var valor = $(this).val();
-    console.log(valor)
+
     if(valor === "empleado"){
-        $('#btnSiguiente').append('<a href="#" class="btn btn-primary float-right" onclick="toggleUser();">Siguiente</a>');
+        $('#btnSiguiente a').remove('.aCliente');
+        $('#btnSiguiente').append('<a href="#" class="btn btn-primary aEmpleado float-right" onclick="toggleUser();">Siguiente</a>');
         $(".agregarEmpleado").show();
     } else {
-        // $('#btnSiguiente').remove('<a href="#" class="btn btn-primary float-right" onclick="toggleUser();">Siguiente</a>');
-        $('#btnSiguiente').append('<a href="#" class="btn btn-primary float-right" onclick="toggleCliente();">Siguiente</a>');
+        $('#btnSiguiente a').remove('.aEmpleado');
+        $('#btnSiguiente').append('<a href="#" class="btn btn-primary aCliente float-right" onclick="toggleCliente();">Siguiente</a>');
     }
 })
