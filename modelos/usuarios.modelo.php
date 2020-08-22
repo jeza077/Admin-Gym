@@ -7,30 +7,43 @@ class ModeloUsuarios{
 	/*=============================================
 	MOSTRAR USUARIOS
 	=============================================*/
+	
+	static public function mdlMostrarUsuarios($tabla1, $tabla2, $item, $valor){
 
-	static public function mdlMostrarUsuarios($tabla, $item, $valor){
+		if($tabla2 == "empleados"){
+	
+			if($item != null){
+	
+				$stmt = Conexion::conectar()->prepare("SELECT p.*, e.usuario, e.password, e.foto, e.id AS id_usuario, r.rol FROM $tabla1 AS p\n"
+						. " INNER JOIN $tabla2 AS e ON p.id = e.id_persona\n"
+						. " INNER JOIN roles AS r ON e.id_rol = r.id"
+						. " WHERE $item = :$item");
+						
+				$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+				$stmt -> execute();
+				return $stmt -> fetch();
+	
+			} else {
+	
+				$stmt = Conexion::conectar()->prepare("SELECT p.*, e.usuario, e.password, e.foto, e.id AS id_usuario, r.rol FROM $tabla1 AS p\n"
+						. " INNER JOIN $tabla2 AS e ON p.id = e.id_persona\n"
+						. " INNER JOIN roles AS r ON e.id_rol = r.id");
+				$stmt -> execute();
+				return $stmt -> fetchAll();
+	
+			}
+		} else if ($tabla2 == null) {
 
-		if($item != null){
-
-			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item");
-			$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
-			$stmt -> execute();
-			return $stmt -> fetch();
-
-		} else {
-
-			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla ");
+			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla1");
 			$stmt -> execute();
 			return $stmt -> fetchAll();
 
 		}
 
 		$stmt -> close();
-		$stmt = null;
-		
+		$stmt = null;	
 
 	}
-
 	/*=============================================
 		MOSTRAR ROLES
 	=============================================*/

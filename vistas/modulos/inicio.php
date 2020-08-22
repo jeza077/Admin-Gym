@@ -35,6 +35,18 @@
         </div>
         <div class="card-body">
           Start creating your amazing application!
+          <?php
+
+            $tabla = null;
+            $item = null;
+            $valor = null;
+
+            $usuarios = ControladorUsuarios::ctrMostrarUsuario($tabla, $item, $valor);
+            echo "<pre>";
+              var_dump($usuarios);
+            echo "</pre>";
+          ?>
+
         </div>
         <!-- /.card-body -->
         <div class="card-footer">

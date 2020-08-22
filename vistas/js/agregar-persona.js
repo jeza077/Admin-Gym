@@ -7,9 +7,9 @@ function toggleCliente(){
     container.classList.toggle('clien');
 }
 
-$(".btnGuardar").on("click", function (e) {
-    e.preventDefault();
-});
+// $(".btnGuardar").on("click", function (e) {
+//     e.preventDefault();
+// });
 
 $(".agregarEmpleado").hide();
 

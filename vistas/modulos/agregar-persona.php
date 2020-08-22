@@ -89,15 +89,15 @@
           <div class="form-row empleados">
             <div class="form-group col-md-12">
               <label for="">Usuario</label>
-              <input type="text" class="form-control" id="" name="nuevoUsuario" required>
+              <input type="text" class="form-control" id="" name="nuevoUsuario">
             </div>
             <div class="form-group col-md-12">
               <label for="inputPassword4">Password</label>
-              <input type="password" class="form-control" id="inputPassword4" name="nuevoPassword" required>
+              <input type="password" class="form-control" id="inputPassword4" name="nuevoPassword">
             </div>
             <div class="form-group col-md-12">
               <label>Rol</label>
-              <select class="form-control select2" style="width: 100%;" name="nuevoRol" required>
+              <select class="form-control select2" style="width: 100%;" name="nuevoRol">
                 <option selected="selected">Seleccionar...</option>
                   <?php 
                       $item = null;

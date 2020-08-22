@@ -6,10 +6,11 @@ class ControladorUsuarios{
 				MOSTRAR USUARIOS
 	=============================================*/
 
-	static public function ctrMostrarUsuarios($item, $valor) {
+	static public function ctrMostrarUsuarios($tabla, $item, $valor) {
 
-		$tabla = "personas";
-		$respuesta = ModeloUsuarios::mdlMostrarUsuarios($tabla, $item, $valor);
+		$tabla1 = "personas";
+		$tabla2 = $tabla;
+		$respuesta = ModeloUsuarios::mdlMostrarUsuarios($tabla1, $tabla2, $item, $valor);
 
 		return $respuesta;
 
@@ -34,37 +35,155 @@ class ControladorUsuarios{
 
 	public function ctrIngresoUsuario(){
 
+		// if(isset($_POST["ingUsuario"])){
+
+		// 	if(preg_match('/^[a-zA-Z0-9]+$/', $_POST["ingUsuario"]) &&
+		// 	   preg_match('/^[a-zA-Z0-9]+$/', $_POST["ingPassword"])){
+
+		// 		$tabla = "usuarios";
+
+		// 		$item = "usuario";
+		// 		$valor = $_POST["ingUsuario"];
+
+		// 		$respuesta = ModeloUsuarios::s($tabla, $item, $valor);
+
+		// 		if($respuesta["usuario"] == $_POST["ingUsuario"] && $respuesta["password"] == $_POST["ingPassword"]){
+
+		// 			$_SESSION["iniciarSesion"] = "ok";
+
+		// 			echo '<script>
+
+		// 				window.location = "inicio";
+
+		// 			</script>';
+
+		// 		}else{
+
+		// 			echo '<br><div class="alert alert-danger">Error al ingresar, vuelve a intentarlo</div>';
+
+		// 		}
+
+		// 	}	
+
+		// }
+
 		if(isset($_POST["ingUsuario"])){
 
-			if(preg_match('/^[a-zA-Z0-9]+$/', $_POST["ingUsuario"]) &&
-			   preg_match('/^[a-zA-Z0-9]+$/', $_POST["ingPassword"])){
+			if(preg_match('/^[A-Z0-9]+$/', $_POST["ingUsuario"]) &&
+			   preg_match('/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{8,16}$/', $_POST["ingPassword"])){
+
+				$encriptar = crypt($_POST["ingPassword"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
+
+				$_SESSION['contadorLogin'] = 0;
 
 				$tabla = "usuarios";
-
+				
 				$item = "usuario";
 				$valor = $_POST["ingUsuario"];
 
-				$respuesta = ModeloUsuarios::MdlMostrarUsuarios($tabla, $item, $valor);
+				$respuesta = ModeloUsuarios::s($tabla, $item, $valor);
 
-				if($respuesta["usuario"] == $_POST["ingUsuario"] && $respuesta["password"] == $_POST["ingPassword"]){
+				if($respuesta["usuario"] == $_POST["ingUsuario"] && $respuesta["password"] == $encriptar){
+					
+					if($respuesta["estado"] == 1) {
 
-					$_SESSION["iniciarSesion"] = "ok";
+						$_SESSION["iniciarSesion"] = "ok";
+						$_SESSION["id"] = $respuesta["id"];
+						$_SESSION["nombre"] = $respuesta["nombre"];
+						$_SESSION["usuario"] = $respuesta["usuario"];
+						$_SESSION["foto"] = $respuesta["foto"];
+						$_SESSION["perfil"] = $respuesta["perfil"];
 
-					echo '<script>
+						/* =====REGISTRAR FECHA Y HORA PARA SABER EL ULTIMO LOGIN ====== */
 
-						window.location = "inicio";
+						date_default_timezone_set('America/Tegucigalpa');
 
-					</script>';
+						$fecha = date('Y-m-d');
+						$hora = date('H:i:s');
 
-				}else{
+						$fechaActual = $fecha." ".$hora;
 
-					echo '<br><div class="alert alert-danger">Error al ingresar, vuelve a intentarlo</div>';
+						$item1 = "ultimo_login";
+						$valor1 = $fechaActual;
+
+						$item2 = "id";
+						$valor2 = $respuesta["id"];
+
+						$ultimoLogin = ModeloUsuarios::mdlActualizarUsuario($tabla, $item1, $valor1, $item2, $valor2);
+
+						if($ultimoLogin == "ok"){
+
+							echo '<script>
+									window.location = "inicio";
+								</script>';
+
+						}
+
+
+					} else {
+
+						echo '<br><div class="alert alert-danger">El usuario no esta activado, comuniquese con el administrador</div>';
+					}
 
 				}
+				
+			} else {
+				//INTENTOS DE LOGUEARSE PERMITIDOS SOLO 3 AL REBASARLOS SE DESACTIVARA EL USUARIO INGRESADO AUTOMATICAMENTE.
+				$intentos = 3;
+				$_SESSION['contadorLogin'] = $_SESSION['contadorLogin'] + 1; 
 
-			}	
+				$intentos = $intentos - ($_SESSION['contadorLogin']);
 
+
+				if($_SESSION['contadorLogin'] === 3) {
+					$tabla = "usuarios";
+				
+					$item = "usuario";
+					$valor = $_POST["ingUsuario"];	
+
+					$respuesta = ModeloUsuarios::MdlMostrarUsuarios($tabla, $item, $valor);
+
+					if($respuesta["usuario"] == $_POST["ingUsuario"]){
+						$tabla = "usuarios";
+						$item1 = "estado";
+						$valor1 = 0;
+
+						$item2 = "usuario";
+						$valor2 = $_POST["ingUsuario"];
+
+						$respuesta = ModeloUsuarios::mdlActualizarUsuario($tabla, $item1, $valor1, $item2, $valor2);
+
+						if($respuesta == "ok"){
+							// echo '<br><div class="alert alert-danger">¡Lo sentimos! Su usuario ha sido desactivado, comuniquese con el Administrador</div>';
+							
+							echo '<script>
+									swal({
+										type: "warning",
+										title: "¡Lo sentimos! Su usuario ha sido desactivado, comuniquese con el Administrador",
+										showConfirmButton: true,
+										confirmButtonText: "Cerrar",
+										closeOnConfirm: false
+									})
+									</script>';
+							session_destroy();
+						}
+						
+					}
+							
+			
+				} else {
+					
+					echo '<br><div class="alert alert-danger">¡Usuario y contraseña invalidos! Intento: '.$_SESSION['contadorLogin'] .', tiene '.$intentos.' intento mas </div>';
+					
+				}
+				
+			}
+			
+		
+		
 		}
+	
+
 
 	}
 
@@ -78,7 +197,7 @@ class ControladorUsuarios{
 
 			if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevoNombre"])){
 
-				$tabla = "personas";
+				$tabla1 = "personas";
 
 				$datos = array("nombre" => $_POST["nuevoNombre"],
 							   "apellido" => $_POST["nuevoApellido"],
@@ -89,15 +208,17 @@ class ControladorUsuarios{
 							   "direccion" => $_POST["nuevaDireccion"],
 							   "email" => $_POST["nuevoEmail"]);
 
-				$respuesta = ModeloUsuarios::mdlIngresarPersona($tabla, $datos);
+				$respuesta = ModeloUsuarios::mdlIngresarPersona($tabla1, $datos);
 				
 					if($respuesta == "ok"){
 
 						$totalId = array();
+
+						$tabla2 = null;
 						$item = null;
 						$valor = null;
 
-						$personasTotal = ModeloUsuarios::mdlMostrarUsuarios($tabla, $item, $valor);
+						$personasTotal = ModeloUsuarios::mdlMostrarUsuarios($tabla1, $tabla2, $item, $valor);
 
 						foreach($personasTotal as $keyPersonas => $valuePersonas){
 							array_push($totalId, $valuePersonas["id"]);
@@ -225,9 +346,8 @@ class ControladorUsuarios{
 										
 								echo '<script>
 									Swal.fire(
-										"Cliente guardado correctamente!",
-										"You clicked the button!",
-										"success"
+										title: "Cliente guardado correctamente!",
+										icon: "success"
 									)
 							
 								</script>';
@@ -240,7 +360,6 @@ class ControladorUsuarios{
 						echo '<script>
 						Swal.fire(
 							"Error!",
-							"You clicked the button!",
 							"error"
 						)
 				
