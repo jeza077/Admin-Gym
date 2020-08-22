@@ -21,7 +21,7 @@
     <!-- Main content -->
     <section class="content">
 
-    <form role="form" method="post">
+    <form role="form" method="post" enctype="multipart/form-data">
       <!-- Default box -->
       <div class="card">
         
@@ -62,6 +62,17 @@
           </div>
 
           <div class="form-row">
+            <!-- <div class="form-group col-md-4">
+              <label for="exampleInputFile">Foto</label>
+              <div class="input-group">
+                <div class="custom-file">
+                  <input type="file" class="custom-file-input" id="exampleInputFile" name="nuevaFoto">
+                  <label class="custom-file-label" for="exampleInputFile">Escoger foto</label>
+                </div>
+                  <img class="img-thumbnail ml-2" src="vistas/img/usuarios/default/anonymous.png" alt="imagen-del-usuario" width="100px">
+              </div>
+                  <p class="p-foto help-block">Peso máximo de la foto 2 MB</p>
+            </div> -->
             <div class="form-group col-md-4">
               <label>Sexo</label>
               <select class="form-control select2" name="nuevoSexo" style="width: 100%;">
@@ -69,15 +80,6 @@
                 <option>Masculino</option>
                 <option>Femenino</option>
               </select>
-            </div>
-            <div class="form-group col-md-4">
-              <label for="exampleInputFile">Foto</label>
-              <div class="input-group">
-                <div class="custom-file">
-                  <input type="file" class="custom-file-input" id="exampleInputFile" name="nuevaFoto">
-                  <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-                </div>
-              </div>
             </div>
             <div class="form-group col-md-4">
               <label>Tipo de persona</label>
@@ -119,6 +121,17 @@
                       }
                   ?>
               </select>
+            </div>
+            <div class="form-group col-md-12">
+              <label for="exampleInputFile">Foto</label>
+              <div class="input-group">
+                <div class="custom-file">
+                  <input type="file" class="custom-file-input nuevaFoto" id="exampleInputFile" name="nuevaFoto">
+                  <label class="custom-file-label" for="exampleInputFile">Escoger foto</label>
+                </div>
+                  <img class="img-thumbnail previsualizar ml-2" src="vistas/img/usuarios/default/anonymous.png" alt="imagen-del-usuario" width="100px">
+              </div>
+                  <p class="p-foto help-block">Peso máximo de la foto 2 MB</p>
             </div>
           </div>
           <div class="form-group">

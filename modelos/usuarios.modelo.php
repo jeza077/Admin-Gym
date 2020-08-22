@@ -64,7 +64,7 @@ class ModeloUsuarios{
 	 
 	public function mdlIngresarPersona($tabla, $datos){
 
-		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(nombre, apellidos, identidad, fecha_nacimiento, sexo, telefono, direccion, correo, foto) VALUES (:nombre, :apellidos, :identidad, :fecha_nacimiento, :sexo, :telefono, :direccion, :correo, :foto)");
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(nombre, apellidos, identidad, fecha_nacimiento, sexo, telefono, direccion, correo) VALUES (:nombre, :apellidos, :identidad, :fecha_nacimiento, :sexo, :telefono, :direccion, :correo)");
 
 		$stmt->bindParam(":nombre", $datos["nombre"], PDO::PARAM_STR);
 		$stmt->bindParam(":apellidos", $datos["apellido"], PDO::PARAM_STR);
@@ -74,7 +74,6 @@ class ModeloUsuarios{
 		$stmt->bindParam(":telefono", $datos["telefono"], PDO::PARAM_STR);
 		$stmt->bindParam(":direccion", $datos["direccion"], PDO::PARAM_STR);
 		$stmt->bindParam(":correo", $datos["email"], PDO::PARAM_STR);
-		$stmt->bindParam(":foto", $datos["foto"], PDO::PARAM_STR);
 		// $stmt->bindParam(":tipo_persona", $datos["tipo_persona"], PDO::PARAM_STR);
 
 		if($stmt->execute()){
@@ -117,11 +116,12 @@ class ModeloUsuarios{
 	 
 	static public function mdlIngresarUsuarioEmpleado($tabla, $datos){
 
-		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(id_persona, usuario, password, id_rol) VALUES (:id_persona, :usuario, :password, :id_rol)");
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(id_persona, usuario, password, foto, id_rol) VALUES (:id_persona, :usuario, :password, :foto, :id_rol)");
 
 		$stmt->bindParam(":id_persona", $datos["id_persona"], PDO::PARAM_INT);
 		$stmt->bindParam(":usuario", $datos["usuario"], PDO::PARAM_STR);
 		$stmt->bindParam(":password", $datos["password"], PDO::PARAM_STR);
+		$stmt->bindParam(":foto", $datos["foto"], PDO::PARAM_STR);
 		$stmt->bindParam(":id_rol", $datos["rol"], PDO::PARAM_INT);
 
 		if($stmt->execute()){
