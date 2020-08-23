@@ -1,5 +1,5 @@
 <?php
-
+error_reporting(E_ALL & ~E_NOTICE);
 class ControladorUsuarios{
 
 	/*=============================================
@@ -84,7 +84,15 @@ class ControladorUsuarios{
 						if($ultimoLogin == "ok"){
 
 							echo '<script>
-									window.location = "inicio";
+							
+								Swal.fire({
+									title: "Bienvenido",
+									icon: "success"
+								}).then((result)=>{
+									if(result.value){
+										window.location = "inicio";
+									}
+								});
 								</script>';
 
 						}

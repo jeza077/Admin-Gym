@@ -36,10 +36,8 @@ function toggelPassword(){
     container.classList.toggle('changePassword')
 }
 
-// function removerClase(){  
-//     $('.login').on('click', function () {
-//         $(body).removeClass('.login-page');
-//     });
+// function mayusculas(e){  
+//     e.value = e.value.toUpperCase();
 // }
 
 /*function editarPassword(){  
