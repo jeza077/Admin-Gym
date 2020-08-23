@@ -37,11 +37,11 @@
           Start creating your amazing application!
           <?php
 
-            $tabla = null;
-            $item = null;
-            $valor = null;
+            $tabla = "empleados";
+            $item = "usuario";
+            $valor = "JEZA";
 
-            $usuarios = ControladorUsuarios::ctrMostrarUsuario($tabla, $item, $valor);
+            $usuarios = ControladorUsuarios::ctrMostrarUsuarios($tabla, $item, $valor);
             echo "<pre>";
               var_dump($usuarios);
             echo "</pre>";

@@ -28,16 +28,27 @@
         </li>
         <li class="dropdown nav-item user user-menu" style="margin-right:1em">
           <a href="#"  data-toggle="dropdown">
-            <img src="vistas/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-            <span class="hidden-xs">Alexander Pierce</span>
+            <?php
+              if($_SESSION["foto"] != ""){
+                echo '<img src="'.$_SESSION["foto"].'" class="user-image" alt="User Image">';
+              } else {
+                echo '<img src="vistas/img/usuarios/default/anonymous.png" class="user-image" alt="User Image">';
+              }
+            ?>
+            <span class="hidden-xs"><?php echo $_SESSION["nombre"]." ". $_SESSION["apellidos"]?></span>
           </a>
           <ul class="dropdown-menu">
             <!-- User image -->
             <li class="user-header">
-              <img src="vistas/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-
+              <?php
+                if($_SESSION["foto"] != ""){
+                  echo '<img src="'.$_SESSION["foto"].'" class="img-circle" alt="User Image">';
+                } else {
+                  echo '<img src="vistas/img/usuarios/default/anonymous.png" class="img-circle" alt="User Image">';
+                }
+              ?>
               <p>
-                Alexander Pierce - Web Developer
+                <?php echo $_SESSION["usuario"] . " - " . $_SESSION["rol"]?>
               </p>
             </li>
             
@@ -47,7 +58,7 @@
                 <a href="#" class="btn btn-default btn-flat">Profile</a>
               </div>
               <div class="float-right">
-                <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                <a href="salir" class="btn btn-default btn-flat">Salir</a>
               </div>
             </li>
           </ul>

@@ -36,6 +36,12 @@ function toggelPassword(){
     container.classList.toggle('changePassword')
 }
 
+// function removerClase(){  
+//     $('.login').on('click', function () {
+//         $(body).removeClass('.login-page');
+//     });
+// }
+
 /*function editarPassword(){  
     $("#nueva_password").keyup(function() { 
         var editPassword = $("#nueva_password").val();

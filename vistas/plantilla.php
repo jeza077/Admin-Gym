@@ -1,3 +1,7 @@
+<?php
+  session_start();
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,10 +24,10 @@
   <!-- SweetAlert2 CDN -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 </head>
-<body class="hold-transition sidebar-mini">
 <?php
 
-    // if(isset($_SESSION["iniciarSesion"]) && $_SESSION["iniciarSesion"] == "ok"){
+    if(isset($_SESSION["iniciarSesion"]) && $_SESSION["iniciarSesion"] == "ok"){
+    echo '<body class="hold-transition sidebar-mini">';
 
     echo '<div class="wrapper">';
 
@@ -86,11 +90,12 @@
 
       
 
-    // } else{
+    } else{
+      echo '<body class="hold-transition login-page sidebar-mini">';
 
-    //   include "modulos/login.php";
+      include "modulos/login.php";
 
-    // }
+    }
 
     ?>
 

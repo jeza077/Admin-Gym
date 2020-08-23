@@ -11,7 +11,7 @@
 
       <form method="post">
         <div class="input-group mb-3">
-          <input type="text" class="form-control" name="ingUsuario" placeholder="Usuario">
+          <input type="text" class="form-control" name="ingUsuario" placeholder="Usuario" required>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -19,7 +19,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" name="ingPassword" placeholder="Contraseña">
+          <input type="password" class="form-control" name="ingPassword" placeholder="Contraseña" required>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -28,7 +28,7 @@
         </div>
         <div class="row mb-2">
           <div class="col-12">
-            <button type="submit" class="btn btn-orange btn-block">Login</button>
+            <button type="submit" class="btn btn-orange login btn-block">Login</button>
           </div>
         </div>
       </form>
@@ -39,6 +39,10 @@
       <p class="mb-0">
         ¿No tienes una cuenta? <a href="#" class="text-center">Registrate</a>
       </p>
+  <?php 
+    $login = new ControladorUsuarios();
+    $login->ctrIngresoUsuario();
+  ?>
     </div>
 
     <!-- CONTENEDOR VERIFICAR EL EMAIL -->
@@ -108,6 +112,7 @@
       </form>
     </div>
   </div>
+
 </div>
 <!-- /.login-box -->
 

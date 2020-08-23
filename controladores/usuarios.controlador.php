@@ -35,38 +35,6 @@ class ControladorUsuarios{
 
 	public function ctrIngresoUsuario(){
 
-		// if(isset($_POST["ingUsuario"])){
-
-		// 	if(preg_match('/^[a-zA-Z0-9]+$/', $_POST["ingUsuario"]) &&
-		// 	   preg_match('/^[a-zA-Z0-9]+$/', $_POST["ingPassword"])){
-
-		// 		$tabla = "usuarios";
-
-		// 		$item = "usuario";
-		// 		$valor = $_POST["ingUsuario"];
-
-		// 		$respuesta = ModeloUsuarios::s($tabla, $item, $valor);
-
-		// 		if($respuesta["usuario"] == $_POST["ingUsuario"] && $respuesta["password"] == $_POST["ingPassword"]){
-
-		// 			$_SESSION["iniciarSesion"] = "ok";
-
-		// 			echo '<script>
-
-		// 				window.location = "inicio";
-
-		// 			</script>';
-
-		// 		}else{
-
-		// 			echo '<br><div class="alert alert-danger">Error al ingresar, vuelve a intentarlo</div>';
-
-		// 		}
-
-		// 	}	
-
-		// }
-
 		if(isset($_POST["ingUsuario"])){
 
 			if(preg_match('/^[A-Z0-9]+$/', $_POST["ingUsuario"]) &&
@@ -76,12 +44,13 @@ class ControladorUsuarios{
 
 				$_SESSION['contadorLogin'] = 0;
 
-				$tabla = "usuarios";
+				$tabla1 = "personas";
+				$tabla2 = "empleados";
 				
 				$item = "usuario";
 				$valor = $_POST["ingUsuario"];
 
-				$respuesta = ModeloUsuarios::s($tabla, $item, $valor);
+				$respuesta = ModeloUsuarios::mdlMostrarUsuarios($tabla1, $tabla2, $item, $valor);
 
 				if($respuesta["usuario"] == $_POST["ingUsuario"] && $respuesta["password"] == $encriptar){
 					
@@ -90,9 +59,10 @@ class ControladorUsuarios{
 						$_SESSION["iniciarSesion"] = "ok";
 						$_SESSION["id"] = $respuesta["id"];
 						$_SESSION["nombre"] = $respuesta["nombre"];
+						$_SESSION["apellidos"] = $respuesta["apellidos"];
 						$_SESSION["usuario"] = $respuesta["usuario"];
 						$_SESSION["foto"] = $respuesta["foto"];
-						$_SESSION["perfil"] = $respuesta["perfil"];
+						$_SESSION["rol"] = $respuesta["rol"];
 
 						/* =====REGISTRAR FECHA Y HORA PARA SABER EL ULTIMO LOGIN ====== */
 
@@ -106,10 +76,10 @@ class ControladorUsuarios{
 						$item1 = "ultimo_login";
 						$valor1 = $fechaActual;
 
-						$item2 = "id";
+						$item2 = "id_persona";
 						$valor2 = $respuesta["id"];
 
-						$ultimoLogin = ModeloUsuarios::mdlActualizarUsuario($tabla, $item1, $valor1, $item2, $valor2);
+						$ultimoLogin = ModeloUsuarios::mdlActualizarUsuario($tabla2, $item1, $valor1, $item2, $valor2);
 
 						if($ultimoLogin == "ok"){
 
@@ -125,59 +95,62 @@ class ControladorUsuarios{
 						echo '<br><div class="alert alert-danger">El usuario no esta activado, comuniquese con el administrador</div>';
 					}
 
+				} else {
+					echo '<br><div class="alert alert-danger">¡Usuario y contraseña incorrectos! Vuelve a intentar.</div>';
 				}
 				
-			} else {
-				//INTENTOS DE LOGUEARSE PERMITIDOS SOLO 3 AL REBASARLOS SE DESACTIVARA EL USUARIO INGRESADO AUTOMATICAMENTE.
-				$intentos = 3;
-				$_SESSION['contadorLogin'] = $_SESSION['contadorLogin'] + 1; 
+			} 
+			// else {
+			// 	//INTENTOS DE LOGUEARSE PERMITIDOS SOLO 3 AL REBASARLOS SE DESACTIVARA EL USUARIO INGRESADO AUTOMATICAMENTE.
+			// 	$intentos = 3;
+			// 	$_SESSION['contadorLogin'] = $_SESSION['contadorLogin'] + 1; 
 
-				$intentos = $intentos - ($_SESSION['contadorLogin']);
+			// 	$intentos = $intentos - ($_SESSION['contadorLogin']);
 
 
-				if($_SESSION['contadorLogin'] === 3) {
-					$tabla = "usuarios";
+			// 	if($_SESSION['contadorLogin'] === 3) {
+			// 		$tabla = "usuarios";
 				
-					$item = "usuario";
-					$valor = $_POST["ingUsuario"];	
+			// 		$item = "usuario";
+			// 		$valor = $_POST["ingUsuario"];	
 
-					$respuesta = ModeloUsuarios::MdlMostrarUsuarios($tabla, $item, $valor);
+			// 		$respuesta = ModeloUsuarios::MdlMostrarUsuarios($tabla, $item, $valor);
 
-					if($respuesta["usuario"] == $_POST["ingUsuario"]){
-						$tabla = "usuarios";
-						$item1 = "estado";
-						$valor1 = 0;
+			// 		if($respuesta["usuario"] == $_POST["ingUsuario"]){
+			// 			$tabla = "usuarios";
+			// 			$item1 = "estado";
+			// 			$valor1 = 0;
 
-						$item2 = "usuario";
-						$valor2 = $_POST["ingUsuario"];
+			// 			$item2 = "usuario";
+			// 			$valor2 = $_POST["ingUsuario"];
 
-						$respuesta = ModeloUsuarios::mdlActualizarUsuario($tabla, $item1, $valor1, $item2, $valor2);
+			// 			$respuesta = ModeloUsuarios::mdlActualizarUsuario($tabla, $item1, $valor1, $item2, $valor2);
 
-						if($respuesta == "ok"){
-							// echo '<br><div class="alert alert-danger">¡Lo sentimos! Su usuario ha sido desactivado, comuniquese con el Administrador</div>';
+			// 			if($respuesta == "ok"){
+			// 				// echo '<br><div class="alert alert-danger">¡Lo sentimos! Su usuario ha sido desactivado, comuniquese con el Administrador</div>';
 							
-							echo '<script>
-									swal({
-										type: "warning",
-										title: "¡Lo sentimos! Su usuario ha sido desactivado, comuniquese con el Administrador",
-										showConfirmButton: true,
-										confirmButtonText: "Cerrar",
-										closeOnConfirm: false
-									})
-									</script>';
-							session_destroy();
-						}
+			// 				echo '<script>
+			// 						swal({
+			// 							type: "warning",
+			// 							title: "¡Lo sentimos! Su usuario ha sido desactivado, comuniquese con el Administrador",
+			// 							showConfirmButton: true,
+			// 							confirmButtonText: "Cerrar",
+			// 							closeOnConfirm: false
+			// 						})
+			// 						</script>';
+			// 				session_destroy();
+			// 			}
 						
-					}
+			// 		}
 							
 			
-				} else {
+			// 	} else {
 					
-					echo '<br><div class="alert alert-danger">¡Usuario y contraseña invalidos! Intento: '.$_SESSION['contadorLogin'] .', tiene '.$intentos.' intento mas </div>';
+			// 		echo '<br><div class="alert alert-danger">¡Usuario y contraseña invalidos! Intento: '.$_SESSION['contadorLogin'] .', tiene '.$intentos.' intento mas </div>';
 					
-				}
+			// 	}
 				
-			}
+			// }
 			
 		
 		
@@ -188,7 +161,7 @@ class ControladorUsuarios{
 	}
 
 	/*=============================================
-		REGISTRO DE USUARIO
+		REGISTRO DE PERSONAS
 	=============================================*/
 
 	static public function ctrCrearUsuario(){
