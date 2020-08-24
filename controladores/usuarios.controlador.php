@@ -296,11 +296,10 @@ class ControladorUsuarios{
 								if($respuesta2 = "ok"){
 										
 									echo '<script>
-										Swal.fire(
-											"Empleado guardado correctamente!",
-											"You clicked the button!",
-											"success"
-										)
+										Swal.fire({
+											title: "Empleado guardado correctamente!",
+											icon: "success"
+										})
 								
 									</script>';
 
@@ -326,10 +325,10 @@ class ControladorUsuarios{
 							if($respuesta3 = "ok"){
 										
 								echo '<script>
-									Swal.fire(
+									Swal.fire({
 										title: "Cliente guardado correctamente!",
 										icon: "success"
-									)
+									})
 							
 								</script>';
 

@@ -75,7 +75,7 @@ class ModeloUsuarios{
 				INGRESAR PERSONAS	
 	=============================================*/
 	 
-	public function mdlIngresarPersona($tabla, $datos){
+	static public function mdlIngresarPersona($tabla, $datos){
 
 		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(nombre, apellidos, identidad, fecha_nacimiento, sexo, telefono, direccion, correo) VALUES (:nombre, :apellidos, :identidad, :fecha_nacimiento, :sexo, :telefono, :direccion, :correo)");
 

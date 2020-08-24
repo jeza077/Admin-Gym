@@ -105,6 +105,9 @@
 <script src="vistas/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- SweetAlert 2 -->
 <!-- <script src="vistas/plugins/sweetalert2/sweetalert2.all.js"></script> -->
+<!-- InputMask -->
+<script src="vistas/plugins/moment/moment.min.js"></script>
+<script src="vistas/plugins/inputmask/jquery.inputmask.bundle.min.js"></script>
 <!-- AdminLTE App -->
 <script src="vistas/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
