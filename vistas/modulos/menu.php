@@ -32,25 +32,30 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-item">
-            <a href="inicio" class="nav-link">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
-              <p>
-                Dashboard
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="../widgets.html" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                Usuarios
-              </p>
-            </a>
-          </li>
+               <?php
+                
+                  $item1 = "usuario";
+                  $valor1 = $_SESSION["usuario"];
+                  $item2 = "rol";
+                  $valor2 = $_SESSION["rol"];
+
+                  $modulos = ControladorUsuarios::ctrMostrarUsuarioModulo($item1, $item2, $valor1, $valor2);
+
+                  // $modulos_rol = array();                  
+                  foreach($modulos as $modulo) {?>
+       
+                    <li class="nav-item">
+                      <a href="<?php echo $modulo['link_modulo'] ?>" class="nav-link">
+                        <i class="nav-icon fas <?php echo $modulo['icono'] ?>"></i>
+                        <p>
+                          <?php echo $modulo['nombre_modulo'] ?>
+                        </p>
+                      </a>
+                    </li>
+  
+                  <?php }
+              ?>
         </ul>
       </nav>
-      <!-- /.sidebar-menu -->
     </div>
-    <!-- /.sidebar -->
   </aside>

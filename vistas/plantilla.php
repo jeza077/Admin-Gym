@@ -49,7 +49,7 @@
 
       if(isset($_GET["ruta"])){
 
-        if($_GET["ruta"] == "inicio" ||
+        if($_GET["ruta"] == "dashboard" ||
           $_GET["ruta"] == "usuarios" ||
           $_GET["ruta"] == "categorias" ||
           $_GET["ruta"] == "empleados" ||

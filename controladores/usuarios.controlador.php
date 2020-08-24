@@ -29,6 +29,13 @@ class ControladorUsuarios{
 
 	}
 
+	static public function ctrMostrarUsuarioModulo($item1, $item2, $valor1, $valor2){
+
+		$respuesta = ModeloUsuarios::mdlMostrarUsuarioModulo($item1, $item2, $valor1, $valor2);
+
+		return $respuesta;
+	}
+
 	/*=============================================
 	INGRESO DE USUARIO
 	=============================================*/
@@ -90,7 +97,7 @@ class ControladorUsuarios{
 									icon: "success"
 								}).then((result)=>{
 									if(result.value){
-										window.location = "inicio";
+										window.location = "dashboard";
 									}
 								});
 								</script>';

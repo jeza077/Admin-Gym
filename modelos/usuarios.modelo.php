@@ -5,7 +5,7 @@ require_once "conexion.php";
 class ModeloUsuarios{
 
 	/*=============================================
-	MOSTRAR USUARIOS
+		MOSTRAR USUARIOS
 	=============================================*/
 	
 	static public function mdlMostrarUsuarios($tabla1, $tabla2, $item, $valor){
@@ -44,6 +44,29 @@ class ModeloUsuarios{
 		$stmt = null;	
 
 	}
+
+	/*=============================================
+		MOSTRAR USUARIOS-ROLES-MODULO
+	=============================================*/
+	
+	static public function mdlMostrarUsuarioModulo($item1, $item2, $valor1, $valor2){
+
+		$stmt = Conexion::conectar()->prepare("SELECT e.usuario, r.rol, m.nombre_modulo, m.link_modulo, m.icono FROM empleados AS e\n"
+				. " INNER JOIN roles AS r ON e.id_rol = r.id\n"
+				. " INNER JOIN rol_modulos AS rm ON r.id=rm.rol_id_fk\n"
+				. " INNER JOIN modulos AS m ON rm.modulo_id_fk=m.id\n"
+				. " WHERE e.$item1 = :$item1 AND r.$item2 = :$item2");
+				
+		$stmt -> bindParam(":".$item1, $valor1, PDO::PARAM_STR);
+		$stmt -> bindParam(":".$item2, $valor2, PDO::PARAM_STR);
+		$stmt -> execute();
+		return $stmt -> fetchAll();
+
+		$stmt -> close();
+		$stmt = null;	
+
+	}
+
 	/*=============================================
 		MOSTRAR ROLES
 	=============================================*/
