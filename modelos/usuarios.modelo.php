@@ -32,6 +32,7 @@ class ModeloUsuarios{
 				return $stmt -> fetchAll();
 	
 			}
+
 		} else if ($tabla2 == null) {
 
 			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla1");
@@ -68,7 +69,7 @@ class ModeloUsuarios{
 	}
 
 	/*=============================================
-		MOSTRAR 
+			MOSTRAR 
 	=============================================*/
 
 	static public function mdlMostrar($tabla, $item, $valor){
@@ -110,15 +111,14 @@ class ModeloUsuarios{
 		$stmt->bindParam(":telefono", $datos["telefono"], PDO::PARAM_STR);
 		$stmt->bindParam(":direccion", $datos["direccion"], PDO::PARAM_STR);
 		$stmt->bindParam(":correo", $datos["email"], PDO::PARAM_STR);
-		// $stmt->bindParam(":tipo_persona", $datos["tipo_persona"], PDO::PARAM_STR);
 
 		if($stmt->execute()){
 
-			return "ok";
+			return true;
 
 		}else{
 
-			return "error";
+			return false;
 		
 		}
 
@@ -144,11 +144,62 @@ class ModeloUsuarios{
 
 		if($stmt->execute()){
 
-			return "ok";	
+			return true;	
 
 		}else{
 
-			return "error";
+			return false;
+		
+		}
+
+		$stmt->close();
+		
+		$stmt = null;
+
+	}
+
+	/*=============================================
+	INGRESAR PREGUNTAS DE SEGURIDAD USUARIO-EMPLEADO	
+	=============================================*/
+	 
+	static public function mdlIngresarPreguntaUsuario($tabla, $datos){
+
+		$preguntas = $datos['idPregunta'];
+		$respuestas = $datos['respuesta'];
+
+		while(true) {
+
+			$fin = false;
+			
+			$pregunta = current($preguntas);
+			$respuesta = current($respuestas);
+
+			$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(id_usuario, id_pregunta, respuesta) 
+												   VALUES (:id_usuario, :id_pregunta, :respuesta)");
+	
+			$stmt->bindParam(":id_usuario", $datos["idUsuario"], PDO::PARAM_INT);
+			$stmt->bindParam(":id_pregunta", $pregunta, PDO::PARAM_INT);
+			$stmt->bindParam(":respuesta", $respuesta, PDO::PARAM_STR);
+			
+			$stmt->execute();
+
+			$pregunta = next($preguntas);
+			$respuesta = next($respuestas);
+			
+
+			if($pregunta === false && $respuesta === false){
+				$fin = true;
+				break;
+			}
+		}
+
+		if($fin == true){
+
+			return true;	
+
+		}else{
+
+			return false;
 		
 		}
 
@@ -170,11 +221,11 @@ class ModeloUsuarios{
 
 		if($stmt->execute()){
 
-			return "ok";	
+			return true;	
 
 		}else{
 
-			return "error";
+			return false;
 		
 		}
 

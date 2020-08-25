@@ -215,9 +215,9 @@ class ControladorUsuarios{
 							   "direccion" => $_POST["nuevaDireccion"],
 							   "email" => $_POST["nuevoEmail"]);
 
-				$respuesta = ModeloUsuarios::mdlIngresarPersona($tabla1, $datos);
+				$respuestaPersona = ModeloUsuarios::mdlIngresarPersona($tabla1, $datos);
 				
-					if($respuesta == "ok"){
+					if($respuestaPersona == true){
 
 						$totalId = array();
 
@@ -317,17 +317,44 @@ class ControladorUsuarios{
 											"rol" => $_POST["nuevoRol"],
 											"foto" => $ruta);
 
-								$respuesta2 = ModeloUsuarios::mdlIngresarUsuarioEmpleado($tabla2, $datos);
+								$respuestaEmpleado = ModeloUsuarios::mdlIngresarUsuarioEmpleado($tabla2, $datos);
 
-								if($respuesta2 = "ok"){
+								if($respuestaEmpleado = true){
 										
-									echo '<script>
-										Swal.fire({
-											title: "Empleado guardado correctamente!",
-											icon: "success"
-										})
-								
-									</script>';
+									$totalIdUsuarios = array();
+
+									$tabla1 = "empleados";
+									$tabla2 = null;
+									$item = null;
+									$valor = null;
+
+									$usuariosTotal = ModeloUsuarios::mdlMostrarUsuarios($tabla1, $tabla2, $item, $valor);
+
+									foreach($usuariosTotal as $keyUsuarios => $valueUsuarios){
+										array_push($totalIdUsuarios, $valueUsuarios["id"]);
+									}
+
+									$idUsuario = end($totalIdUsuarios);
+
+									$tabla3 = "usuario_pregunta";
+									
+									$datos = array("idUsuario" => $idUsuario,
+												   "idPregunta" => $_POST["nuevaPregunta"],
+												   "respuesta" => $_POST["respuestaPregunta"]);
+
+												   
+									$respuestaPreguntas = ModeloUsuarios::mdlIngresarPreguntaUsuario($tabla3, $datos);
+
+									if($respuestaPreguntas == true){
+										echo '<script>
+											Swal.fire({
+												title: "Empleado guardado correctamente!",
+												icon: "success"
+											})
+									
+										</script>';
+									}
+
 
 								}
 							} else {
@@ -342,13 +369,13 @@ class ControladorUsuarios{
 							}
 
 						} else {
-							$tabla3 = "clientes";
+							$tabla4 = "clientes";
 							
 							$datos = array("id_persona" => $idPersona);
 
-							$respuesta3 = ModeloUsuarios::mdlIngresarCliente($tabla3, $datos);
+							$respuestaCliente = ModeloUsuarios::mdlIngresarCliente($tabla4, $datos);
 
-							if($respuesta3 = "ok"){
+							if($respuestaCliente = true){
 										
 								echo '<script>
 									Swal.fire({
