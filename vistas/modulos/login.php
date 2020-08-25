@@ -71,7 +71,26 @@
       <p class="login-box-msg">Preguntas de Seguridad</p>
       <form method="post">
         <div class="form-group has-feedback" id="preguntaSeguridad">
-  
+          <div class="form-row">
+                <?php 
+                    $tabla = "preguntas";
+                    $item = null;
+                    $valor = null;
+
+                    $preguntas = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
+
+                    // var_dump($preguntas);
+                    foreach ($preguntas as $key => $pregunta) { ?>
+
+                    <div class="form-group col-md-4">
+                      <label for="inputPassword4">Pregunta <?php echo $key+1?></label>
+                      <input type="text" value="<?php echo $pregunta['pregunta']?>" class="form-control" disabled>
+                    </div>
+
+                    <?php    
+                      }
+                    ?>                
+          </div>
         </div>
   
         <div class="row mb-2">    

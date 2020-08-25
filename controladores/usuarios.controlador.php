@@ -20,10 +20,10 @@ class ControladorUsuarios{
 				MOSTRAR ROLES
 	=============================================*/
 
-	static public function ctrMostrarRoles($item, $valor) {
+	static public function ctrMostrar($tabla, $item, $valor) {
 
-		$tabla = "roles";
-		$respuesta = ModeloUsuarios::mdlMostrarRoles($tabla, $item, $valor);
+		$tabla1 = $tabla;
+		$respuesta = ModeloUsuarios::mdlMostrar($tabla1, $item, $valor);
 
 		return $respuesta;
 

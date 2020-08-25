@@ -86,24 +86,21 @@
         </div>
 
         <div class="card-body contenedor agregarEmpleado">
-          <div class="form-row empleados">
-            <div class="form-group col-md-12">
+          <div class="form-row">
+            <div class="form-group col-md-6">
               <label for="">Usuario</label>
-              <input type="text" class="form-control" id="" name="nuevoUsuario">
+              <input type="text" class="form-control" id="" name="nuevoUsuario" placeholder="Ingrese Usuario">
             </div>
-            <div class="form-group col-md-12">
-              <label for="inputPassword4">Password</label>
-              <input type="password" class="form-control" id="inputPassword4" name="nuevoPassword">
-            </div>
-            <div class="form-group col-md-12">
+            <div class="form-group col-md-6">
               <label>Rol</label>
               <select class="form-control select2" style="width: 100%;" name="nuevoRol">
                 <option selected="selected">Seleccionar...</option>
                   <?php 
+                      $tabla = "roles";
                       $item = null;
                       $valor = null;
 
-                      $roles = ControladorUsuarios::ctrMostrarRoles($item, $valor);
+                      $roles = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
 
                       foreach ($roles as $key => $value) {
                         echo '<option value="'.$value["id"].'">'.$value["rol"].'</option>';
@@ -111,18 +108,71 @@
                   ?>
               </select>
             </div>
-            <div class="form-group col-md-12">
-              <label for="exampleInputFile">Foto</label>
-              <div class="input-group">
-                <div class="custom-file">
-                  <input type="file" class="custom-file-input nuevaFoto" id="exampleInputFile" name="nuevaFoto">
-                  <label class="custom-file-label" for="exampleInputFile">Escoger foto</label>
-                </div>
-                  <img class="img-thumbnail previsualizar ml-2" src="vistas/img/usuarios/default/anonymous.png" alt="imagen-del-usuario" width="100px">
-              </div>
-                  <p class="p-foto help-block">Peso máximo de la foto 2 MB</p>
+          </div>  
+
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="inputPassword4">Password</label>
+              <input type="password" class="form-control" id="inputPassword4" name="nuevoPassword" placeholder="Ingrese Contraseña">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="inputPassword4">Confirmar Password</label>
+              <input type="password" class="form-control" placeholder="Ingrese Confirmar contraseña">
             </div>
           </div>
+          <div class="form-row">
+          <?php 
+            for ($i=1; $i <=3 ; $i++) { ?>
+            <div class="form-group col-md-4">
+              <label for="inputPassword4">Pregunta <?php echo $i?></label>
+              <select class="form-control select2" name="nuevaPregunta">
+              <option selected="selected">Seleccionar...</option>
+              <?php 
+                      $tabla = "preguntas";
+                      $item = null;
+                      $valor = null;
+
+                      $preguntas = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
+
+                      foreach ($preguntas as $key => $value) { ?>
+                        <option value="<?php echo $value['id']?>"><?php echo $value['pregunta']?></option>        
+                      <?php 
+                      }
+                  ?>
+              </select>
+            </div>
+          <?php
+            }            
+          ?>
+          </div>
+          
+          <div class="form row">
+            <div class="form-group col-md-4">
+              <label for="inputPassword4">Respuesta</label>
+              <input type="text" class="form-control" name="respuestaPregunta1">
+            </div>
+            <div class="form-group col-md-4">
+              <label for="inputPassword4">Respuesta</label>
+              <input type="text" class="form-control" name="respuestaPregunta2">
+            </div>
+            <div class="form-group col-md-4">
+              <label for="inputPassword4">Respuesta</label>
+              <input type="text" class="form-control" name="respuestaPregunta3">
+            </div>
+          </div>
+          
+          <div class="form-group col-md-12">
+            <label for="exampleInputFile">Foto</label>
+            <div class="input-group">
+              <div class="custom-file">
+                <input type="file" class="custom-file-input nuevaFoto" id="exampleInputFile" name="nuevaFoto">
+                <label class="custom-file-label" for="exampleInputFile">Escoger foto</label>
+              </div>
+                <img class="img-thumbnail previsualizar ml-2" src="vistas/img/usuarios/default/anonymous.png" alt="imagen-del-usuario" width="100px">
+            </div>
+                <p class="p-foto help-block">Peso máximo de la foto 2 MB</p>
+          </div>
+        
           <div class="form-group">
             <a href="#" class="btn btn-danger float-left" onclick="toggleUser();">Atras</a>
             <button type="submit" class="btn btn-primary btnGuardar float-right">Guardar</button>

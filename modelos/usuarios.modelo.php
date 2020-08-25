@@ -68,10 +68,10 @@ class ModeloUsuarios{
 	}
 
 	/*=============================================
-		MOSTRAR ROLES
+		MOSTRAR 
 	=============================================*/
 
-	static public function mdlMostrarRoles($tabla, $item, $valor){
+	static public function mdlMostrar($tabla, $item, $valor){
 
 		if($item != null){
 
