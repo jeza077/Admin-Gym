@@ -94,7 +94,9 @@ class ControladorUsuarios{
 							
 								Swal.fire({
 									title: "Bienvenido",
-									icon: "success"
+									icon: "success",
+									heightAuto: false,
+									allowOutsideClick: false
 								}).then((result)=>{
 									if(result.value){
 										window.location = "dashboard";
@@ -106,15 +108,32 @@ class ControladorUsuarios{
 
 
 					} else {
-
-						echo '<br><div class="alert alert-danger">El usuario no esta activado, comuniquese con el administrador</div>';
+						echo '<script>			
+								Swal.fire({
+									title: "Usuario desactivado, comuniquese con el administrador.",
+									icon: "error",
+									heightAuto: false,
+									allowOutsideClick: false
+								});
+							</script>';
+						// echo '<br><div class="alert alert-danger">El usuario no esta activado, comuniquese con el administrador</div>';
 					}
 
 				} else {
 					echo '<br><div class="alert alert-danger">¡Usuario y contraseña incorrectos! Vuelve a intentar.</div>';
 				}
 				
-			} 
+			} else {
+
+				echo '<script>			
+						Swal.fire({
+							title: "Usuario y contraseña incorrectos! Intente de nuevo.",
+							icon: "error",
+							heightAuto: false,
+							allowOutsideClick: false
+						});
+					</script>';
+			}
 			// else {
 			// 	//INTENTOS DE LOGUEARSE PERMITIDOS SOLO 3 AL REBASARLOS SE DESACTIVARA EL USUARIO INGRESADO AUTOMATICAMENTE.
 			// 	$intentos = 3;
