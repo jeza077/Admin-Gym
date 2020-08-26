@@ -19,19 +19,19 @@ $(".verificarPreguntas").on('click', function(event){
 })
 
 //FUNCION PARA PASAR A VERIFICAR EL EMAIL
-function toggelForm(){
+function toggleForm(){
     var container = document.querySelector('.login-box');
     container.classList.toggle('active')
 }
 
 //FUNCION PARA PASAR A LAS PREGUNTAS DE SEGURIDAD
-function toggelQuestions(){
+function toggleQuestions(){
     var container = document.querySelector('.login-box');
     container.classList.toggle('quest')
 }
 
 //FUNCION PARA PASAR A CAMBIAR LA CONTRASEÑA
-function toggelPassword(){
+function togglePassword(){
     var container = document.querySelector('.login-box');
     container.classList.toggle('changePassword')
 }

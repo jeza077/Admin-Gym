@@ -34,7 +34,7 @@
       </form>
 
       <p class="mb-1">
-        <a href="#" onclick="toggelForm();">¿Olvidaste tu contraseña</a>
+        <a href="#" onclick="toggleForm();">¿Olvidaste tu contraseña</a>
       </p>
       <p class="mb-0">
         ¿No tienes una cuenta? <a href="#" class="text-center">Registrate</a>
@@ -56,9 +56,9 @@
 
         <div class="row mb-2">
           <div class="col-12">
-            <button type="submit" class="btn btn-orange btn-block verificarCorreo" onclick="toggelQuestions();">Verificar</button>
+            <button type="submit" class="btn btn-orange btn-block verificarCorreo" onclick="toggleQuestions();">Verificar</button>
           </div>
-          <p class="link">Regresar al <a href="#" onclick="toggelForm();">Login</a></p>
+          <p class="link">Regresar al <a href="#" onclick="toggleForm();">Login</a></p>
         </div>
 
       </form>
@@ -72,32 +72,15 @@
       <form method="post">
         <div class="form-group has-feedback" id="preguntaSeguridad">
           <div class="form-row">
-                <?php 
-                    $tabla = "preguntas";
-                    $item = null;
-                    $valor = null;
-
-                    $preguntas = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
-
-                    // var_dump($preguntas);
-                    foreach ($preguntas as $key => $pregunta) { ?>
-
-                    <div class="form-group col-md-4">
-                      <label for="inputPassword4">Pregunta <?php echo $key+1?></label>
-                      <input type="text" value="<?php echo $pregunta['pregunta']?>" class="form-control" disabled>
-                    </div>
-
-                    <?php    
-                      }
-                    ?>                
+                   
           </div>
         </div>
   
         <div class="row mb-2">    
           <div class="col-12">
-            <button type="submit" class="btn btn-orange btn-block btn-flat verificarPreguntas" id="verificarPreguntas" onclick="toggelPassword();">Verificar</button>       
+            <button type="submit" class="btn btn-orange btn-block btn-flat verificarPreguntas" id="verificarPreguntas" onclick="togglePassword();">Verificar</button>       
           </div>
-          <p class="link">Regresar al <a href="#" onclick="toggelForm(); toggelQuestions();">Login</a></p>
+          <p class="link">Regresar al <a href="#" onclick="toggleForm(); toggleQuestions();">Login</a></p>
         </div>
       </form>
   
@@ -126,6 +109,8 @@
             <div class="col-12" id="btnCambiarPass">
 
             </div>  
+
+            <p class="link">Regresar al <a href="#" onclick="toggleForm(); toggleQuestions(); togglePassword();">Login</a></p>
         </div>
 
       </form>
