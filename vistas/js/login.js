@@ -36,10 +36,6 @@ function togglePassword(){
     container.classList.toggle('changePassword')
 }
 
-// function mayusculas(e){  
-//     e.value = e.value.toUpperCase();
-// }
-
 /*function editarPassword(){  
     $("#nueva_password").keyup(function() { 
         var editPassword = $("#nueva_password").val();
@@ -88,7 +84,7 @@ function togglePassword(){
     });
 }*/
 
-/*
+
 //VERIFICAR SI EL CORREO ESTA ASOCIADO A UN USUARIO
 $("#verificarEmail").change(function() { 
     
@@ -114,7 +110,8 @@ $("#verificarEmail").change(function() {
             // console.log(respuesta);
             
             idUsuario = respuesta.id; //<----- ID PARA CAMBIAR EL PASSWORD//
-            // console.log(idUsuario)
+            usuario = respuesta.usuario;
+            // console.log(idUsuario, usuario)
 
             if(!respuesta) {//Si la Respuesta = FALSE entonces...
                 //Mandamos una alerta diciendo que ya existe el usuario.
@@ -128,10 +125,10 @@ $("#verificarEmail").change(function() {
                 // TRAEMOS LAS RESPUESTAS DE SEGURIDAD
 
                 $("#verificarEmail").val("");
-                toggelQuestions();
+                toggleQuestions();
                 
                 var datos = new FormData();
-                datos.append("email", emailIngresado);
+                datos.append("usuario", usuario);
                 
                 $.ajax({
 
@@ -143,12 +140,12 @@ $("#verificarEmail").change(function() {
                     processData: false,  
                     dataType: "json",
                     success: function(respuesta) {
-                        // console.log(respuesta);
-
+                        console.log(respuesta[2]);
+                        $(".questionsBx").prepend("<p class='login-box-msg'>Hola <b>" + usuario + "</b>, contesta las siguientes preguntas de seguridad para poder cambiar la contraseña!</p>");
                         
                         for(var i in respuesta){
-                            // console.log(respuesta[i][2]);
-                            $("#preguntaSeguridad").append("<label>" + respuesta[i]['pregunta'] + "</label>");
+                            // console.log(respuesta[i][1]);
+                            $("#preguntaSeguridad").append("<label class='mt-2'>" + respuesta[i]['pregunta'] + "</label>");
                             $("#preguntaSeguridad").append("<input type='text' class='form-control respuestaPregunta' placeholder='Agrega la respuesta' required>")
                         }
 
@@ -157,7 +154,7 @@ $("#verificarEmail").change(function() {
                                 return respuestasRegistrada.respuesta; 
                             })
                             
-                            // console.log(respuestasRegistradas);
+                            console.log(respuestasRegistradas);
                         
 
                             // VERIFICAMOS SI LAS RESPUESTAS INGRESADAS CON LAS YA REGISTRADAS COINCIDEN
@@ -171,93 +168,96 @@ $("#verificarEmail").change(function() {
                                             respuestasIngresadas.push(respuestaPregunta.value);
                                         });
 
-                                        // console.log(respuestasIngresadas);
+                                        // var respuestas = $('.respuestaPregunta').val();
+                                        // respuestasIngresadas.push(respuestas);
+                                        console.log(respuestasIngresadas);
 
                                         var preguntaString = respuestasIngresadas.toString();
                                         var respuestaString = respuestasRegistradas.toString();
 
                                         if(preguntaString == respuestaString){
-                                            // console.log("CORRECTO");
-                                            toggelPassword();
+                                            console.log("CORRECTO");
+                                            togglePassword();
 
                                             $("#passwords").append("<input type='password' class='form-control' id='nueva_password' placeholder='Nueva contraseña' name='editarPassword' required>",
                                             "<input type='password' class='form-control' id='confirmar_password' placeholder='Confirmar contraseña'>",
                                             "<span class='help-block' id='resultado_password'></span>")
                                             
-                                            $("#btnCambiarPass").append("<button type='submit' class='btn btn-naranja btn-block btn-flat', id='cambiarContraseña' disabled='disabled'>Cambiar Contraseña</button>")
+                                            $("#btnCambiarPass").append("<button type='submit' class='btn btn-orange btn-block btn-flat', id='cambiarContraseña' disabled='disabled'>Cambiar Contraseña</button>")
 
-                                            $("#linkLogin").append("<p class='link'>Regresar al <a href='#' onclick='toggelForm(); toggelQuestions(); toggelPassword();'>Login</a></p>")
+                                            // $("#linkLogin").append("<p class='link'>Regresar al <a href='#' onclick='toggelForm(); toggelQuestions(); toggelPassword();'>Login</a></p>")
 
-                                                //CAMBIAR CONTRASEÑA
-                                                editarPassword();
-                                                $("input[name='editarPassword']").on('change', function(){
-                                                    cambiarPass = $(this).val();
-                                                });
-                                                $("#confirmar_password").on('input', function(){
-                                                    // var password_nuevo = cambiarPass;
-                                                    if($(this).val() == cambiarPass){
-                                                        $('#resultado_password').text('Correcto');
-                                                        $('#resultado_password').parents('.form-group').addClass('has-success').removeClass('has-error');
-                                                        $('#cambiarContraseña').attr('disabled', false);  
-                                                    } else {
-                                                        $('#resultado_password').text('No son iguales');
-                                                        $('#resultado_password').parents('.form-group').addClass('has-error').removeClass('has-success');
-                                                        $('#cambiarContraseña').attr('disabled', true);
-                                                    }
-                                                })
+                                            //     //CAMBIAR CONTRASEÑA
+                                            //     editarPassword();
+                                            //     $("input[name='editarPassword']").on('change', function(){
+                                            //         cambiarPass = $(this).val();
+                                            //     });
+                                            //     $("#confirmar_password").on('input', function(){
+                                            //         // var password_nuevo = cambiarPass;
+                                            //         if($(this).val() == cambiarPass){
+                                            //             $('#resultado_password').text('Correcto');
+                                            //             $('#resultado_password').parents('.form-group').addClass('has-success').removeClass('has-error');
+                                            //             $('#cambiarContraseña').attr('disabled', false);  
+                                            //         } else {
+                                            //             $('#resultado_password').text('No son iguales');
+                                            //             $('#resultado_password').parents('.form-group').addClass('has-error').removeClass('has-success');
+                                            //             $('#cambiarContraseña').attr('disabled', true);
+                                            //         }
+                                            //     })
                                                 
-                                                    $("#cambiarContraseña").on("click", function(event){  
-                                                        event.preventDefault();
-                                                        // console.log("clickkkk")
+                                            //         $("#cambiarContraseña").on("click", function(event){  
+                                            //             event.preventDefault();
+                                            //             // console.log("clickkkk")
 
-                                                        var datos = new FormData();
-                                                        datos.append("usuarioId", idUsuario);
-                                                        datos.append("cambiarPass", cambiarPass);
+                                            //             var datos = new FormData();
+                                            //             datos.append("usuarioId", idUsuario);
+                                            //             datos.append("cambiarPass", cambiarPass);
 
-                                                        $.ajax({
+                                            //             $.ajax({
 
-                                                            url:"ajax/usuarios.ajax.php",
-                                                            method: "POST",
-                                                            data: datos,
-                                                            cache: false,
-                                                            contentType: false,
-                                                            processData: false,  
-                                                            dataType: "json",
-                                                            success: function(respuesta) {
-                                                                if(respuesta == 'ok'){
-                                                                    swal({
+                                            //                 url:"ajax/usuarios.ajax.php",
+                                            //                 method: "POST",
+                                            //                 data: datos,
+                                            //                 cache: false,
+                                            //                 contentType: false,
+                                            //                 processData: false,  
+                                            //                 dataType: "json",
+                                            //                 success: function(respuesta) {
+                                            //                     if(respuesta == 'ok'){
+                                            //                         swal({
                 
-                                                                        type: "success",
-                                                                        title: "¡Contraseña cambiada correctamente!",
-                                                                        showConfirmButton: true,
-                                                                        confirmButtonText: "Cerrar",
-                                                                        closeOnConfirm: false
-                                                                    }).then((result)=>{
+                                            //                             type: "success",
+                                            //                             title: "¡Contraseña cambiada correctamente!",
+                                            //                             showConfirmButton: true,
+                                            //                             confirmButtonText: "Cerrar",
+                                            //                             closeOnConfirm: false
+                                            //                         }).then((result)=>{
     
-                                                                        if(result.value){
+                                            //                             if(result.value){
                                                 
-                                                                            toggelForm(); 
-                                                                            toggelQuestions();
-                                                                            toggelPassword();
+                                            //                                 toggelForm(); 
+                                            //                                 toggelQuestions();
+                                            //                                 toggelPassword();
                                                 
-                                                                        }
+                                            //                             }
                                                 
-                                                                    });
-                                                                }
+                                            //                         });
+                                            //                     }
                                                     
-                                                            }
+                                            //                 }
                                                     
-                                                        })
-                                                    })
+                                            //             })
+                                            //         })
 
                                         } else {
-                                            swal({		
-                                
-                                                type: 'error',
+                                            Swal.fire({		
+                                                icon: 'error',
                                                 title: 'Respuestas no coinciden. Intente de nuevo.',
                                                 showConfirmButton: false,
-                                                timer: 2000
+                                                heightAuto: false,  
+                                                timer: 1000
                                                 })
+
                                             $("#preguntaSeguridad input[type='text']").val("");
                                             console.log("MAL");
                                         }
@@ -276,5 +276,5 @@ $("#verificarEmail").change(function() {
     })
     
 });
-*/
+
 

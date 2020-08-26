@@ -17,7 +17,7 @@ class ControladorUsuarios{
 	}
 
 	/*=============================================
-				MOSTRAR ROLES
+				MOSTRAR (DINAMICO)
 	=============================================*/
 
 	static public function ctrMostrar($tabla, $item, $valor) {
@@ -29,6 +29,11 @@ class ControladorUsuarios{
 
 	}
 
+	
+	/*=============================================
+			MOSTRAR MODULOS POR ROL-USUARIO
+	=============================================*/
+
 	static public function ctrMostrarUsuarioModulo($item1, $item2, $valor1, $valor2){
 
 		$respuesta = ModeloUsuarios::mdlMostrarUsuarioModulo($item1, $item2, $valor1, $valor2);
@@ -37,7 +42,7 @@ class ControladorUsuarios{
 	}
 
 	/*=============================================
-	INGRESO DE USUARIO
+			INGRESO DE USUARIO
 	=============================================*/
 
 	public function ctrIngresoUsuario(){
@@ -195,7 +200,7 @@ class ControladorUsuarios{
 	}
 
 	/*=============================================
-		REGISTRO DE PERSONAS
+			REGISTRO DE PERSONAS
 	=============================================*/
 
 	static public function ctrCrearUsuario(){
@@ -428,6 +433,21 @@ class ControladorUsuarios{
 
 
 	}
+
+	/*=============================================
+                MOSTRAR PREGUNTAS
+	=============================================*/	
+
+
+	static public function ctrMostrarPreguntas($item, $valor) {
+
+		// $tabla = "usuarios";
+		$respuesta = ModeloUsuarios::mdlMostrarPreguntas($item, $valor);
+
+		return $respuesta;
+
+	}
+
 
 }
 	

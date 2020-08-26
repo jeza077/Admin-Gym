@@ -56,7 +56,7 @@
 
         <div class="row mb-2">
           <div class="col-12">
-            <button type="submit" class="btn btn-orange btn-block verificarCorreo" onclick="toggleQuestions();">Verificar</button>
+            <button type="submit" class="btn btn-orange btn-block verificarCorreo">Verificar</button>
           </div>
           <p class="link">Regresar al <a href="#" onclick="toggleForm();">Login</a></p>
         </div>
@@ -68,19 +68,18 @@
     <!-- CONTENEDOR PREGUNTAS DE SEGURIDAD -->
     <div class="card-body login-card-body questionsBx">
   
-      <p class="login-box-msg">Preguntas de Seguridad</p>
       <form method="post">
-        <div class="form-group has-feedback" id="preguntaSeguridad">
-          <div class="form-row">
+        <div class="form-row">
+          <div class="form-group col-md-12" id="preguntaSeguridad">
                    
           </div>
         </div>
   
         <div class="row mb-2">    
           <div class="col-12">
-            <button type="submit" class="btn btn-orange btn-block btn-flat verificarPreguntas" id="verificarPreguntas" onclick="togglePassword();">Verificar</button>       
+            <button type="submit" class="btn btn-orange btn-block btn-flat verificarPreguntas" id="verificarPreguntas">Verificar</button>       
           </div>
-          <p class="link">Regresar al <a href="#" onclick="toggleForm(); toggleQuestions();">Login</a></p>
+          <p class="link mt-3 ml-2">Regresar al <a href="#" onclick="toggleForm(); toggleQuestions();">Login</a></p>
         </div>
       </form>
   
@@ -91,10 +90,12 @@
       <p class="login-box-msg">Cambia tu contraseña</p>
       <form method="post" id="cambiarPassword">
 
-        <div class='form-group has-feedback' id="passwords">
+      <div class="row">
+        <div class='form-group col-md-12' id="passwords">
           
         </div>
-        <div class="con_info">
+      </div>
+        <!-- <div class="con_info">
           <h4>La contraseña debe cumplir con los siguientes requerimientos:</h4>
           <ul>
             <li class="letter">Al menos debe tener <strong>una letra</strong></li>
@@ -104,7 +105,7 @@
             <li class="length">Al menos debe tener <strong>8 caracteres como minimo y 16 maximo</strong></li>
           </ul>
         </div>
-        
+         -->
         <div class="row mb-2" id="linkLogin">    
             <div class="col-12" id="btnCambiarPass">
 

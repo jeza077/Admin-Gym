@@ -16,7 +16,7 @@ class ModeloUsuarios{
 	
 				$stmt = Conexion::conectar()->prepare("SELECT p.*, e.usuario, e.password, e.foto, e.id AS id_usuario, r.rol FROM $tabla1 AS p\n"
 						. " INNER JOIN $tabla2 AS e ON p.id = e.id_persona\n"
-						. " INNER JOIN roles AS r ON e.id_rol = r.id"
+						. " INNER JOIN roles AS r ON e.id_rol = r.id\n"
 						. " WHERE $item = :$item");
 						
 				$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
@@ -69,7 +69,7 @@ class ModeloUsuarios{
 	}
 
 	/*=============================================
-			MOSTRAR 
+			MOSTRAR (DINAMICO)
 	=============================================*/
 
 	static public function mdlMostrar($tabla, $item, $valor){
@@ -261,4 +261,21 @@ class ModeloUsuarios{
 		$stmt = null;
 	}
 
+		/*=============================================
+                MOSTRAR PREGUNTAS
+	=============================================*/	
+
+	static public function mdlMostrarPreguntas($item, $valor){
+
+		$stmt = Conexion::conectar()->prepare(
+	
+			"SELECT e.usuario, pr.pregunta, up.respuesta FROM empleados AS e "
+			. " INNER JOIN usuario_pregunta AS up ON e.id = up.id_usuario\n"
+			. " INNER JOIN preguntas AS pr ON up.id_pregunta = pr.id\n"
+			. "	WHERE $item = :$item");
+			
+		$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+		$stmt -> execute();
+		return $stmt -> fetchAll();
+	}	
 }
