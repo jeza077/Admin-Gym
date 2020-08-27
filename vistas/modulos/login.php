@@ -92,8 +92,9 @@
 
       <div class="form-row">
         <div class="form-group col-md-12" id="passwords">
-          <input type='password' class='form-control nueva_password' placeholder='Ingrese nueva contraseña' name='editarPassword' required>
-          <input type='password' class='form-control confirmar_password' placeholder='Confirmar contraseña'>
+          <input type='password' class='form-control nueva-password' placeholder='Ingrese nueva contraseña' name='editarPassword' required>
+          <input type='password' class='form-control confirmar-password' placeholder='Confirmar contraseña'>
+          <span class="resultado-password help-block mt-2 float-right"></span>
         </div>
       </div>
         <div class="requisito-password">

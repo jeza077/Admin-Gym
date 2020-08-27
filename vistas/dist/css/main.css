@@ -53,6 +53,14 @@ body.login-page .card{
 .invalid{
     color: red;
 }
+.border-valid {
+    border: 1px solid green!important;
+}
+.border-invalid {
+    border: 1px solid red!important;
+}
+
+
 .requisito-password{
     background: #d7dce4;
     border-radius: 8px;
@@ -156,7 +164,7 @@ body.login-page .card{
 
 /* CONTENEDOR: CAMBIAR CONTRASEÑA */
 .login-box.contenedor-rp{
-    height: 600px!important;
+    height: 630px!important;
 }
 .cambiarPassword{
     left: 0;

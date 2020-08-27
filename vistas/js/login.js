@@ -38,8 +38,8 @@ function togglePassword(){
 
 function requisitosPassword(){  
 
-    $(".nueva_password").keyup(function() { 
-        var editPassword = $(".nueva_password").val();
+    $(".nueva-password").keyup(function() { 
+        var editPassword = $(this).val();
             
         //validar que tenga una letra
         if(editPassword.match(/[A-z]/)){
@@ -191,21 +191,28 @@ requisitosPassword();
 
                                                 // //CAMBIAR CONTRASEÑA
                                                 // // editarPassword();
-                                                // $("input[name='editarPassword']").on('change', function(){
-                                                //     cambiarPass = $(this).val();
-                                                // });
-                                                // $("#confirmar_password").on('input', function(){
-                                                //     // var password_nuevo = cambiarPass;
-                                                //     if($(this).val() == cambiarPass){
-                                                //         $('#resultado_password').text('Correcto');
-                                                //         $('#resultado_password').parents('.form-group').addClass('has-success').removeClass('has-error');
-                                                //         $('#cambiarContraseña').attr('disabled', false);  
-                                                //     } else {
-                                                //         $('#resultado_password').text('No son iguales');
-                                                //         $('#resultado_password').parents('.form-group').addClass('has-error').removeClass('has-success');
-                                                //         $('#cambiarContraseña').attr('disabled', true);
-                                                //     }
-                                                // })
+                                                $('#cambiarContraseña').attr('disabled', true);
+                                                $(".nueva-password").on('change', function(){
+                                                    cambiarPass = $(this).val();
+                                                });
+                                                $(".confirmar-password").on('input', function(){
+                                                    // var password_nuevo = cambiarPass;
+                                                    if($(this).val() == cambiarPass){
+                                                        console.log('correcto')
+                                                        $('.resultado-password').text('Correcto');
+                                                        $('.resultado-password').addClass('valid').removeClass('invalid');
+                                                        $('input.nueva-password').addClass('valid border-valid').removeClass('invalid border-invalid');
+                                                        $('input.confirmar-password').addClass('valid border-valid').removeClass('invalid border-invalid');
+                                                        $('#cambiarContraseña').attr('disabled', false);  
+                                                    } else {
+                                                        console.log('mal')
+                                                        $('.resultado-password').text('Contraseñas no coinciden');
+                                                        $('.resultado-password').addClass('invalid').removeClass('valid');
+                                                        $('input.nueva-password').addClass('invalid border-invalid').removeClass('valid border-valid');
+                                                        $('input.confirmar-password').addClass('invalid border-invalid').removeClass('valid border-valid');
+                                                        $('#cambiarContraseña').attr('disabled', true);
+                                                    }
+                                                })
                                                 
 //                                                     $("#cambiarContraseña").on("click", function(event){  
 //                                                         event.preventDefault();
