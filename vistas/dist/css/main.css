@@ -163,12 +163,9 @@ body.login-page .card{
 }
 
 /* CONTENEDOR: CAMBIAR CONTRASEÑA */
-.login-box.contenedor-rp{
-    height: 630px!important;
-}
 .cambiarPassword{
-    left: 0;
-    /* height: 600px; */
+    left: 100%;
+    height: 600px;
 }
 .login-box.changePassword .cambiarPassword{
     left: 0;
@@ -179,6 +176,10 @@ body.login-page .card{
 .login-box.active.quest.changePassword{
     margin: 6.5% 35%;
     height: 500px;
+}
+.login-box.active.quest.changePassword.contenedor-rp{
+    margin: 3% 35%;
+    height: 630px!important;
 }
 .login-box.active.quest.changePassword .card{
     height: 580px;

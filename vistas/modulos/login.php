@@ -6,7 +6,7 @@
     </div>
 
     <!-- CONTENEDOR LOGIN -->
-    <!-- <div class="card-body login-card-body iniciarSesion">
+    <div class="card-body login-card-body iniciarSesion">
       <p class="login-box-msg">Inicio de Sesión</p>
 
       <form method="post">
@@ -38,15 +38,15 @@
       </p>
       <p class="mb-0">
         ¿No tienes una cuenta? <a href="#" class="text-center">Registrate</a>
-      </p> -->
+      </p>
   <?php 
     $login = new ControladorUsuarios();
     $login->ctrIngresoUsuario();
   ?>
-    <!-- </div> -->
+    </div>
 
     <!-- CONTENEDOR VERIFICAR EL EMAIL -->
-    <!-- <div class="card-body login-card-body verificarEmail">
+    <div class="card-body login-card-body verificarEmail">
       <p class="login-box-msg">Verifica tu correo</p>
       <form method="post">
         <div class="form-group has-feedback">
@@ -63,10 +63,10 @@
 
       </form>
 
-    </div> -->
+    </div>
     
     <!-- CONTENEDOR PREGUNTAS DE SEGURIDAD -->
-    <!-- <div class="card-body login-card-body questionsBx">
+    <div class="card-body login-card-body questionsBx">
   
       <form method="post">
         <div class="form-row">
@@ -83,7 +83,7 @@
         </div>
       </form>
   
-    </div> -->
+    </div>
 
     <!-- CONTENEDOR CAMBIAR CONTRASEÑA -->
     <div class="card-body login-card-body cambiarPassword" >
@@ -92,8 +92,8 @@
 
       <div class="form-row">
         <div class="form-group col-md-12" id="passwords">
-          <input type='password' class='form-control nueva-password' placeholder='Ingrese nueva contraseña' name='editarPassword' required>
-          <input type='password' class='form-control confirmar-password' placeholder='Confirmar contraseña'>
+          <!-- <input type='password' class='form-control nueva-password' placeholder='Ingrese nueva contraseña' name='editarPassword' required>
+          <input type='password' class='form-control confirmar-password' placeholder='Confirmar contraseña'> -->
           <span class="resultado-password help-block mt-2 float-right"></span>
         </div>
       </div>
@@ -110,7 +110,7 @@
         
         <div class="row mb-2" id="linkLogin">    
             <div class="col-12" id="btnCambiarPass">
-            <button type='submit' class='btn btn-orange btn-block btn-flat' id='cambiarContraseña'>Cambiar Contraseña</button>
+            <!-- <button type='submit' class='btn btn-orange btn-block btn-flat' id='cambiarContraseña'>Cambiar Contraseña</button> -->
             </div>  
         </div>
 
