@@ -45,6 +45,31 @@ body.login-page .card{
     margin-top: 3.5rem;
 }
 
+/* VALIDAR CONTRASEÑA */
+.valid{
+    color: green;
+}
+
+.invalid{
+    color: red;
+}
+.requisito-password{
+    background: #d7dce4;
+    border-radius: 8px;
+    margin-bottom: 5px;
+    display: none; 
+}
+.requisito-password h4 {
+    font-size: 1rem;
+    padding: 1em 2em 0;
+    text-align: center;
+}
+.requisito-password ul {
+    font-size: 1rem;
+    padding: 0 2em 1em 3em;
+}
+
+
 /* SLIDE DE, LOGIN, VERIFICAR EMAIL, PREGUNTAS, CAMBIAR CONTRASEÑA */
 .login-page .login-box{
     position: relative;
@@ -130,8 +155,12 @@ body.login-page .card{
 }
 
 /* CONTENEDOR: CAMBIAR CONTRASEÑA */
+.login-box.contenedor-rp{
+    height: 600px!important;
+}
 .cambiarPassword{
-    left: 100%;
+    left: 0;
+    /* height: 600px; */
 }
 .login-box.changePassword .cambiarPassword{
     left: 0;

@@ -6,7 +6,7 @@
     </div>
 
     <!-- CONTENEDOR LOGIN -->
-    <div class="card-body login-card-body iniciarSesion">
+    <!-- <div class="card-body login-card-body iniciarSesion">
       <p class="login-box-msg">Inicio de Sesión</p>
 
       <form method="post">
@@ -38,15 +38,15 @@
       </p>
       <p class="mb-0">
         ¿No tienes una cuenta? <a href="#" class="text-center">Registrate</a>
-      </p>
+      </p> -->
   <?php 
     $login = new ControladorUsuarios();
     $login->ctrIngresoUsuario();
   ?>
-    </div>
+    <!-- </div> -->
 
     <!-- CONTENEDOR VERIFICAR EL EMAIL -->
-    <div class="card-body login-card-body verificarEmail">
+    <!-- <div class="card-body login-card-body verificarEmail">
       <p class="login-box-msg">Verifica tu correo</p>
       <form method="post">
         <div class="form-group has-feedback">
@@ -63,10 +63,10 @@
 
       </form>
 
-    </div>
+    </div> -->
     
     <!-- CONTENEDOR PREGUNTAS DE SEGURIDAD -->
-    <div class="card-body login-card-body questionsBx">
+    <!-- <div class="card-body login-card-body questionsBx">
   
       <form method="post">
         <div class="form-row">
@@ -83,7 +83,7 @@
         </div>
       </form>
   
-    </div>
+    </div> -->
 
     <!-- CONTENEDOR CAMBIAR CONTRASEÑA -->
     <div class="card-body login-card-body cambiarPassword" >
@@ -92,10 +92,11 @@
 
       <div class="form-row">
         <div class="form-group col-md-12" id="passwords">
-          
+          <input type='password' class='form-control nueva_password' placeholder='Ingrese nueva contraseña' name='editarPassword' required>
+          <input type='password' class='form-control confirmar_password' placeholder='Confirmar contraseña'>
         </div>
       </div>
-        <!-- <div class="con_info">
+        <div class="requisito-password">
           <h4>La contraseña debe cumplir con los siguientes requerimientos:</h4>
           <ul>
             <li class="letter">Al menos debe tener <strong>una letra</strong></li>
@@ -105,13 +106,11 @@
             <li class="length">Al menos debe tener <strong>8 caracteres como minimo y 16 maximo</strong></li>
           </ul>
         </div>
-         -->
+        
         <div class="row mb-2" id="linkLogin">    
             <div class="col-12" id="btnCambiarPass">
-
+            <button type='submit' class='btn btn-orange btn-block btn-flat' id='cambiarContraseña'>Cambiar Contraseña</button>
             </div>  
-
-            <!-- <p class="link mt-3 ml-2">Regresar al <a href="#" onclick="toggleForm(); toggleQuestions(); togglePassword();">Login</a></p> -->
         </div>
 
       </form>
