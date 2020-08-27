@@ -50,7 +50,7 @@ class ControladorUsuarios{
 		if(isset($_POST["ingUsuario"])){
 
 			if(preg_match('/^[A-Z0-9]+$/', $_POST["ingUsuario"]) &&
-			   preg_match('/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{8,16}$/', $_POST["ingPassword"])){
+			   preg_match('/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%.])\S{8,16}$/', $_POST["ingPassword"])){
 
 				$encriptar = crypt($_POST["ingPassword"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
 
@@ -121,18 +121,25 @@ class ControladorUsuarios{
 									allowOutsideClick: false
 								});
 							</script>';
-						// echo '<br><div class="alert alert-danger">El usuario no esta activado, comuniquese con el administrador</div>';
 					}
 
 				} else {
-					echo '<br><div class="alert alert-danger">¡Usuario y contraseña incorrectos! Vuelve a intentar.</div>';
+					// echo '<br><div class="alert alert-danger">¡Usuario y contraseña incorrectos! Vuelve a intentar.</div>';
+					echo '<script>			
+						Swal.fire({
+							title: "Usuario/contraseña incorrectos! Intente de nuevo.",
+							icon: "error",
+							heightAuto: false,
+							allowOutsideClick: false
+						});
+					</script>';
 				}
 				
 			} else {
 
 				echo '<script>			
 						Swal.fire({
-							title: "Usuario y contraseña incorrectos! Intente de nuevo.",
+							title: "Usuario/contraseña incorrectos! Intente de nuevo.",
 							icon: "error",
 							heightAuto: false,
 							allowOutsideClick: false
@@ -243,7 +250,7 @@ class ControladorUsuarios{
 							$tabla2 = "empleados";
 
 							if(preg_match('/^[A-Z0-9]+$/', $_POST["nuevoUsuario"]) &&
-								preg_match('/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{8,16}$/', $_POST["nuevoPassword"])){
+								preg_match('/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%.])\S{8,16}$/', $_POST["nuevoPassword"])){
 
 							/*=============================================
 									VALIDAR IMAGEN
@@ -459,7 +466,7 @@ class ControladorUsuarios{
 		// var_dump($_POST["editarPassword"]);		
 		if(isset($post)){
 			
-			if(preg_match('/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{8,16}$/', $post)){
+			if(preg_match('/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%.])\S{8,16}$/', $post)){
 				
 				$encriptar = crypt($post, '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
 				
@@ -469,59 +476,18 @@ class ControladorUsuarios{
 				$item2 = $item;
 				$valor2 = $valor;
 
-				// $respuesta = ModeloUsuarios::mdlCambiarContraseña($tabla, $valor);
 				$respuesta = ModeloUsuarios::mdlActualizarUsuario($tabla, $item1, $valor1, $item2, $valor2);
 				return $respuesta;
 			
-				// if($respuesta == "ok"){
-				// 	echo '<script>
-
-				// 	swal({
-						
-				// 		type: "success",
-				// 		title: "¡Contraseña cambiada!",
-				// 		showConfirmButton: true,
-				// 		confirmButtonText: "Cerrar",
-				// 		closeOnConfirm: false
-				// 		})
-
-
-				// 		</script>';
-				// } else {
-				// 	echo '<script>
-
-				// 	swal({
-						
-				// 		type: "error",
-				// 		title: "¡Error!",
-				// 		showConfirmButton: true,
-				// 		confirmButtonText: "Cerrar",
-				// 		closeOnConfirm: false
-				// 		})
-
-
-				// 		</script>';
-				// }
-
 			} else {
 
-				echo '<script>
-						swal({
-							type: "error",
-							title: "¡La contraseña no puede ir vacia!",
-							showConfirmButton: true,
-							confirmButtonText: "Cerrar",
-							closeOnConfirm: false
-						})
-					</script>';
+				$respuesta = false;
+				return $respuesta;
 
 			}
 					
 		} 
-		// else {
-		// 	//Si no hay cambios en la contraseña, que guarde la que ya tiene.
-		// 	$encriptar = $_POST["passwordActual"];
-		// }
+	
 	}
 
 }

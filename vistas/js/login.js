@@ -222,13 +222,13 @@ $("#verificarEmail").change(function() {
                                                             processData: false,  
                                                             dataType: "json",
                                                             success: function(respuesta) {
-                                                                if(respuesta == 'ok'){
+                                                                if(respuesta == true){
                                                                     Swal.fire({
-                
                                                                         icon: "success",
                                                                         title: "¡Contraseña cambiada correctamente!",
                                                                         showConfirmButton: true,
                                                                         confirmButtonText: "Cerrar",
+							                                            allowOutsideClick: false,
                                                                         closeOnConfirm: false
                                                                     }).then((result)=>{
     
@@ -241,6 +241,15 @@ $("#verificarEmail").change(function() {
                                                                         }
                                                 
                                                                     });
+                                                                    
+                                                                } else {
+                                                                    Swal.fire({
+                                                                        icon: "error",
+                                                                        title: "¡La contraseña no cumple con los requisitos!",
+                                                                        showConfirmButton: true,
+                                                                        confirmButtonText: "Cerrar",
+                                                                        closeOnConfirm: false
+                                                                    })
                                                                 }
                                                     
                                                             }
