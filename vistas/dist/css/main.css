@@ -143,7 +143,9 @@ body.login-page .card{
     margin: 6.5% 35%;
     height: 500px;
 }
-
+.login-box.active.quest.changePassword .card{
+    height: 580px;
+}
 /* BARRA O HEADER*/
 .navbar-nav{
     align-items: center;

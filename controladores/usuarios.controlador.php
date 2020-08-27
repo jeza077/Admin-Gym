@@ -448,6 +448,81 @@ class ControladorUsuarios{
 
 	}
 
+	/*=============================================
+                CAMBIAR CONTRASEÑA
+	=============================================*/	
+	
+	static public function ctrCambiarContraseña($item, $valor, $post){
+
+		$tabla = "empleados";
+		
+		// var_dump($_POST["editarPassword"]);		
+		if(isset($post)){
+			
+			if(preg_match('/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{8,16}$/', $post)){
+				
+				$encriptar = crypt($post, '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
+				
+				$item1 = "password";
+				$valor1 = $encriptar;
+		
+				$item2 = $item;
+				$valor2 = $valor;
+
+				// $respuesta = ModeloUsuarios::mdlCambiarContraseña($tabla, $valor);
+				$respuesta = ModeloUsuarios::mdlActualizarUsuario($tabla, $item1, $valor1, $item2, $valor2);
+				return $respuesta;
+			
+				// if($respuesta == "ok"){
+				// 	echo '<script>
+
+				// 	swal({
+						
+				// 		type: "success",
+				// 		title: "¡Contraseña cambiada!",
+				// 		showConfirmButton: true,
+				// 		confirmButtonText: "Cerrar",
+				// 		closeOnConfirm: false
+				// 		})
+
+
+				// 		</script>';
+				// } else {
+				// 	echo '<script>
+
+				// 	swal({
+						
+				// 		type: "error",
+				// 		title: "¡Error!",
+				// 		showConfirmButton: true,
+				// 		confirmButtonText: "Cerrar",
+				// 		closeOnConfirm: false
+				// 		})
+
+
+				// 		</script>';
+				// }
+
+			} else {
+
+				echo '<script>
+						swal({
+							type: "error",
+							title: "¡La contraseña no puede ir vacia!",
+							showConfirmButton: true,
+							confirmButtonText: "Cerrar",
+							closeOnConfirm: false
+						})
+					</script>';
+
+			}
+					
+		} 
+		// else {
+		// 	//Si no hay cambios en la contraseña, que guarde la que ya tiene.
+		// 	$encriptar = $_POST["passwordActual"];
+		// }
+	}
 
 }
 	

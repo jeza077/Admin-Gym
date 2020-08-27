@@ -109,9 +109,9 @@ $("#verificarEmail").change(function() {
         success: function(respuesta) {
             // console.log(respuesta);
             
-            idUsuario = respuesta.id; //<----- ID PARA CAMBIAR EL PASSWORD//
+            idUsuario = respuesta.id_usuario; //<----- ID PARA CAMBIAR EL PASSWORD//
             usuario = respuesta.usuario;
-            // console.log(idUsuario, usuario)
+ 
 
             if(!respuesta) {//Si la Respuesta = FALSE entonces...
                 //Mandamos una alerta diciendo que ya existe el usuario.
@@ -140,7 +140,6 @@ $("#verificarEmail").change(function() {
                     processData: false,  
                     dataType: "json",
                     success: function(respuesta) {
-                        console.log(respuesta[2]);
                         $(".questionsBx").prepend("<p class='login-box-msg'>Hola <b>" + usuario + "</b>, contesta las siguientes preguntas de seguridad para poder cambiar la contraseña!</p>");
                         
                         for(var i in respuesta){
@@ -154,7 +153,7 @@ $("#verificarEmail").change(function() {
                                 return respuestasRegistrada.respuesta; 
                             })
                             
-                            console.log(respuestasRegistradas);
+                            // console.log(respuestasRegistradas);
                         
 
                             // VERIFICAMOS SI LAS RESPUESTAS INGRESADAS CON LAS YA REGISTRADAS COINCIDEN
@@ -170,84 +169,84 @@ $("#verificarEmail").change(function() {
 
                                         // var respuestas = $('.respuestaPregunta').val();
                                         // respuestasIngresadas.push(respuestas);
-                                        console.log(respuestasIngresadas);
+
+                                        // console.log(respuestasIngresadas);
 
                                         var preguntaString = respuestasIngresadas.toString();
                                         var respuestaString = respuestasRegistradas.toString();
 
                                         if(preguntaString == respuestaString){
-                                            console.log("CORRECTO");
                                             togglePassword();
 
-                                            $("#passwords").append("<input type='password' class='form-control' id='nueva_password' placeholder='Nueva contraseña' name='editarPassword' required>",
-                                            "<input type='password' class='form-control' id='confirmar_password' placeholder='Confirmar contraseña'>",
-                                            "<span class='help-block' id='resultado_password'></span>")
-                                            
-                                            $("#btnCambiarPass").append("<button type='submit' class='btn btn-orange btn-block btn-flat', id='cambiarContraseña' disabled='disabled'>Cambiar Contraseña</button>")
+                                            $("#passwords").append("<label class='mt-2'>Nueva contraseña</label>");
+                                            $("#passwords").append("<input type='password' class='form-control' id='nueva_password' placeholder='Ingrese nueva contraseña' name='editarPassword' required>");
+                                            $("#passwords").append("<label class='mt-2'>Confirmar contraseña</label>");
+                                            $("#passwords").append("<input type='password' class='form-control' id='confirmar_password' placeholder='Confirmar contraseña'>");
 
-                                            // $("#linkLogin").append("<p class='link'>Regresar al <a href='#' onclick='toggelForm(); toggelQuestions(); toggelPassword();'>Login</a></p>")
+                                            $("#btnCambiarPass").append("<button type='submit' class='btn btn-orange btn-block btn-flat', id='cambiarContraseña'>Cambiar Contraseña</button>")
 
-                                            //     //CAMBIAR CONTRASEÑA
-                                            //     editarPassword();
-                                            //     $("input[name='editarPassword']").on('change', function(){
-                                            //         cambiarPass = $(this).val();
-                                            //     });
-                                            //     $("#confirmar_password").on('input', function(){
-                                            //         // var password_nuevo = cambiarPass;
-                                            //         if($(this).val() == cambiarPass){
-                                            //             $('#resultado_password').text('Correcto');
-                                            //             $('#resultado_password').parents('.form-group').addClass('has-success').removeClass('has-error');
-                                            //             $('#cambiarContraseña').attr('disabled', false);  
-                                            //         } else {
-                                            //             $('#resultado_password').text('No son iguales');
-                                            //             $('#resultado_password').parents('.form-group').addClass('has-error').removeClass('has-success');
-                                            //             $('#cambiarContraseña').attr('disabled', true);
-                                            //         }
-                                            //     })
+                                            $("#linkLogin").append("<p class='link mt-3 ml-2'>Regresar al <a href='#' onclick='toggelForm(); toggelQuestions(); toggelPassword();'>Login</a></p>")
+
+                                                //CAMBIAR CONTRASEÑA
+                                                // editarPassword();
+                                                $("input[name='editarPassword']").on('change', function(){
+                                                    cambiarPass = $(this).val();
+                                                });
+                                                // $("#confirmar_password").on('input', function(){
+                                                //     // var password_nuevo = cambiarPass;
+                                                //     if($(this).val() == cambiarPass){
+                                                //         $('#resultado_password').text('Correcto');
+                                                //         $('#resultado_password').parents('.form-group').addClass('has-success').removeClass('has-error');
+                                                //         $('#cambiarContraseña').attr('disabled', false);  
+                                                //     } else {
+                                                //         $('#resultado_password').text('No son iguales');
+                                                //         $('#resultado_password').parents('.form-group').addClass('has-error').removeClass('has-success');
+                                                //         $('#cambiarContraseña').attr('disabled', true);
+                                                //     }
+                                                // })
                                                 
-                                            //         $("#cambiarContraseña").on("click", function(event){  
-                                            //             event.preventDefault();
-                                            //             // console.log("clickkkk")
+                                                    $("#cambiarContraseña").on("click", function(event){  
+                                                        event.preventDefault();
+                                                        
+                                                        var datos = new FormData();
+                                                        datos.append("usuarioId", idUsuario);
+                                                        datos.append("cambiarPass", cambiarPass);
 
-                                            //             var datos = new FormData();
-                                            //             datos.append("usuarioId", idUsuario);
-                                            //             datos.append("cambiarPass", cambiarPass);
+                                                        $.ajax({
 
-                                            //             $.ajax({
-
-                                            //                 url:"ajax/usuarios.ajax.php",
-                                            //                 method: "POST",
-                                            //                 data: datos,
-                                            //                 cache: false,
-                                            //                 contentType: false,
-                                            //                 processData: false,  
-                                            //                 dataType: "json",
-                                            //                 success: function(respuesta) {
-                                            //                     if(respuesta == 'ok'){
-                                            //                         swal({
+                                                            url:"ajax/usuarios.ajax.php",
+                                                            method: "POST",
+                                                            data: datos,
+                                                            cache: false,
+                                                            contentType: false,
+                                                            processData: false,  
+                                                            dataType: "json",
+                                                            success: function(respuesta) {
+                                                                if(respuesta == 'ok'){
+                                                                    Swal.fire({
                 
-                                            //                             type: "success",
-                                            //                             title: "¡Contraseña cambiada correctamente!",
-                                            //                             showConfirmButton: true,
-                                            //                             confirmButtonText: "Cerrar",
-                                            //                             closeOnConfirm: false
-                                            //                         }).then((result)=>{
+                                                                        icon: "success",
+                                                                        title: "¡Contraseña cambiada correctamente!",
+                                                                        showConfirmButton: true,
+                                                                        confirmButtonText: "Cerrar",
+                                                                        closeOnConfirm: false
+                                                                    }).then((result)=>{
     
-                                            //                             if(result.value){
+                                                                        if(result.value){
                                                 
-                                            //                                 toggelForm(); 
-                                            //                                 toggelQuestions();
-                                            //                                 toggelPassword();
+                                                                            toggleForm(); 
+                                                                            toggleQuestions();
+                                                                            togglePassword();
                                                 
-                                            //                             }
+                                                                        }
                                                 
-                                            //                         });
-                                            //                     }
+                                                                    });
+                                                                }
                                                     
-                                            //                 }
+                                                            }
                                                     
-                                            //             })
-                                            //         })
+                                                        })
+                                                    })
 
                                         } else {
                                             Swal.fire({		

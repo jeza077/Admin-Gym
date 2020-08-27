@@ -90,8 +90,8 @@
       <p class="login-box-msg">Cambia tu contraseña</p>
       <form method="post" id="cambiarPassword">
 
-      <div class="row">
-        <div class='form-group col-md-12' id="passwords">
+      <div class="form-row">
+        <div class="form-group col-md-12" id="passwords">
           
         </div>
       </div>
@@ -111,7 +111,7 @@
 
             </div>  
 
-            <p class="link">Regresar al <a href="#" onclick="toggleForm(); toggleQuestions(); togglePassword();">Login</a></p>
+            <!-- <p class="link mt-3 ml-2">Regresar al <a href="#" onclick="toggleForm(); toggleQuestions(); togglePassword();">Login</a></p> -->
         </div>
 
       </form>
