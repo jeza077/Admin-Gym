@@ -78,7 +78,7 @@ body.login-page .card{
 .requisito-password ul li {
      list-style: none;
 }
-.info {
+.rp-info {
     font-size: 3rem;
     color: rgba(53, 222, 245, 0.897);
     margin-bottom: 1rem;

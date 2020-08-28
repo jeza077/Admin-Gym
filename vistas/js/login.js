@@ -82,7 +82,7 @@ function requisitosPassword(){
             // icon: "info",
             width: 350,
             html: 
-              '<i class="info fas fa-info-circle"></i> ' +
+              '<i class="rp-info fas fa-info-circle"></i> ' +
               '<div class="requisito-password"> ' +
                 '<h4>La contraseña debe cumplir con los siguientes requerimientos:</h4> ' +
                 '<ul> ' +
