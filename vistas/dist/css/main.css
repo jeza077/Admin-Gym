@@ -60,7 +60,6 @@ body.login-page .card{
     border: 1px solid red!important;
 }
 
-
 .requisito-password{
     background: #d7dce4;
     border-radius: 8px;
@@ -114,12 +113,18 @@ body.login-page .card{
     background-image: none!important;
 }
 
-.login-card-body .input-group .input-group-text, .register-card-body .input-group .input-group-text{
+.login-card-body .input-group .input-group-text{
     border-left: 1px solid #ced4da;
     border-right: 0;
     border-radius: 5px 0 0 5px;
 }
-.login-card-body .input-group .form-control, .register-card-body .input-group .form-control{
+.login-card-body .input-group .input-group-text.eye{
+    border-right: 1px solid #ced4da;
+    border-left: 0;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+}
+.login-card-body .input-group .form-control{
     border-right: 1px solid #ced4da;
 }
 .login-card-body form .btn{

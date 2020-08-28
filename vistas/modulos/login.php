@@ -24,7 +24,12 @@
               <span class="fas fa-lock"></span>
             </div>
           </div>
-          <input type="password" class="form-control" name="ingPassword" placeholder="Contraseña" required>
+          <input type="password" class="form-control password" name="ingPassword" placeholder="Contraseña" required> 
+          <div class="input-group-append">
+            <div class="input-group-text eye">
+              <i class="far fa-eye show-pass" action="hide"></i>
+            </div>
+          </div>
         </div>
         <div class="row mb-2">
           <div class="col-12">

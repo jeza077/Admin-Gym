@@ -1,12 +1,4 @@
 /*LOGIN PREVENIR RECARGAR */
-// document.querySelector(".verificarCorreo").addEventListener("click", function (e) {
-//     e.preventDefault();
-//     console.log("hola")
-// });
-// document.querySelector(".verificarPreguntas").addEventListener("click", function (e) {
-//     e.preventDefault();
-//     console.log("hola")
-// });
 
 $(".verificarCorreo").on('click', function(event){
     event.preventDefault();
@@ -317,6 +309,22 @@ $("#verificarEmail").change(function() {
         
     })
     
+});
+
+//MOSTRAR CONTRASEÑA
+$('.show-pass').on('click', function () { 
+
+    var action = $(this).attr('action');
+
+    if(action == 'hide'){
+        $('.password').attr('type', 'text')
+        $('.show-pass').removeClass('far fa-eye').addClass('far fa-eye-slash').attr('action', 'show')
+    }
+
+    if(action == 'show'){
+        $('.password').attr('type', 'password')
+        $('.show-pass').removeClass('far fa-eye-slash').addClass('far fa-eye').attr('action', 'hide')
+    }
 });
 
 
