@@ -25,11 +25,7 @@
             </div>
           </div>
           <input type="password" class="form-control password" name="ingPassword" placeholder="Contraseña" required> 
-          <div class="input-group-append">
-            <div class="input-group-text eye">
-              <i class="far fa-eye show-pass" action="hide"></i>
-            </div>
-          </div>
+          <i class="far fa-eye show-pass" action="hide"></i>
         </div>
         <div class="row mb-2">
           <div class="col-12">
@@ -99,6 +95,8 @@
         <div class="form-group col-md-12" id="passwords">
           <!-- <input type='password' class='form-control nueva-password' placeholder='Ingrese nueva contraseña' name='editarPassword' required>
           <input type='password' class='form-control confirmar-password' placeholder='Confirmar contraseña'> -->
+          <i class="far fa-eye show-pass primero" action="hide"></i>
+          <i class="far fa-eye show-pass segundo" action="hide"></i>
           <span class="resultado-password help-block mt-2 float-right"></span>
         </div>
       </div>
@@ -115,7 +113,7 @@
         
         <div class="row mb-2" id="linkLogin">    
             <div class="col-12" id="btnCambiarPass">
-            <!-- <button type='submit' class='btn btn-orange btn-block btn-flat' id='cambiarContraseña'>Cambiar Contraseña</button> -->
+    
             </div>  
         </div>
 

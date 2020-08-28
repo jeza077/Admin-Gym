@@ -118,12 +118,35 @@ body.login-page .card{
     border-right: 0;
     border-radius: 5px 0 0 5px;
 }
-.login-card-body .input-group .input-group-text.eye{
+/* .login-card-body .input-group .input-group-text.eye{
     border-right: 1px solid #ced4da;
     border-left: 0;
     border-radius: 0 5px 5px 0;
     cursor: pointer;
+} */
+i.show-pass{
+    cursor: pointer;
+    position: absolute;
+    top: 12px;
+    right: 30px;
+    z-index: 1000;
 }
+#passwords i.show-pass.primero{
+    cursor: pointer;
+    position: absolute;
+    top: 52px;
+    right: 30px;
+    z-index: 1000;
+}
+#passwords i.show-pass.segundo{
+    cursor: pointer;
+    position: absolute;
+    top: 130px;
+    right: 30px;
+    z-index: 1000;
+}
+
+
 .login-card-body .input-group .form-control{
     border-right: 1px solid #ced4da;
 }

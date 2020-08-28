@@ -112,7 +112,7 @@ $("#verificarEmail").change(function() {
     
     var emailIngresado = $(this).val();
 
-    console.log(emailIngresado);
+    // console.log(emailIngresado);
     
     var datos = new FormData();
     datos.append("verificarEmail", emailIngresado);
@@ -198,16 +198,15 @@ $("#verificarEmail").change(function() {
                                             togglePassword();
 
                                             $("#passwords").append("<label class='mt-2'>Nueva contraseña</label>");
-                                            $("#passwords").append("<input type='password' class='form-control nueva-password' placeholder='Ingrese nueva contraseña' name='editarPassword' required>");
+                                            $("#passwords").append("<input type='password' class='form-control password nueva-password' placeholder='Ingrese nueva contraseña' name='editarPassword' required>");
                                             $("#passwords").append("<label class='mt-2'>Confirmar contraseña</label>");
-                                            $("#passwords").append("<input type='password' class='form-control confirmar-password' placeholder='Confirmar contraseña'>");
+                                            $("#passwords").append("<input type='password' class='form-control password confirmar-password' placeholder='Confirmar contraseña'>");
 
                                             $("#btnCambiarPass").append("<button type='submit' class='btn btn-orange btn-block btn-flat' id='cambiarContraseña'>Cambiar Contraseña</button>")
 
-                                            $("#linkLogin").append("<p class='link mt-3 ml-2'>Regresar al <a href='#' onclick='toggelForm(); toggelQuestions(); toggelPassword();'>Login</a></p>")
+                                            $("#linkLogin").append("<p class='link mt-3 ml-2'>Regresar al <a href='#' onclick='toggleForm(); toggleQuestions(); togglePassword();'>Login</a></p>")
 
                                                 //CAMBIAR CONTRASEÑA
-                                                // // editarPassword();
                                                 requisitosPassword();
 
                                                 $('#cambiarContraseña').attr('disabled', true);
@@ -263,6 +262,8 @@ $("#verificarEmail").change(function() {
                                                                             toggleForm(); 
                                                                             toggleQuestions();
                                                                             togglePassword();
+
+                                                                            // window.location('login')
                                                 
                                                                         }
                                                 
