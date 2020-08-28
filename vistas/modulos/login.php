@@ -97,7 +97,7 @@
           <span class="resultado-password help-block mt-2 float-right"></span>
         </div>
       </div>
-        <div class="requisito-password">
+        <!-- <div class="requisito-password">
           <h4>La contraseña debe cumplir con los siguientes requerimientos:</h4>
           <ul>
             <li class="letter">Al menos debe tener <strong>una letra</strong></li>
@@ -106,7 +106,7 @@
             <li class="special">Al menos debe tener <strong>un caracter especial</strong></li>
             <li class="length">Al menos debe tener <strong>8 caracteres como minimo y 16 maximo</strong></li>
           </ul>
-        </div>
+        </div> -->
         
         <div class="row mb-2" id="linkLogin">    
             <div class="col-12" id="btnCambiarPass">

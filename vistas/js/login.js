@@ -85,15 +85,33 @@ function requisitosPassword(){
         }
         
     }).focus(function() {  
-        $(".requisito-password").show();
-        $(".login-box").addClass('contenedor-rp');
+        // $(".requisito-password").show();
+        Swal.fire({
+            // icon: "info",
+            width: 350,
+            html: 
+              '<i class="info fas fa-info-circle"></i> ' +
+              '<div class="requisito-password"> ' +
+                '<h4>La contraseña debe cumplir con los siguientes requerimientos:</h4> ' +
+                '<ul> ' +
+                '<li class="letter">Al menos debe tener <strong>una letra</strong></li> ' +
+                '<li class="capital">Al menos debe tener <strong>una letra en mayuscula</strong></li> ' +
+                '<li class="number">Al menos debe tener <strong>un numero</strong></li> ' +
+                '<li class="special">Al menos debe tener <strong>un caracter especial</strong></li> ' +
+                '<li class="length">Al menos debe tener <strong>8 caracteres como minimo y 16 maximo</strong></li> ' +
+                '</ul> ' + 
+              '</div>',
+            toast: true,
+            position: "center-end",
+            showConfirmButton: false,
+        })
+        // $(".login-box").addClass('contenedor-rp');
     }).blur(function() { 
-        $(".requisito-password").hide();
-        $(".login-box").removeClass('contenedor-rp');
+        // $(".requisito-password").hide();
+        Swal.close();
+        // $(".login-box").removeClass('contenedor-rp');
     });
 }
-
-// requisitosPassword();
 
 //VERIFICAR SI EL CORREO ESTA ASOCIADO A UN USUARIO
 $("#verificarEmail").change(function() { 
