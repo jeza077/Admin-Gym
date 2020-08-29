@@ -35,17 +35,14 @@
         </div>
         <div class="card-body">
           <?php
-                  $item1 = "usuario";
-                  $valor1 = "JEZA";
-                  $item2 = "rol";
-                  $valor2 = "Administrador";
+                // $item1 = "usuario";
+                // $valor1 = "JEZA";
+                // $item2 = "rol";
+                // $valor2 = "Administrador";
 
-                  $modulos = ControladorUsuarios::ctrMostrarUsuarioModulo($item1, $item2, $valor1, $valor2);
-
-                  echo "<pre>";
-                  var_dump($modulos);
-                  echo "</pre>";
-              ?>
+                // $modulos = ControladorUsuarios::ctrMostrarUsuarioModulo($item1, $item2, $valor1, $valor2);
+            
+          ?>
 
         </div>
         <!-- /.card-body -->

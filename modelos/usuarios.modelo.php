@@ -58,7 +58,8 @@ class ModeloUsuarios{
 				. " INNER JOIN modulos AS m ON rm.modulo_id_fk=m.id\n"
 				. " INNER JOIN rol_sub_modulo AS rsm ON r.id=rsm.id_rol_fk\n"
 				. " INNER JOIN sub_modulos AS sm ON rsm.id_sub_modulo_fk=sm.id AND sm.modulo_id_fk=m.id\n"
-				. " WHERE e.$item1 = :$item1 AND r.$item2 = :$item2");
+				. " WHERE e.$item1 = :$item1 AND r.$item2 = :$item2\n"
+				. " ORDER BY m.id");
 				
 		$stmt -> bindParam(":".$item1, $valor1, PDO::PARAM_STR);
 		$stmt -> bindParam(":".$item2, $valor2, PDO::PARAM_STR);
