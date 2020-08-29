@@ -57,9 +57,10 @@
 
         <div class="row mb-2">
           <div class="col-12">
-            <button type="submit" class="btn btn-orange btn-block verificarCorreo">Verificar</button>
+            <button type="submit" class="btn btn-orange btn-block verificarCorreo">Recuperar por correo</button>
+            <button type="submit" class="btn btn-orange btn-block verificarCorreoPreguntas">Recuperar por preguntas</button>
           </div>
-          <p class="link">Regresar al <a href="#" onclick="toggleForm();">Login</a></p>
+          <p class="link mt-3 ml-2">Regresar al <a href="#" onclick="toggleForm();">Login</a></p>
         </div>
 
       </form>

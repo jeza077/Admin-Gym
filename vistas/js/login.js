@@ -1,11 +1,9 @@
 /*LOGIN PREVENIR RECARGAR */
-
-$(".verificarCorreo").on('click', function(event){
+$(".verificarPreguntas").on('click', function(event){
     event.preventDefault();
     // console.log("click")
 })
-
-$(".verificarPreguntas").on('click', function(event){
+$(".verificarCorreoPreguntas").on('click', function(event){
     event.preventDefault();
     // console.log("click")
 })
@@ -105,7 +103,40 @@ function requisitosPassword(){
     });
 }
 
-//VERIFICAR SI EL CORREO ESTA ASOCIADO A UN USUARIO
+//VERIFICAR CORREO Y ENVIAR CORREO PARA CAMBIAR PASSWORD
+$(".verificarCorreo").on('click', function(event){
+    event.preventDefault();
+    console.log("click")
+    
+
+    var emailIngresado = $('#verificarEmail').val();
+
+    // console.log(emailIngresado);
+    
+    var datos = new FormData();
+    datos.append("verificarEmail", emailIngresado);
+
+    $.ajax({
+
+        url:"ajax/usuarios.ajax.php",
+        method: "POST",
+        data: datos,
+        cache: false,
+        contentType: false,
+        processData: false,  
+        dataType: "json",
+        success: function(respuesta) {
+            console.log(respuesta);
+
+            var correoUsuario = respuesta.correo;
+            console.log(correoUsuario);
+
+        }
+    })   
+})
+
+/*
+//VERIFICAR SI EL CORREO ESTA ASOCIADO A UN USUARIO Y MOSTRAR PREGUNTAS DE SEGURIDAD
 $("#verificarEmail").change(function() { 
     
     $(".alert").remove();
@@ -311,6 +342,8 @@ $("#verificarEmail").change(function() {
     })
     
 });
+*/
+
 
 //MOSTRAR CONTRASEÑA
 $('.show-pass').on('click', function () { 
