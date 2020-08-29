@@ -41,9 +41,12 @@
 
                   $modulos = ControladorUsuarios::ctrMostrarUsuarioModulo($item1, $item2, $valor1, $valor2);
 
-                  // $modulos_rol = array();                  
+                  var_dump($modulos);
+
+                  $modulos_rol = array();                  
                   foreach($modulos as $modulo) {?>
        
+
                     <li class="nav-item">
                       <a href="<?php echo $modulo['link_modulo'] ?>" class="nav-link">
                         <i class="nav-icon fas <?php echo $modulo['icono'] ?>"></i>
