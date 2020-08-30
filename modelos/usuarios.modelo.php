@@ -242,22 +242,40 @@ class ModeloUsuarios{
 				ACTUALIZAR USUARIOS	
 	=============================================*/
 
-	static public function mdlActualizarUsuario($tabla, $item1, $valor1, $item2, $valor2){
+	static public function mdlActualizarUsuario($tabla, $item1, $valor1, $item2, $valor2, $item3, $valor3){
 
-		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET $item1 = :$item1 WHERE $item2 = :$item2");
-
-		$stmt->bindParam(":".$item1, $valor1, PDO::PARAM_STR);
-		$stmt->bindParam(":".$item2, $valor2, PDO::PARAM_STR);
-
-		if($stmt->execute()){
-
-			return true;	
-
-		}else{
-
-			return false;
+		if($item3 != null) {
+			$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET $item1 = :$item1, $item2 = :$item2 WHERE $item3 = :$item3");
+	
+			$stmt->bindParam(":".$item1, $valor1, PDO::PARAM_STR);
+			$stmt->bindParam(":".$item2, $valor2, PDO::PARAM_STR);
+			$stmt->bindParam(":".$item3, $valor3, PDO::PARAM_STR);
+			if($stmt->execute()){
 		
+					return true;	
+		
+				}else{
+		
+					return false;
+				
+				}
+		} else {
+			
+			$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET $item1 = :$item1 WHERE $item2 = :$item2");
+	
+			$stmt->bindParam(":".$item1, $valor1, PDO::PARAM_STR);
+			$stmt->bindParam(":".$item2, $valor2, PDO::PARAM_STR);
+			if($stmt->execute()){
+	
+				return true;	
+	
+			}else{
+	
+				return false;
+			
+			}
 		}
+
 
 		$stmt->close();
 		

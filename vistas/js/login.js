@@ -106,8 +106,6 @@ function requisitosPassword(){
 //VERIFICAR CORREO Y ENVIAR CORREO PARA CAMBIAR PASSWORD
 $(".verificarCorreo").on('click', function(event){
     event.preventDefault();
-    console.log("click")
-    
 
     var emailIngresado = $('#verificarEmail').val();
 
@@ -126,9 +124,7 @@ $(".verificarCorreo").on('click', function(event){
         processData: false,  
         dataType: "json",
         success: function(respuesta) {
-            console.log(respuesta);
-
-
+            // console.log(respuesta);
 
             if(!respuesta) {//Si la Respuesta = FALSE entonces...
                 //Mandamos una alerta diciendo que ya existe el usuario.
@@ -138,17 +134,16 @@ $(".verificarCorreo").on('click', function(event){
                 $("#verificarEmail").val("");
                 
             } else { //SI LA RESPUESTA ES TRUE ENTONCES...
-                
-                var correoUsuario = respuesta.correo;
-                var idUsuario = respuesta.id_usuario;
-            
-                // console.log(correoUsuario, idUsuario);
+                // console.log("bien")
 
-                
-                
+                correoUsuario = respuesta.correo;
+                idUsua = respuesta.id_usuario;
+            
+                // console.log(correoUsuario, idUsua);
+
                 var datos = new FormData();
                 datos.append("correoUsuario", correoUsuario);
-                datos.append("idUsuario", idUsuario);
+                datos.append("idUsua", idUsua);
 
                 $.ajax({
 
@@ -160,7 +155,7 @@ $(".verificarCorreo").on('click', function(event){
                     processData: false,  
                     dataType: "json",
                     success: function(respuesta) {
-
+                        console.log(respuesta)
                     }
                 })
             }

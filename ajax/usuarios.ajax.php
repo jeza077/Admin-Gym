@@ -92,13 +92,13 @@ class AjaxUsuarios{
     ENVIAR USUARIO PARA ENVIAR CORREO DE RECUPERAR PASSWORD
     =============================================*/
     
-    public $idUsuario;
+    public $idUsua;
     public $correoUsuario;
 
     public function ajaxEnviarCorreoRecuperacion(){
 
         // $item = "usuario";
-        $id = $this->idUsuario;
+        $id = $this->idUsua;
         $correo = $this->correoUsuario;
 
         $respuesta = ControladorUsuarios::ctrEnviarCodigo($id, $correo);
@@ -181,7 +181,7 @@ ENVIAR USUARIO PARA ENVIAR CORREO DE RECUPERAR PASSWORD
 if(isset($_POST["correoUsuario"])){
     $enviarCorreo = new AjaxUsuarios();
     $enviarCorreo->correoUsuario = $_POST["correoUsuario"];   
-    $enviarCorreo->idUsuario = $_POST["idUsuario"];
+    $enviarCorreo->idUsua = $_POST["idUsua"];
     $enviarCorreo->ajaxEnviarCorreoRecuperacion();
 }
 /*=============================================

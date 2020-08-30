@@ -91,7 +91,10 @@ class ControladorUsuarios{
 						$item2 = "id_persona";
 						$valor2 = $respuesta["id"];
 
-						$ultimoLogin = ModeloUsuarios::mdlActualizarUsuario($tabla2, $item1, $valor1, $item2, $valor2);
+						$item3 = null;
+						$valor3 = null;
+
+						$ultimoLogin = ModeloUsuarios::mdlActualizarUsuario($tabla2, $item1, $valor1, $item2, $valor2, $item3, $valor3);
 
 						if($ultimoLogin == "ok"){
 
@@ -475,7 +478,10 @@ class ControladorUsuarios{
 				$item2 = $item;
 				$valor2 = $valor;
 
-				$respuesta = ModeloUsuarios::mdlActualizarUsuario($tabla, $item1, $valor1, $item2, $valor2);
+				$item3 = null;
+				$valor3 = null;
+
+				$respuesta = ModeloUsuarios::mdlActualizarUsuario($tabla, $item1, $valor1, $item2, $valor2, $item3, $valor3);
 				return $respuesta;
 			
 			} else {
@@ -495,12 +501,27 @@ class ControladorUsuarios{
     static public function ctrEnviarCodigo($id, $correo){
         if (isset($correo)) {
             $correoElectronico = $correo;
-            $codigo = $this->ctrCreateRandomCode();
+			$codigo = $this->ctrCreateRandomCode();
+			// $codigo = "48597999sadsa";
 			$fechaRecuperacion = date("Y-m-d H:i:s", strtotime('+24 hours'));
+			// $fechaRecuperacion = "2020-08-29";
 			$tabla = "empleados";
-			// $item1
 
-			$respuesta = ModeloUsuarios::mdlActualizarUsuario($tabla, $item1, $valor1, $item2, $valor2)
+			$item1 = "codigo";
+			$valor1 = $codigo;
+
+			$item2 = "fecha_recuperacion";
+			$valor2 = $fechaRecuperacion;
+
+			$item3 = "id";
+			$valor3 = $id;
+
+			
+			$respuesta = ModeloUsuarios::mdlActualizarUsuario($tabla, $item1, $valor1, $item2, $valor2, $item3, $valor3);
+			
+			return $respuesta;
+			// return $id .' y '. $correo;
+			
     
 
             // if ($user === false) {
@@ -519,10 +540,11 @@ class ControladorUsuarios{
             //         $this->render('login/recover', 'Recuperar Contraseña', array('mensaje' => $mensaje), false);
             //     }
             // }
-        } else {
-            $mensaje = 'El campo de correo electrónico es requerido.';
-            $this->render('login/recover', 'Recuperar Contraseña', array('mensaje' => $mensaje), false);
-        }
+		} 
+		// else {
+        //     $mensaje = 'El campo de correo electrónico es requerido.';
+        //     $this->render('login/recover', 'Recuperar Contraseña', array('mensaje' => $mensaje), false);
+        // }
     }
 
 	/*=============================================
@@ -575,6 +597,16 @@ class ControladorUsuarios{
 		CREAR CODIGO RANDOM PARA EL PASSWORD
 	=============================================*/	
     static public function ctrCreateRandomCode(){
+
+		// $length = "15";
+		// $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+		// $charactersLength = strlen($characters);
+		// $randomString = '';
+		// for ($i = 0; $i < $length; $i++) {
+		// 	$randomString .= $characters[rand(0, $charactersLength - 1)];
+		// }
+		// return $randomString;
+
         $chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz0123456789";
         srand((double)microtime()*1000000);
         $i = 0;
