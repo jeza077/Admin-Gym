@@ -43,10 +43,6 @@
   <?php 
     $login = new ControladorUsuarios();
     $login->ctrIngresoUsuario();
-    
-    // $codigo = new ControladorUsuarios();
-    //     $codigo->ctrCreateRandomCode();
-    // echo $codigo;
   ?>
     </div>
 

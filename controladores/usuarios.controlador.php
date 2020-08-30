@@ -501,10 +501,11 @@ class ControladorUsuarios{
     static public function ctrEnviarCodigo($id, $correo){
         if (isset($correo)) {
             $correoElectronico = $correo;
-			$codigo = $this->ctrCreateRandomCode();
-			// $codigo = "48597999sadsa";
+			$codigo = ControladorUsuarios::ctrCreateRandomCode();
+
+			date_default_timezone_set("America/Tegucigalpa");
 			$fechaRecuperacion = date("Y-m-d H:i:s", strtotime('+24 hours'));
-			// $fechaRecuperacion = "2020-08-29";
+
 			$tabla = "empleados";
 
 			$item1 = "codigo";
@@ -598,28 +599,28 @@ class ControladorUsuarios{
 	=============================================*/	
     static public function ctrCreateRandomCode(){
 
-		// $length = "15";
-		// $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-		// $charactersLength = strlen($characters);
-		// $randomString = '';
-		// for ($i = 0; $i < $length; $i++) {
-		// 	$randomString .= $characters[rand(0, $charactersLength - 1)];
-		// }
-		// return $randomString;
+		$length = "15";
+		$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+		$charactersLength = strlen($characters);
+		$randomString = '';
+		for ($i = 0; $i < $length; $i++) {
+			$randomString .= $characters[rand(0, $charactersLength - 1)];
+		}
+		return $randomString;
 
-        $chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz0123456789";
-        srand((double)microtime()*1000000);
-        $i = 0;
-        $pass = '' ;
+        // $chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz0123456789";
+        // srand((double)microtime()*1000000);
+        // $i = 0;
+        // $pass = '' ;
     
-        while ($i <= 7) {
-            $num = rand() % 33;
-            $tmp = substr($chars, $num, 1);
-            $pass = $pass . $tmp;
-            $i++;
-        }
+        // while ($i <= 7) {
+        //     $num = rand() % 33;
+        //     $tmp = substr($chars, $num, 1);
+        //     $pass = $pass . $tmp;
+        //     $i++;
+        // }
     
-        return time().$pass;
+        // return time().$pass;
     }
 }
 	
