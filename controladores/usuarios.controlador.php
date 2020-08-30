@@ -492,30 +492,33 @@ class ControladorUsuarios{
 	/*=============================================
 		ENVIAR CODIGO DE RECUPERAR CONTRASEÑA
 	=============================================*/	
-    static public function ctrEnviarCodigo($item, $valor){
-        if (isset($valor)) {
-            $correoElectronico = $valor;
-            $codigo = $this->createRandomCode();
-            $fechaRecuperacion = date("Y-m-d H:i:s", strtotime('+24 hours'));
-            $userModel = new User();
-            $user = $userModel->getUserWithEmail($correoElectronico);
+    static public function ctrEnviarCodigo($id, $correo){
+        if (isset($correo)) {
+            $correoElectronico = $correo;
+            $codigo = $this->ctrCreateRandomCode();
+			$fechaRecuperacion = date("Y-m-d H:i:s", strtotime('+24 hours'));
+			$tabla = "empleados";
+			// $item1
 
-            if ($user === false) {
-                $mensaje = 'El correo electrónico no se encuentra registrado en el sistema.';
-                $this->render('login/recover', 'Recuperar Contraseña', array('mensaje' => $mensaje), false);
-            } else {
-                $respuesta = $userModel->recoverPassword($correoElectronico, $codigo, $fechaRecuperacion);
+			$respuesta = ModeloUsuarios::mdlActualizarUsuario($tabla, $item1, $valor1, $item2, $valor2)
+    
+
+            // if ($user === false) {
+            //     $mensaje = 'El correo electrónico no se encuentra registrado en el sistema.';
+            //     $this->render('login/recover', 'Recuperar Contraseña', array('mensaje' => $mensaje), false);
+            // } else {
+            //     $respuesta = $userModel->recoverPassword($correoElectronico, $codigo, $fechaRecuperacion);
             
-                if ($respuesta) {
-                    $this->sendMail($correoElectronico, $user->nombreCompleto, $codigo);
+            //     if ($respuesta) {
+            //         $this->sendMail($correoElectronico, $user->nombreCompleto, $codigo);
                     
-                    $mensaje = 'Se ha enviado un correo electrónico con las instrucciones para el cambio de tu contraseña. Por favor verifica la información enviada.';
-                    $this->render('login/recover', 'Recuperar Contraseña', array('mensaje' => $mensaje), false);
-                } else {
-                    $mensaje = 'No se recuperar la cuenta. Si los errores persisten comuniquese con el administrador del sitio.';
-                    $this->render('login/recover', 'Recuperar Contraseña', array('mensaje' => $mensaje), false);
-                }
-            }
+            //         $mensaje = 'Se ha enviado un correo electrónico con las instrucciones para el cambio de tu contraseña. Por favor verifica la información enviada.';
+            //         $this->render('login/recover', 'Recuperar Contraseña', array('mensaje' => $mensaje), false);
+            //     } else {
+            //         $mensaje = 'No se recuperar la cuenta. Si los errores persisten comuniquese con el administrador del sitio.';
+            //         $this->render('login/recover', 'Recuperar Contraseña', array('mensaje' => $mensaje), false);
+            //     }
+            // }
         } else {
             $mensaje = 'El campo de correo electrónico es requerido.';
             $this->render('login/recover', 'Recuperar Contraseña', array('mensaje' => $mensaje), false);

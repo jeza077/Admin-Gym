@@ -89,6 +89,24 @@ class AjaxUsuarios{
     }
 
     /*=============================================
+    ENVIAR USUARIO PARA ENVIAR CORREO DE RECUPERAR PASSWORD
+    =============================================*/
+    
+    public $idUsuario;
+    public $correoUsuario;
+
+    public function ajaxEnviarCorreoRecuperacion(){
+
+        // $item = "usuario";
+        $id = $this->idUsuario;
+        $correo = $this->correoUsuario;
+
+        $respuesta = ControladorUsuarios::ctrEnviarCodigo($id, $correo);
+
+        echo json_encode($respuesta);
+    }
+
+    /*=============================================
             CAMBIAR CONTRASEÑA
     =============================================*/
     public $usuarioId;
@@ -156,6 +174,15 @@ if(isset($_POST["usuario"])){
     $valUsuario = new AjaxUsuarios();
     $valUsuario->usuario = $_POST["usuario"];
     $valUsuario->ajaxMostrarPreguntas();
+}
+/*=============================================
+ENVIAR USUARIO PARA ENVIAR CORREO DE RECUPERAR PASSWORD
+=============================================*/
+if(isset($_POST["correoUsuario"])){
+    $enviarCorreo = new AjaxUsuarios();
+    $enviarCorreo->correoUsuario = $_POST["correoUsuario"];   
+    $enviarCorreo->idUsuario = $_POST["idUsuario"];
+    $enviarCorreo->ajaxEnviarCorreoRecuperacion();
 }
 /*=============================================
            CAMBIAR CONTRASEÑA

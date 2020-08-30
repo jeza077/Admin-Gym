@@ -128,8 +128,43 @@ $(".verificarCorreo").on('click', function(event){
         success: function(respuesta) {
             console.log(respuesta);
 
-            var correoUsuario = respuesta.correo;
-            console.log(correoUsuario);
+
+
+            if(!respuesta) {//Si la Respuesta = FALSE entonces...
+                //Mandamos una alerta diciendo que ya existe el usuario.
+                $("#verificarEmail").after('<div class="alert alert-danger">Correo inexistente</div>');
+                
+                //E inmeditamente Limpiamos el input
+                $("#verificarEmail").val("");
+                
+            } else { //SI LA RESPUESTA ES TRUE ENTONCES...
+                
+                var correoUsuario = respuesta.correo;
+                var idUsuario = respuesta.id_usuario;
+            
+                // console.log(correoUsuario, idUsuario);
+
+                
+                
+                var datos = new FormData();
+                datos.append("correoUsuario", correoUsuario);
+                datos.append("idUsuario", idUsuario);
+
+                $.ajax({
+
+                    url:"ajax/usuarios.ajax.php",
+                    method: "POST",
+                    data: datos,
+                    cache: false,
+                    contentType: false,
+                    processData: false,  
+                    dataType: "json",
+                    success: function(respuesta) {
+
+                    }
+                })
+            }
+           
 
         }
     })   
