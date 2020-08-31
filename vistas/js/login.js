@@ -138,6 +138,7 @@ $(".verificarCorreo").on('click', function(event){
 
                 correoUsuario = respuesta.correo;
                 idUsua = respuesta.id_usuario;
+                usuario = respuesta.usuario;
             
                 // console.log(correoUsuario, idUsua);
 
@@ -156,6 +157,15 @@ $(".verificarCorreo").on('click', function(event){
                     dataType: "json",
                     success: function(respuesta) {
                         console.log(respuesta)
+
+                        if(respuesta == true){
+                            Swal.fire({
+								title: "Le enviamos un correo para recuperar su contraseña. Por favor revise.",
+								icon: "info",
+								heightAuto: false,
+								allowOutsideClick: false
+							});
+                        }
                     }
                 })
             }

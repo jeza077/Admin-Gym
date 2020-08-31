@@ -1,5 +1,8 @@
 <?php
 error_reporting(E_ALL & ~E_NOTICE);
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
 class ControladorUsuarios{
 
 	/*=============================================
@@ -499,7 +502,7 @@ class ControladorUsuarios{
 		ENVIAR CODIGO DE RECUPERAR CONTRASEÑA
 	=============================================*/	
     static public function ctrEnviarCodigo($id, $correo){
-        if (isset($correo)) {
+        if(isset($correo)) {
             $correoElectronico = $correo;
 			$codigo = ControladorUsuarios::ctrCreateRandomCode();
 
@@ -517,80 +520,76 @@ class ControladorUsuarios{
 			$item3 = "id";
 			$valor3 = $id;
 
-			
 			$respuesta = ModeloUsuarios::mdlActualizarUsuario($tabla, $item1, $valor1, $item2, $valor2, $item3, $valor3);
-			
-			return $respuesta;
-			// return $id .' y '. $correo;
-			
-    
 
-            // if ($user === false) {
-            //     $mensaje = 'El correo electrónico no se encuentra registrado en el sistema.';
-            //     $this->render('login/recover', 'Recuperar Contraseña', array('mensaje' => $mensaje), false);
-            // } else {
-            //     $respuesta = $userModel->recoverPassword($correoElectronico, $codigo, $fechaRecuperacion);
-            
-            //     if ($respuesta) {
-            //         $this->sendMail($correoElectronico, $user->nombreCompleto, $codigo);
-                    
-            //         $mensaje = 'Se ha enviado un correo electrónico con las instrucciones para el cambio de tu contraseña. Por favor verifica la información enviada.';
-            //         $this->render('login/recover', 'Recuperar Contraseña', array('mensaje' => $mensaje), false);
-            //     } else {
-            //         $mensaje = 'No se recuperar la cuenta. Si los errores persisten comuniquese con el administrador del sitio.';
-            //         $this->render('login/recover', 'Recuperar Contraseña', array('mensaje' => $mensaje), false);
-            //     }
-            // }
+			if($respuesta == true) {
+				$nombre = 'Jesús';
+
+				$respuestaCorreo = ControladorUsuarios::ctrEnviarCorreoRecuperacion($correoElectronico, $nombre, $codigo);
+
+				return $respuestaCorreo;	
+			} 
+			
 		} 
-		// else {
-        //     $mensaje = 'El campo de correo electrónico es requerido.';
-        //     $this->render('login/recover', 'Recuperar Contraseña', array('mensaje' => $mensaje), false);
-        // }
     }
 
 	/*=============================================
 		ENVIAR CORREO DE RECUPERAR CONTRASEÑA
 	=============================================*/	
-    static public function ctrSendMail($correoElectronico, $nombre, $codigo)
-    {
-        $template = file_get_contents(APP.'view/login/template.php');
+    static public function ctrEnviarCorreoRecuperacion($correoElectronico, $nombre, $codigo){
+        $template = file_get_contents('../extensiones/plantillas/template.php');
         $template = str_replace("{{name}}", $nombre, $template);
-        $template = str_replace("{{action_url_2}}", '<b>http:'.URL.'login/newPassword/'.$codigo.'</b>', $template);
-        $template = str_replace("{{action_url_1}}", 'http:'.URL.'login/newPassword/'.$codigo, $template);
+        $template = str_replace("{{action_url_1}}", 'localhost/gym/'.$codigo, $template);
+        $template = str_replace("{{action_url_2}}", '<b>http:localhost/gym/'.$codigo.'</b>', $template);
         $template = str_replace("{{year}}", date('Y'), $template);
-        $template = str_replace("{{operating_system}}", Helper::getOS(), $template);
-        $template = str_replace("{{browser_name}}", Helper::getBrowser(), $template);
+        // $template = str_replace("{{operating_system}}", Helper::getOS(), $template);
+        // $template = str_replace("{{browser_name}}", Helper::getBrowser(), $template);
+
+		require '../extensiones/PHPMailer/PHPMailer/src/Exception.php';
+		require '../extensiones/PHPMailer/PHPMailer/src/PHPMailer.php';
+		require '../extensiones/PHPMailer/PHPMailer/src/SMTP.php';
 
         $mail = new PHPMailer(true);
-        $mail->CharSet = "UTF-8";
+		$mail->CharSet = "UTF-8";
 
         try {
+			$mail->SMTPOptions = array(
+				'ssl' => array(
+				'verify_peer' => false,
+				'verify_peer_name' => false,
+				'allow_self_signed' => true
+				)
+			);
+			$mail->SMTPDebug = 0;
             $mail->isSMTP();
-            $mail->Host = 'smtp.googlemail.com';  //gmail SMTP server
+            $mail->Host = 'smtp.gmail.com';  //gmail SMTP server
             $mail->SMTPAuth = true;
-            $mail->Username = 'phpminitest@gmail.com';   //username
-            $mail->Password = 'sena2018.';   //password
-            $mail->SMTPSecure = 'ssl';
-            $mail->Port = 465;                    //smtp port
+            $mail->Username = 'jesus.zuniga077@gmail.com';   //username
+            $mail->Password = 'J35us#077.';   //password
+			$mail->SMTPSecure = 'tls';
+            $mail->Port = 587;     
+			// $mail->SMTPSecure = 'ssl';
+            // $mail->Port = 465;                    //smtp port
 
-            $mail->setFrom('phpminitest@gmail.com', 'Variedades y Comunicaciones');
+            $mail->setFrom('jesus.zuniga077@gmail.com', 'Gimnasio');
             $mail->addAddress($correoElectronico, $nombre);
 
             $mail->isHTML(true);
+            $mail->Subject = 'Recuperación de contraseña - Gimnasio';
+			// $mail->Body    = $template;
+            $mail->Body = $template;
+		
+			if (!$mail->send()) {
 
-            $mail->Subject = 'Recuperación de contraseña - Variedades y Comunicaciones';
-            $mail->Body    = $template;
+				return false;		
+			} else {
+				return true;
+			}
 
-            if (!$mail->send()) {
-                return false;
-            } else {
-                return true;
-            }
         } catch (Exception $e) {
             return false;
-            // echo 'Message could not be sent.';
-            // echo 'Mailer Error: ' . $mail->ErrorInfo;
-        }
+		}
+		
 	}
 
 	
