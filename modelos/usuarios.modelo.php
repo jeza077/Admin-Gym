@@ -14,7 +14,7 @@ class ModeloUsuarios{
 	
 			if($item != null){
 	
-				$stmt = Conexion::conectar()->prepare("SELECT p.*, e.usuario, e.password, e.foto, e.id AS id_usuario, r.rol FROM $tabla1 AS p\n"
+				$stmt = Conexion::conectar()->prepare("SELECT p.*, e.usuario, e.password, e.foto, e.codigo, e.fecha_recuperacion, e.id AS id_usuario, r.rol FROM $tabla1 AS p\n"
 						. " INNER JOIN $tabla2 AS e ON p.id = e.id_persona\n"
 						. " INNER JOIN roles AS r ON e.id_rol = r.id\n"
 						. " WHERE $item = :$item");
@@ -70,6 +70,19 @@ class ModeloUsuarios{
 		$stmt = null;	
 
 	}
+
+	/*=============================================
+		MOSTRAR USUARIOS POR CODIGO
+	=============================================*/
+
+	// static public function mdlMostrarPorCodigo($tabla, $item, $valor){
+	// 	$stmt = Conexion::conectar()->prepare("SELECT p.*, e.usuario, e.password, e.foto, e.codigo, e.fecha_recuperacion, e.id AS id_usuario, r.rol FROM $tabla"
+	// 	. " WHERE $item = :$item");
+		
+	// 	$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+	// 	$stmt -> execute();
+	// 	return $stmt -> fetch();
+	// }
 
 	/*=============================================
 			MOSTRAR (DINAMICO)
@@ -239,7 +252,7 @@ class ModeloUsuarios{
 	}
 
 	/*=============================================
-				ACTUALIZAR USUARIOS	
+	ACTUALIZAR USUARIOS	(tambien contraseña por preguntas)
 	=============================================*/
 
 	static public function mdlActualizarUsuario($tabla, $item1, $valor1, $item2, $valor2, $item3, $valor3){
@@ -275,6 +288,35 @@ class ModeloUsuarios{
 			
 			}
 		}
+
+
+		$stmt->close();
+		
+		$stmt = null;
+	}
+
+	
+	/*=============================================
+		CAMBIAR CONTRASEÑA POR CODIGO-CORREO
+	=============================================*/
+
+	static public function mdlActualizarUsuarioPorCodigo($tabla, $item1, $valor1, $item2, $valor2){
+
+	
+		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET $item1 = :$item1, codigo = NULL, fecha_recuperacion = NULL WHERE $item2 = :$item2");
+
+		$stmt->bindParam(":".$item1, $valor1, PDO::PARAM_STR);
+		$stmt->bindParam(":".$item2, $valor2, PDO::PARAM_STR);
+		if($stmt->execute()){
+
+			return true;	
+
+		}else{
+
+			return false;
+		
+		}
+		
 
 
 		$stmt->close();

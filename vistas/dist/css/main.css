@@ -35,6 +35,9 @@ body.login-page .card{
     padding: 45px 10px;
     height: 480px;
 }
+body.login-page .login-box.recu-password .card{
+    height: 500px;
+}
 .login-logo a{
     font-weight: 400;
 }
@@ -82,6 +85,10 @@ body.login-page .card{
     font-size: 3rem;
     color: rgba(53, 222, 245, 0.897);
     margin-bottom: 1rem;
+}
+/* RECUPERAR PASSWORD*/
+.login-box.recu-password .login-card-body{
+    position: relative;
 }
 
 /* SLIDE DE, LOGIN, VERIFICAR EMAIL, PREGUNTAS, CAMBIAR CONTRASEÑA */

@@ -1,0 +1,59 @@
+<?php
+
+$password = new ControladorUsuarios();
+$password->ctrRevisarCodigoFecha();
+
+?>
+
+<div class="login-box recu-password">
+  <!-- /.login-logo -->
+  <div class="card">
+    <div class="login-logo">
+      <a href="login"><b>Gym</b>La Roca</a>
+    </div>
+
+    <!-- CONTENEDOR CAMBIAR CONTRASEÑA -->
+    <div class="card-body login-card-body">
+      <p class="login-box-msg">Cambia tu contraseña</p>
+      <form method="post" id="cambiarPassword">
+
+      <div class="form-row">
+        <div class="form-group col-md-12">
+          <label class='mt-2'>Nueva contraseña</label>
+          <input type='password' class='form-control nueva-password' placeholder='Ingrese nueva contraseña' name='editarPassword' required>
+          <label class='mt-2'>Confirmar contraseña</label>
+          <input type='password' class='form-control confirmar-password' placeholder='Confirmar contraseña'>
+          <!-- <i class="far fa-eye show-pass primero" action="hide"></i>
+          <i class="far fa-eye show-pass segundo" action="hide"></i> -->
+          <span class="resultado-password help-block mt-2 float-right"></span>
+        </div>
+      </div>
+        <!-- <div class="requisito-password">
+          <h4>La contraseña debe cumplir con los siguientes requerimientos:</h4>
+          <ul>
+            <li class="letter">Al menos debe tener <strong>una letra</strong></li>
+            <li class="capital">Al menos debe tener <strong>una letra en mayuscula</strong></li>
+            <li class="number">Al menos debe tener <strong>un numero</strong></li>
+            <li class="special">Al menos debe tener <strong>un caracter especial</strong></li>
+            <li class="length">Al menos debe tener <strong>8 caracteres como minimo y 16 maximo</strong></li>
+          </ul>
+        </div> -->
+        
+        <div class="row mb-2" id="linkLogin">    
+            <div class="col-12">
+              <button type='submit' class='btn btn-orange btn-block btn-flat' id='cambiarContraseñaPorCorreo'>Cambiar Contraseña</button>
+            </div>  
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+</div>
+<!-- /.login-box -->
+<?php 
+  // $post = "";
+  $recuperarPasswordCodigo = new ControladorUsuarios();
+  $recuperarPasswordCodigo->ctrCambiarContraseñaPorCodigo();
+?>
+

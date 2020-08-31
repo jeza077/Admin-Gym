@@ -48,7 +48,7 @@ class ControladorUsuarios{
 			INGRESO DE USUARIO
 	=============================================*/
 
-	public function ctrIngresoUsuario(){
+	static public function ctrIngresoUsuario(){
 
 		if(isset($_POST["ingUsuario"])){
 
@@ -474,7 +474,7 @@ class ControladorUsuarios{
 			if(preg_match('/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%.])\S{8,16}$/', $post)){
 				
 				$encriptar = crypt($post, '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
-				
+			
 				$item1 = "password";
 				$valor1 = $encriptar;
 		
@@ -487,12 +487,85 @@ class ControladorUsuarios{
 				$respuesta = ModeloUsuarios::mdlActualizarUsuario($tabla, $item1, $valor1, $item2, $valor2, $item3, $valor3);
 				return $respuesta;
 			
+			
 			} else {
 
 				$respuesta = false;
 				return $respuesta;
 
 			}
+					
+		} 
+	
+	}
+
+	
+	/*=============================================
+		CAMBIAR CONTRASEÑA POR CODIGO-CORREO
+	=============================================*/	
+	
+	static public function ctrCambiarContraseñaPorCodigo(){
+
+		// $respuesta = $_GET['codigo'];
+		// // echo $valor2;
+		// var_dump($respuesta);
+
+		// return;
+
+		// $tabla1 = "personas";
+		// $tabla2 = "empleados";
+		// $item = "codigo";
+		// $valor = $_GET['codigo'];
+
+		// $respuesta = ModeloUsuarios::mdlMostrarUsuarios($tabla1, $tabla2, $item, $valor);
+
+		// // var_dump($respuesta);
+		
+		// return $respuesta['id'];
+			
+		if(isset($_POST['editarPassword'])){
+			
+			if(preg_match('/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%.])\S{8,16}$/', $_POST['editarPassword'])){
+				
+				$encriptar = crypt($_POST['editarPassword'], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
+			
+				$item1 = "password";
+				$valor1 = $encriptar;
+		
+				$item2 = "codigo";
+				$valor2 = $_GET['codigo'];
+
+				$respuesta = ModeloUsuarios::mdlActualizarUsuarioPorCodigo($tabla, $item1, $valor1, $item2, $valor2);
+
+				echo '<script>
+				Swal.fire({
+					title: "Contraseña cambiada correctamente.",
+					icon: "success",
+					heightAuto: false,
+					showConfirmButton: true,
+					confirmButtonText: "Cerrar",
+					allowOutsideClick: false
+				}).then((result)=>{
+
+					if(result.value){
+
+						window.location = "login";
+
+					}
+
+				});
+		
+			</script>';
+				// return $respuesta;
+			
+			
+			} 
+			// else {
+
+			// 	$respuesta = false;
+			// 	return $respuesta;
+
+			// }
 					
 		} 
 	
@@ -539,8 +612,8 @@ class ControladorUsuarios{
     static public function ctrEnviarCorreoRecuperacion($correoElectronico, $nombre, $codigo){
         $template = file_get_contents('../extensiones/plantillas/template.php');
         $template = str_replace("{{name}}", $nombre, $template);
-        $template = str_replace("{{action_url_1}}", 'localhost/gym/'.$codigo, $template);
-        $template = str_replace("{{action_url_2}}", '<b>http:localhost/gym/'.$codigo.'</b>', $template);
+        $template = str_replace("{{action_url_1}}", 'localhost/gym/index.php?ruta=recuperar-password&codigo='.$codigo, $template);
+        $template = str_replace("{{action_url_2}}", '<b>localhost/gym/index.php?ruta=recuperar-password&codigo='.$codigo.'</b>', $template);
         $template = str_replace("{{year}}", date('Y'), $template);
         // $template = str_replace("{{operating_system}}", Helper::getOS(), $template);
         // $template = str_replace("{{browser_name}}", Helper::getBrowser(), $template);
@@ -592,6 +665,93 @@ class ControladorUsuarios{
 		
 	}
 
+	/*=============================================
+		ENVIAR CORREO DE RECUPERAR CONTRASEÑA
+	=============================================*/	
+    static public function ctrRevisarCodigoFecha(){
+
+		if(isset($_GET['codigo'])){
+
+			$_SESSION['codigo'] = $_GET['codigo'];
+			$tabla1 = "personas";
+			$tabla2 = "empleados";
+			$item = "codigo";
+			$valor = $_GET['codigo'];
+
+			$respuesta = ModeloUsuarios::mdlMostrarUsuarios($tabla1, $tabla2, $item, $valor);
+
+			// var_dump($respuesta['codigo'] . " " . $_GET['codigo']);
+
+			if($_GET["codigo"] != $respuesta["codigo"]){
+				echo '<script>
+						Swal.fire({
+							title: "El código de recuperación de contraseña no es valido. Por favor intenta de nuevo.",
+							icon: "error",
+							heightAuto: false,
+							showConfirmButton: true,
+							confirmButtonText: "Cerrar",
+							allowOutsideClick: false
+						}).then((result)=>{
+    
+							if(result.value){
+
+								window.location = "login";
+	
+							}
+	
+						});
+				
+					</script>';
+			} else {
+
+				$fechaAhora = date("Y-m-d H:i:s");
+				// var_dump($respuesta['fecha_recuperacion'] . " --- " . $fechaAhora);
+
+				if($fechaAhora > $respuesta['fecha_recuperacion']) {
+					echo '<script>
+							Swal.fire({
+								title: "El código de recuperación de contraseña ha expirado. Por favor intenta de nuevo.",
+								icon: "error",
+								heightAuto: false,
+								showConfirmButton: true,
+								confirmButtonText: "Cerrar",
+								allowOutsideClick: false
+							}).then((result)=>{
+
+								if(result.value){
+
+									window.location = "login";
+
+								}
+
+							});
+					
+						</script>';
+				} 
+				// else {
+
+				// 	$item = null;
+				// 	$valor = null;
+				// 	$post = null;
+				// 	$codigo = $_GET["codigo"];
+				// 	$enviar = ControladorUsuarios::ctrCambiarContraseña($item, $valor, $post, $codigo)
+				// }
+			}
+
+		} else {
+			header("location:login");
+			
+		// 	echo '<script>
+		// 	Swal.fire({
+		// 		title: "mal!",
+		// 		icon: "error",
+		// 		heightAuto: false
+		// 	})
+	
+		// </script>';
+		}
+
+    }
 	
 	/*=============================================
 		CREAR CODIGO RANDOM PARA EL PASSWORD
@@ -622,6 +782,4 @@ class ControladorUsuarios{
         // return time().$pass;
     }
 }
-	
-
 

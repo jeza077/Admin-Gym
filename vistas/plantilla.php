@@ -27,9 +27,9 @@
 <?php
 
     if(isset($_SESSION["iniciarSesion"]) && $_SESSION["iniciarSesion"] == "ok"){
-    echo '<body class="hold-transition sidebar-mini">';
+      echo '<body class="hold-transition sidebar-mini">';
 
-    echo '<div class="wrapper">';
+      echo '<div class="wrapper">';
 
       /*=============================================
             HEADER
@@ -108,9 +108,34 @@
       
 
     } else{
-      echo '<body class="hold-transition login-page sidebar-mini">';
+      
+      // echo '<body class="hold-transition login-page sidebar-mini">';
 
-      include "modulos/login.php";
+      // include "modulos/login.php";
+
+      if(isset($_GET["ruta"])){
+
+        if($_GET["ruta"] == "recuperar-password" ||
+           $_GET["ruta"] == "login"){
+          echo '<body class="hold-transition login-page sidebar-mini">';
+
+          include "modulos/".$_GET["ruta"].".php";
+          
+        } 
+        else {
+
+          echo '<body class="hold-transition sidebar-mini">';
+          
+          include "modulos/404.php";
+
+        }
+
+      } else {
+         echo '<body class="hold-transition login-page sidebar-mini">';
+
+        include "modulos/login.php";
+
+      }
 
     }
 

@@ -175,6 +175,70 @@ $(".verificarCorreo").on('click', function(event){
     })   
 })
 
+//VALIDACIONES PARA LUEGO CAMBIAR CONTRASEÑA CONTRASEÑA (CODIGO-CORREO)
+requisitosPassword();
+$('#cambiarContraseñaPorCorreo').attr('disabled', true);
+$(".nueva-password").on('change', function(){
+    cambiarPassPorCodigo = $(this).val();
+});
+$(".confirmar-password").on('input', function(){
+    // var password_nuevo = cambiarPassPorCodigo;
+    if($(this).val() == cambiarPassPorCodigo){
+        $('.resultado-password').text('Correcto');
+        $('.resultado-password').addClass('valid').removeClass('invalid');
+        $('input.nueva-password').addClass('valid border-valid').removeClass('invalid border-invalid');
+        $('input.confirmar-password').addClass('valid border-valid').removeClass('invalid border-invalid');
+        $('#cambiarContraseñaPorCorreo').attr('disabled', false);                                              
+    } else {
+        $('.resultado-password').text('Contraseñas no coinciden');
+        $('.resultado-password').addClass('invalid').removeClass('valid');
+        $('input.nueva-password').addClass('invalid border-invalid').removeClass('valid border-valid');
+        $('input.confirmar-password').addClass('invalid border-invalid').removeClass('valid border-valid');
+        $('#cambiarContraseñaPorCorreo').attr('disabled', true);
+    }
+})
+// $("#cambiarContraseñaPorCorreo").on("click", function(event){  
+//     event.preventDefault();
+    // console.log("clickkkk");
+    
+//     var datos = new FormData();
+//     // datos.append("usuarioId", idUsuario);
+//     datos.append("cambiarPassPorCodigo", cambiarPassPorCodigo);
+
+//     $.ajax({
+
+//         url:"ajax/usuarios.ajax.php",
+//         method: "POST",
+//         data: datos,
+//         cache: false,
+//         contentType: false,
+//         processData: false,  
+//         dataType: "json",
+//         success: function(respuesta) {
+//             console.log("Bien", respuesta);
+//             // if(respuesta == true){
+//             //     Swal.fire({
+//             //         icon: "success",
+//             //         title: "¡Contraseña cambiada correctamente!",
+//             //         showConfirmButton: true,
+//             //         confirmButtonText: "Cerrar",
+//             //         allowOutsideClick: false,
+//             //         closeOnConfirm: false
+//             //     }).then((result)=>{
+
+//             //         if(result.value){
+
+//             //             window.location('login')
+
+//             //         }
+
+//             //     });
+//             // }
+//         }
+//     })        
+// })
+
+
 /*
 //VERIFICAR SI EL CORREO ESTA ASOCIADO A UN USUARIO Y MOSTRAR PREGUNTAS DE SEGURIDAD
 $("#verificarEmail").change(function() { 

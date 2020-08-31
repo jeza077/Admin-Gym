@@ -107,7 +107,7 @@ class AjaxUsuarios{
     }
 
     /*=============================================
-            CAMBIAR CONTRASEÑA
+    CAMBIAR CONTRASEÑA POR PREGUNTAS DE SEGURIDAD
     =============================================*/
     public $usuarioId;
     public $cambiarPass;
@@ -122,6 +122,27 @@ class AjaxUsuarios{
         $valor = $this->usuarioId;
       
         $respuesta = ControladorUsuarios::ctrCambiarContraseña($item, $valor, $post);
+
+        echo json_encode($respuesta);
+
+    }
+
+    /*=============================================
+        CAMBIAR CONTRASEÑA POR CODIGO-CORREO
+    =============================================*/
+    // public $usuarioId;
+    public $cambiarPassPorCodigo;
+
+    public function ajaxCambiarContraseñaPorCorreo(){
+
+        // $tabla = "usuarios";
+
+        $post = $this->cambiarPassPorCodigo;
+
+        // $item = "id";
+        // $valor = $this->usuarioId;
+      
+        $respuesta = ControladorUsuarios::ctrCambiarContraseñaPorCodigo($post);
 
         echo json_encode($respuesta);
 
@@ -185,11 +206,19 @@ if(isset($_POST["correoUsuario"])){
     $enviarCorreo->ajaxEnviarCorreoRecuperacion();
 }
 /*=============================================
-           CAMBIAR CONTRASEÑA
+CAMBIAR CONTRASEÑA POR PREGUNTAS DE SEGURIDAD
 =============================================*/
 if(isset($_POST["usuarioId"])){
     $cambiarContraseña = new AjaxUsuarios();
     $cambiarContraseña->usuarioId = $_POST["usuarioId"];
     $cambiarContraseña->cambiarPass = $_POST["cambiarPass"];
     $cambiarContraseña->ajaxCambiarContraseña();
+}
+/*=============================================
+    CAMBIAR CONTRASEÑA POR CODIGO-CORREO
+=============================================*/
+if(isset($_POST["cambiarPassPorCodigo"])){
+    $cambiarContraseña = new AjaxUsuarios();
+    $cambiarContraseña->cambiarPassPorCodigo = $_POST["cambiarPassPorCodigo"];
+    $cambiarContraseña->ajaxCambiarContraseñaPorCorreo();
 }
