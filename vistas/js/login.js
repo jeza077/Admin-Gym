@@ -128,7 +128,7 @@ $(".verificarCorreo").on('click', function(event){
 
             if(!respuesta) {//Si la Respuesta = FALSE entonces...
                 //Mandamos una alerta diciendo que ya existe el usuario.
-                $("#verificarEmail").after('<div class="alert alert-danger">Correo inexistente</div>');
+                $("#verificarEmail").after('<div class="alert alert-danger mt-2">Correo inexistente</div>');
                 
                 //E inmeditamente Limpiamos el input
                 $("#verificarEmail").val("");
@@ -138,13 +138,15 @@ $(".verificarCorreo").on('click', function(event){
 
                 correoUsuario = respuesta.correo;
                 idUsua = respuesta.id_usuario;
-                usuario = respuesta.usuario;
+                nombreUsuario = respuesta.nombre;
             
                 // console.log(correoUsuario, idUsua);
 
                 var datos = new FormData();
                 datos.append("correoUsuario", correoUsuario);
                 datos.append("idUsua", idUsua);
+                datos.append("nombreUsuario", nombreUsuario);
+
 
                 $.ajax({
 
@@ -156,14 +158,24 @@ $(".verificarCorreo").on('click', function(event){
                     processData: false,  
                     dataType: "json",
                     success: function(respuesta) {
-                        console.log(respuesta)
+                        // console.log(respuesta)
 
                         if(respuesta == true){
                             Swal.fire({
 								title: "Le enviamos un correo para recuperar su contraseña. Por favor revise.",
 								icon: "info",
-								heightAuto: false,
+                                heightAuto: false,
+                                showConfirmButton: true,
+								confirmButtonText: "Cerrar",
 								allowOutsideClick: false
+							}).then((result)=>{
+			
+								if(result.value){
+			
+									window.location = "login";
+			
+								}
+			
 							});
                         }
                     }
@@ -197,6 +209,7 @@ $(".confirmar-password").on('input', function(){
         $('#cambiarContraseñaPorCorreo').attr('disabled', true);
     }
 })
+
 // $("#cambiarContraseñaPorCorreo").on("click", function(event){  
 //     event.preventDefault();
     // console.log("clickkkk");

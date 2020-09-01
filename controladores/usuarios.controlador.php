@@ -506,12 +506,6 @@ class ControladorUsuarios{
 	
 	static public function ctrCambiarContraseñaPorCodigo(){
 
-		// $respuesta = $_GET['codigo'];
-		// // echo $valor2;
-		// var_dump($respuesta);
-
-		// return;
-
 		$tabla1 = "personas";
 		$tabla2 = "empleados";
 		$item = "codigo";
@@ -522,8 +516,7 @@ class ControladorUsuarios{
 		// var_dump($respuesta['id_usuario']);
 		
 		$idUsuario = $respuesta['id_usuario'];
-		// return;
-			
+		
 		if(isset($_POST['editarPassword'])){
 			
 			if(preg_match('/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%.])\S{8,16}$/', $_POST['editarPassword'])){
@@ -531,7 +524,7 @@ class ControladorUsuarios{
 				$encriptar = crypt($_POST['editarPassword'], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
 			
 				$tabla = "empleados";
-				
+
 				$item1 = "password";
 				$valor1 = $encriptar;
 		
@@ -581,7 +574,7 @@ class ControladorUsuarios{
 	/*=============================================
 		ENVIAR CODIGO DE RECUPERAR CONTRASEÑA
 	=============================================*/	
-    static public function ctrEnviarCodigo($id, $correo){
+    static public function ctrEnviarCodigo($id, $nombre, $correo){
         if(isset($correo)) {
             $correoElectronico = $correo;
 			$codigo = ControladorUsuarios::ctrCreateRandomCode();
@@ -603,9 +596,9 @@ class ControladorUsuarios{
 			$respuesta = ModeloUsuarios::mdlActualizarUsuario($tabla, $item1, $valor1, $item2, $valor2, $item3, $valor3);
 
 			if($respuesta == true) {
-				$nombre = 'Jesús';
+				$nombreRecibido = $nombre;
 
-				$respuestaCorreo = ControladorUsuarios::ctrEnviarCorreoRecuperacion($correoElectronico, $nombre, $codigo);
+				$respuestaCorreo = ControladorUsuarios::ctrEnviarCorreoRecuperacion($correoElectronico, $nombreRecibido, $codigo);
 
 				return $respuestaCorreo;	
 			} 

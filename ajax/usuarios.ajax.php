@@ -94,14 +94,16 @@ class AjaxUsuarios{
     
     public $idUsua;
     public $correoUsuario;
+    public $nombreUsuario;
 
     public function ajaxEnviarCorreoRecuperacion(){
 
         // $item = "usuario";
         $id = $this->idUsua;
         $correo = $this->correoUsuario;
+        $nombre = $this->nombreUsuario;
 
-        $respuesta = ControladorUsuarios::ctrEnviarCodigo($id, $correo);
+        $respuesta = ControladorUsuarios::ctrEnviarCodigo($id, $nombre, $correo);
 
         echo json_encode($respuesta);
     }
@@ -203,6 +205,7 @@ if(isset($_POST["correoUsuario"])){
     $enviarCorreo = new AjaxUsuarios();
     $enviarCorreo->correoUsuario = $_POST["correoUsuario"];   
     $enviarCorreo->idUsua = $_POST["idUsua"];
+    $enviarCorreo->nombreUsuario = $_POST["nombreUsuario"];
     $enviarCorreo->ajaxEnviarCorreoRecuperacion();
 }
 /*=============================================
