@@ -682,7 +682,7 @@ class ControladorUsuarios{
 
 			// var_dump($respuesta['codigo'] . " " . $_GET['codigo']);
 
-			if($_GET["codigo"] != $respuesta["codigo"]){
+			if($respuesta["codigo"] != null && $_GET["codigo"] != $respuesta["codigo"]){
 				echo '<script>
 						Swal.fire({
 							title: "El código de recuperación de contraseña no es valido. Por favor intenta de nuevo.",
@@ -702,10 +702,10 @@ class ControladorUsuarios{
 						});
 				
 					</script>';
+					
 			} else {
 
 				$fechaAhora = date("Y-m-d H:i:s");
-				// var_dump($respuesta['fecha_recuperacion'] . " --- " . $fechaAhora);
 
 				if($fechaAhora > $respuesta['fecha_recuperacion']) {
 					echo '<script>
@@ -728,27 +728,11 @@ class ControladorUsuarios{
 					
 						</script>';
 				} 
-				// else {
-
-				// 	$item = null;
-				// 	$valor = null;
-				// 	$post = null;
-				// 	$codigo = $_GET["codigo"];
-				// 	$enviar = ControladorUsuarios::ctrCambiarContraseña($item, $valor, $post, $codigo)
-				// }
+				
 			}
 
 		} else {
 			header("location:login");
-			
-		// 	echo '<script>
-		// 	Swal.fire({
-		// 		title: "mal!",
-		// 		icon: "error",
-		// 		heightAuto: false
-		// 	})
-	
-		// </script>';
 		}
 
     }
