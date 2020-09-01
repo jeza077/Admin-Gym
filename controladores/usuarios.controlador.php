@@ -512,16 +512,17 @@ class ControladorUsuarios{
 
 		// return;
 
-		// $tabla1 = "personas";
-		// $tabla2 = "empleados";
-		// $item = "codigo";
-		// $valor = $_GET['codigo'];
+		$tabla1 = "personas";
+		$tabla2 = "empleados";
+		$item = "codigo";
+		$valor = $_GET['codigo'];
 
-		// $respuesta = ModeloUsuarios::mdlMostrarUsuarios($tabla1, $tabla2, $item, $valor);
+		$respuesta = ModeloUsuarios::mdlMostrarUsuarios($tabla1, $tabla2, $item, $valor);
 
-		// // var_dump($respuesta);
+		// var_dump($respuesta['id_usuario']);
 		
-		// return $respuesta['id'];
+		$idUsuario = $respuesta['id_usuario'];
+		// return;
 			
 		if(isset($_POST['editarPassword'])){
 			
@@ -529,33 +530,39 @@ class ControladorUsuarios{
 				
 				$encriptar = crypt($_POST['editarPassword'], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
 			
+				$tabla = "empleados";
+				
 				$item1 = "password";
 				$valor1 = $encriptar;
 		
-				$item2 = "codigo";
-				$valor2 = $_GET['codigo'];
+				$item2 = "id";
+				$valor2 = $idUsuario;
 
 				$respuesta = ModeloUsuarios::mdlActualizarUsuarioPorCodigo($tabla, $item1, $valor1, $item2, $valor2);
 
-				echo '<script>
-				Swal.fire({
-					title: "Contraseña cambiada correctamente.",
-					icon: "success",
-					heightAuto: false,
-					showConfirmButton: true,
-					confirmButtonText: "Cerrar",
-					allowOutsideClick: false
-				}).then((result)=>{
+				if($respuesta == true){
+	
+					echo '<script>
+							Swal.fire({
+								title: "Contraseña cambiada correctamente.",
+								icon: "success",
+								heightAuto: false,
+								showConfirmButton: true,
+								confirmButtonText: "Cerrar",
+								allowOutsideClick: false
+							}).then((result)=>{
+			
+								if(result.value){
+			
+									window.location = "login";
+			
+								}
+			
+							});
+					
+						</script>';
 
-					if(result.value){
-
-						window.location = "login";
-
-					}
-
-				});
-		
-			</script>';
+				}
 				// return $respuesta;
 			
 			

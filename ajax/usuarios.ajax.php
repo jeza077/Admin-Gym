@@ -127,26 +127,26 @@ class AjaxUsuarios{
 
     }
 
-    /*=============================================
-        CAMBIAR CONTRASEÑA POR CODIGO-CORREO
-    =============================================*/
-    // public $usuarioId;
-    public $cambiarPassPorCodigo;
+    // /*=============================================
+    //     CAMBIAR CONTRASEÑA POR CODIGO-CORREO
+    // =============================================*/
+    // // public $usuarioId;
+    // public $cambiarPassPorCodigo;
 
-    public function ajaxCambiarContraseñaPorCorreo(){
+    // public function ajaxCambiarContraseñaPorCorreo(){
 
-        // $tabla = "usuarios";
+    //     // $tabla = "usuarios";
 
-        $post = $this->cambiarPassPorCodigo;
+    //     $post = $this->cambiarPassPorCodigo;
 
-        // $item = "id";
-        // $valor = $this->usuarioId;
+    //     // $item = "id";
+    //     // $valor = $this->usuarioId;
       
-        $respuesta = ControladorUsuarios::ctrCambiarContraseñaPorCodigo($post);
+    //     $respuesta = ControladorUsuarios::ctrCambiarContraseñaPorCodigo($post);
 
-        echo json_encode($respuesta);
+    //     echo json_encode($respuesta);
 
-    }
+    // }
     
 
 }
@@ -214,11 +214,11 @@ if(isset($_POST["usuarioId"])){
     $cambiarContraseña->cambiarPass = $_POST["cambiarPass"];
     $cambiarContraseña->ajaxCambiarContraseña();
 }
-/*=============================================
-    CAMBIAR CONTRASEÑA POR CODIGO-CORREO
-=============================================*/
-if(isset($_POST["cambiarPassPorCodigo"])){
-    $cambiarContraseña = new AjaxUsuarios();
-    $cambiarContraseña->cambiarPassPorCodigo = $_POST["cambiarPassPorCodigo"];
-    $cambiarContraseña->ajaxCambiarContraseñaPorCorreo();
-}
+// /*=============================================
+//     CAMBIAR CONTRASEÑA POR CODIGO-CORREO
+// =============================================*/
+// if(isset($_POST["cambiarPassPorCodigo"])){
+//     $cambiarContraseña = new AjaxUsuarios();
+//     $cambiarContraseña->cambiarPassPorCodigo = $_POST["cambiarPassPorCodigo"];
+//     $cambiarContraseña->ajaxCambiarContraseñaPorCorreo();
+// }

@@ -44,7 +44,11 @@ $password->ctrRevisarCodigoFecha();
               <button type='submit' class='btn btn-orange btn-block btn-flat' id='cambiarContraseñaPorCorreo'>Cambiar Contraseña</button>
             </div>  
         </div>
-
+        
+        <?php 
+          $recuperarPasswordCodigo = new ControladorUsuarios();
+          $recuperarPasswordCodigo->ctrCambiarContraseñaPorCodigo();
+        ?>
       </form>
     </div>
   </div>
@@ -52,7 +56,6 @@ $password->ctrRevisarCodigoFecha();
 </div>
 <!-- /.login-box -->
 <?php 
-  // $post = "";
   $recuperarPasswordCodigo = new ControladorUsuarios();
   $recuperarPasswordCodigo->ctrCambiarContraseñaPorCodigo();
 ?>

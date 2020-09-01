@@ -306,7 +306,7 @@ class ModeloUsuarios{
 		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET $item1 = :$item1, codigo = NULL, fecha_recuperacion = NULL WHERE $item2 = :$item2");
 
 		$stmt->bindParam(":".$item1, $valor1, PDO::PARAM_STR);
-		$stmt->bindParam(":".$item2, $valor2, PDO::PARAM_STR);
+		$stmt->bindParam(":".$item2, $valor2, PDO::PARAM_INT);
 		if($stmt->execute()){
 
 			return true;	
