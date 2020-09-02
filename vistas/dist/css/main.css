@@ -52,6 +52,11 @@ body.login-page .login-box.recu-password .card{
     margin-top: 3.5rem;
 }
 
+/* NOTIFICACIONES */
+.alert {
+    transition: 0.5s ease;
+}
+
 /* VALIDAR CONTRASEÑA */
 .valid{
     color: green;

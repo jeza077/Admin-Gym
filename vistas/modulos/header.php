@@ -20,7 +20,7 @@
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
-      <li class="nav-item dropdown mr-4">
+      <!-- <li class="nav-item dropdown mr-4">
 
         <a class="nav-link" data-toggle="dropdown" href="#">
           <i class="fas fa-user mr-1"></i>
@@ -52,14 +52,15 @@
             </div>
           </a>
         </div>
-      </li>
+      </li> -->
 
-        <!-- <li class="nav-item">
+        <li class="nav-item mr-4">
           <a class="nav-link" href="agregar-persona">
-            <i class="fas fa-user-plus"></i>
-            <span class="hidden-xs">Agregar persona</span>
+            <i class="fas fa-user mr-1"></i>
+            <span class="badge badge-warning navbar-badge"><i class="fas fa-plus"></i></span>
+            <!-- <span class="hidden-xs">Agregar persona</span> -->
           </a>
-        </li> -->
+        </li>
 
         <li class="dropdown nav-item user user-menu" style="margin: 0.5em 1.5em 0 0">
           <a href="#"  data-toggle="dropdown">

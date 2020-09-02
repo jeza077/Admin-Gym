@@ -67,70 +67,132 @@ class ControladorUsuarios{
 
 				$respuesta = ModeloUsuarios::mdlMostrarUsuarios($tabla1, $tabla2, $item, $valor);
 
-				if($respuesta["usuario"] == $_POST["ingUsuario"] && $respuesta["password"] == $encriptar){
-					
-					if($respuesta["estado"] == 1) {
+					if($respuesta["usuario"] == $_POST["ingUsuario"] && $respuesta["password"] == $encriptar){
+						
+						if($respuesta["estado"] == 1) {
 
-						$_SESSION["iniciarSesion"] = "ok";
-						$_SESSION["id"] = $respuesta["id"];
-						$_SESSION["nombre"] = $respuesta["nombre"];
-						$_SESSION["apellidos"] = $respuesta["apellidos"];
-						$_SESSION["usuario"] = $respuesta["usuario"];
-						$_SESSION["foto"] = $respuesta["foto"];
-						$_SESSION["rol"] = $respuesta["rol"];
+							$_SESSION["iniciarSesion"] = "ok";
+							$_SESSION["id"] = $respuesta["id"];
+							$_SESSION["nombre"] = $respuesta["nombre"];
+							$_SESSION["apellidos"] = $respuesta["apellidos"];
+							$_SESSION["usuario"] = $respuesta["usuario"];
+							$_SESSION["foto"] = $respuesta["foto"];
+							$_SESSION["rol"] = $respuesta["rol"];
 
-						/* =====REGISTRAR FECHA Y HORA PARA SABER EL ULTIMO LOGIN ====== */
+							/* =====REGISTRAR FECHA Y HORA PARA SABER EL ULTIMO LOGIN ====== */
 
-						date_default_timezone_set('America/Tegucigalpa');
+							date_default_timezone_set('America/Tegucigalpa');
 
-						$fecha = date('Y-m-d');
-						$hora = date('H:i:s');
+							$fecha = date('Y-m-d');
+							$hora = date('H:i:s');
 
-						$fechaActual = $fecha." ".$hora;
+							$fechaActual = $fecha." ".$hora;
 
-						$item1 = "ultimo_login";
-						$valor1 = $fechaActual;
+							$item1 = "ultimo_login";
+							$valor1 = $fechaActual;
 
-						$item2 = "id_persona";
-						$valor2 = $respuesta["id"];
+							$item2 = "id_persona";
+							$valor2 = $respuesta["id"];
 
-						$item3 = null;
-						$valor3 = null;
+							$item3 = null;
+							$valor3 = null;
 
-						$ultimoLogin = ModeloUsuarios::mdlActualizarUsuario($tabla2, $item1, $valor1, $item2, $valor2, $item3, $valor3);
+							$ultimoLogin = ModeloUsuarios::mdlActualizarUsuario($tabla2, $item1, $valor1, $item2, $valor2, $item3, $valor3);
 
-						if($ultimoLogin == "ok"){
+							if($ultimoLogin == true){
 
-							echo '<script>
-							
-								Swal.fire({
-									title: "Bienvenido",
-									icon: "success",
-									heightAuto: false,
-									allowOutsideClick: false
-								}).then((result)=>{
-									if(result.value){
-										window.location = "dashboard";
-									}
-								});
+								echo '<script>
+									Swal.fire({
+										title: "Bienvenido '.$_SESSION['nombre'] . " " . $_SESSION["apellidos"] . '",
+										icon: "success",
+										heightAuto: false,
+										allowOutsideClick: false
+									}).then((result)=>{
+										if(result.value){
+											window.location = "dashboard";
+										}
+									});
+									</script>';
+
+							}
+
+
+						} else {
+							echo '<script>			
+									Swal.fire({
+										title: "Usuario desactivado, comuniquese con el administrador.",
+										icon: "error",
+										heightAuto: false,
+										allowOutsideClick: false
+									});
 								</script>';
-
 						}
 
-
 					} else {
-						echo '<script>			
-								Swal.fire({
-									title: "Usuario desactivado, comuniquese con el administrador.",
-									icon: "error",
-									heightAuto: false,
-									allowOutsideClick: false
-								});
-							</script>';
-					}
+			
+							//INTENTOS DE LOGUEARSE PERMITIDOS SOLO 3 AL REBASARLOS SE DESACTIVARA EL USUARIO INGRESADO AUTOMATICAMENTE.
+							$intentos = 3;
+							$_SESSION['contadorLogin'] = $_SESSION['contadorLogin'] + 1; 
 
-				} else {
-					// echo '<br><div class="alert alert-danger">¡Usuario y contraseña incorrectos! Vuelve a intentar.</div>';
+							$intentos = $intentos - ($_SESSION['contadorLogin']);
+
+							if($_SESSION['contadorLogin'] === 3) {
+								$tabla1 = "personas";
+								$tabla2 = "empleados";
+								
+								$item = "usuario";
+								$valor = $_POST["ingUsuario"];
+				
+								$respuesta = ModeloUsuarios::mdlMostrarUsuarios($tabla1, $tabla2, $item, $valor);
+						
+								if($respuesta["usuario"] == $_POST["ingUsuario"]){
+									$tabla = "empleados";
+									$item1 = "estado";
+									$valor1 = 0;
+
+									$item2 = "usuario";
+									$valor2 = $_POST["ingUsuario"];
+																
+									$item3 = null;
+									$valor3 = null;
+					
+									$respuestaEstado = ModeloUsuarios::mdlActualizarUsuario($tabla, $item1, $valor1, $item2, $valor2, $item3, $valor3);
+
+									if($respuestaEstado == true){
+										// echo '<br><div class="alert alert-danger">¡Lo sentimos! Su usuario ha sido desactivado, comuniquese con el Administrador</div>';
+										
+										echo '<script>			
+												Swal.fire({
+													title: "¡Lo sentimos! Su usuario ha sido desactivado, comuniquese con el Administrador.",
+													icon: "error",
+													heightAuto: false,
+													allowOutsideClick: false
+												});
+											</script>';
+
+										session_destroy();
+									}
+									
+								}									
+						
+							} else {
+								
+								// echo '<br><div class="alert alert-danger">¡Usuario y contraseña invalidos! Intento: '.$_SESSION['contadorLogin'] .', tiene '.$intentos.' intento mas </div>';
+								echo '<script>			
+										Swal.fire({
+											title: "¡Usuario y contraseña invalidos! Intento: '.$_SESSION['contadorLogin'] .', tiene '.$intentos.' intento mas.",
+											icon: "error",
+											toast: true,
+											position: "top-end",
+											showConfirmButton: false,
+											timer: 3000,
+										});
+									</script>';
+							}
+					}
+					
+				} else {			
+					
 					echo '<script>			
 						Swal.fire({
 							title: "Usuario/contraseña incorrectos! Intente de nuevo.",
@@ -139,70 +201,9 @@ class ControladorUsuarios{
 							allowOutsideClick: false
 						});
 					</script>';
-				}
-				
-			} else {
-
-				echo '<script>			
-						Swal.fire({
-							title: "Usuario/contraseña incorrectos! Intente de nuevo.",
-							icon: "error",
-							heightAuto: false,
-							allowOutsideClick: false
-						});
-					</script>';
-			}
-			// else {
-			// 	//INTENTOS DE LOGUEARSE PERMITIDOS SOLO 3 AL REBASARLOS SE DESACTIVARA EL USUARIO INGRESADO AUTOMATICAMENTE.
-			// 	$intentos = 3;
-			// 	$_SESSION['contadorLogin'] = $_SESSION['contadorLogin'] + 1; 
-
-			// 	$intentos = $intentos - ($_SESSION['contadorLogin']);
-
-
-			// 	if($_SESSION['contadorLogin'] === 3) {
-			// 		$tabla = "usuarios";
-				
-			// 		$item = "usuario";
-			// 		$valor = $_POST["ingUsuario"];	
-
-			// 		$respuesta = ModeloUsuarios::MdlMostrarUsuarios($tabla, $item, $valor);
-
-			// 		if($respuesta["usuario"] == $_POST["ingUsuario"]){
-			// 			$tabla = "usuarios";
-			// 			$item1 = "estado";
-			// 			$valor1 = 0;
-
-			// 			$item2 = "usuario";
-			// 			$valor2 = $_POST["ingUsuario"];
-
-			// 			$respuesta = ModeloUsuarios::mdlActualizarUsuario($tabla, $item1, $valor1, $item2, $valor2);
-
-			// 			if($respuesta == "ok"){
-			// 				// echo '<br><div class="alert alert-danger">¡Lo sentimos! Su usuario ha sido desactivado, comuniquese con el Administrador</div>';
-							
-			// 				echo '<script>
-			// 						swal({
-			// 							type: "warning",
-			// 							title: "¡Lo sentimos! Su usuario ha sido desactivado, comuniquese con el Administrador",
-			// 							showConfirmButton: true,
-			// 							confirmButtonText: "Cerrar",
-			// 							closeOnConfirm: false
-			// 						})
-			// 						</script>';
-			// 				session_destroy();
-			// 			}
-						
-			// 		}
-							
 			
-			// 	} else {
-					
-			// 		echo '<br><div class="alert alert-danger">¡Usuario y contraseña invalidos! Intento: '.$_SESSION['contadorLogin'] .', tiene '.$intentos.' intento mas </div>';
-					
-			// 	}
 				
-			// }
+			}
 			
 		
 		

@@ -334,6 +334,9 @@ $(".verificarCorreo").on('click', function(event){
             if(!respuesta) {//Si la Respuesta = FALSE entonces...
                 //Mandamos una alerta diciendo que ya existe el usuario.
                 $("#verificarEmail").after('<div class="alert alert-danger mt-2">Correo inexistente</div>');
+                setTimeout(function () {
+                    $('.alert').remove();
+                }, 2000);
                 
                 //E inmeditamente Limpiamos el input
                 $("#verificarEmail").val("");
@@ -352,6 +355,13 @@ $(".verificarCorreo").on('click', function(event){
                 datos.append("idUsua", idUsua);
                 datos.append("nombreUsuario", nombreUsuario);
 
+                Swal.fire({
+                    title: "Espere por favor...",
+                    heightAuto: false,
+                    showConfirmButton: false,
+                    allowOutsideClick: false
+                })
+                Swal.showLoading();
 
                 $.ajax({
 
@@ -365,7 +375,7 @@ $(".verificarCorreo").on('click', function(event){
                     success: function(respuesta) {
                         // console.log(respuesta)
 
-                        if(respuesta == true){
+                        if(respuesta == true){                                             
                             Swal.fire({
 								title: "Le enviamos un correo para recuperar su contraseña. Por favor revise.",
 								icon: "info",
