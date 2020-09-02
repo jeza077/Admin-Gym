@@ -23,11 +23,12 @@
   <link rel="stylesheet" href="vistas/dist/css/main.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <!-- <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap" rel="stylesheet"> -->
 </head>
 <?php
 
     if(isset($_SESSION["iniciarSesion"]) && $_SESSION["iniciarSesion"] == "ok"){
-      echo '<body class="hold-transition sidebar-mini">';
+      echo '<body class="hold-transition sidebar-mini sidebar-collapse">';
 
       echo '<div class="wrapper">';
 
@@ -65,6 +66,7 @@
             $_GET["ruta"] == "proveedores" ||
             $_GET["ruta"] == "auditoria" ||
             $_GET["ruta"] == "configuracion" ||
+            $_GET["ruta"] == "perfil" ||
             $_GET["ruta"] == "agregar-persona" ||
             $_GET["ruta"] == "salir"){
 
@@ -93,7 +95,7 @@
 
       } else{
 
-        include "modulos/inicio.php";
+        include "modulos/dashboard.php";
 
       }
 

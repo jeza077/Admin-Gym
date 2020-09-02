@@ -20,8 +20,8 @@
 
     <!-- Main content -->
     <section class="content">
-
-    <form role="form" method="post" enctype="multipart/form-data">
+    
+      <form role="form" method="post" class="formulario" enctype="multipart/form-data">
       <!-- Default box -->
       <div class="card">
         

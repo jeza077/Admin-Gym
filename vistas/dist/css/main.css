@@ -1,6 +1,10 @@
 :root{
     --btnPrimario: orange;
+    --btnPrimarioHover: rgb(255, 153, 0);
 }
+/* * {
+    font-family: 'Poppins', sans-serif;
+} */
 /* ------------------------------------------------------------------- */
 body{
     overflow-x: hidden;
@@ -249,11 +253,20 @@ i.show-pass{
     color: #C2C7D0;
 }
 
+.dropdown-menu.show a{
+    transition: 0.2s;
+}
+.dropdown-menu.show a:hover{
+    background-color:var(--btnPrimarioHover);
+    color: #fff;
+}
+
 /* SIDEBAR */
 .main-sidebar{
     position: fixed!important;
     background-color: #212529;
 }
+
 
 /* AGREGAR PERSONA */
 .card{

@@ -20,13 +20,48 @@
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
+      <li class="nav-item dropdown mr-4">
+
+        <a class="nav-link" data-toggle="dropdown" href="#">
+          <i class="fas fa-user mr-1"></i>
+          <span class="badge badge-warning navbar-badge"><i class="fas fa-plus"></i></span>
+        </a>
+        
+        <div class="dropdown-menu dropdown-menu-md dropdown-menu-right" style="min-width:200px">
+          <a href="#" class="dropdown-item">
+            <div class="media">
+                  <i class="fas fa-users"></i>
+              <div class="media-body">
+                <h3 class="dropdown-item-title float-right">
+                  Agregar Cliente
+                </h3>
+              </div>
+            </div>
+          </a>
+          
+          <div class="dropdown-divider"></div>
+
+          <a href="#" class="dropdown-item">
+            <div class="media">
+              <i class="fas fa-user"></i>
+              <div class="media-body">
+                <h3 class="dropdown-item-title float-right">
+                Agregar Empleado
+                </h3>
+              </div>
+            </div>
+          </a>
+        </div>
+      </li>
+
+        <!-- <li class="nav-item">
           <a class="nav-link" href="agregar-persona">
             <i class="fas fa-user-plus"></i>
             <span class="hidden-xs">Agregar persona</span>
           </a>
-        </li>
-        <li class="dropdown nav-item user user-menu" style="margin-right:1em">
+        </li> -->
+
+        <li class="dropdown nav-item user user-menu" style="margin: 0.5em 1.5em 0 0">
           <a href="#"  data-toggle="dropdown">
             <?php
               if($_SESSION["foto"] != ""){
@@ -35,7 +70,7 @@
                 echo '<img src="vistas/img/usuarios/default/anonymous.png" class="user-image" alt="User Image">';
               }
             ?>
-            <span class="hidden-xs"><?php echo $_SESSION["nombre"]." ". $_SESSION["apellidos"]?></span>
+            <!-- <span class="hidden-xs"><?php echo $_SESSION["nombre"]." ". $_SESSION["apellidos"]?></span> -->
           </a>
           <ul class="dropdown-menu">
             <!-- User image -->
@@ -55,7 +90,7 @@
             <!-- Menu Footer-->
             <li class="user-footer">
               <div class="float-left">
-                <a href="#" class="btn btn-default btn-flat">Profile</a>
+                <a href="perfil" class="btn btn-default btn-flat">Profile</a>
               </div>
               <div class="float-right">
                 <a href="salir" class="btn btn-default btn-flat">Salir</a>
