@@ -129,8 +129,12 @@ $(".verificarCorreoPreguntas").on('click', function(event){
      
     
                 if(!respuesta) {//Si la Respuesta = FALSE entonces...
+                    
                     //Mandamos una alerta diciendo que ya existe el usuario.
-                    $("#verificarEmail").after('<div class="alert alert-danger">Correo inexistente</div>');
+                    $("#verificarEmail").after('<div class="alert alert-danger mt-2">Correo inexistente</div>');
+                    setTimeout(function () {
+                        $('.alert').remove();
+                    }, 2000)
                     
                     //E inmeditamente Limpiamos el input
                     $("#verificarEmail").val("");

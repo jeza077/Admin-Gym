@@ -35,7 +35,7 @@
       </form>
 
       <p class="mb-1">
-        <a href="#" onclick="toggleForm();">¿Olvidaste tu contraseña</a>
+        <a href="#verificar-correo" onclick="toggleForm();">¿Olvidaste tu contraseña</a>
       </p>
       <p class="mb-0">
         ¿No tienes una cuenta? <a href="#" class="text-center">Registrate</a>
