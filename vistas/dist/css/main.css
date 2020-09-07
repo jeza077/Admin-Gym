@@ -1,6 +1,11 @@
 :root{
     --btnPrimario: orange;
     --btnPrimarioHover: rgb(255, 153, 0);
+    --darkFirst: #212529;
+    --darkSecond: #23211e;
+    --orangeFirst: #FF5300;
+    --orangeSecond: #FF5F35;
+    --orangeThird: #ff8303;
 }
 /* * {
     font-family: 'Poppins', sans-serif;
@@ -269,9 +274,11 @@ i.show-pass{
 /* SIDEBAR */
 .main-sidebar{
     position: fixed!important;
-    background-color: #212529;
+    background-color: var(--darkFirst);
 }
-
+.nav-link.active {
+    background: var(--orangeThird)!important;
+}
 
 /* AGREGAR PERSONA */
 .card{

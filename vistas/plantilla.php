@@ -28,7 +28,7 @@
 <?php
 
     if(isset($_SESSION["iniciarSesion"]) && $_SESSION["iniciarSesion"] == "ok"){
-      echo '<body class="hold-transition sidebar-mini">';
+      echo '<body class="hold-transition sidebar-mini sidebar-collapse">';
 
       echo '<div class="wrapper">';
 
