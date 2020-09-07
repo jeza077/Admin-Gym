@@ -59,7 +59,7 @@
                   foreach ($grupo_modulo as $link => $icono_mod) { 
                     if($link !== "#") { ?>
                       <li class="nav-item">
-                      <a href="<?php echo $link ?>" class="nav-link">
+                      <a href="<?php echo $link ?>" class="nav-link menu-lateral">
                       
                       <?php foreach ($icono_mod as $icono => $modulo) :?>
                         <i class="nav-icon <?php echo $icono?>"></i>
@@ -78,7 +78,8 @@
 
                     <li class="nav-item has-treeview">
 
-                      <a href="<?php echo $link ?>" class="nav-link">
+                      <!-- var_dump($link); -->
+                      <a href="<?php echo $link ?>" class="nav-link menu-lateral">
                         
                         <?php foreach ($icono_mod as $icono => $modulo) :?>
                           <i class="nav-icon <?php echo $icono?>"></i>
