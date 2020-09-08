@@ -145,6 +145,7 @@ $(".verificarCorreoPreguntas").on('click', function(event){
                     
                     //E inmeditamente Limpiamos el input
                     $("#verificarEmail").val("");
+                    $('#verificarEmail').focus();
                     
                 } else { //SI LA RESPUESTA ES TRUE ENTONCES...
                     
@@ -356,6 +357,7 @@ $(".verificarCorreo").on('click', function(event){
                     
                     //E inmeditamente Limpiamos el input
                     $("#verificarEmail").val("");
+                    $('#verificarEmail').focus();
                     
                 } else { //SI LA RESPUESTA ES TRUE ENTONCES...
                     // console.log("bien")
