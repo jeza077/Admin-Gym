@@ -78,7 +78,6 @@
 
                     <li class="nav-item has-treeview">
 
-                      <!-- var_dump($link); -->
                       <a href="<?php echo $link ?>" class="nav-link menu-lateral">
                         
                         <?php foreach ($icono_mod as $icono => $modulo) :?>

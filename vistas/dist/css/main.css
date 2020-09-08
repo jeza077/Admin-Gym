@@ -278,7 +278,18 @@ i.show-pass{
 }
 .nav-link.active {
     background: var(--orangeThird)!important;
+    color: #fff;
 }
+    /* .nav-link.menu-lateral{
+        transition: 0.3s;
+    } */
+.nav-link.menu-lateral:hover{
+    background: var(--orangeThird)!important;
+}
+/* .nav-treeview>.nav-item>.nav-link.active{
+    background: #d7dce4 !important;
+    color: #fff;
+} */
 
 /* AGREGAR PERSONA */
 .card{

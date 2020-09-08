@@ -12,22 +12,16 @@ $('[data-mask]').inputmask()
 /*=============================================
     SIDEBAR MENU ACTIVO COLOR AZUL
 =============================================*/
-// const linkColor = $('.menu-lateral');
-// const linkColor = document.querySelectorAll('.menu-lateral');
-const claseActivo = $('.menu-lateral');
 
 var pathname = window.location.href;
-console.log(pathname)
+const claseActivo = $('.menu-lateral');
+// console.log(claseActivo[3]);
+var stock = claseActivo[3];
 
-var result = $(claseActivo);
-// console.log(result[3]);
-var stock = result[3];
-
-for (let i = 0; i < result.length -1; i++) {
-    // console.log(result[i]['href']);
-    if(pathname == result[i]['href']){
-        // console.log(result[i]['href'])
-        $(result[i]).addClass('active');     
+for (let i = 0; i < claseActivo.length -1; i++) {
+    // console.log(claseActivo[i]['href']);
+    if(pathname == claseActivo[i]['href']){
+        $(claseActivo[i]).addClass('active');     
         break;
     }
     if(pathname == 'http://localhost/gym/equipo' || pathname == 'http://localhost/gym/productos'){
