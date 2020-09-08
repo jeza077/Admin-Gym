@@ -103,10 +103,17 @@ function requisitosPassword(){
 $(".verificarCorreoPreguntas").on('click', function(event){
     event.preventDefault();
     // console.log("click")    
-        $(".alert").remove();
+    $(".alert").remove();
         
-        var emailIngresado = $('#verificarEmail').val();
+    var emailIngresado = $('#verificarEmail').val();
     
+    if(emailIngresado === ""){
+        $("#verificarEmail").after('<div class="alert alert-danger mt-2">Por favor, ingresar correo</div>');
+        setTimeout(function () {
+            $('.alert').remove();
+        }, 2000)
+        $('#verificarEmail').focus();
+    } else {
         // console.log(emailIngresado);
         
         var datos = new FormData();
@@ -130,7 +137,7 @@ $(".verificarCorreoPreguntas").on('click', function(event){
     
                 if(!respuesta) {//Si la Respuesta = FALSE entonces...
                     
-                    //Mandamos una alerta diciendo que ya existe el usuario.
+                    //Mandamos una alerta diciendo que no existe correo asociado a ningun usuario.
                     $("#verificarEmail").after('<div class="alert alert-danger mt-2">Correo inexistente</div>');
                     setTimeout(function () {
                         $('.alert').remove();
@@ -308,7 +315,7 @@ $(".verificarCorreoPreguntas").on('click', function(event){
             }
             
         })
-        
+    }    
     
 })
 
@@ -317,93 +324,99 @@ $(".verificarCorreo").on('click', function(event){
     event.preventDefault();
 
     var emailIngresado = $('#verificarEmail').val();
-
-    // console.log(emailIngresado);
     
-    var datos = new FormData();
-    datos.append("verificarEmail", emailIngresado);
+    if(emailIngresado === ""){
+        $("#verificarEmail").after('<div class="alert alert-danger mt-2">Por favor, ingresar correo</div>');
+        setTimeout(function () {
+            $('.alert').remove();
+        }, 2000)
+        $('#verificarEmail').focus();
+    } else {
+        var datos = new FormData();
+        datos.append("verificarEmail", emailIngresado);
 
-    $.ajax({
+        $.ajax({
 
-        url:"ajax/usuarios.ajax.php",
-        method: "POST",
-        data: datos,
-        cache: false,
-        contentType: false,
-        processData: false,  
-        dataType: "json",
-        success: function(respuesta) {
-            // console.log(respuesta);
+            url:"ajax/usuarios.ajax.php",
+            method: "POST",
+            data: datos,
+            cache: false,
+            contentType: false,
+            processData: false,  
+            dataType: "json",
+            success: function(respuesta) {
+                // console.log(respuesta);
 
-            if(!respuesta) {//Si la Respuesta = FALSE entonces...
-                //Mandamos una alerta diciendo que ya existe el usuario.
-                $("#verificarEmail").after('<div class="alert alert-danger mt-2">Correo inexistente</div>');
-                setTimeout(function () {
-                    $('.alert').remove();
-                }, 2000);
+                if(!respuesta) {//Si la Respuesta = FALSE entonces...
+                    //Mandamos una alerta diciendo que ya existe el usuario.
+                    $("#verificarEmail").after('<div class="alert alert-danger mt-2">Correo inexistente</div>');
+                    setTimeout(function () {
+                        $('.alert').remove();
+                    }, 2000);
+                    
+                    //E inmeditamente Limpiamos el input
+                    $("#verificarEmail").val("");
+                    
+                } else { //SI LA RESPUESTA ES TRUE ENTONCES...
+                    // console.log("bien")
+
+                    correoUsuario = respuesta.correo;
+                    idUsua = respuesta.id_usuario;
+                    nombreUsuario = respuesta.nombre;
                 
-                //E inmeditamente Limpiamos el input
-                $("#verificarEmail").val("");
+                    // console.log(correoUsuario, idUsua);
+
+                    var datos = new FormData();
+                    datos.append("correoUsuario", correoUsuario);
+                    datos.append("idUsua", idUsua);
+                    datos.append("nombreUsuario", nombreUsuario);
+
+                    Swal.fire({
+                        title: "Espere por favor...",
+                        heightAuto: false,
+                        showConfirmButton: false,
+                        allowOutsideClick: false
+                    })
+                    Swal.showLoading();
+
+                    $.ajax({
+
+                        url:"ajax/usuarios.ajax.php",
+                        method: "POST",
+                        data: datos,
+                        cache: false,
+                        contentType: false,
+                        processData: false,  
+                        dataType: "json",
+                        success: function(respuesta) {
+                            // console.log(respuesta)
+
+                            if(respuesta == true){                                             
+                                Swal.fire({
+                                    title: "Le enviamos un correo para recuperar su contraseña. Por favor revise.",
+                                    icon: "info",
+                                    heightAuto: false,
+                                    showConfirmButton: true,
+                                    confirmButtonText: "Cerrar",
+                                    allowOutsideClick: false
+                                }).then((result)=>{
                 
-            } else { //SI LA RESPUESTA ES TRUE ENTONCES...
-                // console.log("bien")
-
-                correoUsuario = respuesta.correo;
-                idUsua = respuesta.id_usuario;
-                nombreUsuario = respuesta.nombre;
-            
-                // console.log(correoUsuario, idUsua);
-
-                var datos = new FormData();
-                datos.append("correoUsuario", correoUsuario);
-                datos.append("idUsua", idUsua);
-                datos.append("nombreUsuario", nombreUsuario);
-
-                Swal.fire({
-                    title: "Espere por favor...",
-                    heightAuto: false,
-                    showConfirmButton: false,
-                    allowOutsideClick: false
-                })
-                Swal.showLoading();
-
-                $.ajax({
-
-                    url:"ajax/usuarios.ajax.php",
-                    method: "POST",
-                    data: datos,
-                    cache: false,
-                    contentType: false,
-                    processData: false,  
-                    dataType: "json",
-                    success: function(respuesta) {
-                        // console.log(respuesta)
-
-                        if(respuesta == true){                                             
-                            Swal.fire({
-								title: "Le enviamos un correo para recuperar su contraseña. Por favor revise.",
-								icon: "info",
-                                heightAuto: false,
-                                showConfirmButton: true,
-								confirmButtonText: "Cerrar",
-								allowOutsideClick: false
-							}).then((result)=>{
-			
-								if(result.value){
-			
-									window.location = "login";
-			
-								}
-			
-							});
+                                    if(result.value){
+                
+                                        window.location = "login";
+                
+                                    }
+                
+                                });
+                            }
                         }
-                    }
-                })
-            }
-           
+                    })
+                }
+            
 
-        }
-    })   
+            }
+        })   
+    }   
 })
 
 //VALIDACIONES PARA LUEGO CAMBIAR CONTRASEÑA CONTRASEÑA (CODIGO-CORREO)

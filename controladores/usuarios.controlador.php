@@ -667,7 +667,7 @@ class ControladorUsuarios{
 	}
 
 	/*=============================================
-		ENVIAR CORREO DE RECUPERAR CONTRASEÑA
+	REVISAR CODIGO Y FECHA PARA CAMBIAR CONTRASEÑA
 	=============================================*/	
     static public function ctrRevisarCodigoFecha(){
 
