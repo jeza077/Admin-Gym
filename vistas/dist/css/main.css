@@ -57,10 +57,15 @@ body.login-page .login-box.recu-password .card{
     margin-top: 3.5rem;
 }
 
-/* NOTIFICACIONES */
+/* NOTIFICACIONES Y OTROS */
 .alert {
     transition: 0.5s ease;
 }
+.badge-orange{
+    background-color: var(--orangeThird);
+    color: #fff;
+}
+
 
 /* VALIDAR CONTRASEÑA */
 .valid{
@@ -169,7 +174,9 @@ i.show-pass{
 
 
 .login-card-body .input-group .form-control{
+    border-left: 0;
     border-right: 1px solid #ced4da;
+    padding-left: 3px;
 }
 .login-card-body form .btn{
     border-radius: 2px;
@@ -240,7 +247,8 @@ i.show-pass{
 .login-box.active.quest.changePassword .card{
     height: 580px;
 }
-/* BARRA O HEADER*/
+
+/****** BARRA O HEADER *****/
 .navbar-nav{
     align-items: center;
 }
@@ -262,6 +270,15 @@ i.show-pass{
     background:#212529!important;
     color: #C2C7D0;
 }
+.navbar-nav>.user-menu>.dropdown-menu>.user-footer .btn-default:hover{
+    background-color: var(--orangeThird);
+    color: #fff;
+    border: var(--orangeThird) solid;
+    position: absolute;
+    left: 9px;
+    width: 260px;
+    transition: linear 0.2s;
+}
 
 .dropdown-menu.show a{
     transition: 0.2s;
@@ -271,7 +288,7 @@ i.show-pass{
     color: #fff;
 }
 
-/* SIDEBAR */
+/***** SIDEBAR ******/
 .main-sidebar{
     position: fixed!important;
     background-color: var(--darkFirst);

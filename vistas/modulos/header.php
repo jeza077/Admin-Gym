@@ -57,7 +57,7 @@
         <li class="nav-item mr-4">
           <a class="nav-link" href="agregar-persona">
             <i class="fas fa-user mr-1"></i>
-            <span class="badge badge-warning navbar-badge"><i class="fas fa-plus"></i></span>
+            <span class="badge badge-orange navbar-badge"><i class="fas fa-plus"></i></span>
             <!-- <span class="hidden-xs">Agregar persona</span> -->
           </a>
         </li>
@@ -91,7 +91,7 @@
             <!-- Menu Footer-->
             <li class="user-footer">
               <div class="float-left">
-                <a href="perfil" class="btn btn-default btn-flat">Profile</a>
+                <a href="perfil" class="btn btn-default btn-flat">Perfil</a>
               </div>
               <div class="float-right">
                 <a href="salir" class="btn btn-default btn-flat">Salir</a>
