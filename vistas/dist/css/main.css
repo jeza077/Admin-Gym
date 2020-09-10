@@ -23,6 +23,9 @@ body::-webkit-scrollbar-thumb{
     border-radius: 5px;
     border-right: 1px solid gainsboro;
 }
+.text-orange {
+    color: var(--orangeThird);
+}
 .btn-orange {
     background-color: var(--btnPrimario);
     color: #fff;
@@ -296,12 +299,14 @@ i.show-pass{
 .nav-link.active {
     background: var(--orangeThird)!important;
     color: #fff;
+    /* border-radius: 0.6em; */
 }
     /* .nav-link.menu-lateral{
         transition: 0.3s;
     } */
 .nav-link.menu-lateral:hover{
     background: var(--orangeThird)!important;
+    /* border-radius: 0.6em; */
 }
 /* .nav-treeview>.nav-item>.nav-link.active{
     background: #d7dce4 !important;

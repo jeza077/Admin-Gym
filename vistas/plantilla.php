@@ -126,9 +126,9 @@
         } 
         else {
 
-          echo '<body class="hold-transition sidebar-mini">';
+          echo '<body class="hold-transition login-page sidebar-mini">';
           
-          include "modulos/404.php";
+          include "modulos/login.php";
 
         }
 
