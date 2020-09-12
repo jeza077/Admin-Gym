@@ -639,7 +639,7 @@ class ControladorUsuarios{
             $mail->Host = 'smtp.gmail.com';  //gmail SMTP server
             $mail->SMTPAuth = true;
             $mail->Username = 'jesus.zuniga077@gmail.com';   //username
-            $mail->Password = 'J35us#077.';   //password
+            $mail->Password = '';   //password
 			$mail->SMTPSecure = 'tls';
             $mail->Port = 587;     
 			// $mail->SMTPSecure = 'ssl';
