@@ -57,8 +57,6 @@ class ControladorUsuarios{
 
 				$encriptar = crypt($_POST["ingPassword"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
 
-				$_SESSION['contadorLogin'] = 0;
-
 				$tabla1 = "personas";
 				$tabla2 = "empleados";
 				
@@ -132,9 +130,11 @@ class ControladorUsuarios{
 			
 							//INTENTOS DE LOGUEARSE PERMITIDOS SOLO 3 AL REBASARLOS SE DESACTIVARA EL USUARIO INGRESADO AUTOMATICAMENTE.
 							$intentos = 3;
-							$_SESSION['contadorLogin'] = $_SESSION['contadorLogin'] + 1; 
+							$_SESSION['contadorLogin']++; 
 
-							$intentos = $intentos - ($_SESSION['contadorLogin']);
+							$intentos = $intentos - $_SESSION['contadorLogin'];
+							
+							// echo $_SESSION['contadorLogin'];
 
 							if($_SESSION['contadorLogin'] === 3) {
 								$tabla1 = "personas";
@@ -159,7 +159,6 @@ class ControladorUsuarios{
 									$respuestaEstado = ModeloUsuarios::mdlActualizarUsuario($tabla, $item1, $valor1, $item2, $valor2, $item3, $valor3);
 
 									if($respuestaEstado == true){
-										// echo '<br><div class="alert alert-danger">¡Lo sentimos! Su usuario ha sido desactivado, comuniquese con el Administrador</div>';
 										
 										echo '<script>			
 												Swal.fire({
@@ -167,6 +166,10 @@ class ControladorUsuarios{
 													icon: "error",
 													heightAuto: false,
 													allowOutsideClick: false
+												}).then((result)=>{
+													if(result.value){
+														window.location = "login";
+													}
 												});
 											</script>';
 
@@ -191,16 +194,16 @@ class ControladorUsuarios{
 							}
 					}
 					
-				} else {			
-					
-					echo '<script>			
-						Swal.fire({
-							title: "Usuario/contraseña incorrectos! Intente de nuevo.",
-							icon: "error",
-							heightAuto: false,
-							allowOutsideClick: false
-						});
-					</script>';
+			} else {			
+				
+				echo '<script>			
+					Swal.fire({
+						title: "Usuario/contraseña incorrectos! Intente de nuevo.",
+						icon: "error",
+						heightAuto: false,
+						allowOutsideClick: false
+					});
+				</script>';
 			
 				
 			}
