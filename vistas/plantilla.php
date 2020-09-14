@@ -17,6 +17,9 @@
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- overlayScrollbars -->
   <link rel="stylesheet" href="vistas/dist/css/adminlte.min.css">
+  <!-- DataTables -->
+  <link rel="stylesheet" href="vistas/plugins/datatables/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="vistas/plugins/datatables/css/responsive.bootstrap4.min.css">
   <!-- SweetAlert2 CDN -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
   <!-- Css propio -->
@@ -152,6 +155,11 @@
 <!-- InputMask -->
 <script src="vistas/plugins/moment/moment.min.js"></script>
 <script src="vistas/plugins/inputmask/jquery.inputmask.bundle.min.js"></script>
+<!-- DataTables -->
+<script src="vistas/plugins/datatables/js/jquery.dataTables.min.js"></script>
+<script src="vistas/plugins/datatables/js/dataTables.bootstrap4.min.js"></script>
+<script src="vistas/plugins/datatables/js/dataTables.responsive.min.js"></script>
+<script src="vistas/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
 <!-- AdminLTE App -->
 <script src="vistas/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->

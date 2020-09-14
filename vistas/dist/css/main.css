@@ -32,6 +32,10 @@ body::-webkit-scrollbar-thumb{
     border-color: var(--btnPrimario);
     box-shadow: none;
 }
+.btn-orange:hover {
+    background: var(--btnPrimarioHover);
+    color: #fff;
+}
 .login-page {
     background: rgb(255, 158, 30);
     color: white;
