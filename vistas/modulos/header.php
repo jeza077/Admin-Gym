@@ -20,15 +20,34 @@
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
-      <!-- <li class="nav-item dropdown mr-4">
+      <li class="nav-item dropdown mr-4">
 
         <a class="nav-link" data-toggle="dropdown" href="#">
           <i class="fas fa-user mr-1"></i>
           <span class="badge badge-warning navbar-badge"><i class="fas fa-plus"></i></span>
         </a>
         
-        <div class="dropdown-menu dropdown-menu-md dropdown-menu-right" style="min-width:200px">
-          <a href="#" class="dropdown-item">
+        <div class="dropdown-menu dropdown-menu-md dropdown-menu-right accesos-rapidos" style="min-width:200px">
+
+        <!-- <div class="row text-center">
+          <div class="col-6">
+            <a href="#">Prueba</a>
+          </div>
+          <div class="col-6">
+            <a href="#">Prueba</a>
+          </div>
+        </div>
+        
+        <div class="row text-center">
+          <div class="col-6">
+            <a href="#">Prueba</a>
+          </div>
+          <div class="col-6">
+            <a href="#">Prueba</a>
+          </div>
+        </div> -->
+
+          <!-- <a href="#" class="dropdown-item">
             <div class="media">
                   <i class="fas fa-users"></i>
               <div class="media-body">
@@ -50,9 +69,9 @@
                 </h3>
               </div>
             </div>
-          </a>
+          </a> -->
         </div>
-      </li> -->
+      </li>
 
         <li class="nav-item mr-4">
           <a class="nav-link" href="agregar-persona">

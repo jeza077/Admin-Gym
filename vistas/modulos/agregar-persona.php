@@ -8,12 +8,12 @@
           <div class="col-sm-6">
             <h1>Registrar Personas</h1>
           </div>
-          <div class="col-sm-6">
+          <!-- <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Registra personas</a></li>
               <li class="breadcrumb-item active">Tablero</li>
             </ol>
-          </div>
+          </div> -->
         </div>
       </div><!-- /.container-fluid -->
     </section>
@@ -23,7 +23,7 @@
     
       <form role="form" method="post" class="formulario" enctype="multipart/form-data">
       <!-- Default box -->
-      <div class="card">
+      <div class="card agregar-persona">
         
         <div class="card-body contenedor agregarPersona">
           <div class="form-row">
