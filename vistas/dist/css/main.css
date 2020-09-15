@@ -297,7 +297,17 @@ i.show-pass{
     min-width: 300px!important;
     min-height: 250px;
 }
-.navbar-expand .navbar-nav .dropdown-menu.accesos-rapidos 
+.navbar-expand .navbar-nav .dropdown-menu.accesos-rapidos>.row {
+    /* margin: 15px 10px 25px 25px; */
+    width: 100%;
+    height: 50%;
+}
+.navbar-expand .navbar-nav .dropdown-menu.accesos-rapidos>.row a{
+    width: 100%;
+    height: 100%;
+    border: #23211e solid 1px;
+    padding: 10px 30px;
+}
 .dropdown-menu.show{
     top: 38px;
     right: 12px!important;

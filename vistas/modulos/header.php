@@ -29,7 +29,7 @@
         
         <div class="dropdown-menu dropdown-menu-md dropdown-menu-right accesos-rapidos" style="min-width:200px">
 
-        <!-- <div class="row text-center">
+        <div class="row text-center">
           <div class="col-6">
             <a href="#">Prueba</a>
           </div>
@@ -45,7 +45,7 @@
           <div class="col-6">
             <a href="#">Prueba</a>
           </div>
-        </div> -->
+        </div>
 
           <!-- <a href="#" class="dropdown-item">
             <div class="media">
