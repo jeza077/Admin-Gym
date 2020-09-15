@@ -27,7 +27,7 @@ body::-webkit-scrollbar-thumb{
     color: var(--orangeThird);
 }
 .btn-orange {
-    background-color: var(--btnPrimario);
+    background-color: var(--orangeThird);
     color: #fff;
     border-color: var(--btnPrimario);
     box-shadow: none;

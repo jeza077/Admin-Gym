@@ -20,7 +20,7 @@
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
-      <li class="nav-item dropdown mr-4">
+      <!-- <li class="nav-item dropdown mr-4">
 
         <a class="nav-link" data-toggle="dropdown" href="#">
           <i class="fas fa-user mr-1"></i>
@@ -45,7 +45,7 @@
           <div class="col-6">
             <a href="#">Prueba</a>
           </div>
-        </div>
+        </div> -->
 
           <!-- <a href="#" class="dropdown-item">
             <div class="media">
@@ -70,8 +70,8 @@
               </div>
             </div>
           </a> -->
-        </div>
-      </li>
+        <!-- </div>
+      </li> -->
 
         <li class="nav-item mr-4">
           <a class="nav-link" href="agregar-persona">
