@@ -41,6 +41,13 @@
                 // $valor2 = "Administrador";
 
                 // $modulos = ControladorUsuarios::ctrMostrarUsuarioModulo($item1, $item2, $valor1, $valor2);
+
+                $user_os        =   ControladorGlobales::getOS();
+                $user_browser   =   ControladorGlobales::getBrowser();
+                $device_details =   "<strong>Browser: </strong>" . $user_browser . 
+                                    "<br /><strong>Operating System: </strong>" . $user_os;
+                print_r($device_details);
+                echo("<br /><br /><br />" . $_SERVER['HTTP_USER_AGENT']);
             
           ?>
 
