@@ -1,8 +1,10 @@
 <?php
 error_reporting(E_ALL & ~E_NOTICE);
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
+
 class ControladorUsuarios{
 
 	/*=============================================
@@ -220,236 +222,393 @@ class ControladorUsuarios{
 			REGISTRO DE PERSONAS
 	=============================================*/
 
-	static public function ctrCrearUsuario(){
+	static public function ctrCrearUsuario($datos){
 
-		if(isset($_POST["nuevoNombre"])){
+		if(isset($datos["usuario"])){
 
-			if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevoNombre"])){
+			if(preg_match('/^[A-Z0-9]+$/', $datos["usuario"]) &&
+			   preg_match('/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%.])\S{8,16}$/', $datos["password"])){
 
-				$tabla1 = "personas";
+					/*=============================================
+							VALIDAR IMAGEN
+					=============================================*/
 
-				$datos = array("nombre" => $_POST["nuevoNombre"],
-							   "apellido" => $_POST["nuevoApellido"],
-							   "identidad" => $_POST["nuevaIdentidad"],
-							   "fecha_nacimiento" => $_POST["nuevaFechaNacimiento"],
-							   "sexo" => $_POST["nuevoSexo"],
-							   "telefono" => $_POST["nuevoTelefono"],
-							   "direccion" => $_POST["nuevaDireccion"],
-							   "email" => $_POST["nuevoEmail"]);
+					$ruta = "";
 
-				$respuestaPersona = ModeloUsuarios::mdlIngresarPersona($tabla1, $datos);
-				
-					if($respuestaPersona == true){
+					if(isset($datos["foto"]["tmp_name"])){
 
-						$totalId = array();
+						list($ancho, $alto) = getimagesize($datos["foto"]["tmp_name"]);
 
-						$tabla2 = null;
-						$item = null;
-						$valor = null;
+						$nuevoAncho = 500;
+						$nuevoAlto = 500;
 
-						$personasTotal = ModeloUsuarios::mdlMostrarUsuarios($tabla1, $tabla2, $item, $valor);
+						/*==============================================================
+						CREAMOS EL DIRECTORIO DONDE VAMOS A GUARDAR LA FOTO DEL USUARIO
+						===============================================================*/
 
-						foreach($personasTotal as $keyPersonas => $valuePersonas){
-							array_push($totalId, $valuePersonas["id"]);
-						}
+						$directorio = "vistas/img/usuarios/".$_POST["nuevoUsuario"];
 
-						$idPersona = end($totalId);
+						mkdir($directorio, 0755); 
 
-						if(isset($_POST["nuevoTipoPersona"]) && $_POST["nuevoTipoPersona"]  == "empleado"){
+						/*=====================================================================
+						DE ACUERDO AL TIPO DE IMAGEN APLICAMOS LAS FUNCIONES POR DEFECTO DE PHP
+						======================================================================*/
 
-							$tabla2 = "empleados";
-
-							if(preg_match('/^[A-Z0-9]+$/', $_POST["nuevoUsuario"]) &&
-								preg_match('/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%.])\S{8,16}$/', $_POST["nuevoPassword"])){
+						if($datos["foto"]["type"] == "image/jpeg"){
 
 							/*=============================================
-									VALIDAR IMAGEN
+							GUARDAMOS LA IMAGEN EN EL DIRECTORIO
 							=============================================*/
 
-								$ruta = "";
+							$aleatorio = mt_rand(100,999);
 
-								if(isset($_FILES["nuevaFoto"]["tmp_name"])){
+							$ruta = "vistas/img/usuarios/".$_POST["nuevoUsuario"]."/".$aleatorio.".jpg";
 
-									list($ancho, $alto) = getimagesize($_FILES["nuevaFoto"]["tmp_name"]);
+							$origen = imagecreatefromjpeg($datos["foto"]["tmp_name"]);
 
-									$nuevoAncho = 500;
-									$nuevoAlto = 500;
+							$destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
 
-									/*==============================================================
-									CREAMOS EL DIRECTORIO DONDE VAMOS A GUARDAR LA FOTO DEL USUARIO
-									===============================================================*/
+							imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
 
-									$directorio = "vistas/img/usuarios/".$_POST["nuevoUsuario"];
-
-									mkdir($directorio, 0755); 
-
-									/*=====================================================================
-									DE ACUERDO AL TIPO DE IMAGEN APLICAMOS LAS FUNCIONES POR DEFECTO DE PHP
-									======================================================================*/
-
-									if($_FILES["nuevaFoto"]["type"] == "image/jpeg"){
-
-										/*=============================================
-										GUARDAMOS LA IMAGEN EN EL DIRECTORIO
-										=============================================*/
-
-										$aleatorio = mt_rand(100,999);
-
-										$ruta = "vistas/img/usuarios/".$_POST["nuevoUsuario"]."/".$aleatorio.".jpg";
-
-										$origen = imagecreatefromjpeg($_FILES["nuevaFoto"]["tmp_name"]);
-
-										$destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
-
-										imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
-
-										imagejpeg($destino, $ruta);
-
-									}
-
-									if($_FILES["nuevaFoto"]["type"] == "image/png"){
-
-										/*=============================================
-										GUARDAMOS LA IMAGEN EN EL DIRECTORIO
-										=============================================*/
-
-										$aleatorio = mt_rand(100,999);
-
-										$ruta = "vistas/img/usuarios/".$_POST["nuevoUsuario"]."/".$aleatorio.".png";
-
-										$origen = imagecreatefrompng($_FILES["nuevaFoto"]["tmp_name"]);
-
-										$destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
-
-										imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
-
-										imagepng($destino, $ruta);
-
-									}
-
-								}
-							
-
-								/*================== ENCRIPTAMOS LA CONTRASEÑA ===================*/
-								$encriptar = crypt($_POST["nuevoPassword"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
-
-								$datos = array("id_persona" => $idPersona,
-											"usuario" => $_POST["nuevoUsuario"],
-											"password" => $encriptar,
-											"rol" => $_POST["nuevoRol"],
-											"foto" => $ruta);
-
-								$respuestaEmpleado = ModeloUsuarios::mdlIngresarUsuarioEmpleado($tabla2, $datos);
-
-								if($respuestaEmpleado = true){
-										
-									$totalIdUsuarios = array();
-
-									$tabla1 = "empleados";
-									$tabla2 = null;
-									$item = null;
-									$valor = null;
-
-									$usuariosTotal = ModeloUsuarios::mdlMostrarUsuarios($tabla1, $tabla2, $item, $valor);
-
-									foreach($usuariosTotal as $keyUsuarios => $valueUsuarios){
-										array_push($totalIdUsuarios, $valueUsuarios["id"]);
-									}
-
-									$idUsuario = end($totalIdUsuarios);
-
-									$tabla3 = "usuario_pregunta";
-									
-									$datos = array("idUsuario" => $idUsuario,
-												   "idPregunta" => $_POST["nuevaPregunta"],
-												   "respuesta" => $_POST["respuestaPregunta"]);
-
-												   
-									$respuestaPreguntas = ModeloUsuarios::mdlIngresarPreguntaUsuario($tabla3, $datos);
-
-									if($respuestaPreguntas == true){
-										echo '<script>
-											Swal.fire({
-												title: "Empleado guardado correctamente!",
-												icon: "success"
-											})
-									
-										</script>';
-									}
-
-
-								}
-							} else {
-
-								echo "<script>
-								Swal.fire({
-										icon: 'error',
-										title: '¡Llenar campos correctamente!',
-									})
-								</script>";
-
-							}
-
-						} else {
-							$tabla4 = "clientes";
-							
-							$datos = array("id_persona" => $idPersona);
-
-							$respuestaCliente = ModeloUsuarios::mdlIngresarCliente($tabla4, $datos);
-
-							if($respuestaCliente = true){
-										
-								echo '<script>
-									Swal.fire({
-										title: "Cliente guardado correctamente!",
-										icon: "success"
-									})
-							
-								</script>';
-
-							}
+							imagejpeg($destino, $ruta);
 
 						}
 
-					} else {
-						echo '<script>
-						Swal.fire(
-							"Error!",
-							"error"
-						)
-				
-					</script>';
+						if($datos["foto"]["type"] == "image/png"){
+
+							/*=============================================
+							GUARDAMOS LA IMAGEN EN EL DIRECTORIO
+							=============================================*/
+
+							$aleatorio = mt_rand(100,999);
+
+							$ruta = "vistas/img/usuarios/".$_POST["nuevoUsuario"]."/".$aleatorio.".png";
+
+							$origen = imagecreatefrompng($datos["foto"]["tmp_name"]);
+
+							$destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+
+							imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+
+							imagepng($destino, $ruta);
+
+						}
+
 					}
+								
+						/*================== ENCRIPTAMOS LA CONTRASEÑA ===================*/
+						$encriptar = crypt($datos["password"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
+
+						$tabla = "empleados";
+						$datos = array("id_persona" => $datos["id_persona"],
+									   "usuario" => $datos["usuario"],
+									   "password" => $encriptar,
+									   "rol" => $datos["rol"],
+									   "foto" => $ruta);
+
+						$respuestaEmpleado = ModeloUsuarios::mdlIngresarUsuarioEmpleado($tabla, $datos);
+
+						if($respuestaEmpleado = true){
+
+							return true;
+								
+							$totalIdUsuarios = array();
+
+							$tabla1 = "empleados";
+							$tabla2 = null;
+							$item = null;
+							$valor = null;
+
+							$usuariosTotal = ModeloUsuarios::mdlMostrarUsuarios($tabla1, $tabla2, $item, $valor);
+
+							foreach($usuariosTotal as $keyUsuarios => $valueUsuarios){
+								array_push($totalIdUsuarios, $valueUsuarios["id"]);
+							}
+
+							$idUsuario = end($totalIdUsuarios);
+
+							$tabla3 = "usuario_pregunta";
+							
+							$datos = array("idUsuario" => $idUsuario,
+											"idPregunta" => $_POST["nuevaPregunta"],
+											"respuesta" => $_POST["respuestaPregunta"]);
+
+											
+							$respuestaPreguntas = ModeloUsuarios::mdlIngresarPreguntaUsuario($tabla3, $datos);
+
+							if($respuestaPreguntas == true){
+								echo '<script>
+									Swal.fire({
+										title: "Empleado guardado correctamente!",
+										icon: "success"
+									})							
+								</script>';
+							}
+						} else {
+							return false;
+						}
 
 
-			}else{
+				} else {
+
+					echo "<script>
+						Swal.fire({
+								icon: 'error',
+								title: '¡Llenar campos correctamente!',
+							})
+						</script>";
+
+				}
+
+						
+
+		} else{
 
 				echo "<script>
-					Swal.fire({
-						icon: 'error',
-						title: '¡Llenar campos correctamente!',
-					})
-				</script>";
-
-						// swal({
-						// 	type: "error",
-						// 	title: "¡Llenar campos correctamente!",
-						// 	showConfirmButton: true,
-						// 	confirmButtonText: "Cerrar",
-						// 	closeOnConfirm: false
-						// }).then((result)=>{
-						// 	if(result.value){
-						// 		window.location = "inicio";
-						// 	}
-						// });
-
-			}
-
+						Swal.fire({
+							icon: 'error',
+							title: '¡Llenar campos correctamente!',
+						})
+					</script>";
 
 		}
 
 
 	}
+
+
+
+
+	// static public function ctrCrearUsuario(){
+
+	// 	if(isset($_POST["nuevoNombre"])){
+
+	// 		if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevoNombre"])){
+
+	// 			$tabla1 = "personas";
+
+	// 			$datos = array("nombre" => $_POST["nuevoNombre"],
+	// 						   "apellido" => $_POST["nuevoApellido"],
+	// 						   "identidad" => $_POST["nuevaIdentidad"],
+	// 						   "fecha_nacimiento" => $_POST["nuevaFechaNacimiento"],
+	// 						   "sexo" => $_POST["nuevoSexo"],
+	// 						   "telefono" => $_POST["nuevoTelefono"],
+	// 						   "direccion" => $_POST["nuevaDireccion"],
+	// 						   "email" => $_POST["nuevoEmail"]);
+
+	// 			$respuestaPersona = ModeloUsuarios::mdlIngresarPersona($tabla1, $datos);
+				
+	// 				if($respuestaPersona == true){
+
+	// 					$totalId = array();
+
+	// 					$tabla2 = null;
+	// 					$item = null;
+	// 					$valor = null;
+
+	// 					$personasTotal = ModeloUsuarios::mdlMostrarUsuarios($tabla1, $tabla2, $item, $valor);
+
+	// 					foreach($personasTotal as $keyPersonas => $valuePersonas){
+	// 						array_push($totalId, $valuePersonas["id"]);
+	// 					}
+
+	// 					$idPersona = end($totalId);
+
+	// 					if(isset($_POST["nuevoTipoPersona"]) && $_POST["nuevoTipoPersona"]  == "empleado"){
+
+	// 						$tabla2 = "empleados";
+
+	// 						if(preg_match('/^[A-Z0-9]+$/', $_POST["nuevoUsuario"]) &&
+	// 							preg_match('/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%.])\S{8,16}$/', $_POST["nuevoPassword"])){
+
+	// 						/*=============================================
+	// 								VALIDAR IMAGEN
+	// 						=============================================*/
+
+	// 							$ruta = "";
+
+	// 							if(isset($_FILES["nuevaFoto"]["tmp_name"])){
+
+	// 								list($ancho, $alto) = getimagesize($_FILES["nuevaFoto"]["tmp_name"]);
+
+	// 								$nuevoAncho = 500;
+	// 								$nuevoAlto = 500;
+
+	// 								/*==============================================================
+	// 								CREAMOS EL DIRECTORIO DONDE VAMOS A GUARDAR LA FOTO DEL USUARIO
+	// 								===============================================================*/
+
+	// 								$directorio = "vistas/img/usuarios/".$_POST["nuevoUsuario"];
+
+	// 								mkdir($directorio, 0755); 
+
+	// 								/*=====================================================================
+	// 								DE ACUERDO AL TIPO DE IMAGEN APLICAMOS LAS FUNCIONES POR DEFECTO DE PHP
+	// 								======================================================================*/
+
+	// 								if($_FILES["nuevaFoto"]["type"] == "image/jpeg"){
+
+	// 									/*=============================================
+	// 									GUARDAMOS LA IMAGEN EN EL DIRECTORIO
+	// 									=============================================*/
+
+	// 									$aleatorio = mt_rand(100,999);
+
+	// 									$ruta = "vistas/img/usuarios/".$_POST["nuevoUsuario"]."/".$aleatorio.".jpg";
+
+	// 									$origen = imagecreatefromjpeg($_FILES["nuevaFoto"]["tmp_name"]);
+
+	// 									$destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+
+	// 									imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+
+	// 									imagejpeg($destino, $ruta);
+
+	// 								}
+
+	// 								if($_FILES["nuevaFoto"]["type"] == "image/png"){
+
+	// 									/*=============================================
+	// 									GUARDAMOS LA IMAGEN EN EL DIRECTORIO
+	// 									=============================================*/
+
+	// 									$aleatorio = mt_rand(100,999);
+
+	// 									$ruta = "vistas/img/usuarios/".$_POST["nuevoUsuario"]."/".$aleatorio.".png";
+
+	// 									$origen = imagecreatefrompng($_FILES["nuevaFoto"]["tmp_name"]);
+
+	// 									$destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+
+	// 									imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+
+	// 									imagepng($destino, $ruta);
+
+	// 								}
+
+	// 							}
+							
+
+	// 							/*================== ENCRIPTAMOS LA CONTRASEÑA ===================*/
+	// 							$encriptar = crypt($_POST["nuevoPassword"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
+
+	// 							$datos = array("id_persona" => $idPersona,
+	// 										"usuario" => $_POST["nuevoUsuario"],
+	// 										"password" => $encriptar,
+	// 										"rol" => $_POST["nuevoRol"],
+	// 										"foto" => $ruta);
+
+	// 							$respuestaEmpleado = ModeloUsuarios::mdlIngresarUsuarioEmpleado($tabla2, $datos);
+
+	// 							if($respuestaEmpleado = true){
+										
+	// 								$totalIdUsuarios = array();
+
+	// 								$tabla1 = "empleados";
+	// 								$tabla2 = null;
+	// 								$item = null;
+	// 								$valor = null;
+
+	// 								$usuariosTotal = ModeloUsuarios::mdlMostrarUsuarios($tabla1, $tabla2, $item, $valor);
+
+	// 								foreach($usuariosTotal as $keyUsuarios => $valueUsuarios){
+	// 									array_push($totalIdUsuarios, $valueUsuarios["id"]);
+	// 								}
+
+	// 								$idUsuario = end($totalIdUsuarios);
+
+	// 								$tabla3 = "usuario_pregunta";
+									
+	// 								$datos = array("idUsuario" => $idUsuario,
+	// 											   "idPregunta" => $_POST["nuevaPregunta"],
+	// 											   "respuesta" => $_POST["respuestaPregunta"]);
+
+												   
+	// 								$respuestaPreguntas = ModeloUsuarios::mdlIngresarPreguntaUsuario($tabla3, $datos);
+
+	// 								if($respuestaPreguntas == true){
+	// 									echo '<script>
+	// 										Swal.fire({
+	// 											title: "Empleado guardado correctamente!",
+	// 											icon: "success"
+	// 										})
+									
+	// 									</script>';
+	// 								}
+
+
+	// 							}
+	// 						} else {
+
+	// 							echo "<script>
+	// 							Swal.fire({
+	// 									icon: 'error',
+	// 									title: '¡Llenar campos correctamente!',
+	// 								})
+	// 							</script>";
+
+	// 						}
+
+	// 					} else {
+	// 						$tabla4 = "clientes";
+							
+	// 						$datos = array("id_persona" => $idPersona);
+
+	// 						$respuestaCliente = ModeloUsuarios::mdlIngresarCliente($tabla4, $datos);
+
+	// 						if($respuestaCliente = true){
+										
+	// 							echo '<script>
+	// 								Swal.fire({
+	// 									title: "Cliente guardado correctamente!",
+	// 									icon: "success"
+	// 								})
+							
+	// 							</script>';
+
+	// 						}
+
+	// 					}
+
+	// 				} else {
+	// 					echo '<script>
+	// 					Swal.fire(
+	// 						"Error!",
+	// 						"error"
+	// 					)
+				
+	// 				</script>';
+	// 				}
+
+
+	// 		}else{
+
+	// 			echo "<script>
+	// 				Swal.fire({
+	// 					icon: 'error',
+	// 					title: '¡Llenar campos correctamente!',
+	// 				})
+	// 			</script>";
+
+	// 					// swal({
+	// 					// 	type: "error",
+	// 					// 	title: "¡Llenar campos correctamente!",
+	// 					// 	showConfirmButton: true,
+	// 					// 	confirmButtonText: "Cerrar",
+	// 					// 	closeOnConfirm: false
+	// 					// }).then((result)=>{
+	// 					// 	if(result.value){
+	// 					// 		window.location = "inicio";
+	// 					// 	}
+	// 					// });
+
+	// 		}
+
+
+	// 	}
+
+
+	// }
 
 	/*=============================================
                 MOSTRAR PREGUNTAS

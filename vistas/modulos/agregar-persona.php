@@ -89,7 +89,7 @@
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="">Usuario</label>
-              <input type="text" class="form-control" onKeyUp="this.value=this.value.toUpperCase();" name="nuevoUsuario" placeholder="Ingrese Usuario" required>
+              <input type="text" class="form-control" onKeyUp="this.value=this.value.toUpperCase();" name="nuevoUsuario" placeholder="Ingrese Usuario">
             </div>
             <div class="form-group col-md-6">
               <label>Rol</label>
@@ -113,7 +113,7 @@
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="inputPassword4">Password</label>
-              <input type="password" class="form-control" id="inputPassword4" name="nuevoPassword" placeholder="Ingrese Contraseña" required>
+              <input type="password" class="form-control" id="inputPassword4" name="nuevoPassword" placeholder="Ingrese Contraseña">
             </div>
             <div class="form-group col-md-6">
               <label for="inputPassword4">Confirmar Password</label>
@@ -125,7 +125,7 @@
             for ($i=1; $i <=3 ; $i++) { ?>
             <div class="form-group col-md-4">
               <label for="inputPassword4">Pregunta <?php echo $i?></label>
-              <select class="form-control select2" name="nuevaPregunta[]" required>
+              <select class="form-control select2" name="nuevaPregunta[]">
               <option selected="selected">Seleccionar...</option>
               <?php 
                       $tabla = "preguntas";
@@ -149,15 +149,15 @@
           <div class="form row">
             <div class="form-group col-md-4">
               <label for="inputPassword4">Respuesta 1</label>
-              <input type="text" class="form-control" onKeyUp="this.value=this.value.toLowerCase();" name="respuestaPregunta[]" required>
+              <input type="text" class="form-control" onKeyUp="this.value=this.value.toLowerCase();" name="respuestaPregunta[]">
             </div>
             <div class="form-group col-md-4">
               <label for="inputPassword4">Respuesta 2</label>
-              <input type="text" class="form-control" onKeyUp="this.value=this.value.toLowerCase();" name="respuestaPregunta[]" required>
+              <input type="text" class="form-control" onKeyUp="this.value=this.value.toLowerCase();" name="respuestaPregunta[]">
             </div>
             <div class="form-group col-md-4">
               <label for="inputPassword4">Respuesta 3</label>
-              <input type="text" class="form-control" onKeyUp="this.value=this.value.toLowerCase();" name="respuestaPregunta[]" required>
+              <input type="text" class="form-control" onKeyUp="this.value=this.value.toLowerCase();" name="respuestaPregunta[]">
             </div>
           </div>
           
@@ -189,11 +189,11 @@
         
       </div>
       <!-- /.card -->
-      </form>
       <?php
-        $ingresarPersona = new ControladorUsuarios();
-        $ingresarPersona->ctrCrearUsuario();
+        $ingresarPersona = new ControladorPersonas();
+        $ingresarPersona->ctrCrearPersona();
       ?>
+      </form>
 
     </section>
     <!-- /.content -->
