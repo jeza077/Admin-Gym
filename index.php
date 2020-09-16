@@ -3,9 +3,9 @@
 date_default_timezone_set("America/Tegucigalpa");
 
 require_once "controladores/plantilla.controlador.php";
-require_once "controladores/globales.controlador.php";
 require_once "controladores/personas.controlador.php";
 require_once "controladores/usuarios.controlador.php";
+require_once "controladores/globales.controlador.php";
 require_once "controladores/categorias.controlador.php";
 require_once "controladores/productos.controlador.php";
 require_once "controladores/clientes.controlador.php";

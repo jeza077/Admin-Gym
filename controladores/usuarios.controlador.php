@@ -377,239 +377,6 @@ class ControladorUsuarios{
 	}
 
 
-
-
-	// static public function ctrCrearUsuario(){
-
-	// 	if(isset($_POST["nuevoNombre"])){
-
-	// 		if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevoNombre"])){
-
-	// 			$tabla1 = "personas";
-
-	// 			$datos = array("nombre" => $_POST["nuevoNombre"],
-	// 						   "apellido" => $_POST["nuevoApellido"],
-	// 						   "identidad" => $_POST["nuevaIdentidad"],
-	// 						   "fecha_nacimiento" => $_POST["nuevaFechaNacimiento"],
-	// 						   "sexo" => $_POST["nuevoSexo"],
-	// 						   "telefono" => $_POST["nuevoTelefono"],
-	// 						   "direccion" => $_POST["nuevaDireccion"],
-	// 						   "email" => $_POST["nuevoEmail"]);
-
-	// 			$respuestaPersona = ModeloUsuarios::mdlIngresarPersona($tabla1, $datos);
-				
-	// 				if($respuestaPersona == true){
-
-	// 					$totalId = array();
-
-	// 					$tabla2 = null;
-	// 					$item = null;
-	// 					$valor = null;
-
-	// 					$personasTotal = ModeloUsuarios::mdlMostrarUsuarios($tabla1, $tabla2, $item, $valor);
-
-	// 					foreach($personasTotal as $keyPersonas => $valuePersonas){
-	// 						array_push($totalId, $valuePersonas["id"]);
-	// 					}
-
-	// 					$idPersona = end($totalId);
-
-	// 					if(isset($_POST["nuevoTipoPersona"]) && $_POST["nuevoTipoPersona"]  == "empleado"){
-
-	// 						$tabla2 = "empleados";
-
-	// 						if(preg_match('/^[A-Z0-9]+$/', $_POST["nuevoUsuario"]) &&
-	// 							preg_match('/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%.])\S{8,16}$/', $_POST["nuevoPassword"])){
-
-	// 						/*=============================================
-	// 								VALIDAR IMAGEN
-	// 						=============================================*/
-
-	// 							$ruta = "";
-
-	// 							if(isset($_FILES["nuevaFoto"]["tmp_name"])){
-
-	// 								list($ancho, $alto) = getimagesize($_FILES["nuevaFoto"]["tmp_name"]);
-
-	// 								$nuevoAncho = 500;
-	// 								$nuevoAlto = 500;
-
-	// 								/*==============================================================
-	// 								CREAMOS EL DIRECTORIO DONDE VAMOS A GUARDAR LA FOTO DEL USUARIO
-	// 								===============================================================*/
-
-	// 								$directorio = "vistas/img/usuarios/".$_POST["nuevoUsuario"];
-
-	// 								mkdir($directorio, 0755); 
-
-	// 								/*=====================================================================
-	// 								DE ACUERDO AL TIPO DE IMAGEN APLICAMOS LAS FUNCIONES POR DEFECTO DE PHP
-	// 								======================================================================*/
-
-	// 								if($_FILES["nuevaFoto"]["type"] == "image/jpeg"){
-
-	// 									/*=============================================
-	// 									GUARDAMOS LA IMAGEN EN EL DIRECTORIO
-	// 									=============================================*/
-
-	// 									$aleatorio = mt_rand(100,999);
-
-	// 									$ruta = "vistas/img/usuarios/".$_POST["nuevoUsuario"]."/".$aleatorio.".jpg";
-
-	// 									$origen = imagecreatefromjpeg($_FILES["nuevaFoto"]["tmp_name"]);
-
-	// 									$destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
-
-	// 									imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
-
-	// 									imagejpeg($destino, $ruta);
-
-	// 								}
-
-	// 								if($_FILES["nuevaFoto"]["type"] == "image/png"){
-
-	// 									/*=============================================
-	// 									GUARDAMOS LA IMAGEN EN EL DIRECTORIO
-	// 									=============================================*/
-
-	// 									$aleatorio = mt_rand(100,999);
-
-	// 									$ruta = "vistas/img/usuarios/".$_POST["nuevoUsuario"]."/".$aleatorio.".png";
-
-	// 									$origen = imagecreatefrompng($_FILES["nuevaFoto"]["tmp_name"]);
-
-	// 									$destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
-
-	// 									imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
-
-	// 									imagepng($destino, $ruta);
-
-	// 								}
-
-	// 							}
-							
-
-	// 							/*================== ENCRIPTAMOS LA CONTRASEÑA ===================*/
-	// 							$encriptar = crypt($_POST["nuevoPassword"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
-
-	// 							$datos = array("id_persona" => $idPersona,
-	// 										"usuario" => $_POST["nuevoUsuario"],
-	// 										"password" => $encriptar,
-	// 										"rol" => $_POST["nuevoRol"],
-	// 										"foto" => $ruta);
-
-	// 							$respuestaEmpleado = ModeloUsuarios::mdlIngresarUsuarioEmpleado($tabla2, $datos);
-
-	// 							if($respuestaEmpleado = true){
-										
-	// 								$totalIdUsuarios = array();
-
-	// 								$tabla1 = "empleados";
-	// 								$tabla2 = null;
-	// 								$item = null;
-	// 								$valor = null;
-
-	// 								$usuariosTotal = ModeloUsuarios::mdlMostrarUsuarios($tabla1, $tabla2, $item, $valor);
-
-	// 								foreach($usuariosTotal as $keyUsuarios => $valueUsuarios){
-	// 									array_push($totalIdUsuarios, $valueUsuarios["id"]);
-	// 								}
-
-	// 								$idUsuario = end($totalIdUsuarios);
-
-	// 								$tabla3 = "usuario_pregunta";
-									
-	// 								$datos = array("idUsuario" => $idUsuario,
-	// 											   "idPregunta" => $_POST["nuevaPregunta"],
-	// 											   "respuesta" => $_POST["respuestaPregunta"]);
-
-												   
-	// 								$respuestaPreguntas = ModeloUsuarios::mdlIngresarPreguntaUsuario($tabla3, $datos);
-
-	// 								if($respuestaPreguntas == true){
-	// 									echo '<script>
-	// 										Swal.fire({
-	// 											title: "Empleado guardado correctamente!",
-	// 											icon: "success"
-	// 										})
-									
-	// 									</script>';
-	// 								}
-
-
-	// 							}
-	// 						} else {
-
-	// 							echo "<script>
-	// 							Swal.fire({
-	// 									icon: 'error',
-	// 									title: '¡Llenar campos correctamente!',
-	// 								})
-	// 							</script>";
-
-	// 						}
-
-	// 					} else {
-	// 						$tabla4 = "clientes";
-							
-	// 						$datos = array("id_persona" => $idPersona);
-
-	// 						$respuestaCliente = ModeloUsuarios::mdlIngresarCliente($tabla4, $datos);
-
-	// 						if($respuestaCliente = true){
-										
-	// 							echo '<script>
-	// 								Swal.fire({
-	// 									title: "Cliente guardado correctamente!",
-	// 									icon: "success"
-	// 								})
-							
-	// 							</script>';
-
-	// 						}
-
-	// 					}
-
-	// 				} else {
-	// 					echo '<script>
-	// 					Swal.fire(
-	// 						"Error!",
-	// 						"error"
-	// 					)
-				
-	// 				</script>';
-	// 				}
-
-
-	// 		}else{
-
-	// 			echo "<script>
-	// 				Swal.fire({
-	// 					icon: 'error',
-	// 					title: '¡Llenar campos correctamente!',
-	// 				})
-	// 			</script>";
-
-	// 					// swal({
-	// 					// 	type: "error",
-	// 					// 	title: "¡Llenar campos correctamente!",
-	// 					// 	showConfirmButton: true,
-	// 					// 	confirmButtonText: "Cerrar",
-	// 					// 	closeOnConfirm: false
-	// 					// }).then((result)=>{
-	// 					// 	if(result.value){
-	// 					// 		window.location = "inicio";
-	// 					// 	}
-	// 					// });
-
-	// 		}
-
-
-	// 	}
-
-
-	// }
-
 	/*=============================================
                 MOSTRAR PREGUNTAS
 	=============================================*/	
@@ -773,13 +540,18 @@ class ControladorUsuarios{
 		ENVIAR CORREO DE RECUPERAR CONTRASEÑA
 	=============================================*/	
     static public function ctrEnviarCorreoRecuperacion($correoElectronico, $nombre, $codigo){
+		// $user_os        =   ControladorGlobales::ctrGetOS();
+		// $user_browser   =   ControladorGlobales::ctrGetBrowser();
+
+		// echo $user_os . " " . $user_browser;
+
         $template = file_get_contents('../extensiones/plantillas/template.php');
         $template = str_replace("{{name}}", $nombre, $template);
         $template = str_replace("{{action_url_1}}", 'localhost/gym/index.php?ruta=recuperar-password&codigo='.$codigo, $template);
         $template = str_replace("{{action_url_2}}", '<b>localhost/gym/index.php?ruta=recuperar-password&codigo='.$codigo.'</b>', $template);
         $template = str_replace("{{year}}", date('Y'), $template);
-        // $template = str_replace("{{operating_system}}", Helper::getOS(), $template);
-        // $template = str_replace("{{browser_name}}", Helper::getBrowser(), $template);
+        // $template = str_replace("{{operating_system}}", $userOs, $template);
+        // $template = str_replace("{{browser_name}}", $userBrowser, $template);
 
 		require '../extensiones/PHPMailer/PHPMailer/src/Exception.php';
 		require '../extensiones/PHPMailer/PHPMailer/src/PHPMailer.php';
@@ -801,7 +573,7 @@ class ControladorUsuarios{
             $mail->Host = 'smtp.gmail.com';  //gmail SMTP server
             $mail->SMTPAuth = true;
             $mail->Username = 'jesus.zuniga077@gmail.com';   //username
-            $mail->Password = '';   //password
+            $mail->Password = 'Locoporcristo057.';   //password
 			$mail->SMTPSecure = 'tls';
             $mail->Port = 587;     
 			// $mail->SMTPSecure = 'ssl';
@@ -835,7 +607,7 @@ class ControladorUsuarios{
 
 		if(isset($_GET['codigo'])){
 
-			$_SESSION['codigo'] = $_GET['codigo'];
+			// $_SESSION['codigo'] = $_GET['codigo'];
 			$tabla1 = "personas";
 			$tabla2 = "empleados";
 			$item = "codigo";
@@ -843,9 +615,11 @@ class ControladorUsuarios{
 
 			$respuesta = ModeloUsuarios::mdlMostrarUsuarios($tabla1, $tabla2, $item, $valor);
 
+			// var_dump($respuesta);
 			// var_dump($respuesta['codigo'] . " " . $_GET['codigo']);
+			// $respuesta["codigo"] != null && $_GET["codigo"] != $respuesta["codigo"]
 
-			if($respuesta["codigo"] != null && $_GET["codigo"] != $respuesta["codigo"]){
+			if($respuesta == false){
 				echo '<script>
 						Swal.fire({
 							title: "El código de recuperación de contraseña no es valido. Por favor intenta de nuevo.",

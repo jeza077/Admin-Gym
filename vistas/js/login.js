@@ -410,6 +410,24 @@ $(".verificarCorreo").on('click', function(event){
                                     }
                 
                                 });
+                                
+                            } else {
+                                Swal.fire({
+                                    title: "No se pudo enviar el correo. Por favor, intente de nuevo.",
+                                    icon: "error",
+                                    heightAuto: false,
+                                    showConfirmButton: true,
+                                    confirmButtonText: "Cerrar",
+                                    allowOutsideClick: false
+                                }).then((result)=>{
+                
+                                    if(result.value){
+                
+                                        window.location = "login";
+                
+                                    }
+                
+                                });
                             }
                         }
                     })
