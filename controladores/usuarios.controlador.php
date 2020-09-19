@@ -66,10 +66,35 @@ class ControladorUsuarios{
 				$valor = $_POST["ingUsuario"];
 
 				$respuesta = ModeloUsuarios::mdlMostrarUsuarios($tabla1, $tabla2, $item, $valor);
+				// var_dump($respuesta);
+				
+				// return;
 
 					if($respuesta["usuario"] == $_POST["ingUsuario"] && $respuesta["password"] == $encriptar){
 						
-						if($respuesta["estado"] == 1) {
+						if($respuesta["estado"] == 1 && $respuesta["primera_vez"] == 1) {
+
+							$_SESSION["iniciarSesion"] = "ok";
+							$_SESSION["id_usuario"] = $respuesta["id_usuario"];
+							$_SESSION["usuario"] = $respuesta["usuario"];
+							$_SESSION["primerIngreso"] = $respuesta["primera_vez"];
+
+							echo '<script>
+							Swal.fire({
+								title: "Bienvenido '.$_SESSION['nombre'] . " " . $_SESSION["apellidos"] . '",
+								icon: "success",
+								heightAuto: false,
+								allowOutsideClick: false
+							}).then((result)=>{
+								if(result.value){
+									window.location = "primer-ingreso";
+								}
+							});
+							</script>';
+
+						}
+
+						else if($respuesta["estado"] == 1) {
 
 							$_SESSION["iniciarSesion"] = "ok";
 							$_SESSION["id"] = $respuesta["id"];
@@ -78,6 +103,7 @@ class ControladorUsuarios{
 							$_SESSION["usuario"] = $respuesta["usuario"];
 							$_SESSION["foto"] = $respuesta["foto"];
 							$_SESSION["rol"] = $respuesta["rol"];
+							$_SESSION["primerIngreso"] = $respuesta["primera_vez"];
 
 							/* =====REGISTRAR FECHA Y HORA PARA SABER EL ULTIMO LOGIN ====== */
 
@@ -312,38 +338,38 @@ class ControladorUsuarios{
 
 							return true;
 								
-							$totalIdUsuarios = array();
+							// $totalIdUsuarios = array();
 
-							$tabla1 = "empleados";
-							$tabla2 = null;
-							$item = null;
-							$valor = null;
+							// $tabla1 = "empleados";
+							// $tabla2 = null;
+							// $item = null;
+							// $valor = null;
 
-							$usuariosTotal = ModeloUsuarios::mdlMostrarUsuarios($tabla1, $tabla2, $item, $valor);
+							// $usuariosTotal = ModeloUsuarios::mdlMostrarUsuarios($tabla1, $tabla2, $item, $valor);
 
-							foreach($usuariosTotal as $keyUsuarios => $valueUsuarios){
-								array_push($totalIdUsuarios, $valueUsuarios["id"]);
-							}
+							// foreach($usuariosTotal as $keyUsuarios => $valueUsuarios){
+							// 	array_push($totalIdUsuarios, $valueUsuarios["id"]);
+							// }
 
-							$idUsuario = end($totalIdUsuarios);
+							// $idUsuario = end($totalIdUsuarios);
 
-							$tabla3 = "usuario_pregunta";
+							// $tabla3 = "usuario_pregunta";
 							
-							$datos = array("idUsuario" => $idUsuario,
-											"idPregunta" => $_POST["nuevaPregunta"],
-											"respuesta" => $_POST["respuestaPregunta"]);
+							// $datos = array("idUsuario" => $idUsuario,
+							// 				"idPregunta" => $_POST["nuevaPregunta"],
+							// 				"respuesta" => $_POST["respuestaPregunta"]);
 
 											
-							$respuestaPreguntas = ModeloUsuarios::mdlIngresarPreguntaUsuario($tabla3, $datos);
+							// $respuestaPreguntas = ModeloUsuarios::mdlIngresarPreguntaUsuario($tabla3, $datos);
 
-							if($respuestaPreguntas == true){
-								echo '<script>
-									Swal.fire({
-										title: "Empleado guardado correctamente!",
-										icon: "success"
-									})							
-								</script>';
-							}
+							// if($respuestaPreguntas == true){
+							// 	echo '<script>
+							// 		Swal.fire({
+							// 			title: "Empleado guardado correctamente!",
+							// 			icon: "success"
+							// 		})							
+							// 	</script>';
+							// }
 						} else {
 							return false;
 						}
@@ -390,6 +416,78 @@ class ControladorUsuarios{
 		return $respuesta;
 
 	}
+
+
+	/*=============================================
+	CAMBIAR CONTRASEÑA POR PRIMERA VEZ Y AGREGAR PREGUNTAS
+	=============================================*/	
+
+	static public function ctrNuevaContraseñaPreguntasSeguridad($id){
+
+		if(isset($_POST["editarPassword"])){
+				
+			
+			if(preg_match('/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%.])\S{8,16}$/', $_POST["editarPassword"])){
+				
+				$encriptar = crypt($_POST["editarPassword"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
+			
+				$tabla = "empleados";
+			
+				$item1 = "password";
+				$valor1 = $encriptar;
+		
+				$item2 = 'id';
+				$valor2 = $id;
+
+				$item3 = null;
+				$valor3 = null;
+
+				$respuestaContraseña = ModeloUsuarios::mdlActualizarUsuario($tabla, $item1, $valor1, $item2, $valor2, $item3, $valor3);
+
+				if($respuestaContraseña == true) {
+					$tabla = "usuario_pregunta";
+					
+					$datos = array("idUsuario" => $id,
+									"idPregunta" => $_POST["nuevaPregunta"],
+									"respuesta" => $_POST["respuestaPregunta"]);
+		
+									
+					$respuestaPreguntas = ModeloUsuarios::mdlIngresarPreguntaUsuario($tabla, $datos);
+		
+					if($respuestaPreguntas == true){
+
+						$tabla = "empleados";
+
+						$item1 = "primera_vez";
+						$valor1 = 0;
+				
+						$item2 = 'id';
+						$valor2 = $id;
+		
+						$item3 = null;
+						$valor3 = null;
+		
+						$respuestaPrimeraVez = ModeloUsuarios::mdlActualizarUsuario($tabla, $item1, $valor1, $item2, $valor2, $item3, $valor3);
+
+						if($respuestaPrimeraVez == true) {
+							echo '<script>
+								Swal.fire({
+									title: "Contraseña y preguntas guardadas correctamente",
+									icon: "success"
+								}).then((result)=>{
+									if(result.value){
+										window.location = "salir";
+									}
+								});						
+							</script>';
+						}
+					}
+				}
+			} 
+	
+		}
+	}
+	
 
 	/*=============================================
 	CAMBIAR CONTRASEÑA POR PREGUNTAS DE SEGURIDAD
@@ -500,6 +598,7 @@ class ControladorUsuarios{
 		} 
 	
 	}
+
 
 	/*=============================================
 		ENVIAR CODIGO DE RECUPERAR CONTRASEÑA

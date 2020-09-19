@@ -65,6 +65,12 @@
                     <a href="salir" class="btn btn-danger float-left">Salir</a>
                     <button type="submit" class="btn btn-primary float-right">Guardar</button>
                 </div>
+
+                <?php 
+                    $id = $_SESSION["id_usuario"];
+                    $contraseñaPreguntas = new ControladorUsuarios();
+                    $contraseñaPreguntas->ctrNuevaContraseñaPreguntasSeguridad($id);
+                ?>
             </form>
         </div>
     </div>

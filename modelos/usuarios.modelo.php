@@ -14,7 +14,7 @@ class ModeloUsuarios{
 	
 			if($item != null){
 	
-				$stmt = Conexion::conectar()->prepare("SELECT p.*, e.usuario, e.password, e.foto, e.codigo, e.fecha_recuperacion, e.estado, e.id AS id_usuario, r.rol FROM $tabla1 AS p\n"
+				$stmt = Conexion::conectar()->prepare("SELECT p.*, e.usuario, e.password, e.foto, e.codigo, e.fecha_recuperacion, e.estado, e.primera_vez, e.id AS id_usuario, r.rol FROM $tabla1 AS p\n"
 						. " INNER JOIN $tabla2 AS e ON p.id = e.id_persona\n"
 						. " INNER JOIN roles AS r ON e.id_rol = r.id\n"
 						. " WHERE $item = :$item");
@@ -25,7 +25,7 @@ class ModeloUsuarios{
 	
 			} else {
 	
-				$stmt = Conexion::conectar()->prepare("SELECT p.*, e.usuario, e.password, e.foto, e.id AS id_usuario, r.rol FROM $tabla1 AS p\n"
+				$stmt = Conexion::conectar()->prepare("SELECT p.*, e.usuario, e.password, e.foto, e.primera_vez, e.id AS id_usuario, r.rol FROM $tabla1 AS p\n"
 						. " INNER JOIN $tabla2 AS e ON p.id = e.id_persona\n"
 						. " INNER JOIN roles AS r ON e.id_rol = r.id");
 				$stmt -> execute();
