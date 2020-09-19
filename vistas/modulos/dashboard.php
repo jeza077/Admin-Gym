@@ -42,21 +42,17 @@
 
                 // $modulos = ControladorUsuarios::ctrMostrarUsuarioModulo($item1, $item2, $valor1, $valor2);
 
-                $user_os        =   ControladorGlobales::ctrGetOS();
-                $user_browser   =   ControladorGlobales::ctrGetBrowser();
-                $device_details =   "<strong>Browser: </strong>" . $user_browser . 
-                                    "<br /><strong>Operating System: </strong>" . $user_os;
-                print_r($device_details);
+                // $user_os        =   ControladorGlobales::ctrGetOS();
+                // $user_browser   =   ControladorGlobales::ctrGetBrowser();
+                // $device_details =   "<strong>Browser: </strong>" . $user_browser . 
+                //                     "<br /><strong>Operating System: </strong>" . $user_os;
+                // print_r($device_details);
 
             
           ?>
 
         </div>
-        <!-- /.card-body -->
-        <div class="card-footer">
-          Footer
-        </div>
-        <!-- /.card-footer-->
+        
       </div>
       <!-- /.card -->
 

@@ -543,6 +543,9 @@ class ControladorUsuarios{
 		// $user_os        =   ControladorGlobales::ctrGetOS();
 		// $user_browser   =   ControladorGlobales::ctrGetBrowser();
 
+		// var_dump($user_os ." ". $user_browser);
+
+		// return;
 		// echo $user_os . " " . $user_browser;
 
         $template = file_get_contents('../extensiones/plantillas/template.php');
@@ -550,8 +553,8 @@ class ControladorUsuarios{
         $template = str_replace("{{action_url_1}}", 'localhost/gym/index.php?ruta=recuperar-password&codigo='.$codigo, $template);
         $template = str_replace("{{action_url_2}}", '<b>localhost/gym/index.php?ruta=recuperar-password&codigo='.$codigo.'</b>', $template);
         $template = str_replace("{{year}}", date('Y'), $template);
-        // $template = str_replace("{{operating_system}}", $userOs, $template);
-        // $template = str_replace("{{browser_name}}", $userBrowser, $template);
+        $template = str_replace("{{operating_system}}", $user_os, $template);
+        $template = str_replace("{{browser_name}}", $user_browser, $template);
 
 		require '../extensiones/PHPMailer/PHPMailer/src/Exception.php';
 		require '../extensiones/PHPMailer/PHPMailer/src/PHPMailer.php';

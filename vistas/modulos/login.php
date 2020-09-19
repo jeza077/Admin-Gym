@@ -43,6 +43,12 @@
   <?php 
     $login = new ControladorUsuarios();
     $login->ctrIngresoUsuario();
+
+    // $user_os        =   ControladorGlobales::ctrGetOS();
+    // $user_browser   =   ControladorGlobales::ctrGetBrowser();
+    // $device_details =   "<strong>Browser: </strong>" . $user_browser . 
+    //                     "<br /><strong>Operating System: </strong>" . $user_os;
+    // echo($device_details);
   ?>
     </div>
 
