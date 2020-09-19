@@ -29,8 +29,36 @@
   <!-- <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"> -->
 </head>
 <?php
+    
+    if(isset($_SESSION["iniciarSesion"]) && $_SESSION["iniciarSesion"] == "ok" && $_SESSION["primerIngreso"] == 1){
+      echo '<body class="primer-ingreso">';
 
-    if(isset($_SESSION["iniciarSesion"]) && $_SESSION["iniciarSesion"] == "ok"){
+      echo '<div class="wrapper">';
+
+      // include "modulos/primer-ingreso.php";
+
+      /*=============================================
+          CONTENIDO
+      =============================================*/
+
+      if(isset($_GET["ruta"])){
+        // if($_SESSION['rol'] == 'Administrador' && $_SESSION['rol'] == 'Especial') {
+
+          if($_GET["ruta"] == "primer-ingreso" ||
+              $_GET["ruta"] == "salir"){
+  
+              include "modulos/".$_GET["ruta"].".php";
+  
+              }else{
+  
+                include "modulos/404.php";
+  
+              }
+        // }
+      }
+    }
+
+    else if(isset($_SESSION["iniciarSesion"]) && $_SESSION["iniciarSesion"] == "ok"){
       echo '<body class="hold-transition sidebar-mini sidebar-collapse">';
 
       echo '<div class="wrapper">';

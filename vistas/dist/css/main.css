@@ -80,6 +80,18 @@ body.login-page .login-box.recu-password .card{
     color: #fff;
 }
 
+/*** PRIMER INGRESO ***/
+body.primer-ingreso {
+    background: rgb(255, 158, 30);
+    overflow: hidden;
+    padding: 60px 230px;
+}
+body.primer-ingreso .card {
+    width: 900px;
+    padding: 20px;
+    min-height: 500px!important;
+    border-radius: 0.7em;
+}
 
 /* VALIDAR CONTRASEÑA */
 .valid{
