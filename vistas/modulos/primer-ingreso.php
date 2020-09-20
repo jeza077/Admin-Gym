@@ -1,11 +1,11 @@
 
     <div class="card">
         <div class="login-logo">
-        <a href="login"><b>Bienvenido </b><?php echo $_SESSION["usuario"]?>!</a>
+        <a href="login"><b>Bienvenid@ </b><?php echo $_SESSION["usuario"]?>!</a>
         </div>
         <div class="card-body">
             <p class="login-box-msg">Por favor, cambie su contraseña y agregue las preguntas de seguridad!</p>
-            <form method="post">
+            <form method="post" id="primerIngreso">
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label class='mt-2'>Nueva contraseña</label>
@@ -63,7 +63,7 @@
                 
                 <div class="form-group mt-4">
                     <a href="salir" class="btn btn-danger float-left">Salir</a>
-                    <button type="submit" class="btn btn-primary float-right">Guardar</button>
+                    <button type="submit" class="btn btn-primary float-right" id="btnPrimerIngreso">Guardar</button>
                 </div>
 
                 <?php 

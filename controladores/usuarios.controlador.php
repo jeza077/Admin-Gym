@@ -483,7 +483,18 @@ class ControladorUsuarios{
 						}
 					}
 				}
-			} 
+			} else {
+				echo '<script>			
+						Swal.fire({
+							title: "La contraseña no cumple con los requerimientos!",
+							icon: "error",
+							toast: true,
+							position: "top",
+							showConfirmButton: false,
+							timer: 3000,
+						});
+					</script>';
+			}
 	
 		}
 	}

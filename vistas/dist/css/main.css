@@ -87,7 +87,7 @@ body.primer-ingreso {
     padding: 60px 230px;
 }
 body.primer-ingreso .card {
-    width: 900px;
+    /* width: 900px; */
     padding: 20px;
     min-height: 500px!important;
     border-radius: 0.7em;

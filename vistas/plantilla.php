@@ -51,7 +51,7 @@
   
               }else{
   
-                include "modulos/404.php";
+                include "modulos/primer-ingreso.php";
   
               }
         // }
@@ -196,6 +196,7 @@
 
 <script src="vistas/js/plantilla.js"></script>
 <script src="vistas/js/login.js"></script>
+<script src="vistas/js/primer-ingreso.js"></script>
 <script src="vistas/js/agregar-persona.js"></script>
  <script src="vistas/js/usuarios-empleados.js"></script>
 <!--<script src="vistas/js/validaciones.js"></script>
