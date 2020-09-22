@@ -22,6 +22,29 @@ function togglePassword(){
     container.classList.toggle('changePassword')
 }
 
+//CUANDO PRESIONE ESPACIO QUE MUESTRE ALERTA
+var pass = $('.password');
+$('.password').keydown(espaciosPassword);
+
+function espaciosPassword(event) {
+
+    var codigo = event.which || event.keyCode;
+    
+    if(codigo === 32){
+        $('.password').parent().after('<div class="alert alert-danger mt-2">La contraseña no puede llevar espacios.</div>');
+        setTimeout(function () {
+            $('.alert').remove();
+            $('.password').val('');
+            $('.password').attr('disabled', false);
+        }, 2000)
+        $('.password').attr('disabled', true);
+    } else {
+        $('.alert').remove();
+    }
+     
+}
+
+
 
 var letra = /[A-z]/;
 var mayus = /[A-Z]/;
