@@ -23,21 +23,23 @@ function togglePassword(){
 }
 
 //CUANDO PRESIONE ESPACIO QUE MUESTRE ALERTA
-var pass = $('.password');
-$('.password').keydown(espaciosPassword);
+$('.password').keydown(verificarEspacios);
+$('.usuario').keydown(verificarEspacios);
 
-function espaciosPassword(event) {
-
+//FUNCION PARA VERIFICAR SI HAY ESPACIOS EN UN STRING
+function verificarEspacios(event) {
     var codigo = event.which || event.keyCode;
-    
+
     if(codigo === 32){
-        $('.password').parent().after('<div class="alert alert-danger mt-2">La contraseña no puede llevar espacios.</div>');
+        $(this).parent().after('<div class="alert alert-danger mt-2">No se aceptan espacios.</div>');
+        var identificador = $(this);
         setTimeout(function () {
             $('.alert').remove();
-            $('.password').val('');
-            $('.password').attr('disabled', false);
+            identificador.val('');
+            identificador.attr('disabled', false);
+            identificador.focus();
         }, 2000)
-        $('.password').attr('disabled', true);
+        $(this).attr('disabled', true);
     } else {
         $('.alert').remove();
     }
