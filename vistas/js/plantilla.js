@@ -66,8 +66,8 @@ for (let i = 0; i < claseActivo.length -1; i++) {
 /*=============================================
   FUNCION QUE DETERMINE LA LONGITUD DE STRINGS
 =============================================*/
-function longitudString(maxLongitud) {
-	$('.usuario').keydown(function (e) {
+function longitudString(selector, maxLongitud) {
+	selector.keydown(function (e) {
 
 		var valor = $(this).val();
 		var codigo = e.which || e.keyCode;
@@ -80,4 +80,6 @@ function longitudString(maxLongitud) {
 	});
 }
 
-longitudString(5);
+longitudString($('.usuario'),5);
+longitudString($('.password'),16);
+
