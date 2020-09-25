@@ -1,3 +1,39 @@
+//** VERIFICAR QUE USUARIO NO SE REPITA */
+$('.nuevoUsuario').keyup(function (){
+
+    var usuarioIngresado = $(this).val();
+
+    var datos = new FormData();
+    datos.append("validarUsuario", usuarioIngresado);
+
+    $.ajax({
+
+        url:"ajax/usuarios.ajax.php",
+        method: "POST",
+        data: datos,
+        cache: false,
+        contentType: false,
+        processData: false,  
+        dataType: "json",
+        success: function(respuesta) {
+            console.log(respuesta);
+
+            if(respuesta){
+                $('.nuevoUsuario').after('<div class="alert alert-warning mt-2">Usuario ya existente, ingrese uno diferente.</div>');
+                setTimeout(function () {
+                    $('.alert').remove();
+                }, 3000)
+                
+                //E inmeditamente Limpiamos el input
+                $('.nuevoUsuario').val("");
+                $('.nuevoUsuario').focus();
+            }
+        }
+
+    });
+
+})
+
 //** SUBIR FOTO DEL USUARIO-EMPLEADO *//
 
 $(".nuevaFoto").change(function () { 

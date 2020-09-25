@@ -8,37 +8,37 @@ class AjaxUsuarios{
                 EDITAR USUARIO
     =============================================*/
 
-    public $idUsuario;
+    // public $idUsuario;
 
-    public function ajaxEditarUsuarios(){
-        $item = "id";
-        $valor = $this->idUsuario;
-        $respuesta = ControladorUsuarios::ctrMostrarUsuarios($item, $valor);
+    // public function ajaxEditarUsuarios(){
+    //     $item = "id";
+    //     $valor = $this->idUsuario;
+    //     $respuesta = ControladorUsuarios::ctrMostrarUsuarios($item, $valor);
 
-        echo json_encode($respuesta);
+    //     echo json_encode($respuesta);
 
-    }
+    // }
 
     /*=============================================
                 ACTIVAR USUARIO
     =============================================*/
 
-    public $activarUsuario;
-    public $activarId; 
+    // public $activarUsuario;
+    // public $activarId; 
 
-    public function ajaxActivarUsuario(){
+    // public function ajaxActivarUsuario(){
 
-        $tabla = "usuarios";
+    //     $tabla = "usuarios";
 
-        $item1 = "estado";
-        $valor1 = $this->activarUsuario;
+    //     $item1 = "estado";
+    //     $valor1 = $this->activarUsuario;
 
-        $item2 = "id";
-        $valor2 = $this->activarId;
+    //     $item2 = "id";
+    //     $valor2 = $this->activarId;
       
-        $respuesta = ModeloUsuarios::mdlActualizarUsuario($tabla, $item1, $valor1, $item2, $valor2);
+    //     $respuesta = ModeloUsuarios::mdlActualizarUsuario($tabla, $item1, $valor1, $item2, $valor2);
 
-    }
+    // }
 
     /*=============================================
     REVISAR QUE EL USUARIO NO SE REPITA
@@ -48,10 +48,11 @@ class AjaxUsuarios{
 
     public function ajaxValidarUsuario(){
 
+        $tabla = "empleados";
         $item = "usuario";
         $valor = $this->validarUsuario;
         
-        $respuesta = ControladorUsuarios::ctrMostrarUsuarios($item, $valor);
+        $respuesta = ControladorUsuarios::ctrMostrarUsuarios($tabla, $item, $valor);
 
         echo json_encode($respuesta);
     }
@@ -156,21 +157,21 @@ class AjaxUsuarios{
 /*=============================================
             EDITAR USUARIO
 =============================================*/
-if(isset($_POST["idUsuario"])){
-    $editar = new AjaxUsuarios();
-    $editar->idUsuario = $_POST["idUsuario"];
-    $editar->ajaxEditarUsuarios();
-}
+// if(isset($_POST["idUsuario"])){
+//     $editar = new AjaxUsuarios();
+//     $editar->idUsuario = $_POST["idUsuario"];
+//     $editar->ajaxEditarUsuarios();
+// }
 
 /*=============================================
             ACTIVAR USUARIO
 =============================================*/
-if(isset($_POST["activarUsuario"])){
-    $activarUsuario = new AjaxUsuarios();
-    $activarUsuario->activarUsuario = $_POST["activarUsuario"];
-    $activarUsuario->activarId = $_POST["activarId"];
-    $activarUsuario->ajaxActivarUsuario();
-}
+// if(isset($_POST["activarUsuario"])){
+//     $activarUsuario = new AjaxUsuarios();
+//     $activarUsuario->activarUsuario = $_POST["activarUsuario"];
+//     $activarUsuario->activarId = $_POST["activarId"];
+//     $activarUsuario->ajaxActivarUsuario();
+// }
 
 /*=============================================
     REVISAR QUE EL USUARIO NO SE REPITA

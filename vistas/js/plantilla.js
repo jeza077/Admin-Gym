@@ -74,7 +74,7 @@ function longitudString(selector, maxLongitud) {
 		// console.log(valor.length)
 		// console.log(codigo)
 
-		if(valor.length >= maxLongitud && codigo != 8){
+		if(valor.length >= maxLongitud && codigo != 8  && codigo != 116){
 			e.preventDefault();
 		}
 	});
