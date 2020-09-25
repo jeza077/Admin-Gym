@@ -23,11 +23,11 @@ function togglePassword(){
 }
 
 //CUANDO PRESIONE ESPACIO QUE MUESTRE ALERTA
-$('.usuario').keydown(verificarUnEspacio);
-$('.password').keydown(verificarEspacios);
+$('.usuario').keydown(impedirEspacios);
+$('.password').keydown(impedirEspacios);
 
 //FUNCION PARA VERIFICAR SI HAY ESPACIOS EN UN STRING
-function verificarEspacios(event) {
+function impedirEspacios(event) {
     var codigo = event.which || event.keyCode;
 
     if(codigo === 32){
@@ -49,22 +49,15 @@ function verificarEspacios(event) {
 
 //FUNCION PARA VERIFICAR SI HAY ESPACIOS EN UN STRING
 function verificarUnEspacio(event) {
+    console.log(event);
+    console.log(event.originalEvent.repeat);
+    // return;
     var codigo = event.which || event.keyCode;
 
-    if(codigo === 32 && event.repeat){
-        console.log('repetido');
+    if(codigo == 32 && event.repeat){
         event.preventDefault();
-    //     $(this).parent().parent().after('<div class="alert alert-danger mt-2">Solo se acepta 1 espacio.</div>');
-    //     var identificador = $(this);
-    //     setTimeout(function () {
-    //         $('.alert').remove();
-    //         identificador.val('');
-    //         identificador.attr('disabled', false);
-    //         identificador.focus();
-    //     }, 2000)
-    //     $(this).attr('disabled', true);
-    // } else {
-    //     $('.alert').remove();
+        console.log('repetido');
+
     }
      
 }
