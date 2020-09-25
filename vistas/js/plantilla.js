@@ -67,16 +67,17 @@ for (let i = 0; i < claseActivo.length -1; i++) {
   FUNCION QUE DETERMINE LA LONGITUD DE STRINGS
 =============================================*/
 function longitudString(maxLongitud) {
-	$('.usuario').keyup(function (e) {
-		 
-		var valor = $(this).val();
-		console.log(valor.length)
+	$('.usuario').keydown(function (e) {
 
-		if(valor > maxLongitud){
-		console.log('mayor')
+		var valor = $(this).val();
+		var codigo = e.which || e.keyCode;
+		// console.log(valor.length)
+		// console.log(codigo)
+
+		if(valor.length >= maxLongitud && codigo != 8){
 			e.preventDefault();
 		}
 	});
 }
 
-longitudString(5)
+longitudString(5);
