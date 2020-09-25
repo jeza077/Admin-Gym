@@ -439,67 +439,80 @@ class ControladorUsuarios{
 	CAMBIAR CONTRASEÑA POR PRIMERA VEZ Y AGREGAR PREGUNTAS
 	=============================================*/	
 
-	static public function ctrNuevaContraseñaPreguntasSeguridad($id){
+	static public function ctrNuevaContraseñaPreguntasSeguridad($id, $usuario){
 
 		if(isset($_POST["editarPassword"])){
-				
 			
 			if(preg_match('/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%.])\S{8,16}$/', $_POST["editarPassword"])){
 				
 				$encriptar = crypt($_POST["editarPassword"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
 			
-				$tabla = "empleados";
+				$tabla1 = "personas";
+				$tabla2 = "empleados";
+
+				$item = 'usuario';
+				$valor = $usuario;
+
+				$respuestaContraseñas = ModeloUsuarios::mdlMostrarUsuarios($tabla1, $tabla2, $item, $valor);
+
+				// var_dump($respuestaContraseñas['password'] . ' ' . $encriptar);
+
+				if($respuestaContraseñas['password'] == $encriptar){
+					echo '<br><div class="alert alert-danger">Contraseña igual a la anterior, intente de nuevo.</div>';
+				} else {
+					$item1 = "password";
+					$valor1 = $encriptar;
 			
-				$item1 = "password";
-				$valor1 = $encriptar;
-		
-				$item2 = 'id';
-				$valor2 = $id;
+					$item2 = 'id';
+					$valor2 = $id;
 
-				$item3 = null;
-				$valor3 = null;
+					$item3 = null;
+					$valor3 = null;
 
-				$respuestaContraseña = ModeloUsuarios::mdlActualizarUsuario($tabla, $item1, $valor1, $item2, $valor2, $item3, $valor3);
+					$respuestaContraseña = ModeloUsuarios::mdlActualizarUsuario($tabla2, $item1, $valor1, $item2, $valor2, $item3, $valor3);
 
-				if($respuestaContraseña == true) {
-					$tabla = "usuario_pregunta";
+					if($respuestaContraseña == true) {
+						$tabla = "usuario_pregunta";
+						
+						$datos = array("idUsuario" => $id,
+										"idPregunta" => $_POST["nuevaPregunta"],
+										"respuesta" => $_POST["respuestaPregunta"]);
+			
+										
+						$respuestaPreguntas = ModeloUsuarios::mdlIngresarPreguntaUsuario($tabla, $datos);
+			
+						if($respuestaPreguntas == true){
+
+							$tabla = "empleados";
+
+							$item1 = "primera_vez";
+							$valor1 = 0;
 					
-					$datos = array("idUsuario" => $id,
-									"idPregunta" => $_POST["nuevaPregunta"],
-									"respuesta" => $_POST["respuestaPregunta"]);
-		
-									
-					$respuestaPreguntas = ModeloUsuarios::mdlIngresarPreguntaUsuario($tabla, $datos);
-		
-					if($respuestaPreguntas == true){
+							$item2 = 'id';
+							$valor2 = $id;
+			
+							$item3 = null;
+							$valor3 = null;
+			
+							$respuestaPrimeraVez = ModeloUsuarios::mdlActualizarUsuario($tabla, $item1, $valor1, $item2, $valor2, $item3, $valor3);
 
-						$tabla = "empleados";
-
-						$item1 = "primera_vez";
-						$valor1 = 0;
-				
-						$item2 = 'id';
-						$valor2 = $id;
-		
-						$item3 = null;
-						$valor3 = null;
-		
-						$respuestaPrimeraVez = ModeloUsuarios::mdlActualizarUsuario($tabla, $item1, $valor1, $item2, $valor2, $item3, $valor3);
-
-						if($respuestaPrimeraVez == true) {
-							echo '<script>
-								Swal.fire({
-									title: "Contraseña y preguntas guardadas correctamente",
-									icon: "success"
-								}).then((result)=>{
-									if(result.value){
-										window.location = "salir";
-									}
-								});						
-							</script>';
+							if($respuestaPrimeraVez == true) {
+								echo '<script>
+									Swal.fire({
+										title: "Contraseña y preguntas guardadas correctamente",
+										icon: "success"
+									}).then((result)=>{
+										if(result.value){
+											window.location = "salir";
+										}
+									});						
+								</script>';
+							}
 						}
 					}
 				}
+
+				
 			} else {
 				echo '<script>			
 						Swal.fire({
@@ -523,26 +536,39 @@ class ControladorUsuarios{
 	
 	static public function ctrCambiarContraseña($item, $valor, $post){
 
-		$tabla = "empleados";
+		$tabla1 = "personas";
+		$tabla2 = "empleados";
 			
 		if(isset($post)){
 			
 			if(preg_match('/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%.])\S{8,16}$/', $post)){
 				
 				$encriptar = crypt($post, '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
-			
-				$item1 = "password";
-				$valor1 = $encriptar;
-		
+
 				$item2 = $item;
 				$valor2 = $valor;
+	
 
-				$item3 = null;
-				$valor3 = null;
+				// $respuestaContraseñas = ModeloUsuarios::mdlMostrarUsuarios($tabla1, $tabla2, $item2, $valor2);
 
-				$respuesta = ModeloUsuarios::mdlActualizarUsuario($tabla, $item1, $valor1, $item2, $valor2, $item3, $valor3);
-				return $respuesta;
-			
+				// return $respuestaContraseñas;
+
+				// if($respuestaContraseñas['password'] == $encriptar){
+				// 	return false;
+				// } else {
+
+					$item1 = "password";
+					$valor1 = $encriptar;
+					
+					
+					$item3 = null;
+					$valor3 = null;
+	
+					$respuesta = ModeloUsuarios::mdlActualizarUsuario($tabla2, $item1, $valor1, $item2, $valor2, $item3, $valor3);
+					return $respuesta;
+				
+				// }
+				
 			
 			} else {
 

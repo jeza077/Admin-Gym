@@ -68,8 +68,9 @@
 
                 <?php 
                     $id = $_SESSION["id_usuario"];
+                    $usuario = $_SESSION["usuario"];
                     $contraseñaPreguntas = new ControladorUsuarios();
-                    $contraseñaPreguntas->ctrNuevaContraseñaPreguntasSeguridad($id);
+                    $contraseñaPreguntas->ctrNuevaContraseñaPreguntasSeguridad($id, $usuario);
                 ?>
             </form>
         </div>
