@@ -23,30 +23,58 @@ function togglePassword(){
 }
 
 //CUANDO PRESIONE ESPACIO QUE MUESTRE ALERTA
+$('.usuario').keydown(verificarUnEspacio);
 $('.password').keydown(verificarEspacios);
-$('.usuario').keydown(verificarEspacios);
 
 //FUNCION PARA VERIFICAR SI HAY ESPACIOS EN UN STRING
 function verificarEspacios(event) {
     var codigo = event.which || event.keyCode;
 
     if(codigo === 32){
-        $(this).parent().after('<div class="alert alert-danger mt-2">No se aceptan espacios.</div>');
-        var identificador = $(this);
-        setTimeout(function () {
-            $('.alert').remove();
-            identificador.val('');
-            identificador.attr('disabled', false);
-            identificador.focus();
-        }, 2000)
-        $(this).attr('disabled', true);
+        event.preventDefault();
+        // $(this).parent().parent().after('<div class="alert alert-danger mt-2">No se aceptan espacios.</div>');
+        // var identificador = $(this);
+        // setTimeout(function () {
+        //     $('.alert').remove();
+        //     identificador.val('');
+        //     identificador.attr('disabled', false);
+        //     identificador.focus();
+        // }, 2000)
+        // $(this).attr('disabled', true);
     } else {
         $('.alert').remove();
     }
      
 }
 
+//FUNCION PARA VERIFICAR SI HAY ESPACIOS EN UN STRING
+function verificarUnEspacio(event) {
+    var codigo = event.which || event.keyCode;
 
+    if(codigo === 32 && event.repeat){
+        console.log('repetido');
+        event.preventDefault();
+    //     $(this).parent().parent().after('<div class="alert alert-danger mt-2">Solo se acepta 1 espacio.</div>');
+    //     var identificador = $(this);
+    //     setTimeout(function () {
+    //         $('.alert').remove();
+    //         identificador.val('');
+    //         identificador.attr('disabled', false);
+    //         identificador.focus();
+    //     }, 2000)
+    //     $(this).attr('disabled', true);
+    // } else {
+    //     $('.alert').remove();
+    }
+     
+}
+
+// function evento(event) {
+//     $('.usuario').on('input', function () {
+//         var text = $(this).val();
+//         $(this).val() = text.replace(/ {2,}/g, ' ');
+//     });
+// }
 
 var letra = /[A-z]/;
 var mayus = /[A-Z]/;
@@ -245,6 +273,9 @@ $(".verificarCorreoPreguntas").on('click', function(event){
                                                     $(".nueva-password").on('change', function(){
                                                         cambiarPass = $(this).val();
                                                     });
+
+                                                    $('.nueva-password').keydown(verificarEspacios);
+                                                    
                                                     $(".confirmar-password").on('input', function(){
                                                         // var password_nuevo = cambiarPass;
                                                         if($(this).val() == cambiarPass){
