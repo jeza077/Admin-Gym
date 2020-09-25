@@ -25,6 +25,7 @@ function togglePassword(){
 //CUANDO PRESIONE ESPACIO QUE MUESTRE ALERTA
 $('.usuario').keydown(impedirEspacios);
 $('.password').keydown(impedirEspacios);
+$('#verificarEmail').keydown(impedirEspacios);
 
 //FUNCION PARA VERIFICAR SI HAY ESPACIOS EN UN STRING
 function impedirEspacios(event) {
@@ -62,12 +63,6 @@ function verificarUnEspacio(event) {
      
 }
 
-// function evento(event) {
-//     $('.usuario').on('input', function () {
-//         var text = $(this).val();
-//         $(this).val() = text.replace(/ {2,}/g, ' ');
-//     });
-// }
 
 var letra = /[A-z]/;
 var mayus = /[A-Z]/;
@@ -267,7 +262,8 @@ $(".verificarCorreoPreguntas").on('click', function(event){
                                                         cambiarPass = $(this).val();
                                                     });
 
-                                                    $('.nueva-password').keydown(verificarEspacios);
+                                                    $('.nueva-password').keydown(impedirEspacios);
+                                                    $('.confirmar-password').keydown(impedirEspacios);
                                                     
                                                     $(".confirmar-password").on('input', function(){
                                                         // var password_nuevo = cambiarPass;
