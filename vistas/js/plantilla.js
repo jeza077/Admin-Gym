@@ -47,7 +47,6 @@ $(".tablas").DataTable({
 /*=============================================
     SIDEBAR MENU ACTIVO COLOR AZUL
 =============================================*/
-
 var pathname = window.location.href;
 const claseActivo = $('.menu-lateral');
 // console.log(claseActivo[3]);
@@ -64,10 +63,20 @@ for (let i = 0; i < claseActivo.length -1; i++) {
     }
 }
 
+/*=============================================
+  FUNCION QUE DETERMINE LA LONGITUD DE STRINGS
+=============================================*/
+function longitudString(maxLongitud) {
+	$('.usuario').keyup(function (e) {
+		 
+		var valor = $(this).val();
+		console.log(valor.length)
 
+		if(valor > maxLongitud){
+		console.log('mayor')
+			e.preventDefault();
+		}
+	});
+}
 
-// function colorLink(){
-//     linkColor.forEach(l => l.classList.remove('active'));
-//     this.classList.add('active');
-// }
-// const link = linkColor.forEach(l => l.addEventListener('click', colorLink));
+longitudString(5)
