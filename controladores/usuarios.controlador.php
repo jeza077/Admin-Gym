@@ -593,9 +593,10 @@ class ControladorUsuarios{
 
 		$respuesta = ModeloUsuarios::mdlMostrarUsuarios($tabla1, $tabla2, $item, $valor);
 
-		// var_dump($respuesta['id_usuario']);
+		// var_dump($respuesta['password']);
 		
 		$idUsuario = $respuesta['id_usuario'];
+		$passwordAnterior = $respuesta['password'];
 		
 		if(isset($_POST['editarPassword'])){
 			
@@ -603,38 +604,52 @@ class ControladorUsuarios{
 				
 				$encriptar = crypt($_POST['editarPassword'], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
 			
-				$tabla = "empleados";
-
-				$item1 = "password";
-				$valor1 = $encriptar;
-		
-				$item2 = "id";
-				$valor2 = $idUsuario;
-
-				$respuesta = ModeloUsuarios::mdlActualizarUsuarioPorCodigo($tabla, $item1, $valor1, $item2, $valor2);
-
-				if($respuesta == true){
-	
+				if($passwordAnterior === $encriptar){
 					echo '<script>
 							Swal.fire({
-								title: "Contraseña cambiada correctamente.",
-								icon: "success",
+								title: "Contraseña ingresada no cumple con los requisitos, intente de nuevo.",
+								icon: "error",
 								heightAuto: false,
 								showConfirmButton: true,
 								confirmButtonText: "Cerrar",
 								allowOutsideClick: false
-							}).then((result)=>{
-			
-								if(result.value){
-			
-									window.location = "login";
-			
-								}
-			
-							});
-					
+							});					
 						</script>';
+				} else {
 
+					$tabla = "empleados";
+	
+					$item1 = "password";
+					$valor1 = $encriptar;
+			
+					$item2 = "id";
+					$valor2 = $idUsuario;
+	
+					$respuesta = ModeloUsuarios::mdlActualizarUsuarioPorCodigo($tabla, $item1, $valor1, $item2, $valor2);
+	
+					if($respuesta == true){
+		
+						echo '<script>
+								Swal.fire({
+									title: "Contraseña cambiada correctamente.",
+									icon: "success",
+									heightAuto: false,
+									showConfirmButton: true,
+									confirmButtonText: "Cerrar",
+									allowOutsideClick: false
+								}).then((result)=>{
+				
+									if(result.value){
+				
+										window.location = "login";
+				
+									}
+				
+								});
+						
+							</script>';
+	
+					}
 				}
 				// return $respuesta;
 			
@@ -727,7 +742,7 @@ class ControladorUsuarios{
             $mail->Host = 'smtp.gmail.com';  //gmail SMTP server
             $mail->SMTPAuth = true;
             $mail->Username = 'jesus.zuniga077@gmail.com';   //username
-            $mail->Password = 'Locoporcristo057.';   //password
+            $mail->Password = 'Jesus#077.';   //password
 			$mail->SMTPSecure = 'tls';
             $mail->Port = 587;     
 			// $mail->SMTPSecure = 'ssl';
