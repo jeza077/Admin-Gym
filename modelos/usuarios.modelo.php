@@ -273,7 +273,7 @@ class ModeloUsuarios{
 
 	    
 	/*=============================================
-		MOSTRAR USUARIOS
+		MOSTRAR PARAMETROS
     =============================================*/
     
     static public function mdlMostrarParametros($tabla){

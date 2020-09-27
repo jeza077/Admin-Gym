@@ -4,8 +4,8 @@ require_once "conexion.php";
 
 class ModeloGlobales{
     
-	/*=============================================
-		MOSTRAR USUARIOS
+	  /*=============================================
+		  MOSTRAR PARAMETROS
     =============================================*/
     
     static public function mdlMostrarParametros($tabla){

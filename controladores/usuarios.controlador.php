@@ -722,8 +722,11 @@ class ControladorUsuarios{
 		// return;
 		// echo $user_os . " " . $user_browser;
 
-		$parametros = ControladorGlobales::ctrMostrarParametros();
-		// $parametros = ControladorUsuarios::ctrMostrarParametros();
+		$correoDestinatario = $correoElectronico;
+		$nombreDestinatario = $nombre;
+		
+		// $parametros = ControladorGlobales::ctrMostrarParametros();
+		$parametros = ControladorUsuarios::ctrMostrarParametros();
 
 		$correoEmpresa = $parametros[1]['valor'];
 		$passwordEmpresa = $parametros[0]['valor'];
@@ -735,52 +738,13 @@ class ControladorUsuarios{
         $template = str_replace("{{action_url_2}}", '<b>localhost/gym/index.php?ruta=recuperar-password&codigo='.$codigo.'</b>', $template);
         $template = str_replace("{{year}}", date('Y'), $template);
         // $template = str_replace("{{operating_system}}", $user_os, $template);
-        // $template = str_replace("{{browser_name}}", $user_browser, $template);
+		// $template = str_replace("{{browser_name}}", $user_browser, $template);
 
-		require '../extensiones/PHPMailer/PHPMailer/src/Exception.php';
-		require '../extensiones/PHPMailer/PHPMailer/src/PHPMailer.php';
-		require '../extensiones/PHPMailer/PHPMailer/src/SMTP.php';
 
-        $mail = new PHPMailer(true);
-		$mail->CharSet = "UTF-8";
+		$respuestaCorreo = ControladorUsuarios::ctrGenerarCorreo($correoEmpresa, $passwordEmpresa, $correoDestinatario, $nombreDestinatario, $template);
 
-        try {
-			$mail->SMTPOptions = array(
-				'ssl' => array(
-				'verify_peer' => false,
-				'verify_peer_name' => false,
-				'allow_self_signed' => true
-				)
-			);
-			$mail->SMTPDebug = 0;
-            $mail->isSMTP();
-            $mail->Host = 'smtp.gmail.com';  //gmail SMTP server
-            $mail->SMTPAuth = true;
-            $mail->Username = $correoEmpresa;   //username
-            $mail->Password = $passwordEmpresa;   //password
-			// $mail->SMTPSecure = 'tls';
-            // $mail->Port = 587;     
-			$mail->SMTPSecure = 'ssl';
-            $mail->Port = 465;                    //smtp port
+		return $respuestaCorreo;
 
-            $mail->setFrom($correoEmpresa, 'Gimnasio');
-            $mail->addAddress($correoElectronico, $nombre);
-
-            $mail->isHTML(true);
-            $mail->Subject = 'Recuperación de contraseña - Gimnasio';
-            $mail->Body = $template;
-		
-			if (!$mail->send()) {
-
-				return false;		
-			} else {
-				return true;
-			}
-
-        } catch (Exception $e) {
-            return false;
-		}
-		
 	}
 
 	/*=============================================
@@ -855,7 +819,58 @@ class ControladorUsuarios{
 			header("location:login");
 		}
 
-    }
+	}
+	
+	/*=============================================
+			GENERAR CORREO
+	=============================================*/	
+    static public function ctrGenerarCorreo($correoEmpresa, $passwordEmpresa, $correoDestinatario, $nombreDestinatario, $template){
+
+		require '../extensiones/PHPMailer/PHPMailer/src/Exception.php';
+		require '../extensiones/PHPMailer/PHPMailer/src/PHPMailer.php';
+		require '../extensiones/PHPMailer/PHPMailer/src/SMTP.php';
+
+        $mail = new PHPMailer(true);
+		$mail->CharSet = "UTF-8";
+
+        try {
+			$mail->SMTPOptions = array(
+				'ssl' => array(
+				'verify_peer' => false,
+				'verify_peer_name' => false,
+				'allow_self_signed' => true
+				)
+			);
+			$mail->SMTPDebug = 0;
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com';  //gmail SMTP server
+            $mail->SMTPAuth = true;
+            $mail->Username = $correoEmpresa;   //username
+            $mail->Password = $passwordEmpresa;   //password
+			// $mail->SMTPSecure = 'tls';
+            // $mail->Port = 587;     
+			$mail->SMTPSecure = 'ssl';
+            $mail->Port = 465;                    //smtp port
+
+            $mail->setFrom($correoEmpresa, 'Gimnasio');
+            $mail->addAddress($correoDestinatario, $nombreDestinatario);
+
+            $mail->isHTML(true);
+            $mail->Subject = 'Recuperación de contraseña - Gimnasio';
+            $mail->Body = $template;
+		
+			if (!$mail->send()) {
+
+				return false;		
+			} else {
+				return true;
+			}
+
+        } catch (Exception $e) {
+            return false;
+		}
+		
+	}
 	
 	/*=============================================
 		CREAR CODIGO RANDOM PARA EL PASSWORD
