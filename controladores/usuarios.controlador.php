@@ -534,7 +534,7 @@ class ControladorUsuarios{
 	CAMBIAR CONTRASEÑA POR PREGUNTAS DE SEGURIDAD
 	=============================================*/	
 	
-	static public function ctrCambiarContraseña($item, $valor, $post){
+	static public function ctrCambiarContraseña($item, $valor, $itemUsuario, $valorUsuario, $post){
 
 		$tabla1 = "personas";
 		$tabla2 = "empleados";
@@ -545,29 +545,27 @@ class ControladorUsuarios{
 				
 				$encriptar = crypt($post, '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
 
-				$item2 = $item;
-				$valor2 = $valor;
-	
+				$respuestaContraseñas = ModeloUsuarios::mdlMostrarUsuarios($tabla1, $tabla2, $itemUsuario, $valorUsuario);
 
-				// $respuestaContraseñas = ModeloUsuarios::mdlMostrarUsuarios($tabla1, $tabla2, $item2, $valor2);
+				// return $respuestaContraseñas['password'] . ' ' . $encriptar;
 
-				// return $respuestaContraseñas;
-
-				// if($respuestaContraseñas['password'] == $encriptar){
-				// 	return false;
-				// } else {
+				if($respuestaContraseñas['password'] == $encriptar){
+					return false;
+				} else {
 
 					$item1 = "password";
 					$valor1 = $encriptar;
 					
-					
+					$item2 = $item;
+					$valor2 = $valor;
+
 					$item3 = null;
 					$valor3 = null;
 	
 					$respuesta = ModeloUsuarios::mdlActualizarUsuario($tabla2, $item1, $valor1, $item2, $valor2, $item3, $valor3);
 					return $respuesta;
 				
-				// }
+				}
 				
 			
 			} else {

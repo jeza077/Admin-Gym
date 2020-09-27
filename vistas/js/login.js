@@ -25,7 +25,7 @@ function togglePassword(){
 //CUANDO PRESIONE ESPACIO QUE MUESTRE ALERTA
 $('.usuario').keydown(impedirEspacios);
 $('.password').keydown(impedirEspacios);
-$('#verificarEmail').keydown(impedirEspacios);
+// $('#verificarEmail').keydown(impedirEspacios);
 
 //FUNCION PARA VERIFICAR SI HAY ESPACIOS EN UN STRING
 function impedirEspacios(event) {
@@ -287,6 +287,7 @@ $(".verificarCorreoPreguntas").on('click', function(event){
                                                             
                                                             var datos = new FormData();
                                                             datos.append("usuarioId", idUsuario);
+                                                            datos.append("usuarioIngresado", usuario);
                                                             datos.append("cambiarPass", cambiarPass);
     
                                                             $.ajax({
@@ -299,6 +300,7 @@ $(".verificarCorreoPreguntas").on('click', function(event){
                                                                 processData: false,  
                                                                 dataType: "json",
                                                                 success: function(respuesta) {
+                                                                    // console.log(respuesta);
                                                                     if(respuesta == true){
                                                                         Swal.fire({
                                                                             icon: "success",
@@ -322,6 +324,7 @@ $(".verificarCorreoPreguntas").on('click', function(event){
                                                                         });
                                                                         
                                                                     } else {
+
                                                                         Swal.fire({
                                                                             icon: "error",
                                                                             title: "¡La contraseña no cumple con los requisitos!",
@@ -346,7 +349,7 @@ $(".verificarCorreoPreguntas").on('click', function(event){
                                                     })
     
                                                 $("#preguntaSeguridad input[type='text']").val("");
-                                                console.log("MAL");
+                                                // console.log("MAL");
                                             }
                                                                         
                                     });

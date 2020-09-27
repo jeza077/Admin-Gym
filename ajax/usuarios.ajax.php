@@ -114,17 +114,19 @@ class AjaxUsuarios{
     =============================================*/
     public $usuarioId;
     public $cambiarPass;
+    public $usuarioIngresado;
 
     public function ajaxCambiarContraseña(){
-
-        // $tabla = "usuarios";
 
         $post = $this->cambiarPass;
 
         $item = "id";
         $valor = $this->usuarioId;
+
+        $itemUsuario = "usuario";
+        $valorUsuario = $this->usuarioIngresado;
       
-        $respuesta = ControladorUsuarios::ctrCambiarContraseña($item, $valor, $post);
+        $respuesta = ControladorUsuarios::ctrCambiarContraseña($item, $valor, $itemUsuario, $valorUsuario, $post);
 
         echo json_encode($respuesta);
 
@@ -215,6 +217,7 @@ CAMBIAR CONTRASEÑA POR PREGUNTAS DE SEGURIDAD
 if(isset($_POST["usuarioId"])){
     $cambiarContraseña = new AjaxUsuarios();
     $cambiarContraseña->usuarioId = $_POST["usuarioId"];
+    $cambiarContraseña->usuarioIngresado = $_POST["usuarioIngresado"];
     $cambiarContraseña->cambiarPass = $_POST["cambiarPass"];
     $cambiarContraseña->ajaxCambiarContraseña();
 }
