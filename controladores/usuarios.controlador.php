@@ -655,12 +655,18 @@ class ControladorUsuarios{
 			
 			
 			} 
-			// else {
-
-			// 	$respuesta = false;
-			// 	return $respuesta;
-
-			// }
+			else {
+				echo '<script>
+						Swal.fire({
+							title: "Contraseña ingresada no cumple con los requisitos, intente de nuevo.",
+							icon: "error",
+							heightAuto: false,
+							showConfirmButton: true,
+							confirmButtonText: "Cerrar",
+							allowOutsideClick: false
+						});					
+					</script>';
+			}
 					
 		} 
 	
@@ -709,23 +715,27 @@ class ControladorUsuarios{
 		// $user_os        =   ControladorGlobales::ctrGetOS();
 		// $user_browser   =   ControladorGlobales::ctrGetBrowser();
 
+		// return $user_os;
+
 		// var_dump($user_os ." ". $user_browser);
 
 		// return;
 		// echo $user_os . " " . $user_browser;
 
 		$parametros = ControladorGlobales::ctrMostrarParametros();
+		// $parametros = ControladorUsuarios::ctrMostrarParametros();
 
 		$correoEmpresa = $parametros[1]['valor'];
 		$passwordEmpresa = $parametros[0]['valor'];
+		// return $correoEmpresa . '--' . $passwordEmpresa;
 
         $template = file_get_contents('../extensiones/plantillas/template.php');
         $template = str_replace("{{name}}", $nombre, $template);
         $template = str_replace("{{action_url_1}}", 'localhost/gym/index.php?ruta=recuperar-password&codigo='.$codigo, $template);
         $template = str_replace("{{action_url_2}}", '<b>localhost/gym/index.php?ruta=recuperar-password&codigo='.$codigo.'</b>', $template);
         $template = str_replace("{{year}}", date('Y'), $template);
-        $template = str_replace("{{operating_system}}", $user_os, $template);
-        $template = str_replace("{{browser_name}}", $user_browser, $template);
+        // $template = str_replace("{{operating_system}}", $user_os, $template);
+        // $template = str_replace("{{browser_name}}", $user_browser, $template);
 
 		require '../extensiones/PHPMailer/PHPMailer/src/Exception.php';
 		require '../extensiones/PHPMailer/PHPMailer/src/PHPMailer.php';
@@ -748,17 +758,16 @@ class ControladorUsuarios{
             $mail->SMTPAuth = true;
             $mail->Username = $correoEmpresa;   //username
             $mail->Password = $passwordEmpresa;   //password
-			$mail->SMTPSecure = 'tls';
-            $mail->Port = 587;     
-			// $mail->SMTPSecure = 'ssl';
-            // $mail->Port = 465;                    //smtp port
+			// $mail->SMTPSecure = 'tls';
+            // $mail->Port = 587;     
+			$mail->SMTPSecure = 'ssl';
+            $mail->Port = 465;                    //smtp port
 
             $mail->setFrom($correoEmpresa, 'Gimnasio');
             $mail->addAddress($correoElectronico, $nombre);
 
             $mail->isHTML(true);
             $mail->Subject = 'Recuperación de contraseña - Gimnasio';
-			// $mail->Body    = $template;
             $mail->Body = $template;
 		
 			if (!$mail->send()) {
@@ -875,6 +884,18 @@ class ControladorUsuarios{
         // }
     
         // return time().$pass;
+	}
+	
+	
+    /*=============================================
+			MOSTRAR PARAMETROS
+    =============================================*/
+    
+    static public function ctrMostrarParametros(){
+        $tabla = 'parametros';
+		$respuesta = ModeloUsuarios::mdlMostrarParametros($tabla);
+
+		return $respuesta;
     }
 }
 
