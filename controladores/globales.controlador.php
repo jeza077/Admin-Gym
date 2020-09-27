@@ -78,4 +78,14 @@ class ControladorGlobales{
         return $browser;
     }        
 
+    /*=============================================
+			MOSTRAR PARAMETROS
+    =============================================*/
+    
+    static public function ctrMostrarParametros(){
+        $tabla = 'parametros';
+		$respuesta = ModeloGlobales::mdlMostrarParametros($tabla);
+
+		return $respuesta;
+    }
 }

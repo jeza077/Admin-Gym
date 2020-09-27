@@ -714,6 +714,11 @@ class ControladorUsuarios{
 		// return;
 		// echo $user_os . " " . $user_browser;
 
+		$parametros = ControladorGlobales::ctrMostrarParametros();
+
+		$correoEmpresa = $parametros[1]['valor'];
+		$passwordEmpresa = $parametros[0]['valor'];
+
         $template = file_get_contents('../extensiones/plantillas/template.php');
         $template = str_replace("{{name}}", $nombre, $template);
         $template = str_replace("{{action_url_1}}", 'localhost/gym/index.php?ruta=recuperar-password&codigo='.$codigo, $template);
@@ -741,14 +746,14 @@ class ControladorUsuarios{
             $mail->isSMTP();
             $mail->Host = 'smtp.gmail.com';  //gmail SMTP server
             $mail->SMTPAuth = true;
-            $mail->Username = 'jesus.zuniga077@gmail.com';   //username
-            $mail->Password = 'Jesus#077.';   //password
+            $mail->Username = $correoEmpresa;   //username
+            $mail->Password = $passwordEmpresa;   //password
 			$mail->SMTPSecure = 'tls';
             $mail->Port = 587;     
 			// $mail->SMTPSecure = 'ssl';
             // $mail->Port = 465;                    //smtp port
 
-            $mail->setFrom('jesus.zuniga077@gmail.com', 'Gimnasio');
+            $mail->setFrom($correoEmpresa, 'Gimnasio');
             $mail->addAddress($correoElectronico, $nombre);
 
             $mail->isHTML(true);
