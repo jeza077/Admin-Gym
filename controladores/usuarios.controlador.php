@@ -91,11 +91,13 @@ class ControladorUsuarios{
 								$_SESSION["iniciarSesion"] = "ok";
 								$_SESSION["id_usuario"] = $respuesta["id_usuario"];
 								$_SESSION["usuario"] = $respuesta["usuario"];
+								$_SESSION["nombre"] = $respuesta["nombre"];
+								$_SESSION["apellidos"] = $respuesta["apellidos"];
 								$_SESSION["primerIngreso"] = $respuesta["primera_vez"];
 
 								echo '<script>
 								Swal.fire({
-									title: "Bienvenido '.$_SESSION['nombre'] . " " . $_SESSION["apellidos"] . '",
+									title: "Bienvenid@ '.$_SESSION['nombre'] . " " . $_SESSION["apellidos"] . '",
 									icon: "success",
 									heightAuto: false,
 									allowOutsideClick: false
@@ -143,7 +145,7 @@ class ControladorUsuarios{
 
 									echo '<script>
 										Swal.fire({
-											title: "Bienvenido '.$_SESSION['nombre'] . " " . $_SESSION["apellidos"] . '",
+											title: "Bienvenid@ '.$_SESSION['nombre'] . " " . $_SESSION["apellidos"] . '",
 											icon: "success",
 											heightAuto: false,
 											allowOutsideClick: false
@@ -443,7 +445,11 @@ class ControladorUsuarios{
 
 		if(isset($_POST["editarPassword"])){
 			
-			if(preg_match('/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%.])\S{8,16}$/', $_POST["editarPassword"])){
+			if(preg_match('/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%.])\S{8,16}$/', $_POST["editarPassword"]) && preg_grep('/^(?=.*[a-zñÑáéíóúÁÉÍÓÚ])\S{1,50}$/', $_POST["respuestaPregunta"])){
+				// echo '<br><div class="alert alert-danger">bien.</div>';
+
+				// return;
+				
 				
 				$encriptar = crypt($_POST["editarPassword"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
 			
@@ -458,7 +464,28 @@ class ControladorUsuarios{
 				// var_dump($respuestaContraseñas['password'] . ' ' . $encriptar);
 
 				if($respuestaContraseñas['password'] == $encriptar){
-					echo '<br><div class="alert alert-danger">Contraseña igual a la anterior, intente de nuevo.</div>';
+					// echo '<br><div class="alert alert-danger">Contraseña igual a la anterior, intente de nuevo.</div>';
+					echo '<script>			
+						Swal.fire({
+							title: "Contraseña no puede ser igual a la anterior. Por favor, intente de nuevo.",
+							icon: "error",
+							toast: true,
+							position: "top",
+							showConfirmButton: false,
+							timer: 3000,
+						});
+					</script>';
+				} else if($usuario == $_POST["editarPassword"]) {
+					echo '<script>			
+						Swal.fire({
+							title: "Contraseña ingresada no puede ser igual al usuario. Por favor, intente de nuevo.",
+							icon: "error",
+							toast: true,
+							position: "top",
+							showConfirmButton: false,
+							timer: 3000,
+						});
+					</script>';
 				} else {
 					$item1 = "password";
 					$valor1 = $encriptar;
@@ -499,7 +526,7 @@ class ControladorUsuarios{
 							if($respuestaPrimeraVez == true) {
 								echo '<script>
 									Swal.fire({
-										title: "Contraseña y preguntas guardadas correctamente",
+										title: "Contraseña y preguntas guardadas correctamente.",
 										icon: "success"
 									}).then((result)=>{
 										if(result.value){
@@ -516,7 +543,7 @@ class ControladorUsuarios{
 			} else {
 				echo '<script>			
 						Swal.fire({
-							title: "La contraseña no cumple con los requerimientos!",
+							title: "Por favor, llena los campos corectamente. Intente de nuevo.",
 							icon: "error",
 							toast: true,
 							position: "top",
