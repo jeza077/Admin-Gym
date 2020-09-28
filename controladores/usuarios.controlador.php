@@ -578,6 +578,8 @@ class ControladorUsuarios{
 
 				if($respuestaContraseñas['password'] == $encriptar){
 					return false;
+				} else if($valorUsuario == $post) {
+					return false;
 				} else {
 
 					$item1 = "password";
