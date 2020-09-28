@@ -48,21 +48,6 @@ function impedirEspacios(event) {
      
 }
 
-//FUNCION PARA VERIFICAR SI HAY ESPACIOS EN UN STRING
-function verificarUnEspacio(event) {
-    console.log(event);
-    console.log(event.originalEvent.repeat);
-    // return;
-    var codigo = event.which || event.keyCode;
-
-    if(codigo == 32 && event.repeat){
-        event.preventDefault();
-        console.log('repetido');
-
-    }
-     
-}
-
 
 var letra = /[A-z]/;
 var mayus = /[A-Z]/;

@@ -74,7 +74,7 @@ function longitudString(selector, maxLongitud) {
 		// console.log(valor.length)
 		// console.log(codigo)
 
-		if(valor.length >= maxLongitud && codigo != 8  && codigo != 116){
+		if(valor.length >= maxLongitud && codigo != 8  && codigo != 116 && codigo != 9){
 			e.preventDefault();
 		}
 	});
@@ -83,3 +83,15 @@ function longitudString(selector, maxLongitud) {
 longitudString($('.usuario'),5);
 longitudString($('.password'),16);
 
+/*====================================================
+FUNCION PARA PERMITIR 1 SOLO ESPACIO ENTRE CADA PALABRA
+=====================================================*/
+// var flag = false;
+var teclaAnterior = "";
+function permitirUnEspacio(event) {
+    teclaAnterior = teclaAnterior + " " + event.keyCode;
+    var arregloTA = teclaAnterior.split(" ");
+    if (event.keyCode == 32 && arregloTA[arregloTA.length - 2] == 32) {
+        event.preventDefault();
+    }     
+}
