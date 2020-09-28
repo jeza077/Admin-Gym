@@ -622,9 +622,11 @@ class ControladorUsuarios{
 
 		$respuesta = ModeloUsuarios::mdlMostrarUsuarios($tabla1, $tabla2, $item, $valor);
 
-		// var_dump($respuesta['password']);
+		// var_dump($respuesta['usuario']);
+		// return;
 		
 		$idUsuario = $respuesta['id_usuario'];
+		$usuario = $respuesta['usuario'];
 		$passwordAnterior = $respuesta['password'];
 		
 		if(isset($_POST['editarPassword'])){
@@ -638,10 +640,21 @@ class ControladorUsuarios{
 							Swal.fire({
 								title: "Contraseña ingresada no cumple con los requisitos, intente de nuevo.",
 								icon: "error",
-								heightAuto: false,
-								showConfirmButton: true,
-								confirmButtonText: "Cerrar",
-								allowOutsideClick: false
+								toast: true,
+								position: "top",
+								showConfirmButton: false,
+								timer: 3000,
+							});					
+						</script>';
+				} else if($usuario == $_POST['editarPassword']) {
+					echo '<script>
+							Swal.fire({
+								title: "Contraseña ingresada no puede ser igual a usuario, intente de nuevo.",
+								icon: "error",
+								toast: true,
+								position: "top",
+								showConfirmButton: false,
+								timer: 3000,
 							});					
 						</script>';
 				} else {
@@ -689,10 +702,10 @@ class ControladorUsuarios{
 						Swal.fire({
 							title: "Contraseña ingresada no cumple con los requisitos, intente de nuevo.",
 							icon: "error",
-							heightAuto: false,
-							showConfirmButton: true,
-							confirmButtonText: "Cerrar",
-							allowOutsideClick: false
+							toast: true,
+							position: "top",
+							showConfirmButton: false,
+							timer: 3000,
 						});					
 					</script>';
 			}
