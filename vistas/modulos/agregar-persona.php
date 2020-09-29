@@ -44,7 +44,7 @@
           <div class="form-row">
             <div class="form-group col-md-4">
               <label for="inputEmail4">Email</label>
-              <input type="email" class="form-control" id="inputEmail4" name="nuevoEmail" placeholder="Ingrese Email" required>
+              <input type="email" class="form-control email" id="inputEmail4" name="nuevoEmail" placeholder="Ingrese Email" required>
             </div>
             <div class="form-group col-md-4">
               <label>Teléfono</label>

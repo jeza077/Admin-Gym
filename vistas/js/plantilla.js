@@ -95,3 +95,21 @@ function permitirUnEspacio(event) {
         event.preventDefault();
     }     
 }
+
+/*==========================================
+		FUNCION PARA VALIDAR EMAIL	
+===========================================*/
+function validarEmail(selector, email) {
+	if (/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.([a-zA-Z]{2,4})+$/.test(email)){
+		selector.addClass('valid border-valid').removeClass('invalid border-invalid');
+		return (true);
+	} else {
+		selector.addClass('invalid border-invalid').removeClass('valid border-valid');
+		return (false);
+	}
+}
+
+$('.email').blur(function () { 
+	var emailIngresado = $('.email').val();
+	validarEmail($('.email'), emailIngresado);
+});

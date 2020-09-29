@@ -95,11 +95,11 @@ body.primer-ingreso .card {
 
 /* VALIDAR CONTRASEÑA */
 .valid{
-    color: green;
+    color: green!important;
 }
 
 .invalid{
-    color: red;
+    color: red!important;
 }
 .border-valid {
     border: 1px solid green!important;
