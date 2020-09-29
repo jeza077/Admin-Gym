@@ -199,6 +199,8 @@ $(".verificarCorreoPreguntas").on('click', function(event){
                                 $("#preguntaSeguridad").append("<label class='mt-2'>" + respuesta[i]['pregunta'] + "</label>");
                                 $("#preguntaSeguridad").append("<input type='text' class='form-control respuestaPregunta' placeholder='Agrega la respuesta' required>")
                             }
+
+                            $('.respuestaPregunta').keydown(permitirUnEspacio);
     
                             //CONVERTIMOS LAS RESPUESTAS DEL USUARIO QUE VIENEN DE LA BASE DE DATOS, EN UN ARRAY
                                 var respuestasRegistradas = respuesta.map(function(respuestasRegistrada){
