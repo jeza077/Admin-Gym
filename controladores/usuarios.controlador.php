@@ -85,16 +85,20 @@ class ControladorUsuarios{
 					// return;
 
 						if($respuesta["usuario"] == $_POST["ingUsuario"] && $respuesta["password"] == $encriptar){
+
+							$_SESSION["iniciarSesion"] = "ok";
+							$_SESSION["id_usuario"] = $respuesta["id_usuario"];
+							$_SESSION["id"] = $respuesta["id"];
+							$_SESSION["usuario"] = $respuesta["usuario"];
+							$_SESSION["nombre"] = $respuesta["nombre"];
+							$_SESSION["apellidos"] = $respuesta["apellidos"];
+							$_SESSION["foto"] = $respuesta["foto"];
+							$_SESSION["rol"] = $respuesta["rol"];
+							$_SESSION["primerIngreso"] = $respuesta["primera_vez"];
+
 							
-							if($respuesta["estado"] == 1 && $respuesta["primera_vez"] == 1) {
-
-								$_SESSION["iniciarSesion"] = "ok";
-								$_SESSION["id_usuario"] = $respuesta["id_usuario"];
-								$_SESSION["usuario"] = $respuesta["usuario"];
-								$_SESSION["nombre"] = $respuesta["nombre"];
-								$_SESSION["apellidos"] = $respuesta["apellidos"];
-								$_SESSION["primerIngreso"] = $respuesta["primera_vez"];
-
+							if($respuesta["estado"] == 1 && $respuesta["bloqueado"] == 0 && $respuesta["primera_vez"] == 1) {
+			
 								echo '<script>
 								Swal.fire({
 									title: "Bienvenid@ '.$_SESSION['nombre'] . " " . $_SESSION["apellidos"] . '",
@@ -108,18 +112,7 @@ class ControladorUsuarios{
 								});
 								</script>';
 
-							}
-
-							else if($respuesta["estado"] == 1) {
-
-								$_SESSION["iniciarSesion"] = "ok";
-								$_SESSION["id"] = $respuesta["id"];
-								$_SESSION["nombre"] = $respuesta["nombre"];
-								$_SESSION["apellidos"] = $respuesta["apellidos"];
-								$_SESSION["usuario"] = $respuesta["usuario"];
-								$_SESSION["foto"] = $respuesta["foto"];
-								$_SESSION["rol"] = $respuesta["rol"];
-								$_SESSION["primerIngreso"] = $respuesta["primera_vez"];
+							} else if($respuesta["estado"] == 1 && $respuesta["bloqueado"] == 0) {
 
 								/* =====REGISTRAR FECHA Y HORA PARA SABER EL ULTIMO LOGIN ====== */
 
@@ -159,7 +152,19 @@ class ControladorUsuarios{
 								}
 
 
+							} else if($respuesta["estado"] == 1 && $respuesta["bloqueado"] == 1) {
+								echo '<script>			
+										Swal.fire({
+											title: "Usuario bloqueado, comuniquese con el administrador.",
+											icon: "error",
+											heightAuto: false,
+											allowOutsideClick: false
+										});
+									</script>';
+								
+								session_destroy();
 							} else {
+								
 								echo '<script>			
 										Swal.fire({
 											title: "Usuario desactivado, comuniquese con el administrador.",
@@ -191,8 +196,8 @@ class ControladorUsuarios{
 							
 									if($respuesta["usuario"] == $_POST["ingUsuario"]){
 										$tabla = "empleados";
-										$item1 = "estado";
-										$valor1 = 0;
+										$item1 = "bloqueado";
+										$valor1 = 1;
 
 										$item2 = "usuario";
 										$valor2 = $_POST["ingUsuario"];
@@ -206,7 +211,7 @@ class ControladorUsuarios{
 											
 											echo '<script>			
 													Swal.fire({
-														title: "¡Lo sentimos! Su usuario ha sido desactivado, comuniquese con el Administrador.",
+														title: "¡Lo sentimos! Su usuario ha sido bloqueado, comuniquese con el Administrador.",
 														icon: "error",
 														heightAuto: false,
 														allowOutsideClick: false
