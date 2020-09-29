@@ -582,22 +582,26 @@ class ControladorUsuarios{
 
 				$respuestaContraseñas = ModeloUsuarios::mdlMostrarUsuarios($tabla1, $tabla2, $itemUsuario, $valorUsuario);
 
-				// return $respuestaContraseñas['password'] . ' ' . $encriptar;
+				// return $respuestaContraseñas;
 
 				if($respuestaContraseñas['password'] == $encriptar){
+
 					return false;
+
 				} else if($valorUsuario == $post) {
+
 					return false;
+					
 				} else {
 
 					$item1 = "password";
 					$valor1 = $encriptar;
-					
-					$item2 = $item;
-					$valor2 = $valor;
 
-					$item3 = null;
-					$valor3 = null;
+					$item2 = 'bloqueado';
+					$valor2 = 0;
+					
+					$item3 = $item;
+					$valor3 = $valor;
 	
 					$respuesta = ModeloUsuarios::mdlActualizarUsuario($tabla2, $item1, $valor1, $item2, $valor2, $item3, $valor3);
 					return $respuesta;
