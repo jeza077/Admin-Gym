@@ -97,7 +97,7 @@ class ControladorUsuarios{
 							$_SESSION["primerIngreso"] = $respuesta["primera_vez"];
 
 							
-							if($respuesta["estado"] == 1 && $respuesta["bloqueado"] == 0 && $respuesta["primera_vez"] == 1) {
+							if($respuesta["estado"] == 0 && $respuesta["bloqueado"] == 0 && $respuesta["primera_vez"] == 1) {
 			
 								echo '<script>
 								Swal.fire({
@@ -112,7 +112,7 @@ class ControladorUsuarios{
 								});
 								</script>';
 
-							} else if($respuesta["estado"] == 1 && $respuesta["bloqueado"] == 0) {
+							} else if($respuesta["estado"] == 1 && $respuesta["bloqueado"] == 0 && $respuesta["primera_vez"] == 0) {
 
 								/* =====REGISTRAR FECHA Y HORA PARA SABER EL ULTIMO LOGIN ====== */
 
@@ -164,7 +164,7 @@ class ControladorUsuarios{
 								
 								session_destroy();
 							} else {
-								
+
 								echo '<script>			
 										Swal.fire({
 											title: "Usuario desactivado, comuniquese con el administrador.",
@@ -480,7 +480,9 @@ class ControladorUsuarios{
 							timer: 3000,
 						});
 					</script>';
+
 				} else if($usuario == $_POST["editarPassword"]) {
+
 					echo '<script>			
 						Swal.fire({
 							title: "Contraseña ingresada no puede ser igual al usuario. Por favor, intente de nuevo.",
@@ -491,6 +493,7 @@ class ControladorUsuarios{
 							timer: 3000,
 						});
 					</script>';
+
 				} else {
 					$item1 = "password";
 					$valor1 = $encriptar;
@@ -517,18 +520,18 @@ class ControladorUsuarios{
 
 							$tabla = "empleados";
 
-							$item1 = "primera_vez";
-							$valor1 = 0;
-					
-							$item2 = 'id';
-							$valor2 = $id;
-			
-							$item3 = null;
-							$valor3 = null;
-			
-							$respuestaPrimeraVez = ModeloUsuarios::mdlActualizarUsuario($tabla, $item1, $valor1, $item2, $valor2, $item3, $valor3);
+							$item1 = 'estado';
+							$valor1 = 1;
 
-							if($respuestaPrimeraVez == true) {
+							$item2 = "primera_vez";
+							$valor2 = 0;
+			
+							$item3 = 'id';
+							$valor3 = $id;
+			
+							$respuestaEstadoPrimeraVez = ModeloUsuarios::mdlActualizarUsuario($tabla, $item1, $valor1, $item2, $valor2, $item3, $valor3);
+
+							if($respuestaEstadoPrimeraVez == true) {
 								echo '<script>
 									Swal.fire({
 										title: "Contraseña y preguntas guardadas correctamente.",
