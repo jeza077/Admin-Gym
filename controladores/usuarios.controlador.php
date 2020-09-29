@@ -675,11 +675,14 @@ class ControladorUsuarios{
 	
 					$item1 = "password";
 					$valor1 = $encriptar;
+
+					$item2 = "bloqueado";
+					$valor2 = 0;
 			
-					$item2 = "id";
-					$valor2 = $idUsuario;
+					$item3 = "id";
+					$valor3 = $idUsuario;
 	
-					$respuesta = ModeloUsuarios::mdlActualizarUsuarioPorCodigo($tabla, $item1, $valor1, $item2, $valor2);
+					$respuesta = ModeloUsuarios::mdlActualizarUsuarioPorCodigo($tabla, $item1, $valor1, $item2, $valor2, $item3, $valor3);
 	
 					if($respuesta == true){
 		
