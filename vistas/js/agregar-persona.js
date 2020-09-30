@@ -8,6 +8,9 @@ function toggleCliente(){
 }
 
 //***VALIDACIONES */
+validarEmail($('.email')); //Validar email de la persona ingresada
+
+
 // const formulario = $(".formulario").select();
 // const inputs = $('.formulario input');
 
@@ -36,9 +39,6 @@ function toggleCliente(){
 // inputs.forEach((input) => {
 //     input
 // });
-
-
-
 
 
 //** MOSTRAR TIPO DE PERSONA */

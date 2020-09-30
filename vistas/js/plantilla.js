@@ -100,13 +100,53 @@ function permitirUnEspacio(event) {
 		FUNCION PARA VALIDAR EMAIL	
 ===========================================*/
 function validarEmail(selector) {
-	selector.keydown(function() {  
-		if(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.([a-zA-Z]{2,4})+$/.test(selector.val())){
-			selector.addClass('border-valid').removeClass('border-invalid');
-		} else {
-			selector.addClass('border-invalid').removeClass('border-valid');
-		}
+	selector.blur(function() {
+		var emailIngresado = selector.val();
+
+		var datos = new FormData();
+		datos.append("verificarEmail", emailIngresado);
+	
+		$.ajax({
+	
+			url:"ajax/usuarios.ajax.php",
+			method: "POST",
+			data: datos,
+			cache: false,
+			contentType: false,
+			processData: false,  
+			dataType: "json",
+			success: function(respuesta) {
+				console.log(respuesta);
+	
+				if(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.([a-zA-Z]{2,4})+$/.test(emailIngresado) && respuesta){
+					selector.after('<div class="alert alert-warning mt-2">Email ya existente, ingrese uno diferente.</div>');
+					setTimeout(function () {
+						$('.alert').remove();
+					}, 3000)
+					
+					//E inmeditamente Limpiamos el input
+					selector.val("");
+					// selector.focus();
+				} else if(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.([a-zA-Z]{2,4})+$/.test(emailIngresado) && respuesta == false) {
+					selector.addClass('border-valid').removeClass('border-invalid');
+					// setTimeout(function () {
+					// 	selector.removeClass('border-valid');
+					// }, 3000)
+				} else {
+					selector.addClass('border-invalid').removeClass('border-valid');
+					selector.after('<div class="alert alert-warning mt-2">Correo invalidido, intente de nuevo.</div>');
+					setTimeout(function () {
+						$('.alert').remove();
+					}, 3000)
+					
+					//E inmeditamente Limpiamos el input
+					selector.val("");
+					// selector.focus();
+					
+				}
+			}
+	
+		});
+
 	})
 }
-
-validarEmail($('.email'));
