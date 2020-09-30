@@ -113,7 +113,7 @@
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="inputPassword4">Password</label>
-              <input type="password" class="form-control" id="inputPassword4" name="nuevoPassword" placeholder="Ingrese Contraseña">
+              <input type="password" class="form-control nueva-password" id="inputPassword4" name="nuevoPassword" placeholder="Ingrese Contraseña">
             </div>
             <div class="form-group col-md-6">
               <label for="inputPassword4">Confirmar Password</label>

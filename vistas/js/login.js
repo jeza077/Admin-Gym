@@ -1,131 +1,38 @@
-/*LOGIN PREVENIR RECARGAR */
+//** LOGIN PREVENIR RECARGAR */
 $(".verificarPreguntas").on('click', function(event){
     event.preventDefault();
     // console.log("click")
 })
 
-//FUNCION PARA PASAR A VERIFICAR EL EMAIL
+
+//** FUNCION PARA PASAR A VERIFICAR EL EMAIL */
 function toggleForm(){
     var container = document.querySelector('.login-box');
     container.classList.toggle('active')
 }
 
-//FUNCION PARA PASAR A LAS PREGUNTAS DE SEGURIDAD
+
+//** FUNCION PARA PASAR A LAS PREGUNTAS DE SEGURIDAD */
 function toggleQuestions(){
     var container = document.querySelector('.login-box');
     container.classList.toggle('quest')
 }
 
-//FUNCION PARA PASAR A CAMBIAR LA CONTRASEÑA
+
+//** FUNCION PARA PASAR A CAMBIAR LA CONTRASEÑA */
 function togglePassword(){
     var container = document.querySelector('.login-box');
     container.classList.toggle('changePassword')
 }
 
-//CUANDO PRESIONE ESPACIO QUE MUESTRE ALERTA
+
+//** CUANDO PRESIONE ESPACIO QUE MUESTRE ALERTA */
 $('.usuario').keydown(impedirEspacios);
 $('.password').keydown(impedirEspacios);
 // $('#verificarEmail').keydown(impedirEspacios);
 
-//FUNCION PARA VERIFICAR SI HAY ESPACIOS EN UN STRING
-function impedirEspacios(event) {
-    var codigo = event.which || event.keyCode;
 
-    if(codigo === 32){
-        event.preventDefault();
-        // $(this).parent().parent().after('<div class="alert alert-danger mt-2">No se aceptan espacios.</div>');
-        // var identificador = $(this);
-        // setTimeout(function () {
-        //     $('.alert').remove();
-        //     identificador.val('');
-        //     identificador.attr('disabled', false);
-        //     identificador.focus();
-        // }, 2000)
-        // $(this).attr('disabled', true);
-    } else {
-        $('.alert').remove();
-    }
-     
-}
-
-
-var letra = /[A-z]/;
-var mayus = /[A-Z]/;
-var minus = /[a-z]/;
-var num = /\d/;
-var caracEspe = /[!@#$&*?.,]/;
-var long = /^.{8,16}$/;
-
-function requisitosPassword(){  
-    
-    $(".nueva-password").keyup(function() { 
-        var editPassword = $(this).val();
-        
-        //validar que tenga una letra
-        if(editPassword.match(letra)){
-            $(".letter").removeClass('invalid').addClass('valid');
-        } else {
-            $(".letter").removeClass('valid').addClass('invalid');
-        }
-    
-        //validar que tenga una letra Mayuscula
-        if(editPassword.match(mayus)){
-            $(".capital").removeClass('invalid').addClass('valid');
-        } else {
-            $(".capital").removeClass('valid').addClass('invalid');
-        }
-    
-        //validar que tenga un numero
-        if(editPassword.match(num)){
-            $(".number").removeClass('invalid').addClass('valid');
-        } else {
-            $(".number").removeClass('valid').addClass('invalid');
-        }
-    
-        //validar que tenga un caracter especial
-        if(editPassword.match(caracEspe)){
-            $(".special").removeClass('invalid').addClass('valid');
-        } else {
-            $(".special").removeClass('valid').addClass('invalid');
-        }
-
-        //validar longitud
-        if(editPassword.match(long)){
-            $(".length").removeClass('invalid').addClass('valid');
-        } else {
-            $(".length").removeClass('valid').addClass('invalid');
-        }
-        
-    }).focus(function() {  
-        // $(".requisito-password").show();
-        Swal.fire({
-            // icon: "info",
-            width: 350,
-            html: 
-            '<i class="rp-info fas fa-info-circle"></i> ' +
-              '<div class="requisito-password"> ' +
-              '<h4>La contraseña debe cumplir con los siguientes requerimientos:</h4> ' +
-                '<ul> ' +
-                '<li class="letter">Al menos debe tener <strong>una letra</strong></li> ' +
-                '<li class="capital">Al menos debe tener <strong>una letra en mayuscula</strong></li> ' +
-                '<li class="number">Al menos debe tener <strong>un numero</strong></li> ' +
-                '<li class="special">Al menos debe tener <strong>un caracter especial</strong></li> ' +
-                '<li class="length">Al menos debe tener <strong>8 caracteres como minimo y 16 maximo</strong></li> ' +
-                '</ul> ' + 
-              '</div>',
-            toast: true,
-            position: "center-end",
-            showConfirmButton: false,
-        })
-        // $(".login-box").addClass('contenedor-rp');
-    }).blur(function() { 
-        // $(".requisito-password").hide();
-        Swal.close();
-        // $(".login-box").removeClass('contenedor-rp');
-    });
-}
-
-//VERIFICAR CORREO Y TRAER PREGUNTAS DE SEGURIDAD PARA CAMBIAR PASSWORD
+//** VERIFICAR CORREO Y TRAER PREGUNTAS DE SEGURIDAD PARA CAMBIAR PASSWORD */
 $(".verificarCorreoPreguntas").on('click', function(event){
     event.preventDefault();
     // console.log("click")    
@@ -355,7 +262,8 @@ $(".verificarCorreoPreguntas").on('click', function(event){
     
 })
 
-//VERIFICAR CORREO Y ENVIAR CORREO PARA CAMBIAR PASSWORD
+
+//** VERIFICAR CORREO Y ENVIAR CORREO PARA CAMBIAR PASSWORD */
 $(".verificarCorreo").on('click', function(event){
     event.preventDefault();
 
@@ -474,7 +382,8 @@ $(".verificarCorreo").on('click', function(event){
     }   
 })
 
-//VALIDACIONES PARA LUEGO CAMBIAR CONTRASEÑA CONTRASEÑA (CODIGO-CORREO)
+
+//** VALIDACIONES PARA LUEGO CAMBIAR CONTRASEÑA CONTRASEÑA (CODIGO-CORREO) */
 requisitosPassword();
 $('#cambiarContraseñaPorCorreo').attr('disabled', true);
 $(".nueva-password").on('change', function(){
@@ -499,7 +408,7 @@ $(".confirmar-password").on('input', function(){
 
 
 
-//MOSTRAR CONTRASEÑA
+//** MOSTRAR CONTRASEÑA */
 $('.show-pass').on('click', function () { 
 
     var action = $(this).attr('action');

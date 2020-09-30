@@ -107,6 +107,20 @@ body.primer-ingreso .card {
 .border-invalid {
     border: 1px solid red!important;
 }
+/* body.wrapper.content-wrapper.content.card.agregar-persona.swal2-container.swal2-top.swal2-backdrop-show {
+    top: 55px!important;
+} */
+
+/***Cambio de color de icono Error de SweetAlert  */
+.swal2-title{
+    color: #fff;
+}
+.swal2-icon.swal2-error{
+    border-color: #fff;
+}
+.swal2-icon.swal2-error [class^=swal2-x-mark-line] {
+    background-color:#fff;
+}
 
 .requisito-password{
     background: #d7dce4;
