@@ -112,6 +112,17 @@
 
           <div class="form-row">
             <div class="form-group col-md-6">
+              <label for="inputPassword4">Contraseña Generada</label>
+              <input type="text" class="form-control nueva-password" id="inputPassword4" name="nuevoPassword" placeholder="Ingrese Contraseña">
+            </div>
+            <div class="col-md-6">
+              <!-- <label for="inputPassword4">Generar Contraseña</label> -->
+              <a href="javascript:void(0);"  class="btn btn-block btn-orange" id="generarPassword" style="margin-top:2em">Generar contraseña</a>
+            </div>
+          </div>
+
+          <!-- <div class="form-row">
+            <div class="form-group col-md-6">
               <label for="inputPassword4">Password</label>
               <input type="password" class="form-control nueva-password" id="inputPassword4" name="nuevoPassword" placeholder="Ingrese Contraseña">
             </div>
@@ -119,7 +130,7 @@
               <label for="inputPassword4">Confirmar Password</label>
               <input type="password" class="form-control" placeholder="Ingrese Confirmar contraseña">
             </div>
-          </div>
+          </div> -->
 
           <!-- <div class="form-row">
           <?php 
