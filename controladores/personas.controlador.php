@@ -6,7 +6,8 @@ class ControladorPersonas{
 
         if(isset($_POST["nuevoNombre"])){
 
-			if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevoNombre"])){
+            if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevoNombre"]) && 
+               preg_match('/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.([a-zA-Z]{2,4})+$/', $_POST["nuevoEmail"])){
 
 				$tabla = "personas";
 
@@ -77,6 +78,18 @@ class ControladorPersonas{
                         
                
                     }
+            } else {
+                
+                echo '<script>
+                    Swal.fire({
+                        title: "Llene los campos correctamente.",
+                        icon: "error",
+                        toast: true,
+                        position: "top",
+                        showConfirmButton: false,
+                        timer: 3000,
+                    });					
+                </script>';
             }
         }
 

@@ -89,7 +89,7 @@
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="">Usuario</label>
-              <input type="text" class="form-control" onKeyUp="this.value=this.value.toUpperCase();" name="nuevoUsuario" placeholder="Ingrese Usuario">
+              <input type="text" class="form-control nuevoUsuario" onKeyUp="this.value=this.value.toUpperCase();" name="nuevoUsuario" placeholder="Ingrese Usuario">
             </div>
             <div class="form-group col-md-6">
               <label>Rol</label>

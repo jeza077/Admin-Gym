@@ -16,7 +16,7 @@ $('.nuevoUsuario').keyup(function (){
         processData: false,  
         dataType: "json",
         success: function(respuesta) {
-            console.log(respuesta);
+            // console.log(respuesta);
 
             if(respuesta){
                 $('.nuevoUsuario').after('<div class="alert alert-warning mt-2">Usuario ya existente, ingrese uno diferente.</div>');
