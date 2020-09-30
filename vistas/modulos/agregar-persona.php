@@ -120,7 +120,8 @@
               <input type="password" class="form-control" placeholder="Ingrese Confirmar contraseña">
             </div>
           </div>
-          <div class="form-row">
+
+          <!-- <div class="form-row">
           <?php 
             for ($i=1; $i <=3 ; $i++) { ?>
             <div class="form-group col-md-4">
@@ -144,9 +145,9 @@
           <?php
             }            
           ?>
-          </div>
+          </div> -->
           
-          <div class="form row">
+          <!-- <div class="form row">
             <div class="form-group col-md-4">
               <label for="inputPassword4">Respuesta 1</label>
               <input type="text" class="form-control" onKeyUp="this.value=this.value.toLowerCase();" name="respuestaPregunta[]">
@@ -159,7 +160,7 @@
               <label for="inputPassword4">Respuesta 3</label>
               <input type="text" class="form-control" onKeyUp="this.value=this.value.toLowerCase();" name="respuestaPregunta[]">
             </div>
-          </div>
+          </div> -->
           
           <div class="form-group col-md-12">
             <label for="exampleInputFile">Foto</label>

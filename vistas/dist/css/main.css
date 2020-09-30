@@ -111,7 +111,7 @@ body.primer-ingreso .card {
     top: 55px!important;
 } */
 
-/***Cambio de color de icono Error de SweetAlert  */
+/***Cambio de color en Alerta de Error de SweetAlert  */
 .swal2-title{
     color: #fff;
 }
@@ -121,6 +121,7 @@ body.primer-ingreso .card {
 .swal2-icon.swal2-error [class^=swal2-x-mark-line] {
     background-color:#fff;
 }
+
 
 .requisito-password{
     background: #d7dce4;
@@ -379,7 +380,7 @@ i.show-pass{
     transition: 0.5s;
 }
 .card.emplea{
-    height: 580px;
+    height: 450px;
 }
 .card .agregarPersona{
     left: 0;
