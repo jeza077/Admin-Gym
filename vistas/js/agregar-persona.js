@@ -13,6 +13,7 @@ function toggleCliente(){
 }
 
 $(".agregarEmpleado").hide();
+// $("#tipoPersona").attr("disabled", true);
 
 $("#tipoPersona").change(function(){
 
@@ -27,6 +28,31 @@ $("#tipoPersona").change(function(){
         $('#btnSiguiente').append('<a href="#" class="btn btn-primary aCliente float-right" onclick="toggleCliente();">Siguiente</a>');
     }
 })
+
+// var $('input[type="text"]')
+
+$('#btnSiguiente').click(function () {
+    var form = $('.agregarPersona');
+    var inputs = $('input[type="text"]', form).toArray().some(function (el) {  
+        return $(el).val().length < 1
+    });
+    // var vacios = false;
+    // inputs.each(function () {
+    //     if($(this).val() !== ""){
+
+    //         vacios = true;
+    //     }
+    //     // console.log($(this).val());
+    // });
+  
+
+    if(inputs){
+        console.log('Vacios')
+    } else {
+        console.log('Llenos')
+    }
+});
+
 
 
 

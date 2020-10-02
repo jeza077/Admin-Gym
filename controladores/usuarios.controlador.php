@@ -346,7 +346,9 @@ class ControladorUsuarios{
 
 					}
 								
-						/*================== ENCRIPTAMOS LA CONTRASEÑA ===================*/
+						/*============================== 
+							ENCRIPTAMOS LA CONTRASEÑA 
+						================================*/
 						$encriptar = crypt($datos["password"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
 
 						$tabla = "empleados";
