@@ -21,38 +21,56 @@ $("#tipoPersona").change(function(){
 
     if(valor === "empleado"){
         $('#btnSiguiente a').remove('.aCliente');
-        $('#btnSiguiente').append('<a href="#" class="btn btn-primary aEmpleado float-right" onclick="toggleUser();">Siguiente</a>');
-        $(".agregarEmpleado").show();
+        $('#btnSiguiente').append('<a href="#" class="btn btn-primary aEmpleado float-right" onclick="">Siguiente</a>');
+        $('#btnSiguiente').click(function () {
+            if(validarInputsVacios() == false){
+                toggleUser();
+                $(".agregarEmpleado").show();
+            } else {
+                Swal.fire({
+                    title: "Por favor llene todos los campos.",
+                    icon: "error",
+                    background: "#FFADAD",
+                    toast: true,
+                    position: "top",
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+            }
+        });        
     } else {
         $('#btnSiguiente a').remove('.aEmpleado');
-        $('#btnSiguiente').append('<a href="#" class="btn btn-primary aCliente float-right" onclick="toggleCliente();">Siguiente</a>');
+        $('#btnSiguiente').append('<a href="#" class="btn btn-primary aCliente float-right">Siguiente</a>');
+        $('#btnSiguiente').click(function () {
+            if(validarInputsVacios() == false){
+                toggleCliente();
+            } else {
+                Swal.fire({
+                    title: "Por favor llene todos los campos.",
+                    icon: "error",
+                    background: "#FFADAD",
+                    toast: true,
+                    position: "top",
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+            }
+        });
     }
 })
 
-// var $('input[type="text"]')
 
-$('#btnSiguiente').click(function () {
+
+//** FUNCION VALIDAR QUE TODOS LOS INPUTS ESTEN LLENOS */
+function validarInputsVacios() {       
     var form = $('.agregarPersona');
     var inputs = $('input[type="text"]', form).toArray().some(function (el) {  
-        return $(el).val().length < 1
+        return $(el).val().length < 1;
     });
-    // var vacios = false;
-    // inputs.each(function () {
-    //     if($(this).val() !== ""){
-
-    //         vacios = true;
-    //     }
-    //     // console.log($(this).val());
-    // });
-  
-
-    if(inputs){
-        console.log('Vacios')
-    } else {
-        console.log('Llenos')
-    }
-});
-
+    
+    // console.log(inputs);
+    return inputs;
+}
 
 
 
