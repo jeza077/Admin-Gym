@@ -13,19 +13,26 @@ function toggleCliente(){
 }
 
 $(".agregarEmpleado").hide();
-// $("#tipoPersona").attr("disabled", true);
+$(".agregarCliente").hide();
 
-$("#tipoPersona").change(function(){
+$("#tipoPersona").on("change",function(){
 
     var valor = $(this).val();
+    var formInput = $('.agregarPersona');
+    var selector = $('input[type="text"]', formInput);
+    console.log(valor);
 
+    
     if(valor === "empleado"){
         $('#btnSiguiente a').remove('.aCliente');
-        $('#btnSiguiente').append('<a href="#" class="btn btn-primary aEmpleado float-right" onclick="">Siguiente</a>');
+        $('#btnSiguiente').append('<a href="#" class="btn btn-primary aEmpleado float-right">Siguiente</a>');
+        $(".agregarEmpleado").show();
+        $(".agregarCliente").hide();
         $('#btnSiguiente').click(function () {
-            if(validarInputsVacios() == false){
+            if(validarInputsVacios(selector) == false){
+            console.log(valor);
+                // toggleCliente();
                 toggleUser();
-                $(".agregarEmpleado").show();
             } else {
                 Swal.fire({
                     title: "Por favor llene todos los campos.",
@@ -40,9 +47,13 @@ $("#tipoPersona").change(function(){
         });        
     } else {
         $('#btnSiguiente a').remove('.aEmpleado');
+        $(".agregarEmpleado").hide();
         $('#btnSiguiente').append('<a href="#" class="btn btn-primary aCliente float-right">Siguiente</a>');
+        $(".agregarCliente").show();
         $('#btnSiguiente').click(function () {
-            if(validarInputsVacios() == false){
+            if(validarInputsVacios(selector) == false){
+            console.log(valor);
+                // toggleUser();
                 toggleCliente();
             } else {
                 Swal.fire({
@@ -62,9 +73,8 @@ $("#tipoPersona").change(function(){
 
 
 //** FUNCION VALIDAR QUE TODOS LOS INPUTS ESTEN LLENOS */
-function validarInputsVacios() {       
-    var form = $('.agregarPersona');
-    var inputs = $('input[type="text"]', form).toArray().some(function (el) {  
+function validarInputsVacios(selector) {       
+    var inputs = selector.toArray().some(function (el) {  
         return $(el).val().length < 1;
     });
     
