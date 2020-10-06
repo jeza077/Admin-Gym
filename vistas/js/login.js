@@ -29,7 +29,7 @@ function togglePassword(){
 //** CUANDO PRESIONE ESPACIO QUE MUESTRE ALERTA */
 $('.usuario').keydown(impedirEspacios);
 $('.password').keydown(impedirEspacios);
-// $('#verificarEmail').keydown(impedirEspacios);
+$('#verificarEmail').keydown(impedirEspacios);
 
 
 //** VERIFICAR CORREO Y TRAER PREGUNTAS DE SEGURIDAD PARA CAMBIAR PASSWORD */
