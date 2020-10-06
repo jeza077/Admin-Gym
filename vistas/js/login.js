@@ -85,6 +85,23 @@ $(".verificarCorreoPreguntas").on('click', function(event){
                     // TRAEMOS LAS RESPUESTAS DE SEGURIDAD
                     $("#verificarEmail").val("");
                     toggleQuestions();
+                    $(".questionsBx").prepend("<p class='login-box-msg'>Hola <b>" + usuario + "</b>, contesta las siguientes preguntas de seguridad para poder cambiar la contraseña!</p>");
+          
+                    $("#preguntaSeguridad").append("<input type='text' class='form-control respuestaPregunta' placeholder='Agrega la respuesta' required>");
+                    
+                    $('.respuestaPregunta').keydown(permitirUnEspacio);
+
+                    // $('#preguntaSeleccionada').on('change', function(){
+                    //     var valorPregunta = $(this).val();
+                    //     console.log(valorPregunta);
+                    // });
+                    
+                    var valorPregunta = $('#preguntaSeleccionada').on('change', function() {
+                        return $(this).val();
+                    });
+                    console.log(valorPregunta);
+
+
     
                     var datos = new FormData();
                     datos.append("usuario", usuario);
@@ -99,24 +116,34 @@ $(".verificarCorreoPreguntas").on('click', function(event){
                         processData: false,  
                         dataType: "json",
                         success: function(respuesta) {
-                            $(".questionsBx").prepend("<p class='login-box-msg'>Hola <b>" + usuario + "</b>, contesta las siguientes preguntas de seguridad para poder cambiar la contraseña!</p>");
+                            // console.log(respuesta);
+                            // $(".questionsBx").prepend("<p class='login-box-msg'>Hola <b>" + usuario + "</b>, contesta las siguientes preguntas de seguridad para poder cambiar la contraseña!</p>");
                             
-                            for(var i in respuesta){
-                                // console.log(respuesta[i][1]);
-                                $("#preguntaSeguridad").append("<label class='mt-2'>" + respuesta[i]['pregunta'] + "</label>");
-                                $("#preguntaSeguridad").append("<input type='text' class='form-control respuestaPregunta' placeholder='Agrega la respuesta' required>")
-                            }
+                            // for(var i in respuesta){
+                            //     // console.log(respuesta[i][1]);
+                            //     $("#preguntaSeguridad").append("<label class='mt-2'>" + respuesta[i]['pregunta'] + "</label>");
+                            //     $("#preguntaSeguridad").append("<input type='text' class='form-control respuestaPregunta' placeholder='Agrega la respuesta' required>")
+                            // }
 
-                            $('.respuestaPregunta').keydown(permitirUnEspacio);
+                            // $("#preguntaSeguridad").append("<input type='text' class='form-control respuestaPregunta' placeholder='Agrega la respuesta' required>");
+                            
+                            // $('.respuestaPregunta').keydown(permitirUnEspacio);
     
+
                             //CONVERTIMOS LAS RESPUESTAS DEL USUARIO QUE VIENEN DE LA BASE DE DATOS, EN UN ARRAY
+                                var preguntasRegistradas = respuesta.map(function(preguntasRegistrada){
+                                    return preguntasRegistrada.pregunta; 
+                                })
+                                // console.log(preguntasRegistradas);
+
+                            
                                 var respuestasRegistradas = respuesta.map(function(respuestasRegistrada){
                                     return respuestasRegistrada.respuesta; 
                                 })
                                 
                                 // console.log(respuestasRegistradas);
-                            
-    
+
+
                                 // VERIFICAMOS SI LAS RESPUESTAS INGRESADAS CON LAS YA REGISTRADAS COINCIDEN
                                     $("#verificarPreguntas").on("click", function (event) {
                                         event.preventDefault();
@@ -252,8 +279,8 @@ $(".verificarCorreoPreguntas").on('click', function(event){
                             
     
                         }
-                    })
-    
+                    });
+                    
                 }
             }
             

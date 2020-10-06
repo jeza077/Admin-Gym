@@ -85,7 +85,31 @@
       <form method="post">
         <div class="form-row">
           <div class="form-group col-md-12" id="preguntaSeguridad">
-                   
+          <div class="form-row">
+            <?php 
+              // for ($i=1; $i <=3 ; $i++) { ?>
+              <div class="form-group col-md-12">
+                <label for="inputPassword4">Pregunta <?php echo $i?></label>
+                <select class="form-control select2" id="preguntaSeleccionada">
+                <option selected="selected">Seleccionar...</option>
+                <?php 
+                        $tabla = "preguntas";
+                        $item = null;
+                        $valor = null;
+
+                        $preguntas = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
+
+                        foreach ($preguntas as $key => $value) { ?>
+                          <option value="<?php echo $value['id']?>"><?php echo $value['pregunta']?></option>        
+                        <?php 
+                        }
+                    ?>
+                </select>
+              </div>
+            <?php
+              // }            
+            ?>
+            </div>
           </div>
         </div>
   
