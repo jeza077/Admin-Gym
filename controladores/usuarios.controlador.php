@@ -434,10 +434,9 @@ class ControladorUsuarios{
 	=============================================*/	
 
 
-	static public function ctrMostrarPreguntas($item, $valor) {
+	static public function ctrMostrarPreguntas($item1, $valor1, $item2, $valor2, $item3, $valor3) {
 
-		// $tabla = "usuarios";
-		$respuesta = ModeloUsuarios::mdlMostrarPreguntas($item, $valor);
+		$respuesta = ModeloUsuarios::mdlMostrarPreguntas($item1, $valor1, $item2, $valor2, $item3, $valor3);
 
 		return $respuesta;
 
@@ -566,10 +565,6 @@ class ControladorUsuarios{
 		}
 	}
 	
-
-	/*=============================================
-	CAMBIAR CONTRASEÑA POR PREGUNTAS DE SEGURIDAD
-	=============================================*/	
 	
 	static public function ctrCambiarContraseña($item, $valor, $itemUsuario, $valorUsuario, $post){
 
@@ -623,6 +618,17 @@ class ControladorUsuarios{
 	}
 
 	
+	
+	/*=============================================
+		ACTUALIZAR USUARIO
+	=============================================*/	
+	static public function ctrActualizarUsuario($tabla, $item1, $valor1, $item2, $valor2, $item3, $valor3){
+		
+		$respuesta = ModeloUsuarios::mdlActualizarUsuario($tabla, $item1, $valor1, $item2, $valor2, $item3, $valor3);
+		return $respuesta;
+	
+	}
+
 	/*=============================================
 		CAMBIAR CONTRASEÑA POR CODIGO-CORREO
 	=============================================*/	

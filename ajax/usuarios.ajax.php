@@ -78,13 +78,21 @@ class AjaxUsuarios{
     =============================================*/
     
     public $usuario;
+    public $idPregunta;
+    public $respuestaPregunta;
 
     public function ajaxMostrarPreguntas(){
 
-        $item = "usuario";
-        $valor = $this->usuario;
+        $item1 = "usuario";
+        $valor1 = $this->usuario;
         
-        $respuesta = ControladorUsuarios::ctrMostrarPreguntas($item, $valor);
+        $item2 = "id_pregunta";
+        $valor2 = $this->idPregunta;
+        
+        $item3 = "respuesta";
+        $valor3 = $this->respuestaPregunta;
+
+        $respuesta = ControladorUsuarios::ctrMostrarPreguntas($item1, $valor1, $item2, $valor2, $item3, $valor3);
 
         echo json_encode($respuesta);
     }
@@ -132,26 +140,29 @@ class AjaxUsuarios{
 
     }
 
-    // /*=============================================
-    //     CAMBIAR CONTRASEÑA POR CODIGO-CORREO
-    // =============================================*/
-    // // public $usuarioId;
-    // public $cambiarPassPorCodigo;
+    /*=============================================
+            ACTUALIZAR USUARIO
+    =============================================*/
+    public $usua;
+    
+    public function ajaxActualizarUsuario(){
 
-    // public function ajaxCambiarContraseñaPorCorreo(){
+        $tabla = "empleados";
 
-    //     // $tabla = "usuarios";
+        $item1 = "bloqueado";
+        $valor1 = 1;
 
-    //     $post = $this->cambiarPassPorCodigo;
+        $item2 = "usuario";
+        $valor2 = $this->usua;
 
-    //     // $item = "id";
-    //     // $valor = $this->usuarioId;
+        $item3 = null;
+        $valor3 = null;
       
-    //     $respuesta = ControladorUsuarios::ctrCambiarContraseñaPorCodigo($post);
+        $respuesta = ControladorUsuarios::ctrActualizarUsuario($tabla, $item1, $valor1, $item2, $valor2, $item3, $valor3);
 
-    //     echo json_encode($respuesta);
+        echo json_encode($respuesta);
 
-    // }
+    }
     
 
 }
@@ -199,6 +210,8 @@ if(isset($_POST["verificarEmail"])){
 if(isset($_POST["usuario"])){
     $valUsuario = new AjaxUsuarios();
     $valUsuario->usuario = $_POST["usuario"];
+    $valUsuario->idPregunta = $_POST["idPregunta"];
+    $valUsuario->respuestaPregunta = $_POST["respuestaPregunta"];
     $valUsuario->ajaxMostrarPreguntas();
 }
 /*=============================================
@@ -221,11 +234,11 @@ if(isset($_POST["usuarioId"])){
     $cambiarContraseña->cambiarPass = $_POST["cambiarPass"];
     $cambiarContraseña->ajaxCambiarContraseña();
 }
-// /*=============================================
-//     CAMBIAR CONTRASEÑA POR CODIGO-CORREO
-// =============================================*/
-// if(isset($_POST["cambiarPassPorCodigo"])){
-//     $cambiarContraseña = new AjaxUsuarios();
-//     $cambiarContraseña->cambiarPassPorCodigo = $_POST["cambiarPassPorCodigo"];
-//     $cambiarContraseña->ajaxCambiarContraseñaPorCorreo();
-// }
+/*=============================================
+        ACTUALIZAR USUARIO
+=============================================*/
+if(isset($_POST["usua"])){
+    $actualizarUsuario = new AjaxUsuarios();
+    $actualizarUsuario->usua = $_POST["usua"];
+    $actualizarUsuario->ajaxActualizarUsuario();
+}

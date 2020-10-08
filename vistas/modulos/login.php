@@ -91,7 +91,7 @@
               <div class="form-group col-md-12">
                 <label for="inputPassword4">Pregunta <?php echo $i?></label>
                 <select class="form-control select2" id="preguntaSeleccionada">
-                <option selected="selected">Seleccionar...</option>
+                <option value="" selected="selected">Seleccionar...</option>
                 <?php 
                         $tabla = "preguntas";
                         $item = null;

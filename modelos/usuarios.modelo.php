@@ -258,16 +258,18 @@ class ModeloUsuarios{
                 MOSTRAR PREGUNTAS
 	=============================================*/	
 
-	static public function mdlMostrarPreguntas($item, $valor){
+	static public function mdlMostrarPreguntas($item1, $valor1, $item2, $valor2, $item3, $valor3){
 
 		$stmt = Conexion::conectar()->prepare(
 	
-			"SELECT e.usuario, pr.pregunta, up.respuesta FROM empleados AS e "
+			"SELECT e.usuario, pr.pregunta, up.id_pregunta, up.respuesta FROM empleados AS e "
 			. " INNER JOIN usuario_pregunta AS up ON e.id = up.id_usuario\n"
 			. " INNER JOIN preguntas AS pr ON up.id_pregunta = pr.id\n"
-			. "	WHERE $item = :$item");
+			. "	WHERE $item1 = :$item1 AND $item2 = :$item2 AND $item3 = :$item3");
 			
-		$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+		$stmt -> bindParam(":".$item1, $valor1, PDO::PARAM_STR);
+		$stmt -> bindParam(":".$item2, $valor2, PDO::PARAM_INT);
+		$stmt -> bindParam(":".$item3, $valor3, PDO::PARAM_STR);
 		$stmt -> execute();
 		return $stmt -> fetchAll();
 	}	
