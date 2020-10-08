@@ -1,10 +1,3 @@
-//** LOGIN PREVENIR RECARGAR */
-$(".verificarPreguntas").on('click', function(event){
-    event.preventDefault();
-    // console.log("click")
-})
-
-
 //** FUNCION PARA PASAR A VERIFICAR EL EMAIL */
 function toggleForm(){
     var container = document.querySelector('.login-box');
@@ -540,27 +533,35 @@ $(".nueva-password").on('change', function(){
 $(".confirmar-password").on('input', function(){
 
     let confirPass = $(this).val();
-    let btnCambiarPass = $('#cambiarContraseña');
+    let btnCambiarPass = $('#cambiarContraseñaPorCorreo');
 
     confirmarContraseña(cambiarPassPorCodigo, confirPass, btnCambiarPass);
 })
 
 
-
-//** MOSTRAR CONTRASEÑA */
+//** MOSTRAR CONTRASEÑAS EN LOGIN */
 $('.show-pass').on('click', function () { 
-
     var action = $(this).attr('action');
-
-    if(action == 'hide'){
-        $('.password').attr('type', 'text')
-        $('.show-pass').removeClass('far fa-eye').addClass('far fa-eye-slash').attr('action', 'show')
-    }
-
-    if(action == 'show'){
-        $('.password').attr('type', 'password')
-        $('.show-pass').removeClass('far fa-eye-slash').addClass('far fa-eye').attr('action', 'hide')
-    }
+    var mostrarPass = $('.show-pass');
+    var nuevaPass = $('input[name="ingPassword"]');
+    mostrarContraseña(nuevaPass, mostrarPass, action);
 });
+
+
+//** MOSTRAR CONTRASEÑAS EN RECUPERAR CONTRASEÑAS */
+$('.show-nueva-pass').on('click', function () { 
+    var action = $(this).attr('action');
+    var mostrarPass = $('.show-nueva-pass');
+    var nuevaPass = $('.nueva-password');
+    mostrarContraseña(nuevaPass, mostrarPass, action);
+});
+
+$('.show-confir-pass').on('click', function () { 
+    var action = $(this).attr('action');
+    var mostrarPass = $('.show-confir-pass');
+    var confirmarPass = $('.confirmar-password');
+    mostrarContraseña(confirmarPass, mostrarPass, action);
+});
+
 
 

@@ -979,7 +979,6 @@ class ControladorUsuarios{
     /*=============================================
 			MOSTRAR PARAMETROS
     =============================================*/
-    
     static public function ctrMostrarParametros($item, $valor){
         $tabla = 'parametros';
 		$respuesta = ModeloUsuarios::mdlMostrarParametros($tabla, $item, $valor);

@@ -45,9 +45,9 @@ $(".tablas").DataTable({
   });
 
 
-/*=============================================
-    SIDEBAR MENU ACTIVO COLOR AZUL
-=============================================*/
+//*============================================
+//*     SIDEBAR MENU ACTIVO COLOR AZUL
+//*============================================
 var pathname = window.location.href;
 const claseActivo = $('.menu-lateral');
 // console.log(claseActivo[3]);
@@ -65,9 +65,9 @@ for (let i = 0; i < claseActivo.length -1; i++) {
 }
 
 
-/*=============================================
-  FUNCION QUE DETERMINE LA LONGITUD DE STRINGS
-=============================================*/
+//*=============================================
+//* FUNCION QUE DETERMINE LA LONGITUD DE STRINGS
+//*=============================================
 function longitudString(selector, maxLongitud) {
 	selector.keydown(function (e) {
 
@@ -82,10 +82,13 @@ function longitudString(selector, maxLongitud) {
 	});
 }
 
-longitudString($('.usuario'),5);
-longitudString($('.password'),16);
+longitudString($('.usuario'),5); //Input Usuario Login
+longitudString($('.password'),16); //Input Password Login
 
-//FUNCION PARA VERIFICAR SI HAY ESPACIOS EN UN STRING
+
+//* ===================================================
+//*FUNCION PARA VERIFICAR SI HAY ESPACIOS EN UN STRING
+//**===================================================
 function impedirEspacios(event) {
     var codigo = event.which || event.keyCode;
 
@@ -107,10 +110,9 @@ function impedirEspacios(event) {
 }
 
 
-/*====================================================
-FUNCION PARA PERMITIR 1 SOLO ESPACIO ENTRE CADA PALABRA
-=====================================================*/
-// var flag = false;
+//*=======================================================
+//*FUNCION PARA PERMITIR 1 SOLO ESPACIO ENTRE CADA PALABRA
+//*=======================================================
 var teclaAnterior = "";
 function permitirUnEspacio(event) {
     teclaAnterior = teclaAnterior + " " + event.keyCode;
@@ -188,7 +190,9 @@ function validarEmail(selector) {
 }
 
 
-//** FUNCION REQUISITOS PARA CONTRASEÑA */
+//*==========================================
+//*		FUNCION REQUISITOS PARA CONTRASEÑA
+//*===========================================
 var letra = /[A-z]/;
 var mayus = /[A-Z]/;
 var minus = /[a-z]/;
@@ -282,5 +286,21 @@ function confirmarContraseña(nuevaPass, confirmarPass, botonCambiarPass) {
         $('input.nueva-password').addClass('invalid border-invalid').removeClass('valid border-valid');
         $('input.confirmar-password').addClass('invalid border-invalid').removeClass('valid border-valid');
         botonCambiarPass.attr('disabled', true);
+    }
+}
+
+
+//*==========================================
+//*		FUNCION MOSTRAR CONTRASEÑAS
+//*===========================================
+function mostrarContraseña(selector, mostrar, action) {
+    if(action == 'hide'){
+        selector.attr('type', 'text')
+        mostrar.removeClass('far fa-eye').addClass('far fa-eye-slash').attr('action', 'show')
+    }
+
+    if(action == 'show'){
+        selector.attr('type', 'password')
+        mostrar.removeClass('far fa-eye-slash').addClass('far fa-eye').attr('action', 'hide')
     }
 }

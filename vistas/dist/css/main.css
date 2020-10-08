@@ -146,12 +146,12 @@ body.primer-ingreso .card {
     color: rgba(53, 222, 245, 0.897);
     margin-bottom: 1rem;
 }
-/* RECUPERAR PASSWORD*/
+/** RECUPERAR PASSWORD*/
 .login-box.recu-password .login-card-body{
     position: relative;
 }
 
-/* SLIDE DE, LOGIN, VERIFICAR EMAIL, PREGUNTAS, CAMBIAR CONTRASEÑA */
+/** SLIDE DE, LOGIN, VERIFICAR EMAIL, PREGUNTAS, CAMBIAR CONTRASEÑA */
 .login-page .login-box{
     position: relative;
     width: 400px;
@@ -191,21 +191,23 @@ body.primer-ingreso .card {
     border-radius: 0 5px 5px 0;
     cursor: pointer;
 } */
-i.show-pass{
+i.show-pass,
+i.show-nueva-pass,
+i.show-confir-pass{
     cursor: pointer;
     position: absolute;
     top: 12px;
     right: 30px;
     z-index: 1000;
 }
-#passwords i.show-pass.primero{
+.passwords i.show-nueva-pass.primero{
     cursor: pointer;
     position: absolute;
     top: 52px;
     right: 30px;
     z-index: 1000;
 }
-#passwords i.show-pass.segundo{
+.passwords i.show-confir-pass.segundo{
     cursor: pointer;
     position: absolute;
     top: 130px;

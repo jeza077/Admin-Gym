@@ -24,7 +24,7 @@
               <span class="fas fa-lock"></span>
             </div>
           </div>
-          <input type="password" class="form-control password" name="ingPassword" placeholder="Contraseña" required> 
+          <input type="password" class="form-control" name="ingPassword" placeholder="Contraseña" required> 
           <i class="far fa-eye show-pass" action="hide"></i>
         </div>
         <div class="row mb-2">
@@ -129,11 +129,9 @@
       <form method="post" id="cambiarPassword">
 
       <div class="form-row">
-        <div class="form-group col-md-12" id="passwords">
-          <!-- <input type='password' class='form-control nueva-password' placeholder='Ingrese nueva contraseña' name='editarPassword' required>
-          <input type='password' class='form-control confirmar-password' placeholder='Confirmar contraseña'> -->
-          <i class="far fa-eye show-pass primero" action="hide"></i>
-          <i class="far fa-eye show-pass segundo" action="hide"></i>
+        <div class="form-group col-md-12 passwords" id="passwords">
+          <i class="far fa-eye show-nueva-pass primero" action="hide"></i>
+          <i class="far fa-eye show-confir-pass segundo" action="hide"></i>
           <span class="resultado-password help-block mt-2 float-right"></span>
         </div>
       </div>

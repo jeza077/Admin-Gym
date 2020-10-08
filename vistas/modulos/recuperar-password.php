@@ -16,15 +16,14 @@ $password->ctrRevisarCodigoFecha();
     <div class="card-body login-card-body">
       <p class="login-box-msg">Cambia tu contraseña</p>
       <form method="post" id="cambiarPassword">
-
       <div class="form-row">
-        <div class="form-group col-md-12">
+        <div class="form-group col-md-12 passwords">
           <label class='mt-2'>Nueva contraseña</label>
           <input type='password' class='form-control nueva-password' placeholder='Ingrese nueva contraseña' name='editarPassword' required>
           <label class='mt-2'>Confirmar contraseña</label>
           <input type='password' class='form-control confirmar-password' placeholder='Confirmar contraseña'>
-          <!-- <i class="far fa-eye show-pass primero" action="hide"></i>
-          <i class="far fa-eye show-pass segundo" action="hide"></i> -->
+          <i class="far fa-eye show-nueva-pass primero" action="hide"></i>
+          <i class="far fa-eye show-confir-pass segundo" action="hide"></i>
           <span class="resultado-password help-block mt-2 float-right"></span>
         </div>
       </div>
