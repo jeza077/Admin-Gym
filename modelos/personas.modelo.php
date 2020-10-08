@@ -8,11 +8,12 @@ class ModeloPersonas{
 	 
 	static public function mdlCrearPersona($tabla, $datos){
 
-		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(nombre, apellidos, identidad, fecha_nacimiento, sexo, telefono, direccion, correo) VALUES (:nombre, :apellidos, :identidad, :fecha_nacimiento, :sexo, :telefono, :direccion, :correo)");
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(nombre, apellidos, identidad, tipo_persona, fecha_nacimiento, sexo, telefono, direccion, correo) VALUES (:nombre, :apellidos, :identidad, :tipo_persona, :fecha_nacimiento, :sexo, :telefono, :direccion, :correo)");
 
 		$stmt->bindParam(":nombre", $datos["nombre"], PDO::PARAM_STR);
 		$stmt->bindParam(":apellidos", $datos["apellido"], PDO::PARAM_STR);
 		$stmt->bindParam(":identidad", $datos["identidad"], PDO::PARAM_STR);
+		$stmt->bindParam(":tipo_persona", $datos["tipo_persona"], PDO::PARAM_STR);
 		$stmt->bindParam(":fecha_nacimiento", $datos["fecha_nacimiento"], PDO::PARAM_STR);
 		$stmt->bindParam(":sexo", $datos["sexo"], PDO::PARAM_STR);
 		$stmt->bindParam(":telefono", $datos["telefono"], PDO::PARAM_STR);

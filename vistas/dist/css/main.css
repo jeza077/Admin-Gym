@@ -235,7 +235,6 @@ i.show-confir-pass{
 .login-box.active .verificarEmail{
     left: 0;
 }
-
 .iniciarSesion{
     left: 0;
 }
@@ -289,6 +288,28 @@ i.show-confir-pass{
 }
 .login-box.active.quest.changePassword .card{
     height: 580px;
+}
+/** REGISTRAR DESDE LOGIN */
+.registrar{
+    left: 100%;
+    z-index: 1000;
+}
+.login-box.registro .registrar{
+    left: 0;
+}
+.login-box.registro .iniciarSesion{
+    left: 100%;
+}
+.login-box.registro,
+.login-box.registro .card{
+    width: 800px;
+    height: 570px;
+}
+.login-card-body.registrar{
+    padding-top: 0;
+}
+.login-card-body.registrar .login-box-msg{
+    padding-bottom: 35px;
 }
 
 /****** BARRA O HEADER *****/

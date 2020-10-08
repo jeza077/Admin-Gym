@@ -202,8 +202,9 @@
         </div>
         <!-- /.card -->
         <?php
+          $tipoPersona = null;
           $ingresarPersona = new ControladorPersonas();
-          $ingresarPersona->ctrCrearPersona();
+          $ingresarPersona->ctrCrearPersona($tipoPersona);
         ?>
       </form>
 

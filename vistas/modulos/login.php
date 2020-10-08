@@ -38,24 +38,25 @@
         <a href="javascript:void(0);" onclick="toggleForm();">¿Olvidaste tu contraseña</a>
       </p>
       <p class="mb-0">
-        ¿No tienes una cuenta? <a href="javascript:void(0);" class="text-center">Registrate</a>
+        ¿No tienes una cuenta? <a href="javascript:void(0);" onclick="toggleRegistrar()" class="text-center">Registrate</a>
       </p>
-  <?php 
-    $login = new ControladorUsuarios();
-    $login->ctrIngresoUsuario();
+      
+        <?php 
+          $login = new ControladorUsuarios();
+          $login->ctrIngresoUsuario();
 
-    // $user_os        =   ControladorGlobales::ctrGetOS();
-    // $user_browser   =   ControladorGlobales::ctrGetBrowser();
-    // $device_details =   "<strong>Browser: </strong>" . $user_browser . 
-    //                     "<br /><strong>Operating System: </strong>" . $user_os;
-    // echo($device_details);
+          // $user_os        =   ControladorGlobales::ctrGetOS();
+          // $user_browser   =   ControladorGlobales::ctrGetBrowser();
+          // $device_details =   "<strong>Browser: </strong>" . $user_browser . 
+          //                     "<br /><strong>Operating System: </strong>" . $user_os;
+          // echo($device_details);
 
-    // $correoElectronico = null;
-    // $nombre = null; 
-    // $codigo = null;
-    // $param = ControladorUsuarios::ctrEnviarCorreoRecuperacion($correoElectronico, $nombre, $codigo);
-    // echo($param);
-  ?>
+          // $correoElectronico = null;
+          // $nombre = null; 
+          // $codigo = null;
+          // $param = ControladorUsuarios::ctrEnviarCorreoRecuperacion($correoElectronico, $nombre, $codigo);
+          // echo($param);
+        ?>
     </div>
 
     <!-- CONTENEDOR VERIFICAR EL EMAIL -->
@@ -154,8 +155,77 @@
 
       </form>
     </div>
-  </div>
 
+    <!-- CONTENEDOR CAMBIAR CONTRASEÑA -->
+    <div class="card-body login-card-body registrar" >
+      <p class="login-box-msg">Registra tus datos personales</p>
+      <form method="post" id="">
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label for="identidad">Identidad</label>
+            <input type="text" class="form-control" name="nuevaIdentidad" placeholder="Ingrese Identidad" required>
+          </div>
+          <div class="form-group col-md-4">
+            <label for="nombre">Nombre</label>
+            <input type="text" class="form-control" name="nuevoNombre" placeholder="Ingrese Nombre" required>
+          </div>
+          <div class="form-group col-md-4">
+            <label for="apellido">Apellido</label>
+            <input type="text" class="form-control" name="nuevoApellido" placeholder="Ingrese Apellidos" required>
+          </div>
+        </div>
+            
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label for="inputEmail4">Email</label>
+            <input type="email" class="form-control email" id="inputEmail4" name="nuevoEmail" placeholder="Ingrese Email" required>
+          </div>
+          <div class="form-group col-md-4">
+            <label>Teléfono</label>
+            <input type="text" class="form-control" data-inputmask='"mask": "(999) 9999-9999"' data-mask  name="nuevoTelefono" placeholder="Ingrese Telefono" required>
+          </div>
+          <div class="form-group col-md-4">
+            <label>Fecha de nacimiento</label>
+              <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy/mm/dd" data-mask  name="nuevaFechaNacimiento" placeholder="Ingrese Fecha de Nacimiento" required>
+          </div>
+        </div>
+
+        <!-- <div class="form-group">
+          <label for="inputAddress">Dirección</label>
+          <input type="text" class="form-control" id="inputAddress" name="nuevaDireccion" placeholder="Col. Alameda, calle #2..." required>
+        </div> -->
+
+        <div class="form-row">
+          <div class="form-group col-md-9">
+            <label for="inputAddress">Dirección</label>
+            <input type="text" class="form-control" id="inputAddress" name="nuevaDireccion" placeholder="Col. Alameda, calle #2..." required>
+          </div>
+          <div class="form-group col-md-3">
+            <label>Sexo</label>
+            <select class="form-control select2" name="nuevoSexo" style="width: 100%;" required>
+              <option selected="selected">Seleccionar...</option>
+              <option>Masculino</option>
+              <option>Femenino</option>
+            </select>
+        </div>
+
+        <div class="form-row col-md-12 mt-5">
+          <div class="form-group col-md-6">
+              <p class="link mt-3 ml-2">Regresar al <a href="javascript:void(0);" onclick="toggleRegistrar();">Login</a></p>
+          </div>
+          <div class="form-group col-md-6">
+            <button type="submit" class="btn btn-primary btnGuardar mt-3 float-right">Guardar</button>
+          </div>
+        </div>
+
+        <?php
+          $tipoPersona = 'default';
+          $ingresaPersona = new ControladorPersonas();
+          $ingresaPersona->ctrCrearPersona($tipoPersona);
+        ?>
+      </form>
+    </div>
+  </div>
 </div>
 <!-- /.login-box -->
 

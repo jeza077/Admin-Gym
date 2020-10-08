@@ -18,6 +18,13 @@ function togglePassword(){
     container.classList.toggle('changePassword')
 }
 
+//** FUNCION PARA PASAR A REGISTRAR USUARIO */
+function toggleRegistrar(){
+    var container = document.querySelector('.login-box');
+    container.classList.toggle('registro')
+}
+
+
 
 //** CUANDO PRESIONE ESPACIO QUE MUESTRE ALERTA */
 $('.usuario').keydown(impedirEspacios);
