@@ -251,14 +251,14 @@ i.show-pass{
 .login-box.active.quest .verificarEmail{
     left: 100%;
 }
-.login-box.active.quest{
+/* .login-box.active.quest{
     margin: 4% 35%;
     height: 580px;
 }
 .login-box.active.quest .card{
     height: 580px;
     padding: 25px 10px;
-}
+} */
 .login-box.active.quest .login-box-msg{
     padding: 0 10px 20px;
 }

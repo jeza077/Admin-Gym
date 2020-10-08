@@ -178,14 +178,23 @@ class ControladorUsuarios{
 						} else {
 				
 								//INTENTOS DE LOGUEARSE PERMITIDOS SOLO 3 AL REBASARLOS SE DESACTIVARA EL USUARIO INGRESADO AUTOMATICAMENTE.
-								$intentos = 3;
+								$item = 'parametro';
+								$valor = 'ADMIN_INTENTOS';
+								$parametros = ControladorUsuarios::ctrMostrarParametros($item, $valor);
+								// var_dump($parametros);
+								
+								// return;
+								$intentos = $parametros['valor'];
 								$_SESSION['contadorLogin']++; 
+								// $intentosRestantes = $intentos - $_SESSION['contadorLogin'];
 
-								$intentos = $intentos - $_SESSION['contadorLogin'];
+								// $intentos = $intentos - $_SESSION['contadorLogin'];
 								
 								// echo $_SESSION['contadorLogin'];
+								// echo $intentosRestantes;
+								// session_destroy();
 
-								if($_SESSION['contadorLogin'] === 3) {
+								if($_SESSION['contadorLogin'] == $intentos) {
 									$tabla1 = "personas";
 									$tabla2 = "empleados";
 									
@@ -232,7 +241,7 @@ class ControladorUsuarios{
 									// echo '<br><div class="alert alert-danger">¡Usuario y contraseña invalidos! Intento: '.$_SESSION['contadorLogin'] .', tiene '.$intentos.' intento mas </div>';
 									echo '<script>			
 											Swal.fire({
-												title: "¡Usuario y contraseña invalidos! Intento: '.$_SESSION['contadorLogin'] .', tiene '.$intentos.' intento mas.",
+												title: "¡Usuario y contraseña invalidos!",
 												icon: "error",
 												toast: true,
 												position: "top-end",
@@ -271,7 +280,6 @@ class ControladorUsuarios{
 	/*=============================================
 			REGISTRO DE PERSONAS
 	=============================================*/
-
 	static public function ctrCrearUsuario($datos){
 
 		if(isset($datos["usuario"])){
@@ -432,8 +440,6 @@ class ControladorUsuarios{
 	/*=============================================
                 MOSTRAR PREGUNTAS
 	=============================================*/	
-
-
 	static public function ctrMostrarPreguntas($item1, $valor1, $item2, $valor2, $item3, $valor3) {
 
 		$respuesta = ModeloUsuarios::mdlMostrarPreguntas($item1, $valor1, $item2, $valor2, $item3, $valor3);
@@ -446,7 +452,6 @@ class ControladorUsuarios{
 	/*=============================================
 	CAMBIAR CONTRASEÑA POR PRIMERA VEZ Y AGREGAR PREGUNTAS
 	=============================================*/	
-
 	static public function ctrNuevaContraseñaPreguntasSeguridad($id, $usuario){
 
 		if(isset($_POST["editarPassword"])){
@@ -565,7 +570,10 @@ class ControladorUsuarios{
 		}
 	}
 	
-	
+
+	/*=============================================
+	CAMBIAR CONTRASEÑA POR PREGUNTAS DE SEGURIDAD
+	=============================================*/	
 	static public function ctrCambiarContraseña($item, $valor, $itemUsuario, $valorUsuario, $post){
 
 		$tabla1 = "personas";
@@ -618,7 +626,6 @@ class ControladorUsuarios{
 	}
 
 	
-	
 	/*=============================================
 		ACTUALIZAR USUARIO
 	=============================================*/	
@@ -632,7 +639,6 @@ class ControladorUsuarios{
 	/*=============================================
 		CAMBIAR CONTRASEÑA POR CODIGO-CORREO
 	=============================================*/	
-	
 	static public function ctrCambiarContraseñaPorCodigo(){
 
 		$tabla1 = "personas";
@@ -791,7 +797,10 @@ class ControladorUsuarios{
 		$nombreDestinatario = $nombre;
 		
 		// $parametros = ControladorGlobales::ctrMostrarParametros();
-		$parametros = ControladorUsuarios::ctrMostrarParametros();
+
+		$item = null;
+		$valor = null;
+		$parametros = ControladorUsuarios::ctrMostrarParametros($item, $valor);
 
 		$correoEmpresa = $parametros[1]['valor'];
 		$passwordEmpresa = $parametros[0]['valor'];
@@ -971,9 +980,9 @@ class ControladorUsuarios{
 			MOSTRAR PARAMETROS
     =============================================*/
     
-    static public function ctrMostrarParametros(){
+    static public function ctrMostrarParametros($item, $valor){
         $tabla = 'parametros';
-		$respuesta = ModeloUsuarios::mdlMostrarParametros($tabla);
+		$respuesta = ModeloUsuarios::mdlMostrarParametros($tabla, $item, $valor);
 
 		return $respuesta;
     }
