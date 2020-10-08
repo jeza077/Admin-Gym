@@ -121,9 +121,9 @@ function permitirUnEspacio(event) {
 }
 
 
-/*==========================================
-		FUNCION PARA VALIDAR EMAIL	
-===========================================*/
+//*==========================================
+//*		FUNCION PARA VALIDAR EMAIL	
+//*===========================================
 function validarEmail(selector) {
 	selector.blur(function() {
 		var emailIngresado = selector.val();
@@ -263,4 +263,24 @@ function requisitosPassword(){
         Swal.close();
         // $(".login-box").removeClass('contenedor-rp');
     });
+}
+
+
+//*==========================================
+//*	   FUNCION PARA CONFIRMAR CONTRASEÑA	
+//*===========================================
+function confirmarContraseña(nuevaPass, confirmarPass, botonCambiarPass) {
+    if(confirmarPass == nuevaPass){
+        $('.resultado-password').text('Correcto');
+        $('.resultado-password').addClass('valid').removeClass('invalid');
+        $('input.nueva-password').addClass('valid border-valid').removeClass('invalid border-invalid');
+        $('input.confirmar-password').addClass('valid border-valid').removeClass('invalid border-invalid');
+        botonCambiarPass.attr('disabled', false);                                              
+    } else {
+        $('.resultado-password').text('Contraseñas no coinciden');
+        $('.resultado-password').addClass('invalid').removeClass('valid');
+        $('input.nueva-password').addClass('invalid border-invalid').removeClass('valid border-valid');
+        $('input.confirmar-password').addClass('invalid border-invalid').removeClass('valid border-valid');
+        botonCambiarPass.attr('disabled', true);
+    }
 }

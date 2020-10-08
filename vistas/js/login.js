@@ -86,20 +86,10 @@ $(".verificarCorreoPreguntas").on('click', function(event){
                     $("#verificarEmail").val("");
                     toggleQuestions();
                     $(".questionsBx").prepend("<p class='login-box-msg'>Hola <b>" + usuario + "</b>, contesta las siguientes preguntas de seguridad para poder cambiar la contraseña!</p>");
-          
                     $("#preguntaSeguridad").append("<input type='text' class='form-control respuestaPregunta' placeholder='Agrega la respuesta' required>");
                     
                     $('.respuestaPregunta').keydown(permitirUnEspacio);
 
-                    // $('#preguntaSeleccionada').on('change', function(){
-                    //     var valorPregunta = $(this).val();
-                    //     console.log(valorPregunta);
-                    // });
-                    
-                    // var valorPregunta = $('#preguntaSeleccionada').on('change', function() {
-                    //     return $(this).val();
-                    // });
-                    // console.log(valorPregunta);
 
                     $('#verificarPreguntas').click(function (e) { 
                         e.preventDefault();
@@ -169,9 +159,9 @@ $(".verificarCorreoPreguntas").on('click', function(event){
 
                                         $("#btnCambiarPass").append("<button type='submit' class='btn btn-orange btn-block btn-flat' id='cambiarContraseña'>Cambiar Contraseña</button>")
 
-                                        $("#linkLogin").append("<p class='link mt-3 ml-2'>Regresar al <a href='#' onclick='toggleForm(); toggleQuestions(); togglePassword();'>Login</a></p>")
+                                        $("#linkLogin").append("<p class='link mt-3 ml-2'>Regresar al <a href='javascript:void(0);' onclick='toggleForm(); toggleQuestions(); togglePassword();'>Login</a></p>")
 
-                                            //CAMBIAR CONTRASEÑA
+                                            //*CAMBIAR CONTRASEÑA
                                             requisitosPassword();
 
                                             $('#cambiarContraseña').attr('disabled', true);
@@ -183,20 +173,11 @@ $(".verificarCorreoPreguntas").on('click', function(event){
                                             $('.confirmar-password').keydown(impedirEspacios);
                                             
                                             $(".confirmar-password").on('input', function(){
-                                                // var password_nuevo = cambiarPass;
-                                                if($(this).val() == cambiarPass){
-                                                    $('.resultado-password').text('Correcto');
-                                                    $('.resultado-password').addClass('valid').removeClass('invalid');
-                                                    $('input.nueva-password').addClass('valid border-valid').removeClass('invalid border-invalid');
-                                                    $('input.confirmar-password').addClass('valid border-valid').removeClass('invalid border-invalid');
-                                                    $('#cambiarContraseña').attr('disabled', false);                                              
-                                                } else {
-                                                    $('.resultado-password').text('Contraseñas no coinciden');
-                                                    $('.resultado-password').addClass('invalid').removeClass('valid');
-                                                    $('input.nueva-password').addClass('invalid border-invalid').removeClass('valid border-valid');
-                                                    $('input.confirmar-password').addClass('invalid border-invalid').removeClass('valid border-valid');
-                                                    $('#cambiarContraseña').attr('disabled', true);
-                                                }
+                                                
+                                                var confirPass = $(this).val();
+                                                var btnCambiarPass = $('#cambiarContraseña');
+
+                                                confirmarContraseña(cambiarPass, confirPass, btnCambiarPass)
                                             })
                                             
                                                 $("#cambiarContraseña").on("click", function(event){  
@@ -234,7 +215,7 @@ $(".verificarCorreoPreguntas").on('click', function(event){
                                                                         toggleQuestions();
                                                                         togglePassword();
 
-                                                                        // window.location('login')
+                                                                        // window.location = 'login';
                                             
                                                                     }
                                             
@@ -557,20 +538,11 @@ $(".nueva-password").on('change', function(){
     cambiarPassPorCodigo = $(this).val();
 });
 $(".confirmar-password").on('input', function(){
-    // var password_nuevo = cambiarPassPorCodigo;
-    if($(this).val() == cambiarPassPorCodigo){
-        $('.resultado-password').text('Correcto');
-        $('.resultado-password').addClass('valid').removeClass('invalid');
-        $('input.nueva-password').addClass('valid border-valid').removeClass('invalid border-invalid');
-        $('input.confirmar-password').addClass('valid border-valid').removeClass('invalid border-invalid');
-        $('#cambiarContraseñaPorCorreo').attr('disabled', false);                                              
-    } else {
-        $('.resultado-password').text('Contraseñas no coinciden');
-        $('.resultado-password').addClass('invalid').removeClass('valid');
-        $('input.nueva-password').addClass('invalid border-invalid').removeClass('valid border-valid');
-        $('input.confirmar-password').addClass('invalid border-invalid').removeClass('valid border-valid');
-        $('#cambiarContraseñaPorCorreo').attr('disabled', true);
-    }
+
+    let confirPass = $(this).val();
+    let btnCambiarPass = $('#cambiarContraseña');
+
+    confirmarContraseña(cambiarPassPorCodigo, confirPass, btnCambiarPass);
 })
 
 

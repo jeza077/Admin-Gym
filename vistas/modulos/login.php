@@ -35,10 +35,10 @@
       </form>
 
       <p class="mb-1">
-        <a href="#verificar-correo" onclick="toggleForm();">¿Olvidaste tu contraseña</a>
+        <a href="javascript:void(0);" onclick="toggleForm();">¿Olvidaste tu contraseña</a>
       </p>
       <p class="mb-0">
-        ¿No tienes una cuenta? <a href="#" class="text-center">Registrate</a>
+        ¿No tienes una cuenta? <a href="javascript:void(0);" class="text-center">Registrate</a>
       </p>
   <?php 
     $login = new ControladorUsuarios();
@@ -72,7 +72,7 @@
             <button type="submit" class="btn btn-orange btn-block verificarCorreo">Recuperar por correo</button>
             <button type="submit" class="btn btn-orange btn-block verificarCorreoPreguntas">Recuperar por preguntas</button>
           </div>
-          <p class="link mt-3 ml-2">Regresar al <a href="#" onclick="toggleForm();">Login</a></p>
+          <p class="link mt-3 ml-2">Regresar al <a href="javascript:void(0);" onclick="toggleForm();">Login</a></p>
         </div>
 
       </form>
@@ -117,7 +117,7 @@
           <div class="col-12">
             <button type="submit" class="btn btn-orange btn-block btn-flat verificarPreguntas" id="verificarPreguntas">Verificar</button>       
           </div>
-          <p class="link mt-3 ml-2">Regresar al <a href="#" onclick="toggleForm(); toggleQuestions();">Login</a></p>
+          <p class="link mt-3 ml-2">Regresar al <a href="javascript:void(0);" onclick="toggleForm(); toggleQuestions();">Login</a></p>
         </div>
       </form>
   
