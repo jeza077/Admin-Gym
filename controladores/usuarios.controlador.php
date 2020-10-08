@@ -752,8 +752,14 @@ class ControladorUsuarios{
             $correoElectronico = $correo;
 			$codigo = ControladorUsuarios::ctrCreateRandomCode();
 
+			$item = 'parametro';
+			$valor = 'ADMIN_VIGENCIA_CORREO';
+			$parametros = ControladorUsuarios::ctrMostrarParametros($item, $valor);
+	
+			$vigenciaCorreo = $parametros['valor'];
+
 			date_default_timezone_set("America/Tegucigalpa");
-			$fechaRecuperacion = date("Y-m-d H:i:s", strtotime('+24 hours'));
+			$fechaRecuperacion = date("Y-m-d H:i:s", strtotime('+'.$vigenciaCorreo.' hours'));
 
 			$tabla = "empleados";
 
