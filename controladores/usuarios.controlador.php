@@ -80,8 +80,21 @@ class ControladorUsuarios{
 					$valor = $_POST["ingUsuario"];
 
 					$respuesta = ModeloUsuarios::mdlMostrarUsuarios($tabla1, $tabla2, $item, $valor);
-					// var_dump($respuesta);
+					// var_dump($respuesta['fecha_vencimiento']);
 					
+					$fechaVencimiento = date('Y-m-d', strtotime($respuesta['fecha_vencimiento']));
+					// echo $fechaVencimiento;
+					
+					date_default_timezone_set('America/Tegucigalpa');
+					$fechaHoy = date('Y-m-d');
+					// echo $fechaHoy;
+					// if($fechaHoy > $fechaVencimiento){
+					// 	echo 'si, hoy es mayor';
+					// } else if($fechaHoy < $fechaVencimiento){
+					// 	echo 'no, hoy es menor';
+					// } else {
+					// 	echo 'son iguales';
+					// }
 					// return;
 
 						if($respuesta["usuario"] == $_POST["ingUsuario"] && $respuesta["password"] == $encriptar){
@@ -97,7 +110,7 @@ class ControladorUsuarios{
 							$_SESSION["primerIngreso"] = $respuesta["primera_vez"];
 
 							
-							if($respuesta["estado"] == 0 && $respuesta["bloqueado"] == 0 && $respuesta["primera_vez"] == 1) {
+							if($respuesta["estado"] == 0 && $respuesta["bloqueado"] == 0 && $respuesta["primera_vez"] == 1 && $fechaHoy < $fechaVencimiento) {
 			
 								echo '<script>
 								Swal.fire({
@@ -112,11 +125,9 @@ class ControladorUsuarios{
 								});
 								</script>';
 
-							} else if($respuesta["estado"] == 1 && $respuesta["bloqueado"] == 0 && $respuesta["primera_vez"] == 0) {
+							} else if($respuesta["estado"] == 1 && $respuesta["bloqueado"] == 0 && $respuesta["primera_vez"] == 0 && $fechaHoy < $fechaVencimiento) {
 
-								/* =====REGISTRAR FECHA Y HORA PARA SABER EL ULTIMO LOGIN ====== */
-
-								date_default_timezone_set('America/Tegucigalpa');
+								//* =====REGISTRAR FECHA Y HORA PARA SABER EL ULTIMO LOGIN ====== */
 
 								$fecha = date('Y-m-d');
 								$hora = date('H:i:s');
@@ -152,7 +163,8 @@ class ControladorUsuarios{
 								}
 
 
-							} else if($respuesta["estado"] == 1 && $respuesta["bloqueado"] == 1) {
+							} else if($respuesta["estado"] == 1 && $respuesta["bloqueado"] == 1 || $respuesta["estado"] == 0 && $respuesta["bloqueado"] == 1) {
+
 								echo '<script>			
 										Swal.fire({
 											title: "Usuario bloqueado, comuniquese con el administrador.",
@@ -163,6 +175,19 @@ class ControladorUsuarios{
 									</script>';
 								
 								session_destroy();
+
+							} else if($respuesta["estado"] == 1 && $respuesta["bloqueado"] == 0 && $fechaHoy > $fechaVencimiento){
+								
+								echo '<script>			
+										Swal.fire({
+											title: "Su usuario ha vencido, comuniquese con el administrador.",
+											icon: "error",
+											heightAuto: false,
+											allowOutsideClick: false
+										});
+									</script>';
+								session_destroy();
+
 							} else {
 
 								echo '<script>			
