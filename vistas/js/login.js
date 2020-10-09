@@ -18,6 +18,7 @@ function togglePassword(){
     container.classList.toggle('changePassword')
 }
 
+
 //** FUNCION PARA PASAR A REGISTRAR USUARIO */
 function toggleRegistrar(){
     var container = document.querySelector('.login-box');
@@ -118,8 +119,19 @@ $(".verificarCorreoPreguntas").on('click', function(event){
                                 success: function(respuesta) {
                                     // console.log(respuesta);
 
-                                    if(respuesta == ""){
-                                        // console.log('vacia');
+                                    if(respuesta == "" && usuario == 'SUPERADMIN'){
+
+                                        Swal.fire({		
+                                            icon: 'error',
+                                            title: 'Pregunta/Respuesta no coinciden. Intente de nuevo.',
+                                            showConfirmButton: false,
+                                            heightAuto: false,  
+                                            allowOutsideClick: false,
+                                            timer: 2500
+                                        });
+
+                                    } else if(respuesta == "" && usuario != 'SUPERADMIN'){ //*Bloqueamos el usuario si no coinciden su pregunta y/o respuesta.
+                                        
                                         var datos = new FormData();
                                         datos.append("usua", usuario);
           
@@ -133,15 +145,17 @@ $(".verificarCorreoPreguntas").on('click', function(event){
                                             processData: false,  
                                             dataType: "json",
                                             success: function(respuesta) {
-                                                console.log(respuesta);
-                                                Swal.fire({		
-                                                    icon: 'error',
-                                                    title: 'Pregunta/Respuesta no coinciden. Su usuario ha sido bloqueado.',
-                                                    showConfirmButton: false,
-                                                    heightAuto: false,  
-                                                    allowOutsideClick: false,
-                                                    timer: 2500
-                                                });
+                                                // console.log(respuesta);
+                                                if(respuesta){
+                                                    Swal.fire({		
+                                                        icon: 'error',
+                                                        title: 'Pregunta/Respuesta no coinciden. Su usuario ha sido bloqueado.',
+                                                        showConfirmButton: false,
+                                                        heightAuto: false,  
+                                                        allowOutsideClick: false,
+                                                        timer: 2500
+                                                    });
+                                                }
 
                                                 setTimeout(function () {
                                                     window.location = 'login';

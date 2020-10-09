@@ -251,6 +251,7 @@ class ControladorUsuarios{
 											});
 										</script>';
 								}
+								
 							} else {
 								echo '<script>			
 										Swal.fire({
