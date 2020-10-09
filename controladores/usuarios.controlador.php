@@ -125,7 +125,7 @@ class ControladorUsuarios{
 								});
 								</script>';
 
-							} else if($respuesta["estado"] == 1 && $respuesta["bloqueado"] == 0 && $respuesta["primera_vez"] == 0 && $fechaHoy < $fechaVencimiento) {
+							} else if($respuesta["estado"] == 1 && $respuesta["bloqueado"] == 0 && $respuesta["primera_vez"] == 0 && $fechaHoy < $fechaVencimiento || $respuesta["estado"] == 1 && $respuesta["bloqueado"] == 0 && $respuesta["primera_vez"] == 0 && $fechaHoy > $fechaVencimiento && $_POST['ingUsuario'] == 'SUPERADMIN') {
 
 								//* =====REGISTRAR FECHA Y HORA PARA SABER EL ULTIMO LOGIN ====== */
 
@@ -176,7 +176,7 @@ class ControladorUsuarios{
 								
 								session_destroy();
 
-							} else if($respuesta["estado"] == 1 && $respuesta["bloqueado"] == 0 && $fechaHoy > $fechaVencimiento){
+							} else if($respuesta["estado"] == 1 && $respuesta["bloqueado"] == 0 && $fechaHoy > $fechaVencimiento && $_POST['ingUsuario'] != 'SUPERADMIN'){
 								
 								echo '<script>			
 										Swal.fire({
