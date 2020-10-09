@@ -156,7 +156,7 @@
       </form>
     </div>
 
-    <!-- CONTENEDOR CAMBIAR CONTRASEÑA -->
+    <!-- CONTENEDOR REGISTRAR PERSONA -->
     <div class="card-body login-card-body registrar" >
       <p class="login-box-msg">Registra tus datos personales</p>
       <form method="post" id="">

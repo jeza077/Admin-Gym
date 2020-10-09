@@ -82,7 +82,7 @@ function longitudString(selector, maxLongitud) {
 	});
 }
 
-longitudString($('.usuario'),5); //Input Usuario Login
+longitudString($('.usuario'),50); //Input Usuario Login
 longitudString($('.password'),16); //Input Password Login
 
 

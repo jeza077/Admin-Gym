@@ -177,19 +177,20 @@ class ControladorUsuarios{
 
 						} else {
 				
+							if($_POST["ingUsuario"] != 'SUPERADMIN') {
 								//INTENTOS DE LOGUEARSE PERMITIDOS SOLO 3 AL REBASARLOS SE DESACTIVARA EL USUARIO INGRESADO AUTOMATICAMENTE.
 								$item = 'parametro';
 								$valor = 'ADMIN_INTENTOS';
 								$parametros = ControladorUsuarios::ctrMostrarParametros($item, $valor);
 								// var_dump($parametros);
-								
+
 								// return;
 								$intentos = $parametros['valor'];
 								$_SESSION['contadorLogin']++; 
 								// $intentosRestantes = $intentos - $_SESSION['contadorLogin'];
 
 								// $intentos = $intentos - $_SESSION['contadorLogin'];
-								
+
 								// echo $_SESSION['contadorLogin'];
 								// echo $intentosRestantes;
 								// session_destroy();
@@ -200,9 +201,9 @@ class ControladorUsuarios{
 									
 									$item = "usuario";
 									$valor = $_POST["ingUsuario"];
-					
+
 									$respuesta = ModeloUsuarios::mdlMostrarUsuarios($tabla1, $tabla2, $item, $valor);
-							
+
 									if($respuesta["usuario"] == $_POST["ingUsuario"]){
 										$tabla = "empleados";
 										$item1 = "bloqueado";
@@ -213,7 +214,7 @@ class ControladorUsuarios{
 																	
 										$item3 = null;
 										$valor3 = null;
-						
+
 										$respuestaEstado = ModeloUsuarios::mdlActualizarUsuario($tabla, $item1, $valor1, $item2, $valor2, $item3, $valor3);
 
 										if($respuestaEstado == true){
@@ -235,7 +236,7 @@ class ControladorUsuarios{
 										}
 										
 									}									
-							
+
 								} else {
 									
 									// echo '<br><div class="alert alert-danger">¡Usuario y contraseña invalidos! Intento: '.$_SESSION['contadorLogin'] .', tiene '.$intentos.' intento mas </div>';
@@ -250,6 +251,19 @@ class ControladorUsuarios{
 											});
 										</script>';
 								}
+							} else {
+								echo '<script>			
+										Swal.fire({
+											title: "¡Usuario y contraseña invalidos!",
+											icon: "error",
+											toast: true,
+											position: "top-end",
+											showConfirmButton: false,
+											timer: 3000,
+										});
+									</script>';
+							}
+							
 						}
 						
 				} else {			
