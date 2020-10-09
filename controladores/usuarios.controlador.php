@@ -251,7 +251,7 @@ class ControladorUsuarios{
 											});
 										</script>';
 								}
-								
+
 							} else {
 								echo '<script>			
 										Swal.fire({
@@ -369,56 +369,34 @@ class ControladorUsuarios{
 
 					}
 								
-						/*============================== 
-							ENCRIPTAMOS LA CONTRASEÑA 
-						================================*/
+						//**================= ENCRIPTAMOS LA CONTRASEÑA ===================*/
 						$encriptar = crypt($datos["password"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
+
+
+						//** =============== CREAMOS LA FECHA VENCIMIENTO DEL USUARIO =================*/
+						$item = 'parametro';
+						$valor = 'ADMIN_DIAS_VIGENCIA';
+						$parametros = ControladorUsuarios::ctrMostrarParametros($item, $valor);
+				
+						$vigenciaUsuario = $parametros['valor'];
+						
+						date_default_timezone_set("America/Tegucigalpa");
+						$fechaVencimiento = date("Y-m-d H:i:s", strtotime('+'.$vigenciaUsuario.' days'));
 
 						$tabla = "empleados";
 						$datos = array("id_persona" => $datos["id_persona"],
 									   "usuario" => $datos["usuario"],
 									   "password" => $encriptar,
 									   "rol" => $datos["rol"],
-									   "foto" => $ruta);
+									   "foto" => $ruta,
+									   "fecha_vencimiento" => $fechaVencimiento);
 
 						$respuestaEmpleado = ModeloUsuarios::mdlIngresarUsuarioEmpleado($tabla, $datos);
 
 						if($respuestaEmpleado = true){
 
 							return true;
-								
-							// $totalIdUsuarios = array();
 
-							// $tabla1 = "empleados";
-							// $tabla2 = null;
-							// $item = null;
-							// $valor = null;
-
-							// $usuariosTotal = ModeloUsuarios::mdlMostrarUsuarios($tabla1, $tabla2, $item, $valor);
-
-							// foreach($usuariosTotal as $keyUsuarios => $valueUsuarios){
-							// 	array_push($totalIdUsuarios, $valueUsuarios["id"]);
-							// }
-
-							// $idUsuario = end($totalIdUsuarios);
-
-							// $tabla3 = "usuario_pregunta";
-							
-							// $datos = array("idUsuario" => $idUsuario,
-							// 				"idPregunta" => $_POST["nuevaPregunta"],
-							// 				"respuesta" => $_POST["respuestaPregunta"]);
-
-											
-							// $respuestaPreguntas = ModeloUsuarios::mdlIngresarPreguntaUsuario($tabla3, $datos);
-
-							// if($respuestaPreguntas == true){
-							// 	echo '<script>
-							// 		Swal.fire({
-							// 			title: "Empleado guardado correctamente!",
-							// 			icon: "success"
-							// 		})							
-							// 	</script>';
-							// }
 						} else {
 							return false;
 						}
