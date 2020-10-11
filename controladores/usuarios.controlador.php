@@ -822,12 +822,12 @@ class ControladorUsuarios{
 		
 		// $parametros = ControladorGlobales::ctrMostrarParametros();
 
-		$item = null;
-		$valor = null;
-		$parametros = ControladorUsuarios::ctrMostrarParametros($item, $valor);
+		// $item = null;
+		// $valor = null;
+		// $parametros = ControladorUsuarios::ctrMostrarParametros($item, $valor);
 
-		$correoEmpresa = $parametros[1]['valor'];
-		$passwordEmpresa = $parametros[0]['valor'];
+		// $correoEmpresa = $parametros[1]['valor'];
+		// $passwordEmpresa = $parametros[0]['valor'];
 		// return $correoEmpresa . '--' . $passwordEmpresa;
 
         $template = file_get_contents('../extensiones/plantillas/template.php');
@@ -839,7 +839,7 @@ class ControladorUsuarios{
 		// $template = str_replace("{{browser_name}}", $user_browser, $template);
 
 
-		$respuestaCorreo = ControladorUsuarios::ctrGenerarCorreo($correoEmpresa, $passwordEmpresa, $correoDestinatario, $nombreDestinatario, $template);
+		$respuestaCorreo = ControladorUsuarios::ctrGenerarCorreo($correoDestinatario, $nombreDestinatario, $template);
 
 		return $respuestaCorreo;
 
@@ -922,7 +922,19 @@ class ControladorUsuarios{
 	/*=============================================
 			GENERAR CORREO
 	=============================================*/	
-    static public function ctrGenerarCorreo($correoEmpresa, $passwordEmpresa, $correoDestinatario, $nombreDestinatario, $template){
+    static public function ctrGenerarCorreo($correoDestinatario, $nombreDestinatario, $template){
+
+		
+		$item = null;
+		$valor = null;
+		$parametros = ControladorUsuarios::ctrMostrarParametros($item, $valor);
+
+		$correoEmpresa = $parametros[1]['valor'];
+		$passwordEmpresa = $parametros[0]['valor'];
+		$puerto = $parametros[5]['valor'];
+		$host = $parametros[6]['valor'];
+		$smtp = $parametros[7]['valor'];
+		
 
 		require '../extensiones/PHPMailer/PHPMailer/src/Exception.php';
 		require '../extensiones/PHPMailer/PHPMailer/src/PHPMailer.php';
@@ -941,14 +953,14 @@ class ControladorUsuarios{
 			);
 			$mail->SMTPDebug = 0;
             $mail->isSMTP();
-            $mail->Host = 'smtp.gmail.com';  //gmail SMTP server
+            $mail->Host = $host;  //gmail SMTP server
             $mail->SMTPAuth = true;
             $mail->Username = $correoEmpresa;   //username
             $mail->Password = $passwordEmpresa;   //password
 			// $mail->SMTPSecure = 'tls';
             // $mail->Port = 587;     
-			$mail->SMTPSecure = 'ssl';
-            $mail->Port = 465;                    //smtp port
+			$mail->SMTPSecure = $smtp;
+            $mail->Port = $puerto;                    //smtp port
 
             $mail->setFrom($correoEmpresa, 'Gimnasio');
             $mail->addAddress($correoDestinatario, $nombreDestinatario);

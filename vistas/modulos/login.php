@@ -50,12 +50,6 @@
           // $device_details =   "<strong>Browser: </strong>" . $user_browser . 
           //                     "<br /><strong>Operating System: </strong>" . $user_os;
           // echo($device_details);
-
-          // $correoElectronico = null;
-          // $nombre = null; 
-          // $codigo = null;
-          // $param = ControladorUsuarios::ctrEnviarCorreoRecuperacion($correoElectronico, $nombre, $codigo);
-          // echo($param);
         ?>
     </div>
 
