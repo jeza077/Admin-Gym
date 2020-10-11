@@ -230,14 +230,15 @@ class ModeloUsuarios{
 		CAMBIAR CONTRASEÑA POR CODIGO-CORREO
 	=============================================*/
 
-	static public function mdlActualizarUsuarioPorCodigo($tabla, $item1, $valor1, $item2, $valor2, $item3, $valor3){
+	static public function mdlActualizarUsuarioPorCodigo($tabla, $item1, $valor1, $item2, $valor2, $item3, $valor3, $item4, $valor4){
 
 	
-		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET $item1 = :$item1, $item2 = :$item2, codigo = NULL, fecha_recuperacion = NULL WHERE $item3 = :$item3");
+		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET $item1 = :$item1, $item2 = :$item2, codigo = NULL, fecha_recuperacion = NULL, $item3 = :$item3 WHERE $item4 = :$item4");
 
 		$stmt->bindParam(":".$item1, $valor1, PDO::PARAM_STR);
 		$stmt->bindParam(":".$item2, $valor2, PDO::PARAM_INT);
-		$stmt->bindParam(":".$item3, $valor3, PDO::PARAM_INT);
+		$stmt->bindParam(":".$item3, $valor3, PDO::PARAM_STR);
+		$stmt->bindParam(":".$item4, $valor4, PDO::PARAM_INT);
 		if($stmt->execute()){
 
 			return true;	

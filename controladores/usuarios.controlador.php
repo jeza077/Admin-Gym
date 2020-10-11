@@ -703,6 +703,16 @@ class ControladorUsuarios{
 						</script>';
 				} else {
 
+					//** =============== CREAMOS LA FECHA VENCIMIENTO DEL USUARIO =================*/
+					$item = 'parametro';
+					$valor = 'ADMIN_DIAS_VIGENCIA';
+					$parametros = ControladorUsuarios::ctrMostrarParametros($item, $valor);
+			
+					$vigenciaUsuario = $parametros['valor'];
+
+					date_default_timezone_set("America/Tegucigalpa");
+					$fechaVencimiento = date("Y-m-d H:i:s", strtotime('+'.$vigenciaUsuario.' days'));
+
 					$tabla = "empleados";
 	
 					$item1 = "password";
@@ -710,11 +720,14 @@ class ControladorUsuarios{
 
 					$item2 = "bloqueado";
 					$valor2 = 0;
-			
-					$item3 = "id";
-					$valor3 = $idUsuario;
+
+					$item3 = "fecha_vencimiento";
+					$valor3 = $fechaVencimiento;
+
+					$item4 = "id";
+					$valor4 = $idUsuario;
 	
-					$respuesta = ModeloUsuarios::mdlActualizarUsuarioPorCodigo($tabla, $item1, $valor1, $item2, $valor2, $item3, $valor3);
+					$respuesta = ModeloUsuarios::mdlActualizarUsuarioPorCodigo($tabla, $item1, $valor1, $item2, $valor2, $item3, $valor3, $item4, $valor4);
 	
 					if($respuesta == true){
 		
