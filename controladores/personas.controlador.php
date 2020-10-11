@@ -87,7 +87,8 @@ class ControladorPersonas{
                                         "usuario" => $_POST["nuevoUsuario"],
                                         "password" => $_POST["nuevoPassword"],
                                         "rol" => $_POST["nuevoRol"],
-                                        "foto" => $_FILES["nuevaFoto"]);
+                                        "foto" => $_FILES["nuevaFoto"],
+                                        "email" => $_POST["nuevoEmail"]);
 
                             $crearUsuario = ControladorUsuarios::ctrCrearUsuario($datos);
 
@@ -96,6 +97,19 @@ class ControladorPersonas{
                                         Swal.fire({
                                             title: "Empleado guardado correctamente!",
                                             icon: "success",
+                                            heightAuto: false,
+                                            allowOutsideClick: false
+                                        }).then((result)=>{
+                                            if(result.value){
+                                                window.location = "agregar-persona";
+                                            }
+                                        });                                      
+                                    </script>';
+                            } else {
+                                echo '<script>
+                                        Swal.fire({
+                                            title: "Error al guardar.",
+                                            icon: "error",
                                             heightAuto: false,
                                             allowOutsideClick: false
                                         }).then((result)=>{

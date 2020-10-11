@@ -426,7 +426,22 @@ class ControladorUsuarios{
 
 						if($respuestaEmpleado = true){
 
-							return true;
+							$emailUsuario = $datos["email"];
+							$nombreUsuario = $datos["usuario"];
+							$contraseña =  $datos["password"];
+
+							$template = 'Hola '.$nombreUsuario.'! <br> Este es tu usuario: '.$nombreUsuario.'. <br> Esta es tu contraseña: '.$contraseña.'.'; 
+							
+							$respuestaCorreo = ControladorUsuarios::ctrGenerarCorreo($emailUsuario, $nombreUsuario, $template);
+
+							if($respuestaCorreo = true){
+
+								return true;
+
+							} else {
+								return false;
+							}
+
 
 						} else {
 							return false;
@@ -965,6 +980,9 @@ class ControladorUsuarios{
 	=============================================*/	
     static public function ctrGenerarCorreo($correoDestinatario, $nombreDestinatario, $template){
 
+		require '../extensiones/PHPMailer/PHPMailer/src/Exception.php';
+		require '../extensiones/PHPMailer/PHPMailer/src/PHPMailer.php';
+		require '../extensiones/PHPMailer/PHPMailer/src/SMTP.php';
 		
 		$item = null;
 		$valor = null;
@@ -977,9 +995,6 @@ class ControladorUsuarios{
 		$smtp = $parametros[7]['valor'];
 		
 
-		require '../extensiones/PHPMailer/PHPMailer/src/Exception.php';
-		require '../extensiones/PHPMailer/PHPMailer/src/PHPMailer.php';
-		require '../extensiones/PHPMailer/PHPMailer/src/SMTP.php';
 
         $mail = new PHPMailer(true);
 		$mail->CharSet = "UTF-8";
