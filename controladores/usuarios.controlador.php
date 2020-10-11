@@ -333,6 +333,8 @@ class ControladorUsuarios{
 			if(preg_match('/^[A-Z0-9]+$/', $datos["usuario"]) &&
 			   preg_match('/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%.])\S{8,16}$/', $datos["password"])){
 
+				$emailUsuario = $datos["email"];
+				$contraSinEncriptar = $datos["password"];
 					/*=============================================
 							VALIDAR IMAGEN
 					=============================================*/
@@ -426,27 +428,31 @@ class ControladorUsuarios{
 
 						if($respuestaEmpleado = true){
 
-							$emailUsuario = $datos["email"];
+							$email = $emailUsuario;
 							$nombreUsuario = $datos["usuario"];
-							$contraseña =  $datos["password"];
+							$contraseña =  $contraSinEncriptar;
+							$asunto = 'Envio de Usuario y Contraseña';
+							$require = false;
 
-							$template = 'Hola '.$nombreUsuario.'! <br> Este es tu usuario: '.$nombreUsuario.'. <br> Esta es tu contraseña: '.$contraseña.'.'; 
+							$template = 'Hola '.$nombreUsuario.'! <br> Tu usuario es: '.$nombreUsuario.'. <br> Tu contraseña es: '.$contraseña.'.'; 
 							
-							$respuestaCorreo = ControladorUsuarios::ctrGenerarCorreo($emailUsuario, $nombreUsuario, $template);
+							$respuestaCorreo = ControladorUsuarios::ctrGenerarCorreo($email, $nombreUsuario, $asunto, $template, $require);
 
 							if($respuestaCorreo = true){
 
 								return true;
 
 							} else {
+
 								return false;
 							}
 
 
 						} else {
+							
 							return false;
-						}
 
+						}
 
 				} else {
 
@@ -875,6 +881,8 @@ class ControladorUsuarios{
 
 		$correoDestinatario = $correoElectronico;
 		$nombreDestinatario = $nombre;
+		$asunto = 'Recuperación de Contraseña';
+		$require = true;
 		
 		// $parametros = ControladorGlobales::ctrMostrarParametros();
 
@@ -895,7 +903,7 @@ class ControladorUsuarios{
 		// $template = str_replace("{{browser_name}}", $user_browser, $template);
 
 
-		$respuestaCorreo = ControladorUsuarios::ctrGenerarCorreo($correoDestinatario, $nombreDestinatario, $template);
+		$respuestaCorreo = ControladorUsuarios::ctrGenerarCorreo($correoDestinatario, $nombreDestinatario, $asunto, $template, $require);
 
 		return $respuestaCorreo;
 
@@ -978,11 +986,23 @@ class ControladorUsuarios{
 	/*=============================================
 			GENERAR CORREO
 	=============================================*/	
-    static public function ctrGenerarCorreo($correoDestinatario, $nombreDestinatario, $template){
+    static public function ctrGenerarCorreo($correoDestinatario, $nombreDestinatario, $asunto, $template, $require){
 
-		require '../extensiones/PHPMailer/PHPMailer/src/Exception.php';
-		require '../extensiones/PHPMailer/PHPMailer/src/PHPMailer.php';
-		require '../extensiones/PHPMailer/PHPMailer/src/SMTP.php';
+		if($require != false){
+			
+			require '../extensiones/PHPMailer/PHPMailer/src/Exception.php';
+			require '../extensiones/PHPMailer/PHPMailer/src/PHPMailer.php';
+			require '../extensiones/PHPMailer/PHPMailer/src/SMTP.php';
+
+		} else {
+			
+			require 'extensiones/PHPMailer/PHPMailer/src/Exception.php';
+			require 'extensiones/PHPMailer/PHPMailer/src/PHPMailer.php';
+			require 'extensiones/PHPMailer/PHPMailer/src/SMTP.php';
+		}
+
+		
+
 		
 		$item = null;
 		$valor = null;
@@ -1022,7 +1042,7 @@ class ControladorUsuarios{
             $mail->addAddress($correoDestinatario, $nombreDestinatario);
 
             $mail->isHTML(true);
-            $mail->Subject = 'Recuperación de contraseña - Gimnasio';
+            $mail->Subject = $asunto.' - Gimnasio';
             $mail->Body = $template;
 		
 			if (!$mail->send()) {

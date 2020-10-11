@@ -205,6 +205,13 @@
           $tipoPersona = null;
           $ingresarPersona = new ControladorPersonas();
           $ingresarPersona->ctrCrearPersona($tipoPersona);
+
+          // $correoDestinatario = 'jesus.zuniga077@gmail.com';
+          // $nombreDestinatario = 'Jesus';
+          // $template = 'Hola tu contraseña es: 455asd5sd.';
+          // $asunto = 'Envio';
+          // $ingresaPersona = new ControladorUsuarios();
+          // $ingresaPersona->ctrGenerarCorreo($correoDestinatario, $nombreDestinatario, $asunto, $template);
         ?>
       </form>
 
