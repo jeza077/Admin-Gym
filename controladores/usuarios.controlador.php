@@ -143,7 +143,10 @@ class ControladorUsuarios{
 								$item3 = null;
 								$valor3 = null;
 
-								$ultimoLogin = ModeloUsuarios::mdlActualizarUsuario($tabla2, $item1, $valor1, $item2, $valor2, $item3, $valor3);
+								$item4 = null;
+								$valor4 = null;
+
+								$ultimoLogin = ModeloUsuarios::mdlActualizarUsuario($tabla2, $item1, $valor1, $item2, $valor2, $item3, $valor3, $item4, $valor4);
 
 								if($ultimoLogin == true){
 
@@ -240,7 +243,10 @@ class ControladorUsuarios{
 										$item3 = null;
 										$valor3 = null;
 
-										$respuestaEstado = ModeloUsuarios::mdlActualizarUsuario($tabla, $item1, $valor1, $item2, $valor2, $item3, $valor3);
+										$item4 = null;
+										$valor4 = null;
+
+										$respuestaEstado = ModeloUsuarios::mdlActualizarUsuario($tabla, $item1, $valor1, $item2, $valor2, $item3, $valor3, $item4, $valor4);
 
 										if($respuestaEstado == true){
 											
@@ -528,7 +534,10 @@ class ControladorUsuarios{
 					$item3 = null;
 					$valor3 = null;
 
-					$respuestaContraseña = ModeloUsuarios::mdlActualizarUsuario($tabla2, $item1, $valor1, $item2, $valor2, $item3, $valor3);
+					$item4 = null;
+					$valor4 = null;
+
+					$respuestaContraseña = ModeloUsuarios::mdlActualizarUsuario($tabla2, $item1, $valor1, $item2, $valor2, $item3, $valor3, $item4, $valor4);
 
 					if($respuestaContraseña == true) {
 						$tabla = "usuario_pregunta";
@@ -552,8 +561,11 @@ class ControladorUsuarios{
 			
 							$item3 = 'id';
 							$valor3 = $id;
+
+							$item4 = null;
+							$valor4 = null;
 			
-							$respuestaEstadoPrimeraVez = ModeloUsuarios::mdlActualizarUsuario($tabla, $item1, $valor1, $item2, $valor2, $item3, $valor3);
+							$respuestaEstadoPrimeraVez = ModeloUsuarios::mdlActualizarUsuario($tabla, $item1, $valor1, $item2, $valor2, $item3, $valor3, $item4, $valor4);
 
 							if($respuestaEstadoPrimeraVez == true) {
 								echo '<script>
@@ -616,17 +628,30 @@ class ControladorUsuarios{
 					return false;
 					
 				} else {
+					
+					//** =============== CREAMOS LA FECHA VENCIMIENTO DEL USUARIO =================*/
+					$itemParam = 'parametro';
+					$valorParam = 'ADMIN_DIAS_VIGENCIA';
+					$parametros = ControladorUsuarios::ctrMostrarParametros($itemParam, $valorParam);
+			
+					$vigenciaUsuario = $parametros['valor'];
+
+					date_default_timezone_set("America/Tegucigalpa");
+					$fechaVencimiento = date("Y-m-d H:i:s", strtotime('+'.$vigenciaUsuario.' days'));
 
 					$item1 = "password";
 					$valor1 = $encriptar;
 
 					$item2 = 'bloqueado';
 					$valor2 = 0;
+
+					$item3 = "fecha_vencimiento";
+					$valor3 = $fechaVencimiento;
 					
-					$item3 = $item;
-					$valor3 = $valor;
+					$item4 = $item;
+					$valor4 = $valor;
 	
-					$respuesta = ModeloUsuarios::mdlActualizarUsuario($tabla2, $item1, $valor1, $item2, $valor2, $item3, $valor3);
+					$respuesta = ModeloUsuarios::mdlActualizarUsuario($tabla2, $item1, $valor1, $item2, $valor2, $item3, $valor3, $item4, $valor4);
 					return $respuesta;
 				
 				}
@@ -649,7 +674,7 @@ class ControladorUsuarios{
 	=============================================*/	
 	static public function ctrActualizarUsuario($tabla, $item1, $valor1, $item2, $valor2, $item3, $valor3){
 		
-		$respuesta = ModeloUsuarios::mdlActualizarUsuario($tabla, $item1, $valor1, $item2, $valor2, $item3, $valor3);
+		$respuesta = ModeloUsuarios::mdlActualizarUsuario($tabla, $item1, $valor1, $item2, $valor2, $item3, $valor3, $item4, $valor4);
 		return $respuesta;
 	
 	}
@@ -803,7 +828,10 @@ class ControladorUsuarios{
 			$item3 = "id";
 			$valor3 = $id;
 
-			$respuesta = ModeloUsuarios::mdlActualizarUsuario($tabla, $item1, $valor1, $item2, $valor2, $item3, $valor3);
+			$item4 = null;
+			$valor4 = null;
+			
+			$respuesta = ModeloUsuarios::mdlActualizarUsuario($tabla, $item1, $valor1, $item2, $valor2, $item3, $valor3, $item4, $valor4);
 
 			if($respuesta == true) {
 				$nombreRecibido = $nombre;

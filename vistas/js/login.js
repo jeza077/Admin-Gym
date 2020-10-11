@@ -225,11 +225,11 @@ $(".verificarCorreoPreguntas").on('click', function(event){
 
                                                                     if(result.value){
                                             
-                                                                        toggleForm(); 
-                                                                        toggleQuestions();
-                                                                        togglePassword();
+                                                                        // toggleForm(); 
+                                                                        // toggleQuestions();
+                                                                        // togglePassword();
 
-                                                                        // window.location = 'login';
+                                                                        window.location = 'login';
                                             
                                                                     }
                                             
