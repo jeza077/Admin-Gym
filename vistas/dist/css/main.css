@@ -83,12 +83,15 @@ body.login-page .login-box.recu-password .card{
 /*** PRIMER INGRESO ***/
 body.primer-ingreso {
     background: rgb(255, 158, 30);
-    overflow: hidden;
-    padding: 60px 230px;
+    overflow-y: auto;
+    /* padding: 60px 230px; */
+}
+body.primer-ingreso .wrapper {
+    padding: 50px 195px;
 }
 body.primer-ingreso .card {
-    /* width: 900px; */
-    padding: 20px;
+    /* width: auto; */
+    padding: 30px;
     min-height: 500px!important;
     border-radius: 0.7em;
 }

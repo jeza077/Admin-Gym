@@ -84,6 +84,7 @@ class ControladorPersonas{
                         if(isset($_POST["nuevoTipoPersona"]) && $_POST["nuevoTipoPersona"]  == "empleado"){
                             
                             $datos = array("id_persona" => $idPersona,
+                                        "nombre" => $_POST["nuevoNombre"],
                                         "usuario" => $_POST["nuevoUsuario"],
                                         "password" => $_POST["nuevoPassword"],
                                         "rol" => $_POST["nuevoRol"],
