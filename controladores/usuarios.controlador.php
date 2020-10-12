@@ -434,7 +434,7 @@ class ControladorUsuarios{
 							$asunto = 'Envio de Usuario y Contraseña';
 							$require = false;
 
-							$template = 'Hola '.$nombreUsuario.'! <br> Tu usuario es: '.$nombreUsuario.'. <br> Tu contraseña es: '.$contraseña.'.'; 
+							$template = 'Hola '.$nombreUsuario.'! <br> Tu usuario es: '.$nombreUsuario.' <br> Tu contraseña es: '.$contraseña; 
 							
 							$respuestaCorreo = ControladorUsuarios::ctrGenerarCorreo($email, $nombreUsuario, $asunto, $template, $require);
 
