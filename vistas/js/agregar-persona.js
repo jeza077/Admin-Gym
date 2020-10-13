@@ -1,5 +1,6 @@
 //***VALIDACIONES */
-validarEmail($('.email')); //Validar email de la persona ingresada
+longitudString($('.nuevoUsuario'),50); //Longitud Input Usuario
+validarEmail($('.email')); //Validar que no exista en DB, email de la persona ingresada
 
 
 //** MOSTRAR TIPO DE PERSONA */
@@ -88,30 +89,32 @@ function validarInputsVacios(selector) {
 $('#generarPassword').on('click', function () {
     var clave = generar_contrasenya(10);
     $('.passwordGenerado').val(clave);
-    // if(/^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%+.])\S{8,16}$/.test(clave)){
-    //     console.log('bien');
-    // } else {
-    //     console.log('mal');
-    // }
-    // console.log(clave);
+    if(/^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%+.])\S{8,16}$/.test(clave)){
+        $('.passwordGenerado').addClass('border-valid').removeClass('border-invalid');
+        console.log('bien');
+    } else {
+        $('.passwordGenerado').addClass('border-invalid').removeClass('border-valid');
+        console.log('mal');
+    }
+    console.log(clave);
 });
 
 //** FUNCION PARA GENERAR CONTRASEÑAS ALEATORIAMENTE */
 function generar_contrasenya(longitud){
 
-    var tamanyo_password				=	longitud;			// definimos el tamaño que tendrá nuestro password
-    var caracteres_conseguidos			=	0;			// contador de los caracteres que hemos conseguido
+    var tamanyo_password				=	longitud;	 // definimos el tamaño que tendrá nuestro password
+    var caracteres_conseguidos			=	0;			 // contador de los caracteres que hemos conseguido
     var caracter_temporal				=	'';
-    var array_caracteres				=	new Array();// array para guardar los caracteres de forma temporal
+    var array_caracteres				=	new Array(); // array para guardar los caracteres de forma temporal
         
-    for(var i = 0; i < tamanyo_password; i++){		// inicializamos el array con el valor null
+    for(var i = 0; i < tamanyo_password; i++){		     // inicializamos el array con el valor null
         array_caracteres[i]	=	null;
     }
 
     var password_definitivo				=	'';
     var numero_minimo_letras_minusculas	=	1;			// en ésta y las siguientes variables definimos cuántos 
     var numero_minimo_letras_mayusculas	=	1;			// caracteres de cada tipo queremos en cada 
-    var numero_minimo_numeros			=	1;
+    var numero_minimo_numeros			=	2;
     var numero_minimo_simbolos			=	1;
 
     var letras_minusculas_conseguidas 	=	0;
@@ -131,53 +134,53 @@ function generar_contrasenya(longitud){
     // función que genera un tipo de caracter en base al tipo que se le pasa por parámetro (mayúscula, minúscula, número, símbolo o aleatorio)
     function genera_caracter(tipo_de_caracter){
     // hemos creado una lista de caracteres específica, que además no tiene algunos caracteres como la "i" mayúscula ni la "l" minúscula para evitar errores de transcripción
-    var lista_de_caracteres	=	'!@#$%+.23456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz';
-    var caracter_generado	=	'';
-    var valor_inferior		=	0;
-    var valor_superior		=	0;
-    
-    switch (tipo_de_caracter){
-        case 'minúscula':
-            valor_inferior	=	38;
-            valor_superior	=	61;
-            break;
-        case 'mayúscula':
-            valor_inferior	=	14;
-            valor_superior	=	37;
-            break;
-        case 'número':
-            valor_inferior	=	6;
-            valor_superior	=	13;
-            break;
-        case 'símbolo':	
-            valor_inferior	=	0;
-            valor_superior	=	5;
-            break;
-        case 'aleatorio':
-            valor_inferior	=	0;
-            valor_superior	=	61;
-    
-    } // fin del switch
-    
-    caracter_generado	=	lista_de_caracteres.charAt(genera_aleatorio(valor_inferior, valor_superior));
-    return caracter_generado;
+        var lista_de_caracteres	=	'!@#$%+.23456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz';
+        var caracter_generado	=	'';
+        var valor_inferior		=	0;
+        var valor_superior		=	0;
+        
+        switch (tipo_de_caracter){
+            case 'minúscula':
+                valor_inferior	=	38;
+                valor_superior	=	61;
+                break;
+            case 'mayúscula':
+                valor_inferior	=	14;
+                valor_superior	=	37;
+                break;
+            case 'número':
+                valor_inferior	=	6;
+                valor_superior	=	13;
+                break;
+            case 'símbolo':	
+                valor_inferior	=	0;
+                valor_superior	=	5;
+                break;
+            case 'aleatorio':
+                valor_inferior	=	0;
+                valor_superior	=	61;
+        
+        } // fin del switch
+        
+        caracter_generado	=	lista_de_caracteres.charAt(genera_aleatorio(valor_inferior, valor_superior));
+        return caracter_generado;
     } // fin de la función genera_caracter()
     
     
     // función que guarda en una posición vacía aleatoria el caracter pasado por parámetro
     function guarda_caracter_en_posicion_aleatoria(caracter_pasado_por_parametro){
-    var guardado_en_posicion_vacia	=	false;
-    var posicion_en_array			=	0;
-    
-    while(guardado_en_posicion_vacia	!=	true){
-        posicion_en_array	=	genera_aleatorio(0, tamanyo_password-1);	// generamos un aleatorio en el rango del tamaño del password
-    
-        // el array ha sido inicializado con null en sus posiciones. Si es una posición vacía, guardamos el caracter
-        if(array_caracteres[posicion_en_array] == null){
-            array_caracteres[posicion_en_array]	=	caracter_pasado_por_parametro;
-            guardado_en_posicion_vacia			=	true;
+        var guardado_en_posicion_vacia	=	false;
+        var posicion_en_array			=	0;
+        
+        while(guardado_en_posicion_vacia	!=	true){
+            posicion_en_array	=	genera_aleatorio(0, tamanyo_password-1);	// generamos un aleatorio en el rango del tamaño del password
+        
+            // el array ha sido inicializado con null en sus posiciones. Si es una posición vacía, guardamos el caracter
+            if(array_caracteres[posicion_en_array] == null){
+                array_caracteres[posicion_en_array]	=	caracter_pasado_por_parametro;
+                guardado_en_posicion_vacia			=	true;
+            }
         }
-    }
     }
     
     // generamos los distintos tipos de caracteres y los metemos en un password_temporal

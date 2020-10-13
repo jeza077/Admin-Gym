@@ -82,8 +82,12 @@ function longitudString(selector, maxLongitud) {
 	});
 }
 
-longitudString($('.usuario'),50); //Input Usuario Login
-longitudString($('.password'),16); //Input Password Login
+
+//** VALIDACIONES GLOBALES */
+longitudString($('input[type=password]'),16); //Longitud maxima Input tipo Password Global.
+$('input[type=password]').keydown(impedirEspacios); //Evitar espacios en Input de tipo Password, Global.
+$('input[type=email]').keydown(impedirEspacios); // Evitar espacios en Input de tipo Email, Global.
+
 
 
 //* ===================================================

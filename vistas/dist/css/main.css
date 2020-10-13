@@ -95,8 +95,26 @@ body.primer-ingreso .card {
     min-height: 500px!important;
     border-radius: 0.7em;
 }
+body.primer-ingreso .passwords i.show-nueva-pass.primero{
+    cursor: pointer;
+    position: absolute;
+    top: 52px;
+    right: 465px;
+    z-index: 1000;
+}
 
-/* VALIDAR CONTRASEÑA */
+body.primer-ingreso .passwords i.show-confir-pass.segundo{
+    cursor: pointer;
+    position: absolute;
+    top: 52px;
+    right: 22px;
+    z-index: 1000;
+}
+
+
+
+
+/** VALIDAR CONTRASEÑA */
 .valid{
     color: green!important;
 }
@@ -153,6 +171,7 @@ body.primer-ingreso .card {
 .login-box.recu-password .login-card-body{
     position: relative;
 }
+
 
 /** SLIDE DE, LOGIN, VERIFICAR EMAIL, PREGUNTAS, CAMBIAR CONTRASEÑA */
 .login-page .login-box{

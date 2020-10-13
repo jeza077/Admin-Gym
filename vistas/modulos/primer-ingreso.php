@@ -11,11 +11,11 @@
                         <label class='mt-2'>Nueva contraseña</label>
                         <input type='password' class='form-control nueva-password' placeholder='Nueva contraseña' name='editarPassword' required>
                     </div>
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-6 passwords">
                         <label class='mt-2'>Confirmar contraseña</label>
                         <input type='password' class='form-control confirmar-password' placeholder='Confirmar contraseña'>
-                    <!-- <i class="far fa-eye show-pass primero" action="hide"></i>
-                    <i class="far fa-eye show-pass segundo" action="hide"></i> -->
+                    <i class="far fa-eye show-nueva-pass primero" action="hide"></i>
+                    <i class="far fa-eye show-confir-pass segundo" action="hide"></i>
                         <span class="resultado-password help-block mt-2 float-right"></span>
                     </div>
                 </div>

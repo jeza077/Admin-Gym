@@ -27,10 +27,10 @@ function toggleRegistrar(){
 
 
 
-//** CUANDO PRESIONE ESPACIO QUE MUESTRE ALERTA */
-$('.usuario').keydown(impedirEspacios);
-$('.password').keydown(impedirEspacios);
-$('#verificarEmail').keydown(impedirEspacios);
+//** VALIDACIONES */
+$('.usuario').keydown(impedirEspacios); //Impedir espacios en Input de Usuario del Login.
+longitudString($('.usuario'),50); //Longitud maxima Input Usuario Login.
+
 
 
 //** VERIFICAR CORREO Y TRAER PREGUNTAS DE SEGURIDAD PARA CAMBIAR PASSWORD */
