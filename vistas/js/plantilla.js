@@ -82,7 +82,6 @@ function longitudString(selector, maxLongitud) {
 	});
 }
 
-
 //** VALIDACIONES GLOBALES */
 longitudString($('input[type=password]'),16); //Longitud maxima Input tipo Password Global.
 $('input[type=password]').keydown(impedirEspacios); //Evitar espacios en Input de tipo Password, Global.

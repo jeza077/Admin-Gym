@@ -6,6 +6,7 @@
     --orangeFirst: #FF5300;
     --orangeSecond: #FF5F35;
     --orangeThird: #ff8303;
+    --grisOscuro: #495057;
 }
 /* * {
     font-family: 'Poppins', sans-serif;
@@ -82,24 +83,59 @@ body.login-page .login-box.recu-password .card{
 
 /*** PRIMER INGRESO ***/
 body.primer-ingreso {
-    background: rgb(255, 158, 30);
-    overflow-y: auto;
+    /* background: rgb(255, 158, 30); */
+    overflow-y: hidden;
     /* padding: 60px 230px; */
 }
-body.primer-ingreso .wrapper {
-    padding: 50px 195px;
+body.primer-ingreso .card label{
+    color: var(--grisOscuro);
 }
 body.primer-ingreso .card {
     /* width: auto; */
-    padding: 30px;
-    min-height: 500px!important;
-    border-radius: 0.7em;
+    /* padding: 30px; */
+    /* min-height: 500px!important; */
+    /* border-radius: 0.7em; */
+    margin: 0;
+    border-radius: 0;
+    height: 100vh;
+}
+body.primer-ingreso .card .contenedor1 img {
+    width: 350px;
+    height: 400px;
+}
+body.primer-ingreso .card .contenedor1{
+    /* background: var(--btnPrimario); */
+    height: 100vh;
+    padding: 80px 50px 50px 50px;
+}
+body.primer-ingreso .card .contenedor2{
+    padding: 100px 60px 60px 60px;
+}
+body.primer-ingreso .card .contenedor2 a{
+    color: var(--orangeThird);
+    font-size: 1.5rem;
+    text-align: center;
+    letter-spacing: 1px;
+    font-weight: 900;
+    padding-left: 60px;
+}
+body.primer-ingreso .card .contenedor2 a b{
+    color: var(--orangeThird);
+    font-size: 1.5rem;
+    text-align: center;
+}
+body.primer-ingreso .card .contenedor2 .login-box-msg{
+    /* margin-top: 30px; */
+    font-size: 1.2rem;
+    color: var(--grisOscuro);
+    text-align: center;
+    /* padding: 0 50px 40px; */
 }
 body.primer-ingreso .passwords i.show-nueva-pass.primero{
     cursor: pointer;
     position: absolute;
     top: 52px;
-    right: 465px;
+    right: 444px;
     z-index: 1000;
 }
 
@@ -107,10 +143,12 @@ body.primer-ingreso .passwords i.show-confir-pass.segundo{
     cursor: pointer;
     position: absolute;
     top: 52px;
-    right: 22px;
+    right: 40px;
     z-index: 1000;
 }
-
+body.primer-ingreso .card .contenedor2 a.salir{
+    color: #fff;
+}
 
 
 
@@ -414,7 +452,7 @@ i.show-confir-pass{
     color: #fff;
 } */
 
-/* AGREGAR PERSONA */
+/** AGREGAR PERSONA */
 .card.agregar-persona{
     position: relative;
     height: 450px;

@@ -1,17 +1,35 @@
+<?php 
+		// echo '<script>
+        // Swal.fire({
+        //     title: "Bienvenido a bordo :)",
+        //     text: "A continuación podras modificar tu contraseña y añadir tus preguntas de seguridad!",
+        //     heightAuto: false,
+        //     allowOutsideClick: false
+        // });
+        // </script>';
+?>
 
     <div class="card">
-        <div class="login-logo">
-        <a href="login"><b>Bienvenid@ </b><?php echo $_SESSION["usuario"]?>!</a>
+        <div class="form-row">
+
+        <div class="contenedor1 login-logo col-md-5">
+            <!-- <a href="login"><b>Bienvenid@ a bordo</b><?php echo $_SESSION["usuario"]?> :)</a>
+            <p class="login-box-msg">Por favor, cambie su contraseña y agregue las preguntas de seguridad!</p> -->
+            <img src="vistas/img/plantilla/undraw_Process.svg" alt="">
         </div>
-        <div class="card-body">
+
+        <div class="contenedor2 card-body col-md-7">
+            <div>
+            <a href="login"><b>Bienvenid@ a bordo </b><?php echo $_SESSION["usuario"]?> :)</a>
             <p class="login-box-msg">Por favor, cambie su contraseña y agregue las preguntas de seguridad!</p>
+            </div>
             <form method="post" id="primerIngreso">
                 <div class="form-row">
-                    <div class="form-group col-md-6">
+                    <div class="form-group pr-4 col-md-6">
                         <label class='mt-2'>Nueva contraseña</label>
                         <input type='password' class='form-control nueva-password' placeholder='Nueva contraseña' name='editarPassword' required>
                     </div>
-                    <div class="form-group col-md-6 passwords">
+                    <div class="form-group pr-4 col-md-6 passwords">
                         <label class='mt-2'>Confirmar contraseña</label>
                         <input type='password' class='form-control confirmar-password' placeholder='Confirmar contraseña'>
                     <i class="far fa-eye show-nueva-pass primero" action="hide"></i>
@@ -20,9 +38,7 @@
                     </div>
                 </div>
 
-                <div class="form-row">
                     <?php 
-
                         $item = 'parametro';
                         $valor = 'ADMIN_PREGUNTAS';
                         $parametros = ControladorUsuarios::ctrMostrarParametros($item, $valor);
@@ -30,8 +46,10 @@
                         $cantidadPreguntas = $parametros['valor'];
                         
                         for ($i=1; $i <=$cantidadPreguntas ; $i++) { ?>
-                        <div class="form-group col-md-4">
-                            <label for="inputPassword4">Pregunta <?php echo $i?></label>
+                    <div class="form-row">
+
+                        <div class="form-group pr-4 col-md-6">
+                            <label for="">Pregunta <?php echo $i?></label>
                             <select class="form-control select2" name="nuevaPregunta[]">
                             <option selected="selected">Seleccionar...</option>
                             <?php 
@@ -47,13 +65,17 @@
                                     }
                                 ?>
                             </select>
-                            <label class="mt-3" for="inputPassword4">Respuesta <?php echo $i?></label>
+                        </div>
+                        <div class="form-group pr-4 col-md-6">
+                            <label class="" for="">Respuesta <?php echo $i?></label>
                             <input type="text" class="form-control" onKeyUp="this.value=this.value.toLowerCase();" name="respuestaPregunta[]" placeholder="Ingrese respuesta">
                         </div>
+                       
+                    </div>
+
                     <?php
                         }            
                     ?>
-                </div>
 
                 <!-- <div class="form row">
 
@@ -66,7 +88,7 @@
 
                 </div> -->
                 
-                <div class="form-group mt-4">
+                <div class="form-group mt-4 salir">
                     <a href="salir" class="btn btn-danger float-left">Salir</a>
                     <button type="submit" class="btn btn-primary float-right" id="btnPrimerIngreso">Guardar</button>
                 </div>
@@ -78,5 +100,6 @@
                     $contraseñaPreguntas->ctrNuevaContraseñaPreguntasSeguridad($id, $usuario);
                 ?>
             </form>
+        </div>
         </div>
     </div>
