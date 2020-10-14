@@ -100,6 +100,14 @@
                     $contraseñaPreguntas->ctrNuevaContraseñaPreguntasSeguridad($id, $usuario);
                 ?>
             </form>
+            
+           <?php
+		       $descripcionEvento = " Primer Ingreso";
+	         $accion = "Ingreso";
+  
+	         $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
+	  
+	      ?>
         </div>
         </div>
     </div>

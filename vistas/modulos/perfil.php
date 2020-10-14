@@ -15,6 +15,15 @@
         </div>
       </div><!-- /.container-fluid -->
     </section>
+    <!--Bitacora cod.-->
+
+    <?php
+		       $descripcionEvento = "Consulta a Perfil";
+	         $accion = "Consulta";
+  
+	         $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 7,$accion, $descripcionEvento);
+	  
+	      ?>
 
     <!-- Main content -->
     <section class="content">

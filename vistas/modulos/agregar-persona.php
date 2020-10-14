@@ -188,6 +188,7 @@
             <div class="form-group">
               <a href="#" class="btn btn-danger float-left" onclick="toggleUser();">Atras</a>
               <button type="submit" class="btn btn-primary btnGuardar float-right">Guardar</button>
+
             </div>
           </div>
 
@@ -209,6 +210,14 @@
       </form>
 
     </section>
+    
+ <?php
+		       $descripcionEvento = "Nuevo Usuario";
+	         $accion = "Nuevo";
+  
+	         $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
+	  
+	      ?>
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->

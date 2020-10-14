@@ -18,6 +18,15 @@
       </div><!-- /.container-fluid -->
     </section>
 
+     <!-- FUNCION INSERTAR BITACORA -->
+     <?php
+  	  $descripcionEvento = " Consulto Inicio";
+      $accion = "consulta";
+
+      $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 1,$accion, $descripcionEvento);
+    
+     ?>
+
     <!-- Main content -->
     <section class="content">
 

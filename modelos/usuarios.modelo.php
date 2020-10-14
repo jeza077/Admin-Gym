@@ -316,5 +316,57 @@ class ModeloUsuarios{
         
 		$stmt -> close();
 		$stmt = null;	
-    }
+	}
+	
+	/*===================================================
+	insertar Bitacora 
+	================================*/
+	static public function mdlInsertarBitacora($tabla, $fecha, $usuario, $modulo, $accion, $descripcion){
+
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(fecha, id_usuario, id_Modulos, accion, descripcion) VALUES ('$fecha', $usuario, $modulo, '$accion', '$descripcion')");
+
+		if($stmt->execute()){
+
+			return "ok";
+
+		}else{
+
+			return "error";
+		
+		}
+
+		$stmt->close();
+		$stmt = null;
+	}
+		
+	/*=============================================
+			MOSTRAR BITACORA
+	=============================================*/
+		
+		static public function mdlMostrarBitacora($tabla1, $item, $valor){
+		
+				if($item != null){
+		
+					$stmt = Conexion::conectar()->prepare("SELECT * from $tabla1 where $item = :$item");
+							
+							
+					$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+					$stmt -> execute();
+					return $stmt -> fetch();
+		
+				} else {
+		
+					$stmt = Conexion::conectar()->prepare("SELECT b.id_bita, e.usuario, m.nombre_modulo, b.accion, b.descripcion, b.fecha FROM tbl_bitacora as b\n"
+					. "INNER JOIN empleados as e ON b.id_usuario = e.id\n"
+					. "INNER JOIN modulos as m ON b.Id_Modulos = m.id order by b.fecha desc");
+					$stmt -> execute();
+					return $stmt -> fetchAll();
+		
+				}
+	
+			$stmt -> close();
+			$stmt = null;	
+	
+		}
+
 }

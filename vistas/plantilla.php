@@ -85,6 +85,7 @@
           
           if($_GET["ruta"] == "dashboard" ||
             $_GET["ruta"] == "usuarios" ||
+            $_GET["ruta"] == "bitacora" ||
             $_GET["ruta"] == "categorias" ||
             $_GET["ruta"] == "empleados" ||
             $_GET["ruta"] == "productos" ||

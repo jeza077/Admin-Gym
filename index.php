@@ -10,6 +10,7 @@ require_once "controladores/categorias.controlador.php";
 require_once "controladores/productos.controlador.php";
 require_once "controladores/clientes.controlador.php";
 require_once "controladores/ventas.controlador.php";
+require_once "controladores/mantenimiento.controlador.php";
 
 require_once "modelos/globales.modelo.php";
 require_once "modelos/personas.modelo.php";

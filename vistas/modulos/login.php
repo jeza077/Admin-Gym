@@ -221,5 +221,15 @@
     </div>
   </div>
 </div>
+ <!--Bitacora cod.-->
+
+ <?php
+		      //  $descripcionEvento = " Ingreso a Login";
+	        //  $accion = "Ingreso";
+  
+	        //  $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
+	  
+	      ?>
+    </div>
 <!-- /.login-box -->
 

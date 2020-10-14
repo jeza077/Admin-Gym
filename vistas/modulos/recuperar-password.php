@@ -11,7 +11,14 @@ $password->ctrRevisarCodigoFecha();
     <div class="login-logo">
       <a href="login"><b>Gym</b>La Roca</a>
     </div>
+<!--Bitacora cod.-->
 
+<?php
+		       $descripcionEvento = " Ingreso a Recuperar Contraseña ";
+	         $accion = "Ingreso";
+  
+	         $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 1,$accion, $descripcionEvento);
+           ?>
     <!-- CONTENEDOR CAMBIAR CONTRASEÑA -->
     <div class="card-body login-card-body">
       <p class="login-box-msg">Cambia tu contraseña</p>
