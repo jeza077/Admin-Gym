@@ -500,125 +500,140 @@ class ControladorUsuarios{
 	=============================================*/	
 	static public function ctrNuevaContraseñaPreguntasSeguridad($id, $usuario){
 
+
 		if(isset($_POST["editarPassword"])){
 			
-			if(preg_match('/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%.])\S{8,16}$/', $_POST["editarPassword"]) && preg_grep('/^(?=.*[a-zñÑáéíóúÁÉÍÓÚ])\S{1,50}$/', $_POST["respuestaPregunta"])){
-				// echo '<br><div class="alert alert-danger">bien.</div>';
+			if($_POST["nuevaPregunta"][0] !== 'Seleccionar...' && $_POST["nuevaPregunta"][1] !== 'Seleccionar...' && $_POST["nuevaPregunta"][2] !== 'Seleccionar...'){
 
-				// return;
+				if(preg_match('/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%.])\S{8,16}$/', $_POST["editarPassword"]) && preg_grep('/^(?=.*[a-zñÑáéíóúÁÉÍÓÚ])\S{1,50}$/', $_POST["respuestaPregunta"])){
+					// echo '<br><div class="alert alert-danger">bien.</div>';
+
+					// return;
+					
+					
+					$encriptar = crypt($_POST["editarPassword"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
 				
+					$tabla1 = "personas";
+					$tabla2 = "empleados";
+
+					$item = 'usuario';
+					$valor = $usuario;
+
+					$respuestaContraseñas = ModeloUsuarios::mdlMostrarUsuarios($tabla1, $tabla2, $item, $valor);
+
+					// var_dump($respuestaContraseñas['password'] . ' ' . $encriptar);
+
+					if($respuestaContraseñas['password'] == $encriptar){
+						// echo '<br><div class="alert alert-danger">Contraseña igual a la anterior, intente de nuevo.</div>';
+						echo '<script>			
+							Swal.fire({
+								title: "Contraseña no puede ser igual a la anterior. Por favor, intente de nuevo.",
+								icon: "error",
+								toast: true,
+								position: "top",
+								showConfirmButton: false,
+								timer: 3000,
+							});
+						</script>';
+
+					} else if($usuario == $_POST["editarPassword"]) {
+
+						echo '<script>			
+							Swal.fire({
+								title: "Contraseña ingresada no puede ser igual al usuario. Por favor, intente de nuevo.",
+								icon: "error",
+								toast: true,
+								position: "top",
+								showConfirmButton: false,
+								timer: 3000,
+							});
+						</script>';
+
+					} else {
+						$item1 = "password";
+						$valor1 = $encriptar;
 				
-				$encriptar = crypt($_POST["editarPassword"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
-			
-				$tabla1 = "personas";
-				$tabla2 = "empleados";
+						$item2 = 'id';
+						$valor2 = $id;
 
-				$item = 'usuario';
-				$valor = $usuario;
+						$item3 = null;
+						$valor3 = null;
 
-				$respuestaContraseñas = ModeloUsuarios::mdlMostrarUsuarios($tabla1, $tabla2, $item, $valor);
+						$item4 = null;
+						$valor4 = null;
 
-				// var_dump($respuestaContraseñas['password'] . ' ' . $encriptar);
+						$respuestaContraseña = ModeloUsuarios::mdlActualizarUsuario($tabla2, $item1, $valor1, $item2, $valor2, $item3, $valor3, $item4, $valor4);
 
-				if($respuestaContraseñas['password'] == $encriptar){
-					// echo '<br><div class="alert alert-danger">Contraseña igual a la anterior, intente de nuevo.</div>';
-					echo '<script>			
-						Swal.fire({
-							title: "Contraseña no puede ser igual a la anterior. Por favor, intente de nuevo.",
-							icon: "error",
-							toast: true,
-							position: "top",
-							showConfirmButton: false,
-							timer: 3000,
-						});
-					</script>';
+						if($respuestaContraseña == true) {
+							$tabla = "usuario_pregunta";
+							
+							$datos = array("idUsuario" => $id,
+											"idPregunta" => $_POST["nuevaPregunta"],
+											"respuesta" => $_POST["respuestaPregunta"]);
+				
+											
+							$respuestaPreguntas = ModeloUsuarios::mdlIngresarPreguntaUsuario($tabla, $datos);
+				
+							if($respuestaPreguntas == true){
 
-				} else if($usuario == $_POST["editarPassword"]) {
+								$tabla = "empleados";
 
-					echo '<script>			
-						Swal.fire({
-							title: "Contraseña ingresada no puede ser igual al usuario. Por favor, intente de nuevo.",
-							icon: "error",
-							toast: true,
-							position: "top",
-							showConfirmButton: false,
-							timer: 3000,
-						});
-					</script>';
+								$item1 = 'estado';
+								$valor1 = 1;
 
-				} else {
-					$item1 = "password";
-					$valor1 = $encriptar;
-			
-					$item2 = 'id';
-					$valor2 = $id;
+								$item2 = "primera_vez";
+								$valor2 = 0;
+				
+								$item3 = 'id';
+								$valor3 = $id;
 
-					$item3 = null;
-					$valor3 = null;
+								$item4 = null;
+								$valor4 = null;
+				
+								$respuestaEstadoPrimeraVez = ModeloUsuarios::mdlActualizarUsuario($tabla, $item1, $valor1, $item2, $valor2, $item3, $valor3, $item4, $valor4);
 
-					$item4 = null;
-					$valor4 = null;
-
-					$respuestaContraseña = ModeloUsuarios::mdlActualizarUsuario($tabla2, $item1, $valor1, $item2, $valor2, $item3, $valor3, $item4, $valor4);
-
-					if($respuestaContraseña == true) {
-						$tabla = "usuario_pregunta";
-						
-						$datos = array("idUsuario" => $id,
-										"idPregunta" => $_POST["nuevaPregunta"],
-										"respuesta" => $_POST["respuestaPregunta"]);
-			
-										
-						$respuestaPreguntas = ModeloUsuarios::mdlIngresarPreguntaUsuario($tabla, $datos);
-			
-						if($respuestaPreguntas == true){
-
-							$tabla = "empleados";
-
-							$item1 = 'estado';
-							$valor1 = 1;
-
-							$item2 = "primera_vez";
-							$valor2 = 0;
-			
-							$item3 = 'id';
-							$valor3 = $id;
-
-							$item4 = null;
-							$valor4 = null;
-			
-							$respuestaEstadoPrimeraVez = ModeloUsuarios::mdlActualizarUsuario($tabla, $item1, $valor1, $item2, $valor2, $item3, $valor3, $item4, $valor4);
-
-							if($respuestaEstadoPrimeraVez == true) {
-								echo '<script>
-									Swal.fire({
-										title: "Contraseña y preguntas guardadas correctamente.",
-										icon: "success"
-									}).then((result)=>{
-										if(result.value){
-											window.location = "salir";
-										}
-									});						
-								</script>';
+								if($respuestaEstadoPrimeraVez == true) {
+									echo '<script>
+										Swal.fire({
+											title: "Contraseña y preguntas guardadas correctamente.",
+											icon: "success"
+										}).then((result)=>{
+											if(result.value){
+												window.location = "salir";
+											}
+										});						
+									</script>';
+								}
 							}
 						}
 					}
+
+					
+				} else {
+					echo '<script>			
+							Swal.fire({
+								title: "Por favor, llena los campos corectamente. Intente de nuevo.",
+								icon: "error",
+								toast: true,
+								position: "top",
+								showConfirmButton: false,
+								timer: 3000,
+							});
+						</script>';
 				}
 
-				
 			} else {
-				echo '<script>			
-						Swal.fire({
-							title: "Por favor, llena los campos corectamente. Intente de nuevo.",
-							icon: "error",
-							toast: true,
-							position: "top",
-							showConfirmButton: false,
-							timer: 3000,
-						});
-					</script>';
+					echo '<script>			
+							Swal.fire({
+								title: "Por favor, llena los campos corectamente. Intente de nuevo.",
+								icon: "error",
+								toast: true,
+								position: "top",
+								showConfirmButton: false,
+								timer: 3000,
+							});
+						</script>';
 			}
-	
 		}
 	}
 	

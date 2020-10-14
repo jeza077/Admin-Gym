@@ -34,7 +34,7 @@
                         <input type='password' class='form-control confirmar-password' placeholder='Confirmar contraseña'>
                     <i class="far fa-eye show-nueva-pass primero" action="hide"></i>
                     <i class="far fa-eye show-confir-pass segundo" action="hide"></i>
-                        <span class="resultado-password help-block mt-2 float-right"></span>
+                        <span class="resultado-password help-block mt-1 float-right"></span>
                     </div>
                 </div>
 
@@ -51,8 +51,8 @@
                         <div class="form-group pr-4 col-md-6">
                             <label for="">Pregunta <?php echo $i?></label>
                             <select class="form-control select2" name="nuevaPregunta[]">
-                            <option selected="selected">Seleccionar...</option>
-                            <?php 
+                                <option selected="selected">Seleccionar...</option>
+                                <?php 
                                     $tabla = "preguntas";
                                     $item = null;
                                     $valor = null;
@@ -88,8 +88,8 @@
 
                 </div> -->
                 
-                <div class="form-group mt-4 salir">
-                    <a href="salir" class="btn btn-danger float-left">Salir</a>
+                <div class="form-group mt-4">
+                    <a href="salir" class="btn btn-danger salir float-left">Salir</a>
                     <button type="submit" class="btn btn-primary float-right" id="btnPrimerIngreso">Guardar</button>
                 </div>
 
