@@ -48,8 +48,8 @@ class AjaxUsuarios{
 
     public function ajaxValidarUsuario(){
 
-        $tabla = "empleados";
-        $item = "usuario";
+        $tabla = "tbl_usuarios";
+        $item = "Usuario";
         $valor = $this->validarUsuario;
         
         $respuesta = ControladorUsuarios::ctrMostrarUsuarios($tabla, $item, $valor);
@@ -64,8 +64,8 @@ class AjaxUsuarios{
 
     public function ajaxVerificarEmail(){
 
-        $tabla = "empleados";
-        $item = "correo";
+        $tabla = "tbl_usuarios";
+        $item = "Correo";
         $valor = $this->verificarEmail;
         
         $respuesta = ControladorUsuarios::ctrMostrarUsuarios($tabla, $item, $valor);
@@ -83,13 +83,13 @@ class AjaxUsuarios{
 
     public function ajaxMostrarPreguntas(){
 
-        $item1 = "usuario";
+        $item1 = "Usuario";
         $valor1 = $this->usuario;
         
-        $item2 = "id_pregunta";
+        $item2 = "ID_Pregunta";
         $valor2 = $this->idPregunta;
         
-        $item3 = "respuesta";
+        $item3 = "Respuesta";
         $valor3 = $this->respuestaPregunta;
 
         $respuesta = ControladorUsuarios::ctrMostrarPreguntas($item1, $valor1, $item2, $valor2, $item3, $valor3);
@@ -107,7 +107,7 @@ class AjaxUsuarios{
 
     public function ajaxEnviarCorreoRecuperacion(){
 
-        // $item = "usuario";
+        // $item = "Usuario";
         $id = $this->idUsua;
         $correo = $this->correoUsuario;
         $nombre = $this->nombreUsuario;
@@ -131,7 +131,7 @@ class AjaxUsuarios{
         $item = "id";
         $valor = $this->usuarioId;
 
-        $itemUsuario = "usuario";
+        $itemUsuario = "Usuario";
         $valorUsuario = $this->usuarioIngresado;
       
         $respuesta = ControladorUsuarios::ctrCambiarContraseña($item, $valor, $itemUsuario, $valorUsuario, $post);
@@ -147,12 +147,12 @@ class AjaxUsuarios{
     
     public function ajaxActualizarUsuario(){
 
-        $tabla = "empleados";
+        $tabla = "tbl_usuarios";
 
-        $item1 = "bloqueado";
-        $valor1 = 1;
+        $item1 = "Estadp";
+        $valor1 = 0;
 
-        $item2 = "usuario";
+        $item2 = "Usuario";
         $valor2 = $this->usua;
 
         $item3 = null;
