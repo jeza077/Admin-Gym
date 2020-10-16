@@ -9,19 +9,20 @@ class ControladorPersonas{
             if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevoNombre"]) && 
             preg_match('/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.([a-zA-Z]{2,4})+$/', $_POST["nuevoEmail"])){
 
-                $tabla = "personas";
+                $tabla = "tbl_personas";
 
                 if($tipoPersona == 'default'){
                     
                     $datos = array("nombre" => $_POST["nuevoNombre"],
                     "apellido" => $_POST["nuevoApellido"],
-                    "identidad" => $_POST["nuevaIdentidad"],
+                    "numero_documento" => $_POST["nuevoDocumento"],
                     "tipo_persona" => $tipoPersona,
                     "fecha_nacimiento" => $_POST["nuevaFechaNacimiento"],
                     "sexo" => $_POST["nuevoSexo"],
                     "telefono" => $_POST["nuevoTelefono"],
                     "direccion" => $_POST["nuevaDireccion"],
-                    "email" => $_POST["nuevoEmail"]);
+                    "email" => $_POST["nuevoEmail"],
+                    "id_documento" => $_POST["idDocumento"]);
 
                     $respuestaPersona = ModeloPersonas::mdlCrearPersona($tabla, $datos);
                     
@@ -54,13 +55,14 @@ class ControladorPersonas{
 
                     $datos = array("nombre" => $_POST["nuevoNombre"],
                                 "apellido" => $_POST["nuevoApellido"],
-                                "identidad" => $_POST["nuevaIdentidad"],
+                                "numero_documento" => $_POST["nuevoDocumento"],
                                 "tipo_persona" => $_POST["nuevoTipoPersona"],
                                 "fecha_nacimiento" => $_POST["nuevaFechaNacimiento"],
                                 "sexo" => $_POST["nuevoSexo"],
                                 "telefono" => $_POST["nuevoTelefono"],
                                 "direccion" => $_POST["nuevaDireccion"],
-                                "email" => $_POST["nuevoEmail"]);
+                                "email" => $_POST["nuevoEmail"],
+                                "id_documento" => $_POST["idDocumento"]);
 
                     $respuestaPersona = ModeloPersonas::mdlCrearPersona($tabla, $datos);
                 
@@ -68,7 +70,7 @@ class ControladorPersonas{
 
                         $totalId = array();
 
-                        $tabla = "personas";
+                        $tabla = "tbl_personas";
                         // $tabla2 = null;
                         // $item = null;
                         // $valor = null;

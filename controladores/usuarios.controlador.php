@@ -13,7 +13,7 @@ class ControladorUsuarios{
 
 	static public function ctrMostrarUsuarios($tabla, $item, $valor) {
 
-		$tabla1 = "personas";
+		$tabla1 = "tbl_personas";
 		$tabla2 = $tabla;
 		$respuesta = ModeloUsuarios::mdlMostrarUsuarios($tabla1, $tabla2, $item, $valor);
 
@@ -73,10 +73,10 @@ class ControladorUsuarios{
 
 					$encriptar = crypt($_POST["ingPassword"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
 
-					$tabla1 = "personas";
-					$tabla2 = "empleados";
+					$tabla1 = "tbl_personas";
+					$tabla2 = "tbl_usuarios";
 					
-					$item = "usuario";
+					$item = "Usuario";
 					$valor = $_POST["ingUsuario"];
 
 					$respuesta = ModeloUsuarios::mdlMostrarUsuarios($tabla1, $tabla2, $item, $valor);
@@ -84,7 +84,6 @@ class ControladorUsuarios{
 					
 					$fechaVencimiento = date('Y-m-d', strtotime($respuesta['fecha_vencimiento']));
 					// echo $fechaVencimiento;
-					
 					date_default_timezone_set('America/Tegucigalpa');
 					$fechaHoy = date('Y-m-d');
 					// echo $fechaHoy;
@@ -134,10 +133,10 @@ class ControladorUsuarios{
 
 								$fechaActual = $fecha." ".$hora;
 
-								$item1 = "ultimo_login";
+								$item1 = "Ultimo_Login";
 								$valor1 = $fechaActual;
 
-								$item2 = "id_persona";
+								$item2 = "ID_Persona";
 								$valor2 = $respuesta["id"];
 
 								$item3 = null;
@@ -215,13 +214,13 @@ class ControladorUsuarios{
 				
 							if($_POST["ingUsuario"] != 'SUPERADMIN') {
 								//INTENTOS DE LOGUEARSE PERMITIDOS SOLO 3 AL REBASARLOS SE DESACTIVARA EL USUARIO INGRESADO AUTOMATICAMENTE.
-								$item = 'parametro';
+								$item = 'Parametro';
 								$valor = 'ADMIN_INTENTOS';
 								$parametros = ControladorUsuarios::ctrMostrarParametros($item, $valor);
 								// var_dump($parametros);
 
 								// return;
-								$intentos = $parametros['valor'];
+								$intentos = $parametros['Valor'];
 								$_SESSION['contadorLogin']++; 
 								// $intentosRestantes = $intentos - $_SESSION['contadorLogin'];
 
@@ -232,20 +231,20 @@ class ControladorUsuarios{
 								// session_destroy();
 
 								if($_SESSION['contadorLogin'] == $intentos) {
-									$tabla1 = "personas";
-									$tabla2 = "empleados";
+									$tabla1 = "tbl_personas";
+									$tabla2 = "tbl_usuarios";
 									
-									$item = "usuario";
+									$item = "Usuario";
 									$valor = $_POST["ingUsuario"];
 
 									$respuesta = ModeloUsuarios::mdlMostrarUsuarios($tabla1, $tabla2, $item, $valor);
 
 									if($respuesta["usuario"] == $_POST["ingUsuario"]){
-										$tabla = "empleados";
-										$item1 = "bloqueado";
-										$valor1 = 1;
+										$tabla = "tbl_usuarios";
+										$item1 = "estado";
+										$valor1 = 0;
 
-										$item2 = "usuario";
+										$item2 = "Usuario";
 										$valor2 = $_POST["ingUsuario"];
 																	
 										$item3 = null;
@@ -416,16 +415,16 @@ class ControladorUsuarios{
 
 
 						//** =============== CREAMOS LA FECHA VENCIMIENTO DEL USUARIO =================*/
-						$item = 'parametro';
+						$item = 'Parametro';
 						$valor = 'ADMIN_DIAS_VIGENCIA';
 						$parametros = ControladorUsuarios::ctrMostrarParametros($item, $valor);
 				
-						$vigenciaUsuario = $parametros['valor'];
+						$vigenciaUsuario = $parametros['Valor'];
 						
 						date_default_timezone_set("America/Tegucigalpa");
 						$fechaVencimiento = date("Y-m-d H:i:s", strtotime('+'.$vigenciaUsuario.' days'));
 
-						$tabla = "empleados";
+						$tabla = "tbl_usuarios";
 						$datos = array("id_persona" => $datos["id_persona"],
 									   "usuario" => $datos["usuario"],
 									   "password" => $encriptar,
@@ -521,17 +520,17 @@ class ControladorUsuarios{
 					
 					$encriptar = crypt($_POST["editarPassword"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
 				
-					$tabla1 = "personas";
-					$tabla2 = "empleados";
+					$tabla1 = "tbl_personas";
+					$tabla2 = "tbl_usuarios";
 
-					$item = 'usuario';
+					$item = 'Usuario';
 					$valor = $usuario;
 
 					$respuestaContraseñas = ModeloUsuarios::mdlMostrarUsuarios($tabla1, $tabla2, $item, $valor);
 
-					// var_dump($respuestaContraseñas['password'] . ' ' . $encriptar);
+					// var_dump($respuestaContraseñas['Contraseña'] . ' ' . $encriptar);
 
-					if($respuestaContraseñas['password'] == $encriptar){
+					if($respuestaContraseñas['Contraseña'] == $encriptar){
 						// echo '<br><div class="alert alert-danger">Contraseña igual a la anterior, intente de nuevo.</div>';
 						echo '<script>			
 							Swal.fire({
@@ -558,10 +557,10 @@ class ControladorUsuarios{
 						</script>';
 
 					} else {
-						$item1 = "password";
+						$item1 = "Contraseña";
 						$valor1 = $encriptar;
 				
-						$item2 = 'id';
+						$item2 = 'ID_Usuario';
 						$valor2 = $id;
 
 						$item3 = null;
@@ -573,7 +572,7 @@ class ControladorUsuarios{
 						$respuestaContraseña = ModeloUsuarios::mdlActualizarUsuario($tabla2, $item1, $valor1, $item2, $valor2, $item3, $valor3, $item4, $valor4);
 
 						if($respuestaContraseña == true) {
-							$tabla = "usuario_pregunta";
+							$tabla = "tbl_preguntas_usuarios";
 							
 							$datos = array("idUsuario" => $id,
 											"idPregunta" => $_POST["nuevaPregunta"],
@@ -584,7 +583,7 @@ class ControladorUsuarios{
 				
 							if($respuestaPreguntas == true){
 
-								$tabla = "empleados";
+								$tabla = "tbl_usuarios";
 
 								$item1 = 'estado';
 								$valor1 = 1;
@@ -592,7 +591,7 @@ class ControladorUsuarios{
 								$item2 = "primera_vez";
 								$valor2 = 0;
 				
-								$item3 = 'id';
+								$item3 = 'ID_Usuario';
 								$valor3 = $id;
 
 								$item4 = null;
@@ -651,8 +650,8 @@ class ControladorUsuarios{
 	=============================================*/	
 	static public function ctrCambiarContraseña($item, $valor, $itemUsuario, $valorUsuario, $post){
 
-		$tabla1 = "personas";
-		$tabla2 = "empleados";
+		$tabla1 = "tbl_personas";
+		$tabla2 = "tbl_usuarios";
 			
 		if(isset($post)){
 			
@@ -664,7 +663,7 @@ class ControladorUsuarios{
 
 				// return $respuestaContraseñas;
 
-				if($respuestaContraseñas['password'] == $encriptar){
+				if($respuestaContraseñas['Contraseña'] == $encriptar){
 
 					return false;
 
@@ -675,22 +674,22 @@ class ControladorUsuarios{
 				} else {
 					
 					//** =============== CREAMOS LA FECHA VENCIMIENTO DEL USUARIO =================*/
-					$itemParam = 'parametro';
+					$itemParam = 'Parametro';
 					$valorParam = 'ADMIN_DIAS_VIGENCIA';
 					$parametros = ControladorUsuarios::ctrMostrarParametros($itemParam, $valorParam);
 			
-					$vigenciaUsuario = $parametros['valor'];
+					$vigenciaUsuario = $parametros['Valor'];
 
 					date_default_timezone_set("America/Tegucigalpa");
 					$fechaVencimiento = date("Y-m-d H:i:s", strtotime('+'.$vigenciaUsuario.' days'));
 
-					$item1 = "password";
+					$item1 = "Contraseña";
 					$valor1 = $encriptar;
 
-					$item2 = 'bloqueado';
-					$valor2 = 0;
+					$item2 = 'Estado';
+					$valor2 = 1;
 
-					$item3 = "fecha_vencimiento";
+					$item3 = "Fecha_Vencimiento";
 					$valor3 = $fechaVencimiento;
 					
 					$item4 = $item;
@@ -729,9 +728,9 @@ class ControladorUsuarios{
 	=============================================*/	
 	static public function ctrCambiarContraseñaPorCodigo(){
 
-		$tabla1 = "personas";
-		$tabla2 = "empleados";
-		$item = "codigo";
+		$tabla1 = "tbl_personas";
+		$tabla2 = "tbl_usuarios";
+		$item = "Token";
 		$valor = $_GET['codigo'];
 
 		$respuesta = ModeloUsuarios::mdlMostrarUsuarios($tabla1, $tabla2, $item, $valor);
@@ -740,8 +739,8 @@ class ControladorUsuarios{
 		// return;
 		
 		$idUsuario = $respuesta['id_usuario'];
-		$usuario = $respuesta['usuario'];
-		$passwordAnterior = $respuesta['password'];
+		$usuario = $respuesta['Usuario'];
+		$passwordAnterior = $respuesta['Contraseña'];
 		
 		if(isset($_POST['editarPassword'])){
 			
@@ -750,6 +749,7 @@ class ControladorUsuarios{
 				$encriptar = crypt($_POST['editarPassword'], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
 			
 				if($passwordAnterior === $encriptar){
+
 					echo '<script>
 							Swal.fire({
 								title: "Contraseña ingresada no cumple con los requisitos, intente de nuevo.",
@@ -760,7 +760,9 @@ class ControladorUsuarios{
 								timer: 3000,
 							});					
 						</script>';
+
 				} else if($usuario == $_POST['editarPassword']) {
+
 					echo '<script>
 							Swal.fire({
 								title: "Contraseña ingresada no puede ser igual a usuario, intente de nuevo.",
@@ -771,30 +773,31 @@ class ControladorUsuarios{
 								timer: 3000,
 							});					
 						</script>';
+
 				} else {
 
 					//** =============== CREAMOS LA FECHA VENCIMIENTO DEL USUARIO =================*/
-					$item = 'parametro';
+					$item = 'Parametro';
 					$valor = 'ADMIN_DIAS_VIGENCIA';
 					$parametros = ControladorUsuarios::ctrMostrarParametros($item, $valor);
 			
-					$vigenciaUsuario = $parametros['valor'];
+					$vigenciaUsuario = $parametros['Valor'];
 
 					date_default_timezone_set("America/Tegucigalpa");
 					$fechaVencimiento = date("Y-m-d H:i:s", strtotime('+'.$vigenciaUsuario.' days'));
 
-					$tabla = "empleados";
+					$tabla = "tbl_usuarios";
 	
-					$item1 = "password";
+					$item1 = "Contraseña";
 					$valor1 = $encriptar;
 
-					$item2 = "bloqueado";
-					$valor2 = 0;
+					$item2 = "Estado";
+					$valor2 = 1;
 
-					$item3 = "fecha_vencimiento";
+					$item3 = "Fecha_Vencimiento";
 					$valor3 = $fechaVencimiento;
 
-					$item4 = "id";
+					$item4 = "ID_Usuario";
 					$valor4 = $idUsuario;
 	
 					$respuesta = ModeloUsuarios::mdlActualizarUsuarioPorCodigo($tabla, $item1, $valor1, $item2, $valor2, $item3, $valor3, $item4, $valor4);
@@ -849,28 +852,29 @@ class ControladorUsuarios{
 		ENVIAR CODIGO DE RECUPERAR CONTRASEÑA
 	=============================================*/	
     static public function ctrEnviarCodigo($id, $nombre, $correo){
+
         if(isset($correo)) {
             $correoElectronico = $correo;
 			$codigo = ControladorUsuarios::ctrCreateRandomCode();
 
-			$item = 'parametro';
+			$item = 'Parametro';
 			$valor = 'ADMIN_VIGENCIA_CORREO';
 			$parametros = ControladorUsuarios::ctrMostrarParametros($item, $valor);
 	
-			$vigenciaCorreo = $parametros['valor'];
+			$vigenciaCorreo = $parametros['Valor'];
 
 			date_default_timezone_set("America/Tegucigalpa");
 			$fechaRecuperacion = date("Y-m-d H:i:s", strtotime('+'.$vigenciaCorreo.' hours'));
 
-			$tabla = "empleados";
+			$tabla = "tbl_usuarios";
 
-			$item1 = "codigo";
+			$item1 = "Token";
 			$valor1 = $codigo;
 
-			$item2 = "fecha_recuperacion";
+			$item2 = "Fecha_Recuperacion";
 			$valor2 = $fechaRecuperacion;
 
-			$item3 = "id";
+			$item3 = "ID_Usuario";
 			$valor3 = $id;
 
 			$item4 = null;
@@ -941,9 +945,9 @@ class ControladorUsuarios{
 		if(isset($_GET['codigo'])){
 
 			// $_SESSION['codigo'] = $_GET['codigo'];
-			$tabla1 = "personas";
-			$tabla2 = "empleados";
-			$item = "codigo";
+			$tabla1 = "tbl_personas";
+			$tabla2 = "tbl_usuarios";
+			$item = "Token";
 			$valor = $_GET['codigo'];
 
 			$respuesta = ModeloUsuarios::mdlMostrarUsuarios($tabla1, $tabla2, $item, $valor);
@@ -977,7 +981,7 @@ class ControladorUsuarios{
 
 				$fechaAhora = date("Y-m-d H:i:s");
 
-				if($fechaAhora > $respuesta['fecha_recuperacion']) {
+				if($fechaAhora > $respuesta['Fecha_Recuperacion']) {
 					echo '<script>
 							Swal.fire({
 								title: "El código de recuperación de contraseña ha expirado. Por favor intenta de nuevo.",
@@ -1032,11 +1036,11 @@ class ControladorUsuarios{
 		$valor = null;
 		$parametros = ControladorUsuarios::ctrMostrarParametros($item, $valor);
 
-		$correoEmpresa = $parametros[1]['valor'];
-		$passwordEmpresa = $parametros[0]['valor'];
-		$puerto = $parametros[5]['valor'];
-		$host = $parametros[6]['valor'];
-		$smtp = $parametros[7]['valor'];
+		$correoEmpresa = $parametros[1]['Valor'];
+		$passwordEmpresa = $parametros[0]['Valor'];
+		$puerto = $parametros[5]['Valor'];
+		$host = $parametros[6]['Valor'];
+		$smtp = $parametros[7]['Valor'];
 		
 
 
@@ -1116,7 +1120,7 @@ class ControladorUsuarios{
 			MOSTRAR PARAMETROS
     =============================================*/
     static public function ctrMostrarParametros($item, $valor){
-        $tabla = 'parametros';
+        $tabla = 'tbl_parametros';
 		$respuesta = ModeloUsuarios::mdlMostrarParametros($tabla, $item, $valor);
 
 		return $respuesta;

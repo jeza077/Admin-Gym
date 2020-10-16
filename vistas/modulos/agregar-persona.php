@@ -29,7 +29,7 @@
             <div class="form-row">
               <div class="form-group col-md-4">
                 <label for="identidad">Identidad</label>
-                <input type="text" class="form-control" name="nuevaIdentidad" placeholder="Ingrese Identidad" required>
+                <input type="text" class="form-control" name="nuevoDocumento placeholder="Ingrese Identidad" required>
               </div>
               <div class="form-group col-md-4">
                 <label for="nombre">Nombre</label>
