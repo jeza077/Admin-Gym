@@ -48,8 +48,8 @@ class AjaxUsuarios{
 
     public function ajaxValidarUsuario(){
 
-        $tabla = "tbl_usuarios";
-        $item = "Usuario";
+        $tabla = "empleados";
+        $item = "usuario";
         $valor = $this->validarUsuario;
         
         $respuesta = ControladorUsuarios::ctrMostrarUsuarios($tabla, $item, $valor);
@@ -64,8 +64,8 @@ class AjaxUsuarios{
 
     public function ajaxVerificarEmail(){
 
-        $tabla = "tbl_usuarios";
-        $item = "Correo";
+        $tabla = "empleados";
+        $item = "correo";
         $valor = $this->verificarEmail;
         
         $respuesta = ControladorUsuarios::ctrMostrarUsuarios($tabla, $item, $valor);
@@ -83,13 +83,13 @@ class AjaxUsuarios{
 
     public function ajaxMostrarPreguntas(){
 
-        $item1 = "Usuario";
+        $item1 = "usuario";
         $valor1 = $this->usuario;
         
-        $item2 = "ID_Pregunta";
+        $item2 = "id_pregunta";
         $valor2 = $this->idPregunta;
         
-        $item3 = "Respuesta";
+        $item3 = "respuesta";
         $valor3 = $this->respuestaPregunta;
 
         $respuesta = ControladorUsuarios::ctrMostrarPreguntas($item1, $valor1, $item2, $valor2, $item3, $valor3);
@@ -107,7 +107,7 @@ class AjaxUsuarios{
 
     public function ajaxEnviarCorreoRecuperacion(){
 
-        // $item = "Usuario";
+        // $item = "usuario";
         $id = $this->idUsua;
         $correo = $this->correoUsuario;
         $nombre = $this->nombreUsuario;
@@ -131,7 +131,7 @@ class AjaxUsuarios{
         $item = "id";
         $valor = $this->usuarioId;
 
-        $itemUsuario = "Usuario";
+        $itemUsuario = "usuario";
         $valorUsuario = $this->usuarioIngresado;
       
         $respuesta = ControladorUsuarios::ctrCambiarContraseña($item, $valor, $itemUsuario, $valorUsuario, $post);
@@ -147,12 +147,12 @@ class AjaxUsuarios{
     
     public function ajaxActualizarUsuario(){
 
-        $tabla = "tbl_usuarios";
+        $tabla = "empleados";
 
-        $item1 = "Estadp";
-        $valor1 = 0;
+        $item1 = "bloqueado";
+        $valor1 = 1;
 
-        $item2 = "Usuario";
+        $item2 = "usuario";
         $valor2 = $this->usua;
 
         $item3 = null;

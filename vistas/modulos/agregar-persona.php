@@ -96,7 +96,7 @@
                 <select class="form-control select2" style="width: 100%;" name="nuevoRol">
                   <option selected="selected">Seleccionar...</option>
                     <?php 
-                        $tabla = "tbl_roles";
+                        $tabla = "roles";
                         $item = null;
                         $valor = null;
 
@@ -140,7 +140,7 @@
                 <select class="form-control select2" name="nuevaPregunta[]">
                 <option selected="selected">Seleccionar...</option>
                 <?php 
-                        $tabla = "tbl_preguntas";
+                        $tabla = "preguntas";
                         $item = null;
                         $valor = null;
 

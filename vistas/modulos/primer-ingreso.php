@@ -28,11 +28,11 @@
                 </div>
 
                     <?php 
-                        $item = 'Parametro';
+                        $item = 'parametro';
                         $valor = 'ADMIN_PREGUNTAS';
                         $parametros = ControladorUsuarios::ctrMostrarParametros($item, $valor);
                         // var_dump($parametros['valor']);
-                        $cantidadPreguntas = $parametros['Valor'];
+                        $cantidadPreguntas = $parametros['valor'];
                         
                         for ($i=1; $i <=$cantidadPreguntas ; $i++) { ?>
                     <div class="form-row">
@@ -91,11 +91,12 @@
             </form>
             
            <?php
-		        $descripcionEvento = " Primer Ingreso";
-	            $accion = "Ingreso";
+		       $descripcionEvento = " Primer Ingreso";
+	         $accion = "Ingreso";
   
-	            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
-	        ?>    
+	         $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
+	  
+	      ?>
         </div>
         </div>
     </div>
