@@ -52,7 +52,7 @@ class ModeloUsuarios{
 	
 	static public function mdlMostrarUsuarioModulo($item1, $item2, $valor1, $valor2){
 
-		$stmt = Conexion::conectar()->prepare("SELECT u.usuario, r.Rol, m.nombre_modulo, m.link_modulo, m.icono, sm.sub_modulo, sm.link_sub_modulo FROM usuarios AS u\n"
+		$stmt = Conexion::conectar()->prepare("SELECT u.usuario, r.rol, m.nombre_modulo, m.link_modulo, m.icono, sm.sub_modulo, sm.link_sub_modulo FROM usuarios AS u\n"
 				. " INNER JOIN tbl_roles AS r ON u.id_rol = r.id\n"
 				. " INNER JOIN rol_modulos AS rm ON r.id=rm.rol_id_fk\n"
 				. " INNER JOIN modulos AS m ON rm.modulo_id_fk=m.id\n"
@@ -104,14 +104,14 @@ class ModeloUsuarios{
 	 
 	static public function mdlIngresarUsuarioEmpleado($tabla, $datos){
 
-		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(Id_Persona, Usuario, Contraseña, Foto, Fecha_Vencimiento, ID_Rol) VALUES (:Id_Persona, :Usuario, :Contraseña, :Foto, :Fecha_Vencimiento, :ID_Rol)");
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(id_persona, usuario, contraseña, foto, fecha_vencimiento, id_rol) VALUES (:id_persona, :usuario, :contraseña, :foto, :fecha_vencimiento, :id_rol)");
 
 		$stmt->bindParam(":ID_Persona", $datos["id_persona"], PDO::PARAM_INT);
-		$stmt->bindParam(":Usuario", $datos["usuario"], PDO::PARAM_STR);
-		$stmt->bindParam(":Contraseña", $datos["password"], PDO::PARAM_STR);
-		$stmt->bindParam(":Foto", $datos["foto"], PDO::PARAM_STR);
-		$stmt->bindParam(":Fecha_Vencimiento", $datos["fecha_vencimiento"], PDO::PARAM_STR);
-		$stmt->bindParam(":ID_Rol", $datos["rol"], PDO::PARAM_INT);
+		$stmt->bindParam(":usuario", $datos["usuario"], PDO::PARAM_STR);
+		$stmt->bindParam(":contraseña", $datos["password"], PDO::PARAM_STR);
+		$stmt->bindParam(":foto", $datos["foto"], PDO::PARAM_STR);
+		$stmt->bindParam(":fecha_vencimiento", $datos["fecha_vencimiento"], PDO::PARAM_STR);
+		$stmt->bindParam(":id_rol", $datos["rol"], PDO::PARAM_INT);
 
 		if($stmt->execute()){
 
@@ -145,12 +145,12 @@ class ModeloUsuarios{
 			$pregunta = current($preguntas);
 			$respuesta = current($respuestas);
 
-			$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(ID_Usuario, ID_Pregunta, Respuesta) 
-												   VALUES (:ID_Usuario, :ID_Pregunta, :Respuesta)");
+			$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(id_usuario, id_pregunta, respuesta) 
+												   VALUES (:id_usuario, :id_pregunta, :respuesta)");
 	
-			$stmt->bindParam(":ID_Usuario", $datos["idUsuario"], PDO::PARAM_INT);
-			$stmt->bindParam(":ID_Pregunta", $pregunta, PDO::PARAM_INT);
-			$stmt->bindParam(":Respuesta", $respuesta, PDO::PARAM_STR);
+			$stmt->bindParam(":id_usuario", $datos["idUsuario"], PDO::PARAM_INT);
+			$stmt->bindParam(":id_pregunta", $pregunta, PDO::PARAM_INT);
+			$stmt->bindParam(":respuesta", $respuesta, PDO::PARAM_STR);
 			
 			$stmt->execute();
 
@@ -253,7 +253,7 @@ class ModeloUsuarios{
 
 	static public function mdlActualizarUsuarioPorCodigo($tabla, $item1, $valor1, $item2, $valor2, $item3, $valor3, $item4, $valor4){
 	
-		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET $item1 = :$item1, $item2 = :$item2, Token = NULL, Fecha_Recuperacion = NULL, $item3 = :$item3 WHERE $item4 = :$item4");
+		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET $item1 = :$item1, $item2 = :$item2, token = NULL, fecha_recuperacion = NULL, $item3 = :$item3 WHERE $item4 = :$item4");
 
 		$stmt->bindParam(":".$item1, $valor1, PDO::PARAM_STR);
 		$stmt->bindParam(":".$item2, $valor2, PDO::PARAM_INT);
@@ -282,9 +282,9 @@ class ModeloUsuarios{
 
 	static public function mdlMostrarPreguntas($item1, $valor1, $item2, $valor2, $item3, $valor3){
 
-		$stmt = Conexion::conectar()->prepare("SELECT u.usuario, pr.Pregunta, pu.ID_Pregunta, pu.Respuesta FROM tbl_usuarios AS u "
-			. " INNER JOIN tbl_preguntas_usuarios AS pu ON u.ID_Usuario = pu.ID_Usuario\n"
-			. " INNER JOIN Preguntas AS pr ON pu.ID_Pregunta = pr.ID_Pregunta\n"
+		$stmt = Conexion::conectar()->prepare("SELECT u.usuario, pr.pregunta, pu.id_pregunta, pu.respuesta FROM tbl_usuarios AS u "
+			. " INNER JOIN tbl_preguntas_usuarios AS pu ON u.id_usuario = pu.id_usuario\n"
+			. " INNER JOIN tbl_preguntas AS pr ON pu.id_pregunta = pr.id_pregunta\n"
 			. "	WHERE $item1 = :$item1 AND $item2 = :$item2 AND $item3 = :$item3");
 			
 		$stmt -> bindParam(":".$item1, $valor1, PDO::PARAM_STR);
@@ -301,7 +301,7 @@ class ModeloUsuarios{
     
     static public function mdlMostrarParametros($tabla, $item, $valor){
 		if($item != null){
-			$stmt = Conexion::conectar()->prepare("SELECT Parametro, Valor FROM $tabla WHERE $item = :$item");
+			$stmt = Conexion::conectar()->prepare("SELECT parametro, valor FROM $tabla WHERE $item = :$item");
 			$stmt->bindParam(":".$item, $valor, PDO::PARAM_STR);
 			$stmt->execute();
 			return $stmt->fetch();
@@ -320,7 +320,7 @@ class ModeloUsuarios{
 	==============================================*/
 	static public function mdlInsertarBitacora($tabla, $fecha, $usuario, $modulo, $accion, $descripcion){
 
-		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(Fecha,ID_Usuario, ID_Modulos, accion, descripcion) VALUES ('$fecha', $usuario, $modulo, '$accion', '$descripcion')");
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(fecha, id_usuario, id_modulos, accion, descripcion) VALUES ('$fecha', $usuario, $modulo, '$accion', '$descripcion')");
 
 		if($stmt->execute()){
 
