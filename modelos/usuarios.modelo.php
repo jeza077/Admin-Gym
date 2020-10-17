@@ -14,9 +14,9 @@ class ModeloUsuarios{
 	
 			if($item != null){
 	
-				$stmt = Conexion::conectar()->prepare("SELECT p.*, u.Usuario, u.Contraseña, u.Foto_Usuario, u.Codigo, u.Fecha_Recuperacion, u.Estado, u.Primera_Vez, u.Fecha_Vencimiento, u.ID_Usuario AS id_usuario, r.Rol FROM $tabla1 AS p\n"
-				. " INNER JOIN $tabla2 AS u ON p.id = u.ID_Persona\n"
-				. " INNER JOIN tbl_roles AS r ON u.id_rol = r.id\n"
+				$stmt = Conexion::conectar()->prepare("SELECT p.*, u.usuario, u.contraseña, u.foto, u.Token, u.fecha_recuperacion, u.estado, u.primera_vez, u.fecha_vencimiento, u.id_usuario, r.rol FROM $tabla1 AS p\n"
+				. " INNER JOIN $tabla2 AS u ON p.id_persona = u.id_persona\n"
+				. " INNER JOIN tbl_roles AS r ON u.id_rol = r.id_rol\n"
 				. " WHERE $item = :$item");
 				
 				$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
@@ -25,9 +25,9 @@ class ModeloUsuarios{
 	
 			} else {
 	
-				$stmt = Conexion::conectar()->prepare("SELECT p.*, u.Usuario, u.Contraseña, u.Foto_Usuario, u.Primera_Vez, u.ID_Usuario AS id_usuario, r.Rol FROM $tabla1 AS p\n"
-						. " INNER JOIN $tabla2 AS u ON p.id = u.ID_Persona\n"
-						. " INNER JOIN tbl_roles AS r ON u.id_rol = r.id");
+				$stmt = Conexion::conectar()->prepare("SELECT p.*, u.usuario, u.contraseña, u.foto, u.primera_vez, u.id_usuario, r.rol FROM $tabla1 AS p\n"
+						. " INNER JOIN $tabla2 AS u ON p.id_persona = u.id_persona\n"
+						. " INNER JOIN tbl_roles AS r ON u.id_rol = r.id_rol");
 				$stmt -> execute();
 				return $stmt -> fetchAll();
 	
@@ -52,7 +52,7 @@ class ModeloUsuarios{
 	
 	static public function mdlMostrarUsuarioModulo($item1, $item2, $valor1, $valor2){
 
-		$stmt = Conexion::conectar()->prepare("SELECT u.Usuario, r.Rol, m.nombre_modulo, m.link_modulo, m.icono, sm.sub_modulo, sm.link_sub_modulo FROM usuarios AS u\n"
+		$stmt = Conexion::conectar()->prepare("SELECT u.usuario, r.Rol, m.nombre_modulo, m.link_modulo, m.icono, sm.sub_modulo, sm.link_sub_modulo FROM usuarios AS u\n"
 				. " INNER JOIN tbl_roles AS r ON u.id_rol = r.id\n"
 				. " INNER JOIN rol_modulos AS rm ON r.id=rm.rol_id_fk\n"
 				. " INNER JOIN modulos AS m ON rm.modulo_id_fk=m.id\n"
@@ -282,7 +282,7 @@ class ModeloUsuarios{
 
 	static public function mdlMostrarPreguntas($item1, $valor1, $item2, $valor2, $item3, $valor3){
 
-		$stmt = Conexion::conectar()->prepare("SELECT u.Usuario, pr.Pregunta, pu.ID_Pregunta, pu.Respuesta FROM tbl_usuarios AS u "
+		$stmt = Conexion::conectar()->prepare("SELECT u.usuario, pr.Pregunta, pu.ID_Pregunta, pu.Respuesta FROM tbl_usuarios AS u "
 			. " INNER JOIN tbl_preguntas_usuarios AS pu ON u.ID_Usuario = pu.ID_Usuario\n"
 			. " INNER JOIN Preguntas AS pr ON pu.ID_Pregunta = pr.ID_Pregunta\n"
 			. "	WHERE $item1 = :$item1 AND $item2 = :$item2 AND $item3 = :$item3");
@@ -351,7 +351,7 @@ class ModeloUsuarios{
 	
 			} else {
 	
-				$stmt = Conexion::conectar()->prepare("SELECT b.id_bita, u.Usuario, m.nombre_modulo, b.accion, b.descripcion, b.fecha FROM tbl_bitacora as b\n"
+				$stmt = Conexion::conectar()->prepare("SELECT b.id_bita, u.usuario, m.nombre_modulo, b.accion, b.descripcion, b.fecha FROM tbl_bitacora as b\n"
 				. "INNER JOIN usuarios as u ON b.id_usuario = u.id\n"
 				. "INNER JOIN modulos as m ON b.Id_Modulos = m.id order by b.fecha desc");
 				$stmt -> execute();

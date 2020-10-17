@@ -65,6 +65,7 @@ class ControladorUsuarios{
 						timer: 3000,
 					});
 				</script>';
+				
 		
 			} else {
 
@@ -72,6 +73,8 @@ class ControladorUsuarios{
 				preg_match('/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%.])\S{8,16}$/', $_POST["ingPassword"])){
 
 					$encriptar = crypt($_POST["ingPassword"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
+					
+					// echo $encriptar;
 
 					$tabla1 = "tbl_personas";
 					$tabla2 = "tbl_usuarios";
@@ -80,8 +83,10 @@ class ControladorUsuarios{
 					$valor = $_POST["ingUsuario"];
 
 					$respuesta = ModeloUsuarios::mdlMostrarUsuarios($tabla1, $tabla2, $item, $valor);
-					// var_dump($respuesta['fecha_vencimiento']);
+					var_dump($respuesta);
 					
+					return;
+
 					$fechaVencimiento = date('Y-m-d', strtotime($respuesta['fecha_vencimiento']));
 					// echo $fechaVencimiento;
 					date_default_timezone_set('America/Tegucigalpa');
