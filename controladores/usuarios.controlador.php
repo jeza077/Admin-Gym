@@ -83,9 +83,9 @@ class ControladorUsuarios{
 					$valor = $_POST["ingUsuario"];
 
 					$respuesta = ModeloUsuarios::mdlMostrarUsuarios($tabla1, $tabla2, $item, $valor);
-					var_dump($respuesta);
+					// var_dump($respuesta);
+					// return;
 					
-					return;
 
 					$fechaVencimiento = date('Y-m-d', strtotime($respuesta['fecha_vencimiento']));
 					// echo $fechaVencimiento;
@@ -101,11 +101,11 @@ class ControladorUsuarios{
 					// }
 					// return;
 
-						if($respuesta["usuario"] == $_POST["ingUsuario"] && $respuesta["contraseña"] == $encriptar){
+						if($respuesta["usuario"] == $_POST["ingUsuario"] && $respuesta["password"] == $encriptar){
 
 							$_SESSION["iniciarSesion"] = "ok";
 							$_SESSION["id_usuario"] = $respuesta["id_usuario"];
-							$_SESSION["id"] = $respuesta["id_persona"];
+							$_SESSION["id_persona"] = $respuesta["id_personas"];
 							$_SESSION["usuario"] = $respuesta["usuario"];
 							$_SESSION["nombre"] = $respuesta["nombre"];
 							$_SESSION["apellidos"] = $respuesta["apellidos"];
@@ -114,7 +114,7 @@ class ControladorUsuarios{
 							$_SESSION["primerIngreso"] = $respuesta["primera_vez"];
 
 							
-							if($respuesta["estado"] == 0 && $respuesta["bloqueado"] == 0 && $respuesta["primera_vez"] == 1 && $fechaHoy < $fechaVencimiento) {
+							if($respuesta["estado"] == 0 && $respuesta["primera_vez"] == 1) {
 			
 								echo '<script>
 								Swal.fire({
@@ -141,8 +141,8 @@ class ControladorUsuarios{
 								$item1 = "ultimo_login";
 								$valor1 = $fechaActual;
 
-								$item2 = "id_persona";
-								$valor2 = $respuesta["id_persona"];
+								$item2 = "id_usuario";
+								$valor2 = $respuesta["id_usuario"];
 
 								$item3 = null;
 								$valor3 = null;
@@ -348,6 +348,12 @@ class ControladorUsuarios{
 				$emailUsuario = $datos["email"];
 				$contraSinEncriptar = $datos["password"];
 				$nombre = $datos["nombre"];
+
+				// echo $emailUsuario;
+				// echo $contraSinEncriptar;
+				// echo $nombre;
+
+				// return;
 					/*=============================================
 							VALIDAR IMAGEN
 					=============================================*/
@@ -439,6 +445,8 @@ class ControladorUsuarios{
 
 						$respuestaEmpleado = ModeloUsuarios::mdlIngresarUsuarioEmpleado($tabla, $datos);
 
+						// return var_dump($respuestaEmpleado);
+
 						if($respuestaEmpleado = true){
 
 							$email = $emailUsuario;
@@ -459,7 +467,6 @@ class ControladorUsuarios{
 
 								return false;
 							}
-
 
 						} else {
 							
@@ -512,6 +519,8 @@ class ControladorUsuarios{
 	=============================================*/	
 	static public function ctrNuevaContraseñaPreguntasSeguridad($id, $usuario){
 
+		// var_dump($_POST);
+		// return;
 
 		if(isset($_POST["editarPassword"])){
 			
@@ -519,10 +528,8 @@ class ControladorUsuarios{
 
 				if(preg_match('/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%.])\S{8,16}$/', $_POST["editarPassword"]) && preg_grep('/^(?=.*[a-zñÑáéíóúÁÉÍÓÚ])\S{1,50}$/', $_POST["respuestaPregunta"])){
 					// echo '<br><div class="alert alert-danger">bien.</div>';
+					// return;		
 
-					// return;
-					
-					
 					$encriptar = crypt($_POST["editarPassword"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
 				
 					$tabla1 = "tbl_personas";
@@ -535,7 +542,7 @@ class ControladorUsuarios{
 
 					// var_dump($respuestaContraseñas['Contraseña'] . ' ' . $encriptar);
 
-					if($respuestaContraseñas['contraseña'] == $encriptar){
+					if($respuestaContraseñas['password'] == $encriptar){
 						// echo '<br><div class="alert alert-danger">Contraseña igual a la anterior, intente de nuevo.</div>';
 						echo '<script>			
 							Swal.fire({
@@ -562,7 +569,8 @@ class ControladorUsuarios{
 						</script>';
 
 					} else {
-						$item1 = "contraseña";
+
+						$item1 = "password";
 						$valor1 = $encriptar;
 				
 						$item2 = 'id_usuario';
@@ -688,7 +696,7 @@ class ControladorUsuarios{
 					date_default_timezone_set("America/Tegucigalpa");
 					$fechaVencimiento = date("Y-m-d H:i:s", strtotime('+'.$vigenciaUsuario.' days'));
 
-					$item1 = "contraseña";
+					$item1 = "password";
 					$valor1 = $encriptar;
 
 					$item2 = 'estado';
@@ -793,7 +801,7 @@ class ControladorUsuarios{
 
 					$tabla = "tbl_usuarios";
 	
-					$item1 = "contraseña";
+					$item1 = "password";
 					$valor1 = $encriptar;
 
 					$item2 = "estado";
@@ -960,6 +968,7 @@ class ControladorUsuarios{
 			// var_dump($respuesta);
 			// var_dump($respuesta['codigo'] . " " . $_GET['codigo']);
 			// $respuesta["codigo"] != null && $_GET["codigo"] != $respuesta["codigo"]
+			// return;
 
 			if($respuesta == false){
 				echo '<script>
@@ -986,7 +995,7 @@ class ControladorUsuarios{
 
 				$fechaAhora = date("Y-m-d H:i:s");
 
-				if($fechaAhora > $respuesta['Fecha_Recuperacion']) {
+				if($fechaAhora > $respuesta['fecha_recuperacion']) {
 					echo '<script>
 							Swal.fire({
 								title: "El código de recuperación de contraseña ha expirado. Por favor intenta de nuevo.",

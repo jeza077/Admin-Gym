@@ -56,7 +56,6 @@
                 // $device_details =   "<strong>Browser: </strong>" . $user_browser . 
                 //                     "<br /><strong>Operating System: </strong>" . $user_os;
                 // print_r($device_details);
-
             
           ?>
 

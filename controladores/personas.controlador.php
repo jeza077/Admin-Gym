@@ -15,14 +15,14 @@ class ControladorPersonas{
                     
                     $datos = array("nombre" => $_POST["nuevoNombre"],
                     "apellido" => $_POST["nuevoApellido"],
-                    "numero_documento" => $_POST["nuevoDocumento"],
+                    "id_documento" => $_POST["nuevoTipoDocumento"],
+                    "numero_documento" => $_POST["nuevoNumeroDocumento"],
                     "tipo_persona" => $tipoPersona,
                     "fecha_nacimiento" => $_POST["nuevaFechaNacimiento"],
                     "sexo" => $_POST["nuevoSexo"],
                     "telefono" => $_POST["nuevoTelefono"],
                     "direccion" => $_POST["nuevaDireccion"],
-                    "email" => $_POST["nuevoEmail"],
-                    "id_documento" => $_POST["idDocumento"]);
+                    "email" => $_POST["nuevoEmail"]);
 
                     $respuestaPersona = ModeloPersonas::mdlCrearPersona($tabla, $datos);
                     
@@ -51,21 +51,21 @@ class ControladorPersonas{
                                 </script>';
                         }
 
-                } else {
+                } else {                    
 
                     $datos = array("nombre" => $_POST["nuevoNombre"],
                                 "apellido" => $_POST["nuevoApellido"],
-                                "numero_documento" => $_POST["nuevoDocumento"],
+                                "id_documento" => $_POST["nuevoTipoDocumento"],
+                                "numero_documento" => $_POST["nuevoNumeroDocumento"],
                                 "tipo_persona" => $_POST["nuevoTipoPersona"],
                                 "fecha_nacimiento" => $_POST["nuevaFechaNacimiento"],
                                 "sexo" => $_POST["nuevoSexo"],
                                 "telefono" => $_POST["nuevoTelefono"],
                                 "direccion" => $_POST["nuevaDireccion"],
-                                "email" => $_POST["nuevoEmail"],
-                                "id_documento" => $_POST["idDocumento"]);
+                                "email" => $_POST["nuevoEmail"]);
 
                     $respuestaPersona = ModeloPersonas::mdlCrearPersona($tabla, $datos);
-                
+
                     if($respuestaPersona == true){
 
                         $totalId = array();
@@ -78,7 +78,7 @@ class ControladorPersonas{
                         $personasTotal = ModeloPersonas::mdlMostrarPersonas($tabla);
 
                         foreach($personasTotal as $keyPersonas => $valuePersonas){
-                            array_push($totalId, $valuePersonas["id"]);
+                            array_push($totalId, $valuePersonas["id_personas"]);
                         }
 
                         $idPersona = end($totalId);
@@ -100,8 +100,7 @@ class ControladorPersonas{
                                         Swal.fire({
                                             title: "Empleado guardado correctamente!",
                                             icon: "success",
-                                            heightAuto: false,
-                                            allowOutsideClick: false
+                                            heightAuto: false
                                         }).then((result)=>{
                                             if(result.value){
                                                 window.location = "agregar-persona";
@@ -113,8 +112,7 @@ class ControladorPersonas{
                                         Swal.fire({
                                             title: "Error al guardar.",
                                             icon: "error",
-                                            heightAuto: false,
-                                            allowOutsideClick: false
+                                            heightAuto: false
                                         }).then((result)=>{
                                             if(result.value){
                                                 window.location = "agregar-persona";

@@ -65,7 +65,7 @@ class AjaxUsuarios{
     public function ajaxVerificarEmail(){
 
         $tabla = "tbl_usuarios";
-        $item = "Correo";
+        $item = "correo";
         $valor = $this->verificarEmail;
         
         $respuesta = ControladorUsuarios::ctrMostrarUsuarios($tabla, $item, $valor);
@@ -83,13 +83,13 @@ class AjaxUsuarios{
 
     public function ajaxMostrarPreguntas(){
 
-        $item1 = "Usuario";
+        $item1 = "usuario";
         $valor1 = $this->usuario;
         
-        $item2 = "ID_Pregunta";
+        $item2 = "id_preguntas";
         $valor2 = $this->idPregunta;
         
-        $item3 = "Respuesta";
+        $item3 = "respuesta";
         $valor3 = $this->respuestaPregunta;
 
         $respuesta = ControladorUsuarios::ctrMostrarPreguntas($item1, $valor1, $item2, $valor2, $item3, $valor3);
@@ -128,10 +128,10 @@ class AjaxUsuarios{
 
         $post = $this->cambiarPass;
 
-        $item = "id";
+        $item = "id_usuario";
         $valor = $this->usuarioId;
 
-        $itemUsuario = "Usuario";
+        $itemUsuario = "usuario";
         $valorUsuario = $this->usuarioIngresado;
       
         $respuesta = ControladorUsuarios::ctrCambiarContraseña($item, $valor, $itemUsuario, $valorUsuario, $post);
@@ -149,10 +149,10 @@ class AjaxUsuarios{
 
         $tabla = "tbl_usuarios";
 
-        $item1 = "Estadp";
+        $item1 = "estado";
         $valor1 = 0;
 
-        $item2 = "Usuario";
+        $item2 = "usuario";
         $valor2 = $this->usua;
 
         $item3 = null;

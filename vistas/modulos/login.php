@@ -88,14 +88,14 @@
                 <select class="form-control select2" id="preguntaSeleccionada">
                 <option value="" selected="selected">Seleccionar...</option>
                 <?php 
-                        $tabla = "preguntas";
+                        $tabla = "tbl_preguntas";
                         $item = null;
                         $valor = null;
 
                         $preguntas = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
 
                         foreach ($preguntas as $key => $value) { ?>
-                          <option value="<?php echo $value['id']?>"><?php echo $value['pregunta']?></option>        
+                          <option value="<?php echo $value['id_preguntas']?>"><?php echo $value['pregunta']?></option>        
                         <?php 
                         }
                     ?>
@@ -155,15 +155,33 @@
       <p class="login-box-msg">Registra tus datos personales</p>
       <form method="post" id="">
         <div class="form-row">
-          <div class="form-group col-md-4">
-            <label for="identidad">Identidad</label>
-            <input type="text" class="form-control" name="nuevaIdentidad" placeholder="Ingrese Identidad" required>
+          <div class="form-group col-md-3">
+                <label for="">Tipo de documento <?php echo $i?></label>
+            <select class="form-control select2" name="nuevoTipoDocumento">
+                <option selected="selected">Seleccionar...</option>
+                <?php 
+                    $tabla = "tbl_documento";
+                    $item = null;
+                    $valor = null;
+
+                    $preguntas = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
+
+                    foreach ($preguntas as $key => $value) { ?>
+                        <option value="<?php echo $value['id_documento']?>"><?php echo $value['tipo_documento']?></option>        
+                    <?php 
+                    }
+                ?>
+            </select>
           </div>
-          <div class="form-group col-md-4">
+          <div class="form-group col-md-3">
+            <label for="identidad">Identidad</label>
+            <input type="text" class="form-control" name="nuevoNumeroDocumento" placeholder="Ingrese Identidad" required>
+          </div>
+          <div class="form-group col-md-3">
             <label for="nombre">Nombre</label>
             <input type="text" class="form-control" name="nuevoNombre" placeholder="Ingrese Nombre" required>
           </div>
-          <div class="form-group col-md-4">
+          <div class="form-group col-md-3">
             <label for="apellido">Apellido</label>
             <input type="text" class="form-control" name="nuevoApellido" placeholder="Ingrese Apellidos" required>
           </div>
@@ -198,8 +216,8 @@
             <label>Sexo</label>
             <select class="form-control select2" name="nuevoSexo" style="width: 100%;" required>
               <option selected="selected">Seleccionar...</option>
-              <option>Masculino</option>
-              <option>Femenino</option>
+              <option value="M">Masculino</option>
+              <option value="F">Femenino</option>
             </select>
         </div>
 

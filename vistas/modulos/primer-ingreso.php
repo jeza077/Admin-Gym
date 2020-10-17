@@ -28,11 +28,11 @@
                 </div>
 
                     <?php 
-                        $item = 'Parametro';
+                        $item = 'parametro';
                         $valor = 'ADMIN_PREGUNTAS';
                         $parametros = ControladorUsuarios::ctrMostrarParametros($item, $valor);
                         // var_dump($parametros['valor']);
-                        $cantidadPreguntas = $parametros['Valor'];
+                        $cantidadPreguntas = $parametros['valor'];
                         
                         for ($i=1; $i <=$cantidadPreguntas ; $i++) { ?>
                     <div class="form-row">
@@ -42,14 +42,14 @@
                             <select class="form-control select2" name="nuevaPregunta[]">
                                 <option selected="selected">Seleccionar...</option>
                                 <?php 
-                                    $tabla = "preguntas";
+                                    $tabla = "tbl_preguntas";
                                     $item = null;
                                     $valor = null;
 
                                     $preguntas = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
 
                                     foreach ($preguntas as $key => $value) { ?>
-                                        <option value="<?php echo $value['id']?>"><?php echo $value['pregunta']?></option>        
+                                        <option value="<?php echo $value['id_preguntas']?>"><?php echo $value['pregunta']?></option>        
                                     <?php 
                                     }
                                 ?>

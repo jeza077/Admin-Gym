@@ -68,6 +68,7 @@ $(".verificarCorreoPreguntas").on('click', function(event){
                 idUsuario = respuesta.id_usuario; //<----- ID PARA CAMBIAR EL PASSWORD//
                 usuario = respuesta.usuario;
      
+                console.log(idUsuario + ' ' + usuario);
     
                 if(!respuesta) {//Si la Respuesta = FALSE entonces...
                     
@@ -86,7 +87,7 @@ $(".verificarCorreoPreguntas").on('click', function(event){
                     // TRAEMOS LAS RESPUESTAS DE SEGURIDAD
                     $("#verificarEmail").val("");
                     toggleQuestions();
-                    $(".questionsBx").prepend("<p class='login-box-msg'>Hola <b>" + usuario + "</b>, contesta las siguientes preguntas de seguridad para poder cambiar la contraseña!</p>");
+                    $(".questionsBx").prepend("<p class='login-box-msg'>Hola <b>" + usuario + "</b>, contesta la siguiente pregunta de seguridad para poder cambiar la contraseña!</p>");
                     $("#preguntaSeguridad").append("<input type='text' class='form-control respuestaPregunta' placeholder='Agrega la respuesta' required>");
                     
                     $('.respuestaPregunta').keydown(permitirUnEspacio);
@@ -99,7 +100,7 @@ $(".verificarCorreoPreguntas").on('click', function(event){
                         if(valorPregunta == ""){
                             console.log('llenar');
                         } else {
-                            // console.log(valorPregunta, respuestaPregunta);
+                            console.log(valorPregunta, respuestaPregunta);
 
                             //Compararemos la pregunta y la respuesta con las del usuario, para saber si son correctas.
                             var datos = new FormData();
@@ -117,7 +118,7 @@ $(".verificarCorreoPreguntas").on('click', function(event){
                                 processData: false,  
                                 dataType: "json",
                                 success: function(respuesta) {
-                                    // console.log(respuesta);
+                                    console.log(respuesta);
 
                                     if(respuesta == "" && usuario == 'SUPERADMIN'){
 
@@ -151,7 +152,7 @@ $(".verificarCorreoPreguntas").on('click', function(event){
                                                         icon: 'error',
                                                         title: 'Pregunta/Respuesta no coinciden. Su usuario ha sido bloqueado.',
                                                         showConfirmButton: false,
-                                                        heightAuto: false,  
+                                                        heightAuto: false,
                                                         allowOutsideClick: false,
                                                         timer: 2500
                                                     });
