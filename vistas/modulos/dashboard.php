@@ -43,19 +43,36 @@
           </div>
         </div>
         <div class="card-body">
+
           <?php
-                // $item1 = "usuario";
-                // $valor1 = "JEZA";
-                // $item2 = "rol";
-                // $valor2 = "Administrador";
-
-                // $modulos = ControladorUsuarios::ctrMostrarUsuarioModulo($item1, $item2, $valor1, $valor2);
-
                 // $user_os        =   ControladorGlobales::ctrGetOS();
                 // $user_browser   =   ControladorGlobales::ctrGetBrowser();
                 // $device_details =   "<strong>Browser: </strong>" . $user_browser . 
                 //                     "<br /><strong>Operating System: </strong>" . $user_os;
                 // print_r($device_details);
+
+
+                //** ALERTA POR FECHA DE VENCIMIENTO */
+                $tabla = "tbl_usuarios";
+                $item = "id_usuario";
+                $valor = $_SESSION["id_usuario"];
+
+                $usuario = ControladorUsuarios::ctrMostrarUsuarios($tabla, $item, $valor);
+
+                $fechaUsuario = $usuario['fecha_vencimiento'];
+                $fechaHoy = date('Y-m-d');
+                $date1 = new DateTime($fechaHoy);
+                $date2 = new DateTime($fechaUsuario);
+                $diff = $date1->diff($date2);
+
+                if($diff->days <= 7){
+
+                  $mensaje = "Tu usuario vencera en $diff->days dias! Cambia tu contraseña para resetear la fecha de vencimiento.";
+                  $icono = "info";
+                //   $modulo = "dashboard";
+                  $alerta = ControladorGlobales::ctrAlertas($mensaje, $icono);
+                  
+                }
             
           ?>
 
@@ -69,4 +86,7 @@
   </div>
   <!-- /.content-wrapper -->
 
+<!-- <script type="text/javascript">
+  window.onload = hola();
+</script> -->
 

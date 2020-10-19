@@ -14,7 +14,7 @@ class ModeloUsuarios{
 	
 			if($item != null){
 	
-				$stmt = Conexion::conectar()->prepare("SELECT p.*, u.usuario, u.password, u.foto, u.token, u.fecha_recuperacion, u.estado, u.primera_vez, u.fecha_vencimiento, u.id_usuario, r.rol FROM $tabla1 AS p\n"
+				$stmt = Conexion::conectar()->prepare("SELECT p.*, u.*, r.rol FROM $tabla1 AS p\n"
 				. " INNER JOIN $tabla2 AS u ON p.id_personas = u.id_persona\n"
 				. " INNER JOIN tbl_roles AS r ON u.id_rol = r.id_rol\n"
 				. " WHERE $item = :$item");

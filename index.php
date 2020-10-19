@@ -23,3 +23,18 @@ require_once "modelos/ventas.modelo.php";
 
 $plantilla = new ControladorPlantilla();
 $plantilla -> ctrPlantilla();
+
+
+// $host= $_SERVER["HTTP_HOST"];
+// $url= $_SERVER["REQUEST_URI"];
+// $urlF = "http://" . $host . $url;
+// echo '<script>	
+//     Swal.fire({
+//         title: "'.$urlF.'",
+//         icon: "info",
+//         showConfirmButton: true,
+//         confirmButtonText: "Cerrar",
+//         width: 600
+//     });	
+
+// </script>';

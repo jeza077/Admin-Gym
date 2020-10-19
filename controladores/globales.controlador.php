@@ -88,4 +88,33 @@ class ControladorGlobales{
 
 		return $respuesta;
     }
+
+    /*=============================================
+			FUNCION ALERTAS
+    =============================================*/
+    static public function ctrAlertas($mensaje, $icono){
+
+        $host= $_SERVER["HTTP_HOST"];
+        $url= $_SERVER["REQUEST_URI"];
+        $urlF = "http://" . $host . $url;
+        if($urlF == 'http://localhost/gym/dashboard'){
+            echo '<script>			
+                function alertas() {
+                         Swal.fire({
+                            title: "'.$mensaje.'",
+                            icon: "'.$icono.'",
+                            toast: true,
+                            position: "top",
+                            showConfirmButton: true,
+                            confirmButtonText: "Cerrar",
+                            width: 600
+                        });
+                    }
+                alertas();
+                
+            </script>';
+        }
+  
+    }
+
 }

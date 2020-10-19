@@ -307,3 +307,23 @@ function mostrarContraseña(selector, mostrar, action) {
         mostrar.removeClass('far fa-eye-slash').addClass('far fa-eye').attr('action', 'hide')
     }
 }
+
+
+function alertas(modulo) {
+    let pathname = window.location.href;
+    if(pathname == 'http://localhost/gym/'+modulo){
+        Swal.fire({
+            title: "Prueba alerta.",
+            icon: "error",
+            toast: true,
+            position: "top",
+            showConfirmButton: false,
+            timer: 5000
+        });
+
+    }
+        
+}
+// alertas('dashboard');
+
+// document.getElementById('alerta').play();

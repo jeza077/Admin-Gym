@@ -29,12 +29,12 @@
   <!-- <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"> -->
 </head>
 <?php
+		date_default_timezone_set('America/Tegucigalpa');
     
     if(isset($_SESSION["iniciarSesion"]) && $_SESSION["iniciarSesion"] == "ok" && $_SESSION["primerIngreso"] == 1){
       echo '<body class="primer-ingreso">';
 
       echo '<div class="wrapper">';
-
       // include "modulos/primer-ingreso.php";
 
       /*=============================================
@@ -62,7 +62,6 @@
       echo '<body class="hold-transition sidebar-mini sidebar-collapse">';
 
       echo '<div class="wrapper">';
-
       /*=============================================
             HEADER
       =============================================*/

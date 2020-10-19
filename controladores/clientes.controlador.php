@@ -6,7 +6,7 @@ class ControladorClientes{
 
         if(isset($datos['id_persona'])){
 
-            $tabla = "clientes";
+            $tabla = "tbl_clientes";
 							
             $datos = array("id_persona" => $datos['id_persona']);
 
