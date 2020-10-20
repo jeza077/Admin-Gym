@@ -39,11 +39,17 @@ body::-webkit-scrollbar-thumb{
     color: #fff;
 }
 .login-page {
-    background: rgb(255, 158, 30);
+    /* background: rgb(255, 158, 30); */
+    /* background: rgb(255 103 30 / 38%); */
+    /* background: linear-gradient(to left, var(--orangeThird), var(--yellow)); */
+    background: linear-gradient(135deg, rgba(255,175,75,1) 0%, rgba(255,131,3,1) 63%, rgba(255,131,3,1) 100%);
     color: white;
 }
 .login-box{
     width: 400px;   
+    -webkit-box-shadow: 0px 9px 28px -5px rgba(92,85,92,0.67);
+    -moz-box-shadow: 0px 9px 28px -5px rgba(92,85,92,0.67);
+    box-shadow: 0px 9px 28px -5px rgba(92,85,92,0.67);
 }
 .card {
     display: block;
@@ -71,6 +77,13 @@ body.login-page .login-box.recu-password .card{
 .content-wrapper>.content {
     padding: 0 1rem 1rem;
 }
+.form-control:focus {
+    color: #495057;
+    background-color: #fff;
+    border-color: var(--orangeThird);
+    outline: 0;
+}
+
 
 /* NOTIFICACIONES Y OTROS */
 .alert {
@@ -247,7 +260,13 @@ body.primer-ingreso .card .contenedor2 a.salir{
     border-radius: 0 5px 5px 0;
     cursor: pointer;
 } */
-i.show-pass,
+i.show-pass {
+    cursor: pointer;
+    position: absolute;
+    top: 135px;
+    right: 44px;
+    z-index: 1000;
+}
 i.show-nueva-pass,
 i.show-confir-pass{
     cursor: pointer;
@@ -273,9 +292,10 @@ i.show-confir-pass{
 
 
 .login-card-body .input-group .form-control{
-    border-left: 0;
+    /* border-left: 0;
     border-right: 1px solid #ced4da;
-    padding-left: 3px;
+    padding-left: 3px; */
+    border-radius: 5px;
 }
 .login-card-body form .btn{
     border-radius: 2px;

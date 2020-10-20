@@ -167,7 +167,8 @@ class ControladorUsuarios{
 											title: "Bienvenid@ '.$_SESSION['nombre'] . " " . $_SESSION["apellidos"] . '",
 											icon: "success",
 											heightAuto: false,
-											allowOutsideClick: false
+											allowOutsideClick: false,
+											confirmButtonColor: "#ff8303"
 										}).then((result)=>{
 											if(result.value){
 												window.location = "dashboard";
@@ -178,7 +179,7 @@ class ControladorUsuarios{
 								}
 
 
-							} else if($respuesta["estado"] == 1 && $respuesta["bloqueado"] == 1 || $respuesta["estado"] == 0 && $respuesta["bloqueado"] == 1) {
+							} else if($respuesta["estado"] == 0) {
 
 								echo '<script>			
 										Swal.fire({

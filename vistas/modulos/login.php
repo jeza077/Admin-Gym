@@ -2,7 +2,7 @@
   <!-- /.login-logo -->
   <div class="card">
     <div class="login-logo">
-      <a href="login"><b>Gym</b>La Roca</a>
+      <a href="login"><b>Gym </b>La Roca</a>
     </div>
 
     <!-- CONTENEDOR LOGIN -->
@@ -10,20 +10,10 @@
       <p class="login-box-msg">Inicio de Sesión</p>
 
       <form method="post">
-        <div class="input-group mb-3">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-user"></span>
-            </div>
-          </div>
+        <div class="form-group mb-3">
           <input type="text" class="form-control usuario" name="ingUsuario" onKeyUp="this.value=this.value.toUpperCase();" placeholder="Usuario" required>
         </div>
-        <div class="input-group mb-3">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-lock"></span>
-            </div>
-          </div>
+        <div class="form-group mb-3">
           <input type="password" class="form-control password" name="ingPassword" placeholder="Contraseña" required> 
           <i class="far fa-eye show-pass" action="hide"></i>
         </div>
