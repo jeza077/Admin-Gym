@@ -39,25 +39,33 @@
                   $item2 = "rol";
                   $valor2 = $_SESSION["rol"];
 
+                  // $item1 =  null;
+                  // $valor1 =  null; 
+                  // $item2 =  null; 
+                  // $valor2 = null; 
+
                   $modulos = ControladorUsuarios::ctrMostrarUsuarioModulo($item1, $item2, $valor1, $valor2);
 
                   $grupo_modulo = array();
                   foreach($modulos as $modulo) {
-                    $modulo_padre = $modulo['nombre_modulo'];
-                    $icono_modulo = $modulo['icono'];
-                    $link_modulo = $modulo['link_modulo'];
+                    $modulo_padre = $modulo['objeto'];
+                    $icono_objeto = $modulo['icono'];
+                    $link_objeto = $modulo['link_objeto'];
 
-                    $sub_modulos = array(
-                      'sub_modulo' => $modulo['sub_modulo'],
-                      'link_sub_modulo' => $modulo['link_sub_modulo']
-                    );
+                    // $objetos = array(
+                    //   'link_objeto' => $modulo['link_objeto'],
+                    //   'icono_objeto' => $modulo['icono'];
+                    // );
+
+                    // $sub_modulos = array(
+                    //   'sub_modulo' => $modulo['sub_modulo'],
+                    //   'link_sub_modulo' => $modulo['link_sub_modulo']
+                    // );
                     
-                    $grupo_modulo[$link_modulo][$icono_modulo][$modulo_padre][] = $sub_modulos;
-           
+                    $grupo_modulo[$link_objeto][$icono_objeto][] = $modulo_padre;
                   }
 
-                  foreach ($grupo_modulo as $link => $icono_mod) { 
-                    if($link !== "#") { ?>
+                  foreach ($grupo_modulo as $link => $icono_mod) { ?>
                       <li class="nav-item">
                       <a href="<?php echo $link ?>" class="nav-link menu-lateral">
                       
@@ -66,7 +74,7 @@
                         
                           <?php foreach ($modulo as $nombre_mod => $sub_modulos) { ?>
                             <p>
-                              <?php echo $nombre_mod?>
+                              <?php echo $sub_modulos?>
                             </p>
                           <?php } ?>
 
@@ -74,42 +82,9 @@
                       </a>
                       </li>
 
-                  <?php  } else { ?>
-
-                    <li class="nav-item has-treeview">
-
-                      <a href="<?php echo $link ?>" class="nav-link menu-lateral">
-                        
-                        <?php foreach ($icono_mod as $icono => $modulo) :?>
-                          <i class="nav-icon <?php echo $icono?>"></i>
-                          
-                            <?php foreach ($modulo as $nombre_mod => $sub_modulos) { ?>
-                              <p>
-                                <?php echo $nombre_mod?>
-                                <i class="fas fa-angle-left right"></i>
-                              </p>
-                            <?php } ?>
-
-                        <?php endforeach; ?>
-
-                      </a>
-                      <ul class="nav nav-treeview">
-                        <?php foreach ($sub_modulos as $sub_mod) : ?>
-                          
-                          <li class="nav-item">
-                            <a href="<?php echo $sub_mod['link_sub_modulo']?>" class="nav-link">
-                              <i class="far fa-circle nav-icon"></i>
-                              <p><?php echo $sub_mod['sub_modulo']?></p>
-                            </a>
-                          </li>
-                          
-                        <?php endforeach; ?>
-                      </ul>
-
-                    </li>
                   <?php  }  ?>
                                           
-               <?php }
+               <?php 
 
                     // echo "<pre style='color:white;'>";
                     // var_dump($grupo_modulo);

@@ -52,15 +52,22 @@ class ModeloUsuarios{
 	
 	static public function mdlMostrarUsuarioModulo($item1, $item2, $valor1, $valor2){
 
-		$stmt = Conexion::conectar()->prepare("SELECT u.usuario, r.rol, m.nombre_modulo, m.link_modulo, m.icono, sm.sub_modulo, sm.link_sub_modulo FROM usuarios AS u\n"
-				. " INNER JOIN tbl_roles AS r ON u.id_rol = r.id\n"
-				. " INNER JOIN rol_modulos AS rm ON r.id=rm.rol_id_fk\n"
-				. " INNER JOIN modulos AS m ON rm.modulo_id_fk=m.id\n"
-				. " INNER JOIN rol_sub_modulo AS rsm ON r.id=rsm.id_rol_fk\n"
-				. " INNER JOIN sub_modulos AS sm ON rsm.id_sub_modulo_fk=sm.id AND sm.modulo_id_fk=m.id\n"
-				. " WHERE u.$item1 = :$item1 AND r.$item2 = :$item2\n"
-				. " ORDER BY m.id");
+		// $stmt = Conexion::conectar()->prepare("SELECT u.usuario, r.rol, m.nombre_modulo, m.link_modulo, m.icono, sm.sub_modulo, sm.link_sub_modulo FROM usuarios AS u\n"
+		// 		. " INNER JOIN tbl_roles AS r ON u.id_rol = r.id\n"
+		// 		. " INNER JOIN rol_modulos AS rm ON r.id=rm.rol_id_fk\n"
+		// 		. " INNER JOIN modulos AS m ON rm.modulo_id_fk=m.id\n"
+		// 		. " INNER JOIN rol_sub_modulo AS rsm ON r.id=rsm.id_rol_fk\n"
+		// 		. " INNER JOIN sub_modulos AS sm ON rsm.id_sub_modulo_fk=sm.id AND sm.modulo_id_fk=m.id\n"
+		// 		. " WHERE u.$item1 = :$item1 AND r.$item2 = :$item2\n"
+		// 		. " ORDER BY m.id");
 				
+		$stmt = Conexion::conectar()->prepare("SELECT u.usuario, r.rol, m.objeto, m.link_objeto, m.icono, rm.agregar, rm.eliminar, rm.actualizar, rm.consulta FROM tbl_usuarios AS u\n"
+		. " INNER JOIN tbl_roles AS r ON u.id_rol = r.id_rol\n"
+		. " INNER JOIN tbl_permisos AS rm ON r.id_rol = rm.id_rol\n"
+		. " INNER JOIN tbl_objetos AS m ON rm.id_objeto = m.id_objetos\n"
+		. " WHERE u.$item1 = :$item1 AND r.$item2 = :$item2\n"
+		. " ORDER BY m.id_objetos");
+
 		$stmt -> bindParam(":".$item1, $valor1, PDO::PARAM_STR);
 		$stmt -> bindParam(":".$item2, $valor2, PDO::PARAM_STR);
 		$stmt -> execute();

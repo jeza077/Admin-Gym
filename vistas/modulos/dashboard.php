@@ -51,6 +51,40 @@
                 //                     "<br /><strong>Operating System: </strong>" . $user_os;
                 // print_r($device_details);
 
+                $item1 = "usuario";
+                $valor1 = $_SESSION["usuario"];
+                $item2 = "rol";
+                $valor2 = $_SESSION["rol"];
+
+                $modulos = ControladorUsuarios::ctrMostrarUsuarioModulo($item1, $item2, $valor1, $valor2);
+
+                var_dump($modulos);
+
+                // $grupo_modulo = array();
+                // foreach($modulos as $modulo) {
+                //   $modulo_padre = $modulo['objeto'];
+                //   $icono_objeto = $modulo['icono'];
+                //   $link_objeto = $modulo['link_objeto'];
+
+                //   // $objetos = array(
+                //   //   'link_objeto' => $modulo['link_objeto'],
+                //   //   'icono_objeto' => $modulo['icono'];
+                //   // );
+
+                //   // $sub_modulos = array(
+                //   //   'sub_modulo' => $modulo['sub_modulo'],
+                //   //   'link_sub_modulo' => $modulo['link_sub_modulo']
+                //   // );
+                  
+                //   $grupo_modulo[$link_objeto][$icono_objeto][] = $modulo_padre;
+         
+                // }
+
+                //   echo "<pre>";
+                //     var_dump($grupo_modulo);
+                //   echo "</pre>";
+
+                
 
                 //** ALERTA POR FECHA DE VENCIMIENTO */
                 $tabla = "tbl_usuarios";
