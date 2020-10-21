@@ -10,36 +10,28 @@ class ModeloUsuarios{
 	
 	static public function mdlMostrarUsuarios($tabla1, $tabla2, $item, $valor){
 
-		// if($tabla2 == "empleados"){
-	
-			if($item != null){
-	
-				$stmt = Conexion::conectar()->prepare("SELECT p.*, u.*, r.rol FROM $tabla1 AS p\n"
-				. " INNER JOIN $tabla2 AS u ON p.id_personas = u.id_persona\n"
-				. " INNER JOIN tbl_roles AS r ON u.id_rol = r.id_rol\n"
-				. " WHERE $item = :$item");
-				
-				$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
-				$stmt -> execute();
-				return $stmt -> fetch();
-	
-			} else {
-	
-				$stmt = Conexion::conectar()->prepare("SELECT p.*, u.usuario, u.password, u.foto, u.primera_vez, u.id_usuario, r.rol FROM $tabla1 AS p\n"
-						. " INNER JOIN $tabla2 AS u ON p.id_persona = u.id_persona\n"
-						. " INNER JOIN tbl_roles AS r ON u.id_rol = r.id_rol");
-				$stmt -> execute();
-				return $stmt -> fetchAll();
-	
-			}
+		if($item != null){
 
-		// } else if ($tabla2 == null) {
+			$stmt = Conexion::conectar()->prepare("SELECT p.*, u.*, r.rol, m.objeto, rm.agregar, rm.eliminar, rm.actualizar, rm.consulta FROM $tabla1 AS p\n"
+			. " INNER JOIN $tabla2 AS u ON p.id_personas = u.id_persona\n"
+			. " INNER JOIN tbl_roles AS r ON u.id_rol = r.id_rol\n"
+			. " INNER JOIN tbl_permisos AS rm ON r.id_rol = rm.id_rol\n"
+			. " INNER JOIN tbl_objetos AS m ON rm.id_objeto = m.id_objetos\n"
+			. " WHERE $item = :$item");
+			
+			$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+			$stmt -> execute();
+			return $stmt -> fetch();
 
-		// 	$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla1");
-		// 	$stmt -> execute();
-		// 	return $stmt -> fetchAll();
+		} else {
 
-		// }
+			$stmt = Conexion::conectar()->prepare("SELECT p.*, u.usuario, u.password, u.foto, u.primera_vez, u.id_usuario, r.rol FROM $tabla1 AS p\n"
+					. " INNER JOIN $tabla2 AS u ON p.id_persona = u.id_persona\n"
+					. " INNER JOIN tbl_roles AS r ON u.id_rol = r.id_rol");
+			$stmt -> execute();
+			return $stmt -> fetchAll();
+
+		}
 
 		$stmt -> close();
 		$stmt = null;	

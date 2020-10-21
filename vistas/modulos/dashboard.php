@@ -58,31 +58,36 @@
 
                 $modulos = ControladorUsuarios::ctrMostrarUsuarioModulo($item1, $item2, $valor1, $valor2);
 
-                var_dump($modulos);
+                  echo "<pre>";
+                    var_dump($modulos);
+                  echo "</pre>";
 
-                // $grupo_modulo = array();
-                // foreach($modulos as $modulo) {
-                //   $modulo_padre = $modulo['objeto'];
-                //   $icono_objeto = $modulo['icono'];
-                //   $link_objeto = $modulo['link_objeto'];
 
-                //   // $objetos = array(
-                //   //   'link_objeto' => $modulo['link_objeto'],
-                //   //   'icono_objeto' => $modulo['icono'];
-                //   // );
+                $grupo_modulo = array();
+                foreach($modulos as $modulo) {
+                  $modulo_padre = $modulo['objeto'];
+                  $icono_objeto = $modulo['icono'];
+                  $link_objeto = $modulo['link_objeto'];
 
-                //   // $sub_modulos = array(
-                //   //   'sub_modulo' => $modulo['sub_modulo'],
-                //   //   'link_sub_modulo' => $modulo['link_sub_modulo']
-                //   // );
+                  $objetos = array(
+                    'agregar' => $modulo['agregar'],
+                    'eliminar' => $modulo['eliminar'],
+                    'actualizar' => $modulo['actualizar'],
+                    'consulta' => $modulo['consulta']
+                  );
+
+                  // $sub_modulos = array(
+                  //   'sub_modulo' => $modulo['sub_modulo'],
+                  //   'link_sub_modulo' => $modulo['link_sub_modulo']
+                  // );
                   
-                //   $grupo_modulo[$link_objeto][$icono_objeto][] = $modulo_padre;
+                  $grupo_modulo[$link_objeto][$icono_objeto][$modulo_padre][] = $objetos;
          
-                // }
+                }
 
-                //   echo "<pre>";
-                //     var_dump($grupo_modulo);
-                //   echo "</pre>";
+                  echo "<pre>";
+                    var_dump($grupo_modulo);
+                  echo "</pre>";
 
                 
 

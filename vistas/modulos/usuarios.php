@@ -41,7 +41,9 @@
                       <th width="100px">Usuario</th>
                       <th width="100px">Foto</th>
                       <th width="100px">Estado</th>
-                      <th width="100px">Acciones</th>
+                      <?php if($_SESSION["actualizar"] == 1 && $_SESSION["eliminar"] == 1){?>
+                        <th width="100px">Acciones</th>
+                      <?php }?>
                     </tr>
                   </thead>
 
@@ -52,139 +54,21 @@
                       <td>JEZA</td>
                       <td>foto.jpg</td>
                       <td><button class="btn btn-success btn-md">Activo</button></td>
+
+                      <?php if($_SESSION["actualizar"] == 1 && $_SESSION["eliminar"] == 1){?>
                       <td>
                         <div class="btn-group">
+                        <?php if($_SESSION["actualizar"] == 1){?>
                           <button class="btn btn-warning" style="color:white;"><i class="fas fa-pen"></i></button>
+                        <?php }?>
+                        <?php if($_SESSION["eliminar"] == 1){?>
                           <button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                        <?php }?>
                         </div>
                       </td>
+                      <?php }?>
                     </tr>
 
-                    <tr>
-                      <td>01</td>
-                      <td>Jesús Zuniga</td>
-                      <td>JEZA</td>
-                      <td>foto.jpg</td>
-                      <td><button class="btn btn-success btn-md">Activo</button></td>
-                      <td>
-                        <div class="btn-group">
-                          <button class="btn btn-warning" style="color:white;"><i class="fas fa-pen"></i></button>
-                          <button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
-                        </div>
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td>01</td>
-                      <td>Jesús Zuniga</td>
-                      <td>JEZA</td>
-                      <td>foto.jpg</td>
-                      <td><button class="btn btn-success btn-md">Activo</button></td>
-                      <td>
-                        <div class="btn-group">
-                          <button class="btn btn-warning" style="color:white;"><i class="fas fa-pen"></i></button>
-                          <button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
-                        </div>
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td>01</td>
-                      <td>Jesús Zuniga</td>
-                      <td>JEZA</td>
-                      <td>foto.jpg</td>
-                      <td><button class="btn btn-success btn-md">Activo</button></td>
-                      <td>
-                        <div class="btn-group">
-                          <button class="btn btn-warning" style="color:white;"><i class="fas fa-pen"></i></button>
-                          <button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
-                        </div>
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td>01</td>
-                      <td>Jesús Zuniga</td>
-                      <td>JEZA</td>
-                      <td>foto.jpg</td>
-                      <td><button class="btn btn-success btn-md">Activo</button></td>
-                      <td>
-                        <div class="btn-group">
-                          <button class="btn btn-warning" style="color:white;"><i class="fas fa-pen"></i></button>
-                          <button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
-                        </div>
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td>01</td>
-                      <td>Jesús Zuniga</td>
-                      <td>JEZA</td>
-                      <td>foto.jpg</td>
-                      <td><button class="btn btn-success btn-md">Activo</button></td>
-                      <td>
-                        <div class="btn-group">
-                          <button class="btn btn-warning" style="color:white;"><i class="fas fa-pen"></i></button>
-                          <button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
-                        </div>
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td>01</td>
-                      <td>Jesús Zuniga</td>
-                      <td>JEZA</td>
-                      <td>foto.jpg</td>
-                      <td><button class="btn btn-success btn-md">Activo</button></td>
-                      <td>
-                        <div class="btn-group">
-                          <button class="btn btn-warning" style="color:white;"><i class="fas fa-pen"></i></button>
-                          <button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
-                        </div>
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td>01</td>
-                      <td>Jesús Zuniga</td>
-                      <td>JEZA</td>
-                      <td>foto.jpg</td>
-                      <td><button class="btn btn-success btn-md">Activo</button></td>
-                      <td>
-                        <div class="btn-group">
-                          <button class="btn btn-warning" style="color:white;"><i class="fas fa-pen"></i></button>
-                          <button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
-                        </div>
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td>01</td>
-                      <td>Jesús Zuniga</td>
-                      <td>JEZA</td>
-                      <td>foto.jpg</td>
-                      <td><button class="btn btn-success btn-md">Activo</button></td>
-                      <td>
-                        <div class="btn-group">
-                          <button class="btn btn-warning" style="color:white;"><i class="fas fa-pen"></i></button>
-                          <button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
-                        </div>
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td>01</td>
-                      <td>Jesús Zuniga</td>
-                      <td>JEZA</td>
-                      <td>foto.jpg</td>
-                      <td><button class="btn btn-success btn-md">Activo</button></td>
-                      <td>
-                        <div class="btn-group">
-                          <button class="btn btn-warning" style="color:white;"><i class="fas fa-pen"></i></button>
-                          <button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
-                        </div>
-                      </td>
-                    </tr>
                   </tbody>
 
                   <tfoot>

@@ -83,6 +83,9 @@ class ControladorUsuarios{
 					$valor = $_POST["ingUsuario"];
 
 					$respuesta = ModeloUsuarios::mdlMostrarUsuarios($tabla1, $tabla2, $item, $valor);
+				   	// echo "<pre>";
+                    // 	var_dump($respuesta);
+                  	// echo "</pre>";
 					// var_dump($respuesta);
 					// return;
 					
@@ -111,6 +114,10 @@ class ControladorUsuarios{
 							$_SESSION["apellidos"] = $respuesta["apellidos"];
 							$_SESSION["foto"] = $respuesta["foto"];
 							$_SESSION["rol"] = $respuesta["rol"];
+							$_SESSION["agregar"] = $respuesta["agregar"];
+							$_SESSION["eliminar"] = $respuesta["eliminar"];
+							$_SESSION["actualizar"] = $respuesta["actualizar"];
+							$_SESSION["consulta"] = $respuesta["consulta"];
 							$_SESSION["primerIngreso"] = $respuesta["primera_vez"];
 
 							

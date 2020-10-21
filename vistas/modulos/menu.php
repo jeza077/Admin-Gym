@@ -39,11 +39,6 @@
                   $item2 = "rol";
                   $valor2 = $_SESSION["rol"];
 
-                  // $item1 =  null;
-                  // $valor1 =  null; 
-                  // $item2 =  null; 
-                  // $valor2 = null; 
-
                   $modulos = ControladorUsuarios::ctrMostrarUsuarioModulo($item1, $item2, $valor1, $valor2);
 
                   $grupo_modulo = array();
