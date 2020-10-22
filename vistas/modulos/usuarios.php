@@ -25,6 +25,19 @@
 
     <!-- Main content -->
     <section class="content">
+    <?php 
+      $permisoAgregar = $_SESSION['permisos']['Usuarios']['agregar'];
+      $permisoEliminar = $_SESSION['permisos']['Usuarios']['eliminar'];
+      $permisoActualizar = $_SESSION['permisos']['Usuarios']['actualizar'];
+      $permisoConsulta = $_SESSION['permisos']['Usuarios']['consulta'];
+
+      // var_dump($_SESSION['perm']);
+
+      // foreach ($permisos_pantalla as $key => $value) {
+      //   echo $key;
+      // }
+    ?>
+
 
       <!-- Default box -->
       <div class="card">
@@ -41,7 +54,7 @@
                       <th width="100px">Usuario</th>
                       <th width="100px">Foto</th>
                       <th width="100px">Estado</th>
-                      <?php if($_SESSION["actualizar"] == 1 && $_SESSION["eliminar"] == 1){?>
+                      <?php if($permisoActualizar == 1 && $permisoEliminar == 1){?>
                         <th width="100px">Acciones</th>
                       <?php }?>
                     </tr>
@@ -55,13 +68,13 @@
                       <td>foto.jpg</td>
                       <td><button class="btn btn-success btn-md">Activo</button></td>
 
-                      <?php if($_SESSION["actualizar"] == 1 && $_SESSION["eliminar"] == 1){?>
+                      <?php if($permisoActualizar == 1 && $permisoEliminar == 1){?>
                       <td>
                         <div class="btn-group">
-                        <?php if($_SESSION["actualizar"] == 1){?>
+                        <?php if($permisoActualizar == 1){?>
                           <button class="btn btn-warning" style="color:white;"><i class="fas fa-pen"></i></button>
                         <?php }?>
-                        <?php if($_SESSION["eliminar"] == 1){?>
+                        <?php if($permisoEliminar == 1){?>
                           <button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
                         <?php }?>
                         </div>
@@ -71,7 +84,7 @@
 
                   </tbody>
 
-                  <tfoot>
+                  <!-- <tfoot>
                     <tr>
                       <th>#</th>
                       <th>Nombre</th>
@@ -80,7 +93,7 @@
                       <th>Estado</th>
                       <th>Acciones</th>
                     </tr>
-                  </tfoot>
+                  </tfoot> -->
                 </table>
               </div>
               <!-- /.card-body -->
@@ -91,5 +104,4 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-
 

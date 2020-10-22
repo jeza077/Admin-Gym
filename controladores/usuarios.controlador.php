@@ -83,11 +83,52 @@ class ControladorUsuarios{
 					$valor = $_POST["ingUsuario"];
 
 					$respuesta = ModeloUsuarios::mdlMostrarUsuarios($tabla1, $tabla2, $item, $valor);
+
 				   	// echo "<pre>";
-                    // 	var_dump($respuesta);
+                    // 	var_dump($respuesta['rol']);
                   	// echo "</pre>";
-					// var_dump($respuesta);
 					// return;
+					$item1 = "usuario";
+					$valor1 = $_POST["ingUsuario"];
+					$item2 = "rol";
+					$valor2 = $respuesta["rol"];
+	
+					$modulos = ControladorUsuarios::ctrMostrarUsuarioModulo($item1, $item2, $valor1, $valor2);
+	
+					  // echo "<pre>";
+					  //   var_dump($modulos);
+					  // echo "</pre>";
+	
+	
+					$grupo_modulo = array();
+					$permisos_objetos = array();
+					foreach($modulos as $modulo) {
+					  $modulo_padre = $modulo['objeto'];
+					  $icono_objeto = $modulo['icono'];
+					  $link_objeto = $modulo['link_objeto'];
+	
+					  $permisos = array(
+						'agregar' => $modulo['agregar'],
+						'eliminar' => $modulo['eliminar'],
+						'actualizar' => $modulo['actualizar'],
+						'consulta' => $modulo['consulta']
+					  );
+	
+					  // $sub_modulos = array(
+					  //   'sub_modulo' => $modulo['sub_modulo'],
+					  //   'link_sub_modulo' => $modulo['link_sub_modulo']
+					  // );
+					  
+					  $grupo_modulo[$link_objeto][$icono_objeto][] = $modulo_padre;
+					  $permisos_objetos[$modulo_padre] = $permisos;
+			 
+					}
+	
+					//   echo "<pre>";
+					// 	var_dump($permisos_objetos);
+					//   echo "</pre>";
+					
+					//   return;
 					
 
 					$fechaVencimiento = date('Y-m-d', strtotime($respuesta['fecha_vencimiento']));
@@ -119,6 +160,7 @@ class ControladorUsuarios{
 							$_SESSION["actualizar"] = $respuesta["actualizar"];
 							$_SESSION["consulta"] = $respuesta["consulta"];
 							$_SESSION["primerIngreso"] = $respuesta["primera_vez"];
+							$_SESSION['permisos'] = $permisos_objetos;
 
 							
 							if($respuesta["estado"] == 0 && $respuesta["primera_vez"] == 1) {

@@ -98,9 +98,9 @@ $(".verificarCorreoPreguntas").on('click', function(event){
                         var valorPregunta = $('#preguntaSeleccionada').val();
                         var respuestaPregunta = $('.respuestaPregunta').val();
                         if(valorPregunta == ""){
-                            console.log('llenar');
+                            // console.log('llenar');
                         } else {
-                            console.log(valorPregunta, respuestaPregunta);
+                            // console.log(valorPregunta, respuestaPregunta);
 
                             //Compararemos la pregunta y la respuesta con las del usuario, para saber si son correctas.
                             var datos = new FormData();
