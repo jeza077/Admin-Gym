@@ -1,5 +1,6 @@
 
-  <!-- Content Wrapper. Contains page content -->
+ 
+ <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -24,7 +25,7 @@
       <form role="form" method="post" class="formulario" enctype="multipart/form-data">
         <!-- Default box -->
         <div class="card agregar-persona">
-          
+             
           <div class="card-body contenedor agregarPersona">
             <div class="form-row">
               <div class="form-group col-md-3">

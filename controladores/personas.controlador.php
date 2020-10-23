@@ -4,6 +4,9 @@ class ControladorPersonas{
 
     static public function ctrCrearPersona($tipoPersona){
 
+        // var_dump($_POST);
+        // return;
+
         if(isset($_POST["nuevoNombre"])){
 
             if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevoNombre"]) && 
@@ -25,7 +28,7 @@ class ControladorPersonas{
                     "email" => $_POST["nuevoEmail"]);
 
                     $respuestaPersona = ModeloPersonas::mdlCrearPersona($tabla, $datos);
-                    
+
                         if($respuestaPersona == true){
                             echo '<script>
                                     Swal.fire({
@@ -65,6 +68,26 @@ class ControladorPersonas{
                                 "email" => $_POST["nuevoEmail"]);
 
                     $respuestaPersona = ModeloPersonas::mdlCrearPersona($tabla, $datos);
+
+                    if($respuestaPersona == true){
+                        echo '<script>
+                                    Swal.fire({
+                                        title: "Tus datos han sido guardados correctamente!",
+                                        icon: "success",
+                                        heightAuto: false
+                                    })                    
+                                </script>';
+                        return;
+                    } else {
+                        echo '<script>
+                        Swal.fire({
+                            title: "Error!",
+                            icon: "error",
+                            heightAuto: false
+                        })                    
+                    </script>';
+                            return;
+                    }
 
                     if($respuestaPersona == true){
 
