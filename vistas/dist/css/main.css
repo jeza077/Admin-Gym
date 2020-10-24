@@ -491,8 +491,10 @@ i.show-confir-pass{
     left: 100%;
 }
 
+
+/** VISTA PREVIA FOTO USUARIO  */
 .p-foto{
     position: absolute;
     top: 5rem;
-    margin-left: 4px;
+    left: 7rem;
 }

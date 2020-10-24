@@ -179,7 +179,7 @@
               <div class="form-group col-md-3">
                 <label>Rol</label>
                 <select class="form-control select2" style="width: 100%;" name="nuevoRol">
-                  <option selected="selected">Seleccionar...</option>
+                  <!-- <option value="2">Default</option> -->
                     <?php 
                         $tabla = "tbl_roles";
                         $item = null;
@@ -188,7 +188,11 @@
                         $roles = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
 
                         foreach ($roles as $key => $value) {
-                          echo '<option value="'.$value["id_rol"].'">'.$value["rol"].'</option>';
+                          if($value["rol"] == 'Default'){
+                            echo '<option selected="selected" value="'.$value["id_rol"].'">'.$value["rol"].'</option>';
+                          } else {
+                            echo '<option value="'.$value["id_rol"].'">'.$value["rol"].'</option>';
+                          }
                         }
                     ?>
                 </select>
@@ -196,25 +200,48 @@
 
               <div class="form-group col-md-3">
                 <label for="inputPassword4">Contraseña Generada</label>
-                <input type="text" class="form-control passwordGenerado" id="inputPassword4" name="nuevoPassword" placeholder="">
+                <input type="text" class="form-control passwordGenerado" id="inputPassword4" name="nuevoPassword" disabled>
               </div>
               <div class="col-md-3">
-                <!-- <label for="inputPassword4">Generar Contraseña</label> -->
                 <a href="javascript:void(0);"  class="btn btn-block btn-orange" id="generarPassword" style="margin-top:2em">Generar contraseña</a>
               </div>
             </div>
-            
-            <div class="form-group col-md-12">
-              <label for="exampleInputFile">Foto</label>
-              <div class="input-group">
-                <div class="custom-file">
-                  <input type="file" class="custom-file-input nuevaFoto" id="exampleInputFile" name="nuevaFoto">
-                  <label class="custom-file-label" for="exampleInputFile">Escoger foto</label>
+
+            <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="exampleInputFile">Foto</label>
+                <div class="input-group">
+                <img class="img-thumbnail previsualizar mr-2" src="vistas/img/usuarios/default/anonymous.png" alt="imagen-del-usuario" width="100px">
+                  <div class="custom-file">
+                    <input type="file" class="custom-file-input nuevaFoto" id="exampleInputFile" name="nuevaFoto">
+                    <label class="custom-file-label" for="exampleInputFile">Escoger foto</label>
+                  </div>
+
                 </div>
-                  <img class="img-thumbnail previsualizar ml-2" src="vistas/img/usuarios/default/anonymous.png" alt="imagen-del-usuario" width="100px">
+                    <p class="p-foto help-block ml-4">Peso máximo de la foto 2 MB</p>
               </div>
-                  <p class="p-foto help-block">Peso máximo de la foto 2 MB</p>
+              <div class="form-group col-md-3">
+                <label>Estado</label>
+                <input type="text" class="form-control" value="Desactivado" style="color:red;" disabled>
+              </div>
+
+              <div class="form-group col-md-3">
+                <?php 
+                  $itemParam = 'parametro';
+                  $valorParam = 'ADMIN_DIAS_VIGENCIA';
+                  $parametros = ControladorUsuarios::ctrMostrarParametros($itemParam, $valorParam);
+              
+                  $vigenciaUsuario = $parametros['valor'];
+        
+                  date_default_timezone_set("America/Tegucigalpa");
+                  $fechaVencimiento = date("Y-m-d", strtotime('+'.$vigenciaUsuario.' days'));
+                ?>
+                <label>Fecha de vencimiento</label>
+                <input type="text" class="form-control" value="<?php echo $fechaVencimiento?>" disabled>
+              </div>
             </div>
+            
+     
 
             <div class="modal-footer">
             <!-- <div class="form-group mt-4 float-right"> -->
