@@ -20,6 +20,11 @@
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
+
+    <button id="dark-mode-toggle" class="dark-mode-toggle">
+      <span><i class="fas fa-sun"></i></span>
+      <span><i class="fas fa-moon"></i></span>
+    </button>
       <!-- <li class="nav-item dropdown mr-4">
 
         <a class="nav-link" data-toggle="dropdown" href="#">
