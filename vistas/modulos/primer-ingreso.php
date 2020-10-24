@@ -64,13 +64,8 @@
 
                     <div class="card-body contenedor-primer-ingreso password-primer-ingreso">
                         <div class="form-group" id="passwordPrimerIngreso">
-                            <!-- <div class="form-group">
-                                <label class='mt-2'>Nueva contraseña</label>
-                                <input type='password' class='form-control nueva-password' placeholder='Nueva contraseña' name='editarPassword' required>
-                            </div> -->
+
                             <div class="form-group passwords">
-                                <!-- <label class='mt-2'>Confirmar contraseña</label>
-                                <input type='password' class='form-control confirmar-password' placeholder='Confirmar contraseña'> -->
                                 <i class="far fa-eye show-nueva-pass primero" action="hide"></i>
                                 <i class="far fa-eye show-confir-pass segundo" action="hide"></i>
                                 <span class="resultado-password help-block mt-1 float-right"></span>
@@ -78,14 +73,9 @@
                         </div>
 
                         <div class="form-group mt-4" id="guardarPassPrimerIngreso">
-                            <!-- <a href="salir" class="btn btn-danger salir float-left">Salir</a>
-                            <button type="submit" class="btn btn-primary float-right" id="btnPrimerIngreso">Guardar</button> -->
+
                         </div>
                     </div>
-
-                        
-                    
-                    
 
                     <?php 
                         $id = $_SESSION["id_usuario"];
@@ -95,12 +85,12 @@
                     ?>
                 </form>
                 
-            <?php
-                $descripcionEvento = " Primer Ingreso";
-                $accion = "Ingreso";
+                <?php
+                    $descripcionEvento = " Primer Ingreso";
+                    $accion = "Ingreso";
 
-                $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
-            ?>    
+                    $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
+                ?>    
             </div>
         </div>
     </div>

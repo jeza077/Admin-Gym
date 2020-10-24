@@ -35,7 +35,22 @@ $("#passwordPrimerIngreso").append("<label class='mt-2'>Nueva contraseña</label
 $("#passwordPrimerIngreso").append("<input type='password' class='form-control password nueva-password' placeholder='Ingrese nueva contraseña' name='editarPassword' required>");
 $("#passwordPrimerIngreso").append("<label class='mt-2'>Confirmar contraseña</label>");
 $("#passwordPrimerIngreso").append("<input type='password' class='form-control password confirmar-password' placeholder='Confirmar contraseña'>");
+
+$("#guardarPassPrimerIngreso").append("<button type='submit' class='btn btn-orange btn-block btn-flat' id='cambiarPasPrimerIngreso'>Cambiar Contraseña</button>");
+
 requisitosPassword("center-start");
+$('#cambiarPasPrimerIngreso').attr('disabled', true);
+$(".nueva-password").on('change', function(){
+    cambiarPass = $(this).val();
+});
 
+$('.nueva-password').keydown(impedirEspacios);
+$('.confirmar-password').keydown(impedirEspacios);
 
-$("#guardarPassPrimerIngreso").append("<button type='submit' class='btn btn-orange btn-block btn-flat' id=''>Cambiar Contraseña</button>");
+$(".confirmar-password").on('input', function(){
+    var confirPass = $(this).val();
+    var btnCambiarPass = $('#cambiarPasPrimerIngreso');
+
+    confirmarContraseña(cambiarPass, confirPass, btnCambiarPass);
+})
+

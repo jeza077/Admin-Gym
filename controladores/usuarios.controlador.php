@@ -574,7 +574,7 @@ class ControladorUsuarios{
 
 		if(isset($_POST["editarPassword"])){
 			
-			if($_POST["nuevaPregunta"][0] !== 'Seleccionar...' && $_POST["nuevaPregunta"][1] !== 'Seleccionar...' && $_POST["nuevaPregunta"][2] !== 'Seleccionar...'){
+			// if($_POST["nuevaPregunta"][0] !== 'Seleccionar...' && $_POST["nuevaPregunta"][1] !== 'Seleccionar...' && $_POST["nuevaPregunta"][2] !== 'Seleccionar...'){
 
 				if(preg_match('/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%.])\S{8,16}$/', $_POST["editarPassword"]) && preg_grep('/^(?=.*[a-zñÑáéíóúÁÉÍÓÚ])\S{1,50}$/', $_POST["respuestaPregunta"])){
 					// echo '<br><div class="alert alert-danger">bien.</div>';
@@ -671,7 +671,8 @@ class ControladorUsuarios{
 											if(result.value){
 												window.location = "salir";
 											}
-										});						
+										});		
+										window.location = "salir";				
 									</script>';
 								}
 							}
@@ -692,18 +693,18 @@ class ControladorUsuarios{
 						</script>';
 				}
 
-			} else {
-					echo '<script>			
-							Swal.fire({
-								title: "Por favor, llena los campos corectamente. Intente de nuevo.",
-								icon: "error",
-								toast: true,
-								position: "top",
-								showConfirmButton: false,
-								timer: 3000,
-							});
-						</script>';
-			}
+			// } else {
+			// 		echo '<script>			
+			// 				Swal.fire({
+			// 					title: "Por favor, llena los campos corectamente. Intente de nuevo.",
+			// 					icon: "error",
+			// 					toast: true,
+			// 					position: "top",
+			// 					showConfirmButton: false,
+			// 					timer: 3000,
+			// 				});
+			// 			</script>';
+			// }
 		}
 	}
 	
