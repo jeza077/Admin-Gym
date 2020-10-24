@@ -147,6 +147,14 @@ body.primer-ingreso .card .contenedor2 a.salir{
 }
 
 
+/** MODALES  */
+.modal-header {
+    background: var(--orangeThird);
+    color: #fff;
+}
+.modal-body {
+    padding: 2rem;
+}
 
 /** VALIDAR CONTRASEÑA */
 .valid{

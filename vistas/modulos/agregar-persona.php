@@ -139,58 +139,6 @@
                 <a href="javascript:void(0);"  class="btn btn-block btn-orange" id="generarPassword" style="margin-top:2em">Generar contraseña</a>
               </div>
             </div>
-
-            <!-- <div class="form-row">
-              <div class="form-group col-md-6">
-                <label for="inputPassword4">Password</label>
-                <input type="password" class="form-control nueva-password" id="inputPassword4" name="nuevoPassword" placeholder="Ingrese Contraseña">
-              </div>
-              <div class="form-group col-md-6">
-                <label for="inputPassword4">Confirmar Password</label>
-                <input type="password" class="form-control" placeholder="Ingrese Confirmar contraseña">
-              </div>
-            </div> -->
-
-            <!-- <div class="form-row">
-            <?php 
-              for ($i=1; $i <=3 ; $i++) { ?>
-              <div class="form-group col-md-4">
-                <label for="inputPassword4">Pregunta <?php echo $i?></label>
-                <select class="form-control select2" name="nuevaPregunta[]">
-                <option selected="selected">Seleccionar...</option>
-                <?php 
-                        $tabla = "tbl_preguntas";
-                        $item = null;
-                        $valor = null;
-
-                        $preguntas = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
-
-                        foreach ($preguntas as $key => $value) { ?>
-                          <option value="<?php echo $value['id']?>"><?php echo $value['pregunta']?></option>        
-                        <?php 
-                        }
-                    ?>
-                </select>
-              </div>
-            <?php
-              }            
-            ?>
-            </div> -->
-            
-            <!-- <div class="form row">
-              <div class="form-group col-md-4">
-                <label for="inputPassword4">Respuesta 1</label>
-                <input type="text" class="form-control" onKeyUp="this.value=this.value.toLowerCase();" name="respuestaPregunta[]">
-              </div>
-              <div class="form-group col-md-4">
-                <label for="inputPassword4">Respuesta 2</label>
-                <input type="text" class="form-control" onKeyUp="this.value=this.value.toLowerCase();" name="respuestaPregunta[]">
-              </div>
-              <div class="form-group col-md-4">
-                <label for="inputPassword4">Respuesta 3</label>
-                <input type="text" class="form-control" onKeyUp="this.value=this.value.toLowerCase();" name="respuestaPregunta[]">
-              </div>
-            </div> -->
             
             <div class="form-group col-md-12">
               <label for="exampleInputFile">Foto</label>
@@ -223,8 +171,9 @@
         <!-- /.card -->
         <?php
           $tipoPersona = null;
+          $pantalla = 'usuarios';
           $ingresarPersona = new ControladorPersonas();
-          $ingresarPersona->ctrCrearPersona($tipoPersona);
+          $ingresarPersona->ctrCrearPersona($tipoPersona, $pantalla);
         ?>
       </form>
 

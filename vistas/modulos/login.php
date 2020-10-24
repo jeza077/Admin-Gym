@@ -232,8 +232,9 @@
 
         <?php
           $tipoPersona = 'default';
+          $pantalla = 'login';
           $ingresaPersona = new ControladorPersonas();
-          $ingresaPersona->ctrCrearPersona($tipoPersona);
+          $ingresaPersona->ctrCrearPersona($tipoPersona, $pantalla);
         ?>
       </form>
     </div>
