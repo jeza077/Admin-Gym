@@ -69,25 +69,25 @@ class ControladorPersonas{
 
                     $respuestaPersona = ModeloPersonas::mdlCrearPersona($tabla, $datos);
 
-                    if($respuestaPersona == true){
-                        echo '<script>
-                                    Swal.fire({
-                                        title: "Tus datos han sido guardados correctamente!",
-                                        icon: "success",
-                                        heightAuto: false
-                                    })                    
-                                </script>';
-                        return;
-                    } else {
-                        echo '<script>
-                        Swal.fire({
-                            title: "Error!",
-                            icon: "error",
-                            heightAuto: false
-                        })                    
-                    </script>';
-                            return;
-                    }
+                            if($respuestaPersona == true){
+                                echo '<script>
+                                            Swal.fire({
+                                                title: "Tus datos han sido guardados correctamente!",
+                                                icon: "success",
+                                                heightAuto: false
+                                            })                    
+                                        </script>';
+                                return;
+                            } else {
+                                echo '<script>
+                                Swal.fire({
+                                    title: "Error!",
+                                    icon: "error",
+                                    heightAuto: false
+                                })                    
+                            </script>';
+                                    return;
+                            }
 
                     if($respuestaPersona == true){
 
