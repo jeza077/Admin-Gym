@@ -176,6 +176,21 @@ body.primer-ingreso .card .contenedor2 a.salir{
 .contenedor-primer-ingreso.password-primer-ingreso{
     left: 100%;
     transition: 0.5s;
+    width: 520px;
+}
+.contenedor-primer-ingreso.password-primer-ingreso .passwords i.show-nueva-pass.primero{
+    cursor: pointer;
+    position: absolute;
+    top: 117px;
+    right: 17px;
+    z-index: 1000;
+}
+.contenedor-primer-ingreso.password-primer-ingreso .passwords i.show-confir-pass.segundo{
+    cursor: pointer;
+    position: absolute;
+    top: 195px;
+    right: 17px;
+    z-index: 1000;
 }
 /* Contendor Slide para Contenedor Segunda Pregunta  */
 body.primer-ingreso.pregunta-dos .contenedor-primer-ingreso.pregunta1 {

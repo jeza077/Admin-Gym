@@ -29,3 +29,13 @@ $("#pregunta2").append("<a href='javascript:void(0);' class='btn btn-primary flo
 // Pregunta 3
 $("#pregunta3").append("<a href='javascript:void(0);' class='btn btn-danger float-left' onclick='togglePregunta3();'>Atras</a>");
 $("#pregunta3").append("<a href='javascript:void(0);' class='btn btn-primary float-right' onclick='togglePassPrimeraVez();'>Siguiente</a>");
+
+// Contraseña nueva primer ingreso
+$("#passwordPrimerIngreso").append("<label class='mt-2'>Nueva contraseña</label>");
+$("#passwordPrimerIngreso").append("<input type='password' class='form-control password nueva-password' placeholder='Ingrese nueva contraseña' name='editarPassword' required>");
+$("#passwordPrimerIngreso").append("<label class='mt-2'>Confirmar contraseña</label>");
+$("#passwordPrimerIngreso").append("<input type='password' class='form-control password confirmar-password' placeholder='Confirmar contraseña'>");
+requisitosPassword("center-start");
+
+
+$("#guardarPassPrimerIngreso").append("<button type='submit' class='btn btn-orange btn-block btn-flat' id=''>Cambiar Contraseña</button>");
