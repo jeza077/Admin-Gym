@@ -21,10 +21,20 @@ function togglePassPrimeraVez(){
 
 //**AGREGAR BOTONES A CONTENEDOR PREGUNTAS DE SEGURIDAD */
 // Pregunta 1
-$("#pregunta1").append("<a href='javascript:void(0);' class='btn btn-primary float-right' onclick='togglePregunta2();'>Siguiente</a>");
-// Pregunta 2
-$("#pregunta2").append("<a href='javascript:void(0);' class='btn btn-danger float-left' onclick='togglePregunta2();'>Atras</a>");
-$("#pregunta2").append("<a href='javascript:void(0);' class='btn btn-primary float-right' onclick='togglePregunta3();'>Siguiente</a>");
+$("#pregunta1").append("<a href='javascript:void(0);' class='btn btn-primary float-right' id='btn'>Siguiente</a>");
+$('#btn').click(function (e) { 
+    e.preventDefault();
+    var valor = $('.respuesta').val();
+    if(valor == ""){
+        alert('llenar espacios');
+    } else {
+        togglePregunta2();
+    // Pregunta 2
+        $("#pregunta2").append("<a href='javascript:void(0);' class='btn btn-danger float-left' onclick='togglePregunta2();'>Atras</a>");
+        $("#pregunta2").append("<a href='javascript:void(0);' class='btn btn-primary float-right' onclick='togglePregunta3();'>Siguiente</a>");
+    }
+});
+
 
 // Pregunta 3
 $("#pregunta3").append("<a href='javascript:void(0);' class='btn btn-danger float-left' onclick='togglePregunta3();'>Atras</a>");
