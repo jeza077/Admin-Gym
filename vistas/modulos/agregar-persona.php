@@ -47,7 +47,7 @@
               </div>
               <div class="form-group col-md-3">
                 <label for="identidad">Identidad</label>
-                <input type="text" class="form-control id" id="identidad" name="nuevoNumeroDocumento" placeholder="Ingrese Identidad" onkeypress="return validarDoc(event)" required>
+                <input type="text" class="form-control id" id="numDocumento" name="nuevoNumeroDocumento" placeholder="Ingrese Identidad" required>
               </div>
               <div class="form-group col-md-3">
                 <label for="nombre">Nombre</label>

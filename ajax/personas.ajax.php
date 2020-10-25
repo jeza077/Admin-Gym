@@ -15,9 +15,9 @@ class AjaxPersonas{
         $item = "num_documento";
         $valor = $this->identidadIngresada;
         
-        $respuestaDocumento = ControladorPersonas::ctrMostrarDocumento($item, $valor);
+        $respuesta = ControladorPersonas::ctrMostrarDocumento($item, $valor);
 
-        echo json_encode($respuestaDocumento);
+        echo json_encode($respuesta);
     }
     /*=============================================
     REVISAR IDENTIDAD

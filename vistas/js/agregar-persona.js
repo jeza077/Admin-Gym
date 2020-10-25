@@ -1,15 +1,17 @@
 //***VALIDACIONES */
 longitudString($('.nuevoUsuario'),50); //Longitud Input Usuario
-longitudString($('.nuevoApellido'),25);
 validarEmail($('.email')); //Validar que no exista en DB, email de la persona ingresada
-longitudString($('.nombre'),25); //Longitud Input Usuario
-longitudString($('.id'),13);
-$('.nombre').keydown(permitirUnEspacio);
-$('.nuevoApellido').keydown(permitirUnEspacio);
-validarNombre($('.nuevoApellido'));
-$('.id').keydown(impedirEspacios); 
-$('.nuevoUsuario').keydown(impedirEspacios);
+$('.id').keydown(impedirEspacios); //Impedir espacios, input identidad
+//***VALIDACIONES EN INPUT USUARIO */
 validarNombre($('.nuevoUsuario'));
+$('.nuevoUsuario').keydown(impedirEspacios); //Impedir espacios, input usuario
+//***VALIDACIONES EN INPUT NOMBRE */
+longitudString($('.nombre'),25); //Longitud Input Nombre
+$('.nombre').keydown(permitirUnEspacio); //Validar que solo permita un espacio, input nombre
+//***VALIDACIONES EN INPUT APELLIDO */
+$('.nuevoApellido').keydown(permitirUnEspacio); //Validar que solo permita un espacio, Input apellido
+validarNombre($('.nuevoApellido'));
+longitudString($('.nuevoApellido'),25); //Longitud Input Apellido
 
 
 //** MOSTRAR TIPO DE PERSONA */

@@ -174,8 +174,8 @@ class ControladorPersonas{
         
         $tabla = "tbl_personas";
 
-        $respuestaDocumento = ModeloPersonas::mdlMostrarDocumento($tabla, $item, $valor);
+        $respuesta = ModeloPersonas::mdlMostrarDocumento($tabla, $item, $valor);
 
-        return $respuestaDocumento;
+        return $respuesta;
     }
 }

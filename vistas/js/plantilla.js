@@ -312,15 +312,65 @@ function mostrarContraseña(selector, mostrar, action) {
     REVISAR NOMBRES
 =============================================*/
 
+// function impedirCaracteresYNumeros(event) {
+//     var key = event.which || event.keyCode;
+
+//     especiales ="32-34-35-36-37-38-39-40-41-42-43-44-45-46-47-58-59-59-123-124";
+
+//     for (let i = 0; i <= 20; i++) {
+//         if(key.test(especiales)){
+//             event.preventDefault();
+//             // $(this).parent().parent().after('<div class="alert alert-danger mt-2">No se aceptan espacios.</div>');
+//             // var identificador = $(this);
+//             // setTimeout(function () {
+//             //     $('.alert').remove();
+//             //     identificador.val('');
+//             //     identificador.attr('disabled', false);
+//             //     identificador.focus();
+//             // }, 2000)
+//             // $(this).attr('disabled', true);
+//         } else {
+//             $('.alert').remove();
+//         }
+//     }
+// }
+// function impedirEnNombre(selector) { 
+//     selector.keydown(function (e) { 
+//         var nombreingresado = selector.val();
+//         var especiales ="32-34-35-36-37-38-39-40-41-42-43-44-45-46-47-58-59-59-123-124";
+
+//         for (let i = 0; i <= 20; i++) {
+//             if(nombreingresado.search(especiales)){
+//                 keydown.preventDefault();
+//                 // $(this).parent().parent().after('<div class="alert alert-danger mt-2">No se aceptan espacios.</div>');
+//                 // var identificador = $(this);
+//                 // setTimeout(function () {
+//                 //     $('.alert').remove();
+//                 //     identificador.val('');
+//                 //     identificador.attr('disabled', false);
+//                 //     identificador.focus();
+//                 // }, 2000)
+//                 // $(this).attr('disabled', true);
+//             } else {
+//                 $('.alert').remove();
+//             }
+//         }
+//     });
+// }
+
+// var nombre = $('.nombre');
+// validar(nombre);
+
 function validarNombre(selector) { 
-    selector.blur(function (e) { 
-        e.preventDefault();
+    selector.keydown(function (e) { 
+
+        var valorIngresado = selector.val();
     
-        var nombreIngresado =  selector.val();
-    
-        var patron = /^(?=.*[A-Z])[a-zA-Z\s]*$/;
+        var patron = /^[a-zA-ZñÑáéíóúüÁÉÍÓÚÜ\s]*$/;
         
-        if(nombreIngresado.search(patron)){
+        if(valorIngresado.search(patron)){
+            e.preventDefault();
+           
             Swal.fire({
                 title: "Solo se utilizan letras y debe llevar al menos una mayuscula.",
                 icon: "error",
@@ -334,7 +384,7 @@ function validarNombre(selector) {
             selector.focus();
 
         }  else {
-            console.log(selector)
+            console.log("bien")
         } 
     });
  }

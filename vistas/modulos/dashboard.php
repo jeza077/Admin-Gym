@@ -56,6 +56,12 @@
                 // $device_details =   "<strong>Browser: </strong>" . $user_browser . 
                 //                     "<br /><strong>Operating System: </strong>" . $user_os;
                 // print_r($device_details);
+                    
+        // $item = "num_documento";
+        // $valor = "3242234234";
+        
+        // $respuesta = ControladorPersonas::ctrMostrarDocumento($item, $valor);
+        // var_dump($respuesta);
             
           ?>
 
