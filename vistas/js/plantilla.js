@@ -309,58 +309,8 @@ function mostrarContraseña(selector, mostrar, action) {
 }
 
 /*=============================================
-    REVISAR NOMBRES
+    VALIDAR NOMBRE
 =============================================*/
-
-// function impedirCaracteresYNumeros(event) {
-//     var key = event.which || event.keyCode;
-
-//     especiales ="32-34-35-36-37-38-39-40-41-42-43-44-45-46-47-58-59-59-123-124";
-
-//     for (let i = 0; i <= 20; i++) {
-//         if(key.test(especiales)){
-//             event.preventDefault();
-//             // $(this).parent().parent().after('<div class="alert alert-danger mt-2">No se aceptan espacios.</div>');
-//             // var identificador = $(this);
-//             // setTimeout(function () {
-//             //     $('.alert').remove();
-//             //     identificador.val('');
-//             //     identificador.attr('disabled', false);
-//             //     identificador.focus();
-//             // }, 2000)
-//             // $(this).attr('disabled', true);
-//         } else {
-//             $('.alert').remove();
-//         }
-//     }
-// }
-// function impedirEnNombre(selector) { 
-//     selector.keydown(function (e) { 
-//         var nombreingresado = selector.val();
-//         var especiales ="32-34-35-36-37-38-39-40-41-42-43-44-45-46-47-58-59-59-123-124";
-
-//         for (let i = 0; i <= 20; i++) {
-//             if(nombreingresado.search(especiales)){
-//                 keydown.preventDefault();
-//                 // $(this).parent().parent().after('<div class="alert alert-danger mt-2">No se aceptan espacios.</div>');
-//                 // var identificador = $(this);
-//                 // setTimeout(function () {
-//                 //     $('.alert').remove();
-//                 //     identificador.val('');
-//                 //     identificador.attr('disabled', false);
-//                 //     identificador.focus();
-//                 // }, 2000)
-//                 // $(this).attr('disabled', true);
-//             } else {
-//                 $('.alert').remove();
-//             }
-//         }
-//     });
-// }
-
-// var nombre = $('.nombre');
-// validar(nombre);
-
 function validarNombre(selector) { 
     selector.keydown(function (e) { 
 
@@ -396,43 +346,77 @@ validarNombre(nombre);
     Funcion validar documento
 =============================================*/
 
-function validar(selector) { 
-    selector.blur(function (e) { 
-        e.preventDefault();
+// function validar(selector) { 
+//     selector.blur(function (e) { 
+//         e.preventDefault();
         
-        var valorIdentidad = selector.val();
+//         var valorIdentidad = selector.val();
         
         
-        var datos = new FormData();
-        datos.append("identidadIngresada", valorIdentidad);
+//         var datos = new FormData();
+//         datos.append("identidadIngresada", valorIdentidad);
     
-        $.ajax({
+//         $.ajax({
         
-            url:"ajax/personas.ajax.php",
-            method: "POST",
-            data: datos,
-            cache: false,
-            contentType: false,
-            processData: false,  
-            dataType: "json",
-            success: function(respuesta) {
+//             url:"ajax/personas.ajax.php",
+//             method: "POST",
+//             data: datos,
+//             cache: false,
+//             contentType: false,
+//             processData: false,  
+//             dataType: "json",
+//             success: function(respuesta) {
     
-                if (respuesta){
-                    Swal.fire({
-                        title: "Documento ya existente, ingrese uno diferente.",
-                        icon: "error",
-                        background: "rgb(255 75 75 / 85%)",
-                        toast: true,
-                        position: "top",
-                        showConfirmButton: false,
-                        timer: 3000
-                    });
-                    selector.val("");
-                    console.log(valorIdentidad)
-                }
-            }  
-        });   
+//                 if (respuesta){
+//                     Swal.fire({
+//                         title: "Documento ya existente, ingrese uno diferente.",
+//                         icon: "error",
+//                         background: "rgb(255 75 75 / 85%)",
+//                         toast: true,
+//                         position: "top",
+//                         showConfirmButton: false,
+//                         timer: 3000
+//                     });
+//                     selector.val("");
+//                     console.log(valorIdentidad)
+//                 }
+//             }  
+//         });   
+//     });
+// }
+// var num_documento = $('#validarId');
+// validar(num_documento);
+
+/*=============================================
+    Funcion validar documento solo numeros
+=============================================*/
+
+function validarDocumento(selector) { 
+    selector.keydown(function (e) { 
+
+        var identidadIngresada = selector.val();
+    
+        var patron = /^[0-9]*$/;
+        
+        if(identidadIngresada.search(patron)){
+            e.preventDefault();
+           
+            Swal.fire({
+                title: "Solo se utilizan letras y debe llevar al menos una mayuscula.",
+                icon: "error",
+                background: "#FFADAD",
+                toast: true,
+                position: "top",
+                showConfirmButton: false,
+                timer: 3000
+            });
+            selector.val("");
+            selector.focus();
+
+        }  else {
+            console.log("bien")
+        } 
     });
-}
-var num_documento = $('#validarId');
-validar(num_documento);
+ }
+var identidad = $('#numDocumento');
+validarDocumento(identidad);

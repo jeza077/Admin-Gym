@@ -2,6 +2,7 @@
 longitudString($('.nuevoUsuario'),50); //Longitud Input Usuario
 validarEmail($('.email')); //Validar que no exista en DB, email de la persona ingresada
 $('.id').keydown(impedirEspacios); //Impedir espacios, input identidad
+longitudString($('#numDocumento'),20);
 //***VALIDACIONES EN INPUT USUARIO */
 validarNombre($('.nuevoUsuario'));
 $('.nuevoUsuario').keydown(impedirEspacios); //Impedir espacios, input usuario
@@ -238,42 +239,43 @@ function generar_contrasenya(longitud){
     return password_definitivo;
 }
 
-function codigoArea(e){
-    key=e.keyCode || e.wich;
-    teclado= String.fromCharCode(key).toUpperCase();
-    especial1 = "53";
-    especial2 = "48";
-    especial3 = "52";
+// function codigoArea(e){
 
-    for (contador = 1; contador <= 3; contador++) {
+//     key=e.keyCode || e.wich;
+//     teclado= String.fromCharCode(key).toUpperCase();
+//     especial1 = "53";
+//     especial2 = "48";
+//     especial3 = "52";
 
-        if (contador==1) {
-            if (key==especial1) {
-                console.log(key)
+//     for (contador = 1; contador <= 3; contador++) {
+
+//         if (contador==1) {
+//             if (key==especial1) {
+//                 console.log(key)
     
-            } else {
-                console.log("error")
-                return false;
-            }
-        } else if (contador==2) {
-            if (key==especial2) {
-                console.log(key)
+//             } else {
+//                 console.log("error")
+//                 return false;
+//             }
+//         } else if (contador==2) {
+//             if (key==especial2) {
+//                 console.log(key)
     
-            } else {
-                console.log("error")
-                return false;
-            }
-        } else if (contador==3) {
-            if (key==especial3) {
-                console.log(key)
+//             } else {
+//                 console.log("error")
+//                 return false;
+//             }
+//         } else if (contador==3) {
+//             if (key==especial3) {
+//                 console.log(key)
     
-            } else {
-                console.log("error")
-                return false;
-            }
-        } else {
-            return true;
-            console.log('#inputTelefono')
-        }
-    }
-}
+//             } else {
+//                 console.log("error")
+//                 return false;
+//             }
+//         } else {
+//             return true;
+//             console.log('#inputTelefono')
+//         }
+//     }
+// }
