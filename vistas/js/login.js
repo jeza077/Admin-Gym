@@ -584,6 +584,3 @@ $('.show-confir-pass').on('click', function () {
     var confirmarPass = $('.confirmar-password');
     mostrarContraseña(confirmarPass, mostrarPass, action);
 });
-
-
-

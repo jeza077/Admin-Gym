@@ -1,6 +1,15 @@
 //***VALIDACIONES */
 longitudString($('.nuevoUsuario'),50); //Longitud Input Usuario
+longitudString($('.nuevoApellido'),25);
 validarEmail($('.email')); //Validar que no exista en DB, email de la persona ingresada
+longitudString($('.nombre'),25); //Longitud Input Usuario
+longitudString($('.id'),13);
+$('.nombre').keydown(permitirUnEspacio);
+$('.nuevoApellido').keydown(permitirUnEspacio);
+validarNombre($('.nuevoApellido'));
+$('.id').keydown(impedirEspacios); 
+$('.nuevoUsuario').keydown(impedirEspacios);
+validarNombre($('.nuevoUsuario'));
 
 
 //** MOSTRAR TIPO DE PERSONA */
@@ -225,4 +234,44 @@ function generar_contrasenya(longitud){
         password_definitivo	=	password_definitivo + array_caracteres[i];
     }
     return password_definitivo;
+}
+
+function codigoArea(e){
+    key=e.keyCode || e.wich;
+    teclado= String.fromCharCode(key).toUpperCase();
+    especial1 = "53";
+    especial2 = "48";
+    especial3 = "52";
+
+    for (contador = 1; contador <= 3; contador++) {
+
+        if (contador==1) {
+            if (key==especial1) {
+                console.log(key)
+    
+            } else {
+                console.log("error")
+                return false;
+            }
+        } else if (contador==2) {
+            if (key==especial2) {
+                console.log(key)
+    
+            } else {
+                console.log("error")
+                return false;
+            }
+        } else if (contador==3) {
+            if (key==especial3) {
+                console.log(key)
+    
+            } else {
+                console.log("error")
+                return false;
+            }
+        } else {
+            return true;
+            console.log('#inputTelefono')
+        }
+    }
 }

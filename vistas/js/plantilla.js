@@ -307,3 +307,82 @@ function mostrarContraseña(selector, mostrar, action) {
         mostrar.removeClass('far fa-eye-slash').addClass('far fa-eye').attr('action', 'hide')
     }
 }
+
+/*=============================================
+    REVISAR NOMBRES
+=============================================*/
+
+function validarNombre(selector) { 
+    selector.blur(function (e) { 
+        e.preventDefault();
+    
+        var nombreIngresado =  selector.val();
+    
+        var patron = /^(?=.*[A-Z])[a-zA-Z\s]*$/;
+        
+        if(nombreIngresado.search(patron)){
+            Swal.fire({
+                title: "Solo se utilizan letras y debe llevar al menos una mayuscula.",
+                icon: "error",
+                background: "#FFADAD",
+                toast: true,
+                position: "top",
+                showConfirmButton: false,
+                timer: 3000
+            });
+            selector.val("");
+            selector.focus();
+
+        }  else {
+            console.log(selector)
+        } 
+    });
+ }
+var nombre = $('.nombre');
+validarNombre(nombre);
+
+
+/*=============================================
+    Funcion validar documento
+=============================================*/
+
+function validar(selector) { 
+    selector.blur(function (e) { 
+        e.preventDefault();
+        
+        var valorIdentidad = selector.val();
+        
+        
+        var datos = new FormData();
+        datos.append("identidadIngresada", valorIdentidad);
+    
+        $.ajax({
+        
+            url:"ajax/personas.ajax.php",
+            method: "POST",
+            data: datos,
+            cache: false,
+            contentType: false,
+            processData: false,  
+            dataType: "json",
+            success: function(respuesta) {
+    
+                if (respuesta){
+                    Swal.fire({
+                        title: "Documento ya existente, ingrese uno diferente.",
+                        icon: "error",
+                        background: "rgb(255 75 75 / 85%)",
+                        toast: true,
+                        position: "top",
+                        showConfirmButton: false,
+                        timer: 3000
+                    });
+                    selector.val("");
+                    console.log(valorIdentidad)
+                }
+            }  
+        });   
+    });
+}
+var num_documento = $('#validarId');
+validar(num_documento);

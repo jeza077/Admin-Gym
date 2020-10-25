@@ -4,6 +4,8 @@ class ControladorPersonas{
 
     static public function ctrCrearPersona($tipoPersona){
 
+
+
         if(isset($_POST["nuevoNombre"])){
 
             if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevoNombre"]) && 
@@ -164,5 +166,16 @@ class ControladorPersonas{
             
         }
 
+    }
+   /*=============================================
+				MOSTRAR DOCUMENTO 	
+	=============================================*/
+    static public function ctrMostrarDocumento($item, $valor) {
+        
+        $tabla = "tbl_personas";
+
+        $respuestaDocumento = ModeloPersonas::mdlMostrarDocumento($tabla, $item, $valor);
+
+        return $respuestaDocumento;
     }
 }

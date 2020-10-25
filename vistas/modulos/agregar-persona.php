@@ -47,15 +47,15 @@
               </div>
               <div class="form-group col-md-3">
                 <label for="identidad">Identidad</label>
-                <input type="text" class="form-control" name="nuevoNumeroDocumento" placeholder="Ingrese Identidad" required>
+                <input type="text" class="form-control id" id="identidad" name="nuevoNumeroDocumento" placeholder="Ingrese Identidad" onkeypress="return validarDoc(event)" required>
               </div>
               <div class="form-group col-md-3">
                 <label for="nombre">Nombre</label>
-                <input type="text" class="form-control" name="nuevoNombre" placeholder="Ingrese Nombre" required>
+                <input type="text" class="form-control nombre" id="nombre" name="nuevoNombre" placeholder="Ingrese Nombre" required>
               </div>
               <div class="form-group col-md-3">
                 <label for="apellido">Apellido</label>
-                <input type="text" class="form-control" name="nuevoApellido" placeholder="Ingrese Apellidos" required>
+                <input type="text" class="form-control nuevoApellido" id="apellido" name="nuevoApellido" placeholder="Ingrese Apellidos" required>
               </div>
             </div>
             
@@ -66,7 +66,7 @@
               </div>
               <div class="form-group col-md-4">
                 <label>Teléfono</label>
-                <input type="text" class="form-control" data-inputmask='"mask": "(999) 9999-9999"' data-mask  name="nuevoTelefono" placeholder="Ingrese Telefono" required>
+                <input type="text" class="form-control" id="inputTelefono" data-inputmask='"mask": "(999) 9999-9999"' data-mask  name="nuevoTelefono" placeholder="Ingrese Telefono" onkeypress="return codigoArea(event)" required>
               </div>
               <div class="form-group col-md-4">
                 <label>Fecha de nacimiento</label>
