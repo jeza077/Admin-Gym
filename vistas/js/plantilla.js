@@ -338,7 +338,7 @@ function sinCaracteres(event) {
     var key = event.which || event.keyCode;
 
     if(key == 106 || key == 107 || key == 109 || key == 110 || key == 111 || key == 186 ||key == 187 ||key == 188 || key == 189 || key == 190 || key == 191 || key == 219 || key == 220 || key == 221 || key == 222) {
-
+        event.preventDefault();
         // $(this).parent().parent().after('<div class="alert alert-danger mt-2">No se aceptan espacios.</div>');
         // var identificador = $(this);
         // setTimeout(function () {
@@ -448,7 +448,7 @@ function validarId(selector) {
                 });
             }
         }  else {
-            
+
         }
     });
 }
@@ -456,3 +456,40 @@ function validarId(selector) {
 var identidad = $('.id');
 validarId($(identidad));
 
+/*=============================================
+    FUNCION VALIDAR TELEFONO
+=============================================*/
+function telefono(event) {
+    var key = event.which || event.keyCode;
+    // $telefonoIngresado = $('#inputTelefono').val();
+    contador = 0;
+    
+
+    switch (contador) {
+        case contador == 1 :
+            if (key == 53){
+                console.log(key)
+            } else {
+                console.log("error 1")
+            }
+            break;
+        case contador == 2 :
+            if (key == 48) {
+                console.log(key)
+            } else {
+                console.log("error 2")
+            }
+            break;
+        case contador == 3 :
+            if (key == 52) {
+                console.log(key)
+            } else {
+                console.log("error 3")
+            }
+            break;
+        default:
+            break;
+    }
+    
+}
+$('#inputTelefono').keydown(telefono)
