@@ -67,7 +67,7 @@
                       <td><button class="btn btn-success btn-md">Activo</button></td>
                       <td>
                         <div class="btn-group">
-                          <button class="btn btn-warning" style="color:white;"><i class="fas fa-pen"></i></button>
+                          <button class="btn btn-warning" style="color:white;" data-toggle="modal" data-target="#modalEditarUsuario"><i class="fas fa-pen"></i></button>
                           <button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
                         </div>
                       </td>
@@ -296,7 +296,7 @@
       <div class="modal-content">
       
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Nuevo usuario</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Editar usuario</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -409,12 +409,10 @@
               </div>
 
               <div class="form-group col-md-3">
-                <label for="inputPassword4">Contraseña Generada</label>
+                <label for="inputPassword4">Cambiar Contraseña</label>
                 <input type="text" class="form-control passwordGenerado" id="inputPassword4" name="nuevoPassword" disabled>
               </div>
-              <div class="col-md-3">
-                <a href="javascript:void(0);"  class="btn btn-block btn-orange" id="generarPassword" style="margin-top:2em">Generar contraseña</a>
-              </div>
+            
             </div>
 
             <div class="form-row">
@@ -429,25 +427,6 @@
 
                 </div>
                     <p class="p-foto help-block ml-4">Peso máximo de la foto 2 MB</p>
-              </div>
-              <div class="form-group col-md-3">
-                <label>Estado</label>
-                <input type="text" class="form-control" value="Desactivado" style="color:red;" disabled>
-              </div>
-
-              <div class="form-group col-md-3">
-                <?php 
-                  $itemParam = 'parametro';
-                  $valorParam = 'ADMIN_DIAS_VIGENCIA';
-                  $parametros = ControladorUsuarios::ctrMostrarParametros($itemParam, $valorParam);
-              
-                  $vigenciaUsuario = $parametros['valor'];
-        
-                  date_default_timezone_set("America/Tegucigalpa");
-                  $fechaVencimiento = date("Y-m-d", strtotime('+'.$vigenciaUsuario.' days'));
-                ?>
-                <label>Fecha de vencimiento</label>
-                <input type="text" class="form-control" value="<?php echo $fechaVencimiento?>" disabled>
               </div>
             </div>
             
