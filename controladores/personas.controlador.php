@@ -2,7 +2,10 @@
 
 class ControladorPersonas{
 
-    static public function ctrCrearPersona($tipoPersona){
+    static public function ctrCrearPersona($tipoPersona, $pantalla){
+
+        // var_dump($_POST);
+        // return;
 
         if(isset($_POST["nuevoNombre"])){
 
@@ -25,7 +28,7 @@ class ControladorPersonas{
                     "email" => $_POST["nuevoEmail"]);
 
                     $respuestaPersona = ModeloPersonas::mdlCrearPersona($tabla, $datos);
-                    
+
                         if($respuestaPersona == true){
                             echo '<script>
                                     Swal.fire({
@@ -35,7 +38,7 @@ class ControladorPersonas{
                                         allowOutsideClick: false
                                     }).then((result)=>{
                                         if(result.value){
-                                            window.location = "login";
+                                            window.location = "'.$pantalla.'";
                                         }
                                     });                       
                                 </script>';
@@ -57,7 +60,7 @@ class ControladorPersonas{
                                 "apellido" => $_POST["nuevoApellido"],
                                 "id_documento" => $_POST["nuevoTipoDocumento"],
                                 "numero_documento" => $_POST["nuevoNumeroDocumento"],
-                                "tipo_persona" => $_POST["nuevoTipoPersona"],
+                                "tipo_persona" => $tipoPersona,
                                 "fecha_nacimiento" => $_POST["nuevaFechaNacimiento"],
                                 "sexo" => $_POST["nuevoSexo"],
                                 "telefono" => $_POST["nuevoTelefono"],
@@ -83,7 +86,7 @@ class ControladorPersonas{
 
                         $idPersona = end($totalId);
 
-                        if(isset($_POST["nuevoTipoPersona"]) && $_POST["nuevoTipoPersona"]  == "empleado"){
+                        if($tipoPersona == "usuarios"){
                             
                             $datos = array("id_persona" => $idPersona,
                                         "nombre" => $_POST["nuevoNombre"],
@@ -98,12 +101,12 @@ class ControladorPersonas{
                             if($crearUsuario == true){
                                 echo '<script>
                                         Swal.fire({
-                                            title: "Empleado guardado correctamente!",
+                                            title: "Usuario guardado correctamente!",
                                             icon: "success",
                                             heightAuto: false
                                         }).then((result)=>{
                                             if(result.value){
-                                                window.location = "agregar-persona";
+                                                window.location = "'.$pantalla.'";
                                             }
                                         });                                      
                                     </script>';
@@ -115,7 +118,7 @@ class ControladorPersonas{
                                             heightAuto: false
                                         }).then((result)=>{
                                             if(result.value){
-                                                window.location = "agregar-persona";
+                                                window.location = "'.$pantalla.'";
                                             }
                                         });                                      
                                     </script>';
@@ -136,7 +139,7 @@ class ControladorPersonas{
                                             allowOutsideClick: false
                                         }).then((result)=>{
                                             if(result.value){
-                                                window.location = "agregar-persona";
+                                                window.location = "'.$pantalla.'";
                                             }
                                         });                                              
                                     </script>';
