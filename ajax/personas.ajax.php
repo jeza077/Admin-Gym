@@ -6,25 +6,27 @@ require_once "../modelos/personas.modelo.php";
 class AjaxPersonas{
 
     /*=============================================
-    REVISAR IDENTIDAD
+            REVISAR DOCUMENTO
     =============================================*/
-    public $identidadIngresada;
-
-    public function ajaxValidarIdentidad(){
     
+    public $verificarDocumento;
+
+    public function ajaxVerificarDocumento(){
+
         $item = "num_documento";
-        $valor = $this->identidadIngresada;
+        $valor = $this->verificarDocumento;
         
-        $respuesta = ControladorPersonas::ctrMostrarDocumento($item, $valor);
+        $respuesta = ControladorPersonas::ctrMostrarPersonas($item, $valor);
 
         echo json_encode($respuesta);
     }
-    /*=============================================
-    REVISAR IDENTIDAD
-    =============================================*/
-    if(isset($_POST["identidadIngresada"])){
-        $valDocumento = new AjaxPersonas();
-        $valDocumento->identidadIngresada = $_POST["identidadIngresada"];
-        $valDocumento->ajaxValidarIdentidad();
-    }
+}
+
+/*=============================================
+    REVISAR DOCUMENTO
+=============================================*/
+if(isset($_POST["verificarDocumento"])){
+    $valDocumento = new AjaxPersonas();
+    $valDocumento->verificarDocumento = $_POST["verificarDocumento"];
+    $valDocumento->ajaxVerificarDocumento();
 }

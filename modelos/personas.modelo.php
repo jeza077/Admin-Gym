@@ -50,18 +50,16 @@ class ModeloPersonas{
         $stmt -> close();
 		$stmt = null;	
 	}
-	
 	/*=============================================
-				MOSTRAR DOCUMENTO	
+				MOSTRAR 	
 	=============================================*/
-    static public function mdlMostrarDocumento($tabla, $item, $valor){
+    static public function mdlMostrarPersona($tabla, $item, $valor){
 
-		$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item");
-		$stmt->bindParam(":".$item, $valor, PDO::PARAM_STR);
+		$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = num_documento");
         $stmt -> execute();
-        return $stmt -> fetch();
+        return $stmt -> fetchAll();
 
         $stmt -> close();
 		$stmt = null;	
-    }
+	}
 }

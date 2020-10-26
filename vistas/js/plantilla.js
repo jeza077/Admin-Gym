@@ -307,116 +307,138 @@ function mostrarContraseña(selector, mostrar, action) {
         mostrar.removeClass('far fa-eye-slash').addClass('far fa-eye').attr('action', 'hide')
     }
 }
-
 /*=============================================
-    VALIDAR NOMBRE
+    Sin numeros
 =============================================*/
-function validarNombre(selector) { 
-    selector.keydown(function (e) { 
+// function sinNumeros(event) {
+//     var codigo = event.which || event.keyCode;
 
-        var valorIngresado = selector.val();
-    
-        var patron = /^[a-zA-ZñÑáéíóúüÁÉÍÓÚÜ\s]*$/;
-        
-        if(valorIngresado.search(patron)){
-            e.preventDefault();
-           
-            Swal.fire({
-                title: "Solo se utilizan letras y debe llevar al menos una mayuscula.",
-                icon: "error",
-                background: "#FFADAD",
-                toast: true,
-                position: "top",
-                showConfirmButton: false,
-                timer: 3000
-            });
-            selector.val("");
-            selector.focus();
-
-        }  else {
-            console.log("bien")
-        } 
-    });
- }
-var nombre = $('.nombre');
-validarNombre(nombre);
-
-
-/*=============================================
-    Funcion validar documento
-=============================================*/
-
-// function validar(selector) { 
-//     selector.blur(function (e) { 
-//         e.preventDefault();
-        
-//         var valorIdentidad = selector.val();
-        
-        
-//         var datos = new FormData();
-//         datos.append("identidadIngresada", valorIdentidad);
-    
-//         $.ajax({
-        
-//             url:"ajax/personas.ajax.php",
-//             method: "POST",
-//             data: datos,
-//             cache: false,
-//             contentType: false,
-//             processData: false,  
-//             dataType: "json",
-//             success: function(respuesta) {
-    
-//                 if (respuesta){
-//                     Swal.fire({
-//                         title: "Documento ya existente, ingrese uno diferente.",
-//                         icon: "error",
-//                         background: "rgb(255 75 75 / 85%)",
-//                         toast: true,
-//                         position: "top",
-//                         showConfirmButton: false,
-//                         timer: 3000
-//                     });
-//                     selector.val("");
-//                     console.log(valorIdentidad)
-//                 }
-//             }  
-//         });   
-//     });
+//     if(codigo === 48,49,50,51,52,53,54,55,56,57){
+//         event.preventDefault();
+//         // $(this).parent().parent().after('<div class="alert alert-danger mt-2">No se aceptan numeros.</div>');
+//         // var identificador = $(this);
+//         // setTimeout(function () {
+//         //     $('.alert').remove();
+//         //     identificador.val('');
+//         //     identificador.attr('disabled', false);
+//         //     identificador.focus();
+//         // }, 2000)
+//         // $(this).attr('disabled', true);
+//     } else {
+//         // $('.alert').remove();
+//         console.log(codigo)
+//     }
+     
 // }
-// var num_documento = $('#validarId');
-// validar(num_documento);
 
+// $('.nombre').keydown(sinNumeros)
 /*=============================================
-    Funcion validar documento solo numeros
+    Sin caracteres
 =============================================*/
+// function sinCaracteres(event) {
+//     var codigo = event.which || event.keyCode;
 
-function validarDocumento(selector) { 
-    selector.keydown(function (e) { 
+//     if(codigo === 92,64,164,35,33,95,42,126,45){
+//         event.preventDefault();
+//         // $(this).parent().parent().after('<div class="alert alert-danger mt-2">No se aceptan espacios.</div>');
+//         // var identificador = $(this);
+//         // setTimeout(function () {
+//         //     $('.alert').remove();
+//         //     identificador.val('');
+//         //     identificador.attr('disabled', false);
+//         //     identificador.focus();
+//         // }, 2000)
+//         // $(this).attr('disabled', true);
+//     } else {
+//         $('.alert').remove();
+//     }
+     
+// }
 
-        var identidadIngresada = selector.val();
-    
-        var patron = /^[0-9]*$/;
-        
-        if(identidadIngresada.search(patron)){
-            e.preventDefault();
-           
-            Swal.fire({
-                title: "Solo se utilizan letras y debe llevar al menos una mayuscula.",
-                icon: "error",
-                background: "#FFADAD",
-                toast: true,
-                position: "top",
-                showConfirmButton: false,
-                timer: 3000
-            });
-            selector.val("");
-            selector.focus();
+// $('.nombre').keydown(sinCaracteres)
+/*=============================================
+    FUNCION VALIDAR DOCUMENTO
+=============================================*/
+function validarDocumento(selector) {
+	selector.blur(function() {
+        var documentoIngresado = selector.val();
+        // console.log(selector)
 
-        }  else {
-            console.log("bien")
-        } 
-    });
- }
-var identidad = $('#numDocumento');
-validarDocumento(identidad);
+		var datos = new FormData();
+		datos.append("verificarDocumento", documentoIngresado);
+	
+		$.ajax({
+	
+			url:"ajax/personas.ajax.php",
+			method: "POST",
+			data: datos,
+			cache: false,
+			contentType: false,
+			processData: false,  
+			dataType: "json",
+			success: function(respuesta) {
+                // console.log(respuesta);
+
+                // if (select2 === 3) {
+                //     if (/^[a-zA-Z0-9]$/.test(documentoIngresado) && respuesta) {
+                //         Swal.fire({
+                //             title: "Email ya existente, ingrese uno diferente.",
+                //             icon: "error",
+                //             background: "rgb(255 75 75 / 85%)",
+                //             toast: true,
+                //             position: "top",
+                //             showConfirmButton: false,
+                //             timer: 3000
+                //         });
+                //     } else {
+
+                //     }
+
+                // } else if () {
+
+                if (/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.([a-zA-Z]{2,4})+$/.test(documentoIngresado) && respuesta){
+					// selector.after('<div class="alert alert-warning mt-2">Email ya existente, ingrese uno diferente.</div>');
+					// setTimeout(function () {
+					// 	$('.alert').remove();
+					// }, 3000)
+					Swal.fire({
+						title: "Email ya existente, ingrese uno diferente.",
+						icon: "error",
+						background: "rgb(255 75 75 / 85%)",
+						toast: true,
+						position: "top",
+						showConfirmButton: false,
+						timer: 3000
+					});
+					
+					//E inmeditamente Limpiamos el input
+					selector.val("");
+					// selector.focus();
+				} else if(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.([a-zA-Z]{2,4})+$/.test(documentoIngresado) && respuesta == false) {
+					selector.addClass('border-valid').removeClass('border-invalid');
+					// setTimeout(function () {
+					// 	selector.removeClass('border-valid');
+					// }, 3000)
+				} else if(documentoIngresado == ""){
+					selector.removeClass('border-valid border-invalid');
+				} else {
+					selector.addClass('border-invalid').removeClass('border-valid');
+					selector.after('<div class="alert alert-warning mt-2">Correo invalidido, intente de nuevo.</div>');
+					setTimeout(function () {
+						$('.alert').remove();
+					}, 3000)
+					
+					//E inmeditamente Limpiamos el input
+					selector.val("");
+					// selector.focus();
+					
+				}
+			}
+	
+		});
+
+	})
+}
+
+
+validarDocumento($('.id'));

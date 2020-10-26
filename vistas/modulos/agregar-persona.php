@@ -201,6 +201,7 @@
                   <img class="img-thumbnail previsualizar ml-2" src="vistas/img/usuarios/default/anonymous.png" alt="imagen-del-usuario" width="100px">
               </div>
                   <p class="p-foto help-block">Peso máximo de la foto 2 MB</p>
+                  <img src="vistas/img/usuarios/default/anonymous.png" class= "img-thumbnail" width="100px">
             </div>
           
             <div class="form-group">
