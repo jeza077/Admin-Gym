@@ -176,22 +176,28 @@
             <input type="text" class="form-control" name="nuevoApellido" placeholder="Ingrese Apellidos" required>
           </div>
         </div>
-            
+
+  
         <div class="form-row">
-          <div class="form-group col-md-4">
+
+        <div class="form-group col-md-3">
+            <label for="nuevoUsuario">NombreUsuario</label>
+            <input type="text" class="form-control personas" onKeyUp="this.value=this.value.toUpperCase();" placeholder="Ingrese Usuario" required>
+          </div>
+
+          <div class="form-group col-md-3">
             <label for="inputEmail4">Email</label>
             <input type="email" class="form-control email" id="inputEmail4" name="nuevoEmail" placeholder="Ingrese Email" required>
           </div>
-          <div class="form-group col-md-4">
+          <div class="form-group col-md-3">
             <label>Teléfono</label>
             <input type="text" class="form-control" data-inputmask='"mask": "(999) 9999-9999"' data-mask  name="nuevoTelefono" placeholder="Ingrese Telefono" required>
           </div>
-          <div class="form-group col-md-4">
+          <div class="form-group col-md-3">
             <label>Fecha de nacimiento</label>
               <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy/mm/dd" data-mask  name="nuevaFechaNacimiento" placeholder="Ingrese Fecha de Nacimiento" required>
           </div>
         </div>
-
         <!-- <div class="form-group">
           <label for="inputAddress">Dirección</label>
           <input type="text" class="form-control" id="inputAddress" name="nuevaDireccion" placeholder="Col. Alameda, calle #2..." required>

@@ -102,12 +102,12 @@ $('#generarPassword').on('click', function () {
 //** FUNCION PARA GENERAR CONTRASEÑAS ALEATORIAMENTE */
 function generar_contrasenya(longitud){
 
-    var tamanyo_password				=	longitud;	 // definimos el tamaño que tendrá nuestro password
-    var caracteres_conseguidos			=	0;			 // contador de los caracteres que hemos conseguido
+    var $tamanyo_password				=	longitud;	 // definimos el tamaño que tendrá nuestro password
+    var $caracteres_conseguidos			=	0;			 // contador de los caracteres que hemos conseguido
     var caracter_temporal				=	'';
     var array_caracteres				=	new Array(); // array para guardar los caracteres de forma temporal
         
-    for(var i = 0; i < tamanyo_password; i++){		     // inicializamos el array con el valor null
+    for(var i = 0; i < $tamanyo_password; i++){		     // inicializamos el array con el valor null
         array_caracteres[i]	=	null;
     }
 
@@ -173,7 +173,7 @@ function generar_contrasenya(longitud){
         var posicion_en_array			=	0;
         
         while(guardado_en_posicion_vacia	!=	true){
-            posicion_en_array	=	genera_aleatorio(0, tamanyo_password-1);	// generamos un aleatorio en el rango del tamaño del password
+            posicion_en_array	=	genera_aleatorio(0, $tamanyo_password-1);	// generamos un aleatorio en el rango del tamaño del password
         
             // el array ha sido inicializado con null en sus posiciones. Si es una posición vacía, guardamos el caracter
             if(array_caracteres[posicion_en_array] == null){
@@ -188,36 +188,36 @@ function generar_contrasenya(longitud){
         caracter_temporal	=	genera_caracter('minúscula');
         guarda_caracter_en_posicion_aleatoria(caracter_temporal);
         letras_minusculas_conseguidas++;
-        caracteres_conseguidos++;
+        $caracteres_conseguidos++;
     }
 
     while (letras_mayusculas_conseguidas < numero_minimo_letras_mayusculas){
         caracter_temporal	=	genera_caracter('mayúscula');
         guarda_caracter_en_posicion_aleatoria(caracter_temporal);
         letras_mayusculas_conseguidas++;
-        caracteres_conseguidos++;
+        $caracteres_conseguidos++;
     }
 
     while (numeros_conseguidos < numero_minimo_numeros){
         caracter_temporal	=	genera_caracter('número');
         guarda_caracter_en_posicion_aleatoria(caracter_temporal);
         numeros_conseguidos++;
-        caracteres_conseguidos++;
+        $caracteres_conseguidos++;
     }
 
     while (simbolos_conseguidos < numero_minimo_simbolos){
         caracter_temporal	=	genera_caracter('símbolo');
         guarda_caracter_en_posicion_aleatoria(caracter_temporal);
         simbolos_conseguidos++;
-        caracteres_conseguidos++;
+        $caracteres_conseguidos++;
     }
 
     // si no hemos generado todos los caracteres que necesitamos, de forma aleatoria añadimos los que nos falten
     // hasta llegar al tamaño de password que nos interesa
-    while (caracteres_conseguidos < tamanyo_password){
+    while ($caracteres_conseguidos < $tamanyo_password){
         caracter_temporal	=	genera_caracter('aleatorio');
         guarda_caracter_en_posicion_aleatoria(caracter_temporal);
-        caracteres_conseguidos++;
+        $caracteres_conseguidos++;
     }
 
     // ahora pasamos el contenido del array a la variable password_definitivo

@@ -2,7 +2,8 @@
 
 class ControladorPersonas{
 
-    static public function ctrCrearPersona($tipoPersona){
+    static public function ctrCrearPersona($tipoPersona)
+    {
 
         if(isset($_POST["nuevoNombre"])){
 
@@ -10,6 +11,9 @@ class ControladorPersonas{
             preg_match('/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.([a-zA-Z]{2,4})+$/', $_POST["nuevoEmail"])){
 
                 $tabla = "tbl_personas";
+
+
+
 
                 if($tipoPersona == 'default'){
                     
@@ -65,21 +69,81 @@ class ControladorPersonas{
                                 "email" => $_POST["nuevoEmail"]);
 
                     $respuestaPersona = ModeloPersonas::mdlCrearPersona($tabla, $datos);
-
-                    if($respuestaPersona == true){
-
+                    
+                    if($respuestaPersona == true)
+                    {
                         $totalId = array();
-
                         $tabla = "tbl_personas";
                         // $tabla2 = null;
                         // $item = null;
                         // $valor = null;
 
-                        $personasTotal = ModeloPersonas::mdlMostrarPersonas($tabla);
-
-                        foreach($personasTotal as $keyPersonas => $valuePersonas){
-                            array_push($totalId, $valuePersonas["id_personas"]);
+                        $personaTotal = ModeloPersonas::mdlMostrarPersonas($tabla);
+                        
+                        foreach($personaTotal as $keyPersona => $valuePersona){
+                        array_push($totalId, $valuePersonas["id_personas"]);
                         }
+                        /*------------------------------------------ Crear usuario -----------------------------------------------*/
+
+                            //$totalId = array();
+    
+                            //$tabla = "tbl_Usuarios";
+                            // $tabla2 = null;
+                            // $item = null;
+                            // $valor = null;
+    
+                            //$personaTotal = Modeloperonsa::mdlMostrarpersona($tabla);
+    
+                           // foreach($personaTotal as $keypersona => $valuePersona){
+                           //     array_push($totalId, $valuePersona["id_persona"]);
+                          //  }
+                  
+                        $idPersona = end($totalId);
+                        if(isset($_POST["nuevoUsuario"]) && $_POST["nuevoUsuario"]  == "usuario")
+                        {   
+                        //-----------Generar contraseña aleatoria----------------------
+                        {$str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890#$.@";
+                        $contraseñaAleatoria = "";
+                       //Longitud
+                        for($i=0;$i<$_POST[10];$i++) 
+                        {
+                       //obtenemos un caracter aleatorio escogido de la cadena de caracteres
+                        $contraseñaAleatoria .= substr($str,rand(0,62),1);
+                        }
+                        echo 'Password generado: '.$contraseñaAleatoria;
+                        //-------------------------------------------------------------
+                        }
+
+                        //------------------------Roles--------------------------------------
+                        $tabla = "tbl_roles";
+                        $item = null;
+                        $valor = null;
+
+                        $roles  = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
+                        var_dump($roles);
+
+                        //-------------------------------------------------------------------
+
+                        $idPersona = end($totalId);
+                        }
+                        if(isset($_POST["nuevoUsuario"]) && $_POST["nuevoUsuario"]  == "usuario")
+                        {
+                            
+                            $datos = array("id_persona" => $idPersona,
+                                        "usuario" => $_POST["nuevoUsuario"],
+                                        "password" => $contraseñaAleatoria,
+                                        "rol" => $_POST["nuevoRol"],
+                                        "foto" => "vistas/img/usuarios/default/anonimus.png");
+
+                            $crearUsuario = ControladorUsuarios::ctrCrearUsuario($datos);
+
+                        }
+                        
+            
+                    }
+
+
+                        /* ------------------------------------------------------------------------------------------------------- */
 
                         $idPersona = end($totalId);
 
@@ -148,7 +212,7 @@ class ControladorPersonas{
 
                 }
 
-            } else {
+    } else {
                 
                 echo '<script>
                     Swal.fire({
@@ -165,4 +229,3 @@ class ControladorPersonas{
         }
 
     }
-}
