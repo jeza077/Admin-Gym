@@ -102,7 +102,7 @@ $(".verificarCorreoPreguntas").on('click', function(event){
                         } else {
                             console.log(valorPregunta, respuestaPregunta);
 
-                            //Compararemos la pregunta y la respuesta con las del usuario, para saber si son correctas.
+                            //Compararemos la pregunta y la respuesta con las del usuario, para saber si son correctas----.
                             var datos = new FormData();
                             datos.append("usuario", usuario);
                             datos.append("idPregunta", valorPregunta);
@@ -584,6 +584,51 @@ $('.show-confir-pass').on('click', function () {
     var confirmarPass = $('.confirmar-password');
     mostrarContraseña(confirmarPass, mostrarPass, action);
 });
+
+/*==============================================
+=     VALIDACION SOLO LETRAS            =
+==============================================*/
+function sololetras(e){
+    
+    key=e.keyCode || e.wich;
+
+    teclado= String.fromCharCode(key).toUpperCase();
+
+    letras= " ABCDEFGHIJKLMNOPQRSTUVWXYZÑ";
+    
+    especiales ="8-37-38-46-164";
+
+    teclado_especial=false;
+
+    for (var i in especiales) {
+      
+      if(key==especiales[i]){
+        teclado_especial= true;break;
+      }
+    }
+    if (letras.indexOf(teclado)==-1 && !teclado_especial) {
+      return false;
+    }
+}
+
+function validate(s){
+    if (/^(\w+\s?)*\s*$/.test(s)){
+      return s.replace(/\s+$/,  '');
+    }
+    return 'NOT ALLOWED';
+    }
+    
+    validate('test ing')      //'test ing'
+    validate('testing')       //'testing'
+    validate(' testing')      //'NOT ALLOWED'
+    validate('testing ')      //'testing'
+    validate('testing  ')     //'testing'
+    validate('testing   ')    //'test ing'
+    
+    
+
+
+
 
 
 

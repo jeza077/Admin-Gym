@@ -16,7 +16,7 @@
               <span class="fas fa-user"></span>
             </div>
           </div>
-          <input type="text" class="form-control usuario" name="ingUsuario" onKeyUp="this.value=this.value.toUpperCase();" placeholder="Usuario" required>
+          <input type="text" class="form-control usuario" name="ingUsuario" onKeyUp="this.value=this.value.toUpperCase();" placeholder="Usuario" onkeypress="return sololetras(event)" onkeyup="validate('testing')" required>
         </div>
         <div class="input-group mb-3">
           <div class="input-group-append">
@@ -33,6 +33,7 @@
           </div>
         </div>
       </form>
+
 
       <p class="mb-1">
         <a href="javascript:void(0);" onclick="toggleForm();">¿Olvidaste tu contraseña</a>

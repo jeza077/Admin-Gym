@@ -14,7 +14,7 @@ class ModeloUsuarios{
 	
 			if($item != null){
 	
-				$stmt = Conexion::conectar()->prepare("SELECT p.*, u.usuario, u.password, u.foto, u.token, u.fecha_recuperacion, u.estado, u.primera_vez, u.fecha_vencimiento, u.id_usuario, r.rol FROM $tabla1 AS p\n"
+				$stmt = Conexion::conectar()->prepare("SELECT p.*, u.usuario, u.password, u.foto, u.token, u.fecha_recuperacion, u.estado, u.primera_vez, u.fecha_vencimiento, u.intentos, u.id_usuario, r.rol FROM $tabla1 AS p\n"
 				. " INNER JOIN $tabla2 AS u ON p.id_personas = u.id_persona\n"
 				. " INNER JOIN tbl_roles AS r ON u.id_rol = r.id_rol\n"
 				. " WHERE $item = :$item");
@@ -361,6 +361,35 @@ class ModeloUsuarios{
 
 		$stmt -> close();
 		$stmt = null;	
+
+
+
+	}
+
+	/*=============================================
+	ACTUALIZAR USUARIO poleth
+	=============================================*/
+
+	static public function mdlActualizarUsuarioSimple($tabla, $item1, $valor1, $item2, $valor2){
+
+		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET $item1 = :$item1 WHERE $item2 = :$item2");
+
+		$stmt -> bindParam(":".$item1, $valor1, PDO::PARAM_STR);
+		$stmt -> bindParam(":".$item2, $valor2, PDO::PARAM_STR);
+
+		if($stmt -> execute()){
+
+			return "ok";
+		
+		}else{
+
+			return "error";	
+
+		}
+
+		$stmt -> close();
+
+		$stmt = null;
 
 	}
 
