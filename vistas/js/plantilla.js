@@ -310,52 +310,52 @@ function mostrarContraseña(selector, mostrar, action) {
 /*=============================================
     Sin numeros
 =============================================*/
-// function sinNumeros(event) {
-//     var codigo = event.which || event.keyCode;
+function sinNumeros(event) {
+    var codigo = event.which || event.keyCode;
 
-//     if(codigo === 48,49,50,51,52,53,54,55,56,57){
-//         event.preventDefault();
-//         // $(this).parent().parent().after('<div class="alert alert-danger mt-2">No se aceptan numeros.</div>');
-//         // var identificador = $(this);
-//         // setTimeout(function () {
-//         //     $('.alert').remove();
-//         //     identificador.val('');
-//         //     identificador.attr('disabled', false);
-//         //     identificador.focus();
-//         // }, 2000)
-//         // $(this).attr('disabled', true);
-//     } else {
-//         // $('.alert').remove();
-//         console.log(codigo)
-//     }
+    if(codigo == 48 || codigo == 49 || codigo == 50 || codigo == 51 || codigo == 52 || codigo == 53 || codigo == 54 || codigo == 55 || codigo == 56 || codigo == 57 ){
+        event.preventDefault();
+        // $(this).parent().parent().after('<div class="alert alert-danger mt-2">No se aceptan numeros.</div>');
+        // var identificador = $(this);
+        // setTimeout(function () {
+        //     $('.alert').remove();
+        //     identificador.val('');
+        //     identificador.attr('disabled', false);
+        //     identificador.focus();
+        // }, 2000)
+        // $(this).attr('disabled', true);
+    } else {
+        $('.alert').remove();
+    }
      
-// }
+}
 
-// $('.nombre').keydown(sinNumeros)
+$('.nombre').keydown(sinNumeros)
 /*=============================================
     Sin caracteres
 =============================================*/
-// function sinCaracteres(event) {
-//     var codigo = event.which || event.keyCode;
+function sinCaracteres(event) {
+    var codigo = event.which || event.keyCode;47
+    console.log(codigo)
 
-//     if(codigo === 92,64,164,35,33,95,42,126,45){
-//         event.preventDefault();
-//         // $(this).parent().parent().after('<div class="alert alert-danger mt-2">No se aceptan espacios.</div>');
-//         // var identificador = $(this);
-//         // setTimeout(function () {
-//         //     $('.alert').remove();
-//         //     identificador.val('');
-//         //     identificador.attr('disabled', false);
-//         //     identificador.focus();
-//         // }, 2000)
-//         // $(this).attr('disabled', true);
-//     } else {
-//         $('.alert').remove();
-//     }
+    if(codigo.keyCode == 33 || codigo.keyCode == 34 || codigo.keyCode == 35 || codigo.keyCode == 36 || codigo.keyCode == 37 || codigo.keyCode == 38 ||codigo.keyCode == 39 ||codigo.keyCode == 40 || codigo.keyCode == 41 || codigo.keyCode == 42 || codigo.keyCode == 43 || codigo.keyCode == 44 || codigo.keyCode == 45 || codigo.keyCode == 46 || codigo.keyCode == 47 || codigo.keyCode == 58 || codigo.keyCode == 59 || codigo.keyCode == 60 || codigo.keyCode == 61 || codigo.keyCode == 62 || codigo.keyCode == 63 || codigo.keyCode == 64 || codigo.keyCode == 91 || codigo.keyCode == 92 || codigo.keyCode == 93 || codigo.keyCode == 94 || codigo == 95 || codigo.keyCode == 96 || codigo.keyCode == 123 || codigo.keyCode == 124 || codigo.keyCode == 125 || codigo.keyCode == 126 || codigo.keyCode == 166 || codigo.keyCode == 167 || codigo.keyCode == 168 || codigo.keyCode == 238 || codigo.keyCode == 239 || codigo.keyCode == 246 || codigo.keyCode == 249 || codigo.keyCode == 250){
+        event.preventDefault();
+        // $(this).parent().parent().after('<div class="alert alert-danger mt-2">No se aceptan espacios.</div>');
+        // var identificador = $(this);
+        // setTimeout(function () {
+        //     $('.alert').remove();
+        //     identificador.val('');
+        //     identificador.attr('disabled', false);
+        //     identificador.focus();
+        // }, 2000)
+        // $(this).attr('disabled', true);
+    } else {
+        $('.alert').remove();
+    }
      
-// }
+}
 
-// $('.nombre').keydown(sinCaracteres)
+$('.nombre').keydown(sinCaracteres)
 /*=============================================
     FUNCION VALIDAR DOCUMENTO
 =============================================*/
@@ -378,31 +378,9 @@ function validarDocumento(selector) {
 			dataType: "json",
 			success: function(respuesta) {
                 // console.log(respuesta);
-
-                // if (select2 === 3) {
-                //     if (/^[a-zA-Z0-9]$/.test(documentoIngresado) && respuesta) {
-                //         Swal.fire({
-                //             title: "Email ya existente, ingrese uno diferente.",
-                //             icon: "error",
-                //             background: "rgb(255 75 75 / 85%)",
-                //             toast: true,
-                //             position: "top",
-                //             showConfirmButton: false,
-                //             timer: 3000
-                //         });
-                //     } else {
-
-                //     }
-
-                // } else if () {
-
-                if (/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.([a-zA-Z]{2,4})+$/.test(documentoIngresado) && respuesta){
-					// selector.after('<div class="alert alert-warning mt-2">Email ya existente, ingrese uno diferente.</div>');
-					// setTimeout(function () {
-					// 	$('.alert').remove();
-					// }, 3000)
-					Swal.fire({
-						title: "Email ya existente, ingrese uno diferente.",
+                if (respuesta) {
+                    Swal.fire({
+						title: "El documento ya existente, ingrese uno diferente.",
 						icon: "error",
 						background: "rgb(255 75 75 / 85%)",
 						toast: true,
@@ -410,35 +388,17 @@ function validarDocumento(selector) {
 						showConfirmButton: false,
 						timer: 3000
 					});
-					
-					//E inmeditamente Limpiamos el input
-					selector.val("");
-					// selector.focus();
-				} else if(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.([a-zA-Z]{2,4})+$/.test(documentoIngresado) && respuesta == false) {
-					selector.addClass('border-valid').removeClass('border-invalid');
-					// setTimeout(function () {
-					// 	selector.removeClass('border-valid');
-					// }, 3000)
-				} else if(documentoIngresado == ""){
-					selector.removeClass('border-valid border-invalid');
-				} else {
-					selector.addClass('border-invalid').removeClass('border-valid');
-					selector.after('<div class="alert alert-warning mt-2">Correo invalidido, intente de nuevo.</div>');
-					setTimeout(function () {
-						$('.alert').remove();
-					}, 3000)
-					
-					//E inmeditamente Limpiamos el input
-					selector.val("");
-					// selector.focus();
-					
-				}
+                    
+                }
 			}
 	
 		});
 
 	})
 }
-
-
 validarDocumento($('.id'));
+
+/*=============================================
+    FUNCION VALIDAR DOCUMENTO
+=============================================*/
+
