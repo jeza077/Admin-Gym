@@ -1,7 +1,19 @@
 //***VALIDACIONES */
 longitudString($('.nuevoUsuario'),50); //Longitud Input Usuario
 validarEmail($('.email')); //Validar que no exista en DB, email de la persona ingresada
-
+$('.id').keydown(impedirEspacios); //Impedir espacios, input identidad
+//***VALIDACIONES EN EL IMPUT APELLIDO */
+$('.nuevoApellido').keydown(sinCaracteres)
+$('.nuevoApellido').keydown(sinNumeros)
+$('.nuevoApellido').keydown(permitirUnEspacio);
+longitudString($('.nuevoApellido'),30); 
+//***VALIDACIONES EN EL IMPUT USUARIO */
+$('.nuevoUsuario').keydown(impedirEspacios)
+$('.nuevoUsuario').keydown(sinNumeros)
+$('.nuevoUsuario').keydown(sinCaracteres)
+//***VALIDACIONES EN EL IMPUT NOMBRE*/
+$('.nombre').keydown(permitirUnEspacio);
+longitudString($('.nombre'),30);
 
 //** MOSTRAR TIPO DE PERSONA */
 function toggleUser(){

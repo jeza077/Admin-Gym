@@ -1,6 +1,18 @@
 <?php 
 
 class ControladorPersonas{
+    /*=============================================
+				MOSTRAR USUARIOS
+	=============================================*/
+
+	static public function ctrMostrarPersonas($item, $valor) {
+
+		$tabla = "tbl_personas";
+		$respuesta = ModeloPersonas::mdlMostrarPersona($tabla, $item, $valor);
+
+		return $respuesta;
+
+	}
 
     static public function ctrCrearPersona($tipoPersona, $pantalla){
 

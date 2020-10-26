@@ -29,7 +29,7 @@
           <div class="card-body contenedor agregarPersona">
             <div class="form-row">
               <div class="form-group col-md-3">
-                <label for="">Tipo de documento <?php echo $i?></label>
+                <label for="tipoDocumento">Tipo de documento <?php echo $i?></label>
                 <select class="form-control select2" name="nuevoTipoDocumento">
                     <option selected="selected">Seleccionar...</option>
                     <?php 
@@ -47,16 +47,16 @@
                 </select>
               </div>
               <div class="form-group col-md-3">
-                <label for="identidad">Identidad</label>
-                <input type="text" class="form-control" name="nuevoNumeroDocumento" placeholder="Ingrese Identidad" required>
+                <label for="identidad">Numero de documento</label>
+                <input type="text" class="form-control id" id="numDocumento" name="nuevoNumeroDocumento" placeholder="Ingrese Identidad" required>
               </div>
               <div class="form-group col-md-3">
                 <label for="nombre">Nombre</label>
-                <input type="text" class="form-control" name="nuevoNombre" placeholder="Ingrese Nombre" required>
+                <input type="text" class="form-control nombre" id="nombre" name="nuevoNombre" placeholder="Ingrese Nombre" required>
               </div>
               <div class="form-group col-md-3">
                 <label for="apellido">Apellido</label>
-                <input type="text" class="form-control" name="nuevoApellido" placeholder="Ingrese Apellidos" required>
+                <input type="text" class="form-control nuevoApellido" id="apellido" name="nuevoApellido" placeholder="Ingrese Apellidos" required>
               </div>
             </div>
             
@@ -67,7 +67,7 @@
               </div>
               <div class="form-group col-md-4">
                 <label>Teléfono</label>
-                <input type="text" class="form-control" data-inputmask='"mask": "(999) 9999-9999"' data-mask  name="nuevoTelefono" placeholder="Ingrese Telefono" required>
+                <input type="text" class="form-control" id="inputTelefono" data-inputmask='"mask": "(504) 9999-9999"' data-mask  name="nuevoTelefono" placeholder="Ingrese Telefono" required>
               </div>
               <div class="form-group col-md-4">
                 <label>Fecha de nacimiento</label>
@@ -150,6 +150,7 @@
                   <img class="img-thumbnail previsualizar ml-2" src="vistas/img/usuarios/default/anonymous.png" alt="imagen-del-usuario" width="100px">
               </div>
                   <p class="p-foto help-block">Peso máximo de la foto 2 MB</p>
+                  <!-- <img src="vistas/img/usuarios/default/anonymous.png" class= "img-thumbnail" width="100px"> -->
             </div>
           
             <div class="form-group">

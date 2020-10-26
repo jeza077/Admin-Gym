@@ -135,6 +135,12 @@
                   $alerta = ControladorGlobales::ctrAlertas($mensaje, $icono);
                   
                 }
+                    
+        // $item = "num_documento";
+        // $valor = "3242234234";
+        
+        // $respuesta = ControladorPersonas::ctrMostrarDocumento($item, $valor);
+        // var_dump($respuesta);
             
           ?>
 
