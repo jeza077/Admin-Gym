@@ -61,7 +61,7 @@
               $valor = null;
               $usuarios = ControladorUsuarios::ctrMostrarUsuarios($tabla, $item, $valor);
 
-              var_dump($usuarios);
+              // var_dump($usuarios);
 
               foreach ($usuarios as $key => $value) {
                 echo '
