@@ -390,6 +390,8 @@ class ControladorUsuarios{
 	=============================================*/
 	static public function ctrCrearUsuario($datos){
 
+		// var_dump($datos);
+		// return;
 		if(isset($datos["usuario"])){
 
 			if(preg_match('/^[A-Z0-9]+$/', $datos["usuario"]) &&

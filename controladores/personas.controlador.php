@@ -44,18 +44,18 @@ class ControladorPersonas{
                     $respuestaPersona = ModeloPersonas::mdlCrearPersona($tabla, $datos);
 
                         if($respuestaPersona == true){
-                            echo '<script>
-                                    Swal.fire({
-                                        title: "Tus datos han sido guardados correctamente!",
-                                        icon: "success",
-                                        heightAuto: false,
-                                        allowOutsideClick: false
-                                    }).then((result)=>{
-                                        if(result.value){
-                                            window.location = "'.$pantalla.'";
-                                        }
-                                    });                       
-                                </script>';
+                            // echo '<script>
+                            //         Swal.fire({
+                            //             title: "Tus datos han sido guardados correctamente!",
+                            //             icon: "success",
+                            //             heightAuto: false,
+                            //             allowOutsideClick: false
+                            //         }).then((result)=>{
+                            //             if(result.value){
+                            //                 window.location = "'.$pantalla.'";
+                            //             }
+                            //         });                       
+                            //     </script>';
                             
                         //     echo '<script>
                         //     Swal.fire({
@@ -151,6 +151,12 @@ class ControladorPersonas{
 
                 } 
                 else {                    
+
+                // var_dump($_POST);
+                // return;
+
+                // var_dump($_FILES);
+                // return;
 
                     $datos = array("nombre" => $_POST["nuevoNombre"],
                                 "apellido" => $_POST["nuevoApellido"],

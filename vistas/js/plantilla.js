@@ -400,7 +400,7 @@ function sinCaracteres(event) {
      
 }
 
-$('#nombre').keydown(sinCaracteres)
+$('.nombre').keydown(sinCaracteres)
 /*=============================================
     FUNCION VALIDAR DOCUMENTO
 =============================================*/
@@ -428,7 +428,6 @@ function validarDoc(selector) {
                     Swal.fire({
                         title: "Documento ya existente, ingrese uno diferente.",
                         icon: "error",
-                        background: "rgb(255 75 75 / 85%)",
                         toast: true,
                         position: "top",
                         showConfirmButton: false,
@@ -446,7 +445,7 @@ function validarDoc(selector) {
 }
 
 var identidad = $('.id');
-validarDoc($(identidad));
+validarDoc(identidad);
 /*=============================================
     FUNCION VALIDAR DOCUMENTO
 =============================================*/

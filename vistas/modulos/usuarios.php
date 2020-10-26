@@ -154,16 +154,16 @@
                   </div>
 
                   <div class="form-group col-md-3">
-                    <label for="identidad">Identidad</label>
-                    <input type="text" class="form-control" name="nuevoNumeroDocumento" placeholder="Ingrese Identidad" required>
+                    <label for="identidad">Numero de documento</label>
+                    <input type="text" class="form-control id" name="nuevoNumeroDocumento" placeholder="Ingrese Identidad" required>
                   </div>
                   <div class="form-group col-md-3">
                     <label for="nombre">Nombre</label>
-                    <input type="text" class="form-control" name="nuevoNombre" placeholder="Ingrese Nombre" required>
+                    <input type="text" class="form-control nombre" name="nuevoNombre" placeholder="Ingrese Nombre" required>
                   </div>
                   <div class="form-group col-md-3">
                     <label for="apellido">Apellido</label>
-                    <input type="text" class="form-control" name="nuevoApellido" placeholder="Ingrese Apellidos" required>
+                    <input type="text" class="form-control apellidos" name="nuevoApellido" placeholder="Ingrese Apellidos" required>
                   </div>
                 </div>
     
@@ -339,16 +339,16 @@
                   </div>
 
                   <div class="form-group col-md-3">
-                    <label for="identidad">Identidad</label>
-                    <input type="text" class="form-control" name="nuevoNumeroDocumento" placeholder="Ingrese Identidad" required>
+                    <label for="identidad">Numero de documento</label>
+                    <input type="text" class="form-control id" name="nuevoNumeroDocumento" placeholder="Ingrese Identidad" required>
                   </div>
                   <div class="form-group col-md-3">
                     <label for="nombre">Nombre</label>
-                    <input type="text" class="form-control" name="nuevoNombre" placeholder="Ingrese Nombre" required>
+                    <input type="text" class="form-control nombre" name="nuevoNombre" placeholder="Ingrese Nombre" required>
                   </div>
                   <div class="form-group col-md-3">
                     <label for="apellido">Apellido</label>
-                    <input type="text" class="form-control" name="nuevoApellido" placeholder="Ingrese Apellidos" required>
+                    <input type="text" class="form-control apellidos" name="nuevoApellido" placeholder="Ingrese Apellidos" required>
                   </div>
                 </div>
     
