@@ -8,6 +8,7 @@ $('.nuevoApellido').keydown(sinNumeros)
 $('.nuevoApellido').keydown(permitirUnEspacio);
 longitudString($('.nuevoApellido'),30); 
 //***VALIDACIONES EN EL IMPUT USUARIO */
+$('.nuevoUsuario').keydown(impedirEspacios)
 $('.nuevoUsuario').keydown(sinNumeros)
 $('.nuevoUsuario').keydown(sinCaracteres)
 //***VALIDACIONES EN EL IMPUT NOMBRE*/

@@ -314,7 +314,7 @@ function sinNumeros(event) {
     var codigo = event.which || event.keyCode;
 
     if(codigo == 48 || codigo == 49 || codigo == 50 || codigo == 51 || codigo == 52 || codigo == 53 || codigo == 54 || codigo == 55 || codigo == 56 || codigo == 57  || codigo ==97  || codigo == 98  || codigo == 99  || codigo == 100  || codigo == 101  || codigo == 102  || codigo == 103  || codigo == 104  || codigo == 105){
-        // event.preventDefault();
+        event.preventDefault();
         
         // $(this).parent().parent().after('<div class="alert alert-danger mt-2">No se aceptan numeros.</div>');
         // var identificador = $(this);
