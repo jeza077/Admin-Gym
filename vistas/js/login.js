@@ -177,7 +177,7 @@ $(".verificarCorreoPreguntas").on('click', function(event){
                                         $("#linkLogin").append("<p class='link mt-3 ml-2'>Regresar al <a href='javascript:void(0);' onclick='toggleForm(); toggleQuestions(); togglePassword();'>Login</a></p>")
 
                                             //*CAMBIAR CONTRASEÑA
-                                            requisitosPassword();
+                                            requisitosPassword("center-end");
 
                                             $('#cambiarContraseña').attr('disabled', true);
                                             $(".nueva-password").on('change', function(){
@@ -547,7 +547,7 @@ $(".verificarCorreo").on('click', function(event){
 
 
 //** VALIDACIONES PARA LUEGO CAMBIAR CONTRASEÑA CONTRASEÑA (CODIGO-CORREO) */
-requisitosPassword();
+requisitosPassword("center-end");
 $('#cambiarContraseñaPorCorreo').attr('disabled', true);
 $(".nueva-password").on('change', function(){
     cambiarPassPorCodigo = $(this).val();

@@ -203,7 +203,7 @@ var num = /\d/;
 var caracEspe = /[!@#$&*?.,]/;
 var long = /^.{8,16}$/;
 
-function requisitosPassword(){  
+function requisitosPassword(posicion){  
     
     $(".nueva-password").keyup(function() { 
         var editPassword = $(this).val();
@@ -261,7 +261,7 @@ function requisitosPassword(){
                 '</ul> ' + 
               '</div>',
             toast: true,
-            position: "center-end",
+            position: posicion,
             showConfirmButton: false,
         })
         // $(".login-box").addClass('contenedor-rp');

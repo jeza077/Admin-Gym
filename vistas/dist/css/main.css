@@ -117,14 +117,14 @@ body.primer-ingreso .card .contenedor1{
 body.primer-ingreso .card .contenedor2{
     padding: 60px 70px;
 }
-body.primer-ingreso .card .contenedor2 a{
+/* body.primer-ingreso .card .contenedor2 a{
     color: var(--orangeThird);
     font-size: 2rem;
     text-align: center;
     letter-spacing: 1px;
     font-weight: 900;
     padding-left: 115px;
-}
+} */
 body.primer-ingreso .card .contenedor2 a b{
     color: var(--orangeThird);
     font-size: 2rem;
@@ -142,7 +142,6 @@ body.primer-ingreso .passwords i.show-nueva-pass.primero{
     right: 375px;
     z-index: 1000;
 }
-
 body.primer-ingreso .passwords i.show-confir-pass.segundo{
     cursor: pointer;
     position: absolute;
@@ -157,6 +156,62 @@ body.primer-ingreso .card .contenedor2 a.salir{
     letter-spacing: 0.5px;
     font-weight: 400;
     padding: .375rem .75rem;
+}
+.contenedor-primer-ingreso{
+    position: absolute;
+    padding: 3rem 0 0 12rem;
+}
+.contenedor-primer-ingreso.pregunta1 {
+    left: 0;
+    transition: 0.5s;
+}
+.contenedor-primer-ingreso.pregunta2 {
+    left: 100%;
+    transition: 0.5s;
+}
+.contenedor-primer-ingreso.pregunta3 {
+    left: 100%;
+    transition: 0.5s;
+}
+.contenedor-primer-ingreso.password-primer-ingreso{
+    left: 100%;
+    transition: 0.5s;
+    width: 520px;
+}
+.contenedor-primer-ingreso.password-primer-ingreso .passwords i.show-nueva-pass.primero{
+    cursor: pointer;
+    position: absolute;
+    top: 117px;
+    right: 17px;
+    z-index: 1000;
+}
+.contenedor-primer-ingreso.password-primer-ingreso .passwords i.show-confir-pass.segundo{
+    cursor: pointer;
+    position: absolute;
+    top: 195px;
+    right: 17px;
+    z-index: 1000;
+}
+/* Contendor Slide para Contenedor Segunda Pregunta  */
+body.primer-ingreso.pregunta-dos .contenedor-primer-ingreso.pregunta1 {
+    left: 100%;
+}
+body.primer-ingreso.pregunta-dos .contenedor-primer-ingreso.pregunta2 {
+    left: 0;
+}
+/* Contendor Slide para Contenedor Tercera Pregunta  */
+body.primer-ingreso.pregunta-dos.pregunta-tres .contenedor-primer-ingreso.pregunta2 {
+    left: 100%;
+}
+body.primer-ingreso.pregunta-dos.pregunta-tres .contenedor-primer-ingreso.pregunta3 {
+    left: 0;
+}
+/* Contendor Slide para Contendor Password  */
+body.primer-ingreso.pregunta-dos.pregunta-tres.password-primera-vez .contenedor-primer-ingreso.pregunta3 {
+    left: 100%;
+}
+body.primer-ingreso.pregunta-dos.pregunta-tres.password-primera-vez .contenedor-primer-ingreso.password-primer-ingreso {
+    left: 0;
 }
 
 
