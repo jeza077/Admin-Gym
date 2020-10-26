@@ -28,7 +28,7 @@
           <div class="card-body contenedor agregarPersona">
             <div class="form-row">
               <div class="form-group col-md-3">
-                <label for="">Tipo de documento <?php echo $i?></label>
+                <label for="tipoDocumento">Tipo de documento <?php echo $i?></label>
                 <select class="form-control select2" name="nuevoTipoDocumento">
                     <option selected="selected">Seleccionar...</option>
                     <?php 

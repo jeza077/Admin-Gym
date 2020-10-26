@@ -146,7 +146,7 @@ function validarEmail(selector) {
 			processData: false,  
 			dataType: "json",
 			success: function(respuesta) {
-				// console.log(respuesta);
+				console.log(respuesta);
 	
 				if(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.([a-zA-Z]{2,4})+$/.test(emailIngresado) && respuesta){
 					// selector.after('<div class="alert alert-warning mt-2">Email ya existente, ingrese uno diferente.</div>');
@@ -313,7 +313,7 @@ function mostrarContraseña(selector, mostrar, action) {
 function sinNumeros(event) {
     var codigo = event.which || event.keyCode;
 
-    if(codigo == 48 || codigo == 49 || codigo == 50 || codigo == 51 || codigo == 52 || codigo == 53 || codigo == 54 || codigo == 55 || codigo == 56 || codigo == 57 ){
+    if(codigo == 48 || codigo == 49 || codigo == 50 || codigo == 51 || codigo == 52 || codigo == 53 || codigo == 54 || codigo == 55 || codigo == 56 || codigo == 57  || codigo ==97  || codigo == 98  || codigo == 99  || codigo == 100  || codigo == 101  || codigo == 102  || codigo == 103  || codigo == 104  || codigo == 105){
         event.preventDefault();
         // $(this).parent().parent().after('<div class="alert alert-danger mt-2">No se aceptan numeros.</div>');
         // var identificador = $(this);
@@ -335,11 +335,10 @@ $('.nombre').keydown(sinNumeros)
     Sin caracteres
 =============================================*/
 function sinCaracteres(event) {
-    var codigo = event.which || event.keyCode;47
-    console.log(codigo)
+    var key = event.which || event.keyCode;
 
-    if(codigo.keyCode == 33 || codigo.keyCode == 34 || codigo.keyCode == 35 || codigo.keyCode == 36 || codigo.keyCode == 37 || codigo.keyCode == 38 ||codigo.keyCode == 39 ||codigo.keyCode == 40 || codigo.keyCode == 41 || codigo.keyCode == 42 || codigo.keyCode == 43 || codigo.keyCode == 44 || codigo.keyCode == 45 || codigo.keyCode == 46 || codigo.keyCode == 47 || codigo.keyCode == 58 || codigo.keyCode == 59 || codigo.keyCode == 60 || codigo.keyCode == 61 || codigo.keyCode == 62 || codigo.keyCode == 63 || codigo.keyCode == 64 || codigo.keyCode == 91 || codigo.keyCode == 92 || codigo.keyCode == 93 || codigo.keyCode == 94 || codigo == 95 || codigo.keyCode == 96 || codigo.keyCode == 123 || codigo.keyCode == 124 || codigo.keyCode == 125 || codigo.keyCode == 126 || codigo.keyCode == 166 || codigo.keyCode == 167 || codigo.keyCode == 168 || codigo.keyCode == 238 || codigo.keyCode == 239 || codigo.keyCode == 246 || codigo.keyCode == 249 || codigo.keyCode == 250){
-        event.preventDefault();
+    if(key == 106 || key == 107 || key == 109 || key == 110 || key == 111 || key == 186 ||key == 187 ||key == 188 || key == 189 || key == 190 || key == 191 || key == 219 || key == 220 || key == 221 || key == 222) {
+
         // $(this).parent().parent().after('<div class="alert alert-danger mt-2">No se aceptan espacios.</div>');
         // var identificador = $(this);
         // setTimeout(function () {
@@ -355,50 +354,105 @@ function sinCaracteres(event) {
      
 }
 
-$('.nombre').keydown(sinCaracteres)
+$('#nombre').keydown(sinCaracteres)
 /*=============================================
     FUNCION VALIDAR DOCUMENTO
 =============================================*/
-function validarDocumento(selector) {
-	selector.blur(function() {
+function validarDoc(selector) {
+    selector.blur(function() {
         var documentoIngresado = selector.val();
         // console.log(selector)
-
-		var datos = new FormData();
-		datos.append("verificarDocumento", documentoIngresado);
-	
-		$.ajax({
-	
-			url:"ajax/personas.ajax.php",
-			method: "POST",
-			data: datos,
-			cache: false,
-			contentType: false,
-			processData: false,  
-			dataType: "json",
-			success: function(respuesta) {
-                // console.log(respuesta);
-                if (respuesta) {
+    
+        var datos = new FormData();
+        datos.append("verificarDocumento", documentoIngresado);
+    
+        $.ajax({
+    
+            url:"ajax/personas.ajax.php",
+            method: "POST",
+            data: datos,
+            cache: false,
+            contentType: false,
+            processData: false,  
+            dataType: "json",
+            success: function(respuesta) {
+                console.log(respuesta);
+    
+                if(respuesta){
                     Swal.fire({
-						title: "El documento ya existente, ingrese uno diferente.",
-						icon: "error",
-						background: "rgb(255 75 75 / 85%)",
-						toast: true,
-						position: "top",
-						showConfirmButton: false,
-						timer: 3000
-					});
+                        title: "Documento ya existente, ingrese uno diferente.",
+                        icon: "error",
+                        background: "rgb(255 75 75 / 85%)",
+                        toast: true,
+                        position: "top",
+                        showConfirmButton: false,
+                        timer: 3000
+                    });
                     
-                }
-			}
-	
-		});
-
-	})
+                    
+                    //E inmeditamente Limpiamos el input
+                    selector.val("");
+                    selector.focus();
+                } 
+            }
+        });
+    })
 }
-validarDocumento($('.id'));
 
+var identidad = $('.id');
+validarDoc($(identidad));
 /*=============================================
     FUNCION VALIDAR DOCUMENTO
 =============================================*/
+
+function validarId(selector) {
+    selector.blur(function (e) { 
+        e.preventDefault();
+        console.log(selector)
+
+        var documentoIngresado = selector.val();
+        var seleccion = $('.select2').val();
+
+        if (seleccion == 3) {
+            if (/^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])[a-zA-Z0-9]+$/.test(documentoIngresado)) {
+                console.log("correcto")
+            } else {
+                selector.val("");
+                selector.focus();
+
+                Swal.fire({
+                    title: "Numero de documento no valido.",
+                    icon: "error",
+                    background: "rgb(255 75 75 / 85%)",
+                    toast: true,
+                    position: "top",
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+            }
+        } else if (seleccion == 1 || 2) {
+            if (/^[0-9]+$/.test(documentoIngresado)) {
+                console.log("correcto")
+            } else {
+                selector.val("");
+                selector.focus();
+
+                Swal.fire({
+                    title: "Numero de documento no valido.",
+                    icon: "error",
+                    background: "rgb(255 75 75 / 85%)",
+                    toast: true,
+                    position: "top",
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+            }
+        }  else {
+            
+        }
+    });
+}
+
+var identidad = $('.id');
+validarId($(identidad));
 
