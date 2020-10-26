@@ -181,8 +181,8 @@
         <div class="form-row">
 
         <div class="form-group col-md-3">
-            <label for="nuevoUsuario">NombreUsuario</label>
-            <input type="text" class="form-control personas" onKeyUp="this.value=this.value.toUpperCase();" placeholder="Ingrese Usuario" required>
+            <label for="">Usuario</label>
+            <input type="text" class="form-control personas" name="nuevoUsuario" onKeyUp="this.value=this.value.toUpperCase();" placeholder="Ingrese Usuario" required>
           </div>
 
           <div class="form-group col-md-3">
