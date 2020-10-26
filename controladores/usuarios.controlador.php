@@ -405,12 +405,12 @@ class ControladorUsuarios{
 
 				// return;
 
-				if ($datos["foto"] =="vistas/img/usuarios/default/anonimus.png")
-				{
-					$ruta=$datos["foto"];
-				}
-					else 
-				{
+				// if ($datos["foto"] =="vistas/img/usuarios/default/anonimus.png")
+				// {
+				// 	$ruta = $datos["foto"];
+				// }
+				// 	else 
+				// {
 
 					/*=============================================
 							VALIDAR IMAGEN
@@ -478,7 +478,7 @@ class ControladorUsuarios{
 						}
 
 					}
-				}		
+				// }		
 						//**================= ENCRIPTAMOS LA CONTRASEÑA ===================*/
 						$encriptar = crypt($datos["password"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
 
@@ -505,7 +505,7 @@ class ControladorUsuarios{
 
 						// return var_dump($respuestaEmpleado);
 
-						if($respuestaEmpleado = true){
+						if($respuestaEmpleado == true){
 
 							$email = $emailUsuario;
 							$nombreUsuario = $datos["usuario"];

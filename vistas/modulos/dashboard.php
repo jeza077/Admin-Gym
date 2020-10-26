@@ -45,6 +45,9 @@
         <div class="card-body">
 
           <?php
+ 
+
+
                 // $user_os        =   ControladorGlobales::ctrGetOS();
                 // $user_browser   =   ControladorGlobales::ctrGetBrowser();
                 // $device_details =   "<strong>Browser: </strong>" . $user_browser . 

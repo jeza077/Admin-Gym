@@ -40,6 +40,7 @@
           // $device_details =   "<strong>Browser: </strong>" . $user_browser . 
           //                     "<br /><strong>Operating System: </strong>" . $user_os;
           // echo($device_details);
+          
         ?>
     </div>
 
@@ -216,8 +217,19 @@
               <option value="F">Femenino</option>
             </select>
         </div>
+        <div class="form-group col-md-12">
+              <label for="exampleInputFile">Foto</label>
+              <div class="input-group">
+                <div class="custom-file">
+                  <input type="file" class="custom-file-input nuevaFoto" id="exampleInputFile" name="nuevaFoto">
+                  <label class="custom-file-label" for="exampleInputFile">Escoger foto</label>
+                </div>
+                  <img class="img-thumbnail previsualizar ml-2" src="vistas/img/usuarios/default/anonymous.png" alt="imagen-del-usuario" width="100px">
+              </div>
+                  <p class="p-foto help-block">Peso máximo de la foto 2 MB</p>
+            </div>
 
-        <div class="form-row col-md-12 mt-5">
+        <div class="form-row col-md-12">
           <div class="form-group col-md-6">
               <p class="link mt-3 ml-2">Regresar al <a href="javascript:void(0);" onclick="toggleRegistrar();">Login</a></p>
           </div>
