@@ -285,7 +285,7 @@ class ControladorUsuarios{
 								// echo $intentosRestantes;
 								// session_destroy();
 
-								if($_SESSION['contadorLogin'] == $intentos) {
+								if($_SESSION['contadorLogin'] > $intentos) {
 									$tabla1 = "tbl_personas";
 									$tabla2 = "tbl_usuarios";
 									

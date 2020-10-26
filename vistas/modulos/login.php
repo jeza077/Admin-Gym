@@ -24,6 +24,7 @@
         </div>
       </form>
 
+
       <p class="mb-1">
         <a href="javascript:void(0);" onclick="toggleForm();">¿Olvidaste tu contraseña</a>
       </p>
