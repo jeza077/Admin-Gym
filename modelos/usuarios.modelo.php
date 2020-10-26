@@ -25,8 +25,8 @@ class ModeloUsuarios{
 	
 			} else {
 	
-				$stmt = Conexion::conectar()->prepare("SELECT p.*, u.usuario, u.password, u.foto, u.primera_vez, u.id_usuario, r.rol FROM $tabla1 AS p\n"
-						. " INNER JOIN $tabla2 AS u ON p.id_persona = u.id_persona\n"
+				$stmt = Conexion::conectar()->prepare("SELECT p.*, u.* FROM $tabla1 AS p\n"
+						. " INNER JOIN $tabla2 AS u ON p.id_personas = u.id_persona\n"
 						. " INNER JOIN tbl_roles AS r ON u.id_rol = r.id_rol");
 				$stmt -> execute();
 				return $stmt -> fetchAll();
