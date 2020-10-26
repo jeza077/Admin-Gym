@@ -40,6 +40,7 @@
           // $device_details =   "<strong>Browser: </strong>" . $user_browser . 
           //                     "<br /><strong>Operating System: </strong>" . $user_os;
           // echo($device_details);
+          
         ?>
     </div>
 
@@ -176,22 +177,28 @@
             <input type="text" class="form-control" name="nuevoApellido" placeholder="Ingrese Apellidos" required>
           </div>
         </div>
-            
+
+  
         <div class="form-row">
-          <div class="form-group col-md-4">
+
+        <div class="form-group col-md-3">
+            <label for="">Usuario</label>
+            <input type="text" class="form-control personas" name="nuevoUsuario" onKeyUp="this.value=this.value.toUpperCase();" placeholder="Ingrese Usuario" required>
+          </div>
+
+          <div class="form-group col-md-3">
             <label for="inputEmail4">Email</label>
             <input type="email" class="form-control email" id="inputEmail4" name="nuevoEmail" placeholder="Ingrese Email" required>
           </div>
-          <div class="form-group col-md-4">
+          <div class="form-group col-md-3">
             <label>Teléfono</label>
             <input type="text" class="form-control" data-inputmask='"mask": "(999) 9999-9999"' data-mask  name="nuevoTelefono" placeholder="Ingrese Telefono" required>
           </div>
-          <div class="form-group col-md-4">
+          <div class="form-group col-md-3">
             <label>Fecha de nacimiento</label>
               <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy/mm/dd" data-mask  name="nuevaFechaNacimiento" placeholder="Ingrese Fecha de Nacimiento" required>
           </div>
         </div>
-
         <!-- <div class="form-group">
           <label for="inputAddress">Dirección</label>
           <input type="text" class="form-control" id="inputAddress" name="nuevaDireccion" placeholder="Col. Alameda, calle #2..." required>
@@ -210,8 +217,19 @@
               <option value="F">Femenino</option>
             </select>
         </div>
+        <div class="form-group col-md-12">
+              <label for="exampleInputFile">Foto</label>
+              <div class="input-group">
+                <div class="custom-file">
+                  <input type="file" class="custom-file-input nuevaFoto" id="exampleInputFile" name="nuevaFoto">
+                  <label class="custom-file-label" for="exampleInputFile">Escoger foto</label>
+                </div>
+                  <img class="img-thumbnail previsualizar ml-2" src="vistas/img/usuarios/default/anonymous.png" alt="imagen-del-usuario" width="100px">
+              </div>
+                  <p class="p-foto help-block">Peso máximo de la foto 2 MB</p>
+            </div>
 
-        <div class="form-row col-md-12 mt-5">
+        <div class="form-row col-md-12">
           <div class="form-group col-md-6">
               <p class="link mt-3 ml-2">Regresar al <a href="javascript:void(0);" onclick="toggleRegistrar();">Login</a></p>
           </div>
