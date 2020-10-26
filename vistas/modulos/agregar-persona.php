@@ -66,7 +66,7 @@
               </div>
               <div class="form-group col-md-4">
                 <label>Teléfono</label>
-                <input type="text" class="form-control" id="inputTelefono" data-inputmask='"mask": "(999) 9999-9999"' data-mask  name="nuevoTelefono" placeholder="Ingrese Telefono" required>
+                <input type="text" class="form-control" id="inputTelefono" data-inputmask='"mask": "(504) 9999-9999"' data-mask  name="nuevoTelefono" placeholder="Ingrese Telefono" required>
               </div>
               <div class="form-group col-md-4">
                 <label>Fecha de nacimiento</label>

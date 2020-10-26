@@ -314,7 +314,8 @@ function sinNumeros(event) {
     var codigo = event.which || event.keyCode;
 
     if(codigo == 48 || codigo == 49 || codigo == 50 || codigo == 51 || codigo == 52 || codigo == 53 || codigo == 54 || codigo == 55 || codigo == 56 || codigo == 57  || codigo ==97  || codigo == 98  || codigo == 99  || codigo == 100  || codigo == 101  || codigo == 102  || codigo == 103  || codigo == 104  || codigo == 105){
-        event.preventDefault();
+        // event.preventDefault();
+        
         // $(this).parent().parent().after('<div class="alert alert-danger mt-2">No se aceptan numeros.</div>');
         // var identificador = $(this);
         // setTimeout(function () {
@@ -331,6 +332,31 @@ function sinNumeros(event) {
 }
 
 $('.nombre').keydown(sinNumeros)
+
+/*=============================================
+    Sin letras
+=============================================*/
+function sinLetras(event) {
+    var codigo = event.which || event.keyCode;
+
+    if(codigo == 81 || codigo == 87 || codigo == 69 || codigo == 82 || codigo == 84 || codigo == 89 || codigo == 85 || codigo == 73 || codigo == 79 || codigo == 80  || codigo ==65  || codigo == 83  || codigo == 68  || codigo == 70  || codigo == 71 || codigo == 72  || codigo == 74  || codigo == 75  || codigo == 76 || codigo == 192 || codigo == 90 || codigo == 88 || codigo == 67 || codigo == 86 || codigo == 66 || codigo == 78 || codigo == 77){
+        event.preventDefault();
+        
+        // $(this).parent().parent().after('<div class="alert alert-danger mt-2">No se aceptan numeros.</div>');
+        // var identificador = $(this);
+        // setTimeout(function () {
+        //     $('.alert').remove();
+        //     identificador.val('');
+        //     identificador.attr('disabled', false);
+        //     identificador.focus();
+        // }, 2000)
+        // $(this).attr('disabled', true);
+    } else {
+        $('.alert').remove();
+    }
+     
+}
+
 /*=============================================
     Sin caracteres
 =============================================*/
@@ -376,7 +402,7 @@ function validarDoc(selector) {
             processData: false,  
             dataType: "json",
             success: function(respuesta) {
-                console.log(respuesta);
+                // console.log(respuesta);
     
                 if(respuesta){
                     Swal.fire({
@@ -406,47 +432,19 @@ validarDoc($(identidad));
 =============================================*/
 
 function validarId(selector) {
-    selector.blur(function (e) { 
-        e.preventDefault();
-        console.log(selector)
-
-        var documentoIngresado = selector.val();
+    selector.keydown(function (e) { 
+       
         var seleccion = $('.select2').val();
 
         if (seleccion == 3) {
-            if (/^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])[a-zA-Z0-9]+$/.test(documentoIngresado)) {
-                console.log("correcto")
-            } else {
-                selector.val("");
-                selector.focus();
 
-                Swal.fire({
-                    title: "Numero de documento no valido.",
-                    icon: "error",
-                    background: "rgb(255 75 75 / 85%)",
-                    toast: true,
-                    position: "top",
-                    showConfirmButton: false,
-                    timer: 3000
-                });
-            }
+            $('.id').keydown(sinCaracteres)
+         
         } else if (seleccion == 1 || 2) {
-            if (/^[0-9]+$/.test(documentoIngresado)) {
-                console.log("correcto")
-            } else {
-                selector.val("");
-                selector.focus();
 
-                Swal.fire({
-                    title: "Numero de documento no valido.",
-                    icon: "error",
-                    background: "rgb(255 75 75 / 85%)",
-                    toast: true,
-                    position: "top",
-                    showConfirmButton: false,
-                    timer: 3000
-                });
-            }
+            $('.id').keydown(sinLetras)
+            $('.id').keydown(sinCaracteres)
+        
         }  else {
 
         }
@@ -455,41 +453,3 @@ function validarId(selector) {
 
 var identidad = $('.id');
 validarId($(identidad));
-
-/*=============================================
-    FUNCION VALIDAR TELEFONO
-=============================================*/
-function telefono(event) {
-    var key = event.which || event.keyCode;
-    // $telefonoIngresado = $('#inputTelefono').val();
-    contador = 0;
-    
-
-    switch (contador) {
-        case contador == 1 :
-            if (key == 53){
-                console.log(key)
-            } else {
-                console.log("error 1")
-            }
-            break;
-        case contador == 2 :
-            if (key == 48) {
-                console.log(key)
-            } else {
-                console.log("error 2")
-            }
-            break;
-        case contador == 3 :
-            if (key == 52) {
-                console.log(key)
-            } else {
-                console.log("error 3")
-            }
-            break;
-        default:
-            break;
-    }
-    
-}
-$('#inputTelefono').keydown(telefono)
