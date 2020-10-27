@@ -58,7 +58,10 @@
                 // $valor1 = $_SESSION["usuario"];
                 // $item2 = "rol";
                 // $valor2 = $_SESSION["rol"];
-
+                
+                //-----------Generar contraseña aleatoria----------------------
+                // $str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890#$.@";
+                // $contraseñaAleatoria
                 // $modulos = ControladorUsuarios::ctrMostrarUsuarioModulo($item1, $item2, $valor1, $valor2);
 
                 //   // echo "<pre>";

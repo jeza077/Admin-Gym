@@ -166,16 +166,16 @@
             </select>
           </div>
           <div class="form-group col-md-3">
-            <label for="identidad">Identidad</label>
-            <input type="text" class="form-control" name="nuevoNumeroDocumento" placeholder="Ingrese Identidad" required>
+            <label for="identidad">Numero de Documento</label>
+            <input type="text" class="form-control id" name="nuevoNumeroDocumento" placeholder="Ingrese Identidad" required>
           </div>
           <div class="form-group col-md-3">
             <label for="nombre">Nombre</label>
-            <input type="text" class="form-control" name="nuevoNombre" placeholder="Ingrese Nombre" required>
+            <input type="text" class="form-control nombre" name="nuevoNombre" placeholder="Ingrese Nombre" required>
           </div>
           <div class="form-group col-md-3">
             <label for="apellido">Apellido</label>
-            <input type="text" class="form-control" name="nuevoApellido" placeholder="Ingrese Apellidos" required>
+            <input type="text" class="form-control apellidos" name="nuevoApellido" placeholder="Ingrese Apellidos" required>
           </div>
         </div>
 
@@ -218,17 +218,7 @@
               <option value="F">Femenino</option>
             </select>
         </div>
-        <div class="form-group col-md-12">
-              <label for="exampleInputFile">Foto</label>
-              <div class="input-group">
-                <div class="custom-file">
-                  <input type="file" class="custom-file-input nuevaFoto" id="exampleInputFile" name="nuevaFoto">
-                  <label class="custom-file-label" for="exampleInputFile">Escoger foto</label>
-                </div>
-                  <img class="img-thumbnail previsualizar ml-2" src="vistas/img/usuarios/default/anonymous.png" alt="imagen-del-usuario" width="100px">
-              </div>
-                  <p class="p-foto help-block">Peso máximo de la foto 2 MB</p>
-            </div>
+        
 
         <div class="form-row col-md-12">
           <div class="form-group col-md-6">
