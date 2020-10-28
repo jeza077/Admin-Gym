@@ -112,6 +112,7 @@ class ModeloUsuarios{
 		$stmt->bindParam(":fecha_vencimiento", $datos["fecha_vencimiento"], PDO::PARAM_STR);
 		$stmt->bindParam(":id_rol", $datos["rol"], PDO::PARAM_INT);
 
+		// return $stmt->execute();
 		if($stmt->execute()){
 
 			return true;	

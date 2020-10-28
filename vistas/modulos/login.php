@@ -149,7 +149,7 @@
         <div class="form-row">
           <div class="form-group col-md-3">
                 <label for="">Tipo de documento <?php echo $i?></label>
-            <select class="form-control select2" name="nuevoTipoDocumento">
+            <select class="form-control select2 nuevoTipoDocumento" name="nuevoTipoDocumento">
                 <option selected="selected">Seleccionar...</option>
                 <?php 
                     $tabla = "tbl_documento";

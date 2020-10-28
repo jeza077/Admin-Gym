@@ -382,18 +382,10 @@ function sinLetras(event) {
 =============================================*/
 function sinCaracteres(event) {
     var key = event.which || event.keyCode;
+    // console.log(key)
 
     if(key == 106 || key == 107 || key == 109 || key == 110 || key == 111 || key == 186 ||key == 187 ||key == 188 || key == 189 || key == 190 || key == 191 || key == 219 || key == 220 || key == 221 || key == 222) {
         event.preventDefault();
-        // $(this).parent().parent().after('<div class="alert alert-danger mt-2">No se aceptan espacios.</div>');
-        // var identificador = $(this);
-        // setTimeout(function () {
-        //     $('.alert').remove();
-        //     identificador.val('');
-        //     identificador.attr('disabled', false);
-        //     identificador.focus();
-        // }, 2000)
-        // $(this).attr('disabled', true);
     } else {
         $('.alert').remove();
     }
@@ -450,25 +442,41 @@ validarDoc(identidad);
     FUNCION VALIDAR DOCUMENTO
 =============================================*/
 
-function validarId(selector) {
-    selector.keydown(function (e) { 
+// function validarId(selector) {
+//     // selector.keydown(function (e) { 
        
-        var seleccion = $('.select2').val();
+//         var seleccion = $('.select2').val();
 
-        if (seleccion == 3) {
+//         if (seleccion == 3) {
 
-            $('.id').keydown(sinCaracteres)
+//             // $('.id').keydown(sinCaracteres)
+//             sinCaracteres();
          
-        } else if (seleccion == 1 || 2) {
+//         } else {
 
-            $('.id').keydown(sinLetras)
-            $('.id').keydown(sinCaracteres)
-        
-        }  else {
+//             // $('.id').keydown(sinLetras)
+//             // $('.id').keydown(sinCaracteres)
+     
+//             sinLetras();
+//             sinCaracteres();
+//         } 
+//     // });
+// }
 
-        }
-    });
-}
+$('.nuevoTipoDocumento').change(function (e) { 
+    e.preventDefault();
+    $('.id').val("");
 
-var identidad = $('.id');
-validarId($(identidad));
+    var valorTipoDocumento =$(this).val();
+    console.log(valorTipoDocumento);
+
+    if(valorTipoDocumento === 3){
+        $('.id').keydown(sinNumeros);
+    } else {
+        $('.id').keydown(sinLetras);
+        $('.id').keydown(sinCaracteres);
+    }
+});
+// $('.id').keydown(validarId);
+// var identidad = $('.id');
+// validarId(identidad);

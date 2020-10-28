@@ -149,14 +149,13 @@ class ControladorPersonas{
                                 </script>';
                         }
 
-                } 
-                else {                    
+                } else if($tipoPersona == 'usuarios') {                    
 
-                // var_dump($_POST);
-                // return;
+                    // var_dump($_POST);
+                    // return;
 
-                // var_dump($_FILES);
-                // return;
+                    // var_dump($_FILES);
+                    // return;
 
                     $datos = array("nombre" => $_POST["nuevoNombre"],
                                 "apellido" => $_POST["nuevoApellido"],
@@ -186,7 +185,9 @@ class ControladorPersonas{
 
                         $idPersona = end($totalId);
 
-                        if($tipoPersona == "usuarios"){
+                        // echo $idPersona;
+                        // return;
+                            // if($tipoPersona == "usuarios"){
                             
                             $datos = array("id_persona" => $idPersona,
                                         "nombre" => $_POST["nuevoNombre"],
@@ -224,32 +225,34 @@ class ControladorPersonas{
                                     </script>';
                             }
 
-                        } else {
-
-                            $datos = array("id_persona" => $idPersona);
-
-                            $crearCliente = ControladorClientes::ctrCrearCliente($datos);
-
-                            if($crearCliente == true){
-                                echo '<script>
-                                        Swal.fire({
-                                            title: "Cliente guardado correctamente!",
-                                            icon: "success",
-                                            heightAuto: false,
-                                            allowOutsideClick: false
-                                        }).then((result)=>{
-                                            if(result.value){
-                                                window.location = "'.$pantalla.'";
-                                            }
-                                        });                                              
-                                    </script>';
-                            }
-                        }
-                        
-            
                     }
 
+                } else {
+
+                        $datos = array("id_persona" => $idPersona);
+
+                        $crearCliente = ControladorClientes::ctrCrearCliente($datos);
+
+                        if($crearCliente == true){
+                            echo '<script>
+                                    Swal.fire({
+                                        title: "Cliente guardado correctamente!",
+                                        icon: "success",
+                                        heightAuto: false,
+                                        allowOutsideClick: false
+                                    }).then((result)=>{
+                                        if(result.value){
+                                            window.location = "'.$pantalla.'";
+                                        }
+                                    });                                              
+                                </script>';
+                        }
                 }
+                        
+            
+                    
+
+                
 
             } else {
                 

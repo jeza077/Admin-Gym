@@ -390,11 +390,11 @@ class ControladorUsuarios{
 	=============================================*/
 	static public function ctrCrearUsuario($datos){
 
-		// var_dump($datos);
+		// return var_dump($datos);
 		// return;
 		if(isset($datos["usuario"])){
 
-			if(preg_match('/^[A-Z0-9]+$/', $datos["usuario"]) &&
+			if(preg_match('/^[A-Z]+$/', $datos["usuario"]) &&
 			   preg_match('/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%.])\S{8,16}$/', $datos["password"])){
 
 				$emailUsuario = $datos["email"];
@@ -406,13 +406,6 @@ class ControladorUsuarios{
 				// echo $nombre;
 
 				// return;
-
-				// if ($datos["foto"] =="vistas/img/usuarios/default/anonimus.png")
-				// {
-				// 	$ruta = $datos["foto"];
-				// }
-				// 	else 
-				// {
 
 					/*=============================================
 							VALIDAR IMAGEN
@@ -480,7 +473,7 @@ class ControladorUsuarios{
 						}
 
 					}
-				// }		
+						
 						//**================= ENCRIPTAMOS LA CONTRASEÑA ===================*/
 						$encriptar = crypt($datos["password"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
 

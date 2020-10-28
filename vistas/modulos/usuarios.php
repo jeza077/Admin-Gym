@@ -238,7 +238,7 @@
 
               <div class="form-group col-md-3">
                 <label for="inputPassword4">Contraseña Generada</label>
-                <input type="text" class="form-control passwordGenerado" id="inputPassword4" name="nuevoPassword" disabled>
+                <input type="text" class="form-control passwordGenerado" id="inputPassword4" name="nuevoPassword">
               </div>
               <div class="col-md-3">
                 <a href="javascript:void(0);"  class="btn btn-block btn-orange" id="generarPassword" style="margin-top:2em">Generar contraseña</a>
@@ -246,15 +246,14 @@
             </div>
 
             <div class="form-row">
-            <div class="form-group col-md-6">
+              <div class="form-group col-md-6">
                 <label for="exampleInputFile">Foto</label>
                 <div class="input-group">
-                <img class="img-thumbnail previsualizar mr-2" src="vistas/img/usuarios/default/anonymous.png" alt="imagen-del-usuario" width="100px">
+                  <img class="img-thumbnail previsualizar mr-2" src="vistas/img/usuarios/default/anonymous.png" alt="imagen-del-usuario" width="100px">
                   <div class="custom-file">
                     <input type="file" class="custom-file-input nuevaFoto" id="exampleInputFile" name="nuevaFoto">
                     <label class="custom-file-label" for="exampleInputFile">Escoger foto</label>
                   </div>
-
                 </div>
                     <p class="p-foto help-block ml-4">Peso máximo de la foto 2 MB</p>
               </div>
@@ -283,7 +282,7 @@
 
             <div class="modal-footer">
             <!-- <div class="form-group mt-4 float-right"> -->
-              <button type="" class="btn btn-primary" data-toggle="modal" data-target="#modalAddUsuario">Guardar</button>
+              <button type="" class="btn btn-primary">Guardar</button>
               <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
             </div>
             
