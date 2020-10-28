@@ -516,7 +516,7 @@ i.show-confir-pass{
 }
 .nav-link.active {
     background: var(--orangeThird)!important;
-    color: #fff;
+    color: #fff!important;
     /* border-radius: 0.6em; */
 }
     /* .nav-link.menu-lateral{

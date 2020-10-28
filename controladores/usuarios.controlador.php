@@ -11,14 +11,13 @@ class ControladorUsuarios{
 				MOSTRAR USUARIOS
 	=============================================*/
 
-	static public function ctrMostrarUsuarios($tabla, $item, $valor) {
-
+	static public function ctrMostrarUsuarios($tabla, $item, $valor){
 		$tabla1 = "tbl_personas";
 		$tabla2 = $tabla;
+
 		$respuesta = ModeloUsuarios::mdlMostrarUsuarios($tabla1, $tabla2, $item, $valor);
 
 		return $respuesta;
-
 	}
 
 	/*=============================================
