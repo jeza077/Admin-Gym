@@ -50,40 +50,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                <?php 
-                  $tabla = "tbl_usuarios";
-                  $item = null;
-                  $valor = null;
-                  $usuarios = ControladorUsuarios::ctrMostrarUsuarios($tabla, $item, $valor);
-
-                  // echo "<pre>";
-                  // var_dump($usuarios);
-                  // echo "</pre>";
-
-                  foreach ($usuarios as $key => $value) {
-                    echo '
-                          <tr>
-                          <th scope="row">1</th>
-                          <td>'.$value["nombre"].'</td>
-                          <td>'.$value["clientes"].'</td>';
-
-                          if($value != ""){
-                            echo '<td><img src="'.$value["foto"].'" class="img-thumbnail" width="40px"></td>';
-                          } else {
-                            echo '<td><img src="vistas/img/usuarios/default/anonymous.png" class="img-thumbnail" width="40px"></td>';
-                          }
-
-                     echo '     
-                          <td>'.$value["rol"].'</td>
-                          <td><button class="btn btn-success btn-md">Activado</button></td>
-                          <td>
-                            <button class="btn btn-warning"><i class="fas fa-pencil-alt" style="color:#fff"></i></button>
-                            <button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
-                          </td>
-                        </tr>
-                    ';
-                  }
-                ?>
+            
                 
                 </tbody>
               </table>
@@ -106,24 +73,24 @@
       <div class="modal-content">
       
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Nuevo usuario</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Nuevo cliente</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          <form role="form" method="post" class="formulario" enctype="multipart/form-data">
+          <form role="form" method="post" class="formulario">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
               <li class="nav-item" role="presentation">
                 <a class="nav-link active" id="datosPersona" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Datos personales</a>
               </li>
               <li class="nav-item" role="presentation">
-                <a class="nav-link" id="datosUsuario" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Datos Usuario</a>
+                <a class="nav-link" id="datosUsuario" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Datos Cliente</a>
               </li>
             </ul>
             
             <div class="tab-content" id="myTabContent">
-              <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="datosPersona">
+              <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="datoscliente">
                 <div class="container-fluid mt-4">
                   <div class="form-row">
                     <div class="form-group col-md-3">
@@ -193,16 +160,16 @@
                 </div>
               </div>
 
-              <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="datosUsuario">
+              <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="datosCLiente">
                 <div class="container-fluid mt-4">
 
                   <div class="form-row">
                     <div class="form-group col-md-3">
-                      <label for="">Usuario</label>
-                      <input type="text" class="form-control nuevoUsuario" onKeyUp="this.value=this.value.toUpperCase();" name="nuevoUsuario" placeholder="Ingrese Usuario">
+                      <label for="">Cliente</label>
+                      <input type="text" class="form-control nuevoCliente" onKeyUp="this.value=this.value.toUpperCase();" name="nuevoCliente" placeholder="Ingrese Cliente">
                     </div>
                     <div class="form-group col-md-3">
-                      <label>Rol</label>
+                      <label>Tipo Matricula</label>
                       <select class="form-control select2" style="width: 100%;" name="nuevoRol">
                         <!-- <option value="2">Default</option> -->
                           <?php 
@@ -222,28 +189,52 @@
                           ?>
                       </select>
                     </div>
-
                     <div class="form-group col-md-3">
-                      <label for="inputPassword4">Contraseña Generada</label>
-                      <input type="text" class="form-control passwordGenerado" id="inputPassword4" name="nuevoPassword">
+                      <label>Tipo inscripcion</label>
+                      <select class="form-control select2" style="width: 100%;" name="nuevoRol">
+                        <!-- <option value="2">Default</option> -->
+                          <?php 
+                              $tabla = "tbl_roles";
+                              $item = null;
+                              $valor = null;
+
+                              $roles = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
+
+                              foreach ($roles as $key => $value) {
+                                if($value["rol"] == 'Default'){
+                                  echo '<option selected="selected" value="'.$value["id_rol"].'">'.$value["rol"].'</option>';
+                                } else {
+                                  echo '<option value="'.$value["id_rol"].'">'.$value["rol"].'</option>';
+                                }
+                              }
+                          ?>
+                      </select>
                     </div>
-                    <div class="col-md-3">
-                      <a href="javascript:void(0);"  class="btn btn-block btn-orange" id="generarPassword" style="margin-top:2em">Generar contraseña</a>
+                    <div class="form-group col-md-3">
+                      <label>Descuento o
+                             Promocion</label>
+                      <select class="form-control select2" style="width: 100%;" name="nuevoRol">
+                        <!-- <option value="2">Default</option> -->
+                          <?php 
+                              $tabla = "tbl_roles";
+                              $item = null;
+                              $valor = null;
+
+                              $roles = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
+
+                              foreach ($roles as $key => $value) {
+                                if($value["rol"] == 'Default'){
+                                  echo '<option selected="selected" value="'.$value["id_rol"].'">'.$value["rol"].'</option>';
+                                } else {
+                                  echo '<option value="'.$value["id_rol"].'">'.$value["rol"].'</option>';
+                                }
+                              }
+                          ?>
+                      </select>
                     </div>
                   </div>
 
                   <div class="form-row">
-                    <div class="form-group col-md-6">
-                      <label for="exampleInputFile">Foto</label>
-                      <div class="input-group">
-                        <img class="img-thumbnail previsualizar mr-2" src="vistas/img/usuarios/default/anonymous.png" alt="imagen-del-usuario" width="100px">
-                        <div class="custom-file">
-                          <input type="file" class="custom-file-input nuevaFoto" id="exampleInputFile" name="nuevaFoto">
-                          <label class="custom-file-label" for="exampleInputFile">Escoger foto</label>
-                        </div>
-                      </div>
-                          <p class="p-foto help-block ml-4">Peso máximo de la foto 2 MB</p>
-                    </div>
                     <div class="form-group col-md-3">
                       <label>Estado</label>
                       <input type="text" class="form-control" value="Desactivado" style="color:red;" disabled>
@@ -293,18 +284,18 @@
            MODAL EDITAR USUARIO
   ======================================----->
 
-  <div class="modal fade" id="modalEditarUsuario" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="modalEditarCliente" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
       
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Editar usuario</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Editar cliente</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          <form role="form" method="post" class="formulario" enctype="multipart/form-data">
+          <form role="form" method="post" class="formulario">
             <!-- <div class="card">
               <div class="card-body"> -->
                 <div class="form-row">
@@ -385,12 +376,8 @@
 
             <div class="form-row">
               <div class="form-group col-md-3">
-                <label for="">Usuario</label>
-                <input type="text" class="form-control nuevoUsuario" onKeyUp="this.value=this.value.toUpperCase();" name="nuevoUsuario" placeholder="Ingrese Usuario">
-              </div>
-              <div class="form-group col-md-3">
-                <label>Rol</label>
-                <select class="form-control select2" style="width: 100%;" name="nuevoRol">
+                <label>Tipo Inscripcion</label>
+                <select class="form-control select2" style="width: 100%;" name="nuevaIncripcion">
                   <!-- <option value="2">Default</option> -->
                     <?php 
                         $tabla = "tbl_roles";
@@ -409,34 +396,32 @@
                     ?>
                 </select>
               </div>
-
               <div class="form-group col-md-3">
-                <label for="inputPassword4">Cambiar Contraseña</label>
-                <input type="text" class="form-control passwordGenerado" id="inputPassword4" name="nuevoPassword" disabled>
+                <label>Descuento o
+                       Promocion</label>
+                <select class="form-control select2" style="width: 100%;" name="nuevoDescuento">
+                  <!-- <option value="2">Default</option> -->
+                    <?php 
+                        $tabla = "tbl_roles";
+                        $item = null;
+                        $valor = null;
+
+                        $roles = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
+
+                        foreach ($roles as $key => $value) {
+                          if($value["rol"] == 'Default'){
+                            echo '<option selected="selected" value="'.$value["id_rol"].'">'.$value["rol"].'</option>';
+                          } else {
+                            echo '<option value="'.$value["id_rol"].'">'.$value["rol"].'</option>';
+                          }
+                        }
+                    ?>
+                </select>
               </div>
-            
             </div>
-
-            <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="exampleInputFile">Foto</label>
-                <div class="input-group">
-                <img class="img-thumbnail previsualizar mr-2" src="vistas/img/usuarios/default/anonymous.png" alt="imagen-del-usuario" width="100px">
-                  <div class="custom-file">
-                    <input type="file" class="custom-file-input nuevaFoto" id="exampleInputFile" name="nuevaFoto">
-                    <label class="custom-file-label" for="exampleInputFile">Escoger foto</label>
-                  </div>
-
-                </div>
-                    <p class="p-foto help-block ml-4">Peso máximo de la foto 2 MB</p>
-              </div>
-            </div>
-            
-     
-
             <div class="modal-footer">
             <!-- <div class="form-group mt-4 float-right"> -->
-              <button type="" class="btn btn-primary" data-toggle="modal" data-target="#modalAddUsuario">Guardar</button>
+              <button type="" class="btn btn-primary" data-toggle="modal" data-target="#modalAddCLiente">Guardar</button>
               <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
             </div>
             
