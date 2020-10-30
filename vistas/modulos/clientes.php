@@ -50,8 +50,45 @@
                   </tr>
                 </thead>
                 <tbody>
-            
-                
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>Pedro</td>
+                    <td>33244543</td>
+                    <td>asda@fsdf.ed</td>
+                    <td>23/02/05</td>
+                    <td>
+                        <button class="btn btn-outline-warning"><i class="fas fa-exclamation-triangle"></i></button>
+                      <td>
+                        <button class="btn btn-primary"><i class="fas fa-pencil-alt"></i></button>
+                        <button class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+                      </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">1</th>
+                      <td>Pedro</td>
+                      <td>33244543</td>
+                      <td>asda@fsdf.ed</td>
+                      <td>23/02/05</td>
+                      <td>
+                        <button class="btn btn-outline-warning"><i class="fas fa-exclamation-triangle"></i></button>
+                      <td>
+                        <button class="btn btn-primary"><i class="fas fa-pencil-alt"></i></button>
+                        <button class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+                      </td>
+                    </tr>
+                    <tr>
+                    <th scope="row">1</th>
+                    <td>Pedro</td>
+                    <td>33244543</td>
+                    <td>asda@fsdf.ed</td>
+                    <td>23/02/05</td>
+                    <td>
+                        <button class="btn btn-outline-warning"><i class="fas fa-exclamation-triangle"></i></button>
+                      <td>
+                        <button class="btn btn-primary"><i class="fas fa-pencil-alt"></i></button>
+                        <button class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+                      </td>
+                  </tr>
                 </tbody>
               </table>
             </div>
