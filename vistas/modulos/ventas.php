@@ -6,13 +6,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Usuarios</h1>
+            <h1>STOCK</h1>
           </div>
           <div class="col-sm-6">
-          <button class="btn btn-orange float-right"  data-toggle="modal" data-target="#modalAgregarUsuario">
-            Agregar Usuario          
+          <button class="btn btn-orange float-right"  data-toggle="modal" data-target="#modalAgregarInventario">
+            Agregar         
           </button>
-
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -21,10 +20,10 @@
  <!-- Main content -->
     <section class="content">
     <?php 
-      $permisoAgregar = $_SESSION['permisos']['Usuarios']['agregar'];
-      $permisoEliminar = $_SESSION['permisos']['Usuarios']['eliminar'];
-      $permisoActualizar = $_SESSION['permisos']['Usuarios']['actualizar'];
-      $permisoConsulta = $_SESSION['permisos']['Usuarios']['consulta'];
+      $permisoAgregar = $_SESSION['permisos']['Stock']['agregar'];
+      $permisoEliminar = $_SESSION['permisos']['Stock']['eliminar'];
+      $permisoActualizar = $_SESSION['permisos']['Stock']['actualizar'];
+      $permisoConsulta = $_SESSION['permisos']['Stock']['consulta'];
 
       // var_dump($_SESSION['perm']);
 
@@ -34,26 +33,58 @@
     ?>
 
 
-      <!-- Default box -->
-      <div class="card">
 
-        <div class="card-body">
-            
-        </div>
-        <!-- /.card-body -->
-      </div>
-      <!-- /.card -->
+<!-- TAB PRINCIPAL -->
+<div class="modal-content">
+    <div class="modal-body">  
+              <form role="form" method="post" class="formulario" enctype="multipart/form-data">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                  <li class="nav-item" role="presentation">
+                    <a class="nav-link active" id="inventario" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Inventario</a>
 
-    </section>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <a class="nav-link" id="bodega" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Bodega</a>
+                  </li>
+                </ul>
+       
+              <!-- TAB INVENTARIO -->
+
+
+         <div class="tab-content" id="myTabContent">
+                      <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="inventario">
+                        <div class="container-fluid mt-4">
+                                  <div class="card-body">
+                                    inventario
+                                  </div>   <!-- CARD BODY --> 
+                        </div>
+                      </div><!-- FIN TAB INVENTARIO -->
+
+                  <!-- TAB BODEGA -->
+    
+                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="bodega">
+                  <div class="container-fluid mt-4">
+                      <div class="card-body">
+                            BODEGA
+                      </div>
+                   </div>
+                 </div> 
+           </div>  
+      </div>    
+ </div> <!-- Fin del TAB -->
+
+
+ 
+
+
+
+
 
   <!-- =======================================
            MODAL AGREGAR USUARIO
   ======================================----->
 
-  <div class="modal fade" id="modalAgregarUsuario" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="modalAgregarInventario" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
       
