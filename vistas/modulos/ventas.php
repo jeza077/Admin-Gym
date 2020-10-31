@@ -55,7 +55,39 @@
                       <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="inventario">
                         <div class="container-fluid mt-4">
                                   <div class="card-body">
-                                    inventario
+                                    
+                                    <!-- CUERPPO INVENTARIO -->
+                                    <div class="card-body">
+            
+                                      <table class="table table-striped table-bordered tablas text-center">
+                                        <thead>
+                                          <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">tipo producto</th>
+                                            <th scope="col">Nombre</th>
+                                            <th scope="col">stock</th>
+                                            <th scope="col">Precio</th>
+                                            <th scope="col">Product min</th>
+                                            <th scope="col">Produc max</th>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                        <?php 
+                                          $tabla = "tbl_inventario";
+                                          $item = null;
+                                          $valor = null;
+                                          $productos = Controladorinventario::mdlMostrarinventario($tabla, $item, $valor);
+
+                                          // echo "<pre>";
+                                          // var_dump($usuarios);
+                                          // echo "</pre>";
+                                        ?>
+                                        
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                    <!-- -------------------------- -->
+
                                   </div>   <!-- CARD BODY --> 
                         </div>
                       </div><!-- FIN TAB INVENTARIO -->
