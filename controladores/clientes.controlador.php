@@ -22,5 +22,54 @@ class ControladorClientes{
         }
 
     }
+    
+   /*=============================================
+				MOSTRAR CLIENTES
+	=============================================*/
+
+	static public function ctrMostrarClientes($tabla, $item, $valor){
+		$tabla1 = "tbl_personas";
+		$tabla2 = $tabla;
+
+		$respuesta = ModeloClientes::mdlMostrarClientes($tabla1, $tabla2, $item, $valor);
+
+		return $respuesta;
+    }
+    /*=============================================
+				MOSTRAR (DINAMICO)
+	=============================================*/
+
+	static public function ctrMostrar($tabla, $item, $valor) {
+
+		$tabla1 = $tabla; 
+		$respuesta = ModeloClientes::mdlMostrar($tabla1, $item, $valor);
+
+		return $respuesta;
+
+    }
+    /*=============================================
+				MOSTRAR INSCRIPCION
+	=============================================*/
+
+	static public function ctrMostrarInscripcion($tabla, $item, $valor) {
+
+		$tabla1 = $tabla; 
+		$respuesta = ModeloClientes::mdlMostrarInscripcion($tabla1, $item, $valor);
+
+		return $respuesta;
+
+    }
+    /*=============================================
+				MOSTRAR DESCUENTOS
+	=============================================*/
+
+	static public function ctrMostrarDescuentos($tabla, $item, $valor) {
+
+		$tabla1 = $tabla; 
+		$respuesta = ModeloClientes::mdlMostrarDescuentos($tabla1, $item, $valor);
+
+		return $respuesta;
+
+	}
 }
 

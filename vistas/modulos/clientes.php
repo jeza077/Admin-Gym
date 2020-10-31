@@ -44,51 +44,41 @@
                     <th scope="col">Nombre</th>
                     <th scope="col">Telefono</th>
                     <th scope="col">Correo</th>
-                    <th scope="col">Fecha</th>
+                    <th scope="col">Fecha inscripcion</th>
                     <th scope="col">Estado</th>
                     <th scope="col">Acciones</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Pedro</td>
-                    <td>33244543</td>
-                    <td>asda@fsdf.ed</td>
-                    <td>23/02/05</td>
-                    <td>
-                        <button class="btn btn-outline-warning"><i class="fas fa-exclamation-triangle"></i></button>
-                      <td>
-                        <button class="btn btn-primary"><i class="fas fa-pencil-alt"></i></button>
-                        <button class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
-                      </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">1</th>
-                      <td>Pedro</td>
-                      <td>33244543</td>
-                      <td>asda@fsdf.ed</td>
-                      <td>23/02/05</td>
-                      <td>
-                        <button class="btn btn-outline-warning"><i class="fas fa-exclamation-triangle"></i></button>
-                      <td>
-                        <button class="btn btn-primary"><i class="fas fa-pencil-alt"></i></button>
-                        <button class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
-                      </td>
-                    </tr>
-                    <tr>
-                    <th scope="row">1</th>
-                    <td>Pedro</td>
-                    <td>33244543</td>
-                    <td>asda@fsdf.ed</td>
-                    <td>23/02/05</td>
-                    <td>
-                        <button class="btn btn-outline-warning"><i class="fas fa-exclamation-triangle"></i></button>
-                      <td>
-                        <button class="btn btn-primary"><i class="fas fa-pencil-alt"></i></button>
-                        <button class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
-                      </td>
-                  </tr>
+                <?php 
+                  $tabla = "tbl_clientes";
+                  $item = null;
+                  $valor = null;
+                  $clientes = ControladorClientes::ctrMostrarClientes($tabla, $item, $valor);
+
+                  // echo "<pre>";
+                  // var_dump($usuarios);
+                  // echo "</pre>";
+
+                  foreach ($clientes as $key => $value) {
+                    echo '
+                          <tr>
+                          <th scope="row">1</th>
+                          <td>'.$value["nombre"].'</td>
+                          <td>'.$value["telefono"].'</td>
+                          <td>'.$value["correo"].'</td>';
+
+                     echo '     
+                          <td>'.$value["fecha_creacion"].'</td>
+                          <td><button class="btn btn-success btn-md">Activado</button></td>
+                          <td>
+                            <button class="btn btn-warning"><i class="fas fa-pencil-alt" style="color:#fff"></i></button>
+                            <button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                          </td>
+                        </tr>
+                    ';
+                  }
+                ?>
                 </tbody>
               </table>
             </div>
@@ -207,68 +197,69 @@
                     </div>
                     <div class="form-group col-md-3">
                       <label>Tipo Matricula</label>
-                      <select class="form-control select2" style="width: 100%;" name="nuevoRol">
+                      <select class="form-control select2" style="width: 100%;" name="nuevaMatricula">
+                          <option selected="selected">Seleccionar...</option>
                         <!-- <option value="2">Default</option> -->
                           <?php 
-                              $tabla = "tbl_roles";
+                              $tabla = "tbl_matricula";
                               $item = null;
                               $valor = null;
 
-                              $roles = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
+                              $matriculas = ControladorClientes::ctrMostrar($tabla, $item, $valor);
 
-                              foreach ($roles as $key => $value) {
-                                if($value["rol"] == 'Default'){
-                                  echo '<option selected="selected" value="'.$value["id_rol"].'">'.$value["rol"].'</option>';
-                                } else {
-                                  echo '<option value="'.$value["id_rol"].'">'.$value["rol"].'</option>';
-                                }
+                              foreach ($matriculas as $key => $value) { ?>
+                                <option value="<?php echo $value['id_matricula']?>"><?php echo $value['tipo_matricula']?></option>        
+                              <?php 
                               }
                           ?>
                       </select>
                     </div>
                     <div class="form-group col-md-3">
                       <label>Tipo inscripcion</label>
-                      <select class="form-control select2" style="width: 100%;" name="nuevoRol">
+                      <select class="form-control select2" style="width: 100%;" name="nuevaInscripcion">
+                          <option selected="selected">Seleccionar...</option>
                         <!-- <option value="2">Default</option> -->
                           <?php 
-                              $tabla = "tbl_roles";
+                              $tabla = "tbl_inscripcion";
                               $item = null;
                               $valor = null;
 
-                              $roles = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
+                              $inscripciones = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
 
-                              foreach ($roles as $key => $value) {
-                                if($value["rol"] == 'Default'){
-                                  echo '<option selected="selected" value="'.$value["id_rol"].'">'.$value["rol"].'</option>';
-                                } else {
-                                  echo '<option value="'.$value["id_rol"].'">'.$value["rol"].'</option>';
-                                }
+                              foreach ($inscripciones as $key => $value) { ?>
+                                <option value="<?php echo $value['id_inscripcion']?>"><?php echo $value['tipo_inscripcion']?></option>        
+                              <?php 
                               }
+
                           ?>
                       </select>
                     </div>
                     <div class="form-group col-md-3">
                       <label>Descuento o
                              Promocion</label>
-                      <select class="form-control select2" style="width: 100%;" name="nuevoRol">
+                      <select class="form-control select2" style="width: 100%;" name="nuevoDescuento">
+                          <option selected="selected">Seleccionar...</option>
                         <!-- <option value="2">Default</option> -->
                           <?php 
-                              $tabla = "tbl_roles";
+                              $tabla = "tbl_promociones_descuentos";
                               $item = null;
                               $valor = null;
 
-                              $roles = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
+                              $descuentos = ControladorClientes::ctrMostrarDescuentos($tabla, $item, $valor);
 
-                              foreach ($roles as $key => $value) {
-                                if($value["rol"] == 'Default'){
-                                  echo '<option selected="selected" value="'.$value["id_rol"].'">'.$value["rol"].'</option>';
-                                } else {
-                                  echo '<option value="'.$value["id_rol"].'">'.$value["rol"].'</option>';
-                                }
+                              foreach ($descuentos as $key => $value) { ?>
+                                <option value="<?php echo $value['id_promociones_descuentos']?>"><?php echo $value['tipo_promociones_descuentos']?></option>        
+                              <?php 
                               }
+
                           ?>
                       </select>
                     </div>
+                  </div>
+               
+                  <div class="form-group col-md-3">
+                      <label for="nombre">Total</label>
+                      <input type="text" class="form-control total" name="nuevoTotal" placeholder="Su total es " required>
                   </div>
 
                   <div class="form-row">
