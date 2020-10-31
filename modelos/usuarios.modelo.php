@@ -12,8 +12,9 @@ class ModeloUsuarios{
 
 		if($item != null){
 
-			$stmt = Conexion::conectar()->prepare("SELECT p.*, u.*, r.rol, m.objeto, rm.agregar, rm.eliminar, rm.actualizar, rm.consulta FROM $tabla1 AS p\n"
+			$stmt = Conexion::conectar()->prepare("SELECT p.*, u.*, tipo_documento, r.rol, m.objeto, rm.agregar, rm.eliminar, rm.actualizar, rm.consulta FROM $tabla1 AS p\n"
 			. " INNER JOIN $tabla2 AS u ON p.id_personas = u.id_persona\n"
+			. " INNER JOIN tbl_documento AS d ON p.id_documento = d.id_documento\n"
 			. " INNER JOIN tbl_roles AS r ON u.id_rol = r.id_rol\n"
 			. " INNER JOIN tbl_permisos AS rm ON r.id_rol = rm.id_rol\n"
 			. " INNER JOIN tbl_objetos AS m ON rm.id_objeto = m.id_objetos\n"
@@ -25,7 +26,7 @@ class ModeloUsuarios{
 
 		} else {
 
-			$stmt = Conexion::conectar()->prepare("SELECT p.*, u.usuario, u.password, u.foto, u.primera_vez, u.id_usuario, r.rol FROM $tabla1 AS p\n"
+			$stmt = Conexion::conectar()->prepare("SELECT p.*, u.*, r.rol FROM $tabla1 AS p\n"
 					. " INNER JOIN $tabla2 AS u ON p.id_personas = u.id_persona\n"
 					. " INNER JOIN tbl_roles AS r ON u.id_rol = r.id_rol");
 			$stmt -> execute();

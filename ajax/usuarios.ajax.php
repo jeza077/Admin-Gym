@@ -8,16 +8,17 @@ class AjaxUsuarios{
                 EDITAR USUARIO
     =============================================*/
 
-    // public $idUsuario;
+    public $idPersonaUsuario;
 
-    // public function ajaxEditarUsuarios(){
-    //     $item = "id";
-    //     $valor = $this->idUsuario;
-    //     $respuesta = ControladorUsuarios::ctrMostrarUsuarios($item, $valor);
+    public function ajaxEditarUsuarios(){
+        $tabla = "tbl_usuarios";
+        $item = "id_personas";
+        $valor = $this->idPersonaUsuario;
+        $respuesta = ControladorUsuarios::ctrMostrarUsuarios($tabla, $item, $valor);
 
-    //     echo json_encode($respuesta);
+        echo json_encode($respuesta);
 
-    // }
+    }
 
     /*=============================================
                 ACTIVAR USUARIO
@@ -170,11 +171,11 @@ class AjaxUsuarios{
 /*=============================================
             EDITAR USUARIO
 =============================================*/
-// if(isset($_POST["idUsuario"])){
-//     $editar = new AjaxUsuarios();
-//     $editar->idUsuario = $_POST["idUsuario"];
-//     $editar->ajaxEditarUsuarios();
-// }
+if(isset($_POST["idPersonaUsuario"])){
+    $editar = new AjaxUsuarios();
+    $editar->idPersonaUsuario = $_POST["idPersonaUsuario"];
+    $editar->ajaxEditarUsuarios();
+}
 
 /*=============================================
             ACTIVAR USUARIO

@@ -16,11 +16,15 @@ class ControladorPersonas{
 
     static public function ctrCrearPersona($tipoPersona, $pantalla){
 
+        // echo "<pre>";
         // var_dump($_POST);
-        // return;
+        // // return;
 
         // var_dump($_FILES);
+        // echo "</pre>";
+   
         // return;
+
         if(isset($_POST["nuevoNombre"])){
 
             if(preg_match('/^[a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevoNombre"]) && 
@@ -171,6 +175,7 @@ class ControladorPersonas{
                     $respuestaPersona = ModeloPersonas::mdlCrearPersona($tabla, $datos);
                     
                     if($respuestaPersona == true){
+                        
                         $totalId = array();
                         $tabla = "tbl_personas";
                         // $tabla2 = null;
@@ -234,6 +239,7 @@ class ControladorPersonas{
                         $crearCliente = ControladorClientes::ctrCrearCliente($datos);
 
                         if($crearCliente == true){
+                            
                             echo '<script>
                                     Swal.fire({
                                         title: "Cliente guardado correctamente!",

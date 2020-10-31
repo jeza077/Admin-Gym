@@ -103,12 +103,12 @@ $('#generarPassword').on('click', function () {
     $('.passwordGenerado').val(clave);
     if(/^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%+.])\S{8,16}$/.test(clave)){
         $('.passwordGenerado').addClass('border-valid').removeClass('border-invalid');
-        console.log('bien');
+        // console.log('bien');
     } else {
         $('.passwordGenerado').addClass('border-invalid').removeClass('border-valid');
-        console.log('mal');
+        // console.log('mal');
     }
-    console.log(clave);
+    // console.log(clave);
 });
 
 //** FUNCION PARA GENERAR CONTRASEÑAS ALEATORIAMENTE */

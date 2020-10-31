@@ -34,8 +34,8 @@ $('.nuevoUsuario').keyup(function (){
 
 })
 
-//** SUBIR FOTO DEL USUARIO-EMPLEADO *//
 
+//** SUBIR FOTO DEL USUARIO-EMPLEADO *//
 $(".nuevaFoto").change(function () { 
     var imagen = this.files[0];
     // console.log(imagen)
@@ -71,4 +71,49 @@ $(".nuevaFoto").change(function () {
             $(".previsualizar").attr("src", rutaImagen);
         });
     }
+});
+
+
+//** ---------------------*/
+//      EDITAR USUARIO 
+// -----------------------*/ 
+$('.btnEditarUsuario').click(function (e) { 
+    e.preventDefault();
+    var idPersonaUsuario = $(this).attr('idUsuario');
+    // console.log(idPersonaUsuario);
+
+    var datos = new FormData();
+    datos.append('idPersonaUsuario', idPersonaUsuario);
+
+    $.ajax({
+
+        url:"ajax/usuarios.ajax.php",
+        method: "POST",
+        data: datos,
+        cache: false,
+        contentType: false,
+        processData: false,  
+        dataType: "json",
+        success: function(respuesta) {
+            console.log(respuesta);
+
+            $('#editarTipoDocumento').html(respuesta['tipo_documento']);
+            $('input[name=editarNumeroDocumento]').val(respuesta['num_documento']);
+            $('input[name=editarNombre]').val(respuesta['nombre']);
+            $('input[name=editarApellido]').val(respuesta['apellidos']);
+            $('input[name=editarEmail]').val(respuesta['correo']);
+            $('input[name=editarTelefono]').val(respuesta['telefono']);
+            $('input[name=editarFechaNacimiento]').val(respuesta['fecha_nacimiento']);
+            $('input[name=editarDireccion]').val(respuesta['direccion']);
+            $('#editarSexo').html(respuesta['sexo']);
+            $('input[name=editarUsuario]').val(respuesta['usuario']);
+            $('#editarRol').html(respuesta['rol']);
+            $('#passwordActual').val(respuesta['password']);
+            if(respuesta['foto'] != ""){
+                $('.previsualizar').attr('src', respuesta['foto']);
+            } 
+        }
+
+    });
+
 });
