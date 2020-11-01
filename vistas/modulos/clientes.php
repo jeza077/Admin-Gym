@@ -42,8 +42,8 @@
                   <tr>
                     <th scope="col">#</th>
                     <th scope="col">Nombre</th>
-                    <th scope="col">Telefono</th>
                     <th scope="col">Correo</th>
+                    <th scope="col">Telefono</th>
                     <th scope="col">Fecha inscripcion</th>
                     <th scope="col">Estado</th>
                     <th scope="col">Acciones</th>
@@ -65,8 +65,8 @@
                           <tr>
                           <th scope="row">1</th>
                           <td>'.$value["nombre"].'</td>
-                          <td>'.$value["telefono"].'</td>
-                          <td>'.$value["correo"].'</td>';
+                          <td>'.$value["correo"].'</td>
+                          <td>'.$value["telefono"].'</td>';
 
                      echo '     
                           <td>'.$value["fecha_creacion"].'</td>
@@ -192,10 +192,6 @@
 
                   <div class="form-row">
                     <div class="form-group col-md-3">
-                      <label for="">Cliente</label>
-                      <input type="text" class="form-control nuevoCliente" onKeyUp="this.value=this.value.toUpperCase();" name="nuevoCliente" placeholder="Ingrese Cliente">
-                    </div>
-                    <div class="form-group col-md-3">
                       <label>Tipo Matricula</label>
                       <select class="form-control select2" style="width: 100%;" name="nuevaMatricula">
                           <option selected="selected">Seleccionar...</option>
@@ -256,11 +252,7 @@
                       </select>
                     </div>
                   </div>
-               
-                  <div class="form-group col-md-3">
-                      <label for="nombre">Total</label>
-                      <input type="text" class="form-control total" name="nuevoTotal" placeholder="Su total es " required>
-                  </div>
+                  <button class="btn btn-success">Actualizar pago <i class="fas fa-sync"></i></button>
 
                   <div class="form-row">
                     <div class="form-group col-md-3">
@@ -279,8 +271,6 @@
                         date_default_timezone_set("America/Tegucigalpa");
                         $fechaVencimiento = date("Y-m-d", strtotime('+'.$vigenciaUsuario.' days'));
                       ?>
-                      <label>Fecha de vencimiento</label>
-                      <input type="text" class="form-control" value="<?php echo $fechaVencimiento?>" disabled>
                     </div>
                   </div>
                 </div>
