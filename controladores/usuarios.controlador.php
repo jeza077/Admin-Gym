@@ -565,9 +565,9 @@ class ControladorUsuarios{
 
 			if(preg_match('/^[A-Z]+$/', $datos["usuario"])){
 
-				// $emailUsuario = $datos["email"];
-				// $contraSinEncriptar = $datos["password"];
-				// $nombre = $datos["nombre"];
+				$emailUsuario = $datos["email"];
+				$contraSinEncriptar = $datos["password_nueva"];
+				$nombre = $datos["nombre"];
 
 				// echo $emailUsuario;
 				// echo $contraSinEncriptar;
@@ -678,8 +678,7 @@ class ControladorUsuarios{
 									   "usuario" => $datos["usuario"],
 									   "password" => $encriptar,
 									   "rol" => $datos["rol"],
-									   "foto" => $ruta,
-									   "fecha_vencimiento" => $fechaVencimiento);
+									   "foto" => $ruta);
 
 						// return var_dump($datos);
 
@@ -689,26 +688,33 @@ class ControladorUsuarios{
 
 						if($respuestaEmpleado == true){
 
-							return true;
+							// return true;
 
-							// $email = $emailUsuario;
-							// $nombreUsuario = $datos["usuario"];
-							// $contraseña =  $contraSinEncriptar;
-							// $asunto = 'Envio de Usuario y Contraseña';
-							// $require = false;
+							if($contraSinEncriptar != ""){
 
-							// $template = 'Hola '.$nombre.'! <br><br> Tu usuario es: '.$nombreUsuario.' <br> Tu contraseña es: '.$contraseña; 
+								$nombreUsuario = $datos["usuario"];
+								$email = $emailUsuario;
+								$contraseña =  $contraSinEncriptar;
+								$asunto = 'Envio de Contraseña Nueva';
+								$require = false;
+	
+								$template = 'Hola '.$nombreUsuario.'! <br><br> Tu contraseña es: '.$contraseña; 
+								
+								$respuestaCorreo = ControladorUsuarios::ctrGenerarCorreo($email, $nombreUsuario, $asunto, $template, $require);
 							
-							// $respuestaCorreo = ControladorUsuarios::ctrGenerarCorreo($email, $nombreUsuario, $asunto, $template, $require);
+								if($respuestaCorreo = true){
 
-							// if($respuestaCorreo = true){
+									return true;
+	
+								} else {
+	
+									return false;
+								}
+								
+							} else {
 
-							// 	return true;
-
-							// } else {
-
-							// 	return false;
-							// }
+								return true;
+							}
 
 						} else {
 							
