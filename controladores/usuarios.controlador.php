@@ -681,6 +681,8 @@ class ControladorUsuarios{
 									   "foto" => $ruta,
 									   "fecha_vencimiento" => $fechaVencimiento);
 
+						// return var_dump($datos);
+
 						$respuestaEmpleado = ModeloUsuarios::mdlEditarUsuario($tabla, $datos);
 
 						// return var_dump($respuestaEmpleado);
@@ -689,24 +691,24 @@ class ControladorUsuarios{
 
 							return true;
 
-							$email = $emailUsuario;
-							$nombreUsuario = $datos["usuario"];
-							$contraseña =  $contraSinEncriptar;
-							$asunto = 'Envio de Usuario y Contraseña';
-							$require = false;
+							// $email = $emailUsuario;
+							// $nombreUsuario = $datos["usuario"];
+							// $contraseña =  $contraSinEncriptar;
+							// $asunto = 'Envio de Usuario y Contraseña';
+							// $require = false;
 
-							$template = 'Hola '.$nombre.'! <br><br> Tu usuario es: '.$nombreUsuario.' <br> Tu contraseña es: '.$contraseña; 
+							// $template = 'Hola '.$nombre.'! <br><br> Tu usuario es: '.$nombreUsuario.' <br> Tu contraseña es: '.$contraseña; 
 							
-							$respuestaCorreo = ControladorUsuarios::ctrGenerarCorreo($email, $nombreUsuario, $asunto, $template, $require);
+							// $respuestaCorreo = ControladorUsuarios::ctrGenerarCorreo($email, $nombreUsuario, $asunto, $template, $require);
 
-							if($respuestaCorreo = true){
+							// if($respuestaCorreo = true){
 
-								return true;
+							// 	return true;
 
-							} else {
+							// } else {
 
-								return false;
-							}
+							// 	return false;
+							// }
 
 						} else {
 							

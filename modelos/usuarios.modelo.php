@@ -185,15 +185,15 @@ class ModeloUsuarios{
 	/*=============================================
 				EDITAR USUARIOS	
 	=============================================*/	 
-	static public function mdlEditarPersona($tabla, $datos){
+	static public function mdlEditarUsuario($tabla, $datos){
 
-		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET usuario = :usuario, password = :password, foto = :foto, fecha_vencimiento = :fecha_vencimiento, rol = :rol WHERE id_persona = :id_persona");
+		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET usuario = :usuario, password = :password, foto = :foto, fecha_vencimiento = :fecha_vencimiento, id_rol = :id_rol WHERE id_persona = :id_persona");
 
 		$stmt->bindParam(":usuario", $datos["usuario"], PDO::PARAM_STR);
 		$stmt->bindParam(":password", $datos["password"], PDO::PARAM_STR);
 		$stmt->bindParam(":foto", $datos["foto"], PDO::PARAM_STR);
 		$stmt->bindParam(":fecha_vencimiento", $datos["fecha_vencimiento"], PDO::PARAM_STR);
-		$stmt->bindParam(":rol", $datos["rol"], PDO::PARAM_INT);
+		$stmt->bindParam(":id_rol", $datos["rol"], PDO::PARAM_INT);
 		$stmt->bindParam(":id_persona", $datos["id_persona"], PDO::PARAM_INT);
 
 		if($stmt->execute()){

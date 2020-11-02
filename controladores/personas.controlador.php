@@ -339,12 +339,13 @@ class ControladorPersonas{
                                     "password_actual" => $_POST["passwordActual"],
                                     "rol" => $_POST["editarRol"],
                                     "foto_nueva" => $_FILES["editarFoto"],
-                                    "foto_actual" => $_FILES["fotoActual"],
+                                    "foto_actual" => $_POST["fotoActual"],
                                     "email" => $_POST["editarEmail"]);
 
-                        $crearUsuario = ControladorUsuarios::ctrEditarUsuario($datos);
+                        $editarUsuario = ControladorUsuarios::ctrEditarUsuario($datos);
 
-                        if($crearUsuario == true){
+                        if($editarUsuario == true){
+                            // return;
                             echo '<script>
                                     Swal.fire({
                                         title: "Usuario editado correctamente!",
