@@ -111,7 +111,7 @@ $('.btnEditarUsuario').click(function (e) {
             $('#editarSexo').val(respuesta['sexo']); 
             $('input[name=editarUsuario]').val(respuesta['usuario']);
             $('#editarRol').html(respuesta['rol']);
-            $('#editarRol').val(respuesta['rol']);
+            $('#editarRol').val(respuesta['id_rol']);
             $('#passwordActual').val(respuesta['password']);
             $('#fotoActual').val(respuesta['foto']);
             if(respuesta['foto'] != ""){
