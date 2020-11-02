@@ -228,7 +228,7 @@
                       <input type="text" class="form-control passwordGenerado" id="inputPassword4" name="nuevoPassword">
                     </div>
                     <div class="col-md-3">
-                      <a href="javascript:void(0);"  class="btn btn-block btn-orange" id="generarPassword" style="margin-top:2em">Generar contraseña</a>
+                      <a href="javascript:void(0);"  class="btn btn-block btn-orange generarPassword" style="margin-top:2em">Generar contraseña</a>
                     </div>
                   </div>
 
@@ -380,7 +380,7 @@
                         <option value="F">Femenino</option>
                       </select>
                     </div>
-                
+                    <input type="hidden" class="idPersona" value="" name="idPersona">
                   </div>
                 </div>
               </div>
@@ -421,7 +421,7 @@
                       <input type="hidden" class="form-control" id="passwordActual" name="passwordActual">
                     </div>
                     <div class="col-md-3">
-                      <a href="javascript:void(0);"  class="btn btn-block btn-orange" id="generarPassword" style="margin-top:2em">Generar contraseña</a>
+                      <a href="javascript:void(0);"  class="btn btn-block btn-orange generarPassword" style="margin-top:2em">Generar contraseña</a>
                     </div>
                   </div>
 
@@ -433,16 +433,16 @@
                         <div class="custom-file">
                           <input type="file" class="custom-file-input nuevaFoto" id="inputFoto" name="editarFoto">
                           <label class="custom-file-label" for="inputFoto">Escoger foto</label>
+                          <input type="hidden" name="fotoActual" id="fotoActual">
                         </div>
                       </div>
                           <p class="p-foto help-block ml-4">Peso máximo de la foto 2 MB</p>
                     </div>
                     <!-- <div class="form-group col-md-3">
-                      <label>Estado</label>
-                      <input type="text" class="form-control" value="Desactivado" style="color:red;" disabled>
-                    </div>
+                      <input type="text" value="Desactivado" style="color:red;" readonly>
+                    </div> -->
 
-                    <div class="form-group col-md-3">
+                    <!-- <div class="form-group col-md-3">
                       <?php 
                         $itemParam = 'parametro';
                         $valorParam = 'ADMIN_DIAS_VIGENCIA';
@@ -468,8 +468,8 @@
                 <?php
                   $tipoPersona = 'usuarios';
                   $pantalla = 'usuarios';
-                  // $ingresarPersona = new ControladorPersonas();
-                  // $ingresarPersona->ctrCrearPersona($tipoPersona, $pantalla);
+                  $ingresarPersona = new ControladorPersonas();
+                  $ingresarPersona->ctrEditarPersona($tipoPersona, $pantalla);
                 ?>
               </div>
             </div>

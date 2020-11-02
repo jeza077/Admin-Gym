@@ -97,7 +97,9 @@ $('.btnEditarUsuario').click(function (e) {
         success: function(respuesta) {
             console.log(respuesta);
 
+            $('.idPersona').val(respuesta['id_personas']);
             $('#editarTipoDocumento').html(respuesta['tipo_documento']);
+            $('#editarTipoDocumento').val(respuesta['id_documento']);
             $('input[name=editarNumeroDocumento]').val(respuesta['num_documento']);
             $('input[name=editarNombre]').val(respuesta['nombre']);
             $('input[name=editarApellido]').val(respuesta['apellidos']);
@@ -106,9 +108,12 @@ $('.btnEditarUsuario').click(function (e) {
             $('input[name=editarFechaNacimiento]').val(respuesta['fecha_nacimiento']);
             $('input[name=editarDireccion]').val(respuesta['direccion']);
             $('#editarSexo').html(respuesta['sexo']);
+            $('#editarSexo').val(respuesta['sexo']); 
             $('input[name=editarUsuario]').val(respuesta['usuario']);
             $('#editarRol').html(respuesta['rol']);
+            $('#editarRol').val(respuesta['rol']);
             $('#passwordActual').val(respuesta['password']);
+            $('#fotoActual').val(respuesta['foto']);
             if(respuesta['foto'] != ""){
                 $('.previsualizar').attr('src', respuesta['foto']);
             } 

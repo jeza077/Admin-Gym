@@ -385,7 +385,7 @@ class ControladorUsuarios{
 	}
 
 	/*=============================================
-			REGISTRO DE PERSONAS
+			REGISTRO DE USUARIOS
 	=============================================*/
 	static public function ctrCrearUsuario($datos){
 
@@ -553,6 +553,193 @@ class ControladorUsuarios{
 
 	}
 
+
+	/*=============================================
+			EDITAR USUARIOS
+	=============================================*/
+	static public function ctrEditarUsuario($datos){
+
+		// return var_dump($datos);
+		// return;
+		if(isset($datos["usuario"])){
+
+			if(preg_match('/^[A-Z]+$/', $datos["usuario"])){
+
+				// $emailUsuario = $datos["email"];
+				// $contraSinEncriptar = $datos["password"];
+				// $nombre = $datos["nombre"];
+
+				// echo $emailUsuario;
+				// echo $contraSinEncriptar;
+				// echo $nombre;
+
+				// return;
+
+					/*=============================================
+							VALIDAR IMAGEN
+					=============================================*/
+
+					$ruta = $datos['foto_actual'];
+
+					if(isset($datos["foto_nueva"]["tmp_name"]) && !empty($datos["foto_nueva"]["tmp_name"])){
+
+						list($ancho, $alto) = getimagesize($datos["foto_nueva"]["tmp_name"]);
+
+						$nuevoAncho = 500;
+						$nuevoAlto = 500;
+
+						/*==============================================================
+						CREAMOS EL DIRECTORIO DONDE VAMOS A GUARDAR LA FOTO DEL USUARIO
+						===============================================================*/
+
+						$directorio = "vistas/img/usuarios/".$datos["usuario"];
+
+						// PRIMERO PREGUNTAMOS SI EXISTE OTRA IMAGEN EN LA BASE DE DATOS 
+						if(!empty($datos['foto_actual'])){
+				
+							unlink($datos['foto_actual']); 
+		
+						} else {
+
+							mkdir($directorio, 0755); 
+						}
+
+
+						/*=====================================================================
+						DE ACUERDO AL TIPO DE IMAGEN APLICAMOS LAS FUNCIONES POR DEFECTO DE PHP
+						======================================================================*/
+
+						if($datos["foto_nueva"]["type"] == "image/jpeg"){
+
+							/*=============================================
+							GUARDAMOS LA IMAGEN EN EL DIRECTORIO
+							=============================================*/
+
+							$aleatorio = mt_rand(100,999);
+
+							$ruta = "vistas/img/usuarios/".$datos["usuario"]."/".$aleatorio.".jpg";
+
+							$origen = imagecreatefromjpeg($datos["foto_nueva"]["tmp_name"]);
+
+							$destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+
+							imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+
+							imagejpeg($destino, $ruta);
+
+						}
+
+						if($datos["foto_nueva"]["type"] == "image/png"){
+
+							/*=============================================
+							GUARDAMOS LA IMAGEN EN EL DIRECTORIO
+							=============================================*/
+
+							$aleatorio = mt_rand(100,999);
+
+							$ruta = "vistas/img/usuarios/".$datos["usuario"]."/".$aleatorio.".png";
+
+							$origen = imagecreatefrompng($datos["foto_nueva"]["tmp_name"]);
+
+							$destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+
+							imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+
+							imagepng($destino, $ruta);
+
+						}
+
+					}
+					
+					if($datos['password_nueva'] != ""){
+						if(preg_match('/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%.])\S{8,16}$/', $datos["password_nueva"])){
+
+							//**================= ENCRIPTAMOS LA CONTRASEÑA ===================*/
+							$encriptar = crypt($datos["password_nueva"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
+						} 
+
+					} else {
+						$encriptar = $datos['password_actual'];
+					}
+
+
+						//** =============== CREAMOS LA FECHA VENCIMIENTO DEL USUARIO =================*/
+						$item = 'parametro';
+						$valor = 'ADMIN_DIAS_VIGENCIA';
+						$parametros = ControladorUsuarios::ctrMostrarParametros($item, $valor);
+				
+						$vigenciaUsuario = $parametros['valor'];
+						
+						date_default_timezone_set("America/Tegucigalpa");
+						$fechaVencimiento = date("Y-m-d H:i:s", strtotime('+'.$vigenciaUsuario.' days'));
+
+						$tabla = "tbl_usuarios";
+						$datos = array("id_persona" => $datos["id_persona"],
+									   "usuario" => $datos["usuario"],
+									   "password" => $encriptar,
+									   "rol" => $datos["rol"],
+									   "foto" => $ruta,
+									   "fecha_vencimiento" => $fechaVencimiento);
+
+						$respuestaEmpleado = ModeloUsuarios::mdlEditarUsuario($tabla, $datos);
+
+						// return var_dump($respuestaEmpleado);
+
+						if($respuestaEmpleado == true){
+
+							return true;
+
+							$email = $emailUsuario;
+							$nombreUsuario = $datos["usuario"];
+							$contraseña =  $contraSinEncriptar;
+							$asunto = 'Envio de Usuario y Contraseña';
+							$require = false;
+
+							$template = 'Hola '.$nombre.'! <br><br> Tu usuario es: '.$nombreUsuario.' <br> Tu contraseña es: '.$contraseña; 
+							
+							$respuestaCorreo = ControladorUsuarios::ctrGenerarCorreo($email, $nombreUsuario, $asunto, $template, $require);
+
+							if($respuestaCorreo = true){
+
+								return true;
+
+							} else {
+
+								return false;
+							}
+
+						} else {
+							
+							return false;
+
+						}
+
+			} else {
+
+				echo "<script>
+					Swal.fire({
+							icon: 'error',
+							title: '¡Llenar campos correctamente!',
+						})
+					</script>";
+
+			}
+
+						
+
+		} else{
+
+				echo "<script>
+						Swal.fire({
+							icon: 'error',
+							title: '¡Llenar campos correctamente!',
+						})
+					</script>";
+
+		}
+
+
+	}
 
 	/*=============================================
                 MOSTRAR PREGUNTAS

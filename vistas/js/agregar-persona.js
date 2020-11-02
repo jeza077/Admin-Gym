@@ -98,7 +98,7 @@ function validarInputsVacios(selector) {
 
 
 //** GENERAR CONTRASEÑAS ALEATORIAMENTE */
-$('#generarPassword').on('click', function () {
+$('.generarPassword').on('click', function () {
     var clave = generar_contrasenya(10);
     $('.passwordGenerado').val(clave);
     if(/^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%+.])\S{8,16}$/.test(clave)){
