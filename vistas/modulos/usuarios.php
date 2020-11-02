@@ -26,11 +26,6 @@
       $permisoActualizar = $_SESSION['permisos']['Usuarios']['actualizar'];
       $permisoConsulta = $_SESSION['permisos']['Usuarios']['consulta'];
 
-      // var_dump($_SESSION['perm']);
-
-      // foreach ($permisos_pantalla as $key => $value) {
-      //   echo $key;
-      // }
     ?>
 
         <div class="card">
@@ -63,7 +58,7 @@
                   foreach ($usuarios as $key => $value) {
                     echo '
                           <tr>
-                          <th scope="row">1</th>
+                          <td scope="row">1</td>
                           <td>'.$value["nombre"].'</td>
                           <td>'.$value["usuario"].'</td>';
 
@@ -73,14 +68,20 @@
                             echo '<td><img src="vistas/img/usuarios/default/anonymous.png" class="img-thumbnail" width="40px"></td>';
                           }
 
-                     echo '     
-                          <td>'.$value["rol"].'</td>
-                          <td><button class="btn btn-success btn-md">Activado</button></td>
-                          <td>
-                            <button class="btn btn-warning btnEditarUsuario" idUsuario="'.$value["id_personas"].'" data-toggle="modal" data-target="#modalEditarUsuario"><i class="fas fa-pencil-alt" style="color:#fff"></i></button>
-                            <button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
-                          </td>
-                        </tr>
+                     echo '<td>'.$value["rol"].'</td>';
+
+                          if($value['estado'] != 0){
+                            echo '<td><button class="btn btn-success btn-md btnActivar" idUsuario="'.$value["id_usuario"].'" estadoUsuario="0">Activado</button></td>';
+                          } else {
+                            echo '<td><button class="btn btn-danger btn-md btnActivar" idUsuario="'.$value["id_usuario"].'" estadoUsuario="1">Desactivado</button></td>';
+                          }
+                          
+                     
+                     echo '<td>
+                              <button class="btn btn-warning btnEditarUsuario" idUsuario="'.$value["id_personas"].'" data-toggle="modal" data-target="#modalEditarUsuario"><i class="fas fa-pencil-alt" style="color:#fff"></i></button>
+                              <button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                            </td>
+                          </tr>
                     ';
                   }
                 ?>

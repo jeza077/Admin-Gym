@@ -77,7 +77,7 @@ $(".nuevaFoto").change(function () {
 //** ---------------------*/
 //      EDITAR USUARIO 
 // -----------------------*/ 
-$('.btnEditarUsuario').click(function (e) { 
+$('.btnEditarUsuario').on('click', function (e) { 
     e.preventDefault();
     var idPersonaUsuario = $(this).attr('idUsuario');
     // console.log(idPersonaUsuario);
@@ -121,4 +121,46 @@ $('.btnEditarUsuario').click(function (e) {
 
     });
 
+});
+
+
+
+//** ---------------------*/
+//      ACTIVAR USUARIO 
+// -----------------------*/ 
+$('.btnActivar').click(function (e) { 
+    e.preventDefault();
+    var idUsuario = $(this).attr('idUsuario');
+    var estadoUsuario = $(this).attr('estadoUsuario');
+
+    var datos = new FormData();
+    datos.append('activarId', idUsuario);
+    datos.append('activarUsuario', estadoUsuario);
+
+    $.ajax({
+
+        url:"ajax/usuarios.ajax.php",
+        method: "POST",
+        data: datos,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function(respuesta) {
+
+        }
+
+    });
+
+    if(estadoUsuario == 0){
+        $(this).removeClass('btn-success');
+        $(this).addClass('btn-danger');
+        $(this).html('Desactivado');
+        $(this).attr('estadoUsuario',1);
+
+    } else {
+        $(this).removeClass('btn-danger');
+        $(this).addClass('btn-success');
+        $(this).html('Activado');
+        $(this).attr('estadoUsuario',0);
+    }
 });

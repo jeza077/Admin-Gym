@@ -569,12 +569,6 @@ class ControladorUsuarios{
 				$contraSinEncriptar = $datos["password_nueva"];
 				$nombre = $datos["nombre"];
 
-				// echo $emailUsuario;
-				// echo $contraSinEncriptar;
-				// echo $nombre;
-
-				// return;
-
 					/*=============================================
 							VALIDAR IMAGEN
 					=============================================*/
@@ -663,64 +657,64 @@ class ControladorUsuarios{
 					}
 
 
-						//** =============== CREAMOS LA FECHA VENCIMIENTO DEL USUARIO =================*/
-						$item = 'parametro';
-						$valor = 'ADMIN_DIAS_VIGENCIA';
-						$parametros = ControladorUsuarios::ctrMostrarParametros($item, $valor);
-				
-						$vigenciaUsuario = $parametros['valor'];
-						
-						date_default_timezone_set("America/Tegucigalpa");
-						$fechaVencimiento = date("Y-m-d H:i:s", strtotime('+'.$vigenciaUsuario.' days'));
+					//** =============== CREAMOS LA FECHA VENCIMIENTO DEL USUARIO =================*/
+					$item = 'parametro';
+					$valor = 'ADMIN_DIAS_VIGENCIA';
+					$parametros = ControladorUsuarios::ctrMostrarParametros($item, $valor);
+			
+					$vigenciaUsuario = $parametros['valor'];
+					
+					date_default_timezone_set("America/Tegucigalpa");
+					$fechaVencimiento = date("Y-m-d H:i:s", strtotime('+'.$vigenciaUsuario.' days'));
 
-						$tabla = "tbl_usuarios";
-						$datos = array("id_persona" => $datos["id_persona"],
-									   "usuario" => $datos["usuario"],
-									   "password" => $encriptar,
-									   "rol" => $datos["rol"],
-									   "foto" => $ruta);
+					$tabla = "tbl_usuarios";
+					$datos = array("id_persona" => $datos["id_persona"],
+									"usuario" => $datos["usuario"],
+									"password" => $encriptar,
+									"rol" => $datos["rol"],
+									"foto" => $ruta);
 
-						// return var_dump($datos);
+					// return var_dump($datos);
 
-						$respuestaEmpleado = ModeloUsuarios::mdlEditarUsuario($tabla, $datos);
+					$respuestaEmpleado = ModeloUsuarios::mdlEditarUsuario($tabla, $datos);
 
-						// return var_dump($respuestaEmpleado);
+					// return var_dump($respuestaEmpleado);
 
-						if($respuestaEmpleado == true){
+					if($respuestaEmpleado == true){
 
-							// return true;
+						// return true;
 
-							if($contraSinEncriptar != ""){
+						if($contraSinEncriptar != ""){
 
-								$nombreUsuario = $datos["usuario"];
-								$email = $emailUsuario;
-								$contraseña =  $contraSinEncriptar;
-								$asunto = 'Envio de Contraseña Nueva';
-								$require = false;
-	
-								$template = 'Hola '.$nombreUsuario.'! <br><br> Tu contraseña es: '.$contraseña; 
-								
-								$respuestaCorreo = ControladorUsuarios::ctrGenerarCorreo($email, $nombreUsuario, $asunto, $template, $require);
+							$nombreUsuario = $datos["usuario"];
+							$email = $emailUsuario;
+							$contraseña =  $contraSinEncriptar;
+							$asunto = 'Envio de Contraseña Nueva';
+							$require = false;
+
+							$template = 'Hola '.$nombreUsuario.'! <br><br> Tu contraseña es: '.$contraseña; 
 							
-								if($respuestaCorreo = true){
-
-									return true;
-	
-								} else {
-	
-									return false;
-								}
-								
-							} else {
+							$respuestaCorreo = ControladorUsuarios::ctrGenerarCorreo($email, $nombreUsuario, $asunto, $template, $require);
+						
+							if($respuestaCorreo = true){
 
 								return true;
+
+							} else {
+
+								return false;
 							}
 
 						} else {
-							
-							return false;
 
+							return true;
 						}
+
+					} else {
+						
+						return false;
+
+					}
 
 			} else {
 
@@ -731,9 +725,7 @@ class ControladorUsuarios{
 						})
 					</script>";
 
-			}
-
-						
+			}					
 
 		} else{
 
