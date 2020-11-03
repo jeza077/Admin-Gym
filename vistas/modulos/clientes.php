@@ -197,20 +197,8 @@
                     <div class="form-group col-md-3">
                         <label>Tipo matricula</label>
                         <select class="form-control select2" style="width: 100%;" name="nuevaMatricula">
-                          <option selected="selected">Seleccionar...</option>
-                          
-                            <?php 
-                                $tabla = "tbl_matricula";
-                                $item = null;
-                                $valor = null;
-
-                                $matriculas = ControladorClientes::ctrMostrar($tabla, $item, $valor);
-
-                                foreach ($matriculas as $key => $value) { ?>
-                                  <option value="<?php echo $value['id_matricula']?>"><?php echo $value['tipo_matricula']?></option>        
-                                <?php 
-                                }
-                            ?>
+                          <option selected="selected" value="1">normal</option>
+                           
                         </select> 
                       </div>
                     </div>
