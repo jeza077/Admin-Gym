@@ -8,7 +8,7 @@ class ModeloClientes{
 	 
 	static public function mdlCrearCliente($tabla, $datos){
 
-		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(id_persona, id_inscripcion, id_matricula, id_descuentos_promociones) VALUES (:id_persona, :id_inscripcion, : id_matricula, :id_descuentos_promociones)");
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(id_persona, id_inscripcion, id_matricula, id_descuentos_promociones) VALUES (:id_persona, :id_inscripcion, :id_matricula, :id_descuentos_promociones)");
 
 		$stmt->bindParam(":id_persona", $datos["id_persona"], PDO::PARAM_INT);
 		$stmt->bindParam(":id_inscripcion", $datos["id_inscripcion"], PDO::PARAM_INT);
@@ -73,56 +73,6 @@ class ModeloClientes{
 	=============================================*/
 
 	static public function mdlMostrar($tabla, $item, $valor){
-
-		if($item != null){
-
-			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item");
-			$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
-			$stmt -> execute();
-			return $stmt -> fetch();
-
-		} else {
-
-			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla");
-			$stmt -> execute();
-			return $stmt -> fetchAll();
-
-		}
-
-		$stmt -> close();
-		$stmt = null;
-		
-	} 
-	/*=============================================
-			MOSTRAR INSCRIPCION
-	=============================================*/
-
-	static public function mdlMostrarInscripcion($tabla, $item, $valor){
-
-		if($item != null){
-
-			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item");
-			$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
-			$stmt -> execute();
-			return $stmt -> fetch();
-
-		} else {
-
-			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla");
-			$stmt -> execute();
-			return $stmt -> fetchAll();
-
-		}
-
-		$stmt -> close();
-		$stmt = null;
-		
-	} 
-	/*=============================================
-			MOSTRAR DESCUENTOS
-	=============================================*/
-
-	static public function mdlMostrarDescuentos($tabla, $item, $valor){
 
 		if($item != null){
 

@@ -194,9 +194,24 @@
               <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="datosCLiente">
                 <div class="container-fluid mt-4">
                     <div class="form-row">
-                      <div class="form-group col-md-4">
-                        <label>Matricula general</label>
-                        <input type="text" class="form-control" placeholder=" 50 Lps. "  required onlyread>
+                    <div class="form-group col-md-3">
+                        <label>Tipo matricula</label>
+                        <select class="form-control select2" style="width: 100%;" name="nuevaMatricula">
+                          <option selected="selected">Seleccionar...</option>
+                          
+                            <?php 
+                                $tabla = "tbl_matricula";
+                                $item = null;
+                                $valor = null;
+
+                                $matriculas = ControladorClientes::ctrMostrar($tabla, $item, $valor);
+
+                                foreach ($matriculas as $key => $value) { ?>
+                                  <option value="<?php echo $value['id_matricula']?>"><?php echo $value['tipo_matricula']?></option>        
+                                <?php 
+                                }
+                            ?>
+                        </select> 
                       </div>
                     </div>
                     <div class="form-row">
@@ -219,17 +234,16 @@
                             ?>
                         </select> 
                       </div>
-                      <div class="form-group col-md-4">
+                      <!-- <div class="form-group col-md-4">
                         <label>Valor: </label>
                         <input type="text" class="form-control" placeholder="50 "  required>
-                      </div>
+                      </div> -->
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-3"> 
                           <label>Tipo inscripcion</label>
                           <select class="form-control select2" style="width: 100%;" name="nuevaInscripcion">
                               <option selected="selected">Seleccionar...</option>
-                              <option value="2">Default</option>
                               <?php 
                                   $tabla = "tbl_inscripcion";
                                   $item = null;
