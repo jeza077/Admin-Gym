@@ -8,11 +8,33 @@ class ControladorClientes{
 
             $tabla = "tbl_clientes";
 							
-            $datos = array("id_persona" => $datos['id_persona']);
+			$datos = array("id_persona" => $datos['id_persona'],
+							"id_inscripcion" =>  $datos["id_inscripcion"],
+							"id_matricula" =>  $datos["id_matricula"],
+							"id_descuentos_promociones" =>  $datos["id_descuentos_promociones"]);
 
             $respuestaCliente = ModeloClientes::mdlCrearCliente($tabla, $datos);
 
             if($respuestaCliente = true){
+				
+				$totalId = array();
+				$tabla1 = "tbl_personas";
+				$tabla2 = "tbl_clientes";
+				$item = null;
+				$valor = null;
+
+				$personaTotal = ModeloClientes::mdlMostrarClientes($tabla1, $tabla2, $item, $valor);
+				
+				foreach($personaTotal as $keyCliente => $valuePersona){
+				array_push($totalId, $valuePersona["id_cliente"]);
+
+				
+				}
+
+				$idCliente = end($totalId);
+
+				$datos = array("id_clientes" =>$idCliente,
+				"id_inscripcion" =>  $datos["id_inscripcion"]);
                         
                 return true;
 

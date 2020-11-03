@@ -199,6 +199,7 @@ class ControladorPersonas{
 
                             $crearUsuario = ControladorUsuarios::ctrCrearUsuario($datos);
 
+
                             if($crearUsuario == true){
                                 echo '<script>
                                         Swal.fire({
@@ -228,25 +229,66 @@ class ControladorPersonas{
                     }
 
                 } else {
+                    // echo "<pre>";
+                    // var_dump($_POST);
+                    // echo "</pre>";
+                    // return;
 
-                        $datos = array("id_persona" => $idPersona);
+                        $datos = array("nombre" => $_POST["nuevoNombre"],
+                        "apellido" => $_POST["nuevoApellido"],
+                        "id_documento" => $_POST["nuevoTipoDocumento"],
+                        "numero_documento" => $_POST["nuevoNumeroDocumento"],
+                        "tipo_persona" => $tipoPersona,
+                        "fecha_nacimiento" => $_POST["nuevaFechaNacimiento"],
+                        "sexo" => $_POST["nuevoSexo"],
+                        "telefono" => $_POST["nuevoTelefono"],
+                        "direccion" => $_POST["nuevaDireccion"],
+                        "email" => $_POST["nuevoEmail"]);
 
-                        $crearCliente = ControladorClientes::ctrCrearCliente($datos);
+                        $respuestaPersona = ModeloPersonas::mdlCrearPersona($tabla, $datos);
+                        
+                        if($respuestaPersona == true){
+                         
+                            $totalId = array();
+                            $tabla = "tbl_personas";
+                            // $tabla2 = null;
+                            // $item = null;
+                            // $valor = null;
 
-                        if($crearCliente == true){
-                            echo '<script>
-                                    Swal.fire({
-                                        title: "Cliente guardado correctamente!",
-                                        icon: "success",
-                                        heightAuto: false,
-                                        allowOutsideClick: false
-                                    }).then((result)=>{
-                                        if(result.value){
-                                            window.location = "'.$pantalla.'";
-                                        }
-                                    });                                              
-                                </script>';
+                            $personaTotal = ModeloPersonas::mdlMostrarPersonas($tabla);
+                            
+                            foreach($personaTotal as $keyPersona => $valuePersona){
+                            array_push($totalId, $valuePersona["id_personas"]);
+                            }
+
+                            $idPersona = end($totalId);
+
+                            $datos = array("id_persona" => $idPersona,
+                                           "id_inscripcion" => $_POST["nuevaInscripcion"],
+                                           "pago" => $_POST["nuevaMatricula"],
+                                           "id_descuentos_promociones" => $_POST["nuevaPromocion"]
+                                         
+                                        );
+    
+                            $crearCliente = ControladorClientes::ctrCrearCliente($datos);
+    
+                            if($crearCliente == true){
+                                echo '<script>
+                                        Swal.fire({
+                                            title: "Cliente guardado correctamente!",
+                                            icon: "success",
+                                            heightAuto: false,
+                                            allowOutsideClick: false
+                                        }).then((result)=>{
+                                            if(result.value){
+                                                window.location = "'.$pantalla.'";
+                                            }
+                                        });                                              
+                                    </script>';
+                            }
+
                         }
+                        
                 }
                         
             

@@ -57,7 +57,7 @@
                   $clientes = ControladorClientes::ctrMostrarClientes($tabla, $item, $valor);
 
                   // echo "<pre>";
-                  // var_dump($usuarios);
+                  // var_dump($clientes);
                   // echo "</pre>";
 
                   foreach ($clientes as $key => $value) {
@@ -74,9 +74,11 @@
                           <td>
                             <button class="btn btn-warning"><i class="fas fa-pencil-alt" style="color:#fff"></i></button>
                             <button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                            <button class="btn btn-success" id="pago">Actualizar pago <i class="fas fa-sync"></i></button>
                           </td>
                         </tr>
                     ';
+                   
                   }
                 ?>
                 </tbody>
@@ -182,97 +184,69 @@
                         <option value="F">Femenino</option>
                       </select>
                     </div>
-                
+
                   </div>
                 </div>
               </div>
+             
+
 
               <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="datosCLiente">
                 <div class="container-fluid mt-4">
-
-                  <div class="form-row">
-                    <div class="form-group col-md-3">
-                      <label>Tipo Matricula</label>
-                      <select class="form-control select2" style="width: 100%;" name="nuevaMatricula">
+                    <div class="form-row">
+                      <div class="form-group col-md-4">
+                        <label>Matricula general</label>
+                        <input type="text" class="form-control" placeholder=" 50 Lps. "  required onlyread>
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="form-group col-md-3">
+                        <label>Promociones</label>
+                        <select class="form-control select2" style="width: 100%;" name="nuevaPromocion">
                           <option selected="selected">Seleccionar...</option>
-                        <!-- <option value="2">Default</option> -->
-                          <?php 
-                              $tabla = "tbl_matricula";
-                              $item = null;
-                              $valor = null;
+                          
+                            <?php 
+                                $tabla = "tbl_promociones_descuentos";
+                                $item = null;
+                                $valor = null;
 
-                              $matriculas = ControladorClientes::ctrMostrar($tabla, $item, $valor);
+                                $matriculas = ControladorClientes::ctrMostrar($tabla, $item, $valor);
 
-                              foreach ($matriculas as $key => $value) { ?>
-                                <option value="<?php echo $value['id_matricula']?>"><?php echo $value['tipo_matricula']?></option>        
+                                foreach ($matriculas as $key => $value) { ?>
+                                  <option value="<?php echo $value['id_promociones_descuentos']?>"><?php echo $value['tipo_promociones_descuentos']?></option>        
+                                <?php 
+                                }
+                            ?>
+                        </select> 
+                      </div>
+                      <div class="form-group col-md-4">
+                        <label>Valor: </label>
+                        <input type="text" class="form-control" placeholder="50 "  required>
+                      </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-3"> 
+                          <label>Tipo inscripcion</label>
+                          <select class="form-control select2" style="width: 100%;" name="nuevaInscripcion">
+                              <option selected="selected">Seleccionar...</option>
+                              <option value="2">Default</option>
                               <?php 
-                              }
-                          ?>
-                      </select>
-                    </div>
-                    <div class="form-group col-md-3">
-                      <label>Tipo inscripcion</label>
-                      <select class="form-control select2" style="width: 100%;" name="nuevaInscripcion">
-                          <option selected="selected">Seleccionar...</option>
-                        <!-- <option value="2">Default</option> -->
-                          <?php 
-                              $tabla = "tbl_inscripcion";
-                              $item = null;
-                              $valor = null;
+                                  $tabla = "tbl_inscripcion";
+                                  $item = null;
+                                  $valor = null;
 
-                              $inscripciones = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
+                                  $inscripciones = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
 
-                              foreach ($inscripciones as $key => $value) { ?>
-                                <option value="<?php echo $value['id_inscripcion']?>"><?php echo $value['tipo_inscripcion']?></option>        
-                              <?php 
-                              }
+                                  foreach ($inscripciones as $key => $value) { ?>
+                                    <option value="<?php echo $value['id_inscripcion']?>"><?php echo $value['tipo_inscripcion']?></option>        
+                                  <?php 
+                                  }
 
-                          ?>
-                      </select>
-                    </div>
-                    <div class="form-group col-md-3">
-                      <label>Descuento o
-                             Promocion</label>
-                      <select class="form-control select2" style="width: 100%;" name="nuevoDescuento">
-                          <option selected="selected">Seleccionar...</option>
-                        <!-- <option value="2">Default</option> -->
-                          <?php 
-                              $tabla = "tbl_promociones_descuentos";
-                              $item = null;
-                              $valor = null;
-
-                              $descuentos = ControladorClientes::ctrMostrarDescuentos($tabla, $item, $valor);
-
-                              foreach ($descuentos as $key => $value) { ?>
-                                <option value="<?php echo $value['id_promociones_descuentos']?>"><?php echo $value['tipo_promociones_descuentos']?></option>        
-                              <?php 
-                              }
-
-                          ?>
-                      </select>
-                    </div>
-                  </div>
-                  <button class="btn btn-success">Actualizar pago <i class="fas fa-sync"></i></button>
-
-                  <div class="form-row">
-                    <div class="form-group col-md-3">
-                      <label>Estado</label>
-                      <input type="text" class="form-control" value="Desactivado" style="color:red;" disabled>
+                              ?>
+                          </select>
+                        </div>
                     </div>
 
-                    <div class="form-group col-md-3">
-                      <?php 
-                        $itemParam = 'parametro';
-                        $valorParam = 'ADMIN_DIAS_VIGENCIA';
-                        $parametros = ControladorUsuarios::ctrMostrarParametros($itemParam, $valorParam);
-                    
-                        $vigenciaUsuario = $parametros['valor'];
-              
-                        date_default_timezone_set("America/Tegucigalpa");
-                        $fechaVencimiento = date("Y-m-d", strtotime('+'.$vigenciaUsuario.' days'));
-                      ?>
-                    </div>
-                  </div>
                 </div>
             
                 <!-- <div class="modal-footer"> -->
@@ -282,8 +256,8 @@
                 </div>
             
                 <?php
-                  $tipoPersona = 'usuarios';
-                  $pantalla = 'usuarios';
+                  $tipoPersona = 'clientes';
+                  $pantalla = 'clientes';
                   $ingresarPersona = new ControladorPersonas();
                   $ingresarPersona->ctrCrearPersona($tipoPersona, $pantalla);
                 ?>
@@ -443,12 +417,6 @@
               <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
             </div>
             
-        <?php
-          $tipoPersona = 'usuarios';
-          $pantalla = 'usuarios';
-          $ingresarPersona = new ControladorPersonas();
-          $ingresarPersona->ctrCrearPersona($tipoPersona, $pantalla);
-        ?>
           </form>
         </div>
 
