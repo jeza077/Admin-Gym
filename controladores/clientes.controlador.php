@@ -3,6 +3,11 @@
 class ControladorClientes{
 
     static public function ctrCrearCliente($datos){
+		// echo "<pre>";
+		// var_dump($datos);
+		// echo "</pre>";
+		// return;
+
 
         if(isset($datos['id_persona'])){
 
@@ -18,12 +23,12 @@ class ControladorClientes{
             if($respuestaCliente = true){
 				
 				$totalId = array();
-				$tabla1 = "tbl_personas";
+				$tabla = "tbl_personas";
 				$tabla2 = "tbl_clientes";
 				$item = null;
 				$valor = null;
 
-				$personaTotal = ModeloClientes::mdlMostrarClientes($tabla1, $tabla2, $item, $valor);
+				$personaTotal = ModeloClientes::mdlMostrarClientes($tabla, $tabla2, $item, $valor);
 				
 				foreach($personaTotal as $keyCliente => $valuePersona){
 				array_push($totalId, $valuePersona["id_cliente"]);
@@ -33,8 +38,8 @@ class ControladorClientes{
 
 				$idCliente = end($totalId);
 
-				$datos = array("id_clientes" =>$idCliente,
-				"id_inscripcion" =>  $datos["id_inscripcion"]);
+				// $datos = array("id_clientes" =>$idCliente,
+				// "id_inscripcion" =>  $datos["id_inscripcion"]);
                         
                 return true;
 

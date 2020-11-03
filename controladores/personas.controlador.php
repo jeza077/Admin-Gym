@@ -230,7 +230,7 @@ class ControladorPersonas{
 
                 } else {
                     // echo "<pre>";
-                    // var_dump($_POST);
+                    // var_dump($datos);
                     // echo "</pre>";
                     // return;
 
@@ -246,12 +246,14 @@ class ControladorPersonas{
                         "email" => $_POST["nuevoEmail"]);
 
                         $respuestaPersona = ModeloPersonas::mdlCrearPersona($tabla, $datos);
+                         
                         
                         if($respuestaPersona == true){
+                            
                          
                             $totalId = array();
                             $tabla = "tbl_personas";
-                            // $tabla2 = null;
+                            // $tabla2 = "tbl_clientes";
                             // $item = null;
                             // $valor = null;
 
@@ -262,16 +264,21 @@ class ControladorPersonas{
                             }
 
                             $idPersona = end($totalId);
+                            // echo "<pre>";
+                            // var_dump($_POST);
+                            // echo "</pre>";
+                            // return;
 
                             $datos = array("id_persona" => $idPersona,
                                            "id_inscripcion" => $_POST["nuevaInscripcion"],
-                                           "pago" => $_POST["nuevaMatricula"],
+                                           "id_matricula" => $_POST["nuevaMatricula"],
                                            "id_descuentos_promociones" => $_POST["nuevaPromocion"]
                                          
                                         );
     
                             $crearCliente = ControladorClientes::ctrCrearCliente($datos);
-    
+                           
+            
                             if($crearCliente == true){
                                 echo '<script>
                                         Swal.fire({
