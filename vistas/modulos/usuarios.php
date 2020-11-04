@@ -79,7 +79,7 @@
                      
                      echo '<td>
                               <button class="btn btn-warning btnEditarUsuario" idUsuario="'.$value["id_personas"].'" data-toggle="modal" data-target="#modalEditarUsuario"><i class="fas fa-pencil-alt" style="color:#fff"></i></button>
-                              <button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                              <button class="btn btn-danger btnEliminarUsuario" idPersona="'.$value["id_personas"].'" fotoUsuario="'.$value["foto"].'" usuario="'.$value["usuario"].'"><i class="fas fa-trash-alt"></i></button>
                             </td>
                           </tr>
                     ';
@@ -484,3 +484,8 @@
   </div>
     
 
+<?php 
+  $pantalla = 'usuarios';
+  $borrarUsuario = new ControladorPersonas();
+  $borrarUsuario->ctrBorrarPersona($pantalla);
+?>

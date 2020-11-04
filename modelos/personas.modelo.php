@@ -98,5 +98,26 @@ class ModeloPersonas{
 		
 		$stmt = null;
 
-    }
+	}
+	
+
+	/*=============================================
+            BORRAR PERSONAS (USUARIO/CLIENTE)
+	=============================================*/
+	static public function mdlBorrarPersona($tabla, $datos){
+
+		$stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE id_personas = :id_personas");
+
+		$stmt->bindParam(":id_personas", $datos, PDO::PARAM_INT);
+
+		if($stmt->execute()){
+			return true;
+		} else {
+			return false;
+		}
+
+		$stmt->close();
+
+		$stmt = null;
+	}
 }

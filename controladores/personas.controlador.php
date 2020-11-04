@@ -4,7 +4,6 @@ class ControladorPersonas{
     /*=============================================
 				MOSTRAR PERSONAS
 	=============================================*/
-
 	static public function ctrMostrarPersonas($item, $valor) {
 
 		$tabla = "tbl_personas";
@@ -32,7 +31,7 @@ class ControladorPersonas{
         if(isset($_POST["nuevoNombre"])){
 
             if(preg_match('/^[a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevoNombre"]) && 
-            preg_match('/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.([a-zA-Z]{2,4})+$/', $_POST["nuevoEmail"])){
+               preg_match('/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.([a-zA-Z]{2,4})+$/', $_POST["nuevoEmail"])){
 
                 $tabla = "tbl_personas";
 
@@ -257,12 +256,7 @@ class ControladorPersonas{
                                     });                                              
                                 </script>';
                         }
-                }
-                        
-            
-                    
-
-                
+                }                
 
             } else {
                 
@@ -423,6 +417,39 @@ class ControladorPersonas{
                         timer: 3000,
                     });					
                 </script>';
+            }
+        }
+    }
+
+    
+	/*=============================================
+            BORRAR PERSONAS (USUARIO/CLIENTE)
+	=============================================*/
+    static public function ctrBorrarPersona($pantalla){
+        
+        if(isset($_GET['idPersona'])){
+            $tabla = 'tbl_personas';
+            $datos = $_GET['idPersona'];
+
+            if($_GET['fotoUsuario'] != ""){
+                unlink($_GET['fotoUsuario']);
+                rmdir('vistas/img/usuarios/'.$_GET['usuario']);
+            }
+
+            $respuesta = ModeloPersonas::mdlBorrarPersona($tabla, $datos);
+
+            if($respuesta == true){
+                echo '<script>
+                        Swal.fire({
+                            title: "El usuario ha sido borrado correctamente!",
+                            icon: "success",
+                            heightAuto: false
+                        }).then((result)=>{
+                            if(result.value){
+                                window.location = "'.$pantalla.'";
+                            }
+                        });                                      
+                    </script>';
             }
         }
     }

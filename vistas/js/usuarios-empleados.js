@@ -74,11 +74,11 @@ $(".nuevaFoto").change(function () {
 });
 
 
-//** ---------------------*/
-//      EDITAR USUARIO 
-// -----------------------*/ 
-$('.btnEditarUsuario').on('click', function (e) { 
-    e.preventDefault();
+//** ------------------------------------*/
+//         EDITAR USUARIO 
+// --------------------------------------*/ 
+$(document).on('click', '.btnEditarUsuario', function () {
+    // e.preventDefault();
     var idPersonaUsuario = $(this).attr('idUsuario');
     // console.log(idPersonaUsuario);
 
@@ -95,7 +95,7 @@ $('.btnEditarUsuario').on('click', function (e) {
         processData: false,  
         dataType: "json",
         success: function(respuesta) {
-            console.log(respuesta);
+            // console.log(respuesta);
 
             $('.idPersona').val(respuesta['id_personas']);
             $('#editarTipoDocumento').html(respuesta['tipo_documento']);
@@ -125,10 +125,10 @@ $('.btnEditarUsuario').on('click', function (e) {
 
 
 
-//** ---------------------*/
-//      ACTIVAR USUARIO 
-// -----------------------*/ 
-$('.btnActivar').click(function (e) { 
+//** ------------------------------------*/
+//         ACTIVAR USUARIO 
+// --------------------------------------*/ 
+$(document).on('click', '.btnActivar', function () {
     e.preventDefault();
     var idUsuario = $(this).attr('idUsuario');
     var estadoUsuario = $(this).attr('estadoUsuario');
@@ -164,3 +164,24 @@ $('.btnActivar').click(function (e) {
         $(this).attr('estadoUsuario',0);
     }
 });
+
+//** ------------------------------------*/
+//         BORRAR USUARIO 
+// --------------------------------------*/ 
+// $(document).on('click', '.btnEliminarUsuario', function () {
+//     var idPersona = $(this).attr('idPersona');
+//     var fotoUsuario = $(this).attr('fotoUsuario');
+//     var usuario = $(this).attr('usuario');
+
+//     Swal.fire({
+//         title: "¿Estas seguro de borrar el usuario?",
+//         text= "¡Si no lo estas, puedes cancelar la accion!",
+//         icon: "info",
+//         heightAuto: false,
+//         allowOutsideClick: false
+//     }).then((result)=>{
+//         if(result.value){
+//             window.location = "index.php?ruta=usuarios&idPersona="+idPersona+"&usuario="+usuario+"&fotoUsuario="+fotoUsuario;
+//         }
+//     });
+// });
