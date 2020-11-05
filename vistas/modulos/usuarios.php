@@ -192,7 +192,7 @@
                   </div>
                 </div>
               </div>
-
+                  <!-- 2tab --> 
               <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="datosUsuario">
                 <div class="container-fluid mt-4">
                   <div class="form-row">
