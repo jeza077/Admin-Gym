@@ -11,12 +11,20 @@ class ControladorClientes{
 
         if(isset($datos['id_persona'])){
 
-            $tabla = "tbl_clientes";
-							
-			$datos = array("id_persona" => $datos['id_persona'],
+			$tabla = "tbl_clientes";
+			
+			if ($datos['tipo_clientes'] == "gimnasio"){
+				$datos = array("id_persona" => $datos['id_persona'],
+			                "tipo_cliente" => $datos["tipo_cliente"],
 							"id_inscripcion" =>  $datos["id_inscripcion"],
 							"id_matricula" =>  $datos["id_matricula"],
 							"id_descuentos_promociones" =>  $datos["id_descuentos_promociones"]);
+			} else {
+				$datos = array("id_persona" => $datos['id_persona'],
+			                "tipo_cliente" => $datos["tipo_cliente"]);
+			}
+							
+			
 
             $respuestaCliente = ModeloClientes::mdlCrearCliente($tabla, $datos);
 

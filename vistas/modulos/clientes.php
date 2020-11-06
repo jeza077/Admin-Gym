@@ -9,10 +9,9 @@
             <h1>Clientes</h1>
           </div>
           <div class="col-sm-6">
-          <button class="btn btn-orange float-right"  data-toggle="modal" data-target="#modalAgregarUsuario">
+          <button class="btn btn-orange float-right"  data-toggle="modal" data-target="#modalAgregarCliente">
             Agregar cliente       
           </button>
-
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -41,6 +40,7 @@
                 <thead>
                   <tr>
                     <th scope="col">#</th>
+                    <th scope="col">Tipo Cliente</th>
                     <th scope="col">Nombre</th>
                     <th scope="col">Correo</th>
                     <th scope="col">Telefono</th>
@@ -56,14 +56,15 @@
                   $valor = null;
                   $clientes = ControladorClientes::ctrMostrarClientes($tabla, $item, $valor);
 
-                  // echo "<pre>";
-                  // var_dump($clientes);
-                  // echo "</pre>";
+                  echo "<pre>";
+                  var_dump($clientes);
+                  echo "</pre>";
 
                   foreach ($clientes as $key => $value) {
                     echo '
                           <tr>
                           <th scope="row">1</th>
+                          <td>'.$value["tipo_cliente"].'</td>
                           <td>'.$value["nombre"].'</td>
                           <td>'.$value["correo"].'</td>
                           <td>'.$value["telefono"].'</td>';
@@ -72,7 +73,7 @@
                           <td>'.$value["fecha_creacion"].'</td>
                           <td><button class="btn btn-success btn-md">Activado</button></td>
                           <td>
-                            <button class="btn btn-warning"><i class="fas fa-pencil-alt" style="color:#fff"></i></button>
+                            <button class="btn btn-warning" idCliente="'.$value["id_personas"].'"><i class="fas fa-pencil-alt" style="color:#fff"></i></button>
                             <button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
                             <button class="btn btn-success" id="pago">Actualizar pago <i class="fas fa-sync"></i></button>
                           </td>
@@ -94,10 +95,10 @@
   <!-- /.content-wrapper -->
 
   <!-- =======================================
-           MODAL AGREGAR USUARIO
+           MODAL AGREGAR  CLIENTE
   ======================================----->
 
-  <div class="modal fade" id="modalAgregarUsuario" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="modalAgregarCliente" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
       
@@ -114,7 +115,7 @@
                 <a class="nav-link active" id="datosPersona" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Datos personales</a>
               </li>
               <li class="nav-item" role="presentation">
-                <a class="nav-link" id="datosUsuario" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Datos Cliente</a>
+                <a class="nav-link" id="datosCliente" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Datos Cliente</a>
               </li>
             </ul>
             
@@ -157,8 +158,8 @@
       
                   <div class="form-row">
                     <div class="form-group col-md-4">
-                      <label for="inputEmail4">Email</label>
-                      <input type="email" class="form-control email" id="inputEmail4" name="nuevoEmail" placeholder="Ingrese Email" required>
+                      <label for="email">Email</label>
+                      <input type="email" class="form-control email" name="nuevoEmail" placeholder="Ingrese Email" required>
                     </div>
                     <div class="form-group col-md-4">
                       <label>Teléfono</label>
@@ -172,8 +173,8 @@
 
                   <div class="form-row">
                     <div class="form-group col-md-9">
-                      <label for="inputAddress">Dirección</label>
-                      <input type="text" class="form-control" id="inputAddress" name="nuevaDireccion" placeholder="Col. Alameda, calle #2..." required>
+                      <label for="">Dirección</label>
+                      <input type="text" class="form-control" name="nuevaDireccion" placeholder="Col. Alameda, calle #2..." required>
                     </div>
                   
                     <div class="form-group col-md-3">
@@ -184,22 +185,32 @@
                         <option value="F">Femenino</option>
                       </select>
                     </div>
-
+                   
                   </div>
                 </div>
               </div>
-             
-
 
               <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="datosCLiente">
                 <div class="container-fluid mt-4">
                     <div class="form-row">
-                    <div class="form-group col-md-3">
-                        <label>Tipo matricula</label>
-                        <select class="form-control select2" style="width: 100%;" name="nuevaMatricula">
-                          <option selected="selected" value="1">normal</option>
-                           
-                        </select> 
+                      <div class="form-group col-md-3">
+                        <label>Tipo Cliente</label>
+                        <select class="form-control select2 tipoCliente" name="tipoCliente" style="width: 100%;" required>
+                          <option selected="selected">Seleccionar...</option>
+                          <option value="gimnasio">Clientes del gimnasio</option>
+                          <option value="ventas">Cliente de ventas</option>
+                        </select>
+                      </div>
+                    </div>
+                    
+                  <div id="datosClientes">
+                  <div class="form-row">
+                      <div class="form-group col-md-3">
+                          <label>Tipo matricula</label>
+                          <select class="form-control select2" style="width: 100%;" name="nuevaMatricula">
+                            <option selected="selected" value="1">normal</option>
+                            
+                          </select> 
                       </div>
                     </div>
                     <div class="form-row">
@@ -222,10 +233,6 @@
                             ?>
                         </select> 
                       </div>
-                      <!-- <div class="form-group col-md-4">
-                        <label>Valor: </label>
-                        <input type="text" class="form-control" placeholder="50 "  required>
-                      </div> -->
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-3"> 
@@ -242,17 +249,17 @@
                                   foreach ($inscripciones as $key => $value) { ?>
                                     <option value="<?php echo $value['id_inscripcion']?>"><?php echo $value['tipo_inscripcion']?></option>        
                                   <?php 
-                                  }
-
+                                }
                               ?>
                           </select>
                         </div>
                     </div>
-
+                  </div>
                 </div>
             
                 <!-- <div class="modal-footer"> -->
                 <div class="form-group mt-4 float-right">
+                  
                   <button type="" class="btn btn-primary">Guardar</button>
                   <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
                 </div>
@@ -275,7 +282,7 @@
   </div>
 
   <!-- =======================================
-           MODAL EDITAR USUARIO
+           MODAL EDITAR CLIENTE
   ======================================----->
 
   <div class="modal fade" id="modalEditarCliente" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -328,8 +335,8 @@
     
                 <div class="form-row">
                   <div class="form-group col-md-4">
-                    <label for="inputEmail4">Email</label>
-                    <input type="email" class="form-control email" id="inputEmail4" name="nuevoEmail" placeholder="Ingrese Email" required>
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control email" name="nuevoEmail" placeholder="Ingrese Email" required>
                   </div>
                   <div class="form-group col-md-4">
                     <label>Teléfono</label>
@@ -343,8 +350,8 @@
 
                 <div class="form-row">
                   <div class="form-group col-md-9">
-                    <label for="inputAddress">Dirección</label>
-                    <input type="text" class="form-control" id="inputAddress" name="nuevaDireccion" placeholder="Col. Alameda, calle #2..." required>
+                    <label for="">Dirección</label>
+                    <input type="text" class="form-control" name="nuevaDireccion" placeholder="Col. Alameda, calle #2..." required>
                   </div>
                 
                   <div class="form-group col-md-3">

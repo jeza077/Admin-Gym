@@ -269,12 +269,19 @@ class ControladorPersonas{
                             // echo "</pre>";
                             // return;
 
-                            $datos = array("id_persona" => $idPersona,
-                                           "id_inscripcion" => $_POST["nuevaInscripcion"],
-                                           "id_matricula" => $_POST["nuevaMatricula"],
-                                           "id_descuentos_promociones" => $_POST["nuevaPromocion"]
-                                         
-                                        );
+                            if ($_POST['tipoCliente'] == "gimnasio"){
+
+                                $datos = array("id_persona" => $idPersona,
+                                "tipo_cliente" => $_POST["tipoCliente"],
+                                "id_inscripcion" => $_POST["nuevaInscripcion"],
+                                "id_matricula" => $_POST["nuevaMatricula"],
+                                "id_descuentos_promociones" => $_POST["nuevaPromocion"]);
+                            } else {
+                                $datos = array("id_persona" => $idPersona,
+                                "tipo_cliente" => $_POST["tipoCliente"]);
+                            }
+
+                           
     
                             $crearCliente = ControladorClientes::ctrCrearCliente($datos);
                            
