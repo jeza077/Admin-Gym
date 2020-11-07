@@ -168,20 +168,22 @@ $(document).on('click', '.btnActivar', function () {
 //** ------------------------------------*/
 //         BORRAR USUARIO 
 // --------------------------------------*/ 
-// $(document).on('click', '.btnEliminarUsuario', function () {
-//     var idPersona = $(this).attr('idPersona');
-//     var fotoUsuario = $(this).attr('fotoUsuario');
-//     var usuario = $(this).attr('usuario');
+$(document).on('click', '.btnEliminarUsuario', function () {
+    var idPersona = $(this).attr('idPersona');
+    var fotoUsuario = $(this).attr('fotoUsuario');
+    var usuario = $(this).attr('usuario');
 
-//     Swal.fire({
-//         title: "¿Estas seguro de borrar el usuario?",
-//         text= "¡Si no lo estas, puedes cancelar la accion!",
-//         icon: "info",
-//         heightAuto: false,
-//         allowOutsideClick: false
-//     }).then((result)=>{
-//         if(result.value){
-//             window.location = "index.php?ruta=usuarios&idPersona="+idPersona+"&usuario="+usuario+"&fotoUsuario="+fotoUsuario;
-//         }
-//     });
-// });
+    Swal.fire({
+        title: "¿Estas seguro de borrar el usuario?",
+        text: "¡Si no lo estas, puedes cancelar la accion!",
+        icon: "info",
+        showCancelButton: true,
+        cancelButtonColor: "#DC3545",
+        heightAuto: false,
+        allowOutsideClick: false
+    }).then((result)=>{
+        if(result.value){
+            window.location = "index.php?ruta=usuarios&idPersona="+idPersona+"&usuario="+usuario+"&fotoUsuario="+fotoUsuario;
+        }
+    });
+});

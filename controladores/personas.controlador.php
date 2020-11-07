@@ -51,28 +51,6 @@ class ControladorPersonas{
                     $respuestaPersona = ModeloPersonas::mdlCrearPersona($tabla, $datos);
 
                         if($respuestaPersona == true){
-                            // echo '<script>
-                            //         Swal.fire({
-                            //             title: "Tus datos han sido guardados correctamente!",
-                            //             icon: "success",
-                            //             heightAuto: false,
-                            //             allowOutsideClick: false
-                            //         }).then((result)=>{
-                            //             if(result.value){
-                            //                 window.location = "'.$pantalla.'";
-                            //             }
-                            //         });                       
-                            //     </script>';
-                            
-                        //     echo '<script>
-                        //     Swal.fire({
-                        //         title: "Bien!",
-                        //         icon: "success",
-                        //         heightAuto: false,
-                        //         allowOutsideClick: false,
-                        //         timer: 4000
-                        //     });					
-                        // </script>';
                             
                             // /*------------------------------------------ Crear usuario -----------------------------------------------*/
                             $totalId = array();
@@ -308,6 +286,7 @@ class ControladorPersonas{
                                         });                                              
                                     </script>';
                             }
+                        }
                             
                 }                
 
@@ -484,14 +463,31 @@ class ControladorPersonas{
             $tabla = 'tbl_personas';
             $datos = $_GET['idPersona'];
 
-            if($_GET['fotoUsuario'] != ""){
-                unlink($_GET['fotoUsuario']);
-                rmdir('vistas/img/usuarios/'.$_GET['usuario']);
-            }
 
             $respuesta = ModeloPersonas::mdlBorrarPersona($tabla, $datos);
 
-            if($respuesta == true){
+            // var_dump($respuesta[1]);
+            // return;
+            if($respuesta[1] == 1451){
+      
+                echo '<script>
+                        Swal.fire({
+                            title: "No se pudo borrar el usuario!",
+                            icon: "error",
+                            heightAuto: false
+                        }).then((result)=>{
+                            if(result.value){
+                                window.location = "'.$pantalla.'";
+                            }
+                        });                                      
+                    </script>';
+
+            } else {
+                          
+                if($_GET['fotoUsuario'] != ""){
+                    unlink($_GET['fotoUsuario']);
+                    rmdir('vistas/img/usuarios/'.$_GET['usuario']);
+                }
                 echo '<script>
                         Swal.fire({
                             title: "El usuario ha sido borrado correctamente!",

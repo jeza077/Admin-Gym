@@ -111,9 +111,13 @@ class ModeloPersonas{
 		$stmt->bindParam(":id_personas", $datos, PDO::PARAM_INT);
 
 		if($stmt->execute()){
+
 			return true;
+
 		} else {
-			return false;
+		
+			return $stmt->errorInfo();
+
 		}
 
 		$stmt->close();
