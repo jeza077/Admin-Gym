@@ -129,7 +129,7 @@ $(document).on('click', '.btnEditarUsuario', function () {
 //         ACTIVAR USUARIO 
 // --------------------------------------*/ 
 $(document).on('click', '.btnActivar', function () {
-    e.preventDefault();
+    // e.preventDefault();
     var idUsuario = $(this).attr('idUsuario');
     var estadoUsuario = $(this).attr('estadoUsuario');
 

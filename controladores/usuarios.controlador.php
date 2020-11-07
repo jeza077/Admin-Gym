@@ -8,6 +8,19 @@ use PHPMailer\PHPMailer\Exception;
 class ControladorUsuarios{
 
 	/*=============================================
+				MOSTRAR SOLO USUARIOS
+	=============================================*/
+
+	static public function ctrMostrarSoloUsuarios($tabla, $item, $valor){
+		$tabla1 = "tbl_personas";
+		$tabla2 = $tabla;
+
+		$respuesta = ModeloUsuarios::mdlMostrarSoloUsuarios($tabla1, $tabla2, $item, $valor);
+
+		return $respuesta;
+	}
+
+	/*=============================================
 				MOSTRAR USUARIOS
 	=============================================*/
 

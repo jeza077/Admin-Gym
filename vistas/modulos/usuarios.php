@@ -49,7 +49,7 @@
                   $tabla = "tbl_usuarios";
                   $item = null;
                   $valor = null;
-                  $usuarios = ControladorUsuarios::ctrMostrarUsuarios($tabla, $item, $valor);
+                  $usuarios = ControladorUsuarios::ctrMostrarSoloUsuarios($tabla, $item, $valor);
 
                   // echo "<pre>";
                   // var_dump($usuarios);
@@ -58,8 +58,8 @@
                   foreach ($usuarios as $key => $value) {
                     echo '
                           <tr>
-                          <td scope="row">1</td>
-                          <td>'.$value["nombre"].'</td>
+                          <td scope="row">'.($key+1).'</td>
+                          <td>'.$value["nombre"] .' '.$value["apellidos"].'</td>
                           <td>'.$value["usuario"].'</td>';
 
                           if($value != ""){

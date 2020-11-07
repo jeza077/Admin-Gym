@@ -4,6 +4,35 @@ require_once "conexion.php";
 
 class ModeloUsuarios{
 
+	static public function mdlMostrarSoloUsuarios($tabla1, $tabla2, $item, $valor){
+
+		if($item != null){
+
+			$stmt = Conexion::conectar()->prepare("SELECT p.*, u.*, tipo_documento, r.rol, m.objeto, rm.agregar, rm.eliminar, rm.actualizar, rm.consulta FROM $tabla1 AS p\n"
+			. " INNER JOIN $tabla2 AS u ON p.id_personas = u.id_persona\n"
+			. " INNER JOIN tbl_documento AS d ON p.id_documento = d.id_documento\n"
+			. " INNER JOIN tbl_roles AS r ON u.id_rol = r.id_rol\n"
+			. " WHERE $item = :$item");
+			
+			$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+			$stmt -> execute();
+			return $stmt -> fetch();
+
+		} else {
+
+			$stmt = Conexion::conectar()->prepare("SELECT p.*, u.*, r.rol FROM $tabla1 AS p\n"
+					. " INNER JOIN $tabla2 AS u ON p.id_personas = u.id_persona\n"
+					. " INNER JOIN tbl_roles AS r ON u.id_rol = r.id_rol");
+			$stmt -> execute();
+			return $stmt -> fetchAll();
+
+		}
+
+		$stmt -> close();
+		$stmt = null;	
+
+	}
+
 	/*=============================================
 		MOSTRAR USUARIOS
 	=============================================*/
