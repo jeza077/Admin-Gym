@@ -56,7 +56,6 @@
                     <thead>
                     <tr>
                     <th scope="col">#</th>
-                    <th scope="col">id inventario</th>
                     <th scope="col">tipo producto</th>
                     <th scope="col">Nombre</th>
                     <th scope="col">stock</th>
@@ -69,28 +68,29 @@
                 <tbody>
                 <?php 
                     $tabla = "tbl_inventario";
-                    $item = null;
-                    $valor = null;
+                    $item = "tipo_producto";
+                    $valor = "Inventario";
                     $inventarios=ControladorInventario::ctrMostrarInventario($tabla, $item, $valor);
+                    // echo"<pre>";
+                    // var_dump($inventarios['nombre_producto']);
+                    // echo"</pre>";
                     foreach ($inventarios as $key => $value) {
-                    echo '
-                            <tr>
-                            <th scope="row">1</th>
-                            <td>'.$value["id_inventario"].'</td>
-                            <td>'.$value["tipo_producto"].'</td>
-                            <td>'.$value["nombre_producto"].'</td>
-                            <td>'.$value["stock"].'</td>
-                            <td>'.$value["precio"].'</td>
-                            <td>'.$value["producto_minimo"].'</td>
-                            <td>'.$value["producto_maximo"].'</td>';
-                        echo '     
-                            <td>
-                            <button class="btn btn-warning"><i class="fas fa-pencil-alt" style="color:#fff"></i></button>
-                            <button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
-                            </td>
-                        </tr>
-                    ';
-                    }
+                      echo '
+                              <tr>
+                              <td scope="row">1</td>
+                              <td>'.$value["tipo_producto"].'</td>
+                              <td>'.$value["nombre_producto"].'</td>
+                              <td>'.$value["stock"].'</td>
+                              <td>'.$value["precio"].'</td>
+                              <td>'.$value["producto_minimo"].'</td>
+                              <td>'.$value["producto_maximo"].'</td>     
+                              <td>
+                              <button class="btn btn-warning"><i class="fas fa-pencil-alt" style="color:#fff"></i></button>
+                              <button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                              </td>
+                          </tr>
+                      ';
+                      }
                 ?>
                 </tbody>
             </table>
@@ -107,7 +107,6 @@
                         <thead>
                             <tr>
                             <th scope="col">#</th>
-                            <th scope="col">id inventario</th>
                             <th scope="col">tipo producto</th>
                             <th scope="col">Nombre</th>
                             <th scope="col">stock</th>
@@ -120,14 +119,14 @@
                         <tbody>
                         <?php 
                             $tabla = "tbl_inventario";
-                            $item = null;
-                            $valor = null;
+                            $item = "tipo_producto";
+                            $valor = "bodega";
                             $inventarios=ControladorInventario::ctrMostrarInventario($tabla, $item, $valor);
+                            // var_dump($inventarios);
                             foreach ($inventarios as $key => $value) {
                             echo '
                                     <tr>
-                                    <th scope="row">1</th>
-                                    <td>'.$value["id_inventario"].'</td>
+                                    <td scope="row">1</td>
                                     <td>'.$value["tipo_producto"].'</td>
                                     <td>'.$value["nombre_producto"].'</td>
                                     <td>'.$value["stock"].'</td>
@@ -182,86 +181,86 @@
               <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="datosPersona">
                 <div class="container-fluid mt-4">
                   <div class="form-row">
-                    <div class="form-group col-md-3">
+                    <div class="form-group col-md-4">
                       <label for="">Tipo<?php echo $i?></label>
-                      <select class="form-control select2" name="nuevoTipo">
+                      <select class="form-control select2" name="nuevoTipoProducto">
                           <option selected="selected">Seleccionar...</option>
                           <?php 
                               $tabla = "tbl_tipo_producto";
                               $item = null;
                               $valor = null;
 
-                              $preguntas = ControladorInventario::ctrMostrarInventario($tabla, $item, $valor);
-
+                              $preguntas = ControladorInventario::ctrMostrarTipoProducto($tabla, $item, $valor);
                               foreach ($preguntas as $key => $value) { ?>
-                                  <option value="<?php echo $value['id_tiipo_producto']?>"><?php echo $value['tipo_producto']?></option>        
+                                  <option value="<?php echo $value['id_tipo_producto']?>"><?php echo $value['tipo_producto']?></option>        
                               <?php 
                               }
                           ?>
                       </select>
                     </div>
 
-                    <div class="form-group col-md-3">
-                      <label for="identidad">Nombre Producto</label>
-                      <input type="text" class="form-control id" name="nuevoNumeroDocumento" placeholder="Ingrese Identidad" required>
+                    <div class="form-group col-md-4">
+                      <label for="nombreproducto">Nombre Producto</label>
+                      <input type="text" class="form-control nombre_producto" name="nuevoNombreProducto" placeholder="Ingrese Producto" required>
                     </div>
-                    <div class="form-group col-md-3">
-                      <label for="nombre">Nombre</label>
-                      <input type="text" class="form-control nombre" name="nuevoNombre" placeholder="Ingrese Nombre" required>
-                    </div>
-                    <div class="form-group col-md-3">
-                      <label for="apellido">Apellido</label>
-                      <input type="text" class="form-control apellidos" name="nuevoApellido" placeholder="Ingrese Apellidos" required>
+                    <div class="form-group col-md-4">
+                      <label for="stock">Cantidad en stock</label>
+                      <input type="text" class="form-control stock" name="nuevoStock" placeholder="Cantidad en stock" required>
                     </div>
                   </div>
       
                   <div class="form-row">
-                    <div class="form-group col-md-4">
-                      <label for="inputEmail4">Email</label>
-                      <input type="email" class="form-control email" id="inputEmail4" name="nuevoEmail" placeholder="Ingrese Email" required>
+
+                  <div class="form-group col-md-5">
+                      <label for="exampleInputFile">Foto</label>
+                      <div class="input-group">
+                        <img class="img-thumbnail previsualizar mr-2" src="vistas/img/usuarios/default/anonymous.png" alt="imagen-del-usuario" width="100px">
+                        <div class="custom-file">
+                          <input type="file" class="custom-file-input nuevaFoto" id="exampleInputFile" name="nuevaFotoProducto">
+                          <label class="custom-file-label" for="exampleInputFile">Escoger foto</label>
+                        </div>
+                      </div>
+                          <p class="p-foto help-block ml-4">Peso máximo de la foto 2 MB</p>
                     </div>
-                    <div class="form-group col-md-4">
-                      <label>Teléfono</label>
-                      <input type="text" class="form-control" data-inputmask='"mask": "(999) 9999-9999"' data-mask  name="nuevoTelefono" placeholder="Ingrese Telefono" required>
+
+
+                    <div class="form-group col-md-3">
+                      <label for="precio">Precio</label>
+                      <input type="text" class="form-control precio" name="nuevoPrecio" placeholder="Ingrese Precio" required>
                     </div>
-                    <div class="form-group col-md-4">
-                      <label>Fecha de nacimiento</label>
-                        <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy/mm/dd" data-mask  name="nuevaFechaNacimiento" placeholder="Ingrese Fecha de Nacimiento" required>
+                    <div class="form-group col-md-2">
+                    <label for="productominimo">Producto Minimo</label>
+                    <input type="text" class="form-control precio" name="nuevoProductoMinimo" placeholder="Cantidad Minima" required>
+                    </div>
+                    <div class="form-group col-md-2">
+                    <label for="productomaximo">Producto Maximo</label>
+                    <input type="text" class="form-control precio" name="nuevoProductoMaximo" placeholder="Cantidad Maximo" required>
                     </div>
                   </div>
 
-                  <div class="form-row">
-                    <div class="form-group col-md-9">
-                      <label for="inputAddress">Dirección</label>
-                      <input type="text" class="form-control" id="inputAddress" name="nuevaDireccion" placeholder="Col. Alameda, calle #2..." required>
-                    </div>
-                  
-                    <div class="form-group col-md-3">
-                      <label>Sexo</label>
-                      <select class="form-control select2" name="nuevoSexo" style="width: 100%;" required>
-                        <option selected="selected">Seleccionar...</option>
-                        <option value="M">Masculino</option>
-                        <option value="F">Femenino</option>
-                      </select>
-                    </div>
-                
-                  </div>
+
                 </div>
                 <div class="form-group mt-4 float-right">
                     <button type="" class="btn btn-primary">Guardar</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
                     </div>
                 
+
                     <?php
-                    $tipoPersona = 'usuarios';
-                    $pantalla = 'usuarios';
-                    $ingresarPersona = new ControladorPersonas();
-                    $ingresarPersona->ctrCrearPersona($tipoPersona, $pantalla);
+                    $tipostock = 'producto';
+                    $pantalla = 'stock';
+                    $ingresarPersona = new ControladorInventario();
+                    $ingresarPersona->ctrCrearStock($tipostock, $pantalla);
                     ?>
               </div>
               </div>
                   <!-- 2tab --> 
             </div>
+
+
+
+
+
           </form>
         </div>
       </div>
