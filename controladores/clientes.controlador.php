@@ -81,7 +81,7 @@ class ControladorClientes{
 
 		return $respuesta;
 
-    }
+	}
     /*=============================================
 				MOSTRAR INSCRIPCION
 	=============================================*/

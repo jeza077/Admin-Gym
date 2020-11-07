@@ -308,7 +308,7 @@ class ControladorPersonas{
                                         });                                              
                                     </script>';
                             }
-                            
+                        }   
                 }                
 
             } else {
