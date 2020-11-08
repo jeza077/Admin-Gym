@@ -2,17 +2,21 @@
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
+
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
             <h1>Usuarios</h1>
           </div>
+         
           <div class="col-sm-6">
-          <button class="btn btn-orange float-right"  data-toggle="modal" data-target="#modalAgregarUsuario">
-            Agregar Usuario          
-          </button>
-
+            <button class="btn btn-orange float-right"  data-toggle="modal" data-target="#modalAgregarUsuario">
+              Agregar Usuario          
+            </button>
+            <button class="btn btn-danger float-right mr-3">
+              Exportar PDF          
+            </button>
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -20,14 +24,18 @@
 
  <!-- Main content -->
     <section class="content">
+
     <?php 
       $permisoAgregar = $_SESSION['permisos']['Usuarios']['agregar'];
       $permisoEliminar = $_SESSION['permisos']['Usuarios']['eliminar'];
       $permisoActualizar = $_SESSION['permisos']['Usuarios']['actualizar'];
       $permisoConsulta = $_SESSION['permisos']['Usuarios']['consulta'];
 
-    ?>
+      // echo "<pre>";
+      // var_dump($_SESSION['permisos']);
+      // echo "</pre>";
 
+    ?>
         <div class="card">
 
             <div class="card-body">

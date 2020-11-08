@@ -8,7 +8,7 @@ class ModeloUsuarios{
 
 		if($item != null){
 
-			$stmt = Conexion::conectar()->prepare("SELECT p.*, u.*, tipo_documento, r.rol, m.objeto, rm.agregar, rm.eliminar, rm.actualizar, rm.consulta FROM $tabla1 AS p\n"
+			$stmt = Conexion::conectar()->prepare("SELECT p.*, u.*, d.tipo_documento, r.rol FROM $tabla1 AS p\n"
 			. " INNER JOIN $tabla2 AS u ON p.id_personas = u.id_persona\n"
 			. " INNER JOIN tbl_documento AS d ON p.id_documento = d.id_documento\n"
 			. " INNER JOIN tbl_roles AS r ON u.id_rol = r.id_rol\n"

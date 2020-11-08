@@ -14,7 +14,7 @@ class AjaxUsuarios{
         $tabla = "tbl_usuarios";
         $item = "id_personas";
         $valor = $this->idPersonaUsuario;
-        $respuesta = ControladorUsuarios::ctrMostrarUsuarios($tabla, $item, $valor);
+        $respuesta = ControladorUsuarios::ctrMostrarSoloUsuarios($tabla, $item, $valor);
 
         echo json_encode($respuesta);
 

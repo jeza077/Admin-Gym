@@ -158,24 +158,16 @@ class ControladorUsuarios{
 					// return;
 
 						if($respuesta["usuario"] == $_POST["ingUsuario"] && $respuesta["password"] == $encriptar){
-
-							$_SESSION["iniciarSesion"] = "ok";
-							$_SESSION["id_usuario"] = $respuesta["id_usuario"];
-							$_SESSION["id_persona"] = $respuesta["id_personas"];
-							$_SESSION["usuario"] = $respuesta["usuario"];
-							$_SESSION["nombre"] = $respuesta["nombre"];
-							$_SESSION["apellidos"] = $respuesta["apellidos"];
-							$_SESSION["foto"] = $respuesta["foto"];
-							$_SESSION["rol"] = $respuesta["rol"];
-							$_SESSION["agregar"] = $respuesta["agregar"];
-							$_SESSION["eliminar"] = $respuesta["eliminar"];
-							$_SESSION["actualizar"] = $respuesta["actualizar"];
-							$_SESSION["consulta"] = $respuesta["consulta"];
-							$_SESSION["primerIngreso"] = $respuesta["primera_vez"];
-							$_SESSION['permisos'] = $permisos_objetos;
-
 							
 							if($respuesta["estado"] == 0 && $respuesta["primera_vez"] == 1) {
+
+								$_SESSION["iniciarSesion"] = "ok";
+								$_SESSION["id_usuario"] = $respuesta["id_usuario"];
+								$_SESSION["id_persona"] = $respuesta["id_personas"];
+								$_SESSION["usuario"] = $respuesta["usuario"];
+								$_SESSION["nombre"] = $respuesta["nombre"];
+								$_SESSION["apellidos"] = $respuesta["apellidos"];
+								$_SESSION["primerIngreso"] = $respuesta["primera_vez"];
 			
 								echo '<script>
 								Swal.fire({
@@ -190,7 +182,22 @@ class ControladorUsuarios{
 								});
 								</script>';
 
-							} else if($respuesta["estado"] == 1 && $respuesta["bloqueado"] == 0 && $respuesta["primera_vez"] == 0 && $fechaHoy < $fechaVencimiento || $respuesta["estado"] == 1 && $respuesta["bloqueado"] == 0 && $respuesta["primera_vez"] == 0 && $fechaHoy > $fechaVencimiento && $_POST['ingUsuario'] == 'SUPERADMIN') {
+							} else if($respuesta["estado"] == 1 && $respuesta["primera_vez"] == 0 && $fechaHoy < $fechaVencimiento || $respuesta["estado"] == 1 && $respuesta["primera_vez"] == 0 && $fechaHoy > $fechaVencimiento && $_POST['ingUsuario'] == 'SUPERADMIN') {
+
+								$_SESSION["iniciarSesion"] = "ok";
+								$_SESSION["id_usuario"] = $respuesta["id_usuario"];
+								$_SESSION["id_persona"] = $respuesta["id_personas"];
+								$_SESSION["usuario"] = $respuesta["usuario"];
+								$_SESSION["nombre"] = $respuesta["nombre"];
+								$_SESSION["apellidos"] = $respuesta["apellidos"];
+								$_SESSION["foto"] = $respuesta["foto"];
+								$_SESSION["rol"] = $respuesta["rol"];
+								$_SESSION["agregar"] = $respuesta["agregar"];
+								$_SESSION["eliminar"] = $respuesta["eliminar"];
+								$_SESSION["actualizar"] = $respuesta["actualizar"];
+								$_SESSION["consulta"] = $respuesta["consulta"];
+								$_SESSION["primerIngreso"] = $respuesta["primera_vez"];
+								$_SESSION['permisos'] = $permisos_objetos;
 
 								//* =====REGISTRAR FECHA Y HORA PARA SABER EL ULTIMO LOGIN ====== */
 
@@ -240,20 +247,21 @@ class ControladorUsuarios{
 								}
 
 
-							} else if($respuesta["estado"] == 0) {
+							// } 
+							// else if($respuesta["estado"] == 0) {
 
-								echo '<script>			
-										Swal.fire({
-											title: "Usuario bloqueado, comuniquese con el administrador.",
-											icon: "error",
-											heightAuto: false,
-											allowOutsideClick: false
-										});
-									</script>';
+							// 	echo '<script>			
+							// 			Swal.fire({
+							// 				title: "Usuario bloqueado, comuniquese con el administrador.",
+							// 				icon: "error",
+							// 				heightAuto: false,
+							// 				allowOutsideClick: false
+							// 			});
+							// 		</script>';
 								
-								session_destroy();
+							// 	session_destroy();
 
-							} else if($respuesta["estado"] == 1 && $respuesta["bloqueado"] == 0 && $fechaHoy > $fechaVencimiento && $_POST['ingUsuario'] != 'SUPERADMIN'){
+							} else if($respuesta["estado"] == 1 && $fechaHoy > $fechaVencimiento && $_POST['ingUsuario'] != 'SUPERADMIN'){
 								
 								echo '<script>			
 										Swal.fire({
@@ -343,14 +351,12 @@ class ControladorUsuarios{
 									}									
 
 								} else {
-									
-									// echo '<br><div class="alert alert-danger">¡Usuario y contraseña invalidos! Intento: '.$_SESSION['contadorLogin'] .', tiene '.$intentos.' intento mas </div>';
 									echo '<script>			
 											Swal.fire({
-												title: "¡Usuario y contraseña invalidos!",
+												title: "¡Usuario y contraseña invalidos. Intento '. $_SESSION['contadorLogin'].' le queda '. ($intentos - $_SESSION['contadorLogin']).' intentos.",
 												icon: "error",
 												toast: true,
-												position: "top-end",
+												position: "top",
 												showConfirmButton: false,
 												timer: 3000,
 											});
