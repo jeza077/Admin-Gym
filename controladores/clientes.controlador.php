@@ -13,7 +13,7 @@ class ControladorClientes{
 
 			$tabla = "tbl_clientes";
 			
-			if ($datos['tipo_clientes'] == "gimnasio"){
+			if ($datos['tipo_cliente'] == "gimnasio"){
 				$datos = array("id_persona" => $datos['id_persona'],
 			                "tipo_cliente" => $datos["tipo_cliente"],
 							"id_inscripcion" =>  $datos["id_inscripcion"],
@@ -21,7 +21,7 @@ class ControladorClientes{
 							"id_descuentos_promociones" =>  $datos["id_descuentos_promociones"]);
 			} else {
 				$datos = array("id_persona" => $datos['id_persona'],
-			                "tipo_cliente" => $datos["tipo_cliente"]);
+			                  "tipo_cliente" => $datos["tipo_cliente"]);
 			}
 							
 			
@@ -63,6 +63,10 @@ class ControladorClientes{
 	=============================================*/
 
 	static public function ctrMostrarClientes($tabla, $item, $valor){
+		// echo "<pre>";
+        // var_dump($respuesta);
+        // echo "</pre>";
+
 		$tabla1 = "tbl_personas";
 		$tabla2 = $tabla;
 

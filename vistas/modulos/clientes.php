@@ -40,11 +40,12 @@
                 <thead>
                   <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Tipo Cliente</th>
                     <th scope="col">Nombre</th>
+                    <th scope="col">Tipo Cliente</th>
                     <th scope="col">Correo</th>
+                    <th scope="col">Tipo Inscripcion</th>
                     <th scope="col">Telefono</th>
-                    <th scope="col">Fecha inscripcion</th>
+                    <th scope="col">Fecha Inscripcion</th>
                     <th scope="col">Estado</th>
                     <th scope="col">Acciones</th>
                   </tr>
@@ -63,19 +64,25 @@
                   foreach ($clientes as $key => $value) {
                     echo '
                           <tr>
-                          <th scope="row">1</th>
-                          <td>'.$value["tipo_cliente"].'</td>
+                          <th scope="row">'.($key+1).'</th>
                           <td>'.$value["nombre"].'</td>
-                          <td>'.$value["correo"].'</td>
-                          <td>'.$value["telefono"].'</td>';
+                          <td>'.$value["tipo_cliente"].'</td>
+                          <td>'.$value["correo"].'</td>';
+
+                          if ($value['tipo_inscripcion'] == null) {
+                            echo  '<td>**Ninguna**</td>';
+                          } else {
+                            echo  '<td>'.$value["tipo_inscripcion"].'</td>';
+                          }
+                          
+                      echo  '<td>'.$value["telefono"].'</td>';
 
                      echo '     
                           <td>'.$value["fecha_creacion"].'</td>
                           <td><button class="btn btn-success btn-md">Activado</button></td>
                           <td>
-                            <button class="btn btn-warning btnEditarCliente" data-toggle="modal" data-target="#modalEditarCliente" idCliente="'.$value["id_personas"].'"><i class="fas fa-pencil-alt" style="color:#fff"></i></button>
+                            <button class="btn btn-warning btnEditarCliente" id="btnEditar" data-toggle="modal" data-target="#modalEditarCliente" idCliente="'.$value["id_personas"].'"><i class="fas fa-pencil-alt" style="color:#fff"></i></button>
                             <button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
-                            <button class="btn btn-success" id="pago">Actualizar pago <i class="fas fa-sync"></i></button>
                           </td>
                         </tr>
                     ';
@@ -204,19 +211,43 @@
                     </div>
                     
                   <div id="datosClientes">
-                  <div class="form-row">
-                      <div class="form-group col-md-3">
+                    <div class="form-row">
+                      <div class="form-group col-md-6">
                           <label>Tipo matricula</label>
                           <select class="form-control select2" style="width: 100%;" name="nuevaMatricula">
-                            <option selected="selected" value="1">normal</option>
+                            <?php 
+                                $tabla = "tbl_matricula";
+                                $item = null;
+                                $valor = null;
+
+                                $matriculas = ControladorClientes::ctrMostrar($tabla, $item, $valor);
+
+                              
+                                foreach ($matriculas as $key => $value) {
+                                  if($value["tipo_matricula"] == 'Normal'){
+                                    echo '<option selected="selected" value="'.$value["id_matricula"].'">'.$value["tipo_matricula"].'</option>';
+                                  } else {
+                                    echo '<option value="'.$value["id_matricula"].'">'.$value["tipo_matricula"].'</option>';
+                                  }
+                                }
+                            ?>
                             
                           </select> 
                       </div>
+                      <div class="form-group col-md-6">
+                         <label for="">Precio matricula</label>
+                         <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">$</span>  
+                              </div>
+                            <input type="text" class="form-control text-right nuevoPrecioMatricula" value="<?php echo $value['precio_matricula']?>" readonly>
+                         </div>
+                      </div>
                     </div>
                     <div class="form-row">
-                      <div class="form-group col-md-3">
+                      <div class="form-group col-md-6">
                         <label>Promociones</label>
-                        <select class="form-control select2" style="width: 100%;" name="nuevaPromocion">
+                        <select class="form-control select2 nuevaPromocion" style="width: 100%;" name="nuevaPromocion">
                           <option selected="selected">Seleccionar...</option>
                           
                             <?php 
@@ -233,11 +264,20 @@
                             ?>
                         </select> 
                       </div>
+                      <div class="form-group col-md-6">
+                         <label for="">Precio promocion</label>
+                         <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">$</span>  
+                              </div>
+                            <input type="text" class="form-control text-right nuevoPrecioPromocion" value="" readonly>
+                         </div>
+                      </div>
                     </div>
                     <div class="form-row">
-                        <div class="form-group col-md-3"> 
+                        <div class="form-group col-md-6"> 
                           <label>Tipo inscripcion</label>
-                          <select class="form-control select2" style="width: 100%;" name="nuevaInscripcion">
+                          <select class="form-control select2 nuevaInscripcion" style="width: 100%;" name="nuevaInscripcion">
                               <option selected="selected">Seleccionar...</option>
                               <?php 
                                   $tabla = "tbl_inscripcion";
@@ -253,6 +293,27 @@
                               ?>
                           </select>
                         </div>
+                        <div class="form-group col-md-6">
+                         <label for="">Precio inscripcion</label>
+                         <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">$</span>  
+                              </div>
+                            <input type="text" class="form-control text-right nuevoPrecioInscripcion" value="" readonly>
+                         </div>
+                      </div>
+                      
+                    </div>
+                    <div class="form-row">
+                      <div class="form-group col-md-6 float-right">
+                         <label for="">Total a pagar:</label>
+                         <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">$</span>  
+                            </div>
+                            <input type="text" class="form-control text-right totalPagar" value="" readonly>
+                         </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -442,22 +503,9 @@
                 <div class="modal-footer">
                 <div class="form-group mt-4 float-right">
                   
-                  <button type="" class="btn btn-primary">Guardar</button>
+                  <button type="" class="btn btn-primary">Guardar cambios</button>
                   <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
                 </div>
-            
-                <?php
-                  $tipoPersona = 'clientes';
-                  $pantalla = 'clientes';
-                  $ingresarPersona = new ControladorPersonas();
-                  $ingresarPersona->ctrCrearPersona($tipoPersona, $pantalla);
-                ?>
-            <div class="modal-footer">
-            <!-- <div class="form-group mt-4 float-right"> -->
-              <button type="" class="btn btn-primary" data-toggle="modal" data-target="#modalAddCLiente">Guardar</button>
-              <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
-            </div>
-            
           </form>
         </div>
 
