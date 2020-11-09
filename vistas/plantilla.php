@@ -20,7 +20,8 @@
   <!-- DataTables -->
   <link rel="stylesheet" href="vistas/plugins/datatables/css/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="vistas/plugins/datatables/css/responsive.bootstrap4.min.css">
-  <!-- SweetAlert2 CDN -->
+  <!-- SweetAlert2 -->
+  <!-- <link rel="stylesheet" href="vistas/plugins/sweetalert2/dist/sweetalert2.min.css"> -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
   <!-- Css propio -->
   <link rel="stylesheet" href="vistas/dist/css/main.css">
@@ -179,7 +180,7 @@
 <!-- Bootstrap 4 -->
 <script src="vistas/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- SweetAlert 2 -->
-<!-- <script src="vistas/plugins/sweetalert2/sweetalert2.all.js"></script> -->
+<!-- <script src="vistas/plugins/sweetalert2/dist/sweetalert2.all.min.js"></script> -->
 <!-- InputMask -->
 <script src="vistas/plugins/moment/moment.min.js"></script>
 <script src="vistas/plugins/inputmask/jquery.inputmask.bundle.min.js"></script>
