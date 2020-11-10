@@ -1,66 +1,70 @@
 <div class="card">
         <div class="form-row">
+            <div class="col-md-10"></div>
+            <div class="col-md-2 d-flex justify-content-center">
+                <a href="salir" class="btn btn-outline-danger pl-4 pr-4 mt-3">Salir</a>
+            </div>
+        </div>
 
+        <div class="form-row">
             <div class="contenedor1 login-logo col-md-5">
-                <!-- <a href="login"><b>Bienvenid@ a bordo</b><?php echo $_SESSION["usuario"]?> :)</a>
-                <p class="login-box-msg">Por favor, cambie su contraseña y agregue las preguntas de seguridad!</p> -->
                 <img src="vistas/img/plantilla/undraw_Process.svg" alt="">
             </div>
 
             <div class="contenedor2 card-body col-md-7">
-                <div>
+                <div class="titulo">
                     <a href="login"><b>Bienvenid@ a bordo </b><?php echo $_SESSION["usuario"]?> :)</a>
                     <p class="login-box-msg">Por favor, cambie su contraseña y agregue las preguntas de seguridad!</p>
                 </div>
 
                 <form method="post" id="primerIngreso">
-                <?php 
-                    $item = 'parametro';
-                    $valor = 'ADMIN_PREGUNTAS';
-                    $parametros = ControladorUsuarios::ctrMostrarParametros($item, $valor);
-                    // var_dump($parametros['valor']);
-                    $cantidadPreguntas = $parametros['valor'];
+                    <?php 
+                        $item = 'parametro';
+                        $valor = 'ADMIN_PREGUNTAS';
+                        $parametros = ControladorUsuarios::ctrMostrarParametros($item, $valor);
+                        // var_dump($parametros['valor']);
+                        $cantidadPreguntas = $parametros['valor'];
+                        
+                        for ($i=1; $i <=$cantidadPreguntas ; $i++) { ?>
+
+                        <div class="card-body contenedor-primer-ingreso pregunta<?php echo $i?>">
                     
-                    for ($i=1; $i <=$cantidadPreguntas ; $i++) { ?>
+                            <!-- <div class="form-row"> -->
 
-                    <div class="card-body contenedor-primer-ingreso pregunta<?php echo $i?>">
-                
-                        <!-- <div class="form-row"> -->
-
-                            <div class="form-group">
-                                <label for="">Pregunta <?php echo $i?></label>
-                                <select class="form-control select2" name="nuevaPregunta[]">
-                                    <option selected="selected">Seleccionar...</option>
-                                    <?php 
-                                        $tabla = "tbl_preguntas";
-                                        $item = null;
-                                        $valor = null;
-
-                                        $preguntas = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
-
-                                        foreach ($preguntas as $key => $value) { ?>
-                                            <option value="<?php echo $value['id_preguntas']?>"><?php echo $value['pregunta']?></option>        
+                                <div class="form-group">
+                                    <label for="">Pregunta <?php echo $i?></label>
+                                    <select class="form-control select2" name="nuevaPregunta[]">
+                                        <option selected="selected">Seleccionar...</option>
                                         <?php 
-                                        }
-                                    ?>
-                                </select>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label class="" for="">Respuesta <?php echo $i?></label>
-                                <input type="text" class="form-control respuesta<?php echo $i?>" onKeyUp="this.value=this.value.toLowerCase();" name="respuestaPregunta[]" placeholder="Ingrese respuesta">
-                            </div>
+                                            $tabla = "tbl_preguntas";
+                                            $item = null;
+                                            $valor = null;
 
-                            <div class="form-group mt-4" id="pregunta<?php echo $i?>">
-                                <!-- <a href="salir" class="btn btn-danger salir float-left">Salir</a>
-                                <a href="javascript:void(0);" class="btn btn-primary salir float-right" onclick="togglePregunta<?php echo $i+1?>();">Siguiente</a> -->
-                            </div>
-                        <!-- </div> -->
+                                            $preguntas = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
 
-                    </div>
-                <?php
-                    }            
-                ?>
+                                            foreach ($preguntas as $key => $value) { ?>
+                                                <option value="<?php echo $value['id_preguntas']?>"><?php echo $value['pregunta']?></option>        
+                                            <?php 
+                                            }
+                                        ?>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="" for="">Respuesta <?php echo $i?></label>
+                                    <input type="text" class="form-control respuesta<?php echo $i?>" onKeyUp="this.value=this.value.toLowerCase();" name="respuestaPregunta[]" placeholder="Ingrese respuesta">
+                                </div>
+
+                                <div class="form-group mt-4" id="pregunta<?php echo $i?>">
+                                    <!-- <a href="salir" class="btn btn-danger salir float-left">Salir</a>
+                                    <a href="javascript:void(0);" class="btn btn-primary salir float-right" onclick="togglePregunta<?php echo $i+1?>();">Siguiente</a> -->
+                                </div>
+                            <!-- </div> -->
+
+                        </div>
+                    <?php
+                        }            
+                    ?>
 
                     <div class="card-body contenedor-primer-ingreso password-primer-ingreso">
                         <div class="form-group" id="passwordPrimerIngreso">

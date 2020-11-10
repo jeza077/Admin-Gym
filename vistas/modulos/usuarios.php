@@ -137,7 +137,7 @@
                   <div class="form-row">
                     <div class="form-group col-md-3">
                       <label for="">Tipo de documento <?php echo $i?></label>
-                      <select class="form-control select2" name="nuevoTipoDocumento">
+                      <select class="form-control select2 tipoDocumento" name="nuevoTipoDocumento">
                           <option selected="selected">Seleccionar...</option>
                           <?php 
                               $tabla = "tbl_documento";
@@ -156,7 +156,7 @@
 
                     <div class="form-group col-md-3">
                       <label for="identidad">Numero de documento</label>
-                      <input type="text" class="form-control id" name="nuevoNumeroDocumento" placeholder="Ingrese Identidad" required>
+                      <input type="text" class="form-control numeroDocumento" name="nuevoNumeroDocumento" placeholder="Ingrese Identidad" required>
                     </div>
                     <div class="form-group col-md-3">
                       <label for="nombre">Nombre</label>
@@ -329,7 +329,7 @@
                   <div class="form-row">
                     <div class="form-group col-md-3">
                       <label for="">Tipo de documento <?php echo $i?></label>
-                      <select class="form-control select2" name="editarTipoDocumento">
+                      <select class="form-control select2 tipoDocumento" name="editarTipoDocumento">
                           <option value="" id="editarTipoDocumento"></option>
                           <?php 
                               $tabla = "tbl_documento";
@@ -348,7 +348,7 @@
 
                     <div class="form-group col-md-3">
                       <label for="identidad">Numero de documento</label>
-                      <input type="text" class="form-control id" name="editarNumeroDocumento" value="" required>
+                      <input type="text" class="form-control numeroDocumento" name="editarNumeroDocumento" value="" required>
                     </div>
                     <div class="form-group col-md-3">
                       <label for="nombre">Nombre</label>

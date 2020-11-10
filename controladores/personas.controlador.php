@@ -97,6 +97,7 @@ class ControladorPersonas{
                             $datos = array("id_persona" => $idPersona,
                                         "nombre" => $_POST["nuevoNombre"],
                                         "usuario" => $_POST["nuevoUsuario"],
+                                        "tipo_persona" => $tipoPersona,
                                         "password" => "Hola456.",
                                         "rol" => $idRol,
                                         "foto" => "vistas/img/usuarios/default/anonymous.png",

@@ -106,6 +106,9 @@ body.primer-ingreso .card {
     border-radius: 0;
     height: auto;
 }
+/* body.primer-ingreso .card .btnSalir {
+    margin-left: 100px;
+} */
 body.primer-ingreso .card .contenedor1 img {
     width: 350px;
     height: 400px;
@@ -115,16 +118,27 @@ body.primer-ingreso .card .contenedor1{
     padding: 80px 50px 50px 50px;
 }
 body.primer-ingreso .card .contenedor2{
-    padding: 60px 70px;
+    padding: 50px 90px;
+    display: inline-flex;
 }
-/* body.primer-ingreso .card .contenedor2 a{
+/* body.primer-ingreso .card .contenedor2:nth-child(2){
+    text-align: center;
+} */
+body.primer-ingreso .card .contenedor2 .titulo{
     color: var(--orangeThird);
     font-size: 2rem;
     text-align: center;
     letter-spacing: 1px;
     font-weight: 900;
-    padding-left: 115px;
-} */
+    /* padding-left: 115px; */
+}
+body.primer-ingreso .card .contenedor2 .titulo a{
+    color: var(--orangeThird);
+}
+body.primer-ingreso .card .contenedor2 #primerIngreso{
+    /* align-self: center; */
+    margin-top: 100px;
+}
 body.primer-ingreso .card .contenedor2 a b{
     color: var(--orangeThird);
     font-size: 2rem;

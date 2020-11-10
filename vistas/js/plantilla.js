@@ -82,13 +82,6 @@ function longitudString(selector, maxLongitud) {
 	});
 }
 
-//** VALIDACIONES GLOBALES */
-longitudString($('input[type=password]'),16); //Longitud maxima Input tipo Password Global.
-$('input[type=password]').keydown(impedirEspacios); //Evitar espacios en Input de tipo Password, Global.
-$('input[type=email]').keydown(impedirEspacios); // Evitar espacios en Input de tipo Email, Global.
-
-
-
 //* ===================================================
 //*FUNCION PARA VERIFICAR SI HAY ESPACIOS EN UN STRING
 //**===================================================
@@ -146,7 +139,7 @@ function validarEmail(selector) {
 			processData: false,  
 			dataType: "json",
 			success: function(respuesta) {
-				console.log(respuesta);
+				// console.log(respuesta);
 	
 				if(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.([a-zA-Z]{2,4})+$/.test(emailIngresado) && respuesta){
 					// selector.after('<div class="alert alert-warning mt-2">Email ya existente, ingrese uno diferente.</div>');
@@ -156,7 +149,7 @@ function validarEmail(selector) {
 					Swal.fire({
 						title: "Email ya existente, ingrese uno diferente.",
 						icon: "error",
-						background: "rgb(255 75 75 / 85%)",
+						// background: "rgb(255 75 75 / 85%)",
 						toast: true,
 						position: "top",
 						showConfirmButton: false,
@@ -308,7 +301,9 @@ function mostrarContraseña(selector, mostrar, action) {
     }
 }
 
-
+/*=============================================
+    ALERTAS
+=============================================*/
 function alertas(modulo) {
     let pathname = window.location.href;
     if(pathname == 'http://localhost/gym/'+modulo){
@@ -324,53 +319,32 @@ function alertas(modulo) {
     }
         
 }
-// alertas('dashboard');
 
-// document.getElementById('alerta').play();
 /*=============================================
     Sin numeros
 =============================================*/
 function sinNumeros(event) {
     var codigo = event.which || event.keyCode;
-
-    if(codigo == 48 || codigo == 49 || codigo == 50 || codigo == 51 || codigo == 52 || codigo == 53 || codigo == 54 || codigo == 55 || codigo == 56 || codigo == 57  || codigo ==97  || codigo == 98  || codigo == 99  || codigo == 100  || codigo == 101  || codigo == 102  || codigo == 103  || codigo == 104  || codigo == 105){
+    console.log(codigo);
+    if(codigo >= 48 && codigo <= 57  || codigo >= 97  && codigo <= 105){
         event.preventDefault();
-        
-        // $(this).parent().parent().after('<div class="alert alert-danger mt-2">No se aceptan numeros.</div>');
-        // var identificador = $(this);
-        // setTimeout(function () {
-        //     $('.alert').remove();
-        //     identificador.val('');
-        //     identificador.attr('disabled', false);
-        //     identificador.focus();
-        // }, 2000)
-        // $(this).attr('disabled', true);
+
     } else {
         $('.alert').remove();
     }
      
 }
 
-$('.nombre').keydown(sinNumeros)
-
 /*=============================================
     Sin letras
 =============================================*/
 function sinLetras(event) {
     var codigo = event.which || event.keyCode;
+    // console.log(codigo);
 
-    if(codigo == 81 || codigo == 87 || codigo == 69 || codigo == 82 || codigo == 84 || codigo == 89 || codigo == 85 || codigo == 73 || codigo == 79 || codigo == 80  || codigo ==65  || codigo == 83  || codigo == 68  || codigo == 70  || codigo == 71 || codigo == 72  || codigo == 74  || codigo == 75  || codigo == 76 || codigo == 192 || codigo == 90 || codigo == 88 || codigo == 67 || codigo == 86 || codigo == 66 || codigo == 78 || codigo == 77){
+    if(codigo >= 65 && codigo <= 90 || codigo == 192){
         event.preventDefault();
-        
-        // $(this).parent().parent().after('<div class="alert alert-danger mt-2">No se aceptan numeros.</div>');
-        // var identificador = $(this);
-        // setTimeout(function () {
-        //     $('.alert').remove();
-        //     identificador.val('');
-        //     identificador.attr('disabled', false);
-        //     identificador.focus();
-        // }, 2000)
-        // $(this).attr('disabled', true);
+
     } else {
         $('.alert').remove();
     }
@@ -392,7 +366,6 @@ function sinCaracteres(event) {
      
 }
 
-$('.nombre').keydown(sinCaracteres)
 /*=============================================
     FUNCION VALIDAR DOCUMENTO
 =============================================*/
@@ -418,7 +391,7 @@ function validarDoc(selector) {
     
                 if(respuesta){
                     Swal.fire({
-                        title: "Documento ya existente, ingrese uno diferente.",
+                        title: "Numero de documento ya existente, ingrese uno diferente.",
                         icon: "error",
                         toast: true,
                         position: "top",
@@ -436,47 +409,49 @@ function validarDoc(selector) {
     })
 }
 
-var identidad = $('.id');
-validarDoc(identidad);
 /*=============================================
     FUNCION VALIDAR DOCUMENTO
 =============================================*/
-
-// function validarId(selector) {
-//     // selector.keydown(function (e) { 
-       
-//         var seleccion = $('.select2').val();
-
-//         if (seleccion == 3) {
-
-//             // $('.id').keydown(sinCaracteres)
-//             sinCaracteres();
-         
-//         } else {
-
-//             // $('.id').keydown(sinLetras)
-//             // $('.id').keydown(sinCaracteres)
-     
-//             sinLetras();
-//             sinCaracteres();
-//         } 
-//     // });
-// }
-
-$('.nuevoTipoDocumento').change(function (e) { 
+$(document).on('change', '.tipoDocumento', function (e) { 
     e.preventDefault();
-    $('.id').val("");
+    // $('.numeroDocumento').keydown(sinCaracteres);
+    $('.numeroDocumento').val("");
 
-    var valorTipoDocumento =$(this).val();
+    var valorTipoDocumento = $(this).val();
     console.log(valorTipoDocumento);
 
-    if(valorTipoDocumento === 3){
-        $('.id').keydown(sinNumeros);
+    if(valorTipoDocumento == 1){
+        $('.numeroDocumento').keydown(sinLetras);
+        $('.numeroDocumento').keydown(sinCaracteres);
+        // longitudString($('.numeroDocumento'),13); //Longitud maxima.
+        // $('.numeroDocumento').keydown(sinCaracteres);
+    } else if(valorTipoDocumento == 2){
+        $('.numeroDocumento').keydown(sinLetras);
+        // longitudString($('.numeroDocumento'),14); //Longitud maxima.
+        $('.numeroDocumento').keydown(sinCaracteres);
+        
     } else {
-        $('.id').keydown(sinLetras);
-        $('.id').keydown(sinCaracteres);
+        $('.numeroDocumento').keydown(sinCaracteres);
+        longitudString($('.numeroDocumento'),16); //Longitud maxima.
     }
 });
-// $('.id').keydown(validarId);
-// var identidad = $('.id');
-// validarId(identidad);
+
+
+
+/*=============================================
+    EJECUCION DE VALIDACIONES
+=============================================*/
+var identidad = $('.numeroDocumento');
+validarDoc(identidad);
+$('.nombre').keydown(sinNumeros)
+$('.nombre').keydown(sinCaracteres)
+$('.apellidos').keydown(sinNumeros)
+$('.apellidos').keydown(sinCaracteres)
+$('.nuevoUsuario').keydown(sinNumeros)
+$('.nuevoUsuario').keydown(sinCaracteres)
+    
+//** VALIDACIONES GLOBALES */
+longitudString($('input[type=password]'),16); //Longitud maxima Input tipo Password Global.
+$('input[type=password]').keydown(impedirEspacios); //Evitar espacios en Input de tipo Password, Global.
+$('input[type=email]').keydown(impedirEspacios); // Evitar espacios en Input de tipo Email, Global.
+

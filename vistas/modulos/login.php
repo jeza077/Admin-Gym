@@ -149,7 +149,7 @@
         <div class="form-row">
           <div class="form-group col-md-3">
                 <label for="">Tipo de documento <?php echo $i?></label>
-            <select class="form-control select2 nuevoTipoDocumento" name="nuevoTipoDocumento">
+            <select class="form-control select2 tipoDocumento" name="nuevoTipoDocumento">
                 <option selected="selected">Seleccionar...</option>
                 <?php 
                     $tabla = "tbl_documento";
@@ -167,7 +167,7 @@
           </div>
           <div class="form-group col-md-3">
             <label for="identidad">Numero de Documento</label>
-            <input type="text" class="form-control id" name="nuevoNumeroDocumento" placeholder="Ingrese Identidad" required>
+            <input type="text" class="form-control numeroDocumento" name="nuevoNumeroDocumento" placeholder="Ingrese Identidad" required>
           </div>
           <div class="form-group col-md-3">
             <label for="nombre">Nombre</label>

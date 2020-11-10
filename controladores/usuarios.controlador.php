@@ -159,7 +159,7 @@ class ControladorUsuarios{
 
 						if($respuesta["usuario"] == $_POST["ingUsuario"] && $respuesta["password"] == $encriptar){
 							
-							if($respuesta["estado"] == 0 && $respuesta["primera_vez"] == 1) {
+							if($respuesta["estado"] == 0 && $respuesta["primera_vez"] == 1 || $respuesta["estado"] == 1 && $respuesta["primera_vez"] == 1) {
 
 								$_SESSION["iniciarSesion"] = "ok";
 								$_SESSION["id_usuario"] = $respuesta["id_usuario"];
@@ -418,7 +418,7 @@ class ControladorUsuarios{
 				$emailUsuario = $datos["email"];
 				$contraSinEncriptar = $datos["password"];
 				$nombre = $datos["nombre"];
-
+				$tipoPersona = $datos["tipo_persona"];
 				// echo $emailUsuario;
 				// echo $contraSinEncriptar;
 				// echo $nombre;
@@ -520,23 +520,31 @@ class ControladorUsuarios{
 
 						if($respuestaEmpleado == true){
 
-							$email = $emailUsuario;
-							$nombreUsuario = $datos["usuario"];
-							$contraseña =  $contraSinEncriptar;
-							$asunto = 'Envio de Usuario y Contraseña';
-							$require = false;
-
-							$template = 'Hola '.$nombre.'! <br><br> Tu usuario es: '.$nombreUsuario.' <br> Tu contraseña es: '.$contraseña; 
-							
-							$respuestaCorreo = ControladorUsuarios::ctrGenerarCorreo($email, $nombreUsuario, $asunto, $template, $require);
-
-							if($respuestaCorreo = true){
+							if($tipoPersona == 'default'){
 
 								return true;
-
+								
 							} else {
 
-								return false;
+								$email = $emailUsuario;
+								$nombreUsuario = $datos["usuario"];
+								$contraseña =  $contraSinEncriptar;
+								$asunto = 'Envio de Usuario y Contraseña';
+								$require = false;
+
+								$template = 'Hola '.$nombre.'! <br><br> Tu usuario es: '.$nombreUsuario.' <br> Tu contraseña es: '.$contraseña; 
+								
+								$respuestaCorreo = ControladorUsuarios::ctrGenerarCorreo($email, $nombreUsuario, $asunto, $template, $require);
+
+								if($respuestaCorreo = true){
+
+									return true;
+
+								} else {
+
+									return false;
+								}
+
 							}
 
 						} else {
