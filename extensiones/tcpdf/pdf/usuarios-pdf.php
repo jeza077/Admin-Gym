@@ -2,7 +2,7 @@
 // require_once "../../controladores/usuarios.controlador.php";
 require_once('../../../controladores/usuarios.controlador.php');
 require_once "../../../modelos/usuarios.modelo.php";
-require_once('tcpdf_include.php');
+require_once('../examples/tcpdf_include.php');
 
 
 class PDF extends TCPDF{
@@ -10,23 +10,28 @@ class PDF extends TCPDF{
     // Header de la pagina
     public function Header() {
         // Logo
-        $image_file = K_PATH_IMAGES.'logo_example.jpg';
-        $this->Image($image_file, 40, 10, 25, '', 'JPG', '', 'T', false, 300, '', false, false, 0, false, false, false);
+        $image_file = K_PATH_IMAGES.'logo_gym.png';
+        $this->Image($image_file, 40, 10, 25, '', 'PNG', '', 'T', false, 300, '', false, false, 0, false, false, false);
         
         // Fuente
-        $this->Ln(5);
+        $this->Ln(2);
         $this->SetFont('helvetica', 'B', 16);
         
+        //establecer el color del texto
+        $this->SetTextColor(255,0,0);
+
         // Title
         // $this->Cell(189, 5, 'GIMNASIO LA "ROCA"', 0, 1, 'C', 0, '', 0, false, 'M', 'M');
         $this->Cell(189, 5, 'GIMNASIO LA "ROCA"', 0, 1, 'C');
+        
+        $this->SetTextColor(0,0,0);
         $this->SetFont('helvetica', '', 9);
         // $this->Cell(189, 3, 'Gimnasio La roca', 0, 1, 'C');
         $this->Cell(189, 3, 'Col. xxxxxxxxxx....', 0, 1, 'C');
         $this->Cell(189, 3, 'Calle xxxxxxxxxx.....', 0, 1, 'C');
         $this->Cell(189, 3, 'correo: gym@gmail.com', 0, 1, 'C');
 
-        $this->Ln(15); //Espacios
+        $this->Ln(20); //Espacios
         $this->SetFont('helvetica', 'B', 14);
         $this->Cell(189, 3, 'REPORTE DE USUARIOS', 0, 1, 'C');
         $this->Ln(3);
@@ -98,7 +103,7 @@ $pdf->SetFont('dejavusans', '', 14, '', true);
 // This method has several options, check the source code documentation for more information.
 $pdf->AddPage();
 
-$pdf->Ln(40);
+$pdf->Ln(45);
 
 $pdf->SetFont('times', '', 13);
 $pdf->SetFillColor(225, 235, 255);
@@ -115,10 +120,12 @@ $usuarios = ControladorUsuarios::ctrMostrarSoloUsuarios($tabla, $item, $valor);
 
 // var_dump($usuarios);
 
+$i = 1; //Contador
+$max = 1; //Maximo de registros a mostrar en una pagina
 
 foreach ($usuarios as $key => $value) {
 
-    if($key == 2){
+    if(($i%$max) == 0){
         $pdf->AddPage();
 
         $pdf->Ln(40);
@@ -144,7 +151,7 @@ foreach ($usuarios as $key => $value) {
     } else {
         $pdf->Cell(30, 4, 'Activado', 0, 0, 'C');
     }
-
+    $i++;
 
 }
 

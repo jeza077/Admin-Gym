@@ -193,5 +193,5 @@ $(document).on('click', '.btnEliminarUsuario', function () {
 //         IMPRIMIR USUARIOS 
 // --------------------------------------*/ 
 $(document).on('click', '.btnExportarUsuarios', function () {
-    window.open("extensiones/tcpdf/examples/usuarios-pdf.php", "_blank");
+    window.open("extensiones/tcpdf/pdf/usuarios-pdf.php", "_blank");
 });
