@@ -1,5 +1,7 @@
 <?php
-
+// require_once "../../controladores/usuarios.controlador.php";
+require_once('../../../controladores/usuarios.controlador.php');
+require_once "../../../modelos/usuarios.modelo.php";
 require_once('tcpdf_include.php');
 
 
@@ -27,6 +29,9 @@ class PDF extends TCPDF{
         $this->Ln(15); //Espacios
         $this->SetFont('helvetica', 'B', 14);
         $this->Cell(189, 3, 'REPORTE DE USUARIOS', 0, 1, 'C');
+        $this->Ln(3);
+        $this->SetFont('helvetica', 'B', 11);
+        $this->Cell(189, 3, 'Año 2020', 0, 1, 'C');
     }
 
     // Footer de la pagina
@@ -93,15 +98,55 @@ $pdf->SetFont('dejavusans', '', 14, '', true);
 // This method has several options, check the source code documentation for more information.
 $pdf->AddPage();
 
-$pdf->Ln(35);
+$pdf->Ln(40);
 
-$pdf->SetFont('times', '', 14);
+$pdf->SetFont('times', '', 13);
 $pdf->SetFillColor(225, 235, 255);
-$pdf->Cell(20, 5, 'No', 1, 0, 'C', 1);
-$pdf->Cell(50, 5, 'Nombre', 1, 0, 'C', 1);
-$pdf->Cell(30, 5, 'Usuario', 1, 0, 'C', 1);
-$pdf->Cell(50, 5, 'Rol', 1, 0, 'C', 1);
+$pdf->Cell(15, 5, 'No', 1, 0, 'C', 1);
+$pdf->Cell(55, 5, 'Nombre', 1, 0, 'C', 1);
+$pdf->Cell(40, 5, 'Usuario', 1, 0, 'C', 1);
+$pdf->Cell(40, 5, 'Rol', 1, 0, 'C', 1);
+$pdf->Cell(30, 5, 'Estado', 1, 0, 'C', 1);
 
+$tabla = "tbl_usuarios";
+$item = null;
+$valor = null;
+$usuarios = ControladorUsuarios::ctrMostrarSoloUsuarios($tabla, $item, $valor);
+
+// var_dump($usuarios);
+
+
+foreach ($usuarios as $key => $value) {
+
+    if($key == 2){
+        $pdf->AddPage();
+
+        $pdf->Ln(40);
+        
+        $pdf->SetFont('times', '', 13);
+        $pdf->SetFillColor(225, 235, 255);
+        $pdf->Cell(15, 5, 'No', 1, 0, 'C', 1);
+        $pdf->Cell(55, 5, 'Nombre', 1, 0, 'C', 1);
+        $pdf->Cell(40, 5, 'Usuario', 1, 0, 'C', 1);
+        $pdf->Cell(40, 5, 'Rol', 1, 0, 'C', 1);
+        $pdf->Cell(30, 5, 'Estado', 1, 0, 'C', 1);
+    }
+
+    $pdf->Ln(8);
+    $pdf->SetFont('times', '', 12);
+    // $pdf->SetFillColor(225, 235, 255);
+    $pdf->Cell(15, 4, ''.($key+1).'', 0, 0, 'C');
+    $pdf->Cell(55, 4, ''.$value['nombre'].' '.$value['apellidos'].'', 0, 0, 'C');
+    $pdf->Cell(40, 4, ''.$value['usuario'].'', 0, 0, 'C');
+    $pdf->Cell(40, 4, ''.$value['rol'].'', 0, 0, 'C');
+    if($value["estado"] == 0){
+        $pdf->Cell(30, 4, 'Desactivado', 0, 0, 'C');
+    } else {
+        $pdf->Cell(30, 4, 'Activado', 0, 0, 'C');
+    }
+
+
+}
 
 // Close and output PDF document
 $pdf->Output('example_001.pdf', 'I');
