@@ -14,7 +14,7 @@
             <button class="btn btn-orange float-right"  data-toggle="modal" data-target="#modalAgregarUsuario">
               Agregar Usuario          
             </button>
-            <button class="btn btn-danger float-right mr-3">
+            <button class="btn btn-danger btnExportarUsuarios float-right mr-3">
               Exportar PDF          
             </button>
           </div>
