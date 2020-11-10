@@ -100,6 +100,7 @@ class ControladorUsuarios{
                     // 	var_dump($respuesta['rol']);
                   	// echo "</pre>";
 					// return;
+
 					$item1 = "usuario";
 					$valor1 = $_POST["ingUsuario"];
 					$item2 = "rol";
@@ -159,7 +160,19 @@ class ControladorUsuarios{
 
 						if($respuesta["usuario"] == $_POST["ingUsuario"] && $respuesta["password"] == $encriptar){
 							
-							if($respuesta["estado"] == 0 && $respuesta["primera_vez"] == 1 || $respuesta["estado"] == 1 && $respuesta["primera_vez"] == 1) {
+							
+							if($respuesta["estado"] == 0 && $respuesta["primera_vez"] == 1 && $respuesta["rol"] == "Default" || $respuesta["estado"] == 1 && $respuesta["primera_vez"] == 1 && $respuesta["rol"] == "Default"){
+
+								echo '<script>			
+										Swal.fire({
+											title: "Su usuario no tiene permisos, comuniquese con el administrador.",
+											icon: "error",
+											heightAuto: false,
+											allowOutsideClick: false
+										});
+									</script>';
+									
+							} else if($respuesta["estado"] == 0 && $respuesta["primera_vez"] == 1 || $respuesta["estado"] == 1 && $respuesta["primera_vez"] == 1) {
 
 								$_SESSION["iniciarSesion"] = "ok";
 								$_SESSION["id_usuario"] = $respuesta["id_usuario"];
@@ -181,6 +194,8 @@ class ControladorUsuarios{
 									}
 								});
 								</script>';
+
+														
 
 							} else if($respuesta["estado"] == 1 && $respuesta["primera_vez"] == 0 && $fechaHoy < $fechaVencimiento || $respuesta["estado"] == 1 && $respuesta["primera_vez"] == 0 && $fechaHoy > $fechaVencimiento && $_POST['ingUsuario'] == 'SUPERADMIN') {
 
@@ -245,21 +260,6 @@ class ControladorUsuarios{
 										</script>';
 
 								}
-
-
-							// } 
-							// else if($respuesta["estado"] == 0) {
-
-							// 	echo '<script>			
-							// 			Swal.fire({
-							// 				title: "Usuario bloqueado, comuniquese con el administrador.",
-							// 				icon: "error",
-							// 				heightAuto: false,
-							// 				allowOutsideClick: false
-							// 			});
-							// 		</script>';
-								
-							// 	session_destroy();
 
 							} else if($respuesta["estado"] == 1 && $fechaHoy > $fechaVencimiento && $_POST['ingUsuario'] != 'SUPERADMIN'){
 								
@@ -523,7 +523,7 @@ class ControladorUsuarios{
 							if($tipoPersona == 'default'){
 
 								return true;
-								
+
 							} else {
 
 								$email = $emailUsuario;

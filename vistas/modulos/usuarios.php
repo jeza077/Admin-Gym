@@ -25,17 +25,17 @@
  <!-- Main content -->
     <section class="content">
 
-    <?php 
-      $permisoAgregar = $_SESSION['permisos']['Usuarios']['agregar'];
-      $permisoEliminar = $_SESSION['permisos']['Usuarios']['eliminar'];
-      $permisoActualizar = $_SESSION['permisos']['Usuarios']['actualizar'];
-      $permisoConsulta = $_SESSION['permisos']['Usuarios']['consulta'];
+      <?php 
+        $permisoAgregar = $_SESSION['permisos']['Usuarios']['agregar'];
+        $permisoEliminar = $_SESSION['permisos']['Usuarios']['eliminar'];
+        $permisoActualizar = $_SESSION['permisos']['Usuarios']['actualizar'];
+        $permisoConsulta = $_SESSION['permisos']['Usuarios']['consulta'];
 
-      // echo "<pre>";
-      // var_dump($_SESSION['permisos']);
-      // echo "</pre>";
+        // echo "<pre>";
+        // var_dump($_SESSION['permisos']);
+        // echo "</pre>";
 
-    ?>
+      ?>
         <div class="card">
 
             <div class="card-body">
@@ -70,7 +70,7 @@
                           <td>'.$value["nombre"] .' '.$value["apellidos"].'</td>
                           <td>'.$value["usuario"].'</td>';
 
-                          if($value != ""){
+                          if($value["foto"] != ""){
                             echo '<td><img src="'.$value["foto"].'" class="img-thumbnail" width="40px"></td>';
                           } else {
                             echo '<td><img src="vistas/img/usuarios/default/anonymous.png" class="img-thumbnail" width="40px"></td>';
