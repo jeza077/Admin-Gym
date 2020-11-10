@@ -20,6 +20,9 @@ class ControladorInventario
         }
 
 
+        /*=============================================
+                CREAR STOCK
+        =============================================*/
 
         static public function ctrCrearStock($tipostock, $pantalla){
             // var_dump($_POST);
@@ -143,4 +146,11 @@ class ControladorInventario
             }
         }
 
+
+
+
+
+
+
+        
 }
