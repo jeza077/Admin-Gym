@@ -116,7 +116,9 @@ $(document).on('click', '.btnEditarUsuario', function () {
             $('#fotoActual').val(respuesta['foto']);
             if(respuesta['foto'] != ""){
                 $('.previsualizar').attr('src', respuesta['foto']);
-            } 
+            } else {
+                $('.previsualizar').attr('src', 'vistas/img/usuarios/default/default2.jpg');
+            }
         }
 
     });

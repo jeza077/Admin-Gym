@@ -41,7 +41,11 @@
           // $device_details =   "<strong>Browser: </strong>" . $user_browser . 
           //                     "<br /><strong>Operating System: </strong>" . $user_os;
           // echo($device_details);
+
+          // $passw = ControladorUsuarios::password_seguro_random();
+          // $passw->password_seguro_random();
           
+          // echo $passw;
         ?>
     </div>
 

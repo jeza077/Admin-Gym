@@ -73,7 +73,7 @@
                           if($value["foto"] != ""){
                             echo '<td><img src="'.$value["foto"].'" class="img-thumbnail" width="40px"></td>';
                           } else {
-                            echo '<td><img src="vistas/img/usuarios/default/anonymous.png" class="img-thumbnail" width="40px"></td>';
+                            echo '<td><img src="vistas/img/usuarios/default/default2.jpg" class="img-thumbnail" width="40px"></td>';
                           }
 
                      echo '<td>'.$value["rol"].'</td>';
@@ -245,7 +245,7 @@
                     <div class="form-group col-md-6">
                       <label for="exampleInputFile">Foto</label>
                       <div class="input-group">
-                        <img class="img-thumbnail previsualizar mr-2" src="vistas/img/usuarios/default/anonymous.png" alt="imagen-del-usuario" width="100px">
+                        <img class="img-thumbnail previsualizar mr-2" src="vistas/img/usuarios/default/default2.jpg" alt="imagen-del-usuario" width="100px">
                         <div class="custom-file">
                           <input type="file" class="custom-file-input nuevaFoto" id="exampleInputFile" name="nuevaFoto">
                           <label class="custom-file-label" for="exampleInputFile">Escoger foto</label>
@@ -438,7 +438,7 @@
                     <div class="form-group col-md-6">
                       <label for="inputFoto">Foto</label>
                       <div class="input-group">
-                        <img class="img-thumbnail previsualizar mr-2" src="vistas/img/usuarios/default/anonymous.png" alt="imagen-del-usuario" width="100px">
+                        <img class="img-thumbnail previsualizar mr-2" src="" alt="imagen-del-usuario" width="100px">
                         <div class="custom-file">
                           <input type="file" class="custom-file-input nuevaFoto" id="inputFoto" name="editarFoto">
                           <label class="custom-file-label" for="inputFoto">Escoger foto</label>

@@ -82,18 +82,16 @@ class ControladorPersonas{
 
                             //------------------------Roles--------------------------------------
                             $tabla = "tbl_roles";
-                            $item = null;
-                            $valor = null;
+                            $item = "rol";
+                            $valor = "Default";
 
                             $roles  = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
-                            var_dump($roles);
+                            // var_dump($roles);
 
-                            $idRol = $roles[1]["id_rol"];
+                            $idRol = $roles["id_rol"];
 
                             // //-------------------------------------------------------------------
-
-                      
-                     
+           
                             $datos = array("id_persona" => $idPersona,
                                         "nombre" => $_POST["nuevoNombre"],
                                         "usuario" => $_POST["nuevoUsuario"],
