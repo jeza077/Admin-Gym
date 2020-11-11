@@ -84,6 +84,18 @@ body.login-page .login-box.recu-password .card{
     outline: 0;
 }
 
+/** COLORES **/
+.bg-orange,
+.bg-orange>a {
+    color: #fff!important;
+}
+.bg-red {
+    background-color: #ea162b!important;
+}
+.bg-red,
+.bg-red>a {
+    color: #fff!important;
+}
 
 /* NOTIFICACIONES Y OTROS */
 .alert {
@@ -93,6 +105,11 @@ body.login-page .login-box.recu-password .card{
     background-color: var(--orangeThird);
     color: #fff;
 }
+.small-box.bg-gray-dark .icon {
+    color: rgba(0,0,0,.4);
+    z-index: 0;
+}
+
 
 /*** PRIMER INGRESO ***/
 body.primer-ingreso {
