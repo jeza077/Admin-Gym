@@ -160,11 +160,11 @@
                     </div>
                     <div class="form-group col-md-3">
                       <label for="nombre">Nombre</label>
-                      <input type="text" class="form-control nombre" name="nuevoNombre" placeholder="Ingrese Nombre" required>
+                      <input type="text" class="form-control nombre mayus" name="nuevoNombre" placeholder="Ingrese Nombre" required>
                     </div>
                     <div class="form-group col-md-3">
                       <label for="apellido">Apellido</label>
-                      <input type="text" class="form-control apellidos" name="nuevoApellido" placeholder="Ingrese Apellidos" required>
+                      <input type="text" class="form-control apellidos mayus" name="nuevoApellido" placeholder="Ingrese Apellidos" required>
                     </div>
                   </div>
       
@@ -186,7 +186,7 @@
                   <div class="form-row">
                     <div class="form-group col-md-9">
                       <label for="inputAddress">Dirección</label>
-                      <input type="text" class="form-control" id="inputAddress" name="nuevaDireccion" placeholder="Col. Alameda, calle #2..." required>
+                      <input type="text" class="form-control mayus" id="inputAddress" name="nuevaDireccion" placeholder="Col. Alameda, calle #2..." required>
                     </div>
                   
                     <div class="form-group col-md-3">
@@ -208,7 +208,7 @@
                   <div class="form-row">
                     <div class="form-group col-md-3">
                       <label for="">Usuario</label>
-                      <input type="text" class="form-control nuevoUsuario" onKeyUp="this.value=this.value.toUpperCase();" name="nuevoUsuario" placeholder="Ingrese Usuario">
+                      <input type="text" class="form-control mayus nuevoUsuario" name="nuevoUsuario" placeholder="Ingrese Usuario">
                     </div>
                     <div class="form-group col-md-3">
                       <label>Rol</label>
@@ -276,7 +276,7 @@
                 </div>
             
                 <!-- <div class="modal-footer"> -->
-                <div class="form-group mt-4 float-right">
+                <div class="form-group final mt-4 float-right">
                   <button type="" class="btn btn-primary">Guardar</button>
                   <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
                 </div>
@@ -352,11 +352,11 @@
                     </div>
                     <div class="form-group col-md-3">
                       <label for="nombre">Nombre</label>
-                      <input type="text" class="form-control nombre" name="editarNombre" value="" required>
+                      <input type="text" class="form-control nombre mayus" name="editarNombre" value="" required>
                     </div>
                     <div class="form-group col-md-3">
                       <label for="apellido">Apellido</label>
-                      <input type="text" class="form-control apellidos" name="editarApellido" value="" required>
+                      <input type="text" class="form-control apellidos mayus" name="editarApellido" value="" required>
                     </div>
                   </div>
       
@@ -378,7 +378,7 @@
                   <div class="form-row">
                     <div class="form-group col-md-9">
                       <label for="direccion">Dirección</label>
-                      <input type="text" class="form-control" id="direccion" name="editarDireccion" value="" required>
+                      <input type="text" class="form-control mayus" id="direccion" name="editarDireccion" value="" required>
                     </div>
                   
                     <div class="form-group col-md-3">
@@ -400,7 +400,7 @@
                   <div class="form-row">
                     <div class="form-group col-md-3">
                       <label for="">Usuario</label>
-                      <input type="text" class="form-control nuevoUsuario" onKeyUp="this.value=this.value.toUpperCase();" name="editarUsuario" value="" readonly>
+                      <input type="text" class="form-control nuevoUsuario" name="editarUsuario" value="" readonly>
                     </div>
                     <div class="form-group col-md-3">
                       <label>Rol</label>
