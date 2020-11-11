@@ -19,14 +19,16 @@ $('.nuevoUsuario').keyup(function (){
             // console.log(respuesta);
 
             if(respuesta){
-                $('.nuevoUsuario').after('<div class="alert alert-warning mt-2">Usuario ya existente, ingrese uno diferente.</div>');
-                setTimeout(function () {
-                    $('.alert').remove();
-                }, 3000)
+                $('.final').before('<div class="alert alert-danger fade show mt-2" role="alert">Usuario ya existente, ingrese uno diferente.</div>');
+                // setTimeout(function () {
+                    // $('.alert').remove();
+                // }, 3000)
                 
                 //E inmeditamente Limpiamos el input
-                $('.nuevoUsuario').val("");
-                $('.nuevoUsuario').focus();
+                // $('.nuevoUsuario').val("");
+                // $('.nuevoUsuario').focus();
+            } else {
+                $('.alert').remove();
             }
         }
 
