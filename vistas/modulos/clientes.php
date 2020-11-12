@@ -14,10 +14,9 @@
           </button>
           </div>
         </div>
-      </div><!-- /.container-fluid -->
+      </div>
     </section>  
 
- <!-- Main content -->
     <section class="content">
     <?php 
       $permisoAgregar = $_SESSION['permisos']['Clientes']['agregar'];
@@ -96,14 +95,10 @@
                 </tbody>
               </table>
             </div>
-            <!-- /.card-body -->
         </div>
-        <!-- /.card -->
-    
     </section>
-    <!-- /.content -->
   </div>
-  <!-- /.content-wrapper -->
+
 
   <!-- =======================================
            MODAL AGREGAR  CLIENTE
@@ -208,8 +203,8 @@
                         <label>Tipo Cliente</label>
                         <select class="form-control select2 tipoCliente" name="tipoCliente" style="width: 100%;" required>
                           <option selected="selected">Seleccionar...</option>
-                          <option value="gimnasio">Clientes del gimnasio</option>
-                          <option value="ventas">Cliente de ventas</option>
+                          <option value="Gimnasio">Clientes del gimnasio</option>
+                          <option value="Ventas">Cliente de ventas</option>
                         </select>
                       </div>
                     </div>
@@ -218,7 +213,7 @@
                     <div class="form-row">
                       <div class="form-group col-md-6">
                           <label>Tipo matricula</label>
-                          <select class="form-control select2" style="width: 100%;" name="nuevaMatricula">
+                          <select class="form-control select2 nuevaMatricula" style="width: 100%;" name="nuevaMatricula">
                             <?php 
                                 $tabla = "tbl_matricula";
                                 $item = null;
@@ -274,7 +269,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">$</span>  
                               </div>
-                            <input type="text" class="form-control text-right nuevoPrecioPromocion" value="" readonly>
+                            <input type="text" class="form-control text-right nuevoPrecioPromocion precio" value="" readonly>
                          </div>
                       </div>
                     </div>
@@ -303,7 +298,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">$</span>  
                               </div>
-                            <input type="text" class="form-control text-right nuevoPrecioInscripcion" value="" readonly>
+                            <input type="text" class="form-control text-right nuevoPrecioInscripcion precio" value="" readonly>
                          </div>
                       </div>
                       
@@ -321,8 +316,6 @@
                     </div>
                   </div>
                 </div>
-            
-                <!-- <div class="modal-footer"> -->
                 <div class="form-group mt-4 float-right">
                   
                   <button type="" class="btn btn-primary">Guardar</button>
@@ -337,11 +330,8 @@
                 ?>
               </div>
             </div>
-
           </form>
-
         </div>
-
       </div>
     </div>
   </div>
@@ -355,7 +345,7 @@
       <div class="modal-content">
       
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Editar cliente</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Nuevo cliente</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -363,163 +353,220 @@
         <div class="modal-body">
           <form role="form" method="post" class="formulario">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
-                <li class="nav-item" role="presentation">
-                  <a class="nav-link active" id="datosPersonas" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Datos personales</a>
-                </li>
-                <li class="nav-item" role="presentation">
-                  <a class="nav-link" id="datosClientes" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Datos Cliente</a>
-                </li>
-              </ul>
-              
-              <div class="tab-content" id="myTabContent">
-                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="datosclientes">
-                  <div class="container-fluid mt-4">
-                        <div class="form-row">
-                        <div class="form-group col-md-3">
-                          <label for="">Tipo de documento <?php echo $i?></label>
-                          <select class="form-control select2" name="editarTipoDocumento">
-                              <option selected="selected">Seleccionar...</option>
+              <li class="nav-item" role="presentation">
+                <a class="nav-link active" id="datosPersonas" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Datos personales</a>
+              </li>
+              <li class="nav-item" role="presentation">
+                <a class="nav-link" id="datosCliente" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Datos Cliente</a>
+              </li>
+            </ul>
+            
+            <div class="tab-content" id="myTabContent">
+              <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="datoscliente">
+                <div class="container-fluid mt-4">
+                  <div class="form-row">
+                    <div class="form-group col-md-3">
+                      <label for="">Tipo de documento <?php echo $i?></label>
+                      <select class="form-control select2" name="editarTipoDocumento">
+                          <option selected="selected">Seleccionar...</option>
+                          <?php 
+                              $tabla = "tbl_documento";
+                              $item = null;
+                              $valor = null;
+
+                              $preguntas = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
+
+                              foreach ($preguntas as $key => $value) { ?>
+                                  <option value="<?php echo $value['id_documento']?>"><?php echo $value['tipo_documento']?></option>        
                               <?php 
-                                  $tabla = "tbl_documento";
-                                  $item = null;
-                                  $valor = null;
+                              }
+                          ?>
+                      </select>
+                    </div>
 
-                                  $preguntas = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
+                    <div class="form-group col-md-3">
+                      <label for="identidad">Numero de documento</label>
+                      <input type="text" class="form-control id" name="nuevoNumeroDocumento" placeholder="Ingrese Identidad" required>
+                    </div>
+                    <div class="form-group col-md-3">
+                      <label for="nombre">Nombre</label>
+                      <input type="text" class="form-control editarNombre" name="editarNombre" placeholder="Ingrese Nombre" required>
+                    </div>
+                    <div class="form-group col-md-3">
+                      <label for="apellido">Apellido</label>
+                      <input type="text" class="form-control editarApellidos" name="editarApellido" placeholder="Ingrese Apellidos" required>
+                    </div>
+                  </div>
+      
+                  <div class="form-row">
+                    <div class="form-group col-md-4">
+                      <label for="email">Email</label>
+                      <input type="email" class="form-control editarEmail" name="editarEmail" placeholder="Ingrese Email" required>
+                    </div>
+                    <div class="form-group col-md-4">
+                      <label>Teléfono</label>
+                      <input type="text" class="form-control" data-inputmask='"mask": "(999) 9999-9999"' data-mask  name="editarTelefono" placeholder="Ingrese Telefono" required>
+                    </div>
+                    <div class="form-group col-md-4">
+                      <label>Fecha de nacimiento</label>
+                        <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy/mm/dd" data-mask  name="editarFechaNacimiento" placeholder="Ingrese Fecha de Nacimiento" required>
+                    </div>
+                  </div>
 
-                                  foreach ($preguntas as $key => $value) { ?>
-                                      <option value="<?php echo $value['id_documento']?>"><?php echo $value['tipo_documento']?></option>        
-                                  <?php 
-                                  }
-                              ?>
-                          </select>
-                        </div>
-
-                        <div class="form-group col-md-3">
-                          <label for="identidad">Numero de documento</label>
-                          <input type="text" class="form-control id" name="editarNumeroDocumento" placeholder="Editar Identidad" required>
-                        </div>
-                        <div class="form-group col-md-3">
-                          <label for="nombre">Nombre</label>
-                          <input type="text" class="form-control nombre" name="editarNombre" placeholder="Editar Nombre" required>
-                        </div>
-                        <div class="form-group col-md-3">
-                          <label for="apellido">Apellido</label>
-                          <input type="text" class="form-control apellidos" name="editarApellido" placeholder="Editar Apellidos" required>
-                        </div>
-                      </div>
-          
-                      <div class="form-row">
-                        <div class="form-group col-md-4">
-                          <label for="email">Email</label>
-                          <input type="email" class="form-control email" name="editarEmail" placeholder="Ingrese Email" required>
-                        </div>
-                        <div class="form-group col-md-4">
-                          <label>Teléfono</label>
-                          <input type="text" class="form-control" data-inputmask='"mask": "(999) 9999-9999"' data-mask  name="editarTelefono" placeholder="Editar Telefono" required>
-                        </div>
-                        <div class="form-group col-md-4">
-                          <label>Fecha de nacimiento</label>
-                            <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy/mm/dd" data-mask  name="editarFechaNacimiento" placeholder="Edite Fecha de Nacimiento" required>
-                        </div>
-                      </div>
-
-                      <div class="form-row">
-                        <div class="form-group col-md-9">
-                          <label for="">Dirección</label>
-                          <input type="text" class="form-control" name="editarDireccion" placeholder="Col. Alameda, calle #2..." required>
-                        </div>
-                      
-                        <div class="form-group col-md-3">
-                          <label>Sexo</label>
-                          <select class="form-control select2" name="editarSexo" style="width: 100%;" required>
-                            <option selected="selected">Seleccionar...</option>
-                            <option value="M">Masculino</option>
-                            <option value="F">Femenino</option>
-                          </select>
-                        </div>
-                      </div>
-                      <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="datosCLientes">
-                        <div class="container-fluid mt-4">
+                  <div class="form-row">
+                    <div class="form-group col-md-9">
+                      <label for="">Dirección</label>
+                      <input type="text" class="form-control" name="nuevaDireccion" placeholder="Col. Alameda, calle #2..." required>
+                    </div>
                   
-                          <div class="form-row">
-                            <div class="form-group col-md-3">
-                              <label>Tipo Cliente</label>
-                              <select class="form-control select2 tipoCliente" name="tipoCliente" style="width: 100%;" required>
-                                <option selected="selected">Seleccionar...</option>
-                                <option value="gimnasio">Clientes del gimnasio</option>
-                                <option value="ventas">Cliente de ventas</option>
-                              </select>
-                            </div>
-                          </div>
-                          
-                        <div id="datosClientes">
-                            <div class="form-row">
-                                <div class="form-group col-md-3">
-                                    <label>Tipo matricula</label>
-                                    <select class="form-control select2" style="width: 100%;" name="nuevaMatricula">
-                                      <option selected="selected" value="1">normal</option>
-                                      
-                                    </select> 
-                                </div>
-                              </div>
-                              <div class="form-row">
-                                <div class="form-group col-md-3">
-                                  <label>Promociones</label>
-                                  <select class="form-control select2" style="width: 100%;" name="nuevaPromocion">
-                                    <option selected="selected">Seleccionar...</option>
-                                    
-                                      <?php 
-                                          $tabla = "tbl_promociones_descuentos";
-                                          $item = null;
-                                          $valor = null;
-
-                                          $matriculas = ControladorClientes::ctrMostrar($tabla, $item, $valor);
-
-                                          foreach ($matriculas as $key => $value) { ?>
-                                            <option value="<?php echo $value['id_promociones_descuentos']?>"><?php echo $value['tipo_promociones_descuentos']?></option>        
-                                          <?php 
-                                          }
-                                      ?>
-                                  </select> 
-                                </div>
-                              </div>
-                              <div class="form-row">
-                                  <div class="form-group col-md-3"> 
-                                    <label>Tipo inscripcion</label>
-                                    <select class="form-control select2" style="width: 100%;" name="nuevaInscripcion">
-                                        <option selected="selected">Seleccionar...</option>
-                                        <?php 
-                                            $tabla = "tbl_inscripcion";
-                                            $item = null;
-                                            $valor = null;
-
-                                            $inscripciones = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
-
-                                            foreach ($inscripciones as $key => $value) { ?>
-                                              <option value="<?php echo $value['id_inscripcion']?>"><?php echo $value['tipo_inscripcion']?></option>        
-                                            <?php 
-                                          }
-                                        ?>
-                                    </select>
-                                  </div>
-                              </div>
-                            </div>
-                        </div>
-                      </div>
-                  
-                      <div class="modal-footer">
-                      <div class="form-group mt-4 float-right">
-                        
-                        <button type="" class="btn btn-primary">Guardar cambios</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
-                      </div>
+                    <div class="form-group col-md-3">
+                      <label>Sexo</label>
+                      <select class="form-control select2" name="nuevoSexo" style="width: 100%;" required>
+                        <option selected="selected">Seleccionar...</option>
+                        <option value="M">Masculino</option>
+                        <option value="F">Femenino</option>
+                      </select>
+                    </div>
+                   
                   </div>
                 </div>
               </div>
+
+              <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="datosCliente">
+                <div class="container-fluid mt-4">
+                    <div class="form-row">
+                      <div class="form-group col-md-3">
+                        <label>Tipo Cliente</label>
+                        <select class="form-control select2 tipoCliente" name="editarTipoCliente" style="width: 100%;" required>
+                          <option selected="selected">Seleccionar...</option>
+                          <option value="Gimnasio">Clientes del gimnasio</option>
+                          <option value="Ventas">Cliente de ventas</option>
+                        </select>
+                      </div>
+                    </div>
+                    
+                  <div id="datosCliente">
+                    <div class="form-row">
+                      <div class="form-group col-md-6">
+                          <label>Tipo matricula</label>
+                          <select class="form-control select2 editarMatricula" style="width: 100%;" name="editarMatricula">
+                            <?php 
+                                $tabla = "tbl_matricula";
+                                $item = null;
+                                $valor = null;
+
+                                $matriculas = ControladorClientes::ctrMostrar($tabla, $item, $valor);
+
+                              
+                                foreach ($matriculas as $key => $value) {
+                                  if($value["tipo_matricula"] == 'Normal'){
+                                    echo '<option selected="selected" value="'.$value["id_matricula"].'">'.$value["tipo_matricula"].'</option>';
+                                  } else {
+                                    echo '<option value="'.$value["id_matricula"].'">'.$value["tipo_matricula"].'</option>';
+                                  }
+                                }
+                            ?>
+                            
+                          </select> 
+                      </div>
+                      <div class="form-group col-md-6">
+                         <label for="">Precio matricula</label>
+                         <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">$</span>  
+                              </div>
+                            <input type="text" class="form-control text-right editarPrecioMatricula" value="<?php echo $value['precio_matricula']?>" readonly>
+                         </div>
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="form-group col-md-6">
+                        <label>Promociones</label>
+                        <select class="form-control select2 editarPromocion" style="width: 100%;" name="editarPromocion">
+                          <option selected="selected">Seleccionar...</option>
+                          
+                            <?php 
+                                $tabla = "tbl_promociones_descuentos";
+                                $item = null;
+                                $valor = null;
+
+                                $matriculas = ControladorClientes::ctrMostrar($tabla, $item, $valor);
+
+                                foreach ($matriculas as $key => $value) { ?>
+                                  <option value="<?php echo $value['id_promociones_descuentos']?>"><?php echo $value['tipo_promociones_descuentos']?></option>        
+                                <?php 
+                                }
+                            ?>
+                        </select> 
+                      </div>
+                      <div class="form-group col-md-6">
+                         <label for="">Precio promocion</label>
+                         <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">$</span>  
+                              </div>
+                            <input type="text" class="form-control text-right editarPrecioPromocion precio" value="" readonly>
+                         </div>
+                      </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6"> 
+                          <label>Tipo inscripcion</label>
+                          <select class="form-control select2 editarInscripcion" style="width: 100%;" name="editarInscripcion">
+                              <option selected="selected">Seleccionar...</option>
+                              <?php 
+                                  $tabla = "tbl_inscripcion";
+                                  $item = null;
+                                  $valor = null;
+
+                                  $inscripciones = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
+
+                                  foreach ($inscripciones as $key => $value) { ?>
+                                    <option value="<?php echo $value['id_inscripcion']?>"><?php echo $value['tipo_inscripcion']?></option>        
+                                  <?php 
+                                }
+                              ?>
+                          </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                         <label for="">Precio inscripcion</label>
+                         <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">$</span>  
+                              </div>
+                            <input type="text" class="form-control text-right editarPrecioInscripcion precio" value="" readonly>
+                         </div>
+                      </div>
+                      
+                    </div>
+                    <div class="form-row">
+                      <div class="form-group col-md-6 float-right">
+                         <label for="">Total a pagar:</label>
+                         <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">$</span>  
+                            </div>
+                            <input type="text" class="form-control text-right editarTotalPagar" value="" readonly>
+                         </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group mt-4 float-right">
+                  
+                  <button type="" class="btn btn-primary">Guardar</button>
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
+                </div>
+            
+            
+              </div>
+            </div>
+
           </form>
+
         </div>
+
       </div>
     </div>
   </div>
-    
-

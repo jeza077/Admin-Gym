@@ -277,7 +277,7 @@ class ControladorPersonas{
                             // echo "</pre>";
                             // return;
 
-                            if ($_POST['tipoCliente'] == "gimnasio"){
+                            if ($_POST['tipoCliente'] == "Gimnasio"){
 
                                 $datos = array("id_persona" => $idPersona,
                                 "tipo_cliente" => $_POST["tipoCliente"],

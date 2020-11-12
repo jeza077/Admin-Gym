@@ -8,7 +8,7 @@ class ModeloClientes{
 	 
 	static public function mdlCrearCliente($tabla, $datos){
 
-		if ($datos['tipo_cliente'] == "gimnasio"){
+		if ($datos['tipo_cliente'] == "Gimnasio"){
 	
 			$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(id_persona, tipo_cliente, id_inscripcion, id_matricula, id_descuentos_promociones) VALUES (:id_persona, :tipo_cliente, :id_inscripcion, :id_matricula, :id_descuentos_promociones)");
 	

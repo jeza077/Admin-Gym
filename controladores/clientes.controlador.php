@@ -13,7 +13,7 @@ class ControladorClientes{
 
 			$tabla = "tbl_clientes";
 			
-			if ($datos['tipo_cliente'] == "gimnasio"){
+			if ($datos['tipo_cliente'] == "Gimnasio"){
 				$datos = array("id_persona" => $datos['id_persona'],
 			                "tipo_cliente" => $datos["tipo_cliente"],
 							"id_inscripcion" =>  $datos["id_inscripcion"],

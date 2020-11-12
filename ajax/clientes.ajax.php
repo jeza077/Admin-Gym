@@ -16,11 +16,11 @@ class AjaxClientes{
 
     public function ajaxEditarCliente(){
 
-        $tabla = "tbl_clientes";
+      
         $item = "id_personas";
         $valor = $this->idCliente;
         
-        $respuesta = ControladorClientes::ctrMostrarClientes($tabla, $item, $valor);
+        $respuesta = ControladorClientes::ctrMostrarClientes($item, $valor);
         // echo "<pre>";
         // var_dump($respuesta);
         // echo "</pre>";

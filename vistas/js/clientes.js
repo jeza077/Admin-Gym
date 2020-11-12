@@ -1,11 +1,22 @@
-// $('#datosClientes').hide();
-// $(document).on('change', '.tipoCliente', function () {
+$('#datosClientes').hide();
+$(document).on('change', '.tipoCliente', function () {
+    var valor = $(this).val();
+    // console.log(valor)
+    if (valor == "Gimnasio") {
+        $('#datosClientes').show();
+    } else {
+        $('#datosClientes').hide();
+    }
+   
+});
+// $('#datosCliente').hide();
+// $(document).on('change', '.editarTipoCliente', function () {
 //     var valor = $(this).val();
 //     // console.log(valor)
-//     if (valor == "gimnasio") {
-//         $('#datosClientes').show();
+//     if (valor == "Gimnasio") {
+//         $('#datosCliente').show();
 //     } else {
-//         $('#datosClientes').hide();
+//         $('#datosCliente').hide();
 //     }
    
 // });
@@ -15,13 +26,11 @@
 
 $('.btnEditarCliente').click(function () { 
     
-
-
-    var tabla = $(this).val("idCliente");
+    var idCliente = $(this).val("idCliente");
 
     var datos = new FormData();
     datos.append("idCliente", idCliente);
-    // console.log(datos)
+    // console.log(tabla)
 
     $.ajax({
     
@@ -33,7 +42,7 @@ $('.btnEditarCliente').click(function () {
         processData: false,  
         dataType: "json",
         success: function(respuesta) {
-            console.log("personas", respuesta);
+            console.log("respuesta", respuesta);
             
 
          
@@ -69,14 +78,14 @@ function mostrarDinamico(selector1,tablaDB,itemDB,selector2,precio) {
             processData: false,  
             dataType: "json",
             success: function(respuesta) {
-                console.log(respuesta[precio]);
+                // console.log(respuesta[precio]);
                var precioInscripcion = respuesta[precio];
     
                selector2.val(precioInscripcion);
                
 
             }
-        });
+        });        
     });
 }
 
@@ -86,3 +95,19 @@ mostrarDinamico($('.nuevaInscripcion'),'tbl_inscripcion','id_inscripcion',$('.nu
 mostrarDinamico($('.nuevaPromocion'),'tbl_promociones_descuentos', 'id_promociones_descuentos',$('.nuevoPrecioPromocion'),'valor_promociones_descuentos')
 
 // CALCULAR EL TOTAL A PAGAR 
+function SumaTotal() {  
+    var precioItem = $('.precio');
+    var arraySuma = [];
+    for (var i = 0; i  < precioItem.length; i++) {
+        arraySuma.push(Number($(precioItem[i]).val()));
+    }
+    function sumaArrayTotal(total, numero) {
+        return total + numero;
+    }
+    var sumaTotalCliente = arraySuma.reduce(sumaArrayTotal);
+    $('.totalPagar').val(sumaTotalCliente);
+}
+SumaTotal('.nuevaMatricula');
+SumaTotal($('.nuevaPromocion'));
+// SumaTotal($('.nuevaInscripcion'));
+// $('.nuevaMatricula').change(SumaTotal)
