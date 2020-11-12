@@ -11,7 +11,7 @@
 
       <form method="post">
         <div class="form-group mb-3">
-          <input type="text" class="form-control usuario" name="ingUsuario" onKeyUp="this.value=this.value.toUpperCase();" placeholder="Usuario" required>
+          <input type="text" class="form-control mayus usuario" name="ingUsuario" placeholder="Usuario" required>
         </div>
         <div class="form-group mb-3">
           <input type="password" class="form-control password" name="ingPassword" placeholder="Contraseña" required> 
@@ -188,7 +188,7 @@
 
         <div class="form-group col-md-3">
             <label for="">Usuario</label>
-            <input type="text" class="form-control personas" name="nuevoUsuario" onKeyUp="this.value=this.value.toUpperCase();" placeholder="Ingrese Usuario" required>
+            <input type="text" class="form-control mayus personas" name="nuevoUsuario" placeholder="Ingrese Usuario" required>
           </div>
 
           <div class="form-group col-md-3">

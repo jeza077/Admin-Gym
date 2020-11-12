@@ -40,7 +40,7 @@
 
             <div class="card-body">
             
-              <table class="table table-striped table-bordered tablas text-center">
+              <table class="table table-hover tablas text-center">
                 <thead>
                   <tr>
                     <th scope="col">#</th>
