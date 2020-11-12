@@ -416,9 +416,8 @@ class ControladorUsuarios{
 			   preg_match('/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%.])\S{8,16}$/', $datos["password"])){
 
 				$emailUsuario = $datos["email"];
-				$contraSinEncriptar = ControladorUsuarios::password_seguro_random();
-
-				// $contraSinEncriptar = $datos["password"];
+				// $contraSinEncriptar = ControladorUsuarios::password_seguro_random();
+				$contraSinEncriptar = $datos["password"];
 				$nombre = $datos["nombre"];
 				$tipoPersona = $datos["tipo_persona"];
 				// echo $emailUsuario;
@@ -495,7 +494,7 @@ class ControladorUsuarios{
 					}
 						
 						//**================= ENCRIPTAMOS LA CONTRASEÑA ===================*/
-						$encriptar = crypt($contraSinEncriptar, '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
+						$encriptar = crypt($datos["password"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
 
 
 						//** =============== CREAMOS LA FECHA VENCIMIENTO DEL USUARIO =================*/
@@ -522,11 +521,11 @@ class ControladorUsuarios{
 
 						if($respuestaEmpleado == true){
 
-							// if($tipoPersona == 'default'){
+							if($tipoPersona == 'default'){
 
-								// return true;
+								return true;
 
-							// } else {
+							} else {
 
 								$email = $emailUsuario;
 								$nombreUsuario = $datos["usuario"];
@@ -547,7 +546,7 @@ class ControladorUsuarios{
 									return false;
 								}
 
-							// }
+							}
 
 						} else {
 							

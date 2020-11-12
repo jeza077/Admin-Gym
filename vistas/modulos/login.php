@@ -186,11 +186,15 @@
   
         <div class="form-row">
 
-        <div class="form-group col-md-3">
+          <div class="form-group col-md-3">
             <label for="">Usuario</label>
             <input type="text" class="form-control mayus personas" name="nuevoUsuario" placeholder="Ingrese Usuario" required>
           </div>
-
+          <div class="form-group col-md-3">
+            <label for="">Contraseña</label>
+            <input type="password" class="form-control password autoreg" name="nuevoPassword" placeholder="Ingrese Contraseña" required>
+            <i class="far fa-eye show-pass-registro" action="hide"></i>
+          </div>
           <div class="form-group col-md-3">
             <label for="inputEmail4">Email</label>
             <input type="email" class="form-control email" id="inputEmail4" name="nuevoEmail" placeholder="Ingrese Email" required>
@@ -199,10 +203,6 @@
             <label>Teléfono</label>
             <input type="text" class="form-control" data-inputmask='"mask": "(999) 9999-9999"' data-mask  name="nuevoTelefono" placeholder="Ingrese Telefono" required>
           </div>
-          <div class="form-group col-md-3">
-            <label>Fecha de nacimiento</label>
-              <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy/mm/dd" data-mask  name="nuevaFechaNacimiento" placeholder="Ingrese Fecha de Nacimiento" required>
-          </div>
         </div>
         <!-- <div class="form-group">
           <label for="inputAddress">Dirección</label>
@@ -210,16 +210,20 @@
         </div> -->
 
         <div class="form-row">
-          <div class="form-group col-md-9">
+          <div class="form-group col-md-7">
             <label for="inputAddress">Dirección</label>
             <input type="text" class="form-control" id="inputAddress" name="nuevaDireccion" placeholder="Col. Alameda, calle #2..." required>
           </div>
           <div class="form-group col-md-3">
+            <label>Fecha de nacimiento</label>
+              <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy/mm/dd" data-mask  name="nuevaFechaNacimiento" placeholder="Ingrese Fecha de Nacimiento" required>
+          </div>
+          <div class="form-group col-md-2">
             <label>Sexo</label>
             <select class="form-control select2" name="nuevoSexo" style="width: 100%;" required>
               <option selected="selected">Seleccionar...</option>
-              <option value="M">Masculino</option>
-              <option value="F">Femenino</option>
+              <option value="M">M</option>
+              <option value="F">F</option>
             </select>
         </div>
         

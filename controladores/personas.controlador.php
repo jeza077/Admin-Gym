@@ -66,19 +66,6 @@ class ControladorPersonas{
                             }
     
                             $idPersona = end($totalId);
-                          
-                            //-----------Generar contraseña aleatoria----------------------
-                            // $str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890#$.@";
-                            // $contraseñaAleatoria = "";
-                            // //Longitud
-                            // for($i=0;$i<$_POST[10];$i++) 
-                            // {
-                            // //obtenemos un caracter aleatorio escogido de la cadena de caracteres
-                            // $contraseñaAleatoria .= substr($str,rand(0,62),1);
-                            // }
-                            // echo 'Password generado: '.$contraseñaAleatoria;
-                            //-------------------------------------------------------------
-                            
 
                             //------------------------Roles--------------------------------------
                             $tabla = "tbl_roles";
@@ -96,7 +83,7 @@ class ControladorPersonas{
                                         "nombre" => $_POST["nuevoNombre"],
                                         "usuario" => $_POST["nuevoUsuario"],
                                         "tipo_persona" => $tipoPersona,
-                                        "password" => "Hola456.",
+                                        "password" => $_POST["nuevoPassword"],
                                         "rol" => $idRol,
                                         "foto" => "vistas/img/usuarios/default/anonymous.png",
                                         "email" => $_POST["nuevoEmail"]);

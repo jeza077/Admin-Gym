@@ -568,7 +568,12 @@ $('.show-pass').on('click', function () {
     var nuevaPass = $('input[name="ingPassword"]');
     mostrarContraseña(nuevaPass, mostrarPass, action);
 });
-
+$('.show-pass-registro').on('click', function () { 
+    var action = $(this).attr('action');
+    var mostrarPass = $('.show-pass-registro');
+    var nuevaPass = $('.autoreg');
+    mostrarContraseña(nuevaPass, mostrarPass, action);
+});
 
 //** MOSTRAR CONTRASEÑAS EN RECUPERAR CONTRASEÑAS */
 $('.show-nueva-pass').on('click', function () { 

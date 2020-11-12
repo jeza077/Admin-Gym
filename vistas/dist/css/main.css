@@ -397,6 +397,13 @@ i.show-pass {
     right: 44px;
     z-index: 1000;
 }
+i.show-pass-registro {
+    cursor: pointer;
+    position: absolute;
+    top: 44px;
+    right: 16px;
+    z-index: 1000;
+}
 i.show-nueva-pass,
 i.show-confir-pass{
     cursor: pointer;
@@ -509,7 +516,7 @@ i.show-confir-pass{
 .login-box.registro,
 .login-box.registro .card{
     width: 800px;
-    height: 520px;
+    height: 530px;
 }
 .login-card-body.registrar{
     padding-top: 0;
