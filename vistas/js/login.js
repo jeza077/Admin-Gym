@@ -552,11 +552,10 @@ $('#cambiarContraseñaPorCorreo').attr('disabled', true);
 $(".nueva-password").on('change', function(){
     cambiarPassPorCodigo = $(this).val();
 });
-$(".confirmar-password").on('input', function(){
 
+$(".confirmar-password").on('input', function(){
     let confirPass = $(this).val();
     let btnCambiarPass = $('#cambiarContraseñaPorCorreo');
-
     confirmarContraseña(cambiarPassPorCodigo, confirPass, btnCambiarPass);
 })
 
@@ -568,6 +567,8 @@ $('.show-pass').on('click', function () {
     var nuevaPass = $('input[name="ingPassword"]');
     mostrarContraseña(nuevaPass, mostrarPass, action);
 });
+
+//** MOSTRAR CONTRASEÑAS EN REGISTRO */
 $('.show-pass-registro').on('click', function () { 
     var action = $(this).attr('action');
     var mostrarPass = $('.show-pass-registro');

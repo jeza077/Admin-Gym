@@ -199,3 +199,29 @@ $(document).on('click', '.btnEliminarUsuario', function () {
 $(document).on('click', '.btnExportarUsuarios', function () {
     window.open("extensiones/tcpdf/pdf/usuarios-pdf.php", "_blank");
 });
+
+
+//** ------------------------------------*/
+//         AJUSTES PERFIL USUARIO
+// --------------------------------------*/
+// $(document).on('click', '.ajustes', function () {
+//     console.log('clickkkk')
+//     // $('.ajustes-usuario').css('height', '20px');
+//     var clone = $('.ajustes-usuario').clone();
+//     $('.ajustes-usuario').remove();
+//     $(document).on('click', '.ajuste2', function () {
+//         $('.acord').append(clone);
+//     });
+// });
+$(document).on('click', '.ajuste-cuenta', function () {
+    // e.preventDefault();
+    $.ajax({
+        url: "vistas/modulos/ajustes-cuenta.php",
+        success: function (response) {
+            var clone = $('.datos-generales').clone();
+                $('.datos-generales').remove();
+            $('.ajustes-usuario').append(response);
+            
+        }
+    });
+});
