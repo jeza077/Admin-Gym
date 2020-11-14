@@ -28,11 +28,11 @@
               <h3>Ajustes de cuenta</h3>
               <p>Detalles acerca de tu informacion personal</p>
             </div>
-            <div class="ajustes ajuste2">
+            <div class="ajustes ajuste-password">
               <h3>Contraseña</h3>
-              <p>Cambia la contraseña detu cuenta</p>
+              <p>Cambia la contraseña de tu cuenta</p>
             </div>
-            <div class="ajustes">
+            <div class="ajustes ajuste-preguntas">
               <h3>Preguntas de seguridad</h3>
               <p>Cambia las preguntas/respuestas asociadas a tu cuenta</p>
             </div>

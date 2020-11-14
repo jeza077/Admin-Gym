@@ -98,6 +98,11 @@ body.login-page .login-box.recu-password .card{
     border-color: var(--orangeThird);
     outline: 0;
 }
+/* .titulo{
+    font-weight: 300;
+    font-size: 2rem;
+} */
+
 
 /** COLORES **/
 .bg-orange,
@@ -374,12 +379,16 @@ body.primer-ingreso.pregunta-dos.pregunta-tres.password-primera-vez .contenedor-
     box-shadow: 0 0 1px rgba(0,0,0,.125), 0 1px 3px rgba(0,0,0,.2);
     margin: 0 18px 0.75rem 0;
     cursor: pointer;
+    border: none;
     transition: 0.3s;
 }
 .ajustes:hover {
-    border: 1px solid var(--orangeThird);
-    transform: scale(1.06);
+    border: 1px solid var(--orangeThird)!important;
+    transform: scale(1.06)!important;
 }
+/* .ajustes-usuario.contenedor-datos .ajuste-cuenta {
+    transform: scale(1.1)!important;
+} */
 .ajustes h3 {
     margin: 0;
     font-weight: 600;

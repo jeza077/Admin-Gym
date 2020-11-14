@@ -202,26 +202,76 @@ $(document).on('click', '.btnExportarUsuarios', function () {
 
 
 //** ------------------------------------*/
-//         AJUSTES PERFIL USUARIO
+//        AJUSTES GENERALES USUARIO
 // --------------------------------------*/
-// $(document).on('click', '.ajustes', function () {
-//     console.log('clickkkk')
-//     // $('.ajustes-usuario').css('height', '20px');
-//     var clone = $('.ajustes-usuario').clone();
-//     $('.ajustes-usuario').remove();
-//     $(document).on('click', '.ajuste2', function () {
-//         $('.acord').append(clone);
-//     });
-// });
-$(document).on('click', '.ajuste-cuenta', function () {
-    // e.preventDefault();
+$(document).on('click', '.ajuste-cuenta', function (e) {
+    e.preventDefault();
     $.ajax({
         url: "vistas/modulos/ajustes-cuenta.php",
         success: function (response) {
             var clone = $('.datos-generales').clone();
-                $('.datos-generales').remove();
-            $('.ajustes-usuario').append(response);
+            $('.datos-generales').remove();
+            if(!$('.ajustes-usuario').hasClass('contenedor-datos')){
+                $('.ajustes-usuario').addClass('contenedor-datos');
+                $('.ajustes-usuario').append(response);
+            }
             
+            $('.salirPerfil').click(function (e) { 
+                e.preventDefault();
+                $('.ajustes-cuenta').remove();
+                $('.ajustes-usuario').removeClass('contenedor-datos');
+                $('.ajustes-usuario').append(clone);
+            });
+        }
+    });
+});
+
+//** ------------------------------------*/
+//        AJUSTES PASSWORD USUARIO
+// --------------------------------------*/
+$(document).on('click', '.ajuste-password', function (e) {
+    e.preventDefault();
+    $.ajax({
+        url: "vistas/modulos/ajustes-password.php",
+        success: function (response) {
+            var clone = $('.datos-generales').clone();
+            $('.datos-generales').remove();
+            if(!$('.ajustes-usuario').hasClass('contenedor-datos')){
+                $('.ajustes-usuario').addClass('contenedor-datos');
+                $('.ajustes-usuario').append(response);
+            }
+            
+            $('.salirPerfil').click(function (e) { 
+                e.preventDefault();
+                $('.ajustes-password').remove();
+                $('.ajustes-usuario').removeClass('contenedor-datos');
+                $('.ajustes-usuario').append(clone);
+            });
+        }
+    });
+});
+
+//** ------------------------------------*/
+//        AJUSTES PASSWORD USUARIO
+// --------------------------------------*/
+$(document).on('click', '.ajuste-preguntas', function (e) {
+    e.preventDefault();
+    $.ajax({
+        url: "vistas/modulos/ajustes-preguntas.php",
+        success: function (response) {
+            var clone = $('.datos-generales').clone();
+            $('.datos-generales').remove();
+            if(!$('.ajustes-usuario').hasClass('contenedor-datos')){
+                $('.ajustes-usuario').addClass('contenedor-datos');
+                $('.ajustes-usuario').append(response);
+            }
+            
+            $('.salirPerfil').click(function (e) { 
+                e.preventDefault();
+                $('.ajustes-preguntas').remove();
+                $('.ajustes-usuario').removeClass('contenedor-datos');
+                $('.ajustes-usuario').append(clone);
+            });
         }
     });
 });
