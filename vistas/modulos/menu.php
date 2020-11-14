@@ -87,6 +87,36 @@
                 
                 
               ?>
+
+            <li class="nav-item has-treeview">
+              <a href="ventas" class="nav-link">
+                <i class="nav-icon fas fa-cart-plus"></i>
+                <p>
+                  Ventas
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="administrar-venta" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Administrar Venta</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="crear-venta" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Crear Venta</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="pages/charts/inline.html" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Reporte de Ventas</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
         </ul>
       </nav>
     </div>

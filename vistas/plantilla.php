@@ -89,7 +89,7 @@
             $_GET["ruta"] == "empleados" ||
             $_GET["ruta"] == "productos" ||
             $_GET["ruta"] == "clientes" ||
-            $_GET["ruta"] == "ventas" ||
+            $_GET["ruta"] == "administrar-venta" ||
             $_GET["ruta"] == "crear-venta" ||
             $_GET["ruta"] == "editar-venta" ||
             $_GET["ruta"] == "reportes" ||
@@ -199,6 +199,8 @@
 <script src="vistas/js/primer-ingreso.js"></script>
 <script src="vistas/js/agregar-persona.js"></script>
  <script src="vistas/js/usuarios-empleados.js"></script>
+
+ <script src="vistas/js/ventas.js"></script> <!--lo agregue-->
 
 <!--<script src="vistas/js/validaciones.js"></script>
 <script src="vistas/js/categorias.js"></script>
