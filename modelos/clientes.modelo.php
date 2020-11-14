@@ -116,4 +116,29 @@ class ModeloClientes{
 		$stmt = null;
 		
 	} 
+	/*=============================================
+				ELIMINAR CLIENTES
+	=============================================*/
+
+	static public function mdlEliminarCliente($tabla, $datos){
+
+		$stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE id_personas = :id_personas");
+
+		$stmt -> bindParam(":id_personas", $datos, PDO::PARAM_INT);
+
+		if($stmt -> execute()){
+
+			return "ok";
+		
+		}else{
+
+			return "error";	
+
+		}
+
+		$stmt -> close();
+
+		$stmt = null;
+
+	}
 }

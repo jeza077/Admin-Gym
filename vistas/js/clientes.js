@@ -54,7 +54,7 @@ $('.btnEditarCliente').click(function () {
         EDITAR CLIENTE
 =============================================*/
 function mostrarDinamico(selector1,tablaDB,itemDB,selector2,precio) {  
-
+  
     selector1.change(function (e) { 
         e.preventDefault();
         
@@ -80,12 +80,22 @@ function mostrarDinamico(selector1,tablaDB,itemDB,selector2,precio) {
             success: function(respuesta) {
                 // console.log(respuesta[precio]);
                var precioInscripcion = respuesta[precio];
+            //    var precioItem = precio;
+            //    var arraySuma = [];
+            //     for (var i = 0; i  < precioItem.length; i++) {
+            //         arraySuma.push($(precioItem[i]).val());
+            //     }
+            //     function sumaArrayTotal(total, numero) {
+            //         return total + numero;
+            //     }
+            //     var sumaTotalCliente = arraySuma.reduce(sumaArrayTotal);
+            //     $('.totalPagar').val(sumaTotalCliente);
     
                selector2.val(precioInscripcion);
                
 
             }
-        });        
+        });   
     });
 }
 
@@ -96,18 +106,54 @@ mostrarDinamico($('.nuevaPromocion'),'tbl_promociones_descuentos', 'id_promocion
 
 // CALCULAR EL TOTAL A PAGAR 
 function SumaTotal() {  
-    var precioItem = $('.precio');
-    var arraySuma = [];
-    for (var i = 0; i  < precioItem.length; i++) {
-        arraySuma.push(Number($(precioItem[i]).val()));
-    }
-    function sumaArrayTotal(total, numero) {
-        return total + numero;
-    }
-    var sumaTotalCliente = arraySuma.reduce(sumaArrayTotal);
-    $('.totalPagar').val(sumaTotalCliente);
+    
+    
+        var precioItem = $('.nuevoPrecio');
+        // var precioDescuento = $('.nuevoPrecioPromocion');
+        var arraySuma = [];
+        // var arrayResta = [];
+        for (var i = 0; i  < precioItem.length; i++) {
+            arraySuma.push(Number($(precioItem[i]).val()));
+            
+        }
+        // for (var i = 0; i  < precioDescuento.length; i++) {
+        //     arrayResta.push(Number($(precioDescuento[i]).val()));
+            
+        // }
+        function sumaArrayTotal(total, numero) {
+            return total + numero;
+        }
+        
+        var sumaTotal = arraySuma.reduce(sumaArrayTotal);
+        // var totalCliente = sumaTotal[i]-resta[i];
+        $('.totalPagar').val(sumaTotal);
+        // console.log("arraySuma", arraySuma)
 }
-SumaTotal('.nuevaMatricula');
-SumaTotal($('.nuevaPromocion'));
+$('.nuevaInscripcion').change(SumaTotal)
+// $('.nuevaPromocion').change(SumaTotal)
 // SumaTotal($('.nuevaInscripcion'));
-// $('.nuevaMatricula').change(SumaTotal)
+// SumaTotal($('.nuevaPromocion'));
+
+/*=============================================
+        ELIMINAR CLIENTE
+=============================================*/
+$('.btnEliminarCliente').click(function () { 
+
+    var idCliente = $(this).attr("idCliente");
+    
+    Swal.fire({
+        title: '¿Está seguro de borrar el cliente?',
+        text: "¡Si no lo está puede cancelar la acción!",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        cancelButtonText: 'Cancelar',
+        confirmButtonText: 'Si, borrar cliente!'
+      }).then(function(result){
+        if (result.value) {
+          
+            // window.location = "index.php?ruta=clientes&idCliente="+idCliente;
+        }
+    });
+});

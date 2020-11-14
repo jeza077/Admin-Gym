@@ -85,7 +85,7 @@
                           '<td><button class="btn btn-success btn-md">Activado</button></td>
                           <td>
                             <button class="btn btn-warning btnEditarCliente" id="btnEditar" data-toggle="modal" data-target="#modalEditarCliente" idCliente="'.$value["id_personas"].'"><i class="fas fa-pencil-alt" style="color:#fff"></i></button>
-                            <button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                            <button class="btn btn-danger btnEliminarCliente" idCliente="'.$value["id_personas"].'"><i class="fas fa-trash-alt"></i></button>
                           </td>
                         </tr>
                     ';
@@ -239,7 +239,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">$</span>  
                               </div>
-                            <input type="text" class="form-control text-right nuevoPrecioMatricula" value="<?php echo $value['precio_matricula']?>" readonly>
+                            <input type="text" class="form-control text-right nuevoPrecioMatricula nuevoPrecio" value="<?php echo $value['precio_matricula']?>" readonly>
                          </div>
                       </div>
                     </div>
@@ -269,7 +269,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">$</span>  
                               </div>
-                            <input type="text" class="form-control text-right nuevoPrecioPromocion precio" value="" readonly>
+                            <input type="text" class="form-control text-right nuevoPrecioPromocion" value="" readonly>
                          </div>
                       </div>
                     </div>
@@ -298,7 +298,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">$</span>  
                               </div>
-                            <input type="text" class="form-control text-right nuevoPrecioInscripcion precio" value="" readonly>
+                            <input type="text" class="form-control text-right nuevoPrecioInscripcion nuevoPrecio" value="" readonly>
                          </div>
                       </div>
                       
@@ -570,3 +570,9 @@
       </div>
     </div>
   </div>
+
+  <?php
+    
+    $eliminarCliente = new ControladorClientes();
+    $eliminarCliente->ctrEliminarCliente($tipoPersona, $pantalla);
+  ?>
