@@ -96,6 +96,7 @@ function mostrarDinamico(selector1,tablaDB,itemDB,selector2,precio) {
 
             }
         });   
+  
     });
 }
 
@@ -107,29 +108,30 @@ mostrarDinamico($('.nuevaPromocion'),'tbl_promociones_descuentos', 'id_promocion
 // CALCULAR EL TOTAL A PAGAR 
 function SumaTotal() {  
     
-    
-        var precioItem = $('.nuevoPrecio');
-        // var precioDescuento = $('.nuevoPrecioPromocion');
-        var arraySuma = [];
-        // var arrayResta = [];
-        for (var i = 0; i  < precioItem.length; i++) {
-            arraySuma.push(Number($(precioItem[i]).val()));
-            
-        }
-        // for (var i = 0; i  < precioDescuento.length; i++) {
-        //     arrayResta.push(Number($(precioDescuento[i]).val()));
-            
-        // }
-        function sumaArrayTotal(total, numero) {
-            return total + numero;
-        }
-        
-        var sumaTotal = arraySuma.reduce(sumaArrayTotal);
-        // var totalCliente = sumaTotal[i]-resta[i];
-        $('.totalPagar').val(sumaTotal);
-        // console.log("arraySuma", arraySuma)
+
+    var precioItem = $('.nuevoPrecio');
+    var precioDescuento = $('.nuevoPrecioPromocion');
+    var arraySuma = [];
+    var arrayResta = [];
+    var arrayTotal =[];
+
+    for (var i = 0; i  < precioItem.length; i++) {
+        arraySuma.push(Number($(precioItem[i]).val()));   
+    }
+    for (var i = 0; i  < precioDescuento.length; i++) {
+        arrayResta.push(Number($(precioDescuento[i]).val()));   
+    }
+    function sumaArrayTotal(total, numero) {
+        return total + numero;
+    }
+
+    var sumaTotal = arraySuma.reduce(sumaArrayTotal);
+    var restaTotal = arrayResta.reduce(sumaArrayTotal);
+    arrayTotal = sumaTotal-restaTotal;
+    $('.totalPagar').val(arrayTotal);
+    console.log("arraySuma", arraySuma)
 }
-$('.nuevaInscripcion').change(SumaTotal)
+$('.total').click(SumaTotal)
 // $('.nuevaPromocion').change(SumaTotal)
 // SumaTotal($('.nuevaInscripcion'));
 // SumaTotal($('.nuevaPromocion'));

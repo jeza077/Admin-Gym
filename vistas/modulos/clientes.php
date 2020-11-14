@@ -298,10 +298,9 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">$</span>  
                               </div>
-                            <input type="text" class="form-control text-right nuevoPrecioInscripcion nuevoPrecio" value="" readonly>
+                            <input type="text" class="form-control text-right nuevoPrecioInscripcion nuevoPrecio" value="" readonly>                           
                          </div>
                       </div>
-                      
                     </div>
                     <div class="form-row">
                       <div class="form-group col-md-6 float-right">
@@ -311,6 +310,7 @@
                                 <span class="input-group-text">$</span>  
                             </div>
                             <input type="text" class="form-control text-right totalPagar" value="" readonly>
+                            <button type="" class="btn btn-primary total">total</button>
                          </div>
                       </div>
                     </div>
