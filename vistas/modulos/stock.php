@@ -85,7 +85,7 @@
                               <td>'.$value["producto_minimo"].'</td>
                               <td>'.$value["producto_maximo"].'</td>     
                               <td>
-                              <button class="btn btn-warning" data-toggle="modal" data-target="#modalEditarStock"><i class="fas fa-pencil-alt" style="color:#fff"></i></button>
+                              <button class="btn btn-warning btnEditarInventario"id_inventario="'.$value["id_inventario"].'" data-toggle="modal" data-target="#modalEditarStock"><i class="fas fa-pencil-alt" style="color:#fff"></i></button>
                               <button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
                               </td>
                           </tr>
@@ -292,12 +292,12 @@
           <form role="form" method="post" class="formulario" enctype="multipart/form-data">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
               <li class="nav-item" role="presentation">
-                <a class="nav-link active" id="datosPersona" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Editar Inventario/Bodega</a>
+                <a class="nav-link active" id="Editarmodal" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Editar Inventario/Bodega</a>
               </li>
             </ul>
 
             <div class="tab-content" id="myTabContent">
-              <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="datosPersona">
+              <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="Editarmodal">
                 <div class="container-fluid mt-4">
                   <div class="form-row">
                     <div class="form-group col-md-4">
@@ -319,12 +319,12 @@
                     </div>
 
                     <div class="form-group col-md-4">
-                      <label for="nombreproducto">Editar Nombre Producto</label>
-                      <input type="text" class="form-control nombre_producto" name="editarNombreProducto" placeholder="Ingrese Producto" required>
+                      <label for="nombreproducto">Nombre Producto</label>
+                      <input type="text" class="form-control nombre_producto" name="editarNombreProducto" placeholder="Editar Nombre" required>
                     </div>
                     <div class="form-group col-md-4">
-                      <label for="stock">Editar Cantidad en stock</label>
-                      <input type="text" class="form-control stock" name="editarStock" placeholder="Cantidad en stock" required>
+                      <label for="stock">Cantidad en stock</label>
+                      <input type="text" class="form-control stock" name="editarStock" placeholder="Editar stock" required>
                     </div>
                   </div>
       
@@ -333,8 +333,8 @@
 
 
                     <div class="form-group col-md-4">
-                      <label for="precio">Editar Precio</label>
-                      <input type="text" class="form-control precio" name="editarPrecio" placeholder="Ingrese Precio" required>
+                      <label for="precio"> Precio</label>
+                      <input type="text" class="form-control precio" name="editarPrecio" placeholder="Editar Precio" required>
                     </div>
                         <div class="form-group col-md-4">
                           <label for="productominimo">Producto Minimo</label>
