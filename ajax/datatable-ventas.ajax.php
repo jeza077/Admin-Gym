@@ -58,7 +58,11 @@ class TablaProductosVentas{
 		$item = null;
     	$valor = null;
 
-  		$productos = ControladorProductos::ctrMostrarProductos($item, $valor);	
+          $productos = ControladorProductos::ctrMostrarProductos($item, $valor);	
+        //   echo "<pre>";
+        //   var_dump($productos);
+        //   echo "</pre>";
+        //   return;
 		
   		if(count($productos) == 0){
 
@@ -76,7 +80,9 @@ class TablaProductosVentas{
  	 		TRAEMOS LA IMAGEN
   			=============================================*/ 
 
-		  	$imagen = "<img src='".$productos[$i]["imagen"]."' width='40px'>";
+              // $imagen = "<img src='".$productos[$i]["imagen"]."' width='40px'>";
+		  	$imagen = "<img src='vistas/img/usuarios/default/anonymous.png' width='40px'>";
+              
 
 		  	/*=============================================
  	 		STOCK
@@ -100,13 +106,13 @@ class TablaProductosVentas{
  	 		TRAEMOS LAS ACCIONES
   			=============================================*/ 
 
-		  	$botones =  "<div class='btn-group'><button class='btn btn-primary agregarProducto recuperarBoton' idProducto='".$productos[$i]["id"]."'>Agregar</button></div>"; 
+		  	$botones =  "<div class='btn-group'><button class='btn btn-primary agregarProducto recuperarBoton' idProducto='".$productos[$i]["id_inventario"]."'>Agregar</button></div>"; 
 
 		  	$datosJson .='[
 			      "'.($i+1).'",
 			      "'.$imagen.'",
-			      "'.$productos[$i]["codigo"].'",
-			      "'.$productos[$i]["descripcion"].'",
+			      "'.$productos[$i]["nombre_producto"].'",
+			      "'.$productos[$i]["nombre_producto"].'",
 			      "'.$stock.'",
 			      "'.$botones.'"
 			    ],';
