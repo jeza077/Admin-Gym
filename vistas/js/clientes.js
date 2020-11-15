@@ -80,16 +80,7 @@ function mostrarDinamico(selector1,tablaDB,itemDB,selector2,precio) {
             success: function(respuesta) {
                 // console.log(respuesta[precio]);
                var precioInscripcion = respuesta[precio];
-            //    var precioItem = precio;
-            //    var arraySuma = [];
-            //     for (var i = 0; i  < precioItem.length; i++) {
-            //         arraySuma.push($(precioItem[i]).val());
-            //     }
-            //     function sumaArrayTotal(total, numero) {
-            //         return total + numero;
-            //     }
-            //     var sumaTotalCliente = arraySuma.reduce(sumaArrayTotal);
-            //     $('.totalPagar').val(sumaTotalCliente);
+               SumaTotal()
     
                selector2.val(precioInscripcion);
                
@@ -124,14 +115,17 @@ function SumaTotal() {
     function sumaArrayTotal(total, numero) {
         return total + numero;
     }
-
+    
     var sumaTotal = arraySuma.reduce(sumaArrayTotal);
     var restaTotal = arrayResta.reduce(sumaArrayTotal);
     arrayTotal = sumaTotal-restaTotal;
-    $('.totalPagar').val(arrayTotal);
+     $('.totalPagar').val(arrayTotal);
+    
+    
+    
     console.log("arraySuma", arraySuma)
 }
-$('.total').click(SumaTotal)
+$('.nuevaInscripcion').change(SumaTotal)
 // $('.nuevaPromocion').change(SumaTotal)
 // SumaTotal($('.nuevaInscripcion'));
 // SumaTotal($('.nuevaPromocion'));
@@ -155,7 +149,7 @@ $('.btnEliminarCliente').click(function () {
       }).then(function(result){
         if (result.value) {
           
-            // window.location = "index.php?ruta=clientes&idCliente="+idCliente;
+            window.location = "index.php?ruta=clientes&idCliente="+idCliente;
         }
     });
 });

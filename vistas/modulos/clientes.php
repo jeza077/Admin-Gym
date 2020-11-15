@@ -220,7 +220,6 @@
                                 $valor = null;
 
                                 $matriculas = ControladorClientes::ctrMostrar($tabla, $item, $valor);
-
                               
                                 foreach ($matriculas as $key => $value) {
                                   if($value["tipo_matricula"] == 'Normal'){
@@ -228,9 +227,8 @@
                                   } else {
                                     echo '<option value="'.$value["id_matricula"].'">'.$value["tipo_matricula"].'</option>';
                                   }
-                                }
-                            ?>
-                            
+                                }                             
+                            ?>                           
                           </select> 
                       </div>
                       <div class="form-group col-md-6">
@@ -282,6 +280,7 @@
                                   $tabla = "tbl_inscripcion";
                                   $item = null;
                                   $valor = null;
+                                  
 
                                   $inscripciones = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
 
@@ -309,8 +308,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">$</span>  
                             </div>
-                            <input type="text" class="form-control text-right totalPagar" value="" readonly>
-                            <button type="" class="btn btn-primary total">total</button>
+                            <input type="text" class="form-control text-right totalPagar" value="" readonly>                        
                          </div>
                       </div>
                     </div>
@@ -572,6 +570,8 @@
   </div>
 
   <?php
+
+    $pantalla = 'clientes';
     
     $eliminarCliente = new ControladorClientes();
     $eliminarCliente->ctrEliminarCliente($tipoPersona, $pantalla);

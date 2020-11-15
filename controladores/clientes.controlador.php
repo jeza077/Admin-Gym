@@ -62,7 +62,7 @@ class ControladorClientes{
 				ELIMINAR CLIENTES
 	=============================================*/
 
-	static public function ctrEliminarCliente(){
+	static public function ctrEliminarCliente($pantalla){
 
 		if(isset($_GET["idCliente"])){
 
@@ -73,28 +73,20 @@ class ControladorClientes{
 
 			$respuesta = ModeloClientes::mdlEliminarCliente($tabla, $datos);
 
-			if($respuesta = true){
-				
-				echo'<script>
-
-				swal({
-					  type: "success",
-					  title: "El cliente ha sido borrado correctamente",
-					  showConfirmButton: true,
-					  confirmButtonText: "Cerrar"
-					  }).then(function(result){
-								if (result.value) {
-
-								window.location = "clientes";
-
-								}
-							})
-
-				</script>';
-
-				
-
-            }
+			if($respuesta == true){
+				echo '<script>
+						Swal.fire({
+							title: "Cliente eliminado correctamente!",
+							icon: "success",
+							heightAuto: false,
+							allowOutsideClick: false
+						}).then((result)=>{
+							if(result.value){
+								window.location = "'.$pantalla.'";
+							}
+						});                                              
+					</script>';
+			}
 		}
 	}
    /*=============================================
