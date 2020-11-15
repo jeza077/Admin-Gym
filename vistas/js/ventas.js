@@ -2,57 +2,64 @@
 		  Datos de la tabla dinamica
     =============================================*/
     
- var table2 =$('.tablaVenta').dataTable({
+    var table2 = $('.tablaVentas').DataTable({
 
-   "ajax": "ajax/datatable-venta.ajax.php", 
-    "columnDefs": [
-         
-        {
-          "targets": -5,
-          "data": null,
-          "defaultContent": '<img class="img-thumbnail imgTablaVenta" width="40px">'
-        },
+      "ajax" :"ajax/datatable-ventas.ajax.php",
+      "columnDefs": [
+          {
+  
+              "targets": -5,
+              "data": null,
+              "defaultContent":'<img class="img-thumbnail imgTablaVenta" width="40px"</img>'
+  
+          },
+  
+          {
+  
+              "targets": -2,
+              "data": null,
+              "defaultContent":'<div class="btn-group"><button class="btn btn-success limiteStock"></button></div>'
+  
+          },
+  
+          {
+  
+              "targets": -1,
+              "data": null,
+              "defaultContent":'<div class="btn-group"><button class="btn btn-primary agregarProducto recuperarBoton" idProducto">Agregar</button></div>'
+  
+          }
+      ],
+      
+      "language": {
+  
+          "sProcessing":     "Procesando...",
+          "sLengthMenu":     "Mostrar _MENU_ registros",
+          "sZeroRecords":    "No se encontraron resultados",
+          "sEmptyTable":     "Ningún dato disponible en esta tabla",
+          "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_",
+          "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0",
+          "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+          "sInfoPostFix":    "",
+          "sSearch":         "Buscar:",
+          "sUrl":            "",
+          "sInfoThousands":  ",",
+          "sLoadingRecords": "Cargando...",
+          "oPaginate": {
+          "sFirst":    "Primero",
+          "sLast":     "Último",
+          "sNext":     "Siguiente",
+          "sPrevious": "Anterior"
+          },
+          "oAria": {
+              "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+              "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+          }
+  
+      } 
+  
+  })
 
-        {
-           "targets": -2,
-            "data": null,
-            "defaultContent": '<div class=btn-group"><button class="btn btn-success limiteStock"</button></div>'
-        },
-
-        {
-          "targets": -1,
-          "data": null,
-          "defaultContent": '<div class=btn-group"><button class="btn btn-primary agregarProducto recuperarBoton" idProducto>Agregar</button></div>'
-        }
-
-    ],
-    "language": 
-    {
-      "sProcessing":     "Procesando...",
-      "sLengthMenu":     "Mostrar _MENU_ registros",
-      "sZeroRecords":    "No se encontraron resultados",
-      "sEmptyTable":     "Ningún dato disponible en esta tabla",
-      "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_",
-      "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0",
-      "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
-      "sInfoPostFix":    "",
-      "sSearch":         "Buscar:",
-      "sUrl":            "",
-      "sInfoThousands":  ",",
-      "sLoadingRecords": "Cargando...",
-      "oPaginate": {
-      "sFirst":    "Primero",
-      "sLast":     "Último",
-      "sNext":     "Siguiente",
-      "sPrevious": "Anterior"
-      },
-      "oAria": 
-      {
-        "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
-        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-      }
-    }
-})
 // // -------------------------------------------
 // // ACTIVAR LOS BOTONES CON LOS ID CORRESPONDIENTES
 // $(".tablaVenta tbody").on( 'click', 'button.agregarProducto', function ()

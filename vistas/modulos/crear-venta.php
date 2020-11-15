@@ -13,9 +13,10 @@
       <!--=====================================
                  FORMULARIO 
       ======================================-->
-    <section class="content">
-      
+    <section class="content">  
+
       <div class="row">
+
         <div class="card col-md-5">
           <div class="card-body"> 
             <div class="form-group"  class="formularioVenta"> 
@@ -61,7 +62,6 @@
                     <option value="">Seleccionar cliente</option>
                     <!-- metodo para mostrar clientes se BORRA cuando descomento -->
                     <?php
-
                       // $item= null;
                       // $valor= null;
 
@@ -108,11 +108,10 @@
 
         </div>
 
-
            <!--TABLA DE PRODUCTOS  -->
         <div class="card col-md-7">
           <div class="card-body">
-              <table class="table table-striped table-bordered tablas tablaVenta text-center">
+              <table class="table table-striped table-bordered tablaVentas text-center">
                 <thead>
                   <tr>
                     <th scope="col">#</th>
@@ -126,7 +125,9 @@
             </table>
           </div>
         </div>
+
       </div>  
+      
     </section>
 
     
