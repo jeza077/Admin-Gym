@@ -14,10 +14,9 @@
           </button>
           </div>
         </div>
-      </div><!-- /.container-fluid -->
+      </div>
     </section>  
 
- <!-- Main content -->
     <section class="content">
     <?php 
       $permisoAgregar = $_SESSION['permisos']['Clientes']['agregar'];
@@ -40,11 +39,12 @@
                 <thead>
                   <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Tipo Cliente</th>
                     <th scope="col">Nombre</th>
+                    <th scope="col">Tipo Cliente</th>
                     <th scope="col">Correo</th>
+                    <th scope="col">Tipo Inscripcion</th>
                     <th scope="col">Telefono</th>
-                    <th scope="col">Fecha inscripcion</th>
+                    <th scope="col">Fecha Inscripcion</th>
                     <th scope="col">Estado</th>
                     <th scope="col">Acciones</th>
                   </tr>
@@ -56,26 +56,36 @@
                   $valor = null;
                   $clientes = ControladorClientes::ctrMostrarClientes($tabla, $item, $valor);
 
-                  echo "<pre>";
-                  var_dump($clientes);
-                  echo "</pre>";
+                  // echo "<pre>";
+                  // var_dump($clientes);
+                  // echo "</pre>";
 
                   foreach ($clientes as $key => $value) {
                     echo '
                           <tr>
-                          <th scope="row">1</th>
-                          <td>'.$value["tipo_cliente"].'</td>
+                          <th scope="row">'.($key+1).'</th>
                           <td>'.$value["nombre"].'</td>
-                          <td>'.$value["correo"].'</td>
-                          <td>'.$value["telefono"].'</td>';
+                          <td>'.$value["tipo_cliente"].'</td>
+                          <td>'.$value["correo"].'</td>';
 
-                     echo '     
-                          <td>'.$value["fecha_creacion"].'</td>
-                          <td><button class="btn btn-success btn-md">Activado</button></td>
+                          if ($value['tipo_inscripcion'] == null) {
+                            echo  '<td>**Ninguna**</td>';
+                          } else {
+                            echo  '<td>'.$value["tipo_inscripcion"].'</td>';
+                          }
+
+                      echo  '<td>'.$value["telefono"].'</td>';
+ 
+                          if ($value['fecha_creacion'] == null) {
+                            echo  '<td>**Ninguna**</td>';
+                          } else {
+                            echo   '<td>'.$value["fecha_creacion"].'</td>';                          }
+                          
+                      echo
+                          '<td><button class="btn btn-success btn-md">Activado</button></td>
                           <td>
-                            <button class="btn btn-warning" idCliente="'.$value["id_personas"].'"><i class="fas fa-pencil-alt" style="color:#fff"></i></button>
-                            <button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
-                            <button class="btn btn-success" id="pago">Actualizar pago <i class="fas fa-sync"></i></button>
+                            <button class="btn btn-warning btnEditarCliente" id="btnEditar" data-toggle="modal" data-target="#modalEditarCliente" idCliente="'.$value["id_personas"].'"><i class="fas fa-pencil-alt" style="color:#fff"></i></button>
+                            <button class="btn btn-danger btnEliminarCliente" idCliente="'.$value["id_personas"].'"><i class="fas fa-trash-alt"></i></button>
                           </td>
                         </tr>
                     ';
@@ -85,14 +95,10 @@
                 </tbody>
               </table>
             </div>
-            <!-- /.card-body -->
         </div>
-        <!-- /.card -->
-    
     </section>
-    <!-- /.content -->
   </div>
-  <!-- /.content-wrapper -->
+
 
   <!-- =======================================
            MODAL AGREGAR  CLIENTE
@@ -125,7 +131,7 @@
                   <div class="form-row">
                     <div class="form-group col-md-3">
                       <label for="">Tipo de documento <?php echo $i?></label>
-                      <select class="form-control select2" name="nuevoTipoDocumento">
+                      <select class="form-control select2 tipoDocumentoCliente" name="nuevoTipoDocumento">
                           <option selected="selected">Seleccionar...</option>
                           <?php 
                               $tabla = "tbl_documento";
@@ -144,7 +150,7 @@
 
                     <div class="form-group col-md-3">
                       <label for="identidad">Numero de documento</label>
-                      <input type="text" class="form-control id" name="nuevoNumeroDocumento" placeholder="Ingrese Identidad" required>
+                      <input type="text" class="form-control idCliente" name="nuevoNumeroDocumento" placeholder="Ingrese Identidad" required>
                     </div>
                     <div class="form-group col-md-3">
                       <label for="nombre">Nombre</label>
@@ -197,26 +203,48 @@
                         <label>Tipo Cliente</label>
                         <select class="form-control select2 tipoCliente" name="tipoCliente" style="width: 100%;" required>
                           <option selected="selected">Seleccionar...</option>
-                          <option value="gimnasio">Clientes del gimnasio</option>
-                          <option value="ventas">Cliente de ventas</option>
+                          <option value="Gimnasio">Clientes del gimnasio</option>
+                          <option value="Ventas">Cliente de ventas</option>
                         </select>
                       </div>
                     </div>
                     
                   <div id="datosClientes">
-                  <div class="form-row">
-                      <div class="form-group col-md-3">
+                    <div class="form-row">
+                      <div class="form-group col-md-6">
                           <label>Tipo matricula</label>
-                          <select class="form-control select2" style="width: 100%;" name="nuevaMatricula">
-                            <option selected="selected" value="1">normal</option>
-                            
+                          <select class="form-control select2 nuevaMatricula" style="width: 100%;" name="nuevaMatricula">
+                            <?php 
+                                $tabla = "tbl_matricula";
+                                $item = null;
+                                $valor = null;
+
+                                $matriculas = ControladorClientes::ctrMostrar($tabla, $item, $valor);
+                              
+                                foreach ($matriculas as $key => $value) {
+                                  if($value["tipo_matricula"] == 'Normal'){
+                                    echo '<option selected="selected" value="'.$value["id_matricula"].'">'.$value["tipo_matricula"].'</option>';
+                                  } else {
+                                    echo '<option value="'.$value["id_matricula"].'">'.$value["tipo_matricula"].'</option>';
+                                  }
+                                }                             
+                            ?>                           
                           </select> 
+                      </div>
+                      <div class="form-group col-md-6">
+                         <label for="">Precio matricula</label>
+                         <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">$</span>  
+                              </div>
+                            <input type="text" class="form-control text-right nuevoPrecioMatricula nuevoPrecio" value="<?php echo $value['precio_matricula']?>" readonly>
+                         </div>
                       </div>
                     </div>
                     <div class="form-row">
-                      <div class="form-group col-md-3">
+                      <div class="form-group col-md-6">
                         <label>Promociones</label>
-                        <select class="form-control select2" style="width: 100%;" name="nuevaPromocion">
+                        <select class="form-control select2 nuevaPromocion" style="width: 100%;" name="nuevaPromocion">
                           <option selected="selected">Seleccionar...</option>
                           
                             <?php 
@@ -233,16 +261,26 @@
                             ?>
                         </select> 
                       </div>
+                      <div class="form-group col-md-6">
+                         <label for="">Precio promocion</label>
+                         <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">$</span>  
+                              </div>
+                            <input type="text" class="form-control text-right nuevoPrecioPromocion nuevoPrecio" value="" readonly>
+                         </div>
+                      </div>
                     </div>
                     <div class="form-row">
-                        <div class="form-group col-md-3"> 
+                        <div class="form-group col-md-6"> 
                           <label>Tipo inscripcion</label>
-                          <select class="form-control select2" style="width: 100%;" name="nuevaInscripcion">
+                          <select class="form-control select2 nuevaInscripcion" style="width: 100%;" name="nuevaInscripcion">
                               <option selected="selected">Seleccionar...</option>
                               <?php 
                                   $tabla = "tbl_inscripcion";
                                   $item = null;
                                   $valor = null;
+                                  
 
                                   $inscripciones = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
 
@@ -253,11 +291,29 @@
                               ?>
                           </select>
                         </div>
+                        <div class="form-group col-md-6">
+                         <label for="">Precio inscripcion</label>
+                         <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">$</span>  
+                              </div>
+                            <input type="text" class="form-control text-right nuevoPrecioInscripcion nuevoPrecio" value="" readonly>                           
+                         </div>
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="form-group col-md-6 float-right">
+                         <label for="">Total a pagar:</label>
+                         <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">$</span>  
+                            </div>
+                            <input type="text" class="form-control text-right totalPagar" value="" readonly>                        
+                         </div>
+                      </div>
                     </div>
                   </div>
                 </div>
-            
-                <!-- <div class="modal-footer"> -->
                 <div class="form-group mt-4 float-right">
                   
                   <button type="" class="btn btn-primary">Guardar</button>
@@ -272,11 +328,8 @@
                 ?>
               </div>
             </div>
-
           </form>
-
         </div>
-
       </div>
     </div>
   </div>
@@ -297,140 +350,229 @@
         </div>
         <div class="modal-body">
           <form role="form" method="post" class="formulario">
-            <!-- <div class="card">
-              <div class="card-body"> -->
-                <div class="form-row">
-                  <div class="form-group col-md-3">
-                    <label for="">Tipo de documento <?php echo $i?></label>
-                    <select class="form-control select2" name="nuevoTipoDocumento">
-                        <option selected="selected">Seleccionar...</option>
-                        <?php 
-                            $tabla = "tbl_documento";
-                            $item = null;
-                            $valor = null;
-
-                            $preguntas = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
-
-                            foreach ($preguntas as $key => $value) { ?>
-                                <option value="<?php echo $value['id_documento']?>"><?php echo $value['tipo_documento']?></option>        
-                            <?php 
-                            }
-                        ?>
-                    </select>
-                  </div>
-
-                  <div class="form-group col-md-3">
-                    <label for="identidad">Numero de documento</label>
-                    <input type="text" class="form-control id" name="nuevoNumeroDocumento" placeholder="Ingrese Identidad" required>
-                  </div>
-                  <div class="form-group col-md-3">
-                    <label for="nombre">Nombre</label>
-                    <input type="text" class="form-control nombre" name="nuevoNombre" placeholder="Ingrese Nombre" required>
-                  </div>
-                  <div class="form-group col-md-3">
-                    <label for="apellido">Apellido</label>
-                    <input type="text" class="form-control apellidos" name="nuevoApellido" placeholder="Ingrese Apellidos" required>
-                  </div>
-                </div>
-    
-                <div class="form-row">
-                  <div class="form-group col-md-4">
-                    <label for="email">Email</label>
-                    <input type="email" class="form-control email" name="nuevoEmail" placeholder="Ingrese Email" required>
-                  </div>
-                  <div class="form-group col-md-4">
-                    <label>Teléfono</label>
-                    <input type="text" class="form-control" data-inputmask='"mask": "(999) 9999-9999"' data-mask  name="nuevoTelefono" placeholder="Ingrese Telefono" required>
-                  </div>
-                  <div class="form-group col-md-4">
-                    <label>Fecha de nacimiento</label>
-                      <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy/mm/dd" data-mask  name="nuevaFechaNacimiento" placeholder="Ingrese Fecha de Nacimiento" required>
-                  </div>
-                </div>
-
-                <div class="form-row">
-                  <div class="form-group col-md-9">
-                    <label for="">Dirección</label>
-                    <input type="text" class="form-control" name="nuevaDireccion" placeholder="Col. Alameda, calle #2..." required>
-                  </div>
-                
-                  <div class="form-group col-md-3">
-                    <label>Sexo</label>
-                    <select class="form-control select2" name="nuevoSexo" style="width: 100%;" required>
-                      <option selected="selected">Seleccionar...</option>
-                      <option value="M">Masculino</option>
-                      <option value="F">Femenino</option>
-                    </select>
-                  </div>
-                  <!-- <div class="form-group col-md-4">
-                    <label>Tipo de persona</label>
-                    <select class="form-control select2" style="width: 100%;" id="tipoPersona" name="nuevoTipoPersona" required>
-                      <option selected="selected">Seleccionar...</option>
-                      <option value="empleado">Empleado</option>
-                      <option value="cliente">Cliente</option>
-                    </select>
-                  </div> -->
-                </div>
-
-              <!-- </div>
-            </div> -->
-
-            <div class="form-row">
-              <div class="form-group col-md-3">
-                <label>Tipo Inscripcion</label>
-                <select class="form-control select2" style="width: 100%;" name="nuevaIncripcion">
-                  <!-- <option value="2">Default</option> -->
-                    <?php 
-                        $tabla = "tbl_roles";
-                        $item = null;
-                        $valor = null;
-
-                        $roles = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
-
-                        foreach ($roles as $key => $value) {
-                          if($value["rol"] == 'Default'){
-                            echo '<option selected="selected" value="'.$value["id_rol"].'">'.$value["rol"].'</option>';
-                          } else {
-                            echo '<option value="'.$value["id_rol"].'">'.$value["rol"].'</option>';
-                          }
-                        }
-                    ?>
-                </select>
-              </div>
-              <div class="form-group col-md-3">
-                <label>Descuento o
-                       Promocion</label>
-                <select class="form-control select2" style="width: 100%;" name="nuevoDescuento">
-                  <!-- <option value="2">Default</option> -->
-                    <?php 
-                        $tabla = "tbl_roles";
-                        $item = null;
-                        $valor = null;
-
-                        $roles = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
-
-                        foreach ($roles as $key => $value) {
-                          if($value["rol"] == 'Default'){
-                            echo '<option selected="selected" value="'.$value["id_rol"].'">'.$value["rol"].'</option>';
-                          } else {
-                            echo '<option value="'.$value["id_rol"].'">'.$value["rol"].'</option>';
-                          }
-                        }
-                    ?>
-                </select>
-              </div>
-            </div>
-            <div class="modal-footer">
-            <!-- <div class="form-group mt-4 float-right"> -->
-              <button type="" class="btn btn-primary" data-toggle="modal" data-target="#modalAddCLiente">Guardar</button>
-              <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
-            </div>
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+              <li class="nav-item" role="presentation">
+                <a class="nav-link active" id="datosEditarPersona" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Datos personales</a>
+              </li>
+              <li class="nav-item" role="presentation">
+                <a class="nav-link" id="datosEditarCliente" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Datos Cliente</a>
+              </li>
+            </ul>
             
+            <div class="tab-content" id="myTabContent">
+              <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="datoseditarcliente">
+                <div class="container-fluid mt-4">
+                  <div class="form-row">
+                    <div class="form-group col-md-3">
+                      <label for="">Tipo de documento <?php echo $i?></label>
+                      <select class="form-control select2 editarDocumento" name="editarTipoDocumento">
+                          <option selected="selected">Seleccionar...</option>
+                          <?php 
+                              $tabla = "tbl_documento";
+                              $item = null;
+                              $valor = null;
+
+                              $preguntas = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
+
+                              foreach ($preguntas as $key => $value) { ?>
+                                  <option value="<?php echo $value['id_documento']?>"><?php echo $value['tipo_documento']?></option>        
+                              <?php 
+                              }
+                          ?>
+                      </select>
+                    </div>
+
+                    <div class="form-group col-md-3">
+                      <label for="identidad">Numero de documento</label>
+                      <input type="text" class="form-control editarId" name="editarNumeroDocumento" required>
+                    </div>
+                    <div class="form-group col-md-3">
+                      <label for="nombre">Nombre</label>
+                      <input type="text" class="form-control editarNombre" name="editarNombre" required>
+                    </div>
+                    <div class="form-group col-md-3">
+                      <label for="apellido">Apellido</label>
+                      <input type="text" class="form-control editarApellidos" name="editarApellido" required>
+                    </div>
+                  </div>
+      
+                  <div class="form-row">
+                    <div class="form-group col-md-4">
+                      <label for="email">Email</label>
+                      <input type="email" class="form-control editarEmail" name="editarEmail" required>
+                    </div>
+                    <div class="form-group col-md-4">
+                      <label>Teléfono</label>
+                      <input type="text" class="form-control editarTelefono" data-inputmask='"mask": "(504) 9999-9999"' data-mask  name="editarTelefono" required>
+                    </div>
+                    <div class="form-group col-md-4">
+                      <label>Fecha de nacimiento</label>
+                        <input type="text" class="form-control editarFechaNacimiento" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy/mm/dd" data-mask  name="editarFechaNacimiento" required>
+                    </div>
+                  </div>
+
+                  <div class="form-row">
+                    <div class="form-group col-md-9">
+                      <label for="">Dirección</label>
+                      <input type="text" class="form-control editarDireccion" name="editarDireccion" required>
+                    </div>
+                  
+                    <div class="form-group col-md-3">
+                      <label>Sexo</label>
+                      <select class="form-control select2 editarSexo" name="nuevoSexo" style="width: 100%;" required>
+                        <option selected="selected">Seleccionar...</option>
+                        <option value="M">Masculino</option>
+                        <option value="F">Femenino</option>
+                      </select>
+                    </div>
+                   
+                  </div>
+                </div>
+              </div>
+
+              <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="datosCliente">
+                <div class="container-fluid mt-4">
+                    <div class="form-row">
+                      <div class="form-group col-md-3">
+                        <label>Tipo Cliente</label>
+                        <select class="form-control select2 tipoCliente" name="editarTipoCliente" style="width: 100%;" required>
+                          <option selected="selected">Seleccionar...</option>
+                          <option value="Gimnasio">Clientes del gimnasio</option>
+                          <option value="Ventas">Cliente de ventas</option>
+                        </select>
+                      </div>
+                    </div>
+                    
+                  <div id="datosCliente">
+                    <div class="form-row">
+                      <div class="form-group col-md-6">
+                          <label>Tipo matricula</label>
+                          <select class="form-control select2 editarMatricula" style="width: 100%;" name="editarMatricula">
+                            <?php 
+                                $tabla = "tbl_matricula";
+                                $item = null;
+                                $valor = null;
+
+                                $matriculas = ControladorClientes::ctrMostrar($tabla, $item, $valor);
+
+                              
+                                foreach ($matriculas as $key => $value) {
+                                  if($value["tipo_matricula"] == 'Normal'){
+                                    echo '<option selected="selected" value="'.$value["id_matricula"].'">'.$value["tipo_matricula"].'</option>';
+                                  } else {
+                                    echo '<option value="'.$value["id_matricula"].'">'.$value["tipo_matricula"].'</option>';
+                                  }
+                                }
+                            ?>
+                            
+                          </select> 
+                      </div>
+                      <div class="form-group col-md-6">
+                         <label for="">Precio matricula</label>
+                         <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">$</span>  
+                              </div>
+                            <input type="text" class="form-control text-right editarPrecioMatricula" value="<?php echo $value['precio_matricula']?>" readonly>
+                         </div>
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="form-group col-md-6">
+                        <label>Promociones</label>
+                        <select class="form-control select2 editarPromocion" style="width: 100%;" name="editarPromocion">
+                          <option selected="selected">Seleccionar...</option>
+                          
+                            <?php 
+                                $tabla = "tbl_promociones_descuentos";
+                                $item = null;
+                                $valor = null;
+
+                                $matriculas = ControladorClientes::ctrMostrar($tabla, $item, $valor);
+
+                                foreach ($matriculas as $key => $value) { ?>
+                                  <option value="<?php echo $value['id_promociones_descuentos']?>"><?php echo $value['tipo_promociones_descuentos']?></option>        
+                                <?php 
+                                }
+                            ?>
+                        </select> 
+                      </div>
+                      <div class="form-group col-md-6">
+                         <label for="">Precio promocion</label>
+                         <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">$</span>  
+                              </div>
+                            <input type="text" class="form-control text-right editarPrecioPromocion precio" value="" readonly>
+                         </div>
+                      </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6"> 
+                          <label>Tipo inscripcion</label>
+                          <select class="form-control select2 editarInscripcion" style="width: 100%;" name="editarInscripcion">
+                              <option selected="selected">Seleccionar...</option>
+                              <?php 
+                                  $tabla = "tbl_inscripcion";
+                                  $item = null;
+                                  $valor = null;
+
+                                  $inscripciones = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
+
+                                  foreach ($inscripciones as $key => $value) { ?>
+                                    <option value="<?php echo $value['id_inscripcion']?>"><?php echo $value['tipo_inscripcion']?></option>        
+                                  <?php 
+                                }
+                              ?>
+                          </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                         <label for="">Precio inscripcion</label>
+                         <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">$</span>  
+                              </div>
+                            <input type="text" class="form-control text-right editarPrecioInscripcion precio" value="" readonly>
+                         </div>
+                      </div>
+                      
+                    </div>
+                    <div class="form-row">
+                      <div class="form-group col-md-6 float-right">
+                         <label for="">Total a pagar:</label>
+                         <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">$</span>  
+                            </div>
+                            <input type="text" class="form-control text-right editarTotalPagar" value="" readonly>
+                         </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group mt-4 float-right">
+                  
+                  <button type="" class="btn btn-primary">Guardar Cambios</button>
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
+                </div>
+            
+            
+              </div>
+            </div>
+
           </form>
+
         </div>
 
       </div>
     </div>
   </div>
-    
 
+  <?php
+
+    $pantalla = 'clientes';
+    
+    $eliminarCliente = new ControladorClientes();
+    $eliminarCliente->ctrEliminarCliente($tipoPersona, $pantalla);
+  ?>

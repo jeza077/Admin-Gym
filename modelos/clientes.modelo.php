@@ -8,7 +8,7 @@ class ModeloClientes{
 	 
 	static public function mdlCrearCliente($tabla, $datos){
 
-		if ($datos['tipo_clienets'] == "gimnasio"){
+		if ($datos['tipo_cliente'] == "Gimnasio"){
 	
 			$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(id_persona, tipo_cliente, id_inscripcion, id_matricula, id_descuentos_promociones) VALUES (:id_persona, :tipo_cliente, :id_inscripcion, :id_matricula, :id_descuentos_promociones)");
 	
@@ -66,7 +66,7 @@ class ModeloClientes{
 			. "INNER JOIN tbl_matricula as m ON c.id_matricula = m.id_matricula\n"
 			. "INNER JOIN tbl_inscripcion as i ON c.id_inscripcion = i.id_inscripcion\n"
 			. "INNER JOIN tbl_promociones_descuentos as pd ON c.id_descuentos_promociones = pd.id_promociones_descuentos\n"
-			. " WHERE $item = :$item");
+			. " WHERE $item = :$item"); 
 
 			// $stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
 			$stmt -> execute();
@@ -74,11 +74,12 @@ class ModeloClientes{
 
 		} else {
 
-			$stmt = Conexion::conectar()->prepare( "SELECT p.*, c.*, i.fecha_creacion FROM $tabla1 as p\n"
-            . "INNER JOIN $tabla2 as c ON p.id_personas = c.id_persona\n"
-            . "INNER JOIN tbl_matricula as m ON c.id_matricula = m.id_matricula\n"
-            . "INNER JOIN tbl_inscripcion as i ON c.id_inscripcion = i.id_inscripcion\n"
-			. "INNER JOIN tbl_promociones_descuentos as pd ON c.id_descuentos_promociones = pd.id_promociones_descuentos");
+			$stmt = Conexion::conectar()->prepare( "SELECT p.*, c.*, i.fecha_creacion, i.tipo_inscripcion FROM $tabla1 as p\n"
+            . "LEFT JOIN $tabla2 as c ON p.id_personas = c.id_persona\n"
+            . "LEFT JOIN tbl_matricula as m ON c.id_matricula = m.id_matricula\n"
+            . "LEFT JOIN tbl_inscripcion as i ON c.id_inscripcion = i.id_inscripcion\n"
+			. "LEFT JOIN tbl_promociones_descuentos as pd ON c.id_descuentos_promociones = pd.id_promociones_descuentos\n"
+		    . "WHERE p.tipo_persona = 'clientes' ");
 			
 			$stmt -> execute();
 			return $stmt -> fetchAll();
@@ -115,4 +116,29 @@ class ModeloClientes{
 		$stmt = null;
 		
 	} 
+	/*=============================================
+				ELIMINAR CLIENTES
+	=============================================*/
+
+	static public function mdlEliminarCliente($tabla, $datos){
+
+		$stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE id_personas = :id_personas");
+
+		$stmt -> bindParam(":id_personas", $datos, PDO::PARAM_INT);
+
+		if($stmt -> execute()){
+
+			return "ok";
+		
+		}else{
+
+			return "error";	
+
+		}
+
+		$stmt -> close();
+
+		$stmt = null;
+
+	}
 }

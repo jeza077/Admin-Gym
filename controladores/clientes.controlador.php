@@ -13,7 +13,7 @@ class ControladorClientes{
 
 			$tabla = "tbl_clientes";
 			
-			if ($datos['tipo_clientes'] == "gimnasio"){
+			if ($datos['tipo_cliente'] == "Gimnasio"){
 				$datos = array("id_persona" => $datos['id_persona'],
 			                "tipo_cliente" => $datos["tipo_cliente"],
 							"id_inscripcion" =>  $datos["id_inscripcion"],
@@ -21,7 +21,7 @@ class ControladorClientes{
 							"id_descuentos_promociones" =>  $datos["id_descuentos_promociones"]);
 			} else {
 				$datos = array("id_persona" => $datos['id_persona'],
-			                "tipo_cliente" => $datos["tipo_cliente"]);
+			                  "tipo_cliente" => $datos["tipo_cliente"]);
 			}
 							
 			
@@ -56,13 +56,48 @@ class ControladorClientes{
             }
         }
 
-    }
-    
+	}
+	
+    /*=============================================
+				ELIMINAR CLIENTES
+	=============================================*/
+
+	static public function ctrEliminarCliente($pantalla){
+
+		if(isset($_GET["idCliente"])){
+
+			
+			
+			$tabla = "tbl_personas";
+			$datos = $_GET["idCliente"];
+
+			$respuesta = ModeloClientes::mdlEliminarCliente($tabla, $datos);
+
+			if($respuesta == true){
+				echo '<script>
+						Swal.fire({
+							title: "Cliente eliminado correctamente!",
+							icon: "success",
+							heightAuto: false,
+							allowOutsideClick: false
+						}).then((result)=>{
+							if(result.value){
+								window.location = "'.$pantalla.'";
+							}
+						});                                              
+					</script>';
+			}
+		}
+	}
    /*=============================================
 				MOSTRAR CLIENTES
 	=============================================*/
 
 	static public function ctrMostrarClientes($tabla, $item, $valor){
+		// echo "<pre>";
+        // var_dump($respuesta);
+        // echo "</pre>";
+
 		$tabla1 = "tbl_personas";
 		$tabla2 = $tabla;
 
@@ -81,7 +116,7 @@ class ControladorClientes{
 
 		return $respuesta;
 
-    }
+	}
     /*=============================================
 				MOSTRAR INSCRIPCION
 	=============================================*/
