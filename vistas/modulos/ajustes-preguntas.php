@@ -8,7 +8,7 @@ require_once "../../modelos/usuarios.modelo.php";
         <h3>Preguntas de seguridad</h3>
     </div>
 
-    <div class="card-body contenedor2">
+    <div class="card-body">
         <form method="post" id="primerIngreso">
             <?php 
                 $item = 'parametro';
@@ -19,11 +19,11 @@ require_once "../../modelos/usuarios.modelo.php";
                 
                 for ($i=1; $i <=$cantidadPreguntas ; $i++) { ?>
 
-                <div class="card-body contenedor-primer-ingreso pregunta<?php echo $i?>">
+                <div class="card-body pregunta<?php echo $i?>">
             
-                    <!-- <div class="form-row"> -->
+                    <div class="form-row">
 
-                        <div class="form-group">
+                        <div class="form-group col-md-6">
                             <label for="">Pregunta <?php echo $i?></label>
                             <select class="form-control select2" name="nuevaPregunta[]">
                                 <option selected="selected">Seleccionar...</option>
@@ -42,21 +42,23 @@ require_once "../../modelos/usuarios.modelo.php";
                             </select>
                         </div>
                         
-                        <div class="form-group">
+                        <div class="form-group col-md-6">
                             <label class="" for="">Respuesta <?php echo $i?></label>
                             <input type="text" class="form-control mayus respuesta<?php echo $i?>" name="respuestaPregunta[]" placeholder="Ingrese respuesta">
                         </div>
 
-                        <div class="form-group mt-4" id="pregunta<?php echo $i?>">
-                            <!-- <a href="salir" class="btn btn-danger salir float-left">Salir</a>
-                            <a href="javascript:void(0);" class="btn btn-primary salir float-right" onclick="togglePregunta<?php echo $i+1?>();">Siguiente</a> -->
-                        </div>
-                    <!-- </div> -->
+                    </div>
 
                 </div>
             <?php
                 }            
             ?>
+             <div class="form-row float-right mr-4">
+                <div class="form-group" id="pregunta<?php echo $i?>">
+                    <button type="" class="btn btn-primary">Guardar</button>
+                    <button type="button" class="btn btn-danger salirPerfil" data-dismiss="modal">Salir</button>
+                </div>
+            </div>
         </form>
     </div>
     <!-- <div class="card-body">

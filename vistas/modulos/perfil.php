@@ -37,51 +37,49 @@
               <p>Cambia las preguntas/respuestas asociadas a tu cuenta</p>
             </div>
           </div>
-
-            <!-- Profile Image -->
             
-              <div class="card col-8 ajustes-usuario">
-              
-                <div class="card-body box-profile datos-generales">
-                  <div class="row mb-5">                  
-                    <div class="col-md-3">
-                      <div class="float-right">
-                        <?php
-                          if($_SESSION["foto"] != ""){
-                          echo '<img src="'.$_SESSION["foto"].'" class="profile-user-img img-fluid img-circle" alt="User Image">';
-                          } else {
-                          echo '<img src="vistas/img/usuarios/default/default2.png" class="profile-user-img img-fluid img-circle" alt="User Image">';
-                          }
-                        ?>
-                      </div>
-                    </div>
-
-                    <div class="col-md-4 user">
-                      <h3 class="profile-username"><?php echo $_SESSION["nombre"]." ". $_SESSION["apellidos"]?></h3>
-
-                      <p class="text-muted"><?php echo $_SESSION["rol"]?></p>
-                    </div>
-                    
-                    <div class="col-md-4 mt-4">
-                      <a href="javascript:void(0);" class="btn btn-outline-orange btn-block"><b>Cambia tu foto</b></a>                  
-                    </div>
+          <div class="card col-8 ajustes-usuario">
+          
+            <div class="card-body box-profile datos-generales">
+              <div class="row mb-5">                  
+                <div class="col-md-3">
+                  <div class="float-right">
+                    <?php
+                      if($_SESSION["foto"] != ""){
+                      echo '<img src="'.$_SESSION["foto"].'" class="profile-user-img img-fluid img-circle" alt="User Image">';
+                      } else {
+                      echo '<img src="vistas/img/usuarios/default/default2.png" class="profile-user-img img-fluid img-circle" alt="User Image">';
+                      }
+                    ?>
                   </div>
+                </div>
 
-                  <ul class="list-group list-group-unbordered mb-3">
-                    <li class="list-group-item">
-                      <b>Nombre Usuario:</b> <a class="float-right text-muted">JEZA</a>
-                    </li>
-                    <li class="list-group-item">
-                      <b>Correo:</b> <a class="float-right text-muted">jesus@correo.com</a>
-                    </li>
-                    <li class="list-group-item">
-                      <b>Fecha de Vencimiento</b> <a class="float-right text-muted">2021/11/06</a>
-                    </li>
-                  </ul>
+                <div class="col-md-4 user">
+                  <h3 class="profile-username"><?php echo $_SESSION["nombre"]." ". $_SESSION["apellidos"]?></h3>
 
+                  <p class="text-muted"><?php echo $_SESSION["rol"]?></p>
                 </div>
                 
+                <div class="col-md-4 mt-4">
+                  <a href="javascript:void(0);" class="btn btn-outline-orange btn-block"><b>Cambia tu foto</b></a>                  
+                </div>
               </div>
+
+              <ul class="list-group list-group-unbordered mb-3">
+                <li class="list-group-item">
+                  <b>Nombre Usuario:</b> <a class="float-right text-muted">JEZA</a>
+                </li>
+                <li class="list-group-item">
+                  <b>Correo:</b> <a class="float-right text-muted">jesus@correo.com</a>
+                </li>
+                <li class="list-group-item">
+                  <b>Fecha de Vencimiento</b> <a class="float-right text-muted">2021/11/06</a>
+                </li>
+              </ul>
+
+            </div>
+            
+          </div>
             
             <!-- /.card -->
         </div>
