@@ -7,11 +7,11 @@ class ModeloVentas
   /*=============================================
 		MOSTRAR ventas
 	=============================================*/
-    static public function mdlMostrarVentas ($tabla, $item, $valor)
+    static public function mdlMostrarVentas($tabla, $item, $valor)
     {
         if ($item != null){
 
-            $stmt= Conexion::conectar() ->prepare("SELECT * FROM $tabla where $item= :$item ORDER BY fecha DESC");
+            $stmt= Conexion::conectar() ->prepare("SELECT * FROM $tabla WHERE $item= :$item ORDER BY fecha DESC");
             $stmt -> bindParam(":" .$item, $valor, PDO:: PARAM_STR);
             $stmt -> execute();
             return $stmt -> fetch();
