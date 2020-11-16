@@ -1,3 +1,19 @@
+validarEmail($('.emailCliente'))
+$('.numeroDocumentoCliente').keydown(impedirEspacios);
+$('.numeroDocumentoCliente').blur(validarDoc)
+
+//VALIDACIONES AGREGAR CLIENTE
+$('.nombreCliente').keydown(sinCaracteres)
+$('.nombreCliente').keydown(sinNumeros)
+$('.nombreCliente').keydown(permitirUnEspacio);
+longitudString($('.nombreCliente'),30); 
+//VALIDACIONES AGREGAR CLIENTE apellido
+$('.apellidoCliente').keydown(sinCaracteres)
+$('.apellidoCliente').keydown(sinNumeros)
+$('.apellidoCliente').keydown(permitirUnEspacio);
+longitudString($('.apellidoCliente'),30); 
+;
+
 $('#datosClientes').hide();
 $(document).on('change', '.tipoCliente', function () {
     var valor = $(this).val();
@@ -9,28 +25,17 @@ $(document).on('change', '.tipoCliente', function () {
     }
    
 });
-// $('#datosCliente').hide();
-// $(document).on('change', '.editarTipoCliente', function () {
-//     var valor = $(this).val();
-//     // console.log(valor)
-//     if (valor == "Gimnasio") {
-//         $('#datosCliente').show();
-//     } else {
-//         $('#datosCliente').hide();
-//     }
-   
-// });
+
 /*=============================================
         EDITAR CLIENTE
 =============================================*/
 
 $('.btnEditarCliente').click(function () { 
     
-    var idCliente = $(this).attr("idCliente");
-
+    var idCliente = $(this).val("idCliente");
     var datos = new FormData();
     datos.append("idCliente", idCliente);
-    // console.log(tabla)
+    // console.log(datos)
 
     $.ajax({
     
@@ -42,6 +47,16 @@ $('.btnEditarCliente').click(function () {
         processData: false,  
         dataType: "json",
         success: function(respuesta) {
+
+            $('.editarDocumento').val(respuesta["num_documento"])
+            $('.editarNombre').val(respuesta["nombre"])
+            $('.editarApellidos').val(respuesta["apellidos"])
+            $('.editarEmail').val(respuesta["correo"])
+            $('.editarTelefono').val(respuesta["telefono"])
+            $('.editarFechaNacimiento').val(respuesta["fecha_nacimiento"])
+            $('.editarDireccion').val(respuesta["direccion"])
+            $('.editarSexo').val(respuesta["sexo"])
+
 
             // console.log("respuesta", respuesta);
             
@@ -79,10 +94,9 @@ function mostrarDinamico(selector1,tablaDB,itemDB,selector2,precio) {
             success: function(respuesta) {
                 // console.log(respuesta[precio]);
                var precioInscripcion = respuesta[precio];             
-               SumaTotal()
+            //    SumaTotal()      
     
                selector2.val(precioInscripcion);
-               
 
             }
         });   
@@ -96,38 +110,54 @@ mostrarDinamico($('.nuevaInscripcion'),'tbl_inscripcion','id_inscripcion',$('.nu
 mostrarDinamico($('.nuevaPromocion'),'tbl_promociones_descuentos', 'id_promociones_descuentos',$('.nuevoPrecioPromocion'),'valor_promociones_descuentos')
 
 // CALCULAR EL TOTAL A PAGAR 
-function SumaTotal() {  
-    
+function SumaTotal(selector) {  
 
-    var precioItem = $('.nuevoPrecio');
-    var precioDescuento = $('.nuevoPrecioPromocion');
-    var arraySuma = [];
-    var arrayResta = [];
-    var arrayTotal =[];
+    selector.change(function (e) { 
+        e.preventDefault();
+        
+        var precioMatricula = $('.nuevoPrecioMatricula');
+        var precioDescuento = $('.nuevoPrecioPromocion');
+        var precioInscripcion = $('.nuevoPrecioInscripcion');
+     
+        var arrayMatricula = [];
+        var arrayInscripcion = [];
+        var arrayDescuento = [];
+        // var arraySuma =[];
+        var arrayTotal =[];
+    
+        for (var i = 0; i  < precioMatricula.length; i++) {
+            arrayMatricula.push(Number($(precioMatricula[i]).val()));   
+        }
+        for (var i = 0; i  < precioDescuento.length; i++) {
+            arrayDescuento.push(Number($(precioDescuento[i]).val()));   
+        }
+        for (var i = 0; i  < precioInscripcion.length; i++) {
+            arrayInscripcion.push(Number($(precioInscripcion[i]).val()));   
+        }
+        
+        function sumaArrayTotal(total, numero) {
+            return total + numero;
+        }
+        
+        var matricula = arrayMatricula.reduce(sumaArrayTotal);
+        var descuento = arrayDescuento.reduce(sumaArrayTotal);
+        var matriculaTotal = matricula-descuento;
+        var inscripcionTotal = arrayInscripcion.reduce(sumaArrayTotal);
+        
 
-    for (var i = 0; i  < precioItem.length; i++) {
-        arraySuma.push(Number($(precioItem[i]).val()));   
-    }
-    for (var i = 0; i  < precioDescuento.length; i++) {
-        arrayResta.push(Number($(precioDescuento[i]).val()));   
-    }
-    function sumaArrayTotal(total, numero) {
-        return total + numero;
-    }
-    
-    var sumaTotal = arraySuma.reduce(sumaArrayTotal);
-    var restaTotal = arrayResta.reduce(sumaArrayTotal);
-    arrayTotal = sumaTotal-restaTotal;
-     $('.totalPagar').val(arrayTotal);
-    
-    
-    
-    console.log("arraySuma", arraySuma)
+        // arraySuma = matriculaTotal+inscripcionTotal;
+        arrayTotal = matriculaTotal+inscripcionTotal;
+        $('.totalPagar').val(arrayTotal);
+        
+        // console.log("arrayDescuento", arrayDescuento)
+    });
+
 }
-// $('.nuevoPrecioMatricula').change(SumaTotal)
-// $('.nuevaPromocion').change(SumaTotal)
-// SumaTotal($('.nuevaInscripcion'));
-// SumaTotal($('.nuevaPromocion'));
+SumaTotal($('.nuevaMatricula'))
+SumaTotal($('.nuevaPromocion'))
+SumaTotal($('.nuevaInscripcion'))
+
+
 
 /*=============================================
         ELIMINAR CLIENTE
@@ -151,4 +181,19 @@ $('.btnEliminarCliente').click(function () {
             window.location = "index.php?ruta=clientes&idCliente="+idCliente;
         }
     });
+});
+// VALIDACIONES DE EMAIL
+$('.tipoDocumentoCliente').change(function (e) { 
+    e.preventDefault();
+    $('.idCliente').val("");
+
+    var valorTipoDocumento =$(this).val();
+    console.log(valorTipoDocumento);
+
+    if(valorTipoDocumento === 3){
+        $('.idCliente').keydown(sinNumeros);
+    } else {
+        $('.idCliente').keydown(sinLetras);
+        $('.idCliente').keydown(sinCaracteres);
+    }
 });

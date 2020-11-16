@@ -131,7 +131,7 @@
                   <div class="form-row">
                     <div class="form-group col-md-3">
                       <label for="">Tipo de documento <?php echo $i?></label>
-                      <select class="form-control select2" name="nuevoTipoDocumento">
+                      <select class="form-control select2 tipoDocumentoCliente" name="nuevoTipoDocumento">
                           <option selected="selected">Seleccionar...</option>
                           <?php 
                               $tabla = "tbl_documento";
@@ -150,7 +150,7 @@
 
                     <div class="form-group col-md-3">
                       <label for="identidad">Numero de documento</label>
-                      <input type="text" class="form-control id" name="nuevoNumeroDocumento" placeholder="Ingrese Identidad" required>
+                      <input type="text" class="form-control idCliente" name="nuevoNumeroDocumento" placeholder="Ingrese Identidad" required>
                     </div>
                     <div class="form-group col-md-3">
                       <label for="nombre">Nombre</label>
@@ -267,7 +267,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">$</span>  
                               </div>
-                            <input type="text" class="form-control text-right nuevoPrecioPromocion" value="" readonly>
+                            <input type="text" class="form-control text-right nuevoPrecioPromocion nuevoPrecio" value="" readonly>
                          </div>
                       </div>
                     </div>
@@ -343,7 +343,7 @@
       <div class="modal-content">
       
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Nuevo cliente</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Editar cliente</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -352,20 +352,20 @@
           <form role="form" method="post" class="formulario">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
               <li class="nav-item" role="presentation">
-                <a class="nav-link active" id="datosPersonas" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Datos personales</a>
+                <a class="nav-link active" id="datosEditarPersona" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Datos personales</a>
               </li>
               <li class="nav-item" role="presentation">
-                <a class="nav-link" id="datosCliente" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Datos Cliente</a>
+                <a class="nav-link" id="datosEditarCliente" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Datos Cliente</a>
               </li>
             </ul>
             
             <div class="tab-content" id="myTabContent">
-              <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="datoscliente">
+              <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="datoseditarcliente">
                 <div class="container-fluid mt-4">
                   <div class="form-row">
                     <div class="form-group col-md-3">
                       <label for="">Tipo de documento <?php echo $i?></label>
-                      <select class="form-control select2" name="editarTipoDocumento">
+                      <select class="form-control select2 editarDocumento" name="editarTipoDocumento">
                           <option selected="selected">Seleccionar...</option>
                           <?php 
                               $tabla = "tbl_documento";
@@ -384,42 +384,42 @@
 
                     <div class="form-group col-md-3">
                       <label for="identidad">Numero de documento</label>
-                      <input type="text" class="form-control id" name="nuevoNumeroDocumento" placeholder="Ingrese Identidad" required>
+                      <input type="text" class="form-control editarId" name="editarNumeroDocumento" required>
                     </div>
                     <div class="form-group col-md-3">
                       <label for="nombre">Nombre</label>
-                      <input type="text" class="form-control editarNombre" name="editarNombre" placeholder="Ingrese Nombre" required>
+                      <input type="text" class="form-control editarNombre" name="editarNombre" required>
                     </div>
                     <div class="form-group col-md-3">
                       <label for="apellido">Apellido</label>
-                      <input type="text" class="form-control editarApellidos" name="editarApellido" placeholder="Ingrese Apellidos" required>
+                      <input type="text" class="form-control editarApellidos" name="editarApellido" required>
                     </div>
                   </div>
       
                   <div class="form-row">
                     <div class="form-group col-md-4">
                       <label for="email">Email</label>
-                      <input type="email" class="form-control editarEmail" name="editarEmail" placeholder="Ingrese Email" required>
+                      <input type="email" class="form-control editarEmail" name="editarEmail" required>
                     </div>
                     <div class="form-group col-md-4">
                       <label>Teléfono</label>
-                      <input type="text" class="form-control" data-inputmask='"mask": "(999) 9999-9999"' data-mask  name="editarTelefono" placeholder="Ingrese Telefono" required>
+                      <input type="text" class="form-control editarTelefono" data-inputmask='"mask": "(504) 9999-9999"' data-mask  name="editarTelefono" required>
                     </div>
                     <div class="form-group col-md-4">
                       <label>Fecha de nacimiento</label>
-                        <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy/mm/dd" data-mask  name="editarFechaNacimiento" placeholder="Ingrese Fecha de Nacimiento" required>
+                        <input type="text" class="form-control editarFechaNacimiento" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy/mm/dd" data-mask  name="editarFechaNacimiento" required>
                     </div>
                   </div>
 
                   <div class="form-row">
                     <div class="form-group col-md-9">
                       <label for="">Dirección</label>
-                      <input type="text" class="form-control" name="nuevaDireccion" placeholder="Col. Alameda, calle #2..." required>
+                      <input type="text" class="form-control editarDireccion" name="editarDireccion" required>
                     </div>
                   
                     <div class="form-group col-md-3">
                       <label>Sexo</label>
-                      <select class="form-control select2" name="nuevoSexo" style="width: 100%;" required>
+                      <select class="form-control select2 editarSexo" name="nuevoSexo" style="width: 100%;" required>
                         <option selected="selected">Seleccionar...</option>
                         <option value="M">Masculino</option>
                         <option value="F">Femenino</option>
