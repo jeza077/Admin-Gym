@@ -238,3 +238,30 @@ function generar_contrasenya(longitud){
     }
     return password_definitivo;
 }
+
+//** ----------------- MOSTRAR INVENTARIO --------------------------*/
+$(".btnEditarInventario").click(function(){
+    var id_inventario = $(this).attr("id_inventario");
+    console.log("id_inventario",id_inventario);
+
+    $.ajax({
+        url:"ajax/inventario.ajax.php",
+        method: "POST",
+        data:datos,
+        cache: false,
+        contentType: false,
+        processData: false,
+        dataType: "json",
+        success: function(respuesta){
+            console.log("respuesta",respuesta)
+        }
+
+
+
+
+    })
+
+
+
+
+})

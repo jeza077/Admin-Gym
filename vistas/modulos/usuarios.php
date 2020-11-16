@@ -201,10 +201,9 @@
                   </div>
                 </div>
               </div>
-
+                  <!-- 2tab --> 
               <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="datosUsuario">
                 <div class="container-fluid mt-4">
-
                   <div class="form-row">
                     <div class="form-group col-md-3">
                       <label for="">Usuario</label>
