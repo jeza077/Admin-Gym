@@ -10,6 +10,5 @@ class AjaxInventario{
 }
 
 
-
 //** ----------------- editar INVENTARIO --------------------------*/
 
