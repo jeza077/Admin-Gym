@@ -26,7 +26,7 @@ $(document).on('change', '.tipoCliente', function () {
 
 $('.btnEditarCliente').click(function () { 
     
-    var idCliente = $(this).val("idCliente");
+    var idCliente = $(this).attr("idCliente");
 
     var datos = new FormData();
     datos.append("idCliente", idCliente);
@@ -42,10 +42,9 @@ $('.btnEditarCliente').click(function () {
         processData: false,  
         dataType: "json",
         success: function(respuesta) {
-            console.log("respuesta", respuesta);
-            
 
-         
+            // console.log("respuesta", respuesta);
+            
         }
     });
     
@@ -79,7 +78,7 @@ function mostrarDinamico(selector1,tablaDB,itemDB,selector2,precio) {
             dataType: "json",
             success: function(respuesta) {
                 // console.log(respuesta[precio]);
-               var precioInscripcion = respuesta[precio];
+               var precioInscripcion = respuesta[precio];             
                SumaTotal()
     
                selector2.val(precioInscripcion);
@@ -125,7 +124,7 @@ function SumaTotal() {
     
     console.log("arraySuma", arraySuma)
 }
-$('.nuevaInscripcion').change(SumaTotal)
+// $('.nuevoPrecioMatricula').change(SumaTotal)
 // $('.nuevaPromocion').change(SumaTotal)
 // SumaTotal($('.nuevaInscripcion'));
 // SumaTotal($('.nuevaPromocion'));
