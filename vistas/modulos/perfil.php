@@ -24,7 +24,7 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-md-4">
-            <div class="ajustes ajuste-cuenta">
+            <div class="ajustes ajuste-cuenta" idUsuario="<?php echo $_SESSION["id_usuario"]?>">
               <h3>Ajustes de cuenta</h3>
               <p>Detalles acerca de tu informacion personal</p>
             </div>
