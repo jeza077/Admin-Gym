@@ -474,10 +474,11 @@
                 </div>
             
                 <?php
+                  $ajustes = null;
                   $tipoPersona = 'usuarios';
                   $pantalla = 'usuarios';
                   $ingresarPersona = new ControladorPersonas();
-                  $ingresarPersona->ctrEditarPersona($tipoPersona, $pantalla);
+                  $ingresarPersona->ctrEditarPersona($ajustes, $tipoPersona, $pantalla);
                 ?>
               </div>
             </div>

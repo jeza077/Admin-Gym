@@ -201,8 +201,7 @@
 <script src="vistas/js/agregar-persona.js"></script>
  <script src="vistas/js/usuarios-empleados.js"></script>
  <script src="vistas/js/clientes.js"></script>
-<script src="vistas/js/usuarios-empleados.js"></script>
-<script src="vistas/js/ventas.js"></script> <!--lo agregue-->
+<script src="vistas/js/ventas.js"></script>
 
 <!--<script src="vistas/js/validaciones.js"></script>
 <script src="vistas/js/categorias.js"></script>

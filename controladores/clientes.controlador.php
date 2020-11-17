@@ -142,12 +142,12 @@ class ControladorClientes{
 
 	}
 
-    static public function ctrMostrarClientes($tabla, $item, $valor){
+    // static public function ctrMostrarClientes($tabla, $item, $valor){
     
-        $tabla1 = "tbl_personas";
-        $tabla2 = $tabla;
-        $respuesta = ModeloClientes::mdlMostrarClientes($tabla1, $tabla2, $item, $valor);
-        return $respuesta;   
-    }
+    //     $tabla1 = "tbl_personas";
+    //     $tabla2 = $tabla;
+    //     $respuesta = ModeloClientes::mdlMostrarClientes($tabla1, $tabla2, $item, $valor);
+    //     return $respuesta;   
+    // }
 }
 

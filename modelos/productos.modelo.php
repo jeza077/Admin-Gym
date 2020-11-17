@@ -2,6 +2,7 @@
 require_once "conexion.php";
 
 class ModeloProductos{
+	
     static public function mdlMostrarProductos($tabla, $item, $valor){
         if($item != null){
 
