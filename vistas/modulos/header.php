@@ -110,7 +110,7 @@
             <!-- Menu Footer-->
             <li class="user-footer">
               <div class="float-left">
-                <a href="perfil" class="btn btn-default btn-flat">Perfil</a>
+                <a href="perfil" class="btn btn-default btn-flat btnPerfil">Perfil</a>
               </div>
               <div class="float-right">
                 <a href="salir" class="btn btn-default btn-flat">Salir</a>

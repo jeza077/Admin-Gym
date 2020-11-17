@@ -9,10 +9,10 @@
             <h1>Dashboard</h1>
           </div>
           <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
+            <!-- <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
               <li class="breadcrumb-item active">Blank Page</li>
-            </ol>
+            </ol> -->
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -20,133 +20,115 @@
 
      <!-- FUNCION INSERTAR BITACORA -->
      <?php
-  	  $descripcionEvento = " Consulto Inicio";
-      $accion = "consulta";
 
-      $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 1,$accion, $descripcionEvento);
+        //** ALERTA POR FECHA DE VENCIMIENTO */
+        $tabla = "tbl_usuarios";
+        $item = "id_usuario";
+        $valor = $_SESSION["id_usuario"];
+
+        $usuario = ControladorUsuarios::ctrMostrarUsuarios($tabla, $item, $valor);
+
+        $fechaUsuario = $usuario['fecha_vencimiento'];
+        $fechaHoy = date('Y-m-d');
+        $date1 = new DateTime($fechaHoy);
+        $date2 = new DateTime($fechaUsuario);
+        $diff = $date1->diff($date2);
+
+        if($diff->days <= 7){
+
+          $mensaje = "Tu usuario vencera en $diff->days dias! Cambia tu contraseña para resetear la fecha de vencimiento.";
+          $icono = "info";
+        //   $modulo = "dashboard";
+          $alerta = ControladorGlobales::ctrAlertas($mensaje, $icono);
+          
+        }
+        
+        //**Bitacora
+        $descripcionEvento = " Consulto Inicio";
+        $accion = "consulta";
+
+        $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 1,$accion, $descripcionEvento);
     
      ?>
 
     <!-- Main content -->
     <section class="content">
+      <div class="container-fluid">
+        <!-- Small boxes (Stat box) -->
+        <div class="row">
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-purple">
+              <div class="inner">
+                <h3>150</h3>
+
+                <p>New Orders</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-pie-graph"></i>
+              </div>
+              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-primary">
+              <div class="inner">
+                <h3>44</h3>
+
+                <p>Clientes Nuevos</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-person-add"></i>
+              </div>
+              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>    
+          
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-orange">
+              <div class="inner">
+                <h3>53<sup style="font-size: 20px">%</sup></h3>
+
+                <p>Ventas</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-stats-bars"></i>
+              </div>
+              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-gray-dark">
+              <div class="inner">
+                <h3>65</h3>
+
+                <p>Total de Productos</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-bag"></i>
+              </div>
+              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>    
+        </div>
+      </div>
 
       <!-- Default box -->
       <div class="card">
-        <div class="card-header">
-          <h3 class="card-title">Dashboard</h3>
-
-          <div class="card-tools">
-            <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-              <i class="fas fa-minus"></i></button>
-            <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
-              <i class="fas fa-times"></i></button>
-          </div>
-        </div>
         <div class="card-body">
-
           <?php
- 
-
-
-                // $user_os        =   ControladorGlobales::ctrGetOS();
-                // $user_browser   =   ControladorGlobales::ctrGetBrowser();
-                // $device_details =   "<strong>Browser: </strong>" . $user_browser . 
-                //                     "<br /><strong>Operating System: </strong>" . $user_os;
-                // print_r($device_details);
-
-                // $item1 = "usuario";
-                // $valor1 = $_SESSION["usuario"];
-                // $item2 = "rol";
-                // $valor2 = $_SESSION["rol"];
-                
-                //-----------Generar contraseña aleatoria----------------------
-                // $str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890#$.@";
-                // $contraseñaAleatoria
-                // $modulos = ControladorUsuarios::ctrMostrarUsuarioModulo($item1, $item2, $valor1, $valor2);
-
-                //   // echo "<pre>";
-                //   //   var_dump($modulos);
-                //   // echo "</pre>";
-
-
-                // $grupo_modulo = array();
-                // $permisos_objetos = array();
-                // foreach($modulos as $modulo) {
-                //   $modulo_padre = $modulo['objeto'];
-                //   $icono_objeto = $modulo['icono'];
-                //   $link_objeto = $modulo['link_objeto'];
-
-                //   $permisos = array(
-                //     'agregar' => $modulo['agregar'],
-                //     'eliminar' => $modulo['eliminar'],
-                //     'actualizar' => $modulo['actualizar'],
-                //     'consulta' => $modulo['consulta']
-                //   );
-
-                //   // $sub_modulos = array(
-                //   //   'sub_modulo' => $modulo['sub_modulo'],
-                //   //   'link_sub_modulo' => $modulo['link_sub_modulo']
-                //   // );
-                  
-                //   $grupo_modulo[$link_objeto][$icono_objeto][] = $modulo_padre;
-                //   $permisos_objetos[$modulo_padre] = $permisos;
-         
-                // }
-
-                //   echo "<pre>";
-                //     var_dump($permisos_objetos);
-                //   echo "</pre>";
-
-                //   $_SESSION['perm'] = $permisos_objetos;
-
-                  // foreach ($permisos_objetos as $key => $permisos) {
-                  //   // $key = array();
-                  //   $arr = array($key => $permisos);
-                  //   echo "<pre>";
-                  //     var_dump($arr);
-                  //   echo "</pre>";
-
-
-                  //   // foreach ($permisos as $llave => $permiso) {
-                  //   //   // echo $llave;
-
-                  //   //   array_push($key, $llave);
-                  //   //   var_dump($key);
-                  //   // }
-                  // }
-
-                
-
-                //** ALERTA POR FECHA DE VENCIMIENTO */
-                $tabla = "tbl_usuarios";
-                $item = "id_usuario";
-                $valor = $_SESSION["id_usuario"];
-
-                $usuario = ControladorUsuarios::ctrMostrarUsuarios($tabla, $item, $valor);
-
-                $fechaUsuario = $usuario['fecha_vencimiento'];
-                $fechaHoy = date('Y-m-d');
-                $date1 = new DateTime($fechaHoy);
-                $date2 = new DateTime($fechaUsuario);
-                $diff = $date1->diff($date2);
-
-                if($diff->days <= 7){
-
-                  $mensaje = "Tu usuario vencera en $diff->days dias! Cambia tu contraseña para resetear la fecha de vencimiento.";
-                  $icono = "info";
-                //   $modulo = "dashboard";
-                  $alerta = ControladorGlobales::ctrAlertas($mensaje, $icono);
-                  
-                }
-                    
-        // $item = "num_documento";
-        // $valor = "3242234234";
-        
-        // $respuesta = ControladorPersonas::ctrMostrarDocumento($item, $valor);
-        // var_dump($respuesta);
+            // $user_os        =   ControladorGlobales::ctrGetOS();
+            // $user_browser   =   ControladorGlobales::ctrGetBrowser();
+            // $device_details =   "<strong>Browser: </strong>" . $user_browser . 
+            //                     "<br /><strong>Operating System: </strong>" . $user_os;
+            // print_r($device_details);
             
           ?>
-
         </div>
         
       </div>

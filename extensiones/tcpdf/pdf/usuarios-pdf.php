@@ -121,7 +121,7 @@ $usuarios = ControladorUsuarios::ctrMostrarSoloUsuarios($tabla, $item, $valor);
 // var_dump($usuarios);
 
 $i = 1; //Contador
-$max = 1; //Maximo de registros a mostrar en una pagina
+$max = 2; //Maximo de registros a mostrar en una pagina
 
 foreach ($usuarios as $key => $value) {
 
@@ -138,6 +138,7 @@ foreach ($usuarios as $key => $value) {
         $pdf->Cell(40, 5, 'Rol', 1, 0, 'C', 1);
         $pdf->Cell(30, 5, 'Estado', 1, 0, 'C', 1);
     }
+    // $pdf->Cell(15, 5, ''.$i.'', 1, 0, 'C');
 
     $pdf->Ln(8);
     $pdf->SetFont('times', '', 12);

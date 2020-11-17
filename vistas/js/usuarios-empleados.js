@@ -19,14 +19,16 @@ $('.nuevoUsuario').keyup(function (){
             // console.log(respuesta);
 
             if(respuesta){
-                $('.nuevoUsuario').after('<div class="alert alert-warning mt-2">Usuario ya existente, ingrese uno diferente.</div>');
-                setTimeout(function () {
-                    $('.alert').remove();
-                }, 3000)
+                $('.final').before('<div class="alert alert-danger fade show mt-2" role="alert">Usuario ya existente, ingrese uno diferente.</div>');
+                // setTimeout(function () {
+                    // $('.alert').remove();
+                // }, 3000)
                 
                 //E inmeditamente Limpiamos el input
-                $('.nuevoUsuario').val("");
-                $('.nuevoUsuario').focus();
+                // $('.nuevoUsuario').val("");
+                // $('.nuevoUsuario').focus();
+            } else {
+                $('.alert').remove();
             }
         }
 
@@ -116,7 +118,9 @@ $(document).on('click', '.btnEditarUsuario', function () {
             $('#fotoActual').val(respuesta['foto']);
             if(respuesta['foto'] != ""){
                 $('.previsualizar').attr('src', respuesta['foto']);
-            } 
+            } else {
+                $('.previsualizar').attr('src', 'vistas/img/usuarios/default/default2.jpg');
+            }
         }
 
     });
@@ -194,4 +198,131 @@ $(document).on('click', '.btnEliminarUsuario', function () {
 // --------------------------------------*/ 
 $(document).on('click', '.btnExportarUsuarios', function () {
     window.open("extensiones/tcpdf/pdf/usuarios-pdf.php", "_blank");
+});
+
+//**------------ PERFIL ------------ **//
+//** ------------------------------------*/
+//        AJUSTES GENERALES USUARIO
+// --------------------------------------*/
+$(document).on('click', '.ajuste-cuenta', function (e) {
+    e.preventDefault();
+    $.ajax({
+        url: "vistas/modulos/ajustes-cuenta.php",
+        success: function (response) {
+            var clone = $('.datos-generales').clone();
+            $('.datos-generales').remove();
+            if(!$('.ajustes-usuario').hasClass('contenedor-datos')){
+                $('.ajustes-usuario').addClass('contenedor-datos');
+                $('.ajustes-usuario').append(response);
+            }
+            
+            $('.salirPerfil').click(function (e) { 
+                e.preventDefault();
+                $('.ajustes-cuenta').remove();
+                $('.ajustes-usuario').removeClass('contenedor-datos');
+                $('.ajustes-usuario').append(clone);
+            });
+        }
+    });
+});
+
+//** ------------------------------------*/
+//        AJUSTES PASSWORD USUARIO
+// --------------------------------------*/
+$(document).on('click', '.ajuste-password', function (e) {
+    e.preventDefault();
+    $.ajax({
+        url: "vistas/modulos/ajustes-password.php",
+        success: function (response) {
+            var clone = $('.datos-generales').clone();
+            $('.datos-generales').remove();
+            if(!$('.ajustes-usuario').hasClass('contenedor-datos')){
+                $('.ajustes-usuario').addClass('contenedor-datos');
+                $('.ajustes-usuario').append(response);
+            }
+            
+            $('.salirPerfil').click(function (e) { 
+                e.preventDefault();
+                $('.ajustes-password').remove();
+                $('.ajustes-usuario').removeClass('contenedor-datos');
+                $('.ajustes-usuario').append(clone);
+            });
+        }
+    });
+});
+
+//** ------------------------------------*/
+//        AJUSTES PASSWORD USUARIO
+// --------------------------------------*/
+$(document).on('click', '.ajuste-preguntas', function (e) {
+    e.preventDefault();
+    $.ajax({
+        url: "vistas/modulos/ajustes-preguntas.php",
+        success: function (response) {
+            var clone = $('.datos-generales').clone();
+            $('.datos-generales').remove();
+            if(!$('.ajustes-usuario').hasClass('contenedor-datos')){
+                $('.ajustes-usuario').addClass('contenedor-datos');
+                $('.ajustes-usuario').append(response);
+            }
+            
+            $('.salirPerfil').click(function (e) { 
+                e.preventDefault();
+                $('.ajustes-preguntas').remove();
+                $('.ajustes-usuario').removeClass('contenedor-datos');
+                $('.ajustes-usuario').append(clone);
+            });
+        }
+    });
+});
+
+//** ------------------------------------*/
+//        AJUSTES GENERALES USUARIO
+// --------------------------------------*/
+$(document).on('click', '.ajuste-cuenta', function (e) {
+    var idPersonaUsuario = $(this).attr('idUsuario');
+    // console.log(idPersonaUsuario);
+
+    var datos = new FormData();
+    datos.append('idPersonaUsuario', idPersonaUsuario);
+
+    $.ajax({
+
+        url:"ajax/usuarios.ajax.php",
+        method: "POST",
+        data: datos,
+        cache: false,
+        contentType: false,
+        processData: false,  
+        dataType: "json",
+        success: function(respuesta) {
+            console.log(respuesta);
+
+            return;
+            
+            $('.idPersona').val(respuesta['id_personas']);
+            $('#editarTipoDocumento').html(respuesta['tipo_documento']);
+            $('#editarTipoDocumento').val(respuesta['id_documento']);
+            $('input[name=editarNumeroDocumento]').val(respuesta['num_documento']);
+            $('input[name=editarNombre]').val(respuesta['nombre']);
+            $('input[name=editarApellido]').val(respuesta['apellidos']);
+            $('input[name=editarEmail]').val(respuesta['correo']);
+            $('input[name=editarTelefono]').val(respuesta['telefono']);
+            $('input[name=editarFechaNacimiento]').val(respuesta['fecha_nacimiento']);
+            $('input[name=editarDireccion]').val(respuesta['direccion']);
+            $('#editarSexo').html(respuesta['sexo']);
+            $('#editarSexo').val(respuesta['sexo']); 
+            $('input[name=editarUsuario]').val(respuesta['usuario']);
+            $('#editarRol').html(respuesta['rol']);
+            $('#editarRol').val(respuesta['id_rol']);
+            $('#passwordActual').val(respuesta['password']);
+            $('#fotoActual').val(respuesta['foto']);
+            if(respuesta['foto'] != ""){
+                $('.previsualizar').attr('src', respuesta['foto']);
+            } else {
+                $('.previsualizar').attr('src', 'vistas/img/usuarios/default/default2.jpg');
+            }
+        }
+
+    });
 });

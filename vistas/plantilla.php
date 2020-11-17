@@ -87,7 +87,7 @@
             $_GET["ruta"] == "usuarios" ||
             $_GET["ruta"] == "bitacora" ||
             $_GET["ruta"] == "categorias" ||
-            $_GET["ruta"] == "empleados" ||
+            // $_GET["ruta"] == "ajustes-cuenta" ||
             $_GET["ruta"] == "productos" ||
             $_GET["ruta"] == "clientes" ||
             $_GET["ruta"] == "administrar-venta" ||

@@ -40,7 +40,7 @@
 
             <div class="card-body">
             
-              <table class="table table-striped table-bordered tablas text-center">
+              <table class="table table-hover tablas text-center">
                 <thead>
                   <tr>
                     <th scope="col">#</th>
@@ -73,7 +73,7 @@
                           if($value["foto"] != ""){
                             echo '<td><img src="'.$value["foto"].'" class="img-thumbnail" width="40px"></td>';
                           } else {
-                            echo '<td><img src="vistas/img/usuarios/default/anonymous.png" class="img-thumbnail" width="40px"></td>';
+                            echo '<td><img src="vistas/img/usuarios/default/default2.jpg" class="img-thumbnail" width="40px"></td>';
                           }
 
                      echo '<td>'.$value["rol"].'</td>';
@@ -160,11 +160,11 @@
                     </div>
                     <div class="form-group col-md-3">
                       <label for="nombre">Nombre</label>
-                      <input type="text" class="form-control nombre" name="nuevoNombre" placeholder="Ingrese Nombre" required>
+                      <input type="text" class="form-control nombre mayus" name="nuevoNombre" placeholder="Ingrese Nombre" required>
                     </div>
                     <div class="form-group col-md-3">
                       <label for="apellido">Apellido</label>
-                      <input type="text" class="form-control apellidos" name="nuevoApellido" placeholder="Ingrese Apellidos" required>
+                      <input type="text" class="form-control apellidos mayus" name="nuevoApellido" placeholder="Ingrese Apellidos" required>
                     </div>
                   </div>
       
@@ -186,7 +186,7 @@
                   <div class="form-row">
                     <div class="form-group col-md-9">
                       <label for="inputAddress">Dirección</label>
-                      <input type="text" class="form-control" id="inputAddress" name="nuevaDireccion" placeholder="Col. Alameda, calle #2..." required>
+                      <input type="text" class="form-control mayus" id="inputAddress" name="nuevaDireccion" placeholder="Col. Alameda, calle #2..." required>
                     </div>
                   
                     <div class="form-group col-md-3">
@@ -207,7 +207,7 @@
                   <div class="form-row">
                     <div class="form-group col-md-3">
                       <label for="">Usuario</label>
-                      <input type="text" class="form-control nuevoUsuario" onKeyUp="this.value=this.value.toUpperCase();" name="nuevoUsuario" placeholder="Ingrese Usuario">
+                      <input type="text" class="form-control mayus nuevoUsuario" name="nuevoUsuario" placeholder="Ingrese Usuario">
                     </div>
                     <div class="form-group col-md-3">
                       <label>Rol</label>
@@ -244,7 +244,7 @@
                     <div class="form-group col-md-6">
                       <label for="exampleInputFile">Foto</label>
                       <div class="input-group">
-                        <img class="img-thumbnail previsualizar mr-2" src="vistas/img/usuarios/default/anonymous.png" alt="imagen-del-usuario" width="100px">
+                        <img class="img-thumbnail previsualizar mr-2" src="vistas/img/usuarios/default/default2.jpg" alt="imagen-del-usuario" width="100px">
                         <div class="custom-file">
                           <input type="file" class="custom-file-input nuevaFoto" id="exampleInputFile" name="nuevaFoto">
                           <label class="custom-file-label" for="exampleInputFile">Escoger foto</label>
@@ -275,7 +275,7 @@
                 </div>
             
                 <!-- <div class="modal-footer"> -->
-                <div class="form-group mt-4 float-right">
+                <div class="form-group final mt-4 float-right">
                   <button type="" class="btn btn-primary">Guardar</button>
                   <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
                 </div>
@@ -351,11 +351,11 @@
                     </div>
                     <div class="form-group col-md-3">
                       <label for="nombre">Nombre</label>
-                      <input type="text" class="form-control nombre" name="editarNombre" value="" required>
+                      <input type="text" class="form-control nombre mayus" name="editarNombre" value="" required>
                     </div>
                     <div class="form-group col-md-3">
                       <label for="apellido">Apellido</label>
-                      <input type="text" class="form-control apellidos" name="editarApellido" value="" required>
+                      <input type="text" class="form-control apellidos mayus" name="editarApellido" value="" required>
                     </div>
                   </div>
       
@@ -377,7 +377,7 @@
                   <div class="form-row">
                     <div class="form-group col-md-9">
                       <label for="direccion">Dirección</label>
-                      <input type="text" class="form-control" id="direccion" name="editarDireccion" value="" required>
+                      <input type="text" class="form-control mayus" id="direccion" name="editarDireccion" value="" required>
                     </div>
                   
                     <div class="form-group col-md-3">
@@ -399,7 +399,7 @@
                   <div class="form-row">
                     <div class="form-group col-md-3">
                       <label for="">Usuario</label>
-                      <input type="text" class="form-control nuevoUsuario" onKeyUp="this.value=this.value.toUpperCase();" name="editarUsuario" value="" readonly>
+                      <input type="text" class="form-control nuevoUsuario" name="editarUsuario" value="" readonly>
                     </div>
                     <div class="form-group col-md-3">
                       <label>Rol</label>
@@ -437,7 +437,7 @@
                     <div class="form-group col-md-6">
                       <label for="inputFoto">Foto</label>
                       <div class="input-group">
-                        <img class="img-thumbnail previsualizar mr-2" src="vistas/img/usuarios/default/anonymous.png" alt="imagen-del-usuario" width="100px">
+                        <img class="img-thumbnail previsualizar mr-2" src="" alt="imagen-del-usuario" width="100px">
                         <div class="custom-file">
                           <input type="file" class="custom-file-input nuevaFoto" id="inputFoto" name="editarFoto">
                           <label class="custom-file-label" for="inputFoto">Escoger foto</label>

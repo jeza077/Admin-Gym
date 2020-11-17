@@ -4,7 +4,7 @@
     --darkFirst: #212529;
     --darkSecond: #23211e;
     --orangeFirst: #FF5300;
-    --orangeSecond: #FF5F35;
+    --orangeSecond: #292423;
     --orangeThird: #ff8303;
     --grisOscuro: #495057;
 }
@@ -27,6 +27,8 @@ body::-webkit-scrollbar-thumb{
 .text-orange {
     color: var(--orangeThird);
 }
+
+/* BOTON NARANJA */
 .btn-orange {
     background-color: var(--orangeThird);
     color: #fff;
@@ -38,6 +40,19 @@ body::-webkit-scrollbar-thumb{
     background: var(--btnPrimarioHover);
     color: #fff;
 }
+.btn-outline-orange {
+    color: var(--orangeThird);;
+    border-color: var(--orangeThird);;
+}
+.btn-outline-orange:hover {
+color: #ffffff;
+background-color: var(--orangeThird);;
+border-color: var(--orangeThird);;
+}
+/* .btn-outline-orange:focus, .btn-outline-primary.focus {
+box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.5);
+} */
+
 .login-page {
     /* background: rgb(255, 158, 30); */
     /* background: rgb(255 103 30 / 38%); */
@@ -83,16 +98,74 @@ body.login-page .login-box.recu-password .card{
     border-color: var(--orangeThird);
     outline: 0;
 }
+/* .titulo{
+    font-weight: 300;
+    font-size: 2rem;
+} */
 
 
-/* NOTIFICACIONES Y OTROS */
+/** COLORES **/
+.bg-orange,
+.bg-orange>a {
+    color: #fff!important;
+}
+.bg-red {
+    background-color: #ea162b!important;
+}
+.bg-red,
+.bg-red>a {
+    color: #fff!important;
+}
+
+/* ALERTAS Y OTROS */
 .alert {
     transition: 0.5s ease;
 }
+.alert-success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+}
+.alert-secondary {
+    color: #383d41;
+    background-color: #e2e3e5;
+    border-color: #d6d8db;
+}
+.alert-info {
+    color: #0c5460;
+    background-color: #d1ecf1;
+    border-color: #bee5eb;
+}
+.alert-warning {
+    color: #856404;
+    background-color: #fff3cd;
+    border-color: #ffeeba;
+}
+.alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}
+.alert-light {
+    color: #818182;
+    background-color: #fefefe;
+    border-color: #fdfdfe;
+}
+.alert-dark {
+    color: #1b1e21;
+    background-color: #d6d8d9;
+    border-color: #c6c8ca;
+}
+
 .badge-orange{
     background-color: var(--orangeThird);
     color: #fff;
 }
+.small-box.bg-gray-dark .icon {
+    color: rgba(0,0,0,.4);
+    z-index: 0;
+}
+
 
 /*** PRIMER INGRESO ***/
 body.primer-ingreso {
@@ -297,6 +370,44 @@ body.primer-ingreso.pregunta-dos.pregunta-tres.password-primera-vez .contenedor-
 }
 
 
+/** PERFIL */
+.ajustes {
+    background: #fff;
+    padding: 18px 25px;
+    border-radius: 5px;
+    /* box-shadow: 6px 6px 18px 0px #eee; */
+    box-shadow: 0 0 1px rgba(0,0,0,.125), 0 1px 3px rgba(0,0,0,.2);
+    margin: 0 18px 0.75rem 0;
+    cursor: pointer;
+    border: none;
+    transition: 0.3s;
+}
+.ajustes:hover {
+    border: 1px solid var(--orangeThird)!important;
+    transform: scale(1.06)!important;
+}
+/* .ajustes-usuario.contenedor-datos .ajuste-cuenta {
+    transform: scale(1.1)!important;
+} */
+.ajustes h3 {
+    margin: 0;
+    font-weight: 600;
+}
+.ajustes p {
+    margin: 0;
+    font-size: 0.9em;
+    color: #818182;
+}
+.user h3 {
+    margin: 20px 0 0;
+    padding-left: 5px;
+    font-weight: 600;
+}
+.user p {
+    padding-left: 5px;
+}
+
+
 /** SLIDE DE, LOGIN, VERIFICAR EMAIL, PREGUNTAS, CAMBIAR CONTRASEÑA */
 .login-page .login-box{
     position: relative;
@@ -342,6 +453,13 @@ i.show-pass {
     position: absolute;
     top: 135px;
     right: 44px;
+    z-index: 1000;
+}
+i.show-pass-registro {
+    cursor: pointer;
+    position: absolute;
+    top: 44px;
+    right: 16px;
     z-index: 1000;
 }
 i.show-nueva-pass,
@@ -456,7 +574,7 @@ i.show-confir-pass{
 .login-box.registro,
 .login-box.registro .card{
     width: 800px;
-    height: 520px;
+    height: 530px;
 }
 .login-card-body.registrar{
     padding-top: 0;
@@ -581,9 +699,15 @@ i.show-confir-pass{
 }
 
 
-/** VISTA PREVIA FOTO USUARIO  */
+/** PARRAFO AYUDA VISTA PREVIA FOTO USUARIO  */
 .p-foto{
     position: absolute;
     top: 5rem;
     left: 7rem;
 }
+/** PARRAFO AYUDA GENERICO  */
+/* .p-help {
+    position: absolute;
+    top: 4rem;
+    left: 7rem;   
+} */

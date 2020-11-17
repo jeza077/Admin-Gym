@@ -416,6 +416,7 @@ class ControladorUsuarios{
 			   preg_match('/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%.])\S{8,16}$/', $datos["password"])){
 
 				$emailUsuario = $datos["email"];
+				// $contraSinEncriptar = ControladorUsuarios::password_seguro_random();
 				$contraSinEncriptar = $datos["password"];
 				$nombre = $datos["nombre"];
 				$tipoPersona = $datos["tipo_persona"];
@@ -1381,19 +1382,6 @@ class ControladorUsuarios{
 		}
 		return $randomString;
 
-        // $chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz0123456789";
-        // srand((double)microtime()*1000000);
-        // $i = 0;
-        // $pass = '' ;
-    
-        // while ($i <= 7) {
-        //     $num = rand() % 33;
-        //     $tmp = substr($chars, $num, 1);
-        //     $pass = $pass . $tmp;
-        //     $i++;
-        // }
-    
-        // return time().$pass;
 	}
 	
 	
@@ -1405,6 +1393,42 @@ class ControladorUsuarios{
 		$respuesta = ModeloUsuarios::mdlMostrarParametros($tabla, $item, $valor);
 
 		return $respuesta;
-    }
+	}
+	
+
+    /*=============================================
+			GENERAR CONTRASEÑAS ALEATORIAS
+    =============================================*/
+	static public function password_seguro_random(){
+ 
+		//palabras y caracteres que se utilizarán para crear la contraseña
+		$words = 'azote,velocirap,mantis,friend,srcodigo,fuente,kobold,troll,rings,murloc,testement,homaho,jaloja,helohe,haheg';
+		$words2 = '!,@,#,$,%,.';
+		$words3 = 'X,Y,Z,H,H,M,N,Q,O,P';
+		
+		// partimos las cadenas por las comas:
+		$array_words = explode( ',', $words);
+		$array_words2 = explode( ',', $words2);
+		$array_words3 = explode( ',', $words3);
+		
+		// Añade una palabra de cada grupo
+		$pwd = '';
+		$pwd .= $array_words[mt_rand(0, sizeof( $array_words )-1)];
+		$pwd .= $array_words2[mt_rand(0, sizeof( $array_words2 )-1)];
+		$pwd .= $array_words3[mt_rand(0, sizeof( $array_words3 )-1)];
+		
+		// añade un número al principio si el password
+		$num = mt_rand(1, 99);
+		$pwd = $num . $pwd;
+		
+		//para mayor seguridad modifico un caracter aleatorio de la cadena por un número
+		$num = mt_rand(1, 99);
+		$pos_random = mt_rand(0, strlen($pwd) - 1 );
+		$pwd[$pos_random] = $num;
+	
+		return $pwd;
+	 
+	}
+
 }
 

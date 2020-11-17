@@ -52,7 +52,7 @@
                                 
                                 <div class="form-group">
                                     <label class="" for="">Respuesta <?php echo $i?></label>
-                                    <input type="text" class="form-control respuesta<?php echo $i?>" onKeyUp="this.value=this.value.toLowerCase();" name="respuestaPregunta[]" placeholder="Ingrese respuesta">
+                                    <input type="text" class="form-control mayus respuesta<?php echo $i?>" name="respuestaPregunta[]" placeholder="Ingrese respuesta">
                                 </div>
 
                                 <div class="form-group mt-4" id="pregunta<?php echo $i?>">

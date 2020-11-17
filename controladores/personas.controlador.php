@@ -66,39 +66,24 @@ class ControladorPersonas{
                             }
     
                             $idPersona = end($totalId);
-                          
-                            //-----------Generar contraseña aleatoria----------------------
-                            // $str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890#$.@";
-                            // $contraseñaAleatoria = "";
-                            // //Longitud
-                            // for($i=0;$i<$_POST[10];$i++) 
-                            // {
-                            // //obtenemos un caracter aleatorio escogido de la cadena de caracteres
-                            // $contraseñaAleatoria .= substr($str,rand(0,62),1);
-                            // }
-                            // echo 'Password generado: '.$contraseñaAleatoria;
-                            //-------------------------------------------------------------
-                            
 
                             //------------------------Roles--------------------------------------
                             $tabla = "tbl_roles";
-                            $item = null;
-                            $valor = null;
+                            $item = "rol";
+                            $valor = "Default";
 
                             $roles  = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
-                            var_dump($roles);
+                            // var_dump($roles);
 
-                            $idRol = $roles[1]["id_rol"];
+                            $idRol = $roles["id_rol"];
 
                             // //-------------------------------------------------------------------
-
-                      
-                     
+           
                             $datos = array("id_persona" => $idPersona,
                                         "nombre" => $_POST["nuevoNombre"],
                                         "usuario" => $_POST["nuevoUsuario"],
                                         "tipo_persona" => $tipoPersona,
-                                        "password" => "Hola456.",
+                                        "password" => $_POST["nuevoPassword"],
                                         "rol" => $idRol,
                                         "foto" => "vistas/img/usuarios/default/anonymous.png",
                                         "email" => $_POST["nuevoEmail"]);
@@ -310,83 +295,98 @@ class ControladorPersonas{
     /*=============================================
 				EDITAR PERSONAS
     =============================================*/ 
-    static public function ctrEditarPersona($tipoPersona, $pantalla){
+    static public function ctrEditarPersona($ajustes, $tipoPersona, $pantalla){
 
         if(isset($_POST["editarNombre"])){
 
-            if(preg_match('/^[a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarNombre"]) && 
-            preg_match('/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.([a-zA-Z]{2,4})+$/', $_POST["editarEmail"])){
+            if($ajustes == null) {
+                if(preg_match('/^[a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarNombre"]) && 
+                preg_match('/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.([a-zA-Z]{2,4})+$/', $_POST["editarEmail"])){
 
-                $tabla = "tbl_personas";
-                
-                if($tipoPersona == 'usuarios') {                    
-
-                    // echo "<pre>";
-                    // var_dump($_POST);
-                    // echo "</pre>";
-                    // // return;
-                    // var_dump($_FILES);
-                    // echo $tipoPersona;
-                    // return;
-
-                    $datos = array("nombre" => $_POST["editarNombre"],
-                                "apellido" => $_POST["editarApellido"],
-                                "id_documento" => $_POST["editarTipoDocumento"],
-                                "numero_documento" => $_POST["editarNumeroDocumento"],
-                                "tipo_persona" => $tipoPersona,
-                                "fecha_nacimiento" => $_POST["editarFechaNacimiento"],
-                                "sexo" => $_POST["editarSexo"],
-                                "telefono" => $_POST["editarTelefono"],
-                                "direccion" => $_POST["editarDireccion"],
-                                "email" => $_POST["editarEmail"],
-                                "id_persona" => $_POST["idPersona"]);
-
-                    $respuestaPersona = ModeloPersonas::mdlEditarPersona($tabla, $datos);
+                    $tabla = "tbl_personas";
                     
-                    if($respuestaPersona == true){
-                        // echo '<script>
-                        //         Swal.fire({
-                        //             title: "Editada correctamente!",
-                        //             icon: "success",
-                        //             heightAuto: false
-                        //         }).then((result)=>{
-                        //             if(result.value){
-                        //                 window.location = "'.$pantalla.'";
-                        //             }
-                        //         });                                      
-                        //     </script>';
-                        
-                        //     return;
-                        
-                        $datos = array("id_persona" => $_POST["idPersona"],
-                                    "nombre" => $_POST["editarNombre"],
-                                    "usuario" => $_POST["editarUsuario"],
-                                    "password_nueva" => $_POST["editarPassword"],
-                                    "password_actual" => $_POST["passwordActual"],
-                                    "rol" => $_POST["editarRol"],
-                                    "foto_nueva" => $_FILES["editarFoto"],
-                                    "foto_actual" => $_POST["fotoActual"],
-                                    "email" => $_POST["editarEmail"]);
+                    if($tipoPersona == 'usuarios') {                    
 
-                        $editarUsuario = ControladorUsuarios::ctrEditarUsuario($datos);
+                        // echo "<pre>";
+                        // var_dump($_POST);
+                        // echo "</pre>";
+                        // // return;
+                        // var_dump($_FILES);
+                        // echo $tipoPersona;
+                        // return;
 
-                        if($editarUsuario == true){
-                            // return;
-                            echo '<script>
-                                    Swal.fire({
-                                        title: "Usuario editado correctamente!",
-                                        icon: "success",
-                                        heightAuto: false
-                                    }).then((result)=>{
-                                        if(result.value){
-                                            window.location = "'.$pantalla.'";
-                                        }
-                                    });                                      
-                                </script>';
+                        $datos = array("nombre" => $_POST["editarNombre"],
+                                    "apellido" => $_POST["editarApellido"],
+                                    "id_documento" => $_POST["editarTipoDocumento"],
+                                    "numero_documento" => $_POST["editarNumeroDocumento"],
+                                    "tipo_persona" => $tipoPersona,
+                                    "fecha_nacimiento" => $_POST["editarFechaNacimiento"],
+                                    "sexo" => $_POST["editarSexo"],
+                                    "telefono" => $_POST["editarTelefono"],
+                                    "direccion" => $_POST["editarDireccion"],
+                                    "email" => $_POST["editarEmail"],
+                                    "id_persona" => $_POST["idPersona"]);
+
+                        $respuestaPersona = ModeloPersonas::mdlEditarPersona($tabla, $datos);
+                        
+                        if($respuestaPersona == true){
+                            // echo '<script>
+                            //         Swal.fire({
+                            //             title: "Editada correctamente!",
+                            //             icon: "success",
+                            //             heightAuto: false
+                            //         }).then((result)=>{
+                            //             if(result.value){
+                            //                 window.location = "'.$pantalla.'";
+                            //             }
+                            //         });                                      
+                            //     </script>';
+                            
+                            //     return;
+                            
+                            $datos = array("id_persona" => $_POST["idPersona"],
+                                        "nombre" => $_POST["editarNombre"],
+                                        "usuario" => $_POST["editarUsuario"],
+                                        "password_nueva" => $_POST["editarPassword"],
+                                        "password_actual" => $_POST["passwordActual"],
+                                        "rol" => $_POST["editarRol"],
+                                        "foto_nueva" => $_FILES["editarFoto"],
+                                        "foto_actual" => $_POST["fotoActual"],
+                                        "email" => $_POST["editarEmail"]);
+
+                            $editarUsuario = ControladorUsuarios::ctrEditarUsuario($datos);
+
+                            if($editarUsuario == true){
+                                // return;
+                                echo '<script>
+                                        Swal.fire({
+                                            title: "Usuario editado correctamente!",
+                                            icon: "success",
+                                            heightAuto: false
+                                        }).then((result)=>{
+                                            if(result.value){
+                                                window.location = "'.$pantalla.'";
+                                            }
+                                        });                                      
+                                    </script>';
+                            } else {
+                                echo '<script>
+                                        Swal.fire({
+                                            title: "Error al guardar.",
+                                            icon: "error",
+                                            heightAuto: false
+                                        }).then((result)=>{
+                                            if(result.value){
+                                                window.location = "'.$pantalla.'";
+                                            }
+                                        });                                      
+                                    </script>';
+                            }
+
                         } else {
                             echo '<script>
                                     Swal.fire({
-                                        title: "Error al guardar.",
+                                        title: "Error al editar",
                                         icon: "error",
                                         heightAuto: false
                                     }).then((result)=>{
@@ -395,60 +395,92 @@ class ControladorPersonas{
                                         }
                                     });                                      
                                 </script>';
+                            
+                                return;
                         }
 
                     } else {
-                        echo '<script>
-                                Swal.fire({
-                                    title: "Error al editar",
-                                    icon: "error",
-                                    heightAuto: false
-                                }).then((result)=>{
-                                    if(result.value){
-                                        window.location = "'.$pantalla.'";
-                                    }
-                                });                                      
-                            </script>';
-                        
-                            return;
+
+                            $datos = array("id_persona" => $idPersona);
+
+                            $crearCliente = ControladorClientes::ctrCrearCliente($datos);
+
+                            if($crearCliente == true){
+                                
+                                echo '<script>
+                                        Swal.fire({
+                                            title: "Cliente guardado correctamente!",
+                                            icon: "success",
+                                            heightAuto: false,
+                                            allowOutsideClick: false
+                                        }).then((result)=>{
+                                            if(result.value){
+                                                window.location = "'.$pantalla.'";
+                                            }
+                                        });                                              
+                                    </script>';
+                            }
                     }
+                            
 
                 } else {
-
-                        $datos = array("id_persona" => $idPersona);
-
-                        $crearCliente = ControladorClientes::ctrCrearCliente($datos);
-
-                        if($crearCliente == true){
-                            
-                            echo '<script>
-                                    Swal.fire({
-                                        title: "Cliente guardado correctamente!",
-                                        icon: "success",
-                                        heightAuto: false,
-                                        allowOutsideClick: false
-                                    }).then((result)=>{
-                                        if(result.value){
-                                            window.location = "'.$pantalla.'";
-                                        }
-                                    });                                              
-                                </script>';
-                        }
+                    
+                    echo '<script>
+                        Swal.fire({
+                            title: "Llene los campos correctamente.",
+                            icon: "error",
+                            toast: true,
+                            position: "top",
+                            showConfirmButton: false,
+                            timer: 3000,
+                        });					
+                    </script>';
                 }
-                        
 
             } else {
-                
-                echo '<script>
-                    Swal.fire({
-                        title: "Llene los campos correctamente.",
-                        icon: "error",
-                        toast: true,
-                        position: "top",
-                        showConfirmButton: false,
-                        timer: 3000,
-                    });					
-                </script>';
+                if(preg_match('/^[a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarNombre"]) && 
+                        preg_match('/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.([a-zA-Z]{2,4})+$/', $_POST["editarEmail"])){
+
+                            $tabla = "tbl_personas";
+                            
+                            if($tipoPersona == 'usuarios') {                    
+
+                                // echo "<pre>";
+                                // var_dump($_POST);
+                                // echo "</pre>";
+                                // // return;
+                                // var_dump($_FILES);
+                                // echo $tipoPersona;
+                                // return;
+
+                                $datos = array("nombre" => $_POST["editarNombre"],
+                                            "apellido" => $_POST["editarApellido"],
+                                            "id_documento" => $_POST["editarTipoDocumento"],
+                                            "numero_documento" => $_POST["editarNumeroDocumento"],
+                                            "tipo_persona" => $tipoPersona,
+                                            "fecha_nacimiento" => $_POST["editarFechaNacimiento"],
+                                            "sexo" => $_POST["editarSexo"],
+                                            "telefono" => $_POST["editarTelefono"],
+                                            "direccion" => $_POST["editarDireccion"],
+                                            "email" => $_POST["editarEmail"],
+                                            "id_persona" => $_POST["idPersona"]);
+
+                                $respuestaPersona = ModeloPersonas::mdlEditarPersona($tabla, $datos);
+                                if($respuestaPersona == true){
+                                    echo '<script>
+                                            Swal.fire({
+                                                title: "Datos guardados correctamente!",
+                                                icon: "success",
+                                                heightAuto: false
+                                            }).then((result)=>{
+                                                if(result.value){
+                                                    window.location = "'.$pantalla.'";
+                                                }
+                                            });                                      
+                                        </script>';
+                                }
+                           }
+                }
             }
         }
     }

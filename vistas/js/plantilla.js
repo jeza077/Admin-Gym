@@ -325,7 +325,7 @@ function alertas(modulo) {
 =============================================*/
 function sinNumeros(event) {
     var codigo = event.which || event.keyCode;
-    console.log(codigo);
+    // console.log(codigo);
     if(codigo >= 48 && codigo <= 57  || codigo >= 97  && codigo <= 105){
         event.preventDefault();
 
@@ -408,6 +408,17 @@ function validarDoc(selector) {
         });
     })
 }
+
+
+/*=============================================
+    FUNCION CONVERTIR A MAYUSCULAS
+=============================================*/
+$('.mayus').on('keyup', function () {
+    var valor = $(this);
+    // console.log(valor);
+    valor.val(valor.val().toUpperCase());
+});
+
 
 /*=============================================
     FUNCION VALIDAR DOCUMENTO
