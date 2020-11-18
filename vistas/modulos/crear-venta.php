@@ -29,7 +29,9 @@
                 </div>       
               
                 <div class="form-group">     
-                  <!-- entrada codigo factura vendedor -->   
+                  <!--=====================================
+                   ENTRADA DEL CÓDIGO
+                  ======================================-->  
                   <label for="cod_factura">Codigo de Factura</label>
                     <?php
                       $item= null;
@@ -57,12 +59,14 @@
 
                 <div class="form-row">
                   <div class="form-group col-md-9">
-                    <!-- Entrada de cliente-->
+                    <!--=====================================
+                    ENTRADA DEL CLIENTE
+                    ======================================--> 
+
                     <label for="cliente">Cliente</label>
                       
                     <select class="form-control" id="seleccionarCliente" name="seleccionarCliente" required>
                         <option value="">Seleccionar cliente</option>
-                        <!-- metodo para mostrar clientes se BORRA cuando descomento -->
                         <?php
                           $item= null;
                           $valor= null;
@@ -83,7 +87,9 @@
                     <span class="input-group-addon"><button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#modalAgregarCliente" data-dismiss="modal">Agregar cliente</button></span> 
                   </div>
                 </div>
-                
+                <!--=====================================
+                ENTRADA PARA AGREGAR PRODUCTO
+                ======================================--> 
                 <div class="form-row nuevoProducto">
 
                 </div>
@@ -91,16 +97,28 @@
                 <div class="form-row">
                   <div class="form-group-float-right col-md-4" style="padding-left:0px">
                     <label>Impuesto </label>
-                    <input type="number" min="1" class="form-control" id="" name="" readonly required> 
-                  </div>  
+                    <input type="number" class="form-control nuevoImpuestoVenta" name="nuevoImpuestoVenta"  id="nuevoImpuestoVenta"  placeholder="0"  required> 
+                    <!-- <span class="input-group-addon"><i class="fa fa-percent"></i></span> -->
+                  </div>
+                    
+                  <input type="hidden" name="nuevoPrecioImpuesto" id="nuevoPrecioImpuesto" required> 
+
+                  <input type="hidden" name="nuevoPrecioNeto" id="nuevoPrecioNeto" required> 
 
                   <div class="form-group-float-right col-md-4" style="padding-left:0px">
-                    <label for="total_producto">Total </label>
-                    <input type="number" min="1" class="form-control" id="" name="" readonly required> 
+                    <label for="total_producto"> Total </label>
+                    <input type="number" min="1" class="form-control input-lg" id="nuevoTotalVenta" name="nuevoTotalVenta" total="" placeholder="0.00" readonly required>
+
+                    <!-- <input type="hidden" name="totalVenta" id="totalVenta"> -->
+                    <!-- <input type="number" min="1" id="nuevoPrecioNeto" class="form-control" name="nuevoPrecioNeto" placeholder="0" readonly required>  -->
                   </div>  
+
                 </div>
 
               </div>
+              <!--=====================================
+                BOTÓN PARA AGREGAR PRODUCTO
+                ======================================-->
               <div class="card-footer">
                 <button type="submit" class="btn btn-primary pull-right btnAgregarProducto">Guardar venta</button>
               </div>  
@@ -123,6 +141,18 @@
                     <th scope="col">Acciones</th> 
                   </tr>
                 </thead>
+                <?php
+                // $item = "tipo_producto";
+                // $valor = "Productos";
+                // $tabla = "tbl_inventario";
+            
+                //       $productos = ControladorInventario::ctrMostrarInventario($tabla, $item, $valor);	
+                //       echo "<pre>";
+                //       var_dump($productos[1]["stock"]);
+                //       echo "</pre>";
+                //       return;
+
+                ?>
             </table>
           </div>
         </div>
