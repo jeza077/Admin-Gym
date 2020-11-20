@@ -944,7 +944,7 @@ class ControladorUsuarios{
 
 				// return $respuestaContraseñas;
 
-				if($respuestaContraseñas['contraseña'] == $encriptar){
+				if($respuestaContraseñas['password'] == $encriptar){
 
 					return false;
 
@@ -1128,6 +1128,139 @@ class ControladorUsuarios{
 	
 	}
 
+
+	/*=============================================
+	CAMBIAR CONTRASEÑA POR PREGUNTAS DE SEGURIDAD
+	=============================================*/	
+	static public function ctrCambiarContraseñaUsuario($idPersona){
+		$tabla1 = "tbl_personas";
+		$tabla2 = "tbl_usuarios";
+			
+		if(isset($_POST['passwordActual'])){
+			
+			$encriptar = crypt($_POST['passwordActual'], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
+
+			$item = 'id_personas';
+			$valor = $idPersona;
+			$respuestaContraseña = ModeloUsuarios::mdlMostrarUsuarios($tabla1, $tabla2, $item, $valor);
+
+			// echo '<pre>';
+			// var_dump($respuestaContraseña);
+			// echo '</pre>';
+			// return;
+
+			if($respuestaContraseña['password'] == $encriptar){
+
+				if(preg_match('/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%.])\S{8,16}$/', $_POST['editarPassword'])){
+					
+					$encriptar = crypt($_POST['editarPassword'], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
+							
+					$item = 'id_personas';
+					$valor = $idPersona;
+					$respuestaContraseñas = ModeloUsuarios::mdlMostrarUsuarios($tabla1, $tabla2, $item, $valor);
+		
+					// echo '<pre>';
+					// var_dump($respuestaContraseñas);
+					// echo '</pre>';
+					// return;
+					
+					if($respuestaContraseñas['password'] == $encriptar){
+
+						echo '<script>			
+								Swal.fire({
+									title: "Contraseña nueva no puede ser igual a la actual. Intente de nuevo.",
+									icon: "error",
+									showConfirmButton: true,
+									timer: 3000,
+								});
+							</script>';
+
+					} else if($respuestaContraseñas['usuario'] == $_POST['editarPassword']) {
+
+						echo '<script>			
+								Swal.fire({
+									title: "Contraseña nueva no puede ser igual al nombre de usuario. Intente de nuevo.",
+									icon: "error",
+									showConfirmButton: true,
+									timer: 3000,
+								});
+							</script>';
+						
+					} else {
+						
+						//** =============== CREAMOS LA FECHA VENCIMIENTO DEL USUARIO =================*/
+						$itemParam = 'parametro';
+						$valorParam = 'ADMIN_DIAS_VIGENCIA';
+						$parametros = ControladorUsuarios::ctrMostrarParametros($itemParam, $valorParam);
+
+						// echo '<pre>';
+						// var_dump($parametros);
+						// echo '</pre>';
+						// return;
+						$vigenciaUsuario = $parametros['valor'];
+
+						date_default_timezone_set("America/Tegucigalpa");
+						$fechaVencimiento = date("Y-m-d H:i:s", strtotime('+'.$vigenciaUsuario.' days'));
+
+						$item1 = "password";
+						$valor1 = $encriptar;
+
+						$item2 = 'estado';
+						$valor2 = 1;
+
+						$item3 = "fecha_vencimiento";
+						$valor3 = $fechaVencimiento;
+						
+						$item4 = 'id_persona';
+						$valor4 = $idPersona;
+		
+						$respuesta = ModeloUsuarios::mdlActualizarUsuario($tabla2, $item1, $valor1, $item2, $valor2, $item3, $valor3, $item4, $valor4);
+
+						// var_dump($respuesta);
+						// return;
+						if($respuesta == true){
+
+							echo '<script>
+                                    Swal.fire({
+                                        title: "Contraseña cambiada correctamente!",
+                                        icon: "success",
+                                        heightAuto: false
+                                    }).then((result)=>{
+                                        if(result.value){
+                                            window.location = "perfil";
+                                        }
+                                    });                                      
+                                </script>';
+						}
+					
+					}
+					
+				
+				} else {
+
+					echo '<script>			
+							Swal.fire({
+								title: "Llenar los campos correctamente. Intente de nuevo.",
+								icon: "error",
+								showConfirmButton: true,
+								timer: 3000,
+							});
+						</script>';
+				}
+
+			} else {
+				echo '<script>			
+						Swal.fire({
+							title: "Contraseña actual no coincide. Intente de nuevo.",
+							icon: "error",
+							showConfirmButton: true,
+							timer: 3000,
+						});
+					</script>';
+			}	
+		} 
+	
+	}
 
 	/*=============================================
 		ENVIAR CODIGO DE RECUPERAR CONTRASEÑA

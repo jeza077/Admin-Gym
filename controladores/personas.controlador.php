@@ -304,10 +304,7 @@ class ControladorPersonas{
         if(isset($_POST["editarNombre"])){
         
             if($ajustes != null) {
-                // echo "<pre>";
-                // var_dump($_POST);
-                // echo "</pre>";
-                // return;
+                
                 if(preg_match('/^[a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarNombre"]) && 
                 preg_match('/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.([a-zA-Z]{2,4})+$/', $_POST["editarEmail"])){
 

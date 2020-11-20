@@ -85,6 +85,10 @@
                 $pantalla = 'perfil';
                 $ingresarPersona = new ControladorPersonas();
                 $ingresarPersona->ctrEditarPersona($ajustes, $tipoPersona, $pantalla);
+            
+                $idPersona = $_SESSION['id_persona'];
+                $ingresarPersona = new ControladorUsuarios();
+                $ingresarPersona->ctrCambiarContraseñaUsuario($idPersona);
             ?>
 
           </div>

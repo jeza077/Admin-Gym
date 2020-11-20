@@ -85,14 +85,6 @@ require_once "../../modelos/usuarios.modelo.php";
                 <button type="button" class="btn btn-danger salirPerfil" data-dismiss="modal">Salir</button>
             </div>
         
-            <?php
-                $ajustes = 'prueba';
-                $tipoPersona = 'usuarios';
-                $pantalla = 'perfil';
-                $ingresarPersona = new ControladorPersonas();
-                $ingresarPersona->ctrEditarPersona($ajustes, $tipoPersona, $pantalla);
-            ?>
-
         </form>
     </div>
 </div>
