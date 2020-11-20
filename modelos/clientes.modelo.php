@@ -62,13 +62,13 @@ class ModeloClientes{
 		if($item != null){
 
 			$stmt = Conexion::conectar()->prepare("SELECT p.*, c.*, m.tipo_matricula, m.precio_matricula, pd.tipo_promociones_descuentos, pd.valor_promociones_descuentos, i.tipo_inscripcion,i.precio_inscripcion, i.fecha_creacion  FROM $tabla1 as p\n"
-			. "INNER JOIN $tabla2 as c ON p.id_personas = c.id_persona\n"
-			. "INNER JOIN tbl_matricula as m ON c.id_matricula = m.id_matricula\n"
-			. "INNER JOIN tbl_inscripcion as i ON c.id_inscripcion = i.id_inscripcion\n"
-			. "INNER JOIN tbl_promociones_descuentos as pd ON c.id_descuentos_promociones = pd.id_promociones_descuentos\n"
+			. "LEFT JOIN $tabla2 as c ON p.id_personas = c.id_persona\n"
+			. "LEFT JOIN tbl_matricula as m ON c.id_matricula = m.id_matricula\n"
+			. "LEFT JOIN tbl_inscripcion as i ON c.id_inscripcion = i.id_inscripcion\n"
+			. "LEFT JOIN tbl_promociones_descuentos as pd ON c.id_descuentos_promociones = pd.id_promociones_descuentos\n"
 			. " WHERE $item = :$item"); 
 
-			// $stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+			$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
 			$stmt -> execute();
 			return $stmt -> fetch();
 
@@ -116,6 +116,56 @@ class ModeloClientes{
 		$stmt = null;
 		
 	} 
+	/*=============================================
+			EDITAR CLIENTE
+	=============================================*/
+	 
+	static public function mdlEditarCliente($tabla, $datos){
+
+		if ($datos['tipo_cliente'] == "Gimnasio"){
+	
+			$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET id_persona = :id_persona, tipo_cliente = :tipo_cliente, id_inscripcion = :id_inscripcion, id_matricula = :id_matricula, id_descuentos_promociones = :id_descuentos_promociones WHERE id_persona = :id_persona");
+	
+			$stmt->bindParam(":id_persona", $datos["id_persona"], PDO::PARAM_INT);
+			$stmt->bindParam(":tipo_cliente", $datos["tipo_cliente"], PDO::PARAM_STR);
+			$stmt->bindParam(":id_inscripcion", $datos["id_inscripcion"], PDO::PARAM_INT);
+			$stmt->bindParam(":id_matricula", $datos["id_matricula"], PDO::PARAM_INT);
+			$stmt->bindParam(":id_descuentos_promociones", $datos["id_descuentos_promociones"], PDO::PARAM_INT);
+	
+			if($stmt->execute()){
+	
+				return true;	
+	
+			}else{
+	
+				return false;
+			
+			}
+
+		} else {
+
+			$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(id_persona, tipo_cliente) VALUES (:id_persona, :tipo_cliente)");
+	
+			$stmt->bindParam(":id_persona", $datos["id_persona"], PDO::PARAM_INT);
+			$stmt->bindParam(":tipo_cliente", $datos["tipo_cliente"], PDO::PARAM_STR);
+			
+	
+			if($stmt->execute()){
+	
+				return true;	
+	
+			}else{
+	
+				return false;
+			
+			}
+		}
+
+		$stmt->close();
+		
+		$stmt = null;
+
+	}
 	/*=============================================
 				ELIMINAR CLIENTES
 	=============================================*/

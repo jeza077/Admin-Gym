@@ -59,7 +59,7 @@
                   // echo "<pre>";
                   // var_dump($clientes);
                   // echo "</pre>";
-
+                  // return;
                   foreach ($clientes as $key => $value) {
                     echo '
                           <tr>
@@ -84,7 +84,7 @@
                       echo
                           '<td><button class="btn btn-success btn-md">Activado</button></td>
                           <td>
-                            <button class="btn btn-warning btnEditarCliente" id="btnEditar" data-toggle="modal" data-target="#modalEditarCliente" idCliente="'.$value["id_personas"].'"><i class="fas fa-pencil-alt" style="color:#fff"></i></button>
+                            <button class="btn btn-warning btnEditarCliente" id="btnEditar" data-toggle="modal" data-target="#modalEditarCliente" idEditarCliente="'.$value["id_personas"].'"><i class="fas fa-pencil-alt" style="color:#fff"></i></button>
                             <button class="btn btn-danger btnEliminarCliente" idCliente="'.$value["id_personas"].'"><i class="fas fa-trash-alt"></i></button>
                           </td>
                         </tr>
@@ -352,20 +352,21 @@
           <form role="form" method="post" class="formulario">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
               <li class="nav-item" role="presentation">
-                <a class="nav-link active" id="datosEditarPersona" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Datos personales</a>
+                <a class="nav-link active" id="datosEditarPersona" data-toggle="tab" href="#editarPersona" role="tab" aria-controls="home" aria-selected="true">Datos personales</a>
               </li>
               <li class="nav-item" role="presentation">
-                <a class="nav-link" id="datosEditarCliente" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Datos Cliente</a>
+                <a class="nav-link" id="datosEditarCliente" data-toggle="tab" href="#editarCliente" role="tab" aria-controls="profile" aria-selected="false">Datos Cliente</a>
               </li>
             </ul>
             
             <div class="tab-content" id="myTabContent">
-              <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="datoseditarcliente">
+              <div class="tab-pane fade show active" id="editarPersona" role="tabpanel" aria-labelledby="datoseditarcliente">
+              <input type="hidden" id="idEditarCliente" name="idEditarCliente">
                 <div class="container-fluid mt-4">
                   <div class="form-row">
                     <div class="form-group col-md-3">
                       <label for="">Tipo de documento <?php echo $i?></label>
-                      <select class="form-control select2 editarDocumento" name="editarTipoDocumento">
+                      <select class="form-control select2 editarTipoDocumento" name="editarTipoDocumento">
                           <option selected="selected">Seleccionar...</option>
                           <?php 
                               $tabla = "tbl_documento";
@@ -384,7 +385,7 @@
 
                     <div class="form-group col-md-3">
                       <label for="identidad">Numero de documento</label>
-                      <input type="text" class="form-control editarId" name="editarNumeroDocumento" required>
+                      <input type="text" class="form-control editarNumeroDocumento" name="editarNumeroDocumento" required>
                     </div>
                     <div class="form-group col-md-3">
                       <label for="nombre">Nombre</label>
@@ -392,7 +393,7 @@
                     </div>
                     <div class="form-group col-md-3">
                       <label for="apellido">Apellido</label>
-                      <input type="text" class="form-control editarApellidos" name="editarApellido" required>
+                      <input type="text" class="form-control editarApellido" name="editarApellido" required>
                     </div>
                   </div>
       
@@ -419,7 +420,7 @@
                   
                     <div class="form-group col-md-3">
                       <label>Sexo</label>
-                      <select class="form-control select2 editarSexo" name="nuevoSexo" style="width: 100%;" required>
+                      <select class="form-control select2 editarSexo" name="editarSexo" style="width: 100%;" required>
                         <option selected="selected">Seleccionar...</option>
                         <option value="M">Masculino</option>
                         <option value="F">Femenino</option>
@@ -430,12 +431,12 @@
                 </div>
               </div>
 
-              <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="datosCliente">
+              <div class="tab-pane fade" id="editarCliente" role="tabpanel" aria-labelledby="datoseditarCLiente">
                 <div class="container-fluid mt-4">
                     <div class="form-row">
                       <div class="form-group col-md-3">
                         <label>Tipo Cliente</label>
-                        <select class="form-control select2 tipoCliente" name="editarTipoCliente" style="width: 100%;" required>
+                        <select class="form-control select2 editarTipoCliente" name="editarTipoCliente" style="width: 100%;" required>
                           <option selected="selected">Seleccionar...</option>
                           <option value="Gimnasio">Clientes del gimnasio</option>
                           <option value="Ventas">Cliente de ventas</option>
@@ -556,11 +557,15 @@
                   <button type="" class="btn btn-primary">Guardar Cambios</button>
                   <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
                 </div>
-            
-            
+                <?php
+                  $tipoPersona = 'clientes';
+                  $pantalla = 'clientes';
+                  $editarPersona = new ControladorPersonas();
+                  $editarPersona->ctrEditarPersona($tipoPersona, $pantalla);
+                ?>
+
               </div>
             </div>
-
           </form>
 
         </div>
@@ -568,7 +573,9 @@
       </div>
     </div>
   </div>
-
+<!-- =======================================
+           ELIMINAR CLIENTE
+  ======================================----->
   <?php
 
     $pantalla = 'clientes';

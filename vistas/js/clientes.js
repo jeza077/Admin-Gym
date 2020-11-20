@@ -25,6 +25,17 @@ $(document).on('change', '.tipoCliente', function () {
     }
    
 });
+// $('#datosCliente').hide();
+// $(document).on('change', '.editarTipoCliente', function () {
+//     var valor = $(this).val();
+//     // console.log(valor)
+//     if (valor == "Gimnasio") {
+//         $('#datosCliente').show();
+//     } else {
+//         $('#datosCliente').hide();
+//     }
+   
+// });
 
 /*=============================================
         EDITAR CLIENTE
@@ -32,10 +43,11 @@ $(document).on('change', '.tipoCliente', function () {
 
 $('.btnEditarCliente').click(function () { 
     
-    var idCliente = $(this).val("idCliente");
+    var idEditarCliente = $(this).attr("idEditarCliente");
+    // console.log(idEditarCliente)
     var datos = new FormData();
-    datos.append("idCliente", idCliente);
-    // console.log(datos)
+    datos.append("idEditarCliente", idEditarCliente);
+    
 
     $.ajax({
     
@@ -48,21 +60,25 @@ $('.btnEditarCliente').click(function () {
         dataType: "json",
         success: function(respuesta) {
 
-            $('.editarDocumento').val(respuesta["num_documento"])
+            // console.log("respuesta", respuesta);
+            
+            $('#idEditarCliente').val(respuesta["idEditarCliente"])
+            $('.editarTipoDocumento').val(respuesta["id_documento"])
+            $('.editarNumeroDocumento').val(respuesta["num_documento"])
             $('.editarNombre').val(respuesta["nombre"])
-            $('.editarApellidos').val(respuesta["apellidos"])
+            $('.editarApellido').val(respuesta["apellidos"])
             $('.editarEmail').val(respuesta["correo"])
             $('.editarTelefono').val(respuesta["telefono"])
             $('.editarFechaNacimiento').val(respuesta["fecha_nacimiento"])
             $('.editarDireccion').val(respuesta["direccion"])
             $('.editarSexo').val(respuesta["sexo"])
 
-
-            // console.log("respuesta", respuesta);
-            
+            $('.editarTipoCliente').val(respuesta["tipo_cliente"])
+            $('.editarMatricula').val(respuesta["id_matricula"])
+            $('.editarPromocion').val(respuesta["id_descuentos_promociones"])
+            $('.editarInscripcion').val(respuesta["id_inscripcion"])
         }
     });
-    
 });
 /*=============================================
         EDITAR CLIENTE

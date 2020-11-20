@@ -345,7 +345,7 @@ class ControladorPersonas{
                     // echo "<pre>";
                     // var_dump($_POST);
                     // echo "</pre>";
-                    // // return;
+                    // return;
                     // var_dump($_FILES);
                     // echo $tipoPersona;
                     // return;
@@ -435,26 +435,82 @@ class ControladorPersonas{
                     }
 
                 } else {
+                    // echo "<pre>";
+                    // var_dump($_POST);
+                    // echo "</pre>";
+                    // return;
+                    
+                    $datos = array("nombre" => $_POST["editarNombre"],
+                    "apellidos" => $_POST["editarApellido"],
+                    "id_documento" => $_POST["editarTipoDocumento"],
+                    "numero_documento" => $_POST["editarNumeroDocumento"],
+                    "tipo_persona" => $tipoPersona,
+                    "fecha_nacimiento" => $_POST["editarFechaNacimiento"],
+                    "sexo" => $_POST["editarSexo"],
+                    "telefono" => $_POST["editarTelefono"],
+                    "direccion" => $_POST["editarDireccion"],
+                    "email" => $_POST["editarEmail"],
+                    "id_persona" => $_POST["idEditarCliente"]);
 
-                        $datos = array("id_persona" => $idPersona);
+                    $respuestaEditarPersona = ModeloPersonas::mdlEditarPersona($tabla, $datos);
+                    echo "<pre>";
+                    var_dump($datos);
+                    echo "</pre>";
+                    return;
 
-                        $crearCliente = ControladorClientes::ctrCrearCliente($datos);
+                    // if($respuestaEditarPersona == true){
+                        
+                        
+                    //     $totalId = array();
+                    //     $tabla = "tbl_personas";
+                    //     // $tabla2 = "tbl_clientes";
+                    //     // $item = null;
+                    //     // $valor = null;
 
-                        if($crearCliente == true){
+                    //     $personaTotal = ModeloPersonas::mdlMostrarPersonas($tabla);
+                        
+                    //     foreach($personaTotal as $keyPersona => $valuePersona){
+                    //     array_push($totalId, $valuePersona["id_personas"]);
+                    //     }
+
+                    //     $idPersona = end($totalId);
+                        // echo "<pre>";
+                        // var_dump($_POST);
+                        // echo "</pre>";
+                        // return;
+
+                    //     if ($_POST['tipoCliente'] == "Gimnasio"){
+
+                    //         $datos = array("id_persona" => $_POST["idEditarCliente"],
+                    //         "tipo_cliente" => $_POST["editarTipoCliente"],
+                    //         "id_inscripcion" => $_POST["editarInscripcion"],
+                    //         "id_matricula" => $_POST["editarMatricula"],
+                    //         "id_descuentos_promociones" => $_POST["editarPromocion"]);
+                    //     } else {
+                    //         $datos = array("id_persona" => $idEditarCliente,
+                    //         "tipo_cliente" => $_POST["editarTipoCliente"]);
+                    //     }
+
+                        
+
+                    //     $crearCliente = ControladorClientes::ctrEditarCliente($datos);
+
+                    //     if($crearCliente == true){
                             
-                            echo '<script>
-                                    Swal.fire({
-                                        title: "Cliente guardado correctamente!",
-                                        icon: "success",
-                                        heightAuto: false,
-                                        allowOutsideClick: false
-                                    }).then((result)=>{
-                                        if(result.value){
-                                            window.location = "'.$pantalla.'";
-                                        }
-                                    });                                              
-                                </script>';
-                        }
+                    //         echo '<script>
+                    //                 Swal.fire({
+                    //                     title: "Cliente fue editado correctamente!",
+                    //                     icon: "success",
+                    //                     heightAuto: false,
+                    //                     allowOutsideClick: false
+                    //                 }).then((result)=>{
+                    //                     if(result.value){
+                    //                         window.location = "'.$pantalla.'";
+                    //                     }
+                    //                 });                                              
+                    //             </script>';
+                    //     }
+                    // }
                 }
                         
 

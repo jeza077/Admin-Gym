@@ -12,13 +12,13 @@ class AjaxClientes{
     =============================================*/
     
     
-    public $idCliente;
+    public $idEditarCliente;
 
     public function ajaxEditarCliente(){
 
         $tabla = "tbl_clientes";
         $item = "id_personas";
-        $valor = $this->idCliente;
+        $valor = $this->idEditarCliente;
         
         $respuesta = ControladorClientes::ctrMostrarClientes($tabla, $item, $valor);
         // echo "<pre>";
@@ -55,9 +55,9 @@ class AjaxClientes{
 /*=============================================
     EDITAR CLIENTE
 =============================================*/
-if(isset($_POST["idCliente"])){
+if(isset($_POST["idEditarCliente"])){
     $cliente = new AjaxClientes();
-    $cliente->idCliente = $_POST["idCliente"];
+    $cliente->idEditarCliente = $_POST["idEditarCliente"];
     $cliente->ajaxEditarCliente();
 }
 /*=============================================

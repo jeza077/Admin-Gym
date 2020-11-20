@@ -57,37 +57,63 @@ class ControladorClientes{
         }
 
 	}
-	
-    /*=============================================
-				ELIMINAR CLIENTES
+	/*=============================================
+				EDITAR CLIENTE
 	=============================================*/
+	static public function ctrEditarCliente($datos){
+		// echo "<pre>";
+		// var_dump($datos);
+		// echo "</pre>";
+		// return;
 
-	static public function ctrEliminarCliente($pantalla){
 
-		if(isset($_GET["idCliente"])){
+        if(isset($datos['id_persona'])){
 
+			$tabla = "tbl_clientes";
 			
-			
-			$tabla = "tbl_personas";
-			$datos = $_GET["idCliente"];
-
-			$respuesta = ModeloClientes::mdlEliminarCliente($tabla, $datos);
-
-			if($respuesta == true){
-				echo '<script>
-						Swal.fire({
-							title: "Cliente eliminado correctamente!",
-							icon: "success",
-							heightAuto: false,
-							allowOutsideClick: false
-						}).then((result)=>{
-							if(result.value){
-								window.location = "'.$pantalla.'";
-							}
-						});                                              
-					</script>';
+			if ($datos['tipo_cliente'] == "Gimnasio"){
+				$datos = array("id_persona" => $datos['id_persona'],
+			                "tipo_cliente" => $datos["tipo_cliente"],
+							"id_inscripcion" =>  $datos["id_inscripcion"],
+							"id_matricula" =>  $datos["id_matricula"],
+							"id_descuentos_promociones" =>  $datos["id_descuentos_promociones"]);
+			} else {
+				$datos = array("id_persona" => $datos['id_persona'],
+			                  "tipo_cliente" => $datos["tipo_cliente"]);
 			}
-		}
+							
+			
+
+            $respuestaCliente = ModeloClientes::mdlEditarCliente($tabla, $datos);
+
+            if($respuestaCliente = true){
+				
+				$totalId = array();
+				$tabla = "tbl_personas";
+				$tabla2 = "tbl_clientes";
+				$item = null;
+				$valor = null;
+
+				$personaTotal = ModeloClientes::mdlMostrarClientes($tabla, $tabla2, $item, $valor);
+				
+				foreach($personaTotal as $keyCliente => $valuePersona){
+				array_push($totalId, $valuePersona["id_cliente"]);
+
+				
+				}
+
+				$idCliente = end($totalId);
+
+				// $datos = array("id_clientes" =>$idCliente,
+				// "id_inscripcion" =>  $datos["id_inscripcion"]);
+                        
+                return true;
+
+            } else {
+                return false;
+            }
+        }
+
 	}
    /*=============================================
 				MOSTRAR CLIENTES
@@ -140,6 +166,37 @@ class ControladorClientes{
 
 		return $respuesta;
 
+	}
+	/*=============================================
+				ELIMINAR CLIENTES
+	=============================================*/
+
+	static public function ctrEliminarCliente($pantalla){
+
+		if(isset($_GET["idCliente"])){
+
+			
+			
+			$tabla = "tbl_personas";
+			$datos = $_GET["idCliente"];
+
+			$respuesta = ModeloClientes::mdlEliminarCliente($tabla, $datos);
+
+			if($respuesta == true){
+				echo '<script>
+						Swal.fire({
+							title: "Cliente eliminado correctamente!",
+							icon: "success",
+							heightAuto: false,
+							allowOutsideClick: false
+						}).then((result)=>{
+							if(result.value){
+								window.location = "'.$pantalla.'";
+							}
+						});                                              
+					</script>';
+			}
+		}
 	}
 }
 
