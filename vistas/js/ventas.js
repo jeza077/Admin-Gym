@@ -83,10 +83,11 @@ $(".tablaVentas tbody").on("click", "button.agregarProducto", function(){
 
       $(".nuevoProducto").append(
       '<div class="row" style="padding:5px 6px">'+
+      '<!-- Descripcion del producto-->'+
         '<div class="col-md-6">'+
           '<div class="input-group">'+
             '<span class="input-group-prepend"><button type="button" class="btn btn-danger btn-md quitarProducto" idProducto="'+idProducto+'"><i class="fa fa-times"></i></button></span>'+
-            '<input type="text" class="form-control nuevaDescripcionProducto" idProducto="'+idProducto+'" id="agregarProducto" name="agregarProducto" value="'+descripcion+'" readonly required>'+     
+            '<input type="text" class="form-control nuevaDescripcionProducto" idProducto="'+idProducto+'" id="agregarProducto" value="'+descripcion+'" readonly required>'+     
           '</div>'+
 
         '</div>'+
@@ -94,7 +95,7 @@ $(".tablaVentas tbody").on("click", "button.agregarProducto", function(){
         '<!-- Cantidad del producto-->'+
         '<div class="col-md-3">'+
 
-            '<input type="number" class="form-control nuevaCantidadProducto" name="nuevaCantidadProducto" min="1" value="1" stock="'+stock+'" nuevoStock="'+Number(stock-1)+'" required>'+
+            '<input type="number" class="form-control nuevaCantidadProducto"  min="1" value="1" stock="'+stock+'" nuevoStock="'+Number(stock-1)+'" required>'+
 
         '</div>'+
 
@@ -333,33 +334,36 @@ $("#nuevoImpuestoVenta").change(function(){
 // FORMATO AL PRECIO FINAL
 // =============================================*/
 
-// $("#nuevoTotalVenta").number(true, 2);
+$("#nuevoTotalVenta").number(true, 2);
 
-// /*=============================================
-// LISTAR TODOS LOS PRODUCTOS
-// =============================================*/
+/*=============================================
+LISTAR TODOS LOS PRODUCTOS
+=============================================*/
 
-// function listarProductos(){
+function listarProductos(){
 
-// 	var listaProductos = [];
+	var listaProductos = [];
 
-// 	var descripcion = $(".nuevaDescripcionProducto");
+	var descripcion = $(".nuevaDescripcionProducto");
 
-// 	var cantidad = $(".nuevaCantidadProducto");
+	var cantidad = $(".nuevaCantidadProducto");
 
-// 	var precio = $(".nuevoPrecioProducto");
+	var precio = $(".nuevoPrecioProducto");
 
-// 	for(var i = 0; i < descripcion.length; i++){
+	for(var i = 0; i < descripcion.length; i++){
 
-// 		listaProductos.push({ "id" : $(descripcion[i]).attr("idProducto"), 
-// 							  "descripcion" : $(descripcion[i]).val(),
-// 							  "cantidad" : $(cantidad[i]).val(),
-// 							  "stock" : $(cantidad[i]).attr("nuevoStock"),
-// 							  "precio" : $(precio[i]).attr("precioReal"),
-// 							  "total" : $(precio[i]).val()})
+		listaProductos.push({ "id" : $(descripcion[i]).attr("idProducto"), 
+							  "descripcion" : $(descripcion[i]).val(),
+							  "cantidad" : $(cantidad[i]).val(),
+							  "stock" : $(cantidad[i]).attr("nuevoStock"),
+							  "precio" : $(precio[i]).attr("precioReal"),
+							  "total" : $(precio[i]).val()})
 
-// 	}
+  }
+  
+  console.log("listaProductos",listaProductos);
 
-// 	$("#listaProductos").val(JSON.stringify(listaProductos)); 
+	$("#listaProductos").val(JSON.stringify(listaProductos)); 
 
-// }
+}
+

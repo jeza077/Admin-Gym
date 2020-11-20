@@ -22,9 +22,11 @@
             <div class="card">
               <div class="card-body"> 
                 <div class="form-group"  class="formularioVenta"> 
-                  <!-- Entrada vendedor/usuario -->    
+                 <!--=====================================
+                  ENTRADA VENDEDOR/USUARIO
+                ======================================-->  
                     <label for="usuario">Usuario</label>
-                    <input type="text" class="form-control" id="nuevoVendedor" name="nuevoVendedor" value="<?php echo $_SESSION["usuario"]  ?>" readonly>
+                    <input type="text" class="form-control" id="nuevoVendedor" value="<?php echo $_SESSION["usuario"]  ?>" readonly>
                     <input type="hidden" name="idVendedor" value="<?php echo $_SESSION["id_usuario"]; ?>">
                 </div>       
               
@@ -78,7 +80,7 @@
                           //  echo "</pre>";
                             foreach ($clientes as $key => $value)
                             {
-                              echo '<option value="'.$value["id"].'">' .$value["nombre"]. ' '.$value["apellidos"]. '</option>';
+                              echo '<option value="'.$value["id_cliente"].'">' .$value["nombre"]. ' '.$value["apellidos"]. '</option>';
                             }
                         ?>       
                     </select>
@@ -95,7 +97,7 @@
                 </div>
                 <!-- IMPUESTO Y TOTAL-->
                 <div class="form-row">
-                  <div class="form-group-float-right col-md-4" style="padding-left:0px">
+                  <div class="form-group-float-right col-md-2" style="padding-left:0px">
                     <label>Impuesto </label>
                     <input type="number" class="form-control nuevoImpuestoVenta" name="nuevoImpuestoVenta"  id="nuevoImpuestoVenta"  placeholder="0"  required> 
                     <!-- <span class="input-group-addon"><i class="fa fa-percent"></i></span> -->
@@ -108,14 +110,15 @@
                   <div class="form-group-float-right col-md-4" style="padding-left:0px">
                     <label for="total_producto"> Total </label>
                     <input type="number" min="1" class="form-control input-lg" id="nuevoTotalVenta" name="nuevoTotalVenta" total="" placeholder="0.00" readonly required>
+                    <input type="hidden" name="totalVenta" id="totalVenta">
 
-                    <!-- <input type="hidden" name="totalVenta" id="totalVenta"> -->
-                    <!-- <input type="number" min="1" id="nuevoPrecioNeto" class="form-control" name="nuevoPrecioNeto" placeholder="0" readonly required>  -->
                   </div>  
 
                 </div>
 
               </div>
+
+              <input type="hidden" id="listaProductos" name="listaProductos">
               <!--=====================================
                 BOTÓN PARA AGREGAR PRODUCTO
                 ======================================-->
@@ -125,6 +128,11 @@
 
             </div>
           </form>
+          <?php
+           $guardarVenta = new ControladorVentas();
+           $guardarVenta -> ctrCrearVenta();
+
+          ?>
         </div>
 
            <!--TABLA DE PRODUCTOS  -->
@@ -164,38 +172,128 @@
     
 </div>
 
-<!-- modal cliente -->
-<!-- Modal -->
-<div class="modal fade" id="modalAgregarCliente" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Agregar cliente</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <!-- <div class="form-row"> -->
-          <div class="form-group">
-           <label for="">Nombre</label>
-           <input type="text" class="form-control">
-          </div>
-          <div class="form-group">
-           <label for="">Apellidos</label>
-           <input type="text" class="form-control">
-          </div>
-          <div class="form-group">
-           <label for="">Email</label>
-           <input type="email" class="form-control email">
-          </div>
-        <!-- </div> -->
+<!--===========================================
+       Modal cliente 
+=====================================-->
+
+<div class="modal fade" id="modalAgregarCliente" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+      
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Nuevo cliente</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form role="form" method="post" class="formulario">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+              <li class="nav-item" role="presentation">
+                <a class="nav-link active" id="datosPersona" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Datos personales</a>
+              </li>
+             
+            </ul>
+            
+            <div class="tab-content" id="myTabContent">
+              <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="datoscliente">
+                <div class="container-fluid mt-4">
+                  <div class="form-row">
+                    <div class="form-group col-md-3">
+                      <label for="">Tipo de documento <?php echo $i?></label>
+                      <select class="form-control select2 tipoDocumentoCliente" name="nuevoTipoDocumento">
+                          <option selected="selected">Seleccionar...</option>
+                          <?php 
+                              $tabla = "tbl_documento";
+                              $item = null;
+                              $valor = null;
+
+                              $preguntas = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
+
+                              foreach ($preguntas as $key => $value) { ?>
+                                  <option value="<?php echo $value['id_documento']?>"><?php echo $value['tipo_documento']?></option>        
+                              <?php 
+                              }
+                          ?>
+                      </select>
+                    </div>
+
+                    <div class="form-group col-md-3">
+                      <label for="identidad">Numero de documento</label>
+                      <input type="text" class="form-control idCliente" name="nuevoNumeroDocumento" placeholder="Ingrese Identidad" required>
+                    </div>
+                    <div class="form-group col-md-3">
+                      <label for="nombre">Nombre</label>
+                      <input type="text" class="form-control nombre" name="nuevoNombre" placeholder="Ingrese Nombre" required>
+                    </div>
+                    <div class="form-group col-md-3">
+                      <label for="apellido">Apellido</label>
+                      <input type="text" class="form-control apellidos" name="nuevoApellido" placeholder="Ingrese Apellidos" required>
+                    </div>
+                  </div>
+      
+                  <div class="form-row">
+                    <div class="form-group col-md-4">
+                      <label for="email">Email</label>
+                      <input type="email" class="form-control email" name="nuevoEmail" placeholder="Ingrese Email" required>
+                      <input type="hidden" name="tipoCliente" value="ventas">
+                    </div>
+
+                    <div class="form-group col-md-4">
+                      <label>Teléfono</label>
+                      <input type="text" class="form-control" data-inputmask='"mask": "(999) 9999-9999"' data-mask  name="nuevoTelefono" placeholder="Ingrese Telefono" required>
+                    </div>
+                    <div class="form-group col-md-4">
+                      <label>Fecha de nacimiento</label>
+                        <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy/mm/dd" data-mask  name="nuevaFechaNacimiento" placeholder="Ingrese Fecha de Nacimiento" required>
+                    </div>
+                  </div>
+
+                  <div class="form-row">
+                    <div class="form-group col-md-9">
+                      <label for="">Dirección</label>
+                      <input type="text" class="form-control" name="nuevaDireccion" placeholder="Col. Alameda, calle #2..." required>
+                    </div>
+                  
+                    <div class="form-group col-md-3">
+                      <label>Sexo</label>
+                      <select class="form-control select2" name="nuevoSexo" style="width: 100%;" required>
+                        <option selected="selected">Seleccionar...</option>
+                        <option value="M">Masculino</option>
+                        <option value="F">Femenino</option>
+                      </select>
+                    </div>
+                    <div class="form-row">
+                      <div class="form-group col-md-12">
+                        <select class="form-control select2 tipoCliente" name="editarTipoCliente" style="width: 100%;" required>
+                          <option selected="selected">Seleccionar...</option>
+                          <option value="Ventas">Cliente de ventas</option>
+                          
+                        </select>
+                      </div>
+                    </div>
+                   
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group mt-4 float-right">
+                  
+                  <button type="" class="btn btn-primary">Guardar</button>
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
+                </div>
+            
+                <?php
+                  $tipoPersona = 'clientes';
+                  $pantalla = 'crear-venta';
+                  $ingresarPersona = new ControladorPersonas();
+                  $ingresarPersona->ctrCrearPersona($tipoPersona, $pantalla);
+                ?>
 
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Salir</button>
-        <button type="button" class="btn btn-primary">Guardar</button>
-      </div>
+     
     </div>
   </div>
 </div>
+
+
