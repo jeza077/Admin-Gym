@@ -296,10 +296,63 @@ class ControladorPersonas{
 				EDITAR PERSONAS
     =============================================*/ 
     static public function ctrEditarPersona($ajustes, $tipoPersona, $pantalla){
-
+        // echo "<pre>";
+        // var_dump($_POST);
+        // echo "</pre>";
+   
+        // return;
         if(isset($_POST["editarNombre"])){
+        
+            if($ajustes != null) {
+                // echo "<pre>";
+                // var_dump($_POST);
+                // echo "</pre>";
+                // return;
+                if(preg_match('/^[a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarNombre"]) && 
+                preg_match('/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.([a-zA-Z]{2,4})+$/', $_POST["editarEmail"])){
 
-            if($ajustes == null) {
+                    $tabla = "tbl_personas";
+                    
+                    if($tipoPersona == 'usuarios') {                    
+
+                        // echo "<pre>";
+                        // var_dump($_POST);
+                        // echo "</pre>";
+                        // // return;
+                        // var_dump($_FILES);
+                        // echo $tipoPersona;
+                        // return;
+
+                        $datos = array("nombre" => $_POST["editarNombre"],
+                                    "apellido" => $_POST["editarApellido"],
+                                    "id_documento" => $_POST["editarTipoDocumento"],
+                                    "numero_documento" => $_POST["editarNumeroDocumento"],
+                                    "tipo_persona" => $tipoPersona,
+                                    "fecha_nacimiento" => $_POST["editarFechaNacimiento"],
+                                    "sexo" => $_POST["editarSexo"],
+                                    "telefono" => $_POST["editarTelefono"],
+                                    "direccion" => $_POST["editarDireccion"],
+                                    "email" => $_POST["editarEmail"],
+                                    "id_persona" => $_POST["idPersona"]);
+
+                        $respuestaPersona = ModeloPersonas::mdlEditarPersona($tabla, $datos);
+                        if($respuestaPersona == true){
+                            echo '<script>
+                                    Swal.fire({
+                                        title: "Datos guardados correctamente!",
+                                        icon: "success",
+                                        heightAuto: false
+                                    }).then((result)=>{
+                                        if(result.value){
+                                            window.location = "'.$pantalla.'";
+                                        }
+                                    });                                      
+                                </script>';
+                        }
+                    }
+                }
+            } else {
+
                 if(preg_match('/^[a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarNombre"]) && 
                 preg_match('/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.([a-zA-Z]{2,4})+$/', $_POST["editarEmail"])){
 
@@ -436,51 +489,7 @@ class ControladorPersonas{
                         });					
                     </script>';
                 }
-
-            } else {
-                if(preg_match('/^[a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarNombre"]) && 
-                        preg_match('/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.([a-zA-Z]{2,4})+$/', $_POST["editarEmail"])){
-
-                            $tabla = "tbl_personas";
-                            
-                            if($tipoPersona == 'usuarios') {                    
-
-                                // echo "<pre>";
-                                // var_dump($_POST);
-                                // echo "</pre>";
-                                // // return;
-                                // var_dump($_FILES);
-                                // echo $tipoPersona;
-                                // return;
-
-                                $datos = array("nombre" => $_POST["editarNombre"],
-                                            "apellido" => $_POST["editarApellido"],
-                                            "id_documento" => $_POST["editarTipoDocumento"],
-                                            "numero_documento" => $_POST["editarNumeroDocumento"],
-                                            "tipo_persona" => $tipoPersona,
-                                            "fecha_nacimiento" => $_POST["editarFechaNacimiento"],
-                                            "sexo" => $_POST["editarSexo"],
-                                            "telefono" => $_POST["editarTelefono"],
-                                            "direccion" => $_POST["editarDireccion"],
-                                            "email" => $_POST["editarEmail"],
-                                            "id_persona" => $_POST["idPersona"]);
-
-                                $respuestaPersona = ModeloPersonas::mdlEditarPersona($tabla, $datos);
-                                if($respuestaPersona == true){
-                                    echo '<script>
-                                            Swal.fire({
-                                                title: "Datos guardados correctamente!",
-                                                icon: "success",
-                                                heightAuto: false
-                                            }).then((result)=>{
-                                                if(result.value){
-                                                    window.location = "'.$pantalla.'";
-                                                }
-                                            });                                      
-                                        </script>';
-                                }
-                           }
-                }
+                
             }
         }
     }

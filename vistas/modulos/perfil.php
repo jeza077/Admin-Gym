@@ -79,6 +79,14 @@
 
             </div>
             
+            <?php
+                $ajustes = 'prueba';
+                $tipoPersona = 'usuarios';
+                $pantalla = 'perfil';
+                $ingresarPersona = new ControladorPersonas();
+                $ingresarPersona->ctrEditarPersona($ajustes, $tipoPersona, $pantalla);
+            ?>
+
           </div>
             
             <!-- /.card -->
