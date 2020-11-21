@@ -1521,20 +1521,20 @@ class ControladorUsuarios{
 				
 				$tabla = "tbl_preguntas_usuarios";
 
-				$array = array("idUno" => 7,
-				"idDos" => 8,
-				"idTres" => 9);
+				// $array = array("idUno" => 7,
+				// "idDos" => 8,
+				// "idTres" => 9);
 							
 				$datos = array("idUsuario" => $idUsuario,
 								"idPregunta" => $_POST["editarPregunta"],
 								"respuesta" => $_POST["editarRespuestaPregunta"],
-								"array" => $array);
+								"id_preguntas_usuarios" => $_POST["idPreguntaUsuario"]);
 	
 								
 				$respuestaPreguntas = ModeloUsuarios::mdlActualizarPreguntaUsuario($tabla, $datos);
 	
-				var_dump($respuestaPreguntas);
-				return;
+				// var_dump($respuestaPreguntas);
+				// return;
 
 				if($respuestaPreguntas == true){
 					echo '<script>

@@ -357,7 +357,7 @@ class ModeloUsuarios{
 		
 		} else {
 			
-			$stmt = Conexion::conectar()->prepare("SELECT u.usuario, pr.pregunta, pu.id_preguntas, pu.respuesta FROM tbl_usuarios AS u"
+			$stmt = Conexion::conectar()->prepare("SELECT u.usuario, pr.pregunta, pu.* FROM tbl_usuarios AS u"
 				. " INNER JOIN tbl_preguntas_usuarios AS pu ON u.id_usuario = pu.id_usuario\n"
 				. " INNER JOIN tbl_preguntas AS pr ON pu.id_preguntas = pr.id_preguntas\n"
 				. "	WHERE u.$item1 = :$item1");
@@ -381,9 +381,9 @@ class ModeloUsuarios{
 
 		$preguntas = $datos['idPregunta'];
 		$respuestas = $datos['respuesta'];
-		$arrayId = $datos['array'];
+		$idPreguntasUsuarios = $datos['id_preguntas_usuarios'];
 
-		// return $arrayId;
+		// return $idPreguntasUsuarios;
 		// PROBLEMA CON GUARDAR. HACERLO CON AJAX Y GUARDAR UNO POR UNO 
 
 		while(true) {
@@ -392,24 +392,24 @@ class ModeloUsuarios{
 			
 			$pregunta = current($preguntas);
 			$respuesta = current($respuestas);
-			$array = current($arrayId);
+			$idPreguntaUsuario = current($idPreguntasUsuarios);
 
 			// return $respuesta;
 
 
-			$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET id_preguntas = :id_preguntas, respuesta = :respuesta WHERE id_usuario = :id_usuario AND id_preguntas = :id_preguntas");
+			$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET id_preguntas = :id_preguntas, respuesta = :respuesta WHERE id_usuario = :id_usuario AND id_preguntas_usuarios = :id_preguntas_usuarios");
 	
 			$stmt->bindParam(":id_preguntas", $pregunta, PDO::PARAM_INT);
 			$stmt->bindParam(":respuesta", $respuesta, PDO::PARAM_STR);
 			$stmt->bindParam(":id_usuario", $datos["idUsuario"], PDO::PARAM_INT);
-			$stmt->bindParam(":id_preguntas", $array, PDO::PARAM_INT);
+			$stmt->bindParam(":id_preguntas_usuarios", $idPreguntaUsuario, PDO::PARAM_INT);
 			
 			$stmt->execute();
 
 			// return $stmt;
 			$pregunta = next($preguntas);
 			$respuesta = next($respuestas);
-			$array = next($arrayId);
+			$idPreguntaUsuario = next($idPreguntasUsuarios);
 			
 
 			if($pregunta === false && $respuesta === false){

@@ -45,6 +45,7 @@ require_once "../../modelos/usuarios.modelo.php";
                         <div class="form-group col-md-6">
                             <label class="" for="">Respuesta <?php echo ($i+1)?></label>
                             <input type="text" class="form-control mayus respuestaPregunta<?php echo $i?>" value="" name="editarRespuestaPregunta[]" placeholder="Ingrese respuesta">
+                            <input type="hidden" class="idPreguntaUsuario<?php echo $i?>" value="" name="idPreguntaUsuario[]">
                         </div>
 
                     </div>

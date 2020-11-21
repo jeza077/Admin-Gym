@@ -346,7 +346,7 @@ $(document).on('click', '.ajuste-preguntas', function (e) {
                             $('.preguntaUsuario'+i).html(respuesta[i]['pregunta']);
                             $('.preguntaUsuario'+i).val(respuesta[i]['id_preguntas']);
                             $('.respuestaPregunta'+i).val(respuesta[i]['respuesta']);
-
+                            $('.idPreguntaUsuario'+i).val(respuesta[i]['id_preguntas_usuarios']);
                         }
 
                         // $('.idPersona').val(respuesta['id_personas']);
