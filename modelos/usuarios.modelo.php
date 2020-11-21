@@ -342,16 +342,34 @@ class ModeloUsuarios{
 
 	static public function mdlMostrarPreguntas($item1, $valor1, $item2, $valor2, $item3, $valor3){
 
-		$stmt = Conexion::conectar()->prepare("SELECT u.usuario, pr.pregunta, pu.id_preguntas, pu.respuesta FROM tbl_usuarios AS u"
-			. " INNER JOIN tbl_preguntas_usuarios AS pu ON u.id_usuario = pu.id_usuario\n"
-			. " INNER JOIN tbl_preguntas AS pr ON pu.id_preguntas = pr.id_preguntas\n"
-			. "	WHERE u.$item1 = :$item1 AND pu.$item2 = :$item2 AND pu.$item3 = :$item3");
+		if($item2 != null){
+
+			$stmt = Conexion::conectar()->prepare("SELECT u.usuario, pr.pregunta, pu.id_preguntas, pu.respuesta FROM tbl_usuarios AS u"
+				. " INNER JOIN tbl_preguntas_usuarios AS pu ON u.id_usuario = pu.id_usuario\n"
+				. " INNER JOIN tbl_preguntas AS pr ON pu.id_preguntas = pr.id_preguntas\n"
+				. "	WHERE u.$item1 = :$item1 AND pu.$item2 = :$item2 AND pu.$item3 = :$item3");
+				
+			$stmt -> bindParam(":".$item1, $valor1, PDO::PARAM_STR);
+			$stmt -> bindParam(":".$item2, $valor2, PDO::PARAM_INT);
+			$stmt -> bindParam(":".$item3, $valor3, PDO::PARAM_STR);
+			$stmt -> execute();
+			return $stmt -> fetchAll();
+		
+		} else {
 			
-		$stmt -> bindParam(":".$item1, $valor1, PDO::PARAM_STR);
-		$stmt -> bindParam(":".$item2, $valor2, PDO::PARAM_INT);
-		$stmt -> bindParam(":".$item3, $valor3, PDO::PARAM_STR);
-		$stmt -> execute();
-		return $stmt -> fetchAll();
+			$stmt = Conexion::conectar()->prepare("SELECT u.usuario, pr.pregunta, pu.id_preguntas, pu.respuesta FROM tbl_usuarios AS u"
+				. " INNER JOIN tbl_preguntas_usuarios AS pu ON u.id_usuario = pu.id_usuario\n"
+				. " INNER JOIN tbl_preguntas AS pr ON pu.id_preguntas = pr.id_preguntas\n"
+				. "	WHERE u.$item1 = :$item1");
+				
+			$stmt -> bindParam(":".$item1, $valor1, PDO::PARAM_INT);
+			$stmt -> execute();
+			return $stmt -> fetchAll();
+		
+		}
+
+		$stmt -> close();
+		$stmt = null;	
 	}	
 
 	    

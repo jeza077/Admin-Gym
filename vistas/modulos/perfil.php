@@ -32,7 +32,7 @@
               <h3>Contraseña</h3>
               <p>Cambia la contraseña de tu cuenta</p>
             </div>
-            <div class="ajustes ajuste-preguntas">
+            <div class="ajustes ajuste-preguntas" idUsuario="<?php echo $_SESSION["id_usuario"]?>">
               <h3>Preguntas de seguridad</h3>
               <p>Cambia las preguntas/respuestas asociadas a tu cuenta</p>
             </div>
@@ -80,6 +80,18 @@
             </div>
             
             <?php
+            // $item1 = "id_usuario";
+            // $valor1 = 9;
+            
+            // $item2 = null;
+            // $valor2 = null;
+            
+            // $item3 = null;
+            // $valor3 = null;
+    
+            // $respuesta = ControladorUsuarios::ctrMostrarPreguntas($item1, $valor1, $item2, $valor2, $item3, $valor3);
+            // var_dump($respuesta);
+
                 $ajustes = 'prueba';
                 $tipoPersona = 'usuarios';
                 $pantalla = 'perfil';

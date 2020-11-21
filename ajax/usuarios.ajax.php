@@ -88,7 +88,7 @@ class AjaxUsuarios{
     public $idPregunta;
     public $respuestaPregunta;
 
-    public function ajaxMostrarPreguntas(){
+    public function ajaxMostrarUsuarioPreguntas(){
 
         $item1 = "usuario";
         $valor1 = $this->usuario;
@@ -98,6 +98,28 @@ class AjaxUsuarios{
         
         $item3 = "respuesta";
         $valor3 = $this->respuestaPregunta;
+
+        $respuesta = ControladorUsuarios::ctrMostrarPreguntas($item1, $valor1, $item2, $valor2, $item3, $valor3);
+
+        echo json_encode($respuesta);
+    }
+    
+    /*=============================================
+    MOSTRAR PREGUNTAS DE SEGURIDAD
+    =============================================*/
+    
+    public $idUsuarioPersona;
+
+    public function ajaxMostrarPreguntas(){
+
+        $item1 = "id_usuario";
+        $valor1 = $this->idUsuarioPersona;
+        
+        $item2 = null;
+        $valor2 = null;
+        
+        $item3 = null;
+        $valor3 = null;
 
         $respuesta = ControladorUsuarios::ctrMostrarPreguntas($item1, $valor1, $item2, $valor2, $item3, $valor3);
 
@@ -219,8 +241,18 @@ if(isset($_POST["usuario"])){
     $valUsuario->usuario = $_POST["usuario"];
     $valUsuario->idPregunta = $_POST["idPregunta"];
     $valUsuario->respuestaPregunta = $_POST["respuestaPregunta"];
-    $valUsuario->ajaxMostrarPreguntas();
+    $valUsuario->ajaxMostrarUsuarioPreguntas();
 }
+
+/*=============================================
+ MOSTRAR PREGUNTAS DE SEGURIDAD
+=============================================*/
+if(isset($_POST["idUsuarioPersona"])){
+    $usuarioPreguntas = new AjaxUsuarios();
+    $usuarioPreguntas->idUsuarioPersona = $_POST["idUsuarioPersona"];
+    $usuarioPreguntas->ajaxMostrarPreguntas();
+}
+
 /*=============================================
 ENVIAR USUARIO PARA ENVIAR CORREO DE RECUPERAR PASSWORD
 =============================================*/

@@ -200,6 +200,7 @@ $(document).on('click', '.btnExportarUsuarios', function () {
     window.open("extensiones/tcpdf/pdf/usuarios-pdf.php", "_blank");
 });
 
+
 //**------------ PERFIL ------------ **//
 //** ------------------------------------*/
 //        AJUSTES GENERALES USUARIO
@@ -207,7 +208,7 @@ $(document).on('click', '.btnExportarUsuarios', function () {
 $(document).on('click', '.ajuste-cuenta', function (e) {
     e.preventDefault();
     var idPersonaUsuario = $(this).attr('idUsuario');
-    console.log(idPersonaUsuario);
+    // console.log(idPersonaUsuario);
     
     $.ajax({
         url: "vistas/modulos/ajustes-cuenta.php",
@@ -234,7 +235,7 @@ $(document).on('click', '.ajuste-cuenta', function (e) {
                 processData: false,  
                 dataType: "json",
                 success: function(respuesta) {
-                    console.log(respuesta);
+                    // console.log(respuesta);
 
                     if(respuesta){
                         $('.idPersona').val(respuesta['id_personas']);
@@ -264,6 +265,7 @@ $(document).on('click', '.ajuste-cuenta', function (e) {
                 }
 
             });
+
             $('.salirPerfil').click(function (e) { 
                 e.preventDefault();
                 $('.ajustes-cuenta').remove();
@@ -304,6 +306,9 @@ $(document).on('click', '.ajuste-password', function (e) {
 // --------------------------------------*/
 $(document).on('click', '.ajuste-preguntas', function (e) {
     e.preventDefault();
+    var idUsuarioPersona = $(this).attr('idUsuario');
+    // console.log(idUsuarioPersona);
+
     $.ajax({
         url: "vistas/modulos/ajustes-preguntas.php",
         success: function (response) {
@@ -314,6 +319,42 @@ $(document).on('click', '.ajuste-preguntas', function (e) {
                 $('.ajustes-usuario').append(response);
             }
             
+            var datos = new FormData();
+            datos.append('idUsuarioPersona', idUsuarioPersona);
+
+            $.ajax({
+
+                url:"ajax/usuarios.ajax.php",
+                method: "POST",
+                data: datos,
+                cache: false,
+                contentType: false,
+                processData: false,  
+                dataType: "json",
+                success: function(respuesta) {
+                    console.log(respuesta);
+                    // return;
+                    // if(respuesta){
+                        // $('.idPersona').val(respuesta['id_personas']);
+                        // $('#editarTipoDocumento').html(respuesta['tipo_documento']);
+                        // $('#editarTipoDocumento').val(respuesta['id_documento']);
+                        // $('input[name=editarNumeroDocumento]').val(respuesta['num_documento']);
+                        // $('input[name=editarNombre]').val(respuesta['nombre']);
+                        // $('input[name=editarApellido]').val(respuesta['apellidos']);
+                        // $('input[name=editarEmail]').val(respuesta['correo']);
+                        // $('input[name=editarTelefono]').val(respuesta['telefono']);
+                        // $('input[name=editarFechaNacimiento]').val(respuesta['fecha_nacimiento']);
+                        // $('input[name=editarDireccion]').val(respuesta['direccion']);
+                        // $('#editarSexo').html(respuesta['sexo']);
+                        // $('#editarSexo').val(respuesta['sexo']); 
+                
+                    // }
+                    
+                }
+
+            });
+
+
             $('.salirPerfil').click(function (e) { 
                 e.preventDefault();
                 $('.ajustes-preguntas').remove();
