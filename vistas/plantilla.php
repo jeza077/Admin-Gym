@@ -202,6 +202,8 @@
  <script src="vistas/js/usuarios-empleados.js"></script>
  <script src="vistas/js/clientes.js"></script>
 <script src="vistas/js/ventas.js"></script>
+<script src="vistas/js/inventario.js"></script>
+
 
 <!--<script src="vistas/js/validaciones.js"></script>
 <script src="vistas/js/categorias.js"></script>

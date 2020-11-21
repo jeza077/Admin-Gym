@@ -66,7 +66,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                <?php 
+                <?php
                     $tabla = "tbl_inventario";
                     $item = "tipo_producto";
                     $valor = "Inventario";
@@ -85,7 +85,7 @@
                               <td>'.$value["producto_minimo"].'</td>
                               <td>'.$value["producto_maximo"].'</td>     
                               <td>
-                              <button class="btn btn-warning btnEditarInventario"id_inventario="'.$value["id_inventario"].'" data-toggle="modal" data-target="#modalEditarStock"><i class="fas fa-pencil-alt" style="color:#fff"></i></button>
+                              <button class="btn btn-warning btnEditarInventario" idInventario="'.$value["id_inventario"].'" data-toggle="modal" data-target="#modalEditarStock"><i class="fas fa-pencil-alt" style="color:#fff"></i></button>
                               <button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
                               </td>
                           </tr>
@@ -252,8 +252,8 @@
                     <?php
                     $tipostock = 'producto';
                     $pantalla = 'stock';
-                    $ingresarPersona = new ControladorInventario();
-                    $ingresarPersona->ctrCrearStock($tipostock, $pantalla);
+                    $AgregarInventario = new ControladorInventario();
+                    $AgregarInventario->ctrCrearStock($tipostock, $pantalla);
                     ?>
                   </div>
                 </div>
@@ -350,12 +350,12 @@
                 <div class="form-row">
 
                     <div class="form-group col-md-5">
-                        <label for="exampleInputFile">Foto</label>
+                        <label for="nuevafoto">Foto</label>
                         <div class="input-group">
                           <img class="img-thumbnail previsualizar mr-2" src="vistas/img/usuarios/default/anonymous.png" alt="imagen-del-usuario" width="100px">
                           <div class="custom-file">
-                            <input type="file" class="custom-file-input nuevaFoto" id="exampleInputFile" name="nuevaFotoProducto">
-                            <label class="custom-file-label" for="exampleInputFile">Escoger foto</label>
+                            <input type="file" class="custom-file-input nuevaFoto" id="nuevafoto" name="nuevaFotoProducto">
+                            <label class="custom-file-label" for="nuevafoto">Escoger foto</label>
                           </div>
                         </div>
                             <p class="p-foto help-block ml-4">Peso máximo de la foto 2 MB</p>
@@ -363,18 +363,19 @@
                   </div>
 
                   <div class="form-group mt-4 float-right">
-                    <button type="" class="btn btn-primary">Guardar</button>
+                    <button type="" class="btn btn-primary">Guardar Cambios</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
                     </div>
-                
-
+                    
                     <?php
                     $tipostock = 'producto';
                     $pantalla = 'stock';
-                    $ingresarPersona = new ControladorInventario();
-                    $ingresarPersona->ctrCrearStock($tipostock, $pantalla);
+                    $EditarInventario = new ControladorInventario();
+                    $EditarInventario->ctrCrearStock($tipostock, $pantalla);
                     ?>
                   </div>
+
+
                 </div>
 
                 
