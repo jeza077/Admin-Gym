@@ -333,22 +333,35 @@ $(document).on('click', '.ajuste-preguntas', function (e) {
                 dataType: "json",
                 success: function(respuesta) {
                     console.log(respuesta);
-                    // return;
-                    // if(respuesta){
+                    
+                    if(respuesta){
+                        // for (let i = 0; i <= respuesta.length; i++) {
+                        //     // const element = respuesta[i];
+                        //     console.log(respuesta[i]['pregunta'])
+                        //     $('.preguntaUsuario'+i).html(respuesta[i]['pregunta']);                            
+                        // }
+
+                        for(let i in respuesta){
+                            console.log(respuesta[i]['pregunta'])
+                            $('.preguntaUsuario'+i).html(respuesta[i]['pregunta']);
+                            $('.preguntaUsuario'+i).val(respuesta[i]['id_preguntas']);
+                            $('.respuestaPregunta'+i).val(respuesta[i]['respuesta']);
+
+                        }
+
                         // $('.idPersona').val(respuesta['id_personas']);
                         // $('#editarTipoDocumento').html(respuesta['tipo_documento']);
                         // $('#editarTipoDocumento').val(respuesta['id_documento']);
                         // $('input[name=editarNumeroDocumento]').val(respuesta['num_documento']);
                         // $('input[name=editarNombre]').val(respuesta['nombre']);
                         // $('input[name=editarApellido]').val(respuesta['apellidos']);
-                        // $('input[name=editarEmail]').val(respuesta['correo']);
                         // $('input[name=editarTelefono]').val(respuesta['telefono']);
                         // $('input[name=editarFechaNacimiento]').val(respuesta['fecha_nacimiento']);
                         // $('input[name=editarDireccion]').val(respuesta['direccion']);
                         // $('#editarSexo').html(respuesta['sexo']);
                         // $('#editarSexo').val(respuesta['sexo']); 
                 
-                    // }
+                    }
                     
                 }
 

@@ -1130,7 +1130,250 @@ class ControladorUsuarios{
 
 
 	/*=============================================
-	CAMBIAR CONTRASEÑA POR PREGUNTAS DE SEGURIDAD
+		ENVIAR CODIGO DE RECUPERAR CONTRASEÑA
+	=============================================*/	
+    static public function ctrEnviarCodigo($id, $nombre, $correo){
+
+        if(isset($correo)) {
+            $correoElectronico = $correo;
+			$codigo = ControladorUsuarios::ctrCreateRandomCode();
+
+			$item = 'parametro';
+			$valor = 'ADMIN_VIGENCIA_CORREO';
+			$parametros = ControladorUsuarios::ctrMostrarParametros($item, $valor);
+	
+			$vigenciaCorreo = $parametros['valor'];
+
+			date_default_timezone_set("America/Tegucigalpa");
+			$fechaRecuperacion = date("Y-m-d H:i:s", strtotime('+'.$vigenciaCorreo.' hours'));
+
+			$tabla = "tbl_usuarios";
+
+			$item1 = "token";
+			$valor1 = $codigo;
+
+			$item2 = "fecha_recuperacion";
+			$valor2 = $fechaRecuperacion;
+
+			$item3 = "id_usuario";
+			$valor3 = $id;
+
+			$item4 = null;
+			$valor4 = null;
+			
+			$respuesta = ModeloUsuarios::mdlActualizarUsuario($tabla, $item1, $valor1, $item2, $valor2, $item3, $valor3, $item4, $valor4);
+
+			if($respuesta == true) {
+				$nombreRecibido = $nombre;
+
+				$respuestaCorreo = ControladorUsuarios::ctrEnviarCorreoRecuperacion($correoElectronico, $nombreRecibido, $codigo);
+
+				return $respuestaCorreo;	
+			} 
+			
+		} 
+    }
+
+
+	/*=============================================
+		ENVIAR CORREO DE RECUPERAR CONTRASEÑA
+	=============================================*/	
+    static public function ctrEnviarCorreoRecuperacion($correoElectronico, $nombre, $codigo){
+		// $user_os        =   ControladorGlobales::ctrGetOS();
+		// $user_browser   =   ControladorGlobales::ctrGetBrowser();
+
+		// return $user_os;
+
+		// var_dump($user_os ." ". $user_browser);
+
+		// return;
+		// echo $user_os . " " . $user_browser;
+
+		$correoDestinatario = $correoElectronico;
+		$nombreDestinatario = $nombre;
+		$asunto = 'Recuperación de Contraseña';
+		$require = true;
+		
+		// $parametros = ControladorGlobales::ctrMostrarParametros();
+
+		// $item = null;
+		// $valor = null;
+		// $parametros = ControladorUsuarios::ctrMostrarParametros($item, $valor);
+
+		// $correoEmpresa = $parametros[1]['valor'];
+		// $passwordEmpresa = $parametros[0]['valor'];
+		// return $correoEmpresa . '--' . $passwordEmpresa;
+
+        $template = file_get_contents('../extensiones/plantillas/template.php');
+        $template = str_replace("{{name}}", $nombre, $template);
+        $template = str_replace("{{action_url_1}}", 'localhost/gym/index.php?ruta=recuperar-password&codigo='.$codigo, $template);
+        $template = str_replace("{{action_url_2}}", '<b>localhost/gym/index.php?ruta=recuperar-password&codigo='.$codigo.'</b>', $template);
+        $template = str_replace("{{year}}", date('Y'), $template);
+        // $template = str_replace("{{operating_system}}", $user_os, $template);
+		// $template = str_replace("{{browser_name}}", $user_browser, $template);
+
+
+		$respuestaCorreo = ControladorUsuarios::ctrGenerarCorreo($correoDestinatario, $nombreDestinatario, $asunto, $template, $require);
+
+		return $respuestaCorreo;
+
+	}
+
+
+	/*=============================================
+	REVISAR CODIGO Y FECHA PARA CAMBIAR CONTRASEÑA
+	=============================================*/	
+    static public function ctrRevisarCodigoFecha(){
+
+		if(isset($_GET['codigo'])){
+
+			// $_SESSION['codigo'] = $_GET['codigo'];
+			$tabla1 = "tbl_personas";
+			$tabla2 = "tbl_usuarios";
+			$item = "token";
+			$valor = $_GET['codigo'];
+
+			$respuesta = ModeloUsuarios::mdlMostrarUsuarios($tabla1, $tabla2, $item, $valor);
+
+			// var_dump($respuesta);
+			// var_dump($respuesta['codigo'] . " " . $_GET['codigo']);
+			// $respuesta["codigo"] != null && $_GET["codigo"] != $respuesta["codigo"]
+			// return;
+
+			if($respuesta == false){
+				echo '<script>
+						Swal.fire({
+							title: "El código de recuperación de contraseña no es valido. Por favor intenta de nuevo.",
+							icon: "error",
+							heightAuto: false,
+							showConfirmButton: true,
+							confirmButtonText: "Cerrar",
+							allowOutsideClick: false
+						}).then((result)=>{
+    
+							if(result.value){
+
+								window.location = "login";
+	
+							}
+	
+						});
+				
+					</script>';
+					
+			} else {
+
+				$fechaAhora = date("Y-m-d H:i:s");
+
+				if($fechaAhora > $respuesta['fecha_recuperacion']) {
+					echo '<script>
+							Swal.fire({
+								title: "El código de recuperación de contraseña ha expirado. Por favor intenta de nuevo.",
+								icon: "error",
+								heightAuto: false,
+								showConfirmButton: true,
+								confirmButtonText: "Cerrar",
+								allowOutsideClick: false
+							}).then((result)=>{
+
+								if(result.value){
+
+									window.location = "login";
+
+								}
+
+							});
+					
+						</script>';
+				} 
+				
+			}
+
+		} else {
+			header("location:login");
+		}
+
+	}
+	
+
+	/*=============================================
+			GENERAR CORREO
+	=============================================*/	
+    static public function ctrGenerarCorreo($correoDestinatario, $nombreDestinatario, $asunto, $template, $require){
+
+		if($require != false){
+			
+			require '../extensiones/PHPMailer/PHPMailer/src/Exception.php';
+			require '../extensiones/PHPMailer/PHPMailer/src/PHPMailer.php';
+			require '../extensiones/PHPMailer/PHPMailer/src/SMTP.php';
+
+		} else {
+			
+			require 'extensiones/PHPMailer/PHPMailer/src/Exception.php';
+			require 'extensiones/PHPMailer/PHPMailer/src/PHPMailer.php';
+			require 'extensiones/PHPMailer/PHPMailer/src/SMTP.php';
+		}
+
+		
+
+		
+		$item = null;
+		$valor = null;
+		$parametros = ControladorUsuarios::ctrMostrarParametros($item, $valor);
+
+		$correoEmpresa = $parametros[1]['valor'];
+		$passwordEmpresa = $parametros[0]['valor'];
+		$puerto = $parametros[5]['valor'];
+		$host = $parametros[6]['valor'];
+		$smtp = $parametros[7]['valor'];
+		
+
+
+        $mail = new PHPMailer(true);
+		$mail->CharSet = "UTF-8";
+
+        try {
+			$mail->SMTPOptions = array(
+				'ssl' => array(
+				'verify_peer' => false,
+				'verify_peer_name' => false,
+				'allow_self_signed' => true
+				)
+			);
+			$mail->SMTPDebug = 0;
+            $mail->isSMTP();
+            $mail->Host = $host;  //gmail SMTP server
+            $mail->SMTPAuth = true;
+            $mail->Username = $correoEmpresa;   //username
+            $mail->Password = $passwordEmpresa;   //password
+			// $mail->SMTPSecure = 'tls';
+            // $mail->Port = 587;     
+			$mail->SMTPSecure = $smtp;
+            $mail->Port = $puerto;                    //smtp port
+
+            $mail->setFrom($correoEmpresa, 'Gimnasio');
+            $mail->addAddress($correoDestinatario, $nombreDestinatario);
+
+            $mail->isHTML(true);
+            $mail->Subject = $asunto.' - Gimnasio';
+            $mail->Body = $template;
+		
+			if (!$mail->send()) {
+
+				return false;		
+			} else {
+				return true;
+			}
+
+        } catch (Exception $e) {
+            return false;
+		}
+		
+	}
+	
+
+	/*=============================================
+	CAMBIAR CONTRASEÑA POR DESDE PERFIL/AJUSTES DEL USUARIO
 	=============================================*/	
 	static public function ctrCambiarContraseñaUsuario($idPersona){
 		$tabla1 = "tbl_personas";
@@ -1262,245 +1505,54 @@ class ControladorUsuarios{
 	
 	}
 
-	/*=============================================
-		ENVIAR CODIGO DE RECUPERAR CONTRASEÑA
-	=============================================*/	
-    static public function ctrEnviarCodigo($id, $nombre, $correo){
-
-        if(isset($correo)) {
-            $correoElectronico = $correo;
-			$codigo = ControladorUsuarios::ctrCreateRandomCode();
-
-			$item = 'parametro';
-			$valor = 'ADMIN_VIGENCIA_CORREO';
-			$parametros = ControladorUsuarios::ctrMostrarParametros($item, $valor);
 	
-			$vigenciaCorreo = $parametros['valor'];
-
-			date_default_timezone_set("America/Tegucigalpa");
-			$fechaRecuperacion = date("Y-m-d H:i:s", strtotime('+'.$vigenciaCorreo.' hours'));
-
-			$tabla = "tbl_usuarios";
-
-			$item1 = "token";
-			$valor1 = $codigo;
-
-			$item2 = "fecha_recuperacion";
-			$valor2 = $fechaRecuperacion;
-
-			$item3 = "id_usuario";
-			$valor3 = $id;
-
-			$item4 = null;
-			$valor4 = null;
-			
-			$respuesta = ModeloUsuarios::mdlActualizarUsuario($tabla, $item1, $valor1, $item2, $valor2, $item3, $valor3, $item4, $valor4);
-
-			if($respuesta == true) {
-				$nombreRecibido = $nombre;
-
-				$respuestaCorreo = ControladorUsuarios::ctrEnviarCorreoRecuperacion($correoElectronico, $nombreRecibido, $codigo);
-
-				return $respuestaCorreo;	
-			} 
-			
-		} 
-    }
-
-	/*=============================================
-		ENVIAR CORREO DE RECUPERAR CONTRASEÑA
-	=============================================*/	
-    static public function ctrEnviarCorreoRecuperacion($correoElectronico, $nombre, $codigo){
-		// $user_os        =   ControladorGlobales::ctrGetOS();
-		// $user_browser   =   ControladorGlobales::ctrGetBrowser();
-
-		// return $user_os;
-
-		// var_dump($user_os ." ". $user_browser);
-
-		// return;
-		// echo $user_os . " " . $user_browser;
-
-		$correoDestinatario = $correoElectronico;
-		$nombreDestinatario = $nombre;
-		$asunto = 'Recuperación de Contraseña';
-		$require = true;
+	/*====================================================
+	ACTUALIZAR PREGUNTAS/RESPUESTAS POR DESDE PERFIL/AJUSTES DEL USUARIO
+	====================================================*/	
+	static public function ctrActualizarPreguntasRespuestas($idUsuario){
 		
-		// $parametros = ControladorGlobales::ctrMostrarParametros();
+		// echo '<pre>';
+		// var_dump($_POST);
+		// echo '</pre>';
+		// return;
+		if(isset($_POST['editarRespuestaPregunta'])){
 
-		// $item = null;
-		// $valor = null;
-		// $parametros = ControladorUsuarios::ctrMostrarParametros($item, $valor);
-
-		// $correoEmpresa = $parametros[1]['valor'];
-		// $passwordEmpresa = $parametros[0]['valor'];
-		// return $correoEmpresa . '--' . $passwordEmpresa;
-
-        $template = file_get_contents('../extensiones/plantillas/template.php');
-        $template = str_replace("{{name}}", $nombre, $template);
-        $template = str_replace("{{action_url_1}}", 'localhost/gym/index.php?ruta=recuperar-password&codigo='.$codigo, $template);
-        $template = str_replace("{{action_url_2}}", '<b>localhost/gym/index.php?ruta=recuperar-password&codigo='.$codigo.'</b>', $template);
-        $template = str_replace("{{year}}", date('Y'), $template);
-        // $template = str_replace("{{operating_system}}", $user_os, $template);
-		// $template = str_replace("{{browser_name}}", $user_browser, $template);
-
-
-		$respuestaCorreo = ControladorUsuarios::ctrGenerarCorreo($correoDestinatario, $nombreDestinatario, $asunto, $template, $require);
-
-		return $respuestaCorreo;
-
-	}
-
-	/*=============================================
-	REVISAR CODIGO Y FECHA PARA CAMBIAR CONTRASEÑA
-	=============================================*/	
-    static public function ctrRevisarCodigoFecha(){
-
-		if(isset($_GET['codigo'])){
-
-			// $_SESSION['codigo'] = $_GET['codigo'];
-			$tabla1 = "tbl_personas";
-			$tabla2 = "tbl_usuarios";
-			$item = "token";
-			$valor = $_GET['codigo'];
-
-			$respuesta = ModeloUsuarios::mdlMostrarUsuarios($tabla1, $tabla2, $item, $valor);
-
-			// var_dump($respuesta);
-			// var_dump($respuesta['codigo'] . " " . $_GET['codigo']);
-			// $respuesta["codigo"] != null && $_GET["codigo"] != $respuesta["codigo"]
-			// return;
-
-			if($respuesta == false){
-				echo '<script>
-						Swal.fire({
-							title: "El código de recuperación de contraseña no es valido. Por favor intenta de nuevo.",
-							icon: "error",
-							heightAuto: false,
-							showConfirmButton: true,
-							confirmButtonText: "Cerrar",
-							allowOutsideClick: false
-						}).then((result)=>{
-    
-							if(result.value){
-
-								window.location = "login";
-	
-							}
-	
-						});
+			if(preg_grep('/^(?=.*[a-zA-ZñÑáéíóúÁÉÍÓÚ])\S{1,50}$/', $_POST["editarRespuestaPregunta"])){
 				
-					</script>';
-					
-			} else {
+				$tabla = "tbl_preguntas_usuarios";
 
-				$fechaAhora = date("Y-m-d H:i:s");
+				$array = array("idUno" => 7,
+				"idDos" => 8,
+				"idTres" => 9);
+							
+				$datos = array("idUsuario" => $idUsuario,
+								"idPregunta" => $_POST["editarPregunta"],
+								"respuesta" => $_POST["editarRespuestaPregunta"],
+								"array" => $array);
+	
+								
+				$respuestaPreguntas = ModeloUsuarios::mdlActualizarPreguntaUsuario($tabla, $datos);
+	
+				var_dump($respuestaPreguntas);
+				return;
 
-				if($fechaAhora > $respuesta['fecha_recuperacion']) {
+				if($respuestaPreguntas == true){
 					echo '<script>
 							Swal.fire({
-								title: "El código de recuperación de contraseña ha expirado. Por favor intenta de nuevo.",
-								icon: "error",
-								heightAuto: false,
-								showConfirmButton: true,
-								confirmButtonText: "Cerrar",
-								allowOutsideClick: false
+								title: "Preguntas/respuestas actualizadas correctamente.",
+								icon: "success"
 							}).then((result)=>{
-
 								if(result.value){
-
-									window.location = "login";
-
+									window.location = "perfil";
 								}
-
-							});
-					
+							});					
 						</script>';
-				} 
-				
+				}
 			}
-
-		} else {
-			header("location:login");
 		}
-
 	}
-	
-	/*=============================================
-			GENERAR CORREO
-	=============================================*/	
-    static public function ctrGenerarCorreo($correoDestinatario, $nombreDestinatario, $asunto, $template, $require){
-
-		if($require != false){
-			
-			require '../extensiones/PHPMailer/PHPMailer/src/Exception.php';
-			require '../extensiones/PHPMailer/PHPMailer/src/PHPMailer.php';
-			require '../extensiones/PHPMailer/PHPMailer/src/SMTP.php';
-
-		} else {
-			
-			require 'extensiones/PHPMailer/PHPMailer/src/Exception.php';
-			require 'extensiones/PHPMailer/PHPMailer/src/PHPMailer.php';
-			require 'extensiones/PHPMailer/PHPMailer/src/SMTP.php';
-		}
-
-		
-
-		
-		$item = null;
-		$valor = null;
-		$parametros = ControladorUsuarios::ctrMostrarParametros($item, $valor);
-
-		$correoEmpresa = $parametros[1]['valor'];
-		$passwordEmpresa = $parametros[0]['valor'];
-		$puerto = $parametros[5]['valor'];
-		$host = $parametros[6]['valor'];
-		$smtp = $parametros[7]['valor'];
-		
 
 
-        $mail = new PHPMailer(true);
-		$mail->CharSet = "UTF-8";
-
-        try {
-			$mail->SMTPOptions = array(
-				'ssl' => array(
-				'verify_peer' => false,
-				'verify_peer_name' => false,
-				'allow_self_signed' => true
-				)
-			);
-			$mail->SMTPDebug = 0;
-            $mail->isSMTP();
-            $mail->Host = $host;  //gmail SMTP server
-            $mail->SMTPAuth = true;
-            $mail->Username = $correoEmpresa;   //username
-            $mail->Password = $passwordEmpresa;   //password
-			// $mail->SMTPSecure = 'tls';
-            // $mail->Port = 587;     
-			$mail->SMTPSecure = $smtp;
-            $mail->Port = $puerto;                    //smtp port
-
-            $mail->setFrom($correoEmpresa, 'Gimnasio');
-            $mail->addAddress($correoDestinatario, $nombreDestinatario);
-
-            $mail->isHTML(true);
-            $mail->Subject = $asunto.' - Gimnasio';
-            $mail->Body = $template;
-		
-			if (!$mail->send()) {
-
-				return false;		
-			} else {
-				return true;
-			}
-
-        } catch (Exception $e) {
-            return false;
-		}
-		
-	}
-	
 	/*=============================================
 		CREAR CODIGO RANDOM PARA EL PASSWORD
 	=============================================*/	

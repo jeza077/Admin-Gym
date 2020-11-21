@@ -17,16 +17,16 @@ require_once "../../modelos/usuarios.modelo.php";
                 // var_dump($parametros['valor']);
                 $cantidadPreguntas = $parametros['valor'];
                 
-                for ($i=1; $i <=$cantidadPreguntas ; $i++) { ?>
+                for ($i=0; $i < $cantidadPreguntas ; $i++) { ?>
 
-                <div class="card-body pregunta<?php echo $i?>">
+                <div class="card-body">
             
                     <div class="form-row">
 
                         <div class="form-group col-md-6">
-                            <label for="">Pregunta <?php echo $i?></label>
-                            <select class="form-control select2" name="nuevaPregunta[]">
-                                <option selected="selected">Seleccionar...</option>
+                            <label for="">Pregunta <?php echo ($i+1)?></label>
+                            <select class="form-control select2" name="editarPregunta[]">
+                                <option value="" class="preguntaUsuario<?php echo $i?>"></option>
                                 <?php 
                                     $tabla = "tbl_preguntas";
                                     $item = null;
@@ -43,8 +43,8 @@ require_once "../../modelos/usuarios.modelo.php";
                         </div>
                         
                         <div class="form-group col-md-6">
-                            <label class="" for="">Respuesta <?php echo $i?></label>
-                            <input type="text" class="form-control mayus respuesta<?php echo $i?>" name="respuestaPregunta[]" placeholder="Ingrese respuesta">
+                            <label class="" for="">Respuesta <?php echo ($i+1)?></label>
+                            <input type="text" class="form-control mayus respuestaPregunta<?php echo $i?>" value="" name="editarRespuestaPregunta[]" placeholder="Ingrese respuesta">
                         </div>
 
                     </div>

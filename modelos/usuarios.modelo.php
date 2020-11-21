@@ -372,6 +372,68 @@ class ModeloUsuarios{
 		$stmt = null;	
 	}	
 
+
+	/*=============================================
+	CAMBIAR PREGUNTAS/RESPUESTAS POR DESDE PERFIL/AJUSTES DEL USUARIO	
+	=============================================*/
+	 
+	static public function mdlActualizarPreguntaUsuario($tabla, $datos){
+
+		$preguntas = $datos['idPregunta'];
+		$respuestas = $datos['respuesta'];
+		$arrayId = $datos['array'];
+
+		// return $arrayId;
+		// PROBLEMA CON GUARDAR. HACERLO CON AJAX Y GUARDAR UNO POR UNO 
+
+		while(true) {
+
+			$fin = false;
+			
+			$pregunta = current($preguntas);
+			$respuesta = current($respuestas);
+			$array = current($arrayId);
+
+			// return $respuesta;
+
+
+			$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET id_preguntas = :id_preguntas, respuesta = :respuesta WHERE id_usuario = :id_usuario AND id_preguntas = :id_preguntas");
+	
+			$stmt->bindParam(":id_preguntas", $pregunta, PDO::PARAM_INT);
+			$stmt->bindParam(":respuesta", $respuesta, PDO::PARAM_STR);
+			$stmt->bindParam(":id_usuario", $datos["idUsuario"], PDO::PARAM_INT);
+			$stmt->bindParam(":id_preguntas", $array, PDO::PARAM_INT);
+			
+			$stmt->execute();
+
+			// return $stmt;
+			$pregunta = next($preguntas);
+			$respuesta = next($respuestas);
+			$array = next($arrayId);
+			
+
+			if($pregunta === false && $respuesta === false){
+				$fin = true;
+				break;
+			}
+		}
+
+		if($fin == true){
+
+			return true;	
+
+		}else{
+
+			return false;
+		
+		}
+
+		$stmt->close();
+		
+		$stmt = null;
+
+	}
+
 	    
 	/*=============================================
 		MOSTRAR PARAMETROS
