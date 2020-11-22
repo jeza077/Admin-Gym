@@ -26,10 +26,9 @@ $(document).on("click",".btnEditarInventario",function(){
 
 $("#nuevoTipoProducto").change(function(){
     var idCategoria = $(this).val();
-
     var datos = new FormData();
     datos.append("idCategoria", idCategoria);
-
+    // console.log("idCategoria", idCategoria)
     $.ajax({ 
         url:"ajax/inventario.ajax.php",
         method: "POST",
@@ -39,8 +38,20 @@ $("#nuevoTipoProducto").change(function(){
         processData: false,
         dataType: "json",
         success: function(respuesta){
-            var nuevoCodigo = respuesta["codigo"];
-            console.log("nuevoCodigo",nuevoCodigo);
+            // console.log("respuesta",respuesta);
+            var nuevoCodigo = parseInt(respuesta["codigo"]) + 1;
+            // console.log("nuevoCodigo",nuevoCodigo);
+            
+            
+            if(!respuesta && idCategoria == 1){
+                $(".nuevoCodigo").val(100)
+            } 
+            else if (!respuesta && idCategoria == 2){
+                $(".nuevoCodigo").val(700)
+            }
+            else {
+                $(".nuevoCodigo").val(nuevoCodigo)
+            }
         }
     });
 })

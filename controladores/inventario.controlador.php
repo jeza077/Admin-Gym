@@ -2,11 +2,11 @@
 
 class ControladorInventario
 {
-        static public function ctrMostrarInventario($tabla, $item, $valor)
+        static public function ctrMostrarInventario($tabla, $item, $valor,$order)
         {
                 $tabla1 = $tabla;
                 $tabla2 = "tbl_tipo_producto";
-                $respuesta = ModeloInventario::mdlMostrarInventario($tabla1, $tabla2, $item, $valor);
+                $respuesta = ModeloInventario::mdlMostrarInventario($tabla1, $tabla2, $item, $valor,$order);
                 return $respuesta;
         }
 
@@ -102,6 +102,7 @@ class ControladorInventario
                     $tabla = "tbl_inventario";
                     if($tipostock == 'producto'){
                         $datos = array("nombre_producto" => $_POST["nuevoNombreProducto"],
+                        "codigo" => $_POST["nuevoCodigo"],
                         "id_tipo_producto" => $_POST["nuevoTipoProducto"],
                         "stock" => $_POST["nuevoStock"],
                         "precio" => $_POST["nuevoPrecio"],
