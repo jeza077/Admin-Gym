@@ -10,13 +10,13 @@ class ModeloClientes{
 
 		if ($datos['tipo_cliente'] == "Gimnasio"){
 	
-			$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(id_persona, tipo_cliente, id_inscripcion, id_matricula, id_descuentos_promociones) VALUES (:id_persona, :tipo_cliente, :id_inscripcion, :id_matricula, :id_descuentos_promociones)");
+			$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(id_persona, tipo_cliente, id_inscripcion, id_matricula, id_descuento) VALUES (:id_persona, :tipo_cliente, :id_inscripcion, :id_matricula, :id_descuento)");
 	
 			$stmt->bindParam(":id_persona", $datos["id_persona"], PDO::PARAM_INT);
 			$stmt->bindParam(":tipo_cliente", $datos["tipo_cliente"], PDO::PARAM_STR);
 			$stmt->bindParam(":id_inscripcion", $datos["id_inscripcion"], PDO::PARAM_INT);
 			$stmt->bindParam(":id_matricula", $datos["id_matricula"], PDO::PARAM_INT);
-			$stmt->bindParam(":id_descuentos_promociones", $datos["id_descuentos_promociones"], PDO::PARAM_INT);
+			$stmt->bindParam(":id_descuento", $datos["id_descuento"], PDO::PARAM_INT);
 	
 			if($stmt->execute()){
 	
@@ -61,11 +61,11 @@ class ModeloClientes{
 
 		if($item != null){
 
-			$stmt = Conexion::conectar()->prepare("SELECT p.*, c.*, m.tipo_matricula, m.precio_matricula, pd.tipo_promociones_descuentos, pd.valor_promociones_descuentos, i.tipo_inscripcion,i.precio_inscripcion, i.fecha_creacion  FROM $tabla1 as p\n"
+			$stmt = Conexion::conectar()->prepare("SELECT p.*, c.*, m.tipo_matricula, m.precio_matricula, pd.tipo_descuento, pd.valor_descuento, i.tipo_inscripcion,i.precio_inscripcion, i.fecha_creacion  FROM $tabla1 as p\n"
 			. "LEFT JOIN $tabla2 as c ON p.id_personas = c.id_persona\n"
 			. "LEFT JOIN tbl_matricula as m ON c.id_matricula = m.id_matricula\n"
 			. "LEFT JOIN tbl_inscripcion as i ON c.id_inscripcion = i.id_inscripcion\n"
-			. "LEFT JOIN tbl_promociones_descuentos as pd ON c.id_descuentos_promociones = pd.id_promociones_descuentos\n"
+			. "LEFT JOIN tbl_descuento as pd ON c.id_descuento = pd.id_descuento\n"
 			. " WHERE $item = :$item"); 
 
 			$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
@@ -78,7 +78,7 @@ class ModeloClientes{
             . "LEFT JOIN $tabla2 as c ON p.id_personas = c.id_persona\n"
             . "LEFT JOIN tbl_matricula as m ON c.id_matricula = m.id_matricula\n"
             . "LEFT JOIN tbl_inscripcion as i ON c.id_inscripcion = i.id_inscripcion\n"
-			. "LEFT JOIN tbl_promociones_descuentos as pd ON c.id_descuentos_promociones = pd.id_promociones_descuentos\n"
+			. "LEFT JOIN tbl_descuento as pd ON c.id_descuento = pd.id_descuento\n"
 		    . "WHERE p.tipo_persona = 'clientes' ");
 			
 			$stmt -> execute();
@@ -124,13 +124,13 @@ class ModeloClientes{
 
 		if ($datos['tipo_cliente'] == "Gimnasio"){
 	
-			$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET id_persona = :id_persona, tipo_cliente = :tipo_cliente, id_inscripcion = :id_inscripcion, id_matricula = :id_matricula, id_descuentos_promociones = :id_descuentos_promociones WHERE id_persona = :id_persona");
+			$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET id_persona = :id_persona, tipo_cliente = :tipo_cliente, id_inscripcion = :id_inscripcion, id_matricula = :id_matricula, id_descuento = :id_descuento WHERE id_persona = :id_persona");
 	
 			$stmt->bindParam(":id_persona", $datos["id_persona"], PDO::PARAM_INT);
 			$stmt->bindParam(":tipo_cliente", $datos["tipo_cliente"], PDO::PARAM_STR);
 			$stmt->bindParam(":id_inscripcion", $datos["id_inscripcion"], PDO::PARAM_INT);
 			$stmt->bindParam(":id_matricula", $datos["id_matricula"], PDO::PARAM_INT);
-			$stmt->bindParam(":id_descuentos_promociones", $datos["id_descuentos_promociones"], PDO::PARAM_INT);
+			$stmt->bindParam(":id_descuento", $datos["id_descuento"], PDO::PARAM_INT);
 	
 			if($stmt->execute()){
 	

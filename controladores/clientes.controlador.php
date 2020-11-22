@@ -18,7 +18,7 @@ class ControladorClientes{
 			                "tipo_cliente" => $datos["tipo_cliente"],
 							"id_inscripcion" =>  $datos["id_inscripcion"],
 							"id_matricula" =>  $datos["id_matricula"],
-							"id_descuentos_promociones" =>  $datos["id_descuentos_promociones"]);
+							"id_descuento" =>  $datos["id_descuento"]);
 			} else {
 				$datos = array("id_persona" => $datos['id_persona'],
 			                  "tipo_cliente" => $datos["tipo_cliente"]);
@@ -71,7 +71,7 @@ class ControladorClientes{
 			                "tipo_cliente" => $datos["tipo_cliente"],
 							"id_inscripcion" =>  $datos["id_inscripcion"],
 							"id_matricula" =>  $datos["id_matricula"],
-							"id_descuentos_promociones" =>  $datos["id_descuentos_promociones"]);
+							"id_descuento" =>  $datos["id_descuento"]);
 			} else {
 				$datos = array("id_persona" => $datos['id_persona'],
 			                  "tipo_cliente" => $datos["tipo_cliente"]);

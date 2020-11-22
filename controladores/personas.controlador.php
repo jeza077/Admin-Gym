@@ -287,7 +287,7 @@ class ControladorPersonas{
                                 "tipo_cliente" => $_POST["tipoCliente"],
                                 "id_inscripcion" => $_POST["nuevaInscripcion"],
                                 "id_matricula" => $_POST["nuevaMatricula"],
-                                "id_descuentos_promociones" => $_POST["nuevaPromocion"]);
+                                "id_descuento" => $_POST["nuevaPromocion"]);
                             } else {
                                 $datos = array("id_persona" => $idPersona,
                                 "tipo_cliente" => $_POST["tipoCliente"]);
@@ -471,7 +471,7 @@ class ControladorPersonas{
                             "tipo_cliente" => $_POST["editarTipoCliente"],
                             "id_inscripcion" => $_POST["editarInscripcion"],
                             "id_matricula" => $_POST["editarMatricula"],
-                            "id_descuentos_promociones" => $_POST["editarPromocion"]);
+                            "id_descuento" => $_POST["editarPromocion"]);
                         } else {
                             $datos = array("id_persona" => $_POST["idEditarCliente"],
                             "tipo_cliente" => $_POST["editarTipoCliente"]);

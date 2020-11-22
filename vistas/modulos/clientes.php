@@ -248,14 +248,14 @@
                           <option selected="selected">Seleccionar...</option>
                           
                             <?php 
-                                $tabla = "tbl_promociones_descuentos";
+                                $tabla = "tbl_descuento";
                                 $item = null;
                                 $valor = null;
 
                                 $matriculas = ControladorClientes::ctrMostrar($tabla, $item, $valor);
 
                                 foreach ($matriculas as $key => $value) { ?>
-                                  <option value="<?php echo $value['id_promociones_descuentos']?>"><?php echo $value['tipo_promociones_descuentos']?></option>        
+                                  <option value="<?php echo $value['id_descuento']?>"><?php echo $value['tipo_descuento']?></option>        
                                 <?php 
                                 }
                             ?>
@@ -486,14 +486,14 @@
                           <option selected="selected">Seleccionar...</option>
                           
                             <?php 
-                                $tabla = "tbl_promociones_descuentos";
+                                $tabla = "tbl_descuento";
                                 $item = null;
                                 $valor = null;
 
                                 $matriculas = ControladorClientes::ctrMostrar($tabla, $item, $valor);
 
                                 foreach ($matriculas as $key => $value) { ?>
-                                  <option value="<?php echo $value['id_promociones_descuentos']?>"><?php echo $value['tipo_promociones_descuentos']?></option>        
+                                  <option value="<?php echo $value['id_descuento']?>"><?php echo $value['tipo_descuento']?></option>        
                                 <?php 
                                 }
                             ?>

@@ -94,7 +94,7 @@ $('.btnEditarCliente').click(function () {
 
             $('.editarTipoCliente').val(respuesta["tipo_cliente"])
             $('.editarMatricula').val(respuesta["id_matricula"])
-            $('.editarPromocion').val(respuesta["id_descuentos_promociones"])
+            $('.editarPromocion').val(respuesta["id_descuentos"])
             $('.editarInscripcion').val(respuesta["id_inscripcion"])
         }
     });
@@ -148,7 +148,7 @@ function mostrarDinamico(selector1,tablaDB,itemDB,selector2,precio) {
 // MOSTRAR TABLA INSCRIPCION
 mostrarDinamico($('.nuevaInscripcion'),'tbl_inscripcion','id_inscripcion',$('.nuevoPrecioInscripcion'),'precio_inscripcion')
 // MOSTRAR TABLA PROMOCIONES
-mostrarDinamico($('.nuevaPromocion'),'tbl_promociones_descuentos', 'id_promociones_descuentos',$('.nuevoPrecioPromocion'),'valor_promociones_descuentos')
+mostrarDinamico($('.nuevaPromocion'),'tbl_descuento', 'id_descuento',$('.nuevoPrecioPromocion'),'valor_descuento')
 
 /*=============================================
         SUMAR TOTAL CLIENTES
