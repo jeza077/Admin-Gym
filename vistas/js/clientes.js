@@ -1,3 +1,19 @@
+// VALIDACIONES DE DOCUMENTO
+$('.tipoDocumentoCliente').change(function (e) { 
+    e.preventDefault();
+    $('.idCliente').val("");
+
+    var valorTipoDocumento =$(this).val();
+    console.log(valorTipoDocumento);
+
+    if(valorTipoDocumento === 3){
+        $('.idCliente').keydown(sinNumeros);
+    } else {
+        $('.idCliente').keydown(sinLetras);
+        $('.idCliente').keydown(sinCaracteres);
+    }
+});
+
 validarEmail($('.emailCliente'))
 $('.numeroDocumentoCliente').keydown(impedirEspacios);
 $('.numeroDocumentoCliente').blur(validarDoc)
@@ -19,7 +35,10 @@ $(document).on('change', '.tipoCliente', function () {
     var valor = $(this).val();
     // console.log(valor)
     if (valor == "Gimnasio") {
+        SumaTotal()
+       
         $('#datosClientes').show();
+        // sumar();
     } else {
         $('#datosClientes').hide();
     }
@@ -62,7 +81,7 @@ $('.btnEditarCliente').click(function () {
 
             // console.log("respuesta", respuesta);
             
-            $('#idEditarCliente').val(respuesta["idEditarCliente"])
+            $('#idEditarCliente').val(respuesta["id_persona"])
             $('.editarTipoDocumento').val(respuesta["id_documento"])
             $('.editarNumeroDocumento').val(respuesta["num_documento"])
             $('.editarNombre').val(respuesta["nombre"])
@@ -87,6 +106,9 @@ function mostrarDinamico(selector1,tablaDB,itemDB,selector2,precio) {
   
     selector1.change(function (e) { 
         e.preventDefault();
+        // if (selector1 == $('.nuevaPromocion')){
+        //     sumar();    
+        // } 
         
         var item = itemDB;
         var valor = selector1.val();
@@ -109,10 +131,13 @@ function mostrarDinamico(selector1,tablaDB,itemDB,selector2,precio) {
             dataType: "json",
             success: function(respuesta) {
                 // console.log(respuesta[precio]);
-               var precioInscripcion = respuesta[precio];             
-            //    SumaTotal()      
-    
-               selector2.val(precioInscripcion);
+                SumaTotal();
+                var precioInscripcion = respuesta[precio];            
+                //    if (selector1 == $('.nuevaPromocion')){
+                    
+                    // } 
+                selector2.attr("value",precioInscripcion);
+            
 
             }
         });   
@@ -125,20 +150,27 @@ mostrarDinamico($('.nuevaInscripcion'),'tbl_inscripcion','id_inscripcion',$('.nu
 // MOSTRAR TABLA PROMOCIONES
 mostrarDinamico($('.nuevaPromocion'),'tbl_promociones_descuentos', 'id_promociones_descuentos',$('.nuevoPrecioPromocion'),'valor_promociones_descuentos')
 
-// CALCULAR EL TOTAL A PAGAR 
-function SumaTotal(selector) {  
+/*=============================================
+        SUMAR TOTAL CLIENTES
+=============================================*/
+
+function SumaTotal() {  
 
     selector.change(function (e) { 
         e.preventDefault();
+        // var precioMatricula = $('.nuevoPrecioMatricula').val();
+        // console.log("matricula", precioMatricula)
         
         var precioMatricula = $('.nuevoPrecioMatricula');
-        var precioDescuento = $('.nuevoPrecioPromocion');
-        var precioInscripcion = $('.nuevoPrecioInscripcion');
+        var precioDescuento = $('.nuevoPrecioPromocion').val();
+        var precioInscripcion = $('.nuevoPrecioInscripcion').val();
+        // console.log("Descuento", precioDescuento)
+        // console.log("Inscripcion", precioInscripcion)
+        // return;
      
         var arrayMatricula = [];
         var arrayInscripcion = [];
         var arrayDescuento = [];
-        // var arraySuma =[];
         var arrayTotal =[];
     
         for (var i = 0; i  < precioMatricula.length; i++) {
@@ -154,26 +186,53 @@ function SumaTotal(selector) {
         function sumaArrayTotal(total, numero) {
             return total + numero;
         }
-        
+        console.log("matricula", arrayMatricula)
+        console.log("descuento",arrayDescuento)
+        console.log("inscripcion", arrayInscripcion)
         var matricula = arrayMatricula.reduce(sumaArrayTotal);
         var descuento = arrayDescuento.reduce(sumaArrayTotal);
-        var matriculaTotal = matricula-descuento;
+        var matriculaTotal = precioMatricula - descuento;
         var inscripcionTotal = arrayInscripcion.reduce(sumaArrayTotal);
         
-
-        // arraySuma = matriculaTotal+inscripcionTotal;
         arrayTotal = matriculaTotal+inscripcionTotal;
         $('.totalPagar').val(arrayTotal);
         
         // console.log("arrayDescuento", arrayDescuento)
     });
 
+
 }
-SumaTotal($('.nuevaMatricula'))
-SumaTotal($('.nuevaPromocion'))
-SumaTotal($('.nuevaInscripcion'))
+// SumaTotal($('.tipoCliente'))
+// SumaTotal($('.nuevaPromocion'))
+// SumaTotal($('.nuevaInscripcion'))
 
+// function sumar() {
 
+//     var precioMatricula = $('.nuevoPrecioMatricula').val();
+//     var precioDescuento = $('.nuevoPrecioPromocion').val();
+//     var precioInscripcion = $('.nuevoPrecioInscripcion').val();
+//     var resultado = parseInt(precioMatricula) + parseInt(precioDescuento) + parseInt(precioInscripcion);
+//     console.log(precioMatricula)
+//     console.log(precioDescuento)
+//     console.log(precioInscripcion)
+
+//     console.log(resultado)
+
+  
+// }
+// sumar();
+// $('.tipoCliente').change(function (e) { 
+//     e.preventDefault();
+//     sumar();
+// });
+// $('.nuevoPrecioPromocion').change(function (e) { 
+//     e.preventDefault();
+//     sumar();
+// });
+// $('.nuevoPrecioInscripcion').change(function (e) { 
+//     e.preventDefault();
+//     sumar();
+// });
 
 /*=============================================
         ELIMINAR CLIENTE
@@ -197,19 +256,4 @@ $('.btnEliminarCliente').click(function () {
             window.location = "index.php?ruta=clientes&idCliente="+idCliente;
         }
     });
-});
-// VALIDACIONES DE EMAIL
-$('.tipoDocumentoCliente').change(function (e) { 
-    e.preventDefault();
-    $('.idCliente').val("");
-
-    var valorTipoDocumento =$(this).val();
-    console.log(valorTipoDocumento);
-
-    if(valorTipoDocumento === 3){
-        $('.idCliente').keydown(sinNumeros);
-    } else {
-        $('.idCliente').keydown(sinLetras);
-        $('.idCliente').keydown(sinCaracteres);
-    }
 });

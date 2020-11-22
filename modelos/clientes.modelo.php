@@ -139,12 +139,11 @@ class ModeloClientes{
 			}else{
 	
 				return false;
-			
 			}
-
+			
 		} else {
 
-			$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(id_persona, tipo_cliente) VALUES (:id_persona, :tipo_cliente)");
+			$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET id_persona = :id_persona, tipo_cliente = :tipo_cliente WHERE id_persona = :id_persona");
 	
 			$stmt->bindParam(":id_persona", $datos["id_persona"], PDO::PARAM_INT);
 			$stmt->bindParam(":tipo_cliente", $datos["tipo_cliente"], PDO::PARAM_STR);
@@ -162,9 +161,9 @@ class ModeloClientes{
 		}
 
 		$stmt->close();
-		
-		$stmt = null;
+		$stmt = null;	
 
+		
 	}
 	/*=============================================
 				ELIMINAR CLIENTES

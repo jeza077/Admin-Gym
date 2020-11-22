@@ -237,7 +237,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">$</span>  
                               </div>
-                            <input type="text" class="form-control text-right nuevoPrecioMatricula nuevoPrecio" value="<?php echo $value['precio_matricula']?>" readonly>
+                            <input type="text" class="form-control text-right nuevoPrecioMatricula" value="<?php echo $value['precio_matricula']?>" readonly>
                          </div>
                       </div>
                     </div>
@@ -267,7 +267,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">$</span>  
                               </div>
-                            <input type="text" class="form-control text-right nuevoPrecioPromocion nuevoPrecio" value="" readonly>
+                            <input type="text" class="form-control text-right nuevoPrecioPromocion" value="" readonly>
                          </div>
                       </div>
                     </div>
@@ -297,7 +297,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">$</span>  
                               </div>
-                            <input type="text" class="form-control text-right nuevoPrecioInscripcion nuevoPrecio" value="" readonly>                           
+                            <input type="text" class="form-control text-right nuevoPrecioInscripcion" value="" readonly>                           
                          </div>
                       </div>
                     </div>
@@ -308,7 +308,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">$</span>  
                             </div>
-                            <input type="text" class="form-control text-right totalPagar" value="" readonly>                        
+                            <input type="text" class="form-control text-right totalPagar" id="totalPagar" value="" readonly>                        
                          </div>
                       </div>
                     </div>
@@ -361,7 +361,7 @@
             
             <div class="tab-content" id="myTabContent">
               <div class="tab-pane fade show active" id="editarPersona" role="tabpanel" aria-labelledby="datoseditarcliente">
-              <input type="hidden" id="idEditarCliente" name="idEditarCliente">
+              
                 <div class="container-fluid mt-4">
                   <div class="form-row">
                     <div class="form-group col-md-3">
@@ -390,6 +390,7 @@
                     <div class="form-group col-md-3">
                       <label for="nombre">Nombre</label>
                       <input type="text" class="form-control editarNombre" name="editarNombre" required>
+                      <input type="hidden" id="idEditarCliente" name="idEditarCliente">
                     </div>
                     <div class="form-group col-md-3">
                       <label for="apellido">Apellido</label>

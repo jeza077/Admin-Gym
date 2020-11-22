@@ -46,8 +46,8 @@ class ControladorClientes{
 
 				$idCliente = end($totalId);
 
-				// $datos = array("id_clientes" =>$idCliente,
-				// "id_inscripcion" =>  $datos["id_inscripcion"]);
+				$datos = array("id_clientes" =>$idCliente,
+				"id_inscripcion" =>  $datos["id_inscripcion"]);
                         
                 return true;
 
@@ -61,11 +61,6 @@ class ControladorClientes{
 				EDITAR CLIENTE
 	=============================================*/
 	static public function ctrEditarCliente($datos){
-		// echo "<pre>";
-		// var_dump($datos);
-		// echo "</pre>";
-		// return;
-
 
         if(isset($datos['id_persona'])){
 
@@ -81,10 +76,17 @@ class ControladorClientes{
 				$datos = array("id_persona" => $datos['id_persona'],
 			                  "tipo_cliente" => $datos["tipo_cliente"]);
 			}
-							
+			// echo "<pre>";
+			// var_dump($datos);
+			// echo "</pre>";
+			// return;
 			
 
-            $respuestaCliente = ModeloClientes::mdlEditarCliente($tabla, $datos);
+			$respuestaEditarClientes = ModeloClientes::mdlEditarCliente($tabla, $datos);
+			// echo "<pre>";
+			// var_dump($datos);
+			// echo "</pre>";
+			// return;
 
             if($respuestaCliente = true){
 				
@@ -104,8 +106,8 @@ class ControladorClientes{
 
 				$idCliente = end($totalId);
 
-				// $datos = array("id_clientes" =>$idCliente,
-				// "id_inscripcion" =>  $datos["id_inscripcion"]);
+				$datos = array("id_clientes" =>$idCliente,
+				"id_inscripcion" =>  $datos["id_inscripcion"]);
                         
                 return true;
 
