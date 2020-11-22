@@ -17,9 +17,9 @@ require_once "../../modelos/usuarios.modelo.php";
                 // var_dump($parametros['valor']);
                 $cantidadPreguntas = $parametros['valor'];
                 
-                for ($i=0; $i < $cantidadPreguntas ; $i++) { ?>
 
-                <div class="card-body">
+                for ($i=0; $i < $cantidadPreguntas ; $i++) { ?>
+                <!-- <div class="card-body"> -->
             
                     <div class="form-row">
 
@@ -50,11 +50,11 @@ require_once "../../modelos/usuarios.modelo.php";
 
                     </div>
 
-                </div>
+                <!-- </div> -->
             <?php
                 }            
             ?>
-             <div class="form-row float-right mr-4">
+             <div class="form-row float-right mt-4">
                 <div class="form-group" id="pregunta<?php echo $i?>">
                     <button type="" class="btn btn-primary">Guardar</button>
                     <button type="button" class="btn btn-danger salirPerfil" data-dismiss="modal">Salir</button>

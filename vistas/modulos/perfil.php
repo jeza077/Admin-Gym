@@ -41,12 +41,19 @@
           <div class="card col-8 ajustes-usuario">
           
             <div class="card-body box-profile datos-generales">
-              <div class="row mb-5">                  
+              <div class="row mt-4 mb-5">                  
                 <div class="col-md-3">
                   <div class="float-right">
                     <?php
-                      if($_SESSION["foto"] != ""){
-                      echo '<img src="'.$_SESSION["foto"].'" class="profile-user-img img-fluid img-circle" alt="User Image">';
+                      $tabla = 'tbl_usuarios';
+                      $item = 'id_personas';
+                      $valor = $_SESSION['id_persona'];
+                      $usuario = ControladorUsuarios::ctrMostrarUsuarios($tabla, $item, $valor);
+
+                      // var_dump($usuario);
+
+                      if($usuario["foto"] != ""){
+                      echo '<img src="'.$usuario["foto"].'" class="profile-user-img img-fluid img-circle" alt="User Image">';
                       } else {
                       echo '<img src="vistas/img/usuarios/default/default2.png" class="profile-user-img img-fluid img-circle" alt="User Image">';
                       }
@@ -55,9 +62,9 @@
                 </div>
 
                 <div class="col-md-4 user">
-                  <h3 class="profile-username"><?php echo $_SESSION["nombre"]." ". $_SESSION["apellidos"]?></h3>
+                  <h3 class="profile-username"><?php echo $usuario["nombre"]." ". $usuario["apellidos"]?></h3>
 
-                  <p class="text-muted"><?php echo $_SESSION["rol"]?></p>
+                  <p class="text-muted"><?php echo $usuario["rol"]?></p>
                 </div>
                 
                 <div class="col-md-4 mt-4">
@@ -67,13 +74,13 @@
 
               <ul class="list-group list-group-unbordered mb-3">
                 <li class="list-group-item">
-                  <b>Nombre Usuario:</b> <a class="float-right text-muted">JEZA</a>
+                  <b>Nombre Usuario:</b> <a class="float-right text-muted"><?php echo $usuario["usuario"]?></a>
                 </li>
                 <li class="list-group-item">
-                  <b>Correo:</b> <a class="float-right text-muted">jesus@correo.com</a>
+                  <b>Correo:</b> <a class="float-right text-muted"><?php echo $usuario["correo"]?></a>
                 </li>
                 <li class="list-group-item">
-                  <b>Fecha de Vencimiento</b> <a class="float-right text-muted">2021/11/06</a>
+                  <b>Fecha de Vencimiento</b> <a class="float-right text-muted"><?php echo $usuario["fecha_vencimiento"]?></a>
                 </li>
               </ul>
 
