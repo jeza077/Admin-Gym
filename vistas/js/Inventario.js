@@ -20,3 +20,27 @@ $(document).on("click",".btnEditarInventario",function(){
         }
     });
 })
+
+//** ----------------- GENERAR CODIGO  --------------------------*/
+
+
+$("#nuevoTipoProducto").change(function(){
+    var idCategoria = $(this).val();
+
+    var datos = new FormData();
+    datos.append("idCategoria", idCategoria);
+
+    $.ajax({ 
+        url:"ajax/inventario.ajax.php",
+        method: "POST",
+        data: datos,
+        cache: false,
+        contentType: false,
+        processData: false,
+        dataType: "json",
+        success: function(respuesta){
+            var nuevoCodigo = respuesta["codigo"];
+            console.log("nuevoCodigo",nuevoCodigo);
+        }
+    });
+})

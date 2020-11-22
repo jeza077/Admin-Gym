@@ -56,6 +56,8 @@
                     <thead>
                     <tr>
                     <th scope="col">#</th>
+                    <th scope="col">Codigo</th>
+                    <th scope="col">Foto</th>
                     <th scope="col">tipo producto</th>
                     <th scope="col">Nombre</th>
                     <th scope="col">stock</th>
@@ -78,6 +80,8 @@
                       echo '
                               <tr>
                               <td scope="row">1</td>
+                              <td>'.'333'.'</td>
+                              <td><img class="img-thumbnail previsualizar mr-2" src="vistas/img/usuarios/default/anonymous.png" alt="imagen-del-usuario" width="100px"></td>
                               <td>'.$value["tipo_producto"].'</td>
                               <td>'.$value["nombre_producto"].'</td>
                               <td>'.$value["stock"].'</td>
@@ -107,6 +111,8 @@
                         <thead>
                             <tr>
                             <th scope="col">#</th>
+                            <th scope="col">Codigo</th>
+                            <th scope="col">Foto</th>
                             <th scope="col">tipo producto</th>
                             <th scope="col">Nombre</th>
                             <th scope="col">stock</th>
@@ -183,7 +189,7 @@
                   <div class="form-row">
                     <div class="form-group col-md-4">
                       <label for="">Tipo<?php echo $i?></label>
-                      <select class="form-control select2" name="nuevoTipoProducto">
+                      <select class="form-control select2"  id="nuevoTipoProducto" name="nuevoTipoProducto">
                           <option selected="selected">Seleccionar...</option>
                           <?php 
                               $tabla = "tbl_tipo_producto";
@@ -192,7 +198,7 @@
 
                               $preguntas = ControladorInventario::ctrMostrarTipoProducto($tabla, $item, $valor);
                               foreach ($preguntas as $key => $value) { ?>
-                                  <option value="<?php echo $value['id_tipo_producto']?>"><?php echo $value['tipo_producto']?></option>        
+                                  <option value="<?php echo $value['id']?>"><?php echo $value['tipo_producto']?></option>        
                               <?php 
                               }
                           ?>
@@ -205,7 +211,7 @@
                     </div>
                     <div class="form-group col-md-4">
                       <label for="stock">Cantidad en stock</label>
-                      <input type="text" class="form-control stock" name="nuevoStock" placeholder="Cantidad en stock" required>
+                      <input type="number" class="form-control stock" name="nuevoStock" placeholder="Cantidad en stock" min="0" required class="fa fa-arrow-up"></i></span>
                     </div>
                   </div>
       
@@ -219,11 +225,11 @@
                     </div>
                         <div class="form-group col-md-4">
                           <label for="productominimo">Producto Minimo</label>
-                          <input type="text" class="form-control precio" name="nuevoProductoMinimo" placeholder="Cantidad Minima" required>
+                          <input type="number" class="form-control precio" name="nuevoProductoMinimo" placeholder="Cantidad Minima" min="0" required class="fa fa-arrow-up"></i></span>
                         </div>
                         <div class="form-group col-md-4">
                           <label for="productomaximo">Producto Maximo</label>
-                          <input type="text" class="form-control precio" name="nuevoProductoMaximo" placeholder="Cantidad Maximo" required>
+                          <input type="number" class="form-control precio" name="nuevoProductoMaximo" placeholder="Cantidad Maximo" min="0" required class="fa fa-arrow-up"></i></span>
                         </div>
                      </div>
 
