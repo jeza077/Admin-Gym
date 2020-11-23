@@ -97,7 +97,7 @@ class ControladorInventario
 
 					}
 
-
+                    
 
                     $tabla = "tbl_inventario";
                     if($tipostock == 'producto'){

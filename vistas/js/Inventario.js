@@ -42,7 +42,7 @@ $("#nuevoTipoProducto").change(function(){
             var nuevoCodigo = parseInt(respuesta["codigo"]) + 1;
             // console.log("nuevoCodigo",nuevoCodigo);
             
-            
+
             if(!respuesta && idCategoria == 1){
                 $(".nuevoCodigo").val(100)
             } 

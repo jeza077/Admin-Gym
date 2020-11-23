@@ -13,6 +13,7 @@ class AjaxInventario{
         echo json_encode($respuesta);
     }
 
+    
     //** ----------------- GENERAR CODIGO --------------------------*/
     public $idCategoria;
     public function ajaxCradorCodigoProducto(){
