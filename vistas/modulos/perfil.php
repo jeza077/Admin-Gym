@@ -54,9 +54,9 @@
                       // var_dump($usuario);
 
                       if($usuario["foto"] != ""){
-                      echo '<img src="'.$usuario["foto"].'" class="profile-user-img img-fluid img-circle previsualizar" alt="User Image">';
+                      echo '<img src="'.$usuario["foto"].'" class="profile-user-img img-fluid img-circle imgUsuario" alt="User Image">';
                       } else {
-                      echo '<img src="vistas/img/usuarios/default/default2.jpg" class="profile-user-img img-fluid img-circle previsualizar" alt="User Image">';
+                      echo '<img src="vistas/img/usuarios/default/default2.jpg" class="profile-user-img img-fluid img-circle imgUsuario" alt="User Image">';
                       }
                     ?>
                   </div>
@@ -74,7 +74,7 @@
                 <div class="col-md-8 mt-4 editarFotoUsuario">
                   <form role="form" method="post" class="formulario" enctype="multipart/form-data">
                     <div class="form-row">
-                      <div class="col-8">
+                      <div class="col-6">
                         <div class="form-group">
                             <!-- <label for="inputFoto">Foto</label> -->
                             <div class="input-group">
@@ -87,8 +87,9 @@
                                 <p class="p-foto help-block ml-4">Peso máximo de la foto 2 MB</p>
                         </div>
                       </div>
-                      <div class="col-4">
-                        <button type="submit" class="btn btn-orange btn-md guardar">Guardar</button>                   
+                      <div class="col-6">
+                        <button type="submit" class="btn btn-orange ml-3 btn-md guardar">Guardar</button>
+                        <button class="btn btn-outline-danger btn-md ml-2 salirFoto">Atras</button>                   
                       </div>
 
                     </div>

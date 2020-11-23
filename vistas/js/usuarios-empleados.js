@@ -370,18 +370,20 @@ function toggleCambiarFoto(){
 }
 
 $('.btnEditarFoto').click(function () { 
-    // e.preventDefault();
     toggleCambiarFoto();
-
-    // $('.user').slideUp(400);
     $('#datos-generales .user').hide();
+    var preview = $('.contenedorFoto').children().children();
+    preview.addClass('previsualizar');
+    srcFotoActual = $('.imgUsuario').attr('src');   
+    // console.log(srcFotoActual)
    
 });
 
-// $('.guardar').click(function () { 
-//     // e.preventDefault();
-//     console.log('click')
-//     var valor = $('#inputFoto').files;
-//     console.log(valor)
-
-// });
+$('.salirFoto').click(function (e) { 
+    e.preventDefault();  
+    var preview = $('.contenedorFoto').children().children();
+    preview.removeClass('previsualizar');
+    $('.imgUsuario').attr('src', srcFotoActual);
+    $('#datos-generales .user').show();
+    toggleCambiarFoto();
+});

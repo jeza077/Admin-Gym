@@ -1559,118 +1559,141 @@ class ControladorUsuarios{
 	static public function ctrEditarFoto($idUsuario, $usuario){
 		// echo $usuario;
 		// var_dump($_FILES);
+		// if($_FILES['editarFoto']['name'] == ""){
+		// 	echo 'si';
+		// } else {
+		// 	echo 'no';
+
+		// }
 		// var_dump($_POST);
 		// return;
 
 		if(isset($_FILES['editarFoto'])){
 
-			/*=============================================
-					VALIDAR IMAGEN
-			=============================================*/
+			if($_FILES['editarFoto']['name'] != ""){
 
-			$ruta = $_POST['fotoActual'];
-
-			if(isset($_FILES['editarFoto']["tmp_name"]) && !empty($_FILES['editarFoto']["tmp_name"])){
-
-				list($ancho, $alto) = getimagesize($_FILES['editarFoto']["tmp_name"]);
-
-				$nuevoAncho = 500;
-				$nuevoAlto = 500;
-
-				/*==============================================================
-				CREAMOS EL DIRECTORIO DONDE VAMOS A GUARDAR LA FOTO DEL USUARIO
-				===============================================================*/
-
-				$directorio = "vistas/img/usuarios/".$usuario;
-
-				// PRIMERO PREGUNTAMOS SI EXISTE OTRA IMAGEN EN LA BASE DE DATOS 
-				if(!empty($_POST['fotoActual'])){
-		
-					unlink($_POST['fotoActual']); 
-
-				} else {
-
-					mkdir($directorio, 0755); 
-				}
-
-				// echo $directorio;
-				// return;
-
-				/*=====================================================================
-				DE ACUERDO AL TIPO DE IMAGEN APLICAMOS LAS FUNCIONES POR DEFECTO DE PHP
-				======================================================================*/
-
-				if($_FILES['editarFoto']["type"] == "image/jpeg"){
-
-					/*=============================================
-					GUARDAMOS LA IMAGEN EN EL DIRECTORIO
-					=============================================*/
-
-					$aleatorio = mt_rand(100,999);
-
-					$ruta = "vistas/img/usuarios/".$usuario."/".$aleatorio.".jpg";
-
-					$origen = imagecreatefromjpeg($_FILES['editarFoto']["tmp_name"]);
-
-					$destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
-
-					imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
-
-					imagejpeg($destino, $ruta);
-
-				}
-
-				if($_FILES['editarFoto']["type"] == "image/png"){
-
-					/*=============================================
-					GUARDAMOS LA IMAGEN EN EL DIRECTORIO
-					=============================================*/
-
-					$aleatorio = mt_rand(100,999);
-
-					$ruta = "vistas/img/usuarios/".$usuario."/".$aleatorio.".png";
-
-					$origen = imagecreatefrompng($_FILES['editarFoto']["tmp_name"]);
-
-					$destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
-
-					imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
-
-					imagepng($destino, $ruta);
-
-				}
-
-			} 
-
-			$tabla = 'tbl_usuarios';
-			$item1 = "foto";
-			$valor1 = $ruta;
-
-			$item2 = 'id_usuario';
-			$valor2 = $idUsuario;
-
-			$item3 = null;
-			$valor3 = null;
+				/*=============================================
+						VALIDAR IMAGEN
+				=============================================*/
+	
+				$ruta = $_POST['fotoActual'];
+	
+				if(isset($_FILES['editarFoto']["tmp_name"]) && !empty($_FILES['editarFoto']["tmp_name"])){
+	
+					list($ancho, $alto) = getimagesize($_FILES['editarFoto']["tmp_name"]);
+	
+					$nuevoAncho = 500;
+					$nuevoAlto = 500;
+	
+					/*==============================================================
+					CREAMOS EL DIRECTORIO DONDE VAMOS A GUARDAR LA FOTO DEL USUARIO
+					===============================================================*/
+	
+					$directorio = "vistas/img/usuarios/".$usuario;
+	
+					// PRIMERO PREGUNTAMOS SI EXISTE OTRA IMAGEN EN LA BASE DE DATOS 
+					if(!empty($_POST['fotoActual'])){
 			
-			$item4 = null;
-			$valor4 = null;
+						unlink($_POST['fotoActual']); 
+	
+					} else {
+	
+						mkdir($directorio, 0755); 
+					}
+	
+					// echo $directorio;
+					// return;
+	
+					/*=====================================================================
+					DE ACUERDO AL TIPO DE IMAGEN APLICAMOS LAS FUNCIONES POR DEFECTO DE PHP
+					======================================================================*/
+	
+					if($_FILES['editarFoto']["type"] == "image/jpeg"){
+	
+						/*=============================================
+						GUARDAMOS LA IMAGEN EN EL DIRECTORIO
+						=============================================*/
+	
+						$aleatorio = mt_rand(100,999);
+	
+						$ruta = "vistas/img/usuarios/".$usuario."/".$aleatorio.".jpg";
+	
+						$origen = imagecreatefromjpeg($_FILES['editarFoto']["tmp_name"]);
+	
+						$destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+	
+						imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+	
+						imagejpeg($destino, $ruta);
+	
+					}
+	
+					if($_FILES['editarFoto']["type"] == "image/png"){
+	
+						/*=============================================
+						GUARDAMOS LA IMAGEN EN EL DIRECTORIO
+						=============================================*/
+	
+						$aleatorio = mt_rand(100,999);
+	
+						$ruta = "vistas/img/usuarios/".$usuario."/".$aleatorio.".png";
+	
+						$origen = imagecreatefrompng($_FILES['editarFoto']["tmp_name"]);
+	
+						$destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+	
+						imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+	
+						imagepng($destino, $ruta);
+	
+					}
+	
+				} 
+	
+				$tabla = 'tbl_usuarios';
+				$item1 = "foto";
+				$valor1 = $ruta;
+	
+				$item2 = 'id_usuario';
+				$valor2 = $idUsuario;
+	
+				$item3 = null;
+				$valor3 = null;
+				
+				$item4 = null;
+				$valor4 = null;
+	
+				$respuesta = ModeloUsuarios::mdlActualizarUsuario($tabla, $item1, $valor1, $item2, $valor2, $item3, $valor3, $item4, $valor4);
+	
+				// var_dump($respuesta);
+				if($respuesta == true){
+					echo '<script>
+						Swal.fire({
+							title: "Tu foto se cambio exitosamente!",
+							icon: "success",
+							heightAuto: false
+						}).then((result)=>{
+							if(result.value){
+								window.location = "perfil";
+							}
+						});                                      
+					</script>';
+				}
 
-			$respuesta = ModeloUsuarios::mdlActualizarUsuario($tabla, $item1, $valor1, $item2, $valor2, $item3, $valor3, $item4, $valor4);
-
-			// var_dump($respuesta);
-			if($respuesta == true){
+			} else {
 				echo '<script>
-					Swal.fire({
-						title: "Tu foto se cambio exitosamente!",
-						icon: "success",
-						heightAuto: false
-					}).then((result)=>{
-						if(result.value){
-							window.location = "perfil";
-						}
-					});                                      
-				</script>';
+						Swal.fire({
+							title: "Elija un archivo.",
+							icon: "error",
+							heightAuto: false
+						}).then((result)=>{
+							if(result.value){
+								window.location = "perfil";
+							}
+						});                                      
+					</script>';
 			}
+
 
 		}
 	}

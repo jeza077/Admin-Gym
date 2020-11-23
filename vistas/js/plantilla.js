@@ -50,11 +50,11 @@ $(".tablas").DataTable({
 //*============================================
 var pathname = window.location.href;
 const claseActivo = $('.menu-lateral');
-console.log(claseActivo[3]);
+// console.log(claseActivo[3]);
 var stock = claseActivo[3];
 
 for (let i = 0; i < claseActivo.length -1; i++) {
-    console.log(claseActivo[i]['href']);
+    // console.log(claseActivo[i]['href']);
     if(pathname == claseActivo[i]['href']){
         $(claseActivo[i]).addClass('active');     
         break;
