@@ -186,47 +186,24 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
+
         <div class="modal-body">
           <form role="form" method="post" class="formulario">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
               <li class="nav-item" role="presentation">
                 <a class="nav-link active" id="datosPersona" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Datos personales</a>
               </li>
-             
             </ul>
             
             <div class="tab-content" id="myTabContent">
               <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="datoscliente">
                 <div class="container-fluid mt-4">
                   <div class="form-row">
-                    <div class="form-group col-md-3">
-                      <label for="">Tipo de documento <?php echo $i?></label>
-                      <select class="form-control select2 tipoDocumentoCliente" name="nuevoTipoDocumento">
-                          <option selected="selected">Seleccionar...</option>
-                          <?php 
-                              $tabla = "tbl_documento";
-                              $item = null;
-                              $valor = null;
-
-                              $preguntas = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
-
-                              foreach ($preguntas as $key => $value) { ?>
-                                  <option value="<?php echo $value['id_documento']?>"><?php echo $value['tipo_documento']?></option>        
-                              <?php 
-                              }
-                          ?>
-                      </select>
-                    </div>
-
-                    <div class="form-group col-md-3">
-                      <label for="identidad">Numero de documento</label>
-                      <input type="text" class="form-control idCliente" name="nuevoNumeroDocumento" placeholder="Ingrese Identidad" required>
-                    </div>
-                    <div class="form-group col-md-3">
+                    <div class="form-group col-md-4">
                       <label for="nombre">Nombre</label>
                       <input type="text" class="form-control nombre" name="nuevoNombre" placeholder="Ingrese Nombre" required>
                     </div>
-                    <div class="form-group col-md-3">
+                    <div class="form-group col-md-4">
                       <label for="apellido">Apellido</label>
                       <input type="text" class="form-control apellidos" name="nuevoApellido" placeholder="Ingrese Apellidos" required>
                     </div>
@@ -239,61 +216,28 @@
                       <input type="hidden" name="tipoCliente" value="ventas">
                     </div>
 
-                    <div class="form-group col-md-4">
-                      <label>Teléfono</label>
-                      <input type="text" class="form-control" data-inputmask='"mask": "(999) 9999-9999"' data-mask  name="nuevoTelefono" placeholder="Ingrese Telefono" required>
-                    </div>
-                    <div class="form-group col-md-4">
-                      <label>Fecha de nacimiento</label>
-                        <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy/mm/dd" data-mask  name="nuevaFechaNacimiento" placeholder="Ingrese Fecha de Nacimiento" required>
-                    </div>
-                  </div>
-
-                  <div class="form-row">
-                    <div class="form-group col-md-9">
-                      <label for="">Dirección</label>
-                      <input type="text" class="form-control" name="nuevaDireccion" placeholder="Col. Alameda, calle #2..." required>
-                    </div>
+                    <div class="form-group mt-8 float-right">
                   
-                    <div class="form-group col-md-3">
-                      <label>Sexo</label>
-                      <select class="form-control select2" name="nuevoSexo" style="width: 100%;" required>
-                        <option selected="selected">Seleccionar...</option>
-                        <option value="M">Masculino</option>
-                        <option value="F">Femenino</option>
-                      </select>
+                      <span class="input-group-addon"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarCliente" data-dismiss="modal">Guardar</button></span>
+                      <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
                     </div>
-                    <div class="form-row">
-                      <div class="form-group col-md-12">
-                        <select class="form-control select2 tipoCliente" name="editarTipoCliente" style="width: 100%;" required>
-                          <option selected="selected">Seleccionar...</option>
-                          <option value="Ventas">Cliente de ventas</option>
                           
-                        </select>
-                      </div>
-                    </div>
-                   
-                  </div>
-                </div>
-              </div>
+                  </div>     
 
-              <div class="form-group mt-4 float-right">
-                  
-                  <button type="" class="btn btn-primary">Guardar</button>
-                  <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
                 </div>
-            
-                <?php
-                  $tipoPersona = 'clientes';
-                  $pantalla = 'crear-venta';
-                  $ingresarPersona = new ControladorPersonas();
-                  $ingresarPersona->ctrCrearPersona($tipoPersona, $pantalla);
-                ?>
 
-      </div>
-     
+              </div>     
+
+            </div>
+
+          </form>     
+
+        </div>
+
+      </div> 
+
     </div>
-  </div>
+    
 </div>
 
 

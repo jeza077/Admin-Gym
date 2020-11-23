@@ -336,6 +336,7 @@ $("#nuevoImpuestoVenta").change(function(){
 
 $("#nuevoTotalVenta").number(true, 2);
 
+
 /*=============================================
 LISTAR TODOS LOS PRODUCTOS
 =============================================*/

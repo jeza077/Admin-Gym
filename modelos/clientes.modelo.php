@@ -170,12 +170,12 @@ class ModeloClientes{
 	ACTUALIZAR CLIENTE
 	=============================================*/
 
-	static public function mdlActualizarCliente($tabla, $item1, $valor1, $valor){
+	static public function mdlActualizarCliente($tabla, $item, $valor){
 
-		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET $item1 = :$item1 WHERE id = :id");
+		$stmt = Conexion::conectar()->prepare("UPDATE $tabla1 SET $item = :$item WHERE id_cliente = :id_cliente");
 
-		$stmt -> bindParam(":".$item1, $valor1, PDO::PARAM_STR);
-		$stmt -> bindParam(":id", $valor, PDO::PARAM_STR);
+		$stmt -> bindParam(":".$item, PDO::PARAM_STR);
+		$stmt -> bindParam(":id_cliente", $valor, PDO::PARAM_STR);
 
 		if($stmt -> execute()){
 

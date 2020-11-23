@@ -29,7 +29,7 @@ class ControladorVentas {
 
             $listaProductos = json_decode($_POST["listaProductos"], true);
             // var_dump($listaProductos);
-
+  
             $totalProductosComprados = array();
 
 			foreach ($listaProductos as $key => $value) {
@@ -61,28 +61,35 @@ class ControladorVentas {
 				$nuevoStock = ModeloProductos::mdlActualizarProducto($tablaProductos, $item1, $valor1, $item2, $valor2);
 
             }
-            
-            // $tablaClientes = "tbl_clientes";
+			
+		
+            $tabla1 = "tbl_clientes";
+			$item = $item;
+			$valor = $_POST["seleccionarCliente"];
 
-			// $item = "id";
-			// $valor = $_POST["seleccionarCliente"];
+			$traerCliente = ModeloClientes::mdlMostrarClientes($tabla1, $item, $valor);
+			// var_dump($traerCliente); 
+			// return; 
+			// echo $valor;
+			// return;
 
-			// $traerCliente = ModeloClientes::mdlMostrar($tablaClientes, $item, $valor);
+			$item1 = "compras";
+			$valor1 = array_sum($totalProductosComprados) + $traerCliente["compras"];
+			// echo $valor1;
+			// return;
 
-			// $item1a = "compras";
-			// $valor1a = array_sum($totalProductosComprados) + $traerCliente["compras"];
+			$comprasCliente = ModeloClientes::mdlActualizarCliente($tabla1, $item1, $valor1);
+			
 
-			// $comprasCliente = ModeloClientes::mdlActualizarCliente($tablaClientes, $item1a, $valor1a, $valor);
+			$item2 = "ultima_compra";
 
-			// $item1b = "ultima_compra";
+			date_default_timezone_set('America/Tegucigalpa');
 
-			// date_default_timezone_set('America/Tegucigalpa');
+			$fecha = date('Y-m-d');
+			$hora = date('H:i:s');
+			$valor2 = $fecha.' '.$hora;
 
-			// $fecha = date('Y-m-d');
-			// $hora = date('H:i:s');
-			// $valor1b = $fecha.' '.$hora;
-
-            // $fechaCliente = ModeloClientes::mdlActualizarCliente($tablaClientes, $item1b, $valor1b, $valor);
+            $fechaCliente = ModeloClientes::mdlActualizarCliente($tabla1, $item2, $valor2);
 
             /*=============================================
 			GUARDAR LA COMPRA
@@ -110,22 +117,22 @@ class ControladorVentas {
 
 
 			if (!$respuesta){
-				// echo'<script>
+				echo'<script>
 
-				// Swal.fire({
-				// 	  icon: "error",
-				// 	  title: "Error",
-				// 	  showConfirmButton: true,
-				// 	  confirmButtonText: "Cerrar"
-				// 	  }).then((result) => {
-				// 				if (result.value) {
+				Swal.fire({
+					  icon: "error",
+					  title: "Error",
+					  showConfirmButton: true,
+					  confirmButtonText: "Cerrar"
+					  }).then((result) => {
+								if (result.value) {
 
-				// 				window.location = "ventas";
+								window.location = "ventas";
 
-				// 				}
-				// 			})
+								}
+							})
 
-				// </script>';
+				</script>';
 
 				echo $respuesta;
 
