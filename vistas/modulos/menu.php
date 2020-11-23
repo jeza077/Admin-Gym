@@ -138,7 +138,7 @@
             <?php }?>
             <?php if($_SESSION['permisos']['Ventas']['consulta'] == 1){?>
             <li class="nav-item has-treeview">
-              <a href="ventas" class="nav-link">
+              <a href="ventas" class="nav-link menu-lateral">
                 <i class="nav-icon fas fa-cart-plus"></i>
                 <p>
                   Ventas

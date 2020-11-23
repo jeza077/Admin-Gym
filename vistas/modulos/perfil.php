@@ -56,7 +56,7 @@
                       if($usuario["foto"] != ""){
                       echo '<img src="'.$usuario["foto"].'" class="profile-user-img img-fluid img-circle previsualizar" alt="User Image">';
                       } else {
-                      echo '<img src="vistas/img/usuarios/default/default2.jpg" class="profile-user-img img-fluid img-circle" alt="User Image">';
+                      echo '<img src="vistas/img/usuarios/default/default2.jpg" class="profile-user-img img-fluid img-circle previsualizar" alt="User Image">';
                       }
                     ?>
                   </div>
@@ -81,7 +81,7 @@
                               <div class="custom-file">
                                 <input type="file" class="custom-file-input nuevaFoto" id="inputFoto" name="editarFoto">
                                 <label class="custom-file-label" for="inputFoto">Escoger foto</label>
-                                <input type="hidden" name="fotoActual" id="fotoActual">
+                                <input type="hidden" name="fotoActual" id="fotoActual" value="<?php echo $usuario["foto"]?>">
                               </div>
                             </div>
                                 <p class="p-foto help-block ml-4">Peso máximo de la foto 2 MB</p>
@@ -125,8 +125,9 @@
                 $actualizarPreguntasRespuestas = new ControladorUsuarios();
                 $actualizarPreguntasRespuestas->ctrActualizarPreguntasRespuestas($idUsuario);
 
+                $usuario = $_SESSION['usuario'];
                 $editarFoto = new ControladorUsuarios();
-                $editarFoto->ctrEditarFoto();
+                $editarFoto->ctrEditarFoto($idUsuario, $usuario);
             ?>
 
           </div>

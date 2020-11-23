@@ -1556,9 +1556,11 @@ class ControladorUsuarios{
 	/*====================================================
 	ACTUALIZAR FOTO DESDE PERFIL/AJUSTES DEL USUARIO
 	====================================================*/	
-	static public function ctrEditarFoto(){
-		var_dump($_FILES);
-		return;
+	static public function ctrEditarFoto($idUsuario, $usuario){
+		// echo $usuario;
+		// var_dump($_FILES);
+		// var_dump($_POST);
+		// return;
 
 		if(isset($_FILES['editarFoto'])){
 
@@ -1566,7 +1568,7 @@ class ControladorUsuarios{
 					VALIDAR IMAGEN
 			=============================================*/
 
-			$ruta = $datos['foto_actual'];
+			$ruta = $_POST['fotoActual'];
 
 			if(isset($_FILES['editarFoto']["tmp_name"]) && !empty($_FILES['editarFoto']["tmp_name"])){
 
@@ -1579,18 +1581,20 @@ class ControladorUsuarios{
 				CREAMOS EL DIRECTORIO DONDE VAMOS A GUARDAR LA FOTO DEL USUARIO
 				===============================================================*/
 
-				$directorio = "vistas/img/usuarios/".$datos["usuario"];
+				$directorio = "vistas/img/usuarios/".$usuario;
 
 				// PRIMERO PREGUNTAMOS SI EXISTE OTRA IMAGEN EN LA BASE DE DATOS 
-				if(!empty($datos['foto_actual'])){
+				if(!empty($_POST['fotoActual'])){
 		
-					unlink($datos['foto_actual']); 
+					unlink($_POST['fotoActual']); 
 
 				} else {
 
 					mkdir($directorio, 0755); 
 				}
 
+				// echo $directorio;
+				// return;
 
 				/*=====================================================================
 				DE ACUERDO AL TIPO DE IMAGEN APLICAMOS LAS FUNCIONES POR DEFECTO DE PHP
@@ -1604,7 +1608,7 @@ class ControladorUsuarios{
 
 					$aleatorio = mt_rand(100,999);
 
-					$ruta = "vistas/img/usuarios/".$datos["usuario"]."/".$aleatorio.".jpg";
+					$ruta = "vistas/img/usuarios/".$usuario."/".$aleatorio.".jpg";
 
 					$origen = imagecreatefromjpeg($_FILES['editarFoto']["tmp_name"]);
 
@@ -1624,7 +1628,7 @@ class ControladorUsuarios{
 
 					$aleatorio = mt_rand(100,999);
 
-					$ruta = "vistas/img/usuarios/".$datos["usuario"]."/".$aleatorio.".png";
+					$ruta = "vistas/img/usuarios/".$usuario."/".$aleatorio.".png";
 
 					$origen = imagecreatefrompng($_FILES['editarFoto']["tmp_name"]);
 
@@ -1636,7 +1640,38 @@ class ControladorUsuarios{
 
 				}
 
+			} 
+
+			$tabla = 'tbl_usuarios';
+			$item1 = "foto";
+			$valor1 = $ruta;
+
+			$item2 = 'id_usuario';
+			$valor2 = $idUsuario;
+
+			$item3 = null;
+			$valor3 = null;
+			
+			$item4 = null;
+			$valor4 = null;
+
+			$respuesta = ModeloUsuarios::mdlActualizarUsuario($tabla, $item1, $valor1, $item2, $valor2, $item3, $valor3, $item4, $valor4);
+
+			// var_dump($respuesta);
+			if($respuesta == true){
+				echo '<script>
+					Swal.fire({
+						title: "Tu foto se cambio exitosamente!",
+						icon: "success",
+						heightAuto: false
+					}).then((result)=>{
+						if(result.value){
+							window.location = "perfil";
+						}
+					});                                      
+				</script>';
 			}
+
 		}
 	}
 

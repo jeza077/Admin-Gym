@@ -39,66 +39,66 @@
 
         <div class="card">
 
-            <div class="card-body">
-            
-              <table class="table table-hover tablas text-center">
-                <thead>
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Usuario</th>
-                    <th scope="col">Foto</th>
-                    <th scope="col">Rol</th>
-                    <th scope="col">Estado</th>
-                    <th scope="col">Acciones</th>
-                  </tr>
-                </thead>
-                <tbody>
-                <?php 
-                  $tabla = "tbl_usuarios";
-                  $item = null;
-                  $valor = null;
-                  $usuarios = ControladorUsuarios::ctrMostrarSoloUsuarios($tabla, $item, $valor);
+          <div class="card-body">
+          
+            <table class="table table-hover tablas text-center">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Nombre</th>
+                  <th scope="col">Usuario</th>
+                  <th scope="col">Foto</th>
+                  <th scope="col">Rol</th>
+                  <th scope="col">Estado</th>
+                  <th scope="col">Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+              <?php 
+                $tabla = "tbl_usuarios";
+                $item = null;
+                $valor = null;
+                $usuarios = ControladorUsuarios::ctrMostrarSoloUsuarios($tabla, $item, $valor);
 
-                  // echo "<pre>";
-                  // var_dump($usuarios);
-                  // echo "</pre>";
+                // echo "<pre>";
+                // var_dump($usuarios);
+                // echo "</pre>";
 
-                  foreach ($usuarios as $key => $value) {
-                    echo '
-                          <tr>
-                          <td scope="row">'.($key+1).'</td>
-                          <td>'.$value["nombre"] .' '.$value["apellidos"].'</td>
-                          <td>'.$value["usuario"].'</td>';
+                foreach ($usuarios as $key => $value) {
+                  echo '
+                        <tr>
+                        <td scope="row">'.($key+1).'</td>
+                        <td>'.$value["nombre"] .' '.$value["apellidos"].'</td>
+                        <td>'.$value["usuario"].'</td>';
 
-                          if($value["foto"] != ""){
-                            echo '<td><img src="'.$value["foto"].'" class="img-thumbnail" width="40px"></td>';
-                          } else {
-                            echo '<td><img src="vistas/img/usuarios/default/default2.jpg" class="img-thumbnail" width="40px"></td>';
-                          }
+                        if($value["foto"] != ""){
+                          echo '<td><img src="'.$value["foto"].'" class="img-thumbnail" width="40px"></td>';
+                        } else {
+                          echo '<td><img src="vistas/img/usuarios/default/default2.jpg" class="img-thumbnail" width="40px"></td>';
+                        }
 
-                     echo '<td>'.$value["rol"].'</td>';
+                    echo '<td>'.$value["rol"].'</td>';
 
-                          if($value['estado'] != 0){
-                            echo '<td><button class="btn btn-success btn-md btnActivar" idUsuario="'.$value["id_usuario"].'" estadoUsuario="0">Activado</button></td>';
-                          } else {
-                            echo '<td><button class="btn btn-danger btn-md btnActivar" idUsuario="'.$value["id_usuario"].'" estadoUsuario="1">Desactivado</button></td>';
-                          }
-                          
-                     
-                     echo '<td>
-                              <button class="btn btn-warning btnEditarUsuario" idUsuario="'.$value["id_personas"].'" data-toggle="modal" data-target="#modalEditarUsuario"><i class="fas fa-pencil-alt" style="color:#fff"></i></button>
-                              <button class="btn btn-danger btnEliminarUsuario" idPersona="'.$value["id_personas"].'" fotoUsuario="'.$value["foto"].'" usuario="'.$value["usuario"].'"><i class="fas fa-trash-alt"></i></button>
-                            </td>
-                          </tr>
-                    ';
-                  }
-                ?>
-                
-                </tbody>
-              </table>
-            </div>
-            <!-- /.card-body -->
+                        if($value['estado'] != 0){
+                          echo '<td><button class="btn btn-success btn-md btnActivar" idUsuario="'.$value["id_usuario"].'" estadoUsuario="0">Activado</button></td>';
+                        } else {
+                          echo '<td><button class="btn btn-danger btn-md btnActivar" idUsuario="'.$value["id_usuario"].'" estadoUsuario="1">Desactivado</button></td>';
+                        }
+                        
+                    
+                    echo '<td>
+                            <button class="btn btn-warning btnEditarUsuario" idUsuario="'.$value["id_personas"].'" data-toggle="modal" data-target="#modalEditarUsuario"><i class="fas fa-pencil-alt" style="color:#fff"></i></button>
+                            <button class="btn btn-danger btnEliminarUsuario" idPersona="'.$value["id_personas"].'" fotoUsuario="'.$value["foto"].'" usuario="'.$value["usuario"].'"><i class="fas fa-trash-alt"></i></button>
+                          </td>
+                        </tr>
+                  ';
+                }
+              ?>
+              
+              </tbody>
+            </table>
+          </div>
+          <!-- /.card-body -->
         </div>
         <!-- /.card -->
     
