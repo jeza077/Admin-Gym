@@ -793,7 +793,7 @@ class ControladorUsuarios{
 			
 			// if($_POST["nuevaPregunta"][0] !== 'Seleccionar...' && $_POST["nuevaPregunta"][1] !== 'Seleccionar...' && $_POST["nuevaPregunta"][2] !== 'Seleccionar...'){
 
-				if(preg_match('/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%.])\S{8,16}$/', $_POST["editarPassword"]) && preg_grep('/^(?=.*[a-zñÑáéíóúÁÉÍÓÚ])\S{1,50}$/', $_POST["respuestaPregunta"])){
+				if(preg_match('/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%.])\S{8,16}$/', $_POST["editarPassword"]) && preg_grep('/^(?=.*[A-ZñÑáéíóúÁÉÍÓÚ])\S{1,50}$/', $_POST["respuestaPregunta"])){
 					// echo '<br><div class="alert alert-danger">bien.</div>';
 					// return;		
 
@@ -807,8 +807,8 @@ class ControladorUsuarios{
 
 					$respuestaContraseñas = ModeloUsuarios::mdlMostrarUsuarios($tabla1, $tabla2, $item, $valor);
 
-					// var_dump($respuestaContraseñas['Contraseña'] . ' ' . $encriptar);
-
+					// var_dump($respuestaContraseñas);
+					// return;
 					if($respuestaContraseñas['password'] == $encriptar){
 						// echo '<br><div class="alert alert-danger">Contraseña igual a la anterior, intente de nuevo.</div>';
 						echo '<script>			

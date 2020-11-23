@@ -414,7 +414,7 @@ body.primer-ingreso.pregunta-dos.pregunta-tres.password-primera-vez .contenedor-
 }
 .editarFotoUsuario{
     position: absolute;
-    left: 100%;
+    left: 110%;
     top: 30px;
     transition: 0.5s;
 }

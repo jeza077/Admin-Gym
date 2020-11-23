@@ -332,12 +332,12 @@ $(document).on('click', '.ajuste-preguntas', function (e) {
                 processData: false,  
                 dataType: "json",
                 success: function(respuesta) {
-                    console.log(respuesta);
+                    // console.log(respuesta);
                     
                     if(respuesta){
 
                         for(let i in respuesta){
-                            console.log(respuesta[i]['pregunta'])
+                            // console.log(respuesta[i]['pregunta'])
                             $('.preguntaUsuario'+i).html(respuesta[i]['pregunta']);
                             $('.preguntaUsuario'+i).val(respuesta[i]['id_preguntas']);
                             $('.respuestaPregunta'+i).val(respuesta[i]['respuesta']);
@@ -369,14 +369,12 @@ function toggleCambiarFoto(){
     container.classList.toggle('foto')
 }
 
-// $('.editarFotoUsuario').hide();
-
 $('.btnEditarFoto').click(function () { 
     // e.preventDefault();
     toggleCambiarFoto();
 
     // $('.user').slideUp(400);
-    $('.user').hide();
+    $('#datos-generales .user').hide();
    
 });
 

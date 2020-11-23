@@ -413,9 +413,9 @@ function validarDoc(selector) {
 /*=============================================
     FUNCION CONVERTIR A MAYUSCULAS
 =============================================*/
-$('.mayus').on('keyup', function () {
+$(document).on('keyup', '.mayus', function () {
     var valor = $(this);
-    // console.log(valor);
+    // console.log(valor.val());
     valor.val(valor.val().toUpperCase());
 });
 
