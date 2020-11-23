@@ -1,5 +1,15 @@
+<?php
 
-  <!-- Content Wrapper. Contains page content -->
+    $permisoAgregar = $_SESSION['permisos']['Usuarios']['agregar'];
+    $permisoEliminar = $_SESSION['permisos']['Usuarios']['eliminar'];
+    $permisoActualizar = $_SESSION['permisos']['Usuarios']['actualizar'];
+    $permisoConsulta = $_SESSION['permisos']['Usuarios']['consulta'];
+
+    // echo "<pre>";
+    // var_dump($_SESSION['permisos']);
+    // echo "</pre>";
+
+?>
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
 
@@ -11,9 +21,11 @@
           </div>
          
           <div class="col-sm-6">
+          <?php if($permisoAgregar == 1){ ?>
             <button class="btn btn-orange float-right"  data-toggle="modal" data-target="#modalAgregarUsuario">
               Agregar Usuario          
             </button>
+          <?php } ?>
             <button class="btn btn-danger btnExportarUsuarios float-right mr-3">
               Exportar PDF          
             </button>
@@ -25,17 +37,6 @@
  <!-- Main content -->
     <section class="content">
 
-      <?php 
-        $permisoAgregar = $_SESSION['permisos']['Usuarios']['agregar'];
-        $permisoEliminar = $_SESSION['permisos']['Usuarios']['eliminar'];
-        $permisoActualizar = $_SESSION['permisos']['Usuarios']['actualizar'];
-        $permisoConsulta = $_SESSION['permisos']['Usuarios']['consulta'];
-
-        // echo "<pre>";
-        // var_dump($_SESSION['permisos']);
-        // echo "</pre>";
-
-      ?>
         <div class="card">
 
             <div class="card-body">

@@ -33,7 +33,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
                <?php
-                
+                /*
                   $item1 = "usuario";
                   $valor1 = $_SESSION["usuario"];
                   $item2 = "rol";
@@ -77,7 +77,7 @@
                       </a>
                       </li>
 
-                  <?php  }  ?>
+                  <?php  }  */?>
                                           
                <?php 
 
@@ -88,6 +88,55 @@
                 
               ?>
 
+
+            <?php if($_SESSION['permisos']['Dashboard']['consulta'] == 1){?>
+            <li class="nav-item">
+              <a href="dashboard" class="nav-link menu-lateral">
+                <i class="nav-icon fas fa-th"></i>
+                <p>
+                  Dashboard
+                  <!-- <span class="right badge badge-danger">New</span> -->
+                </p>
+              </a>
+            </li>
+            <?php }?>
+
+            <?php if($_SESSION['permisos']['Usuarios']['consulta'] == 1){?>
+            <li class="nav-item">
+              <a href="usuarios" class="nav-link menu-lateral">
+                <i class="nav-icon fas fa-users"></i>
+                <p>
+                  Usuarios
+                  <!-- <span class="right badge badge-danger">New</span> -->
+                </p>
+              </a>
+            </li>
+            <?php }?>
+
+            <?php if($_SESSION['permisos']['Clientes']['consulta'] == 1){?>
+            <li class="nav-item">
+              <a href="clientes" class="nav-link menu-lateral">
+                <i class="nav-icon fas fa-user-circle"></i>
+                <p>
+                  Clientes
+                  <!-- <span class="right badge badge-danger">New</span> -->
+                </p>
+              </a>
+            </li>
+            <?php }?>
+
+            <?php if($_SESSION['permisos']['Stock']['consulta'] == 1){?>
+            <li class="nav-item">
+              <a href="stock" class="nav-link menu-lateral">
+                <i class="nav-icon fas fa-layer-group"></i>
+                <p>
+                  Stock
+                  <!-- <span class="right badge badge-danger">New</span> -->
+                </p>
+              </a>
+            </li>
+            <?php }?>
+            <?php if($_SESSION['permisos']['Ventas']['consulta'] == 1){?>
             <li class="nav-item has-treeview">
               <a href="ventas" class="nav-link">
                 <i class="nav-icon fas fa-cart-plus"></i>
@@ -117,6 +166,30 @@
                 </li>
               </ul>
             </li>
+            <?php } ?>
+            <?php if($_SESSION['permisos']['Mantenimiento']['consulta'] == 1){?>
+            <li class="nav-item">
+              <a href="mantenimiento" class="nav-link menu-lateral">
+                <i class="nav-icon fas fa-sliders-h"></i>
+                <p>
+                  Mantenimiento
+                  <!-- <span class="right badge badge-danger">New</span> -->
+                </p>
+              </a>
+            </li>
+            <?php } ?>
+
+            <?php if($_SESSION['permisos']['Respaldo y Restauracion']['consulta'] == 1){?>
+            <li class="nav-item">
+              <a href="respaldoyrestauracion" class="nav-link menu-lateral">
+                <i class="nav-icon fas fa-download"></i>
+                <p>
+                  Respaldo y Restauracion
+                  <!-- <span class="right badge badge-danger">New</span> -->
+                </p>
+              </a>
+            </li>
+            <?php } ?>
         </ul>
       </nav>
     </div>
