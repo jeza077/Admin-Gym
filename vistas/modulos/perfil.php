@@ -40,9 +40,9 @@
             
           <div class="card col-8 ajustes-usuario">
           
-            <div class="card-body box-profile datos-generales">
+            <div  id="datos-generales" class="card-body box-profile datos-generales">
               <div class="row mt-4 mb-5">                  
-                <div class="col-md-3">
+                <div class="col-md-3 contenedorFoto">
                   <div class="float-right">
                     <?php
                       $tabla = 'tbl_usuarios';
@@ -53,7 +53,7 @@
                       // var_dump($usuario);
 
                       if($usuario["foto"] != ""){
-                      echo '<img src="'.$usuario["foto"].'" class="profile-user-img img-fluid img-circle" alt="User Image">';
+                      echo '<img src="'.$usuario["foto"].'" class="profile-user-img img-fluid img-circle previsualizar" alt="User Image">';
                       } else {
                       echo '<img src="vistas/img/usuarios/default/default2.png" class="profile-user-img img-fluid img-circle" alt="User Image">';
                       }
@@ -63,12 +63,38 @@
 
                 <div class="col-md-4 user">
                   <h3 class="profile-username"><?php echo $usuario["nombre"]." ". $usuario["apellidos"]?></h3>
-
                   <p class="text-muted"><?php echo $usuario["rol"]?></p>
                 </div>
                 
-                <div class="col-md-4 mt-4">
-                  <a href="javascript:void(0);" class="btn btn-outline-orange btn-block"><b>Cambia tu foto</b></a>                  
+                <div class="col-md-4 mt-4 contenedorBtnEditarFoto">
+                    <!-- <div class="contenedorBtnEditarFoto"> -->
+                      <a href="javascript:void(0);" class="btn btn-outline-orange btn-block btnEditarFoto"><b>Cambia tu foto</b></a>                  
+                    <!-- </div> -->
+                </div>
+
+                <div class="col-md-8 mt-4 editarFotoUsuario">
+                  <div class="form-row">
+                    <form role="form" method="post" class="formulario" enctype="multipart/form-data">
+                      <div class="col-8">
+                        <div class="form-group">
+                            <!-- <label for="inputFoto">Foto</label> -->
+                            <div class="input-group">
+                              <!-- <img class="img-thumbnail previsualizar mr-2" src="vistas/img/usuarios/default/default2.jpg" alt="imagen-del-usuario" width="100px"> -->
+                              <div class="custom-file">
+                                <input type="file" class="custom-file-input nuevaFoto" id="inputFoto" name="editarFoto">
+                                <label class="custom-file-label" for="inputFoto">Escoger foto</label>
+                                <input type="hidden" name="fotoActual" id="fotoActual">
+                              </div>
+                            </div>
+                                <p class="p-foto help-block ml-4">Peso máximo de la foto 2 MB</p>
+                        </div>
+                      </div>
+                      <div class="col-4">
+                        <button type="submit" class="btn btn-orange btn-md guardar">Guardar</button>                   
+                      </div>
+                    </form>
+
+                  </div>
                 </div>
               </div>
 
@@ -100,6 +126,9 @@
                 $idUsuario = $_SESSION['id_usuario'];
                 $actualizarPreguntasRespuestas = new ControladorUsuarios();
                 $actualizarPreguntasRespuestas->ctrActualizarPreguntasRespuestas($idUsuario);
+
+                $editarFoto = new ControladorUsuarios();
+                $editarFoto->ctrEditarFoto();
             ?>
 
           </div>

@@ -302,7 +302,7 @@ $(document).on('click', '.ajuste-password', function (e) {
 });
 
 //** ------------------------------------*/
-//        AJUSTES PASSWORD USUARIO
+//        AJUSTES PREGUNTAS/RESPUESTAS USUARIO
 // --------------------------------------*/
 $(document).on('click', '.ajuste-preguntas', function (e) {
     e.preventDefault();
@@ -335,11 +335,6 @@ $(document).on('click', '.ajuste-preguntas', function (e) {
                     console.log(respuesta);
                     
                     if(respuesta){
-                        // for (let i = 0; i <= respuesta.length; i++) {
-                        //     // const element = respuesta[i];
-                        //     console.log(respuesta[i]['pregunta'])
-                        //     $('.preguntaUsuario'+i).html(respuesta[i]['pregunta']);                            
-                        // }
 
                         for(let i in respuesta){
                             console.log(respuesta[i]['pregunta'])
@@ -348,18 +343,6 @@ $(document).on('click', '.ajuste-preguntas', function (e) {
                             $('.respuestaPregunta'+i).val(respuesta[i]['respuesta']);
                             $('.idPreguntaUsuario'+i).val(respuesta[i]['id_preguntas_usuarios']);
                         }
-
-                        // $('.idPersona').val(respuesta['id_personas']);
-                        // $('#editarTipoDocumento').html(respuesta['tipo_documento']);
-                        // $('#editarTipoDocumento').val(respuesta['id_documento']);
-                        // $('input[name=editarNumeroDocumento]').val(respuesta['num_documento']);
-                        // $('input[name=editarNombre]').val(respuesta['nombre']);
-                        // $('input[name=editarApellido]').val(respuesta['apellidos']);
-                        // $('input[name=editarTelefono]').val(respuesta['telefono']);
-                        // $('input[name=editarFechaNacimiento]').val(respuesta['fecha_nacimiento']);
-                        // $('input[name=editarDireccion]').val(respuesta['direccion']);
-                        // $('#editarSexo').html(respuesta['sexo']);
-                        // $('#editarSexo').val(respuesta['sexo']); 
                 
                     }
                     
@@ -379,55 +362,28 @@ $(document).on('click', '.ajuste-preguntas', function (e) {
 });
 
 //** ------------------------------------*/
-//        AJUSTES GENERALES USUARIO
+//       AJUSTES CAMBIAR FOTO USUARIO
 // --------------------------------------*/
-/*
-$(document).on('click', '.ajuste-cuenta', function (e) {
-    var idPersonaUsuario = $(this).attr('idUsuario');
-    // console.log(idPersonaUsuario);
+function toggleCambiarFoto(){
+    var container = document.querySelector('.datos-generales');
+    container.classList.toggle('foto')
+}
 
-    var datos = new FormData();
-    datos.append('idPersonaUsuario', idPersonaUsuario);
+// $('.editarFotoUsuario').hide();
 
-    $.ajax({
+$('.btnEditarFoto').click(function () { 
+    // e.preventDefault();
+    toggleCambiarFoto();
 
-        url:"ajax/usuarios.ajax.php",
-        method: "POST",
-        data: datos,
-        cache: false,
-        contentType: false,
-        processData: false,  
-        dataType: "json",
-        success: function(respuesta) {
-            // console.log(respuesta);
-
-            if(respuesta){
-                // $('.idPersona').val(respuesta['id_personas']);
-                $('#editarTipoDocumento').html(respuesta['tipo_documento']);
-                $('#editarTipoDocumento').val(respuesta['id_documento']);
-                $('input[name=editarNumeroDocumento]').val(respuesta['num_documento']);
-                $('input[name=editarNombre]').val(respuesta['nombre']);
-                $('input[name=editarApellido]').val(respuesta['apellidos']);
-                $('input[name=editarEmail]').val(respuesta['correo']);
-                $('input[name=editarTelefono]').val(respuesta['telefono']);
-                $('input[name=editarFechaNacimiento]').val(respuesta['fecha_nacimiento']);
-                $('input[name=editarDireccion]').val(respuesta['direccion']);
-                $('input[name=editarSexo]').html(respuesta['sexo']);
-                $('input[name=editarSexo]').val(respuesta['sexo']); 
-                // $('input[name=editarUsuario]').val(respuesta['usuario']);
-                // $('#editarRol').html(respuesta['rol']);
-                // $('#editarRol').val(respuesta['id_rol']);
-                // $('#passwordActual').val(respuesta['password']);
-                // $('#fotoActual').val(respuesta['foto']);
-                // if(respuesta['foto'] != ""){
-                //     $('.previsualizar').attr('src', respuesta['foto']);
-                // } else {
-                //     $('.previsualizar').attr('src', 'vistas/img/usuarios/default/default2.jpg');
-                // }
-            }
-            
-        }
-
-    });
+    // $('.user').slideUp(400);
+    $('.user').hide();
+   
 });
-*/
+
+// $('.guardar').click(function () { 
+//     // e.preventDefault();
+//     console.log('click')
+//     var valor = $('#inputFoto').files;
+//     console.log(valor)
+
+// });
