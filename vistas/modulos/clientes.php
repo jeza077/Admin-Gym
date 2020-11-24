@@ -160,11 +160,11 @@
                     </div>
                     <div class="form-group col-md-3">
                       <label for="nombre">Nombre</label>
-                      <input type="text" class="form-control nombre" name="nuevoNombre" placeholder="Ingrese Nombre" required>
+                      <input type="text" class="form-control nombre mayus" name="nuevoNombre" placeholder="Ingrese Nombre" required>
                     </div>
                     <div class="form-group col-md-3">
                       <label for="apellido">Apellido</label>
-                      <input type="text" class="form-control apellidos" name="nuevoApellido" placeholder="Ingrese Apellidos" required>
+                      <input type="text" class="form-control apellidos mayus" name="nuevoApellido" placeholder="Ingrese Apellidos" required>
                     </div>
                   </div>
       
@@ -186,7 +186,7 @@
                   <div class="form-row">
                     <div class="form-group col-md-9">
                       <label for="">Dirección</label>
-                      <input type="text" class="form-control" name="nuevaDireccion" placeholder="Col. Alameda, calle #2..." required>
+                      <input type="text" class="form-control mayus" name="nuevaDireccion" placeholder="Col. Alameda, calle #2..." required>
                     </div>
                   
                     <div class="form-group col-md-3">
@@ -399,12 +399,12 @@
                     </div>
                     <div class="form-group col-md-3">
                       <label for="nombre">Nombre</label>
-                      <input type="text" class="form-control editarNombre" name="editarNombre" required>
+                      <input type="text" class="form-control editarNombre mayus" name="editarNombre" required>
                       <input type="hidden" id="idEditarCliente" name="idEditarCliente">
                     </div>
                     <div class="form-group col-md-3">
                       <label for="apellido">Apellido</label>
-                      <input type="text" class="form-control editarApellido" name="editarApellido" required>
+                      <input type="text" class="form-control editarApellido mayus" name="editarApellido" required>
                     </div>
                   </div>
       
