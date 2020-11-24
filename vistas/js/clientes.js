@@ -79,10 +79,13 @@ $('.btnEditarCliente').click(function () {
         dataType: "json",
         success: function(respuesta) {
 
-            // console.log("respuesta", respuesta);
+            console.log("respuesta", respuesta);
             
             $('#idEditarCliente').val(respuesta["id_persona"])
-            $('.editarTipoDocumento').val(respuesta["id_documento"])
+
+            $('#editarTipoDocumento').html(respuesta["tipo_documento"])
+            $('#editarTipoDocumento').val(respuesta["id_documento"])
+
             $('.editarNumeroDocumento').val(respuesta["num_documento"])
             $('.editarNombre').val(respuesta["nombre"])
             $('.editarApellido').val(respuesta["apellidos"])
@@ -90,12 +93,26 @@ $('.btnEditarCliente').click(function () {
             $('.editarTelefono').val(respuesta["telefono"])
             $('.editarFechaNacimiento').val(respuesta["fecha_nacimiento"])
             $('.editarDireccion').val(respuesta["direccion"])
-            $('.editarSexo').val(respuesta["sexo"])
+            $('#editarSexo').html(respuesta["sexo"])
+            $('#editarSexo').val(respuesta["sexo"])
 
-            $('.editarTipoCliente').val(respuesta["tipo_cliente"])
-            $('.editarMatricula').val(respuesta["id_matricula"])
-            $('.editarPromocion').val(respuesta["id_descuentos"])
-            $('.editarInscripcion').val(respuesta["id_inscripcion"])
+            $('#editarTipoCliente').html(respuesta["tipo_cliente"])
+            $('#editarTipoCliente').val(respuesta["tipo_cliente"])
+
+            $('#editarMatricula').html(respuesta["tipo_matricula"])
+            $('#editarMatricula').val(respuesta["id_matricula"])
+
+            $('#editarPromocion').html(respuesta["tipo_descuento"])
+            $('#editarPromocion').val(respuesta["id_descuento"])
+            
+             $('#editarInscripcion').html(respuesta["tipo_inscripcion"])
+            $('#editarInscripcion').val(respuesta["id_inscripcion"])
+
+            $('.editarPrecioMatricula').val(respuesta["pago_matricula"])
+            $('.editarPrecioPromocion').val(respuesta["pago_descuento"])
+            $('.editarPrecioInscripcion').val(respuesta["pago_inscripcion"])
+            $('.editarTotalPagar').val(respuesta["pago_total"])
+            
         }
     });
 });
@@ -200,6 +217,7 @@ function SumaTotal(selector) {
         $('#nuevoPrecioDescuento').val(arrayDescuento);
         $('#pagoInscripcion').val(arrayInscripcion);
         $('#nuevoTotalCliente').val(arrayTotal);
+        $('#totalPagar').val(arrayTotal);
         // if (selector.change("nuevaPromocion")) {
         //     $('.totalPagar').val(matriculaTotal);
         // } else if (selector.change("nuevaInscripcion")){
@@ -224,7 +242,7 @@ SumaTotal($('.nuevaInscripcion'))
 =============================================*/
 $('.btnEliminarCliente').click(function () { 
 
-    var idCliente = $(this).attr("idCliente");
+    var idCliente = $(this).attr("idPersona");
     
     Swal.fire({
         title: '¿Está seguro de borrar el cliente?',

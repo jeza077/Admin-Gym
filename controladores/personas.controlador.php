@@ -463,28 +463,35 @@ class ControladorPersonas{
                     // echo "</pre>";
                     // return;
 
-                    if($respuestaEditarPersona == true){
+                    if($respuestaDeEditarPersona == true){
 
-                        if ($_POST['tipoCliente'] == "Gimnasio"){
+                        if ($_POST['editarTipoCliente'] == "Gimnasio"){
     
                             $datos = array("id_persona" => $_POST["idEditarCliente"],
                             "tipo_cliente" => $_POST["editarTipoCliente"],
                             "id_inscripcion" => $_POST["editarInscripcion"],
                             "id_matricula" => $_POST["editarMatricula"],
-                            "id_descuento" => $_POST["editarPromocion"]);
+                            "id_descuento" => $_POST["editarPromocion"],
+                            "pagos_matricula" => $_POST["editarPrecioMatricula"],
+                            "pagos_descuento" => $_POST["editarPrecioPromocion"],
+                            "pagos_inscripcion" => $_POST["editarPrecioInscripcion"],
+                            "pagos_total" => $_POST["editarTotalPagar"]);
                         } else {
                             $datos = array("id_persona" => $_POST["idEditarCliente"],
                             "tipo_cliente" => $_POST["editarTipoCliente"]);
                         }
-    
+                        // echo "<pre>";
+                        // var_dump($datos);
+                        // echo "</pre>";
+                        // return;
                         
     
                         $respuestaEditarCliente = ControladorClientes::ctrEditarCliente($datos);
+
                         // echo "<pre>";
                         // var_dump($respuestaEditarCliente);
                         // echo "</pre>";
                         // return;
-    
     
                         if($respuestaEditarCliente == true){
                             
@@ -528,7 +535,9 @@ class ControladorPersonas{
             BORRAR PERSONAS (USUARIO/CLIENTE)
 	=============================================*/
     static public function ctrBorrarPersona($pantalla){
-        
+        // var_dump($_GET);
+        // return;
+
         if(isset($_GET['idPersona'])){
             $tabla = 'tbl_personas';
             $datos = $_GET['idPersona'];

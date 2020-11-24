@@ -75,8 +75,17 @@ class ControladorClientes{
 				EDITAR CLIENTE
 	=============================================*/
 	static public function ctrEditarCliente($datos){
+		// echo "<pre>";
+		// var_dump
+		// echo "</pre>";
+		// return ($datos);
 
         if(isset($datos['id_persona'])){
+
+			$pago_matricula = $datos['pagos_matricula'];
+			$pago_descuento = $datos['pagos_descuento'];
+			$pago_inscripcion = $datos['pagos_inscripcion'];
+			$pago_total = $datos['pagos_total'];
 
 			$tabla = "tbl_clientes";
 			
@@ -98,32 +107,38 @@ class ControladorClientes{
 
 			$respuestaEditarClientes = ModeloClientes::mdlEditarCliente($tabla, $datos);
 			// echo "<pre>";
-			// var_dump($datos);
+			// var_dump($respuestaEditarClientes);
 			// echo "</pre>";
 			// return;
 
-            if($respuestaCliente = true){
+            if($respuestaEditarClientes = true){
 				
-				$totalId = array();
 				$tabla = "tbl_personas";
 				$tabla2 = "tbl_clientes";
-				$item = null;
-				$valor = null;
+				$item = "id_persona";
+				$valor = $datos["id_persona"];
 
 				$personaTotal = ModeloClientes::mdlMostrarClientes($tabla, $tabla2, $item, $valor);
-				
-				foreach($personaTotal as $keyCliente => $valuePersona){
-				array_push($totalId, $valuePersona["id_cliente"]);
+				// var_dump($personaTotal);
+				// return;
+				$idCliente = $personaTotal["id_cliente"];
 
-				
-				}
+				$datos = array("id_cliente" =>$idCliente,
+				"pago_matricula" => $pago_matricula,
+				"pago_descuento" => $pago_descuento,
+				"pago_inscripcion" => $pago_inscripcion,
+				"pago_total" => $pago_total);
 
-				$idCliente = end($totalId);
+				$tabla = "tbl_pagos_cliente";
 
-				$datos = array("id_clientes" =>$idCliente,
-				"id_inscripcion" =>  $datos["id_inscripcion"]);
-                        
-                return true;
+				$respuestaEditarPago = ModeloClientes::mdlEditarPago($tabla, $datos);
+
+                if ($respuestaEditarPago == true) {
+					
+					return true;
+				} else {
+					return false;
+				}       
 
             } else {
                 return false;

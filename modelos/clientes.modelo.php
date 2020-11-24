@@ -61,11 +61,13 @@ class ModeloClientes{
 
 		if($item != null){
 
-			$stmt = Conexion::conectar()->prepare("SELECT p.*, c.*, m.tipo_matricula, m.precio_matricula, pd.tipo_descuento, pd.valor_descuento, i.tipo_inscripcion,i.precio_inscripcion, i.fecha_creacion  FROM $tabla1 as p\n"
+			$stmt = Conexion::conectar()->prepare("SELECT p.*, c.*, d.tipo_documento, m.tipo_matricula, m.precio_matricula, pd.tipo_descuento, pd.valor_descuento, i.tipo_inscripcion,i.precio_inscripcion, i.fecha_creacion, pc.* FROM $tabla1 as p\n"
 			. "LEFT JOIN $tabla2 as c ON p.id_personas = c.id_persona\n"
+			. "LEFT JOIN tbl_documento as d ON p.id_documento = d.id_documento\n"
 			. "LEFT JOIN tbl_matricula as m ON c.id_matricula = m.id_matricula\n"
 			. "LEFT JOIN tbl_inscripcion as i ON c.id_inscripcion = i.id_inscripcion\n"
 			. "LEFT JOIN tbl_descuento as pd ON c.id_descuento = pd.id_descuento\n"
+			. "LEFT JOIN tbl_pagos_cliente as pc ON c.id_cliente = pc.id_cliente\n"
 			. " WHERE $item = :$item"); 
 
 			$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
@@ -124,13 +126,13 @@ class ModeloClientes{
 
 		if ($datos['tipo_cliente'] == "Gimnasio"){
 	
-			$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET id_persona = :id_persona, tipo_cliente = :tipo_cliente, id_inscripcion = :id_inscripcion, id_matricula = :id_matricula, id_descuento = :id_descuento WHERE id_persona = :id_persona");
+			$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET tipo_cliente = :tipo_cliente, id_inscripcion = :id_inscripcion, id_matricula = :id_matricula, id_descuento = :id_descuento WHERE id_persona = :id_persona");
 	
-			$stmt->bindParam(":id_persona", $datos["id_persona"], PDO::PARAM_INT);
 			$stmt->bindParam(":tipo_cliente", $datos["tipo_cliente"], PDO::PARAM_STR);
 			$stmt->bindParam(":id_inscripcion", $datos["id_inscripcion"], PDO::PARAM_INT);
 			$stmt->bindParam(":id_matricula", $datos["id_matricula"], PDO::PARAM_INT);
 			$stmt->bindParam(":id_descuento", $datos["id_descuento"], PDO::PARAM_INT);
+			$stmt->bindParam(":id_persona", $datos["id_persona"], PDO::PARAM_INT);
 	
 			if($stmt->execute()){
 	
@@ -198,10 +200,33 @@ class ModeloClientes{
 		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla3 (id_cliente, pago_matricula, pago_descuento, pago_inscripcion, pago_total) VALUES (:id_cliente, :pago_matricula, :pago_descuento, :pago_inscripcion, :pago_total)");
 
 		$stmt->bindParam(":id_cliente", $datos["id_cliente"], PDO::PARAM_INT);
-		$stmt->bindParam(":pago_matricula", $datos["pago_matricula"], PDO::PARAM_INT);
-		$stmt->bindParam(":pago_descuento", $datos["pago_descuento"], PDO::PARAM_INT);
-		$stmt->bindParam(":pago_inscripcion", $datos["pago_inscripcion"], PDO::PARAM_INT);
-		$stmt->bindParam(":pago_total", $datos["pago_total"], PDO::PARAM_INT);
+		$stmt->bindParam(":pago_matricula", $datos["pago_matricula"], PDO::PARAM_STR);
+		$stmt->bindParam(":pago_descuento", $datos["pago_descuento"], PDO::PARAM_STR);
+		$stmt->bindParam(":pago_inscripcion", $datos["pago_inscripcion"], PDO::PARAM_STR);
+		$stmt->bindParam(":pago_total", $datos["pago_total"], PDO::PARAM_STR);
+
+		if($stmt->execute()){
+
+			return true;	
+
+		}else{
+
+			return false;
+		
+		}
+	}
+	/*=============================================
+			EDITAR PAGO CLIENTE
+	=============================================*/
+	static public function mdlEditarPago($tabla, $datos){
+
+		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET pago_matricula = :pago_matricula, pago_descuento = :pago_descuento, pago_inscripcion = :pago_inscripcion, pago_total = :pago_total WHERE id_cliente = :id_cliente");
+
+		$stmt->bindParam(":pago_matricula", $datos["pago_matricula"], PDO::PARAM_STR);
+		$stmt->bindParam(":pago_descuento", $datos["pago_descuento"], PDO::PARAM_STR);
+		$stmt->bindParam(":pago_inscripcion", $datos["pago_inscripcion"], PDO::PARAM_STR);
+		$stmt->bindParam(":pago_total", $datos["pago_total"], PDO::PARAM_STR);
+		$stmt->bindParam(":id_cliente", $datos["id_cliente"], PDO::PARAM_INT);
 
 		if($stmt->execute()){
 
