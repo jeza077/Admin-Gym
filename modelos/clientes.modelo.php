@@ -190,4 +190,27 @@ class ModeloClientes{
 		$stmt = null;
 
 	}
+	/*=============================================
+				REGISTRAR PAGO CLIENTE
+	=============================================*/
+	static public function mdlCrearPago($tabla3, $datos){
+
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla3 (id_cliente, pago_matricula, pago_descuento, pago_inscripcion, pago_total) VALUES (:id_cliente, :pago_matricula, :pago_descuento, :pago_inscripcion, :pago_total)");
+
+		$stmt->bindParam(":id_cliente", $datos["id_cliente"], PDO::PARAM_INT);
+		$stmt->bindParam(":pago_matricula", $datos["pago_matricula"], PDO::PARAM_INT);
+		$stmt->bindParam(":pago_descuento", $datos["pago_descuento"], PDO::PARAM_INT);
+		$stmt->bindParam(":pago_inscripcion", $datos["pago_inscripcion"], PDO::PARAM_INT);
+		$stmt->bindParam(":pago_total", $datos["pago_total"], PDO::PARAM_INT);
+
+		if($stmt->execute()){
+
+			return true;	
+
+		}else{
+
+			return false;
+		
+		}
+	}
 }

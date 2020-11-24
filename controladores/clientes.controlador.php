@@ -26,9 +26,12 @@ class ControladorClientes{
 							
 			
 
-            $respuestaCliente = ModeloClientes::mdlCrearCliente($tabla, $datos);
-
-            if($respuestaCliente = true){
+            $respuestaCrearCliente = ModeloClientes::mdlCrearCliente($tabla, $datos);
+            // echo "<pre>";
+			// var_dump($respuestaCrearCliente);
+			// echo "</pre>";
+			// return;
+            if($respuestaCrearCliente = true){
 				
 				$totalId = array();
 				$tabla = "tbl_personas";
@@ -38,17 +41,28 @@ class ControladorClientes{
 
 				$personaTotal = ModeloClientes::mdlMostrarClientes($tabla, $tabla2, $item, $valor);
 				
-				foreach($personaTotal as $keyCliente => $valuePersona){
-				array_push($totalId, $valuePersona["id_cliente"]);
+				foreach($personaTotal as $keyCliente => $valueCliente){
+				array_push($totalId, $valueCliente["id_cliente"]);
 
 				
 				}
 
 				$idCliente = end($totalId);
+				
+				$tabla3 = "tbl_pagos_cliente";
 
-				$datos = array("id_clientes" =>$idCliente,
-				"id_inscripcion" =>  $datos["id_inscripcion"]);
-                        
+				$datos = array("id_cliente" =>$idCliente,
+							   "pago_matricula" => $_POST["pagoMatricula"],
+							   "pago_descuento" => $_POST["nuevoPrecioDescuento"],
+							   "pago_inscripcion" => $_POST["pagoInscripcion"],
+							   "pago_total" => $_POST["nuevoTotalCliente"]);
+
+				$respuestaPago = ModeloClientes::mdlCrearPago($tabla3, $datos);
+				// echo "<pre>";
+				// var_dump($respuestaPago);
+				// echo "</pre>";
+				// return;
+
                 return true;
 
             } else {

@@ -238,6 +238,7 @@
                                 <span class="input-group-text">$</span>  
                               </div>
                             <input type="text" class="form-control text-right nuevoPrecioMatricula" value="<?php echo $value['precio_matricula']?>" readonly>
+                            <input type="hidden" id="pagoMatricula" name="pagoMatricula">  
                          </div>
                       </div>
                     </div>
@@ -268,6 +269,7 @@
                                 <span class="input-group-text">$</span>  
                               </div>
                             <input type="text" class="form-control text-right nuevoPrecioPromocion" value="" readonly>
+                            <input type="hidden" id="nuevoPrecioDescuento" name="nuevoPrecioDescuento">  
                          </div>
                       </div>
                     </div>
@@ -297,7 +299,8 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">$</span>  
                               </div>
-                            <input type="text" class="form-control text-right nuevoPrecioInscripcion" value="" readonly>                           
+                            <input type="text" class="form-control text-right nuevoPrecioInscripcion" value="" readonly>    
+                            <input type="hidden" id="pagoInscripcion" name="pagoInscripcion">                         
                          </div>
                       </div>
                     </div>
@@ -308,7 +311,8 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">$</span>  
                             </div>
-                            <input type="text" class="form-control text-right totalPagar" id="totalPagar" value="" readonly>                        
+                            <input type="text" class="form-control text-right totalPagar" id="totalPagar" value="" readonly>  
+                            <input type="hidden" id="nuevoTotalCliente" name="nuevoTotalCliente">                      
                          </div>
                       </div>
                     </div>

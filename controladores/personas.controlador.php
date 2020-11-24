@@ -296,7 +296,7 @@ class ControladorPersonas{
                            
     
                             $crearCliente = ControladorClientes::ctrCrearCliente($datos);
-                           
+                        
             
                             if($crearCliente == true){
                                 echo '<script>
@@ -480,10 +480,10 @@ class ControladorPersonas{
                         
     
                         $respuestaEditarCliente = ControladorClientes::ctrEditarCliente($datos);
-                        echo "<pre>";
-                        var_dump($respuestaEditarCliente);
-                        echo "</pre>";
-                        return;
+                        // echo "<pre>";
+                        // var_dump($respuestaEditarCliente);
+                        // echo "</pre>";
+                        // return;
     
     
                         if($respuestaEditarCliente == true){

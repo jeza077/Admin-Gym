@@ -35,7 +35,7 @@ $(document).on('change', '.tipoCliente', function () {
     var valor = $(this).val();
     // console.log(valor)
     if (valor == "Gimnasio") {
-        SumaTotal()
+        // SumaTotal()
        
         $('#datosClientes').show();
         // sumar();
@@ -99,9 +99,9 @@ $('.btnEditarCliente').click(function () {
         }
     });
 });
-/*=============================================
-        EDITAR CLIENTE
-=============================================*/
+/*============================================================
+    MOSTRAR PRECIOS DE MATRICULA, DESCUENTO Y INSCRIPCION
+============================================================*/
 function mostrarDinamico(selector1,tablaDB,itemDB,selector2,precio) {  
   
     selector1.change(function (e) { 
@@ -131,7 +131,7 @@ function mostrarDinamico(selector1,tablaDB,itemDB,selector2,precio) {
             dataType: "json",
             success: function(respuesta) {
                 // console.log(respuesta[precio]);
-                SumaTotal();
+                // SumaTotal();
                 var precioInscripcion = respuesta[precio];            
                 //    if (selector1 == $('.nuevaPromocion')){
                     
@@ -154,23 +154,24 @@ mostrarDinamico($('.nuevaPromocion'),'tbl_descuento', 'id_descuento',$('.nuevoPr
         SUMAR TOTAL CLIENTES
 =============================================*/
 
-function SumaTotal() {  
+function SumaTotal(selector) {  
 
     selector.change(function (e) { 
         e.preventDefault();
-        // var precioMatricula = $('.nuevoPrecioMatricula').val();
+        var precioMatricula = $('.nuevoPrecioMatricula');
         // console.log("matricula", precioMatricula)
         
-        var precioMatricula = $('.nuevoPrecioMatricula');
-        var precioDescuento = $('.nuevoPrecioPromocion').val();
-        var precioInscripcion = $('.nuevoPrecioInscripcion').val();
+        // var precioMatricula = $('.nuevoPrecioMatricula');
+        var precioDescuento = $('.nuevoPrecioPromocion');
+        var precioInscripcion = $('.nuevoPrecioInscripcion');
         // console.log("Descuento", precioDescuento)
         // console.log("Inscripcion", precioInscripcion)
         // return;
      
         var arrayMatricula = [];
-        var arrayInscripcion = [];
         var arrayDescuento = [];
+        var arrayInscripcion = [];
+     
         var arrayTotal =[];
     
         for (var i = 0; i  < precioMatricula.length; i++) {
@@ -186,53 +187,37 @@ function SumaTotal() {
         function sumaArrayTotal(total, numero) {
             return total + numero;
         }
-        console.log("matricula", arrayMatricula)
-        console.log("descuento",arrayDescuento)
-        console.log("inscripcion", arrayInscripcion)
+        // console.log("matricula", arrayMatricula)
+        // console.log("descuento",arrayDescuento)
+        // console.log("inscripcion", arrayInscripcion)
         var matricula = arrayMatricula.reduce(sumaArrayTotal);
         var descuento = arrayDescuento.reduce(sumaArrayTotal);
-        var matriculaTotal = precioMatricula - descuento;
-        var inscripcionTotal = arrayInscripcion.reduce(sumaArrayTotal);
+        var matriculaTotal = matricula - descuento;
+        var inscripcion = arrayInscripcion.reduce(sumaArrayTotal);
         
-        arrayTotal = matriculaTotal+inscripcionTotal;
-        $('.totalPagar').val(arrayTotal);
+        arrayTotal = matriculaTotal + inscripcion;
+        $('#pagoMatricula').val(arrayMatricula);
+        $('#nuevoPrecioDescuento').val(arrayDescuento);
+        $('#pagoInscripcion').val(arrayInscripcion);
+        $('#nuevoTotalCliente').val(arrayTotal);
+        // if (selector.change("nuevaPromocion")) {
+        //     $('.totalPagar').val(matriculaTotal);
+        // } else if (selector.change("nuevaInscripcion")){
+
+            // }
+            
+            
         
-        // console.log("arrayDescuento", arrayDescuento)
+        console.log("arrayDescuento", arrayDescuento)
     });
 
 
 }
-// SumaTotal($('.tipoCliente'))
+SumaTotal($('.nuevaInscripcion'))
 // SumaTotal($('.nuevaPromocion'))
-// SumaTotal($('.nuevaInscripcion'))
+// SumaTotal($('.nuevaMatricula'))
 
-// function sumar() {
 
-//     var precioMatricula = $('.nuevoPrecioMatricula').val();
-//     var precioDescuento = $('.nuevoPrecioPromocion').val();
-//     var precioInscripcion = $('.nuevoPrecioInscripcion').val();
-//     var resultado = parseInt(precioMatricula) + parseInt(precioDescuento) + parseInt(precioInscripcion);
-//     console.log(precioMatricula)
-//     console.log(precioDescuento)
-//     console.log(precioInscripcion)
-
-//     console.log(resultado)
-
-  
-// }
-// sumar();
-// $('.tipoCliente').change(function (e) { 
-//     e.preventDefault();
-//     sumar();
-// });
-// $('.nuevoPrecioPromocion').change(function (e) { 
-//     e.preventDefault();
-//     sumar();
-// });
-// $('.nuevoPrecioInscripcion').change(function (e) { 
-//     e.preventDefault();
-//     sumar();
-// });
 
 /*=============================================
         ELIMINAR CLIENTE
