@@ -97,7 +97,7 @@ class ControladorUsuarios{
 					$respuesta = ModeloUsuarios::mdlMostrarUsuarios($tabla1, $tabla2, $item, $valor);
 
 				   	// echo "<pre>";
-                    // 	var_dump($respuesta['rol']);
+                    // 	var_dump($respuesta);
                   	// echo "</pre>";
 					// return;
 

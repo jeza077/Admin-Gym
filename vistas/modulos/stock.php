@@ -56,6 +56,8 @@
                     <thead>
                     <tr>
                     <th scope="col">#</th>
+                    <th scope="col">Codigo</th>
+                    <th scope="col">Foto</th>
                     <th scope="col">tipo producto</th>
                     <th scope="col">Nombre</th>
                     <th scope="col">stock</th>
@@ -66,26 +68,35 @@
                     </tr>
                 </thead>
                 <tbody>
-                <?php 
+                <?php
                     $tabla = "tbl_inventario";
                     $item = "tipo_producto";
-                    $valor = "Inventario";
-                    $inventarios=ControladorInventario::ctrMostrarInventario($tabla, $item, $valor);
+                    $valor = "Productos";
+                    $order = null;
+                    $inventarios=ControladorInventario::ctrMostrarInventario($tabla, $item, $valor,$order);
                     // echo"<pre>";
-                    // var_dump($inventarios['nombre_producto']);
+                    // var_dump($inventarios);
                     // echo"</pre>";
                     foreach ($inventarios as $key => $value) {
                       echo '
                               <tr>
-                              <td scope="row">1</td>
-                              <td>'.$value["tipo_producto"].'</td>
+                              <td scope="row">'.($key+1).'</td>
+                              <td>'.$value["codigo"].'</td>';
+
+                                  if($value["foto"] != ""){
+                                    echo '<td><img src="'.$value["foto"].'" class="img-thumbnail" width="40px"></td>';
+                                  } else {
+                                    echo '<td><img src="vistas/img/usuarios/default/default2.jpg" class="img-thumbnail" width="40px"></td>';
+                                  }
+                                    echo '<td>'.$value["tipo_producto"].'</td>
+         
                               <td>'.$value["nombre_producto"].'</td>
                               <td>'.$value["stock"].'</td>
                               <td>'.$value["precio"].'</td>
                               <td>'.$value["producto_minimo"].'</td>
                               <td>'.$value["producto_maximo"].'</td>     
                               <td>
-                              <button class="btn btn-warning btnEditarInventario"id_inventario="'.$value["id_inventario"].'" data-toggle="modal" data-target="#modalEditarStock"><i class="fas fa-pencil-alt" style="color:#fff"></i></button>
+                              <button class="btn btn-warning btnEditarInventario" idInventario="'.$value["id_inventario"].'" data-toggle="modal" data-target="#modalEditarStock"><i class="fas fa-pencil-alt" style="color:#fff"></i></button>
                               <button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
                               </td>
                           </tr>
@@ -107,12 +118,14 @@
                         <thead>
                             <tr>
                             <th scope="col">#</th>
-                            <th scope="col">tipo producto</th>
+                            <th scope="col">Codigo</th>
+                            <th scope="col">Foto</th>
+                            <th scope="col">Tipo producto</th>
                             <th scope="col">Nombre</th>
-                            <th scope="col">stock</th>
+                            <th scope="col">Stock</th>
                             <th scope="col">Precio</th>
-                            <th scope="col">Product min</th>
-                            <th scope="col">Produc max</th>
+                            <th scope="col">Producto min</th>
+                            <th scope="col">Producto max</th>
                             <th scope="col">Acciones</th>
                             </tr>
                         </thead>
@@ -121,13 +134,22 @@
                             $tabla = "tbl_inventario";
                             $item = "tipo_producto";
                             $valor = "bodega";
-                            $inventarios=ControladorInventario::ctrMostrarInventario($tabla, $item, $valor);
+                            $order = null;
+                            $inventarios=ControladorInventario::ctrMostrarInventario($tabla, $item, $valor,$order);
                             // var_dump($inventarios);
                             foreach ($inventarios as $key => $value) {
                             echo '
                                     <tr>
-                                    <td scope="row">1</td>
-                                    <td>'.$value["tipo_producto"].'</td>
+                                    <td scope="row">'.($key+1).'</td>
+                                    <td>'.$value["codigo"].'</td>';
+
+                                        if($value["foto"] != ""){
+                                          echo '<td><img src="'.$value["foto"].'" class="img-thumbnail" width="40px"></td>';
+                                        } else {
+                                          echo '<td><img src="vistas/img/usuarios/default/default2.jpg" class="img-thumbnail" width="40px"></td>';
+                                        }
+                                          echo '<td>'.$value["tipo_producto"].'</td>
+
                                     <td>'.$value["nombre_producto"].'</td>
                                     <td>'.$value["stock"].'</td>
                                     <td>'.$value["precio"].'</td>
@@ -179,17 +201,18 @@
 
             <div class="tab-content" id="myTabContent">
               <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="datosPersona">
-                <div class="container-fluid mt-4">
+                <div class="container-fluid mt-3">
                   <div class="form-row">
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-3">
                       <label for="">Tipo<?php echo $i?></label>
-                      <select class="form-control select2" name="nuevoTipoProducto">
+                      <select class="form-control select2"  id="nuevoTipoProducto" name="nuevoTipoProducto">
+                          
+                          
                           <option selected="selected">Seleccionar...</option>
                           <?php 
                               $tabla = "tbl_tipo_producto";
                               $item = null;
                               $valor = null;
-
                               $preguntas = ControladorInventario::ctrMostrarTipoProducto($tabla, $item, $valor);
                               foreach ($preguntas as $key => $value) { ?>
                                   <option value="<?php echo $value['id_tipo_producto']?>"><?php echo $value['tipo_producto']?></option>        
@@ -198,14 +221,17 @@
                           ?>
                       </select>
                     </div>
-
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-3">
+                      <label for="nombreproducto">Codigo</label>
+                      <input type="text" readonly class="form-control nuevoCodigo" name="nuevoCodigo" placeholder="Codigo producto" required>
+                    </div>
+                    <div class="form-group col-md-3">
                       <label for="nombreproducto">Nombre Producto</label>
                       <input type="text" class="form-control nombre_producto" name="nuevoNombreProducto" placeholder="Ingrese Producto" required>
                     </div>
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-3">
                       <label for="stock">Cantidad en stock</label>
-                      <input type="text" class="form-control stock" name="nuevoStock" placeholder="Cantidad en stock" required>
+                      <input type="number" class="form-control stock" name="nuevoStock" placeholder="Cantidad en stock" min="0" required class="fa fa-arrow-up"></i></span>
                     </div>
                   </div>
       
@@ -219,11 +245,11 @@
                     </div>
                         <div class="form-group col-md-4">
                           <label for="productominimo">Producto Minimo</label>
-                          <input type="text" class="form-control precio" name="nuevoProductoMinimo" placeholder="Cantidad Minima" required>
+                          <input type="number" class="form-control precio" name="nuevoProductoMinimo" placeholder="Cantidad Minima" min="0" required class="fa fa-arrow-up"></i></span>
                         </div>
                         <div class="form-group col-md-4">
                           <label for="productomaximo">Producto Maximo</label>
-                          <input type="text" class="form-control precio" name="nuevoProductoMaximo" placeholder="Cantidad Maximo" required>
+                          <input type="number" class="form-control precio" name="nuevoProductoMaximo" placeholder="Cantidad Maximo" min="0" required class="fa fa-arrow-up"></i></span>
                         </div>
                      </div>
 
@@ -235,7 +261,7 @@
                         <div class="input-group">
                           <img class="img-thumbnail previsualizar mr-2" src="vistas/img/usuarios/default/anonymous.png" alt="imagen-del-usuario" width="100px">
                           <div class="custom-file">
-                            <input type="file" class="custom-file-input nuevaFoto" id="exampleInputFile" name="nuevaFotoProducto">
+                            <input type="file" class="custom-file-input nuevaFotoProducto" id="exampleInputFile" name="nuevaFotoProducto">
                             <label class="custom-file-label" for="exampleInputFile">Escoger foto</label>
                           </div>
                         </div>
@@ -252,8 +278,8 @@
                     <?php
                     $tipostock = 'producto';
                     $pantalla = 'stock';
-                    $ingresarPersona = new ControladorInventario();
-                    $ingresarPersona->ctrCrearStock($tipostock, $pantalla);
+                    $AgregarInventario = new ControladorInventario();
+                    $AgregarInventario->ctrCrearStock($tipostock, $pantalla);
                     ?>
                   </div>
                 </div>
@@ -350,12 +376,12 @@
                 <div class="form-row">
 
                     <div class="form-group col-md-5">
-                        <label for="exampleInputFile">Foto</label>
+                        <label for="nuevafoto">Foto</label>
                         <div class="input-group">
                           <img class="img-thumbnail previsualizar mr-2" src="vistas/img/usuarios/default/anonymous.png" alt="imagen-del-usuario" width="100px">
                           <div class="custom-file">
-                            <input type="file" class="custom-file-input nuevaFoto" id="exampleInputFile" name="nuevaFotoProducto">
-                            <label class="custom-file-label" for="exampleInputFile">Escoger foto</label>
+                            <input type="file" class="custom-file-input nuevaFoto" id="nuevafoto" name="nuevaFotoProducto">
+                            <label class="custom-file-label" for="nuevafoto">Escoger foto</label>
                           </div>
                         </div>
                             <p class="p-foto help-block ml-4">Peso máximo de la foto 2 MB</p>
@@ -363,18 +389,14 @@
                   </div>
 
                   <div class="form-group mt-4 float-right">
-                    <button type="" class="btn btn-primary">Guardar</button>
+                    <button type="" class="btn btn-primary">Guardar Cambios</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
                     </div>
-                
+                   
+                   
+                  </div> -->
 
-                    <?php
-                    $tipostock = 'producto';
-                    $pantalla = 'stock';
-                    $ingresarPersona = new ControladorInventario();
-                    $ingresarPersona->ctrCrearStock($tipostock, $pantalla);
-                    ?>
-                  </div>
+
                 </div>
 
                 
