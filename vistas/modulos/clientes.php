@@ -590,9 +590,9 @@
            ELIMINAR CLIENTE
   ======================================----->
   <?php
-
+    $tipoPersona = 'cliente';
     $pantalla = 'clientes';
     
     $eliminarCliente = new ControladorPersonas();
-    $eliminarCliente->ctrBorrarPersona($pantalla);
+    $eliminarCliente->ctrBorrarPersona($tipoPersona, $pantalla);
   ?>

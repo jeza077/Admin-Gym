@@ -622,7 +622,7 @@ class ControladorPersonas{
 	/*=============================================
             BORRAR PERSONAS (USUARIO/CLIENTE)
 	=============================================*/
-    static public function ctrBorrarPersona($pantalla){
+    static public function ctrBorrarPersona($tipoPersona, $pantalla){
         // var_dump($_GET);
         // return;
 
@@ -632,8 +632,8 @@ class ControladorPersonas{
 
 
             $respuesta = ModeloPersonas::mdlBorrarPersona($tabla, $datos);
-
-            // var_dump($respuesta[1]);
+            
+            // var_dump($respuesta);
             // return;
             
             if($respuesta[1] == 1451){

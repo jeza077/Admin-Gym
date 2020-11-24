@@ -256,7 +256,7 @@ $('.btnEliminarCliente').click(function () {
       }).then(function(result){
         if (result.value) {
           
-            window.location = "index.php?ruta=clientes&idCliente="+idCliente;
+            window.location = "index.php?ruta=clientes&idPersona="+idCliente;
         }
     });
 });
