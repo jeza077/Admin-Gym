@@ -21,30 +21,93 @@
   </section>  
   <section class="content">
     <div class="card">
-
       <div class="card-body">
 
         <table class="table table-striped table-bordered tablas text-center">
+
           <thead>
+
             <tr>
+
               <th scope="col">#</th>
               <th scope="col">Codigo factura</th>
-              <th scope="col">Vendedor</th>
               <th scope="col">Cliente</th>
-              <th scope="col">Descripcion</th>
-              <th scope="col">Total</th>
+              <th scope="col">Vendedor</th>
+              <th scope="col">Total Neto</th>
               <th scope="col">Fecha</th>
               <th scope="col">Acciones</th>
+
             </tr>
+
           </thead>
-        
+          
+          <tbody>
+            <!-- Traer todo lo que encuentre en la lista -->
+            <?php
+
+              $item = null;
+              $valor = null;
+
+              $respuesta = ControladorVentas::ctrMostrarVentas($item, $valor);
+
+              // var_dump($respuesta);
+
+              foreach ($respuesta as $key => $value) {
+                echo  '<tr>
+                        <td>'.($key+1).'</td>
+                        
+                        <td>'.$value["codigo"].'</td>';
+
+                        $itemCliente = "id_personas";
+                        $valorCliente = $value["id_cliente"];
+                        $tabla="tbl_clientes";
+                        $respuestaCliente = ControladorClientes::ctrMostrarClientes($tabla, $itemCliente, $valorCliente);
+
+                        echo '<td>'.$respuestaCliente["nombre"].'</td>';
+
+                       
+                        $itemUsuario = "usuario";
+                        $valorUsuario = $value["id_usuario"];
+                        $respuestaUsuario = ControladorUsuarios::ctrMostrarUsuarios($tabla, $itemUsuario, $valorUsuario);
+
+                        echo '<td>'.$respuestaUsuario["nombre"].'</td>
+                     
+                        <td>$ '.number_format($value["total"],2).'</td>
+
+                        <td>'.$value["fecha"].'</td>
+
+                        <td>
+                          <div class="btn-group">
+                                
+                              <button class="btn btn-warning btnEditarVenta"><i class="fas fa-pencil-alt" style="color:#fff"></i></button>
+
+                              <button class="btn btn-danger btnEliminarVenta"><i class="fas fa-trash-alt"></i></button>
+
+                          </div>  
+                        </td>
+
+                      </tr>';
+                }
+            ?>
+
+          </tbody>
+
         </table>
-      
-      </div> <!-- /.card-body -->
-                
-    </div> <!-- /.card -->
+
+      <?php
+
+        // $eliminarVenta = new ControladorVentas();
+        // $eliminarVenta -> ctrEliminarVenta();
+
+      ?>
+
+      </div>
+
+    </div>
+
   </section>
-</div>            
+
+</div>
    
  
 
