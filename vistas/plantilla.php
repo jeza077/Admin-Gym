@@ -90,6 +90,12 @@
             $_GET["ruta"] == "productos" ||
             $_GET["ruta"] == "clientes" ||
             $_GET["ruta"] == "ventas" ||
+            $_GET["ruta"] == "mantenimiento" ||
+            $_GET["ruta"] == "respaldoyrestauracion" ||
+            $_GET["ruta"] == "connet" ||
+            $_GET["ruta"] == "connet2" ||
+            $_GET["ruta"] == "backup" ||
+            $_GET["ruta"] == "restore2" ||
             $_GET["ruta"] == "crear-venta" ||
             $_GET["ruta"] == "editar-venta" ||
             $_GET["ruta"] == "reportes" ||
@@ -198,7 +204,9 @@
 <script src="vistas/js/login.js"></script>
 <script src="vistas/js/primer-ingreso.js"></script>
 <script src="vistas/js/agregar-persona.js"></script>
- <script src="vistas/js/usuarios-empleados.js"></script>
+<script src="vistas/js/usuarios-empleados.js"></script>
+<script src="vistas/js/mantenimiento.js"></script>
+<script src="vistas/js/respaldo.js"></script>
 
 <!--<script src="vistas/js/validaciones.js"></script>
 <script src="vistas/js/categorias.js"></script>

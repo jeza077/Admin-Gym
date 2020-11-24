@@ -573,3 +573,59 @@ i.show-confir-pass{
     top: 5rem;
     left: 7rem;
 }
+
+/*=============================================
+INICIO 
+=============================================*/
+
+.botonesInicio div{
+    position:relative;
+    display:block;
+    margin:auto;
+    width:150px;
+    height:150px;
+    text-align:center;
+   
+  }
+  
+  .botonesInicio div span{
+    font-size:40px;
+    margin-top:30%;
+    color:white;
+    
+  
+  }
+  
+  .botonesInicio div p{
+    font-size:15px;
+    color:white;
+  }
+    /Inicio/
+    
+    .botonesInicio{
+      float:left;
+      margin:20px 10px;
+      width:20%;
+     
+    }
+  
+    @media screen and (max-width: 800px){
+    .botonesInicio{
+      width: 100%;
+    }  
+    }
+  
+  
+    .box{
+      float:left;
+      margin:20px 10px;
+      width:20%;
+     
+    }
+  
+  
+    @media screen and (max-width: 800px){
+    .box{
+      width: 100%;
+    }  
+    }
