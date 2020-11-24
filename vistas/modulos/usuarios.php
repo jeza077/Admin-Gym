@@ -155,15 +155,15 @@
                       </select>
                     </div>
 
-                    <div class="form-group col-md-9">
+                    <div class="form-group col-md-3">
                       <label for="identidad">Numero de documento</label>
                       <input type="text" class="form-control numeroDocumento" name="nuevoNumeroDocumento" placeholder="Ingrese Identidad" required>
                     </div>
-                    <div class="form-group col-md-9">
+                    <div class="form-group col-md-3">
                       <label for="nombre">Nombre</label>
                       <input type="text" class="form-control nombre mayus" name="nuevoNombre" placeholder="Ingrese Nombre" required>
                     </div>
-                    <div class="form-group col-md-9">
+                    <div class="form-group col-md-3">
                       <label for="apellido">Apellido</label>
                       <input type="text" class="form-control apellidos mayus" name="nuevoApellido" placeholder="Ingrese Apellidos" required>
                     </div>
@@ -494,7 +494,8 @@
     
 
 <?php 
+  $tipoPersona = 'usuario';
   $pantalla = 'usuarios';
   $borrarUsuario = new ControladorPersonas();
-  $borrarUsuario->ctrBorrarPersona($pantalla);
+  $borrarUsuario->ctrBorrarPersona($tipoPersona, $pantalla);
 ?>

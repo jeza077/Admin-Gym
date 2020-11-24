@@ -495,7 +495,7 @@ class ControladorPersonas{
 	/*=============================================
             BORRAR PERSONAS (USUARIO/CLIENTE)
 	=============================================*/
-    static public function ctrBorrarPersona($pantalla){
+    static public function ctrBorrarPersona($tipoPersona, $pantalla){
         
         if(isset($_GET['idPersona'])){
             $tabla = 'tbl_personas';
@@ -506,11 +506,12 @@ class ControladorPersonas{
 
             // var_dump($respuesta[1]);
             // return;
+            
             if($respuesta[1] == 1451){
       
                 echo '<script>
                         Swal.fire({
-                            title: "No se pudo borrar el usuario!",
+                            title: "No se pudo borrar el '.$tipoPersona.'!",
                             icon: "error",
                             heightAuto: false
                         }).then((result)=>{
@@ -520,7 +521,7 @@ class ControladorPersonas{
                         });                                      
                     </script>';
 
-            } else {
+            } else if($tipoPersona == 'usuario') {
                           
                 if($_GET['fotoUsuario'] != ""){
                     unlink($_GET['fotoUsuario']);
@@ -529,6 +530,19 @@ class ControladorPersonas{
                 echo '<script>
                         Swal.fire({
                             title: "El usuario ha sido borrado correctamente!",
+                            icon: "success",
+                            heightAuto: false
+                        }).then((result)=>{
+                            if(result.value){
+                                window.location = "'.$pantalla.'";
+                            }
+                        });                                      
+                    </script>';
+                    
+            } else {
+                echo '<script>
+                        Swal.fire({
+                            title: "El cliente ha sido borrado correctamente!",
                             icon: "success",
                             heightAuto: false
                         }).then((result)=>{
