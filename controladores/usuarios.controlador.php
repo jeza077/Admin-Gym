@@ -96,10 +96,10 @@ class ControladorUsuarios{
 
 					$respuesta = ModeloUsuarios::mdlMostrarUsuarios($tabla1, $tabla2, $item, $valor);
 
-				   	echo "<pre>";
-                    	var_dump($respuesta);
-                  	echo "</pre>";
-					return;
+				   	// echo "<pre>";
+                    // 	var_dump($respuesta);
+                  	// echo "</pre>";
+					// return;
 
 					$item1 = "usuario";
 					$valor1 = $_POST["ingUsuario"];

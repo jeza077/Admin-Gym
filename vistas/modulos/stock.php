@@ -71,16 +71,16 @@
                 <?php
                     $tabla = "tbl_inventario";
                     $item = "tipo_producto";
-                    $valor = "Inventario";
+                    $valor = "Productos";
                     $order = null;
                     $inventarios=ControladorInventario::ctrMostrarInventario($tabla, $item, $valor,$order);
                     // echo"<pre>";
-                    // var_dump($inventarios['nombre_producto']);
+                    // var_dump($inventarios);
                     // echo"</pre>";
                     foreach ($inventarios as $key => $value) {
                       echo '
                               <tr>
-                              <td scope="row">1</td>
+                              <td scope="row">'.($key+1).'</td>
                               <td>'.$value["codigo"].'</td>';
 
                                   if($value["foto"] != ""){
@@ -120,12 +120,12 @@
                             <th scope="col">#</th>
                             <th scope="col">Codigo</th>
                             <th scope="col">Foto</th>
-                            <th scope="col">tipo producto</th>
+                            <th scope="col">Tipo producto</th>
                             <th scope="col">Nombre</th>
-                            <th scope="col">stock</th>
+                            <th scope="col">Stock</th>
                             <th scope="col">Precio</th>
-                            <th scope="col">Product min</th>
-                            <th scope="col">Produc max</th>
+                            <th scope="col">Producto min</th>
+                            <th scope="col">Producto max</th>
                             <th scope="col">Acciones</th>
                             </tr>
                         </thead>
@@ -140,7 +140,7 @@
                             foreach ($inventarios as $key => $value) {
                             echo '
                                     <tr>
-                                    <td scope="row">1</td>
+                                    <td scope="row">'.($key+1).'</td>
                                     <td>'.$value["codigo"].'</td>';
 
                                         if($value["foto"] != ""){
@@ -149,8 +149,7 @@
                                           echo '<td><img src="vistas/img/usuarios/default/default2.jpg" class="img-thumbnail" width="40px"></td>';
                                         }
                                           echo '<td>'.$value["tipo_producto"].'</td>
-                                
-                                    <td>'.$value["tipo_producto"].'</td>
+
                                     <td>'.$value["nombre_producto"].'</td>
                                     <td>'.$value["stock"].'</td>
                                     <td>'.$value["precio"].'</td>

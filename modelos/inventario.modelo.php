@@ -26,7 +26,7 @@ class ModeloInventario
 			$stmt -> execute();
 			return $stmt -> fetchAll();
 		} else {
-			$stmt = Conexion::conectar()->prepare("SELECT i.id_inventario, t.tipo_producto, i.nombre_producto,i.stock,i.precio,i.producto_minimo,i.producto_maximo, i.codigo FROM tbl_inventario AS i\n"
+			$stmt = Conexion::conectar()->prepare("SELECT i.id_inventario, t.tipo_producto, i.nombre_producto, i.stock, i.precio, i.producto_minimo, i.producto_maximo, i.codigo FROM tbl_inventario AS i\n"
 			. "INNER JOIN tbl_tipo_producto AS t ON id_tipo_producto = id_tipo_producto");
 			$stmt -> execute();
 			return $stmt -> fetchAll();
@@ -62,8 +62,8 @@ class ModeloInventario
 		
 	} 
 
-
-
+	
+	
 
  /*=============================================
 				CREAR stock
