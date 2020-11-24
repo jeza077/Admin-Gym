@@ -1206,8 +1206,8 @@ class ControladorUsuarios{
 
         $template = file_get_contents('../extensiones/plantillas/template.php');
         $template = str_replace("{{name}}", $nombre, $template);
-        $template = str_replace("{{action_url_1}}", 'localhost/gym/index.php?ruta=recuperar-password&codigo='.$codigo, $template);
-        $template = str_replace("{{action_url_2}}", '<b>localhost/gym/index.php?ruta=recuperar-password&codigo='.$codigo.'</b>', $template);
+        $template = str_replace("{{action_url_1}}", 'localhost/Admin-Gym/index.php?ruta=recuperar-password&codigo='.$codigo, $template);
+        $template = str_replace("{{action_url_2}}", '<b>localhost/Admin-Gym/index.php?ruta=recuperar-password&codigo='.$codigo.'</b>', $template);
         $template = str_replace("{{year}}", date('Y'), $template);
         // $template = str_replace("{{operating_system}}", $user_os, $template);
 		// $template = str_replace("{{browser_name}}", $user_browser, $template);

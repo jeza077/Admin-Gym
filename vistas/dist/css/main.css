@@ -429,6 +429,16 @@ body.primer-ingreso.pregunta-dos.pregunta-tres.password-primera-vez .contenedor-
 .datos-generales.foto .editarFotoUsuario{
     left: 290px;
 }
+.ajustes-password .passwords i.show-pass{
+    top: 53px;
+    right: 31px;
+}
+.ajustes-password .passwords i.show-nueva-pass.primero{
+    top: 146px;
+}
+.ajustes-password .passwords i.show-confir-pass.segundo{
+    top: 241px;
+}
 
 
 /** SLIDE DE, LOGIN, VERIFICAR EMAIL, PREGUNTAS, CAMBIAR CONTRASEÑA */
