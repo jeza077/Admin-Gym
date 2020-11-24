@@ -428,20 +428,20 @@ class ControladorPersonas{
                                 return;
                         }
 
-                    } else {
-                        echo '<script>
-                                Swal.fire({
-                                    title: "Error al editar",
-                                    icon: "error",
-                                    heightAuto: false
-                                }).then((result)=>{
-                                    if(result.value){
-                                        window.location = "'.$pantalla.'";
-                                    }
-                                });                                      
-                            </script>';
-                        
-                            return;
+                        // } else {
+                        //     echo '<script>
+                        //             Swal.fire({
+                        //                 title: "Error al editar",
+                        //                 icon: "error",
+                        //                 heightAuto: false
+                        //             }).then((result)=>{
+                        //                 if(result.value){
+                        //                     window.location = "'.$pantalla.'";
+                        //                 }
+                        //             });                                      
+                        //         </script>';
+                            
+                        //         return;
                     }
 
                 } else {
@@ -521,7 +521,7 @@ class ControladorPersonas{
 
             } else {
                 if(preg_match('/^[a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarNombre"]) && 
-                        preg_match('/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.([a-zA-Z]{2,4})+$/', $_POST["editarEmail"])){
+                    preg_match('/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.([a-zA-Z]{2,4})+$/', $_POST["editarEmail"])){
 
                             $tabla = "tbl_personas";
                             
@@ -561,7 +561,8 @@ class ControladorPersonas{
                                             });                                      
                                         </script>';
                                 }
-                           }
+                            }
+                    }
                 }
             }
         }

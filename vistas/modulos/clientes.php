@@ -570,10 +570,11 @@
                   <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
                 </div>
                 <?php
+                  $ajustes = null;
                   $tipoPersona = 'clientes';
                   $pantalla = 'clientes';
                   $editarPersona = new ControladorPersonas();
-                  $editarPersona->ctrEditarPersona($tipoPersona, $pantalla);
+                  $editarPersona->ctrEditarPersona($ajustes, $tipoPersona, $pantalla);
                 ?>
 
               </div>
