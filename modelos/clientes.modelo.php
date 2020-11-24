@@ -61,14 +61,14 @@ class ModeloClientes{
 
 		if($item != null){
 
-			$stmt = Conexion::conectar()->prepare("SELECT p.*, c.*, m.tipo_matricula, m.precio_matricula, pd.tipo_promociones_descuentos, pd.valor_promociones_descuentos, i.tipo_inscripcion,i.precio_inscripcion, i.fecha_creacion  FROM $tabla1 as p\n"
-			. "INNER JOIN $tabla2 as c ON p.id_personas = c.id_persona\n"
-			. "INNER JOIN tbl_matricula as m ON c.id_matricula = m.id_matricula\n"
-			. "INNER JOIN tbl_inscripcion as i ON c.id_inscripcion = i.id_inscripcion\n"
-			. "INNER JOIN tbl_promociones_descuentos as pd ON c.id_descuentos_promociones = pd.id_promociones_descuentos\n"
+			$stmt = Conexion::conectar()->prepare("SELECT p.*, c.*, m.tipo_matricula, m.precio_matricula, pd.tipo_descuento, pd.valor_descuento, i.tipo_inscripcion, i.precio_inscripcion, i.fecha_creacion FROM $tabla1 as p\n"
+			. "LEFT JOIN $tabla2 as c ON p.id_personas = c.id_persona\n"
+			. "LEFT JOIN tbl_matricula as m ON c.id_matricula = m.id_matricula\n"
+			. "LEFT JOIN tbl_inscripcion as i ON c.id_inscripcion = i.id_inscripcion\n"
+			. "LEFT JOIN tbl_descuento as pd ON c.id_descuento = pd.id_descuento\n"
 			. " WHERE $item = :$item"); 
 
-			// $stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+			$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
 			$stmt -> execute();
 			return $stmt -> fetch();
 
@@ -78,7 +78,7 @@ class ModeloClientes{
             . "LEFT JOIN $tabla2 as c ON p.id_personas = c.id_persona\n"
             . "LEFT JOIN tbl_matricula as m ON c.id_matricula = m.id_matricula\n"
             . "LEFT JOIN tbl_inscripcion as i ON c.id_inscripcion = i.id_inscripcion\n"
-			. "LEFT JOIN tbl_promociones_descuentos as pd ON c.id_descuentos_promociones = pd.id_promociones_descuentos\n"
+			. "LEFT JOIN tbl_descuento as pd ON c.id_descuento = pd.id_descuento\n"
 		    . "WHERE p.tipo_persona = 'clientes' ");
 			
 			$stmt -> execute();
@@ -170,20 +170,20 @@ class ModeloClientes{
 	ACTUALIZAR CLIENTE
 	=============================================*/
 
-	static public function mdlActualizarCliente($tabla, $item, $valor){
+	static public function mdlActualizarCliente($tabla1, $item1, $valor1, $item2, $valor2){
 
-		$stmt = Conexion::conectar()->prepare("UPDATE $tabla1 SET $item = :$item WHERE id_cliente = :id_cliente");
+		$stmt = Conexion::conectar()->prepare("UPDATE $tabla1 SET $item1 = :$item1 WHERE $item2 = :$item2");
 
-		$stmt -> bindParam(":".$item, PDO::PARAM_STR);
-		$stmt -> bindParam(":id_cliente", $valor, PDO::PARAM_STR);
+		$stmt -> bindParam(":".$item1, $valor1, PDO::PARAM_STR);
+		$stmt -> bindParam(":".$item2, $valor2, PDO::PARAM_STR);
 
 		if($stmt -> execute()){
 
-			return "ok";
+			return true;
 		
 		}else{
 
-			return "error";	
+			return false;	
 
 		}
 

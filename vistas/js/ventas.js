@@ -69,9 +69,9 @@ $(".tablaVentas tbody").on("click", "button.agregarProducto", function(){
 
       if(stock == 0){
 
-        swal({
+      Swal.fire({
           title: "No hay stock disponible",
-          type: "error",
+          icon: "error",
           confirmButtonText: "¡Cerrar!"
       });
       
@@ -358,7 +358,8 @@ function listarProductos(){
 							  "cantidad" : $(cantidad[i]).val(),
 							  "stock" : $(cantidad[i]).attr("nuevoStock"),
 							  "precio" : $(precio[i]).attr("precioReal"),
-							  "total" : $(precio[i]).val()})
+                "total" : $(precio[i]).val()
+              })
 
   }
   

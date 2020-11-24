@@ -20,6 +20,7 @@ class ControladorVentas {
 		// var_dump($_POST);
 		// echo '</pre>';
 		// return;
+
         if(isset($_POST["nuevaVenta"])){
 
 			/*=============================================
@@ -32,9 +33,9 @@ class ControladorVentas {
   
             $totalProductosComprados = array();
 
-			foreach ($listaProductos as $key => $value) {
-			// 	echo $value["id"];
-			// 	return;
+			foreach($listaProductos as $key => $value) {
+				// 	echo $value["id"];
+				// 	return;
 
 			   array_push($totalProductosComprados, $value["cantidad"]);
 
@@ -62,34 +63,43 @@ class ControladorVentas {
 
             }
 			
-		
-            $tabla1 = "tbl_clientes";
-			$item = $item;
+            $tabla1 = "tbl_personas";
+            $tabla2 = "tbl_clientes";
+			$item = "id_cliente";
 			$valor = $_POST["seleccionarCliente"];
 
-			$traerCliente = ModeloClientes::mdlMostrarClientes($tabla1, $item, $valor);
+			$traerCliente = ModeloClientes::mdlMostrarClientes($tabla1, $tabla2, $item, $valor);
 			// var_dump($traerCliente); 
-			// return; 
+			// // return; 
 			// echo $valor;
 			// return;
 
 			$item1 = "compras";
-			$valor1 = array_sum($totalProductosComprados) + $traerCliente["compras"];
+			$valor1 = 2 + $traerCliente["compras"];
 			// echo $valor1;
 			// return;
 
-			$comprasCliente = ModeloClientes::mdlActualizarCliente($tabla1, $item1, $valor1);
+			$item2 = "id_cliente";
+			$valor2 = $valor;
+			$comprasCliente = ModeloClientes::mdlActualizarCliente($tabla2, $item1, $valor1, $item2, $valor2);
 			
+			// var_dump($comprasCliente); 
+			// return; 
+			// echo $valor;
+			// return;
 
-			$item2 = "ultima_compra";
+			// $item1 = "ultima_compra";
 
-			date_default_timezone_set('America/Tegucigalpa');
+			// date_default_timezone_set('America/Tegucigalpa');
 
-			$fecha = date('Y-m-d');
-			$hora = date('H:i:s');
-			$valor2 = $fecha.' '.$hora;
+			// $fecha = date('Y-m-d');
+			// $hora = date('H:i:s');
+			// $valor1 = $fecha.' '.$hora;
 
-            $fechaCliente = ModeloClientes::mdlActualizarCliente($tabla1, $item2, $valor2);
+			// $item2 = "id_cliente";
+			// $valor2 = $valor;
+
+            // $fechaCliente = ModeloClientes::mdlActualizarCliente($tabla2, $item1, $valor1, $item2, $valor2);
 
             /*=============================================
 			GUARDAR LA COMPRA
@@ -99,7 +109,7 @@ class ControladorVentas {
 
 			$datos = array("id_vendedor"=>$_POST["idVendedor"],
 						   "id_cliente"=>$_POST["seleccionarCliente"],
-						   "codigo"=>$_POST["nuevaVenta"],
+						   "numero_factura"=>$_POST["nuevaVenta"],
 						   "productos"=>$_POST["listaProductos"],
 						   "impuesto"=>$_POST["nuevoPrecioImpuesto"],
 						   "neto"=>$_POST["nuevoPrecioNeto"],
@@ -116,28 +126,8 @@ class ControladorVentas {
 			// return;
 
 
-			if (!$respuesta){
-				echo'<script>
+			if ($respuesta == true){
 
-				Swal.fire({
-					  icon: "error",
-					  title: "Error",
-					  showConfirmButton: true,
-					  confirmButtonText: "Cerrar"
-					  }).then((result) => {
-								if (result.value) {
-
-								window.location = "ventas";
-
-								}
-							})
-
-				</script>';
-
-				echo $respuesta;
-
-				
-			}else{
 				echo'<script>
 
 				localStorage.removeItem("rango");
@@ -150,16 +140,31 @@ class ControladorVentas {
 					  }).then((result) => {
 								if (result.value) {
 
-								window.location = "ventas";
+								window.location = "administrar-venta";
 
 								}
 							})
 
 				</script>';
 				
-
-
+			}else{
 				
+				echo'<script>
+
+				Swal.fire({
+					  icon: "error",
+					  title: "Error",
+					  showConfirmButton: true,
+					  confirmButtonText: "Cerrar"
+					  }).then((result) => {
+								if (result.value) {
+
+								window.location = "administrar-venta";
+
+								}
+							})
+
+				</script>';
 
 			}
 
