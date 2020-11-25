@@ -108,7 +108,7 @@ $pdf->Ln(45);
 $pdf->SetFont('times', '', 13);
 $pdf->SetFillColor(225, 235, 255);
 $pdf->Cell(15, 5, 'No', 1, 0, 'C', 1);
-$pdf->Cell(55, 5, 'Nombre', 1, 0, 'C', 1);
+$pdf->Cell(52, 5, 'Nombre', 1, 0, 'C', 1);
 $pdf->Cell(40, 5, 'Usuario', 1, 0, 'C', 1);
 $pdf->Cell(40, 5, 'Rol', 1, 0, 'C', 1);
 $pdf->Cell(30, 5, 'Estado', 1, 0, 'C', 1);
@@ -121,7 +121,7 @@ $usuarios = ControladorUsuarios::ctrMostrarSoloUsuarios($tabla, $item, $valor);
 // var_dump($usuarios);
 
 $i = 1; //Contador
-$max = 2; //Maximo de registros a mostrar en una pagina
+$max = 5; //Maximo de registros a mostrar en una pagina
 
 foreach ($usuarios as $key => $value) {
 
@@ -133,7 +133,7 @@ foreach ($usuarios as $key => $value) {
         $pdf->SetFont('times', '', 13);
         $pdf->SetFillColor(225, 235, 255);
         $pdf->Cell(15, 5, 'No', 1, 0, 'C', 1);
-        $pdf->Cell(55, 5, 'Nombre', 1, 0, 'C', 1);
+        $pdf->Cell(52, 5, 'Nombre', 1, 0, 'C', 1);
         $pdf->Cell(40, 5, 'Usuario', 1, 0, 'C', 1);
         $pdf->Cell(40, 5, 'Rol', 1, 0, 'C', 1);
         $pdf->Cell(30, 5, 'Estado', 1, 0, 'C', 1);
@@ -144,7 +144,7 @@ foreach ($usuarios as $key => $value) {
     $pdf->SetFont('times', '', 12);
     // $pdf->SetFillColor(225, 235, 255);
     $pdf->Cell(15, 4, ''.($key+1).'', 0, 0, 'C');
-    $pdf->Cell(55, 4, ''.$value['nombre'].' '.$value['apellidos'].'', 0, 0, 'C');
+    $pdf->Cell(52, 4, ''.$value['nombre'].' '.$value['apellidos'].'', 0, 0, 'C');
     $pdf->Cell(40, 4, ''.$value['usuario'].'', 0, 0, 'C');
     $pdf->Cell(40, 4, ''.$value['rol'].'', 0, 0, 'C');
     if($value["estado"] == 0){

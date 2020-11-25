@@ -41,7 +41,7 @@
 
           <div class="card-body">
           
-            <table class="table table-hover tablas text-center">
+            <table class="table table-striped tablas text-center">
               <thead>
                 <tr>
                   <th scope="col">#</th>
@@ -50,7 +50,10 @@
                   <th scope="col">Foto</th>
                   <th scope="col">Rol</th>
                   <th scope="col">Estado</th>
-                  <th scope="col">Acciones</th>
+                  
+                  <?php if($permisoActualizar == 1 && $permisoEliminar == 1 || $permisoActualizar == 1 && $permisoEliminar == 0 || $permisoActualizar == 0 && $permisoEliminar == 1){ ?>         
+                    <th scope="col">Acciones</th>
+                  <?php } ?>
                 </tr>
               </thead>
               <tbody>
@@ -84,14 +87,29 @@
                         } else {
                           echo '<td><button class="btn btn-danger btn-md btnActivar" idUsuario="'.$value["id_usuario"].'" estadoUsuario="1">Desactivado</button></td>';
                         }
-                        
-                    
+                  if($permisoActualizar == 1 && $permisoEliminar == 0){
+
+                    echo '<td>
+                            <button class="btn btn-warning btnEditarUsuario" idUsuario="'.$value["id_personas"].'" data-toggle="modal" data-target="#modalEditarUsuario"><i class="fas fa-pencil-alt" style="color:#fff"></i></button>
+                          </td>
+                        </tr>
+                  ';
+                  } else if($permisoActualizar == 0 && $permisoEliminar == 1){
+                    echo '<td>
+                            <button class="btn btn-danger btnEliminarUsuario" idPersona="'.$value["id_personas"].'" fotoUsuario="'.$value["foto"].'" usuario="'.$value["usuario"].'"><i class="fas fa-trash-alt"></i></button>
+                          </td>
+                        </tr>
+                  ';
+                  } else {
                     echo '<td>
                             <button class="btn btn-warning btnEditarUsuario" idUsuario="'.$value["id_personas"].'" data-toggle="modal" data-target="#modalEditarUsuario"><i class="fas fa-pencil-alt" style="color:#fff"></i></button>
                             <button class="btn btn-danger btnEliminarUsuario" idPersona="'.$value["id_personas"].'" fotoUsuario="'.$value["foto"].'" usuario="'.$value["usuario"].'"><i class="fas fa-trash-alt"></i></button>
                           </td>
                         </tr>
                   ';
+                  }
+                        
+                    
                 }
               ?>
               
