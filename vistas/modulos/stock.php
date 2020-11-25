@@ -60,10 +60,10 @@
                     <th scope="col">Foto</th>
                     <th scope="col">tipo producto</th>
                     <th scope="col">Nombre</th>
-                    <th scope="col">stock</th>
+                    <th scope="col">Stock</th>
                     <th scope="col">Precio</th>
-                    <th scope="col">Product min</th>
-                    <th scope="col">Produc max</th>
+                    <th scope="col">Producto min</th>
+                    <th scope="col">Producto max</th>
                     <th scope="col">Acciones</th>
                     </tr>
                 </thead>
