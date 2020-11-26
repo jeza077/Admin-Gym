@@ -56,4 +56,17 @@ class ModeloVentas
 
 	}
 
+	/*=============================================
+			SUMA TOTAL VENTAS
+    =============================================*/
+	static public function mdlSumarTotalVentas($tabla){
+		
+		$stmt = Conexion::conectar() ->prepare("SELECT SUM(neto) as total FROM $tabla");
+		$stmt-> execute();
+		return $stmt ->fetchAll();
+		
+		$stmt -> close();
+		$stmt= null;
+	}
+
 }

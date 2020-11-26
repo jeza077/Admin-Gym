@@ -18,7 +18,6 @@
       </div><!-- /.container-fluid -->
     </section>
 
-     <!-- FUNCION INSERTAR BITACORA -->
      <?php
 
         //** ALERTA POR FECHA DE VENCIMIENTO */
@@ -60,10 +59,18 @@
             include "inicio/cajas-superiores.php";
           ?>    
         </div>
+
+        <div class="row">
+          <div class="col-md-6 col-xs-12">
+            <?php 
+              include "reportes/productos-mas-vendidos.php";
+            ?>    
+          </div>
+        </div>
       </div>
 
       <!-- Default box -->
-      <div class="card">
+      <!-- <div class="card">
         <div class="card-body">
           <?php
             // $user_os        =   ControladorGlobales::ctrGetOS();
@@ -75,15 +82,10 @@
           ?>
         </div>
         
-      </div>
+      </div> -->
       <!-- /.card -->
 
     </section>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
 
-<!-- <script type="text/javascript">
-  window.onload = hola();
-</script> -->
+  </div>
 

@@ -52,7 +52,7 @@
                         foreach ($ventas as $key =>$value) {
                         
                         }
-                        $codigo = $value["codigo"] + 1;
+                        $codigo = $value["numero_factura"] + 1;
                         echo '<input type="text" class="form-control" id="nuevaVenta" 
                         name="nuevaVenta" value= '. $codigo.' readonly>';
                       }

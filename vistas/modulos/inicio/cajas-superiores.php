@@ -1,4 +1,27 @@
-<div class="col-lg-3 col-6">
+<?php 
+    
+    $ventas = ControladorVentas::ctrSumaTotalVentas();
+    
+    $item = 'tipo_producto';
+    $valor = 'Productos';
+    $order = null;
+    $tabla = 'tbl_inventario';
+    $productos = ControladorInventario::ctrMostrarInventario($tabla, $item, $valor,$order);
+    $totalProductos = count($productos);
+
+    $tabla = 'tbl_clientes';
+    $item = null;
+    $valor = null;
+    $clientes = ControladorClientes::ctrMostrarClientes($tabla, $item, $valor);
+    $totalClientes = count($clientes);
+
+    // echo '<pre>';
+    // var_dump($clientes);
+    // echo '</pre>';
+
+?>
+
+<div class="col-lg-3 col-md-6 col-xs-12">
     <!-- small box -->
     <div class="small-box bg-purple">
         <div class="inner">
@@ -13,13 +36,13 @@
     </div>
 </div>
 
-<div class="col-lg-3 col-6">
+<div class="col-lg-3 col-md-6 col-xs-12">
     <!-- small box -->
     <div class="small-box bg-primary">
         <div class="inner">
-        <h3>44</h3>
+        <h3><?php echo number_format($totalClientes);?></h3>
 
-        <p>Clientes Nuevos</p>
+        <p>Clientes</p>
         </div>
         <div class="icon">
         <i class="ion ion-person-add"></i>
@@ -28,11 +51,11 @@
     </div>
 </div>    
 
-<div class="col-lg-3 col-6">
+<div class="col-lg-3 col-md-6 col-xs-12">
     <!-- small box -->
     <div class="small-box bg-orange">
         <div class="inner">
-        <h3>L3,520<sup style="font-size: 20px"></sup></h3>
+        <h3>L<?php echo number_format($ventas[0]["total"],2);?><sup style="font-size: 20px"></sup></h3>
 
         <p>Ventas</p>
         </div>
@@ -43,11 +66,11 @@
     </div>
 </div>
 
-<div class="col-lg-3 col-6">
+<div class="col-lg-3 col-md-6 col-xs-12">
     <!-- small box -->
     <div class="small-box bg-gray-dark">
         <div class="inner">
-        <h3>65</h3>
+        <h3><?php echo number_format($totalProductos);?></h3>
 
         <p>Total de Productos</p>
         </div>

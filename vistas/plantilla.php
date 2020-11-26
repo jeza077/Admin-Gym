@@ -25,6 +25,12 @@
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
   <!-- Css propio -->
   <link rel="stylesheet" href="vistas/dist/css/main.css">
+
+
+  <!-- <script src="https://cdnjs.com/libraries/Chart.js"></script> -->
+
+  <!-- <link rel="stylesheet" href="vistas/plugins/chart.js/Chart.css"> -->
+
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <!-- <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"> -->
@@ -191,6 +197,10 @@
 <!-- InputMask -->
 <script src="vistas/plugins/moment/moment.min.js"></script>
 <script src="vistas/plugins/inputmask/jquery.inputmask.bundle.min.js"></script>
+
+<!-- Chart JS -->
+<script src="vistas/plugins/chart.js/Chart.min.js"></script>
+
 <!-- DataTables -->
 <script src="vistas/plugins/datatables/js/jquery.dataTables.min.js"></script>
 <script src="vistas/plugins/datatables/js/dataTables.bootstrap4.min.js"></script>

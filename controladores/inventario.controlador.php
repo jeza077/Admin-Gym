@@ -146,10 +146,27 @@ class ControladorInventario
         }
 
 
+        /*=============================================
+			TOTAL DE PRODUCTOS
+        =============================================*/
+        static public function ctrMostrarTotalInventario($tabla, $item, $valor,$order) {
+            $tabla1 = $tabla;
+            $tabla2 = "tbl_tipo_producto";
+            $respuesta = ModeloInventario::mdlMostrarTotalInventario($tabla1, $tabla2, $item, $valor,$order);
+            return $respuesta;
+        }
 
 
+    /*=============================================
+			SUMA TOTAL VENTAS
+    =============================================*/
+	static public function ctrMostrarSumaVentas(){
 
-
-
+		$tabla = 'tbl_inventario';
+		
+		$respuesta = ModeloInventario::mdlMostrarSumaVentas($tabla);
+		
+		return $respuesta;
+	}
         
 }

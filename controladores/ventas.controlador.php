@@ -170,6 +170,19 @@ class ControladorVentas {
 
         }
     
-    }
+	}
+	
+
+	/*=============================================
+			SUMA TOTAL VENTAS
+    =============================================*/
+	static public function ctrSumaTotalVentas(){
+
+		$tabla = 'tbl_venta';
+		
+		$respuesta = ModeloVentas::mdlSumarTotalVentas($tabla);
+		
+		return $respuesta;
+	}
 
 }
