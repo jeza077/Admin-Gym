@@ -372,7 +372,7 @@ function listarProductos(){
 
 /*=============================================
     DATERANGE PICKER
-=============================================*/
+  ===========================================*/
 $('#daterange-btn').daterangepicker({
   ranges   : {
   'Hoy'       : [moment(), moment()],
@@ -399,3 +399,24 @@ $('#daterange-btn').daterangepicker({
       // window.location = "index.php?ruta=ventas&fechaInicial="+fechaInicial+"&fechaFinal="+fechaFinal;
   }
 )
+
+//** ------------------------------------*/
+//         IMPRIMIR PDF VENTAS
+// --------------------------------------*/ 
+$(document).on('click', '.btnExportarVentas', function () {
+  console.log("click");
+  window.open("extensiones/tcpdf/pdf/ventas-pdf.php", "_blank");
+});
+
+
+//** ------------------------------------*/
+//         BOTON EDITAR VENTAS
+// --------------------------------------*/ 
+$(".tablas").on("click", ".btnEditarVenta", function(){
+
+	var idVenta = $(this).attr("idVenta");
+
+	window.location = "index.php?ruta=editar-venta&idVenta="+idVenta;
+
+
+})
