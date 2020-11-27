@@ -10,13 +10,19 @@ class ModeloVentas
     static public function mdlMostrarVentas($tabla, $item, $valor) {
         if ($item != null){
 
-            $stmt= Conexion::conectar() ->prepare("SELECT * FROM $tabla WHERE $item= :$item ORDER BY fecha DESC");
-            $stmt -> bindParam(":" .$item, $valor, PDO:: PARAM_STR);
+            $stmt= Conexion::conectar() ->prepare("SELECT v.*, p.nombre, p.apellidos FROM tbl_venta AS v\n"
+			. "INNER JOIN tbl_clientes AS c ON v.id_cliente = c.id_cliente\n"
+			. "INNER JOIN tbl_personas AS p ON c.id_persona = p.id_personas\n"
+			. "WHERE $item=:$item");
+            $stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
             $stmt -> execute();
             return $stmt -> fetch();
 
         } else {
-            $stmt = Conexion::conectar() ->prepare("SELECT * FROM $tabla");
+            $stmt = Conexion::conectar() ->prepare("SELECT v.*, p.nombre, p.apellidos FROM tbl_venta AS v\n"
+			. "INNER JOIN tbl_clientes AS c ON v.id_cliente = c.id_cliente\n"
+			. "INNER JOIN tbl_personas AS p ON c.id_persona = p.id_personas\n"
+			);
             $stmt-> execute();
             return $stmt ->fetchAll();
         }

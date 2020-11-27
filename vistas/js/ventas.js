@@ -334,7 +334,7 @@ $("#nuevoImpuestoVenta").change(function(){
 // FORMATO AL PRECIO FINAL
 // =============================================*/
 
-$("#nuevoTotalVenta").number(true, 2);
+// $("#nuevoTotalVenta").Number(true, 2);
 
 
 /*=============================================
@@ -369,3 +369,23 @@ function listarProductos(){
 
 }
 
+//** ------------------------------------*/
+//         IMPRIMIR PDF VENTAS
+// --------------------------------------*/ 
+$(document).on('click', '.btnExportarVentas', function () {
+  console.log("click");
+  window.open("extensiones/tcpdf/pdf/ventas-pdf.php", "_blank");
+});
+
+
+//** ------------------------------------*/
+//         BOTON EDITAR VENTAS
+// --------------------------------------*/ 
+$(".tablas").on("click", ".btnEditarVenta", function(){
+
+	var idVenta = $(this).attr("idVenta");
+
+	window.location = "index.php?ruta=editar-venta&idVenta="+idVenta;
+
+
+})
