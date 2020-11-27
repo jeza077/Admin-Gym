@@ -6,7 +6,7 @@ $order = 'venta';
 $tabla = 'tbl_inventario';
 $productos = ControladorInventario::ctrMostrarTotalInventario($tabla, $item, $valor,$order);
 
-$colores = array("red","green","yellow","aqua","purple","blue","cyan","magenta","orange","gold");
+$colores = array("red","green","yellow","lightblue","purple","blue","cyan","magenta","orange","gold");
 
 $totalVentas = ControladorInventario::ctrMostrarSumaVentas($tabla);
 // echo "<pre>";
@@ -83,56 +83,37 @@ $totalVentas = ControladorInventario::ctrMostrarSumaVentas($tabla);
 <script src="vistas/plugins/chart.js/Chart.min.js"></script>
 
 <script>
-  //-------------
-  // - PIE CHART -
-  //-------------
-  // Get context with jQuery - using jQuery's .get() method.
-  var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
-  var pieData = {
+var order = 'venta';
+var datos = new FormData();
+datos.append('order', order);   
 
-    <?php 
-        $producto = array();
-        $cantidad = array();
-        $count = count($productos);
+$.ajax({
 
-        for ($i=0; $i < $count; $i++) { 
-            array_push($producto, $productos[$i]['nombre_producto']);
+    url:"ajax/inventario.ajax.php",
+    method: "POST",
+    data: datos,
+    cache: false,
+    contentType: false,
+    processData: false,  
+    dataType: "json",
+    success: function (respuesta) {
+
+        var nombreProducto = [];
+        var ventas = [];
+        for (let i = 0; i < respuesta.length; i++) {
+            // console.log(respuesta[i]['nombre_producto']);
+            nombreProducto.push(respuesta[i]['nombre_producto']);
+            ventas.push(respuesta[i]['venta']);
         }
-        // echo "<pre>";
-        var_dump($producto);
-        // echo "</pre>";
-    ?>
-    labels: [
-      'Chrome',
-      'IE',
-      'FireFox',
-      'Safari',
-      'Opera',
-      'Navigator'
-    ],
-    datasets: [
-      {
-        data: [700, 500, 400, 600, 300, 100],
-        backgroundColor: ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de']
-      }
-    ]
-  }
-  var pieOptions = {
-    legend: {
-      display: false
-    }
-  }
-  // Create pie or douhnut chart
-  // You can switch between pie and douhnut using the method below.
-  // eslint-disable-next-line no-unused-vars
-  var pieChart = new Chart(pieChartCanvas, {
-    type: 'doughnut',
-    data: pieData,
-    options: pieOptions
-  })
 
-  //-----------------
-  // - END PIE CHART -
-  //-----------------
+        var contenedor = '#pieChart';
+        var tipoChart = 'pie';
+        var colores = [];
+
+        crearGrafico(contenedor, nombreProducto, ventas, tipoChart, colores)
+    }
+});
+
+
  
 </script>

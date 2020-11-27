@@ -466,3 +466,38 @@ longitudString($('input[type=password]'),16); //Longitud maxima Input tipo Passw
 $('input[type=password]').keydown(impedirEspacios); //Evitar espacios en Input de tipo Password, Global.
 $('input[type=email]').keydown(impedirEspacios); // Evitar espacios en Input de tipo Email, Global.
 
+
+
+
+/*=============================================
+    FUNCION PARA CREAR GRAFICOS DINAMICOS
+=============================================*/
+function crearGrafico(contenedor, nombre, cantidad, tipoChart, colores){
+        
+    if(colores.length == 0){
+        colores = ["red","green","yellow","lightblue","purple","blue","cyan","magenta","orange","gold"];
+    }
+    var pieChartCanvas = $(contenedor).get(0).getContext('2d')
+    var pieData = {
+
+        labels: nombre,
+        datasets: [
+        {
+            data: cantidad,
+            backgroundColor: colores
+        }
+        ]
+    }
+    var pieOptions = {
+        legend: {
+        display: false
+        }
+    }
+
+    var myChart = new Chart(pieChartCanvas, {
+        type: tipoChart,
+        data: pieData,
+        options: pieOptions
+    })
+
+}

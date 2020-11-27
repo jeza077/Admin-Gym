@@ -12,6 +12,15 @@
           <a href="crear-venta" class="btn btn-orange float-right">
               Agregar venta     
           </a> 
+          
+          <!-- <div class="form-group"> -->
+            <!-- <div class="input-group"> -->
+              <button type="button" class="btn btn-default float-right mr-3" id="daterange-btn">
+                <i class="far fa-calendar-alt"></i> Rango de fechas
+                <span></span><i class="fas fa-caret-down"></i>
+              </button>
+            <!-- </div> -->
+          <!-- </div> -->
         </div>
 
       </div>

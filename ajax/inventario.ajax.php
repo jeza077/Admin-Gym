@@ -24,6 +24,19 @@ class AjaxInventario{
         $respuesta = ControladorInventario::ctrMostrarInventario($tabla,$item,$valor,$order);
         echo json_encode($respuesta);
     }
+
+
+    //*** GRAFICOS PRODUCTOS ***//
+    public $order;
+    public function ajaxDatosGraficoProductos(){
+        $item = 'tipo_producto';
+        $valor = 'Productos';
+        $order = $this->order;
+        $tabla = 'tbl_inventario';
+        $productos = ControladorInventario::ctrMostrarTotalInventario($tabla, $item, $valor,$order);
+        echo json_encode($productos);
+
+    }
 }
 //** ----------------- editar INVENTARIO --------------------------*/
 if (isset($_POST["idInventario"])){
@@ -37,4 +50,14 @@ if (isset($_POST["idCategoria"])){
     $editar = new AjaxInventario();
     $editar->idCategoria = $_POST["idCategoria"];
     $editar->ajaxCradorCodigoProducto();
+}
+
+
+//*** GRAFICOS PRODUCTOS ***/
+if (isset($_POST["order"])){
+    $productos = new AjaxInventario();
+    $productos->order = $_POST["order"];
+    $productos->ajaxDatosGraficoProductos();
 } 
+
+
