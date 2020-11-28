@@ -6,10 +6,11 @@ class AjaxInventario{
     //** ----------------- editar INVENTARIO --------------------------*/
     public $idInventario;
     public function ajaxEditarInventario(){
+        $order = "DESC";
         $tabla = "tbl_inventario";
         $item = "id_inventario";
         $valor = $this->idInventario;
-        $respuesta = ControladorInventario::ctrMostrarInventario($tabla,$item,$valor);
+        $respuesta = ControladorInventario::ctrMostrarInventario($tabla,$item,$valor,$order);
         echo json_encode($respuesta);
     }
 

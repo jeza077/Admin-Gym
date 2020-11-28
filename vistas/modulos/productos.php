@@ -6,9 +6,15 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>STOCK</h1>
+            <h1>Productos</h1>
           </div>
           <div class="col-sm-6">
+          <button class="btn btn-orange float-right"  data-toggle="modal" data-target="#modalAgregarInventario">
+            Nuevo Producto         
+          </button>
+          <button class="btn btn-danger btnExportarProductos float-right mr-3">
+              Exportar PDF          
+            </button>
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -17,10 +23,10 @@
  <!-- Main content -->
     <section class="content">
     <?php 
-      $permisoAgregar = $_SESSION['permisos']['Stock']['agregar'];
-      $permisoEliminar = $_SESSION['permisos']['Stock']['eliminar'];
-      $permisoActualizar = $_SESSION['permisos']['Stock']['actualizar'];
-      $permisoConsulta = $_SESSION['permisos']['Stock']['consulta'];
+      $permisoAgregar = $_SESSION['permisos']['Usuarios']['agregar'];
+      $permisoEliminar = $_SESSION['permisos']['Usuarios']['eliminar'];
+      $permisoActualizar = $_SESSION['permisos']['Usuarios']['actualizar'];
+      $permisoConsulta = $_SESSION['permisos']['Usuarios']['consulta'];
 
       // var_dump($_SESSION['perm']);
 
@@ -30,39 +36,8 @@
     ?>
 
 
-
-<!-- TAB PRINCIPAL -->
-<div class="card">
-
-    <div class="card-header">  
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
-        <li class="nav-item" role="presentation">
-            <a class="nav-link active" id="inventario" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Inventario</a>
-        </li>
-        <li class="nav-item" role="presentation">
-            <a class="nav-link" id="bodega" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Bodega</a>
-        </li>
-        </ul>
-    </div>
-              <!-- TAB INVENTARIO -->
-
-    <div class="tab-content" id="myTabContent"> 
-        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="inventario">
-        <div class="container-fluid mt-4">
-
-
-        <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-1">
-          <div class="col-sm-12">
-          <button class="btn btn-orange float-right"  data-toggle="modal" data-target="#modalAgregarInventario">
-            Nuevo Inventario        
-          </button>
-          </div>
-        </div>
-
-      </div><!-- /.container-fluid -->
-    </section> 
+      <!-- Default box -->
+      <div class="card">
 
       <div class="card-body">
             <!-- CUERPPO INVENTARIO -->
@@ -110,7 +85,7 @@
                               <td>'.$value["producto_minimo"].'</td>
                               <td>'.$value["producto_maximo"].'</td>     
                               <td>
-                              <button class="btn btn-warning btnEditarInventario" idInventario="'.$value["id_inventario"].'" data-toggle="modal" data-target="#modalEditarStock"><i class="fas fa-pencil-alt" style="color:#fff"></i></button>
+                              <button class="btn btn-warning btnEditarInventario" idInventario="'.$value["id_inventario"].'" data-toggle="modal" data-target="#modalEditarProducto"><i class="fas fa-pencil-alt" style="color:#fff"></i></button>
                               <button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
                               </td>
                           </tr>
@@ -120,83 +95,17 @@
                 </tbody>
             </table>
             <!-- -------------------------- -->
-      </div>   <!-- CARD BODY --> 
-        </div>
-          </div><!-- FIN TAB INVENTARIO -->
+      </div> 
 
-            <!-- TAB BODEGA -->
-        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="bodega">
+      </div>
+      <!-- /.card -->
 
-        <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-1">
-          <div class="col-sm-12">
-          <button class="btn btn-orange float-right"  data-toggle="modal" data-target="#modalAgregarBodega">
-            Nuevo Bodega      
-          </button>
-          </div>
-        </div>
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
 
-            <div class="container-fluid mt-3">
-                <div class="card-body">
-                    <table class="table table-striped table-bordered tablas text-center">
-                        <thead>
-                            <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Codigo</th>
-                            <th scope="col">Foto</th>
-                            <th scope="col">Tipo producto</th>
-                            <th scope="col">Nombre</th>
-                            <th scope="col">Stock</th>
-                            <th scope="col">Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        <?php 
-                            $tabla = "tbl_inventario";
-                            $item = "tipo_producto";
-                            $valor = "bodega";
-                            $order = null;
-                            $inventarios=ControladorInventario::ctrMostrarInventario($tabla, $item, $valor,$order);
-                            // var_dump($inventarios);
-                            foreach ($inventarios as $key => $value) {
-                            echo '
-                                    <tr>
-                                    <td scope="row">'.($key+1).'</td>
-                                    <td>'.$value["codigo"].'</td>';
-
-                                        if($value["foto"] != ""){
-                                          echo '<td><img src="'.$value["foto"].'" class="img-thumbnail" width="40px"></td>';
-                                        } else {
-                                          echo '<td><img src="vistas/img/usuarios/default/default2.jpg" class="img-thumbnail" width="40px"></td>';
-                                        }
-                                          echo '<td>'.$value["tipo_producto"].'</td>
-
-                                    <td>'.$value["nombre_producto"].'</td>
-                                    <td>'.$value["stock"].'</td>';
-                                echo '     
-                                    <td>
-                                    <button class="btn btn-warning btnEditarInventario" idInventario="'.$value["id_inventario"].'" data-toggle="modal" data-target="#modalEditarStock"><i class="fas fa-pencil-alt" style="color:#fff"></i></button>
-                                    <button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
-                                    </td>
-                                </tr>
-                            ';
-                            }
-                        ?>
-                        </tbody>
-                    </table>
-            
-                </div> 
-            </div>
-        </div> 
-           </div>  
-      </div>    
- </div> <!-- Fin del TAB -->
-
-
-
-
-  <!-- =======================================
+<!-- =======================================
            MODAL AGREGAR INVENTARIO
   ======================================----->
   <div class="modal fade" id="modalAgregarInventario" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -296,7 +205,7 @@
 
                     <?php
                     $tipostock = 'producto';
-                    $pantalla = 'stock';
+                    $pantalla = 'productos';
                     $AgregarInventario = new ControladorInventario();
                     $AgregarInventario->ctrCrearStock($tipostock, $pantalla);
                     ?>
@@ -314,18 +223,11 @@
     </div>
   </div>
 
-
-  <!-- =======================================
-           MODAL AGREGAR BODEGA
-  ======================================----->
-  
-
-  
-  <!-- =======================================
+    <!-- =======================================
            MODAL EDITAR
   ======================================----->
 
-  <div class="modal fade" id="modalEditarStock" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="modalEditarProducto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -336,15 +238,8 @@
         </div>
         <div class="modal-body">
           <form role="form" method="post" class="formulario" enctype="multipart/form-data">
-            <ul class="nav nav-tabs" id="myTab" role="tablist">
-              <li class="nav-item" role="presentation">
-                <a class="nav-link active" id="datosPersona" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Inventario/Bodega</a>
-              </li>
-            </ul>
             
-            <div class="tab-content" id="myTabContent">
-              <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="datosPersona">
-                <div class="container-fluid mt-3">
+           
                   <div class="form-row">
  
                     <div class="form-group col-md-3">
@@ -362,13 +257,11 @@
                     </div>
                   </div>
       
-               <div class="form-row">
-
-                    <div class="form-group col-md-4">
-                      <label for="precio">Precio</label>
-                      <input type="text" value="" class="form-control" name="editarPrecio" id="editarPrecio" required>
-                    </div>
-
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                        <label for="precio">Precio</label>
+                        <input type="text" value="" class="form-control" name="editarPrecio" id="editarPrecio" required>
+                        </div>
                         <div class="form-group col-md-4">
                           <label for="productominimo">Producto Minimo</label>
                           <input type="number" value="" class="form-control" name="editarProductoMinimo" id="editarProductoMinimo" min="0" required class="fa fa-arrow-up"></i></span>
@@ -377,46 +270,38 @@
                           <label for="productomaximo">Producto Maximo</label>
                           <input type="number" value="" class="form-control" name="editarProductoMaximo" id="editarProductoMaximo" min="0" required class="fa fa-arrow-up"></i></span>
                         </div>
-                     </div>
+                    </div>
 
+                    <div class="form-row">
 
-                <div class="form-row">
-
-                    <div class="form-group col-md-5">
-                        <label for="exampleInputFile">Foto</label>
-                        <div class="input-group">
-                          <img class="img-thumbnail previsualizar mr-2" src="vistas/img/usuarios/default/anonymous.png" alt="imagen-del-usuario" width="100px">
-                          <div class="custom-file">
-                            <input type="file" class="custom-file-input nuevaFotoProducto" id="exampleInputFile" name="editarFotoProducto">
-                            <label class="custom-file-label" for="exampleInputFile">Escoger foto</label>
-                          </div>
+                        <div class="form-group col-md-5">
+                            <label for="exampleInputFile">Foto</label>
+                            <div class="input-group">
+                            <img class="img-thumbnail previsualizar mr-2" src="vistas/img/usuarios/default/anonymous.png" alt="imagen-del-usuario" width="100px">
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input nuevaFotoProducto" id="exampleInputFile" name="editarFotoProducto">
+                                <label class="custom-file-label" for="exampleInputFile">Escoger foto</label>
+                            </div>
+                            </div>
+                                <p class="p-foto help-block ml-4">Peso máximo de la foto 2 MB</p>
                         </div>
-                            <p class="p-foto help-block ml-4">Peso máximo de la foto 2 MB</p>
-                      </div>
-                  </div>
+                    </div>
 
-                  <div class="form-group mt-4 float-right">
-                    <button type="" class="btn btn-primary">Guardar</button>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
+                    <div class="form-group mt-4 float-right">
+                        <button type="" class="btn btn-primary">Guardar</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
                     </div>
                 
-
                     <?php
-                    // $tipostock = 'producto';
-                    // $pantalla = 'stock';
-                    // $EditarInventario = new ControladorInventario();
-                    // $EditarInventario->ctrEditarStock($tipostock, $pantalla);
+                    $tipostock = 'producto';
+                    $pantalla = 'productos';
+                    $EditarInventario = new ControladorInventario();
+                    $EditarInventario->ctrEditarStock($tipostock, $pantalla);
                     ?>
-                  </div>
-                </div>
-
-                
-              </div>
                   <!-- 2tab --> 
-            </div>
-
           </form>
         </div>
       </div>
     </div>
   </div>
+
