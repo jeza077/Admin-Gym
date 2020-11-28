@@ -157,13 +157,13 @@
                     <i class="far fa-circle nav-icon"></i>
                     <p>Nueva Venta</p>
                   </a>
-                <!-- </li>
+                </li>
                 <li class="nav-item">
-                  <a href="pages/charts/inline.html" class="nav-link">
+                  <a href="reportes" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Reporte de Ventas</p>
                   </a>
-                </li> -->
+                </li>
               </ul>
             </li>
             <?php } ?>

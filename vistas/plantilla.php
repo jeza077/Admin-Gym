@@ -27,12 +27,6 @@
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
   <!-- Css propio -->
   <link rel="stylesheet" href="vistas/dist/css/main.css">
-
-
-  <!-- <script src="https://cdnjs.com/libraries/Chart.js"></script> -->
-
-  <!-- <link rel="stylesheet" href="vistas/plugins/chart.js/Chart.css"> -->
-
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <!-- <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"> -->
@@ -224,6 +218,7 @@
  <script src="vistas/js/usuarios-empleados.js"></script>
  <script src="vistas/js/clientes.js"></script>
 <script src="vistas/js/ventas.js"></script>
+<script src="vistas/js/reportes.js"></script>
 <script src="vistas/js/mantenimiento.js"></script>
 <script src="vistas/js/respaldo.js"></script>
 <script src="vistas/js/inventario.js"></script>
