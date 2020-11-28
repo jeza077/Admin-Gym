@@ -17,9 +17,15 @@ $(document).on("click",".btnEditarInventario",function(){
         dataType: "json",
         success: function(respuesta){
             console.log("respuesta",respuesta);
-        }
+        } 
     });
+
+
 })
+
+$("#editarCodigo").val(respuesta[codigo]);
+$("#editarNombreProducto").val(respuesta[nombre_producto]);
+$("#editarStock").val(respuesta[stock]);
 
 //** ----------------- GENERAR CODIGO  --------------------------*/
 

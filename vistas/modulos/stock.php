@@ -9,9 +9,7 @@
             <h1>STOCK</h1>
           </div>
           <div class="col-sm-6">
-          <button class="btn btn-orange float-right"  data-toggle="modal" data-target="#modalAgregarInventario">
-            Agregar         
-          </button>
+       
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -36,6 +34,7 @@
 
 <!-- TAB PRINCIPAL -->
 <div class="card">
+
     <div class="card-header">  
         <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item" role="presentation">
@@ -47,9 +46,24 @@
         </ul>
     </div>
               <!-- TAB INVENTARIO -->
-    <div class="tab-content" id="myTabContent">
+    <div class="tab-content" id="myTabContent"> 
         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="inventario">
         <div class="container-fluid mt-4">
+
+
+        <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-1">
+          <div class="col-sm-12">
+          <button class="btn btn-orange float-right"  data-toggle="modal" data-target="#modalAgregarInventario">
+            Nuevo Inventario        
+          </button>
+          </div>
+        </div>
+
+      </div><!-- /.container-fluid -->
+    </section> 
+
             <div class="card-body">
             <!-- CUERPPO INVENTARIO -->
                 <table class="table table-striped table-bordered tablas text-center">
@@ -112,6 +126,17 @@
 
             <!-- TAB BODEGA -->
         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="bodega">
+
+        <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-1">
+          <div class="col-sm-12">
+          <button class="btn btn-orange float-right"  data-toggle="modal" data-target="#modalAgregarBodega">
+            Nuevo Bodega      
+          </button>
+          </div>
+        </div>
+
             <div class="container-fluid mt-3">
                 <div class="card-body">
                     <table class="table table-striped table-bordered tablas text-center">
@@ -123,9 +148,6 @@
                             <th scope="col">Tipo producto</th>
                             <th scope="col">Nombre</th>
                             <th scope="col">Stock</th>
-                            <th scope="col">Precio</th>
-                            <th scope="col">Producto min</th>
-                            <th scope="col">Producto max</th>
                             <th scope="col">Acciones</th>
                             </tr>
                         </thead>
@@ -151,10 +173,7 @@
                                           echo '<td>'.$value["tipo_producto"].'</td>
 
                                     <td>'.$value["nombre_producto"].'</td>
-                                    <td>'.$value["stock"].'</td>
-                                    <td>'.$value["precio"].'</td>
-                                    <td>'.$value["producto_minimo"].'</td>
-                                    <td>'.$value["producto_maximo"].'</td>';
+                                    <td>'.$value["stock"].'</td>';
                                 echo '     
                                     <td>
                                     <button class="btn btn-warning" data-toggle="modal" data-target="#modalEditarStock"><i class="fas fa-pencil-alt" style="color:#fff"></i></button>
@@ -178,13 +197,12 @@
 
 
   <!-- =======================================
-           MODAL AGREGAR 
+           MODAL AGREGAR INVENTARIO
   ======================================----->
 
   <div class="modal fade" id="modalAgregarInventario" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
-      
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Agregar a Stock</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -198,14 +216,14 @@
                 <a class="nav-link active" id="datosPersona" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Inventario/Bodega</a>
               </li>
             </ul>
-
+            
             <div class="tab-content" id="myTabContent">
               <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="datosPersona">
                 <div class="container-fluid mt-3">
                   <div class="form-row">
                     <div class="form-group col-md-3">
                       <label for="">Tipo<?php echo $i?></label>
-                      <select class="form-control select2"  id="nuevoTipoProducto" name="nuevoTipoProducto">
+                      <select class="form-control select2 "  id="nuevoTipoProducto" style="width: 100%;" name="nuevoTipoProducto">
                           
                           
                           <option selected="selected">Seleccionar...</option>
@@ -227,6 +245,7 @@
                     </div>
                     <div class="form-group col-md-3">
                       <label for="nombreproducto">Nombre Producto</label>
+                      <html>
                       <input type="text" class="form-control nombre_producto" name="nuevoNombreProducto" placeholder="Ingrese Producto" required>
                     </div>
                     <div class="form-group col-md-3">
@@ -241,7 +260,8 @@
 
                     <div class="form-group col-md-4">
                       <label for="precio">Precio</label>
-                      <input type="text" class="form-control precio" name="nuevoPrecio" placeholder="Ingrese Precio" required>
+                      <input type="text" class="form-control precio" name="nuevoPrecio" placeholder="Ingrese Precio"  required>
+                    
                     </div>
                         <div class="form-group col-md-4">
                           <label for="productominimo">Producto Minimo</label>
@@ -296,8 +316,10 @@
   </div>
 
 
-
-
+  <!-- =======================================
+           MODAL AGREGAR BODEGA
+  ======================================----->
+  
 
   
   <!-- =======================================
@@ -307,9 +329,8 @@
   <div class="modal fade" id="modalEditarStock" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
-      
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Editar Stock</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Editar</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -318,57 +339,44 @@
           <form role="form" method="post" class="formulario" enctype="multipart/form-data">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
               <li class="nav-item" role="presentation">
-                <a class="nav-link active" id="Editarmodal" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Editar Inventario/Bodega</a>
+                <a class="nav-link active" id="datosPersona" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Inventario/Bodega</a>
               </li>
             </ul>
-
+            
             <div class="tab-content" id="myTabContent">
-              <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="Editarmodal">
-                <div class="container-fluid mt-4">
+              <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="datosPersona">
+                <div class="container-fluid mt-3">
                   <div class="form-row">
-                    <div class="form-group col-md-4">
-                      <label for=""> Editar Tipo<?php echo $i?></label>
-                      <select class="form-control select2" name="editaripoProducto">
-                          <option selected="selected">Seleccionar...</option>
-                          <?php 
-                              $tabla = "tbl_tipo_producto";
-                              $item = null;
-                              $valor = null;
-
-                              $preguntas = ControladorInventario::ctrMostrarTipoProducto($tabla, $item, $valor);
-                              foreach ($preguntas as $key => $value) { ?>
-                                  <option value="<?php echo $value['id_tipo_producto']?>"><?php echo $value['tipo_producto']?></option>        
-                              <?php 
-                              }
-                          ?>
-                      </select>
+ 
+                    <div class="form-group col-md-3">
+                      <label for="nombreproducto">Codigo</label>
+                      <input type="text" readonly class="form-control nuevoCodigo" readonly id="editarCodigo" name="editarCodigo"  required>
                     </div>
-
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-3">
                       <label for="nombreproducto">Nombre Producto</label>
-                      <input type="text" class="form-control nombre_producto" name="editarNombreProducto" placeholder="Editar Nombre" required>
+                      <html>
+                      <input type="text" class="form-control nombre_producto" name="editarNombreProducto" id="editarNombreProducto" required>
                     </div>
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-3">
                       <label for="stock">Cantidad en stock</label>
-                      <input type="text" class="form-control stock" name="editarStock" placeholder="Editar stock" required>
+                      <input type="number" class="form-control stock" name="editarStock" id="editarStock"  min="0" required class="fa fa-arrow-up"></i></span>
                     </div>
                   </div>
       
                <div class="form-row">
 
-
-
                     <div class="form-group col-md-4">
-                      <label for="precio"> Precio</label>
-                      <input type="text" class="form-control precio" name="editarPrecio" placeholder="Editar Precio" required>
+                      <label for="precio">Precio</label>
+                      <input type="text" class="form-control precio" name="editarPrecio" id="editarPrecio" required>
                     </div>
+
                         <div class="form-group col-md-4">
                           <label for="productominimo">Producto Minimo</label>
-                          <input type="text" class="form-control precio" name="nuevoProductoMinimo" placeholder="Cantidad Minima" required>
+                          <input type="number" class="form-control precio" name="editarProductoMinimo" id="editarProductoMinimo" min="0" required class="fa fa-arrow-up"></i></span>
                         </div>
                         <div class="form-group col-md-4">
                           <label for="productomaximo">Producto Maximo</label>
-                          <input type="text" class="form-control precio" name="nuevoProductoMaximo" placeholder="Cantidad Maximo" required>
+                          <input type="number" class="form-control precio" name="editarProductoMaximo" id="editarProductoMaximo" min="0" required class="fa fa-arrow-up"></i></span>
                         </div>
                      </div>
 
@@ -376,12 +384,12 @@
                 <div class="form-row">
 
                     <div class="form-group col-md-5">
-                        <label for="nuevafoto">Foto</label>
+                        <label for="exampleInputFile">Foto</label>
                         <div class="input-group">
                           <img class="img-thumbnail previsualizar mr-2" src="vistas/img/usuarios/default/anonymous.png" alt="imagen-del-usuario" width="100px">
                           <div class="custom-file">
-                            <input type="file" class="custom-file-input nuevaFoto" id="nuevafoto" name="nuevaFotoProducto">
-                            <label class="custom-file-label" for="nuevafoto">Escoger foto</label>
+                            <input type="file" class="custom-file-input nuevaFotoProducto" id="exampleInputFile" name="editarFotoProducto">
+                            <label class="custom-file-label" for="exampleInputFile">Escoger foto</label>
                           </div>
                         </div>
                             <p class="p-foto help-block ml-4">Peso máximo de la foto 2 MB</p>
@@ -389,14 +397,18 @@
                   </div>
 
                   <div class="form-group mt-4 float-right">
-                    <button type="" class="btn btn-primary">Guardar Cambios</button>
+                    <button type="" class="btn btn-primary">Guardar</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
                     </div>
-                   
-                   
-                  </div> -->
+                
 
-
+                    <?php
+                    // $tipostock = 'producto';
+                    // $pantalla = 'stock';
+                    // $EditarInventario = new ControladorInventario();
+                    // $EditarInventario->ctrEditarStock($tipostock, $pantalla);
+                    ?>
+                  </div>
                 </div>
 
                 
