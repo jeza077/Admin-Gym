@@ -4,6 +4,13 @@ require_once('../../../controladores/ventas.controlador.php');
 require_once "../../../modelos/ventas.modelo.php";
 require_once('../examples/tcpdf_include.php');
 
+// var_dump($_GET);
+
+// $host= $_SERVER["HTTP_HOST"];
+// echo $host;
+// $url= $_SERVER["REQUEST_URI"];
+// echo $url;
+// var_dump($_SERVER['PATH_INFO']);
 
 class PDF extends TCPDF{
     
@@ -112,11 +119,28 @@ $pdf->Cell(55, 5, 'Codigo de Factura', 1, 0, 'C', 1);
 $pdf->Cell(50, 5, 'Cliente', 1, 0, 'C', 1);
 $pdf->Cell(40, 5, 'Total', 1, 0, 'C', 1);
 
+if(isset($_GET["fechaInicial"])){
 
-$item = null;
-$valor = null;
-$ventas = ControladorVentas::ctrMostrarVentas($item, $valor);
-// var_dump($usuarios);
+
+    $fechaInicial = $_GET["fechaInicial"];
+    $fechaFinal = $_GET["fechaFinal"];
+
+    // echo $fechaInicial;
+    // echo $fechaFinal;
+} else {
+
+    $fechaInicial = null;
+    $fechaFinal = null;
+
+} 
+
+    $ventas = ControladorVentas::ctrRangoFechasVentas($fechaInicial, $fechaFinal);
+ 
+
+// $item = null;
+// $valor = null;
+// $ventas = ControladorVentas::ctrMostrarVentas($item, $valor);
+// // var_dump($usuarios);
 
 $i = 1; //Contador
 $max = 5; //Maximo de registros a mostrar en una pagina

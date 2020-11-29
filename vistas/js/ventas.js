@@ -423,6 +423,8 @@ datarangeDinamico($('#daterange-btn'), $('#daterange-btn span'), 'capturarRangoV
 //       window.location = "index.php?ruta=administrar-venta&fechaInicial="+fechaInicial+"&fechaFinal="+fechaFinal;
 //   }
 // )
+
+
 /*=============================================
         CAPTURAR HOY
 =============================================*/  
@@ -481,9 +483,31 @@ datarangeDinamicoHoy(".daterangepicker.reporteVentas .ranges li", 'capturarRango
 //** ------------------------------------*/
 //         IMPRIMIR PDF VENTAS
 // --------------------------------------*/ 
-$(document).on('click', '.btnExportarVentas', function () {
-  console.log("click");
-  window.open("extensiones/tcpdf/pdf/ventas-pdf.php", "_blank");
+$(document).on('click', '.btnExportarVentas', function (e) {
+  // console.log("click");
+  e.preventDefault();
+  function getQueryVariable(variable) {
+    var query = window.location.search.substring(1);
+    var vars = query.split("&");
+    for (var i=0; i < vars.length; i++) {
+        var pair = vars[i].split("=");
+        if(pair[0] == variable) {
+            return pair[1];
+        }
+    }
+    return false;
+ }
+ 
+ // console.log(window.location.search.substring(15));
+ // console.log(getQueryVariable('fechaFinal'));
+ 
+ var fechaInicial = getQueryVariable('fechaInicial');
+ var fechaFinal = getQueryVariable('fechaFinal')
+// console.log(fechaInicial)
+ 
+window.open("extensiones/tcpdf/pdf/ventas-pdf.php?&fechaInicial="+fechaInicial+"&fechaFinal="+fechaFinal);
+
+  // window.open("extensiones/tcpdf/pdf/ventas-pdf.php", "_blank");
 });
 
 
