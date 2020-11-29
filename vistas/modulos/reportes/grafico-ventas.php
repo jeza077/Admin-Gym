@@ -14,7 +14,7 @@
 
 } 
 
-$ventas = ControladorVentas::ctrRangoFechasVentas($fechaInicial, $fechaFinal);
+    $ventas = ControladorVentas::ctrRangoFechasVentas($fechaInicial, $fechaFinal);
  
     // echo '<pre>';
     // var_dump($ventas);
@@ -34,14 +34,20 @@ $ventas = ControladorVentas::ctrRangoFechasVentas($fechaInicial, $fechaFinal);
 
         #Capturamos las ventas
         $arrayVentas = array($fecha => $value["total"]);
+        // echo '<pre>';
         // var_dump($arrayVentas);
+        // echo '</pre>';
 
         #Sumamos los pagos que ocurrieron el mismo mes
         foreach ($arrayVentas as $key => $value) {
 		
             $sumaPagosMes[$key] += $value;
-            var_dump($sumaPagosMes);
-	    }
+            // echo $key;
+            echo '<pre>';
+            var_dump($sumaPagosMes[$key]);
+            echo '</pre>';
+            
+        }
 
     }      
 
@@ -104,17 +110,12 @@ $.ajax({
     processData: false,  
     dataType: "json",
     success: function (respuesta) {
-        console.log(respuesta);
+        // console.log(respuesta);
 
         var arrayFechas = [];
         var arrayVentas = [];
         var sumaPagosMes = [];
-
-    //     foreach ($arrayVentas as $key => $value) {
-		
-    //     $sumaPagosMes[$key] += $value;
-        
-    // }
+        var suma = 0;
 
         respuesta.forEach(element => {
             // console.log(element.fecha);
@@ -126,19 +127,14 @@ $.ajax({
             arrayVentas[fecha] = element.total;
             // console.log(arrayVentas)
 
-            Object.keys(arrayVentas).forEach(key =>  {
-            
-                sumaPagosMes[key] += arrayVentas[key];
-                console.log(sumaPagosMes[key] += arrayVentas[key])
-                // console.log(key, arrayVentas[key])
-            
-            });
+            for(i in arrayVentas){
+                suma = suma + parseInt(arrayVentas[i])
+                // console.log(suma);
+            }
+         
+            sumaPagosMes[fecha] = suma;
 
-            // arrayVentas.forEach(element => {
-            //     // sumaPagosMes[element] += obj[element];
-            //     console.log(element)
-
-            // });
+            console.log(sumaPagosMes);
 
         });
 
