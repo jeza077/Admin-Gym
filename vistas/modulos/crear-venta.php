@@ -75,7 +75,7 @@
 
                     <label for="cliente">Cliente</label>
                       
-                    <select class="form-control" id="seleccionarCliente" name="seleccionarCliente" required>
+                    <select class="form-control select2-dropdown select2-search-dropdown" id="seleccionarCliente" name="seleccionarCliente" required>
                         <option value="">Seleccionar cliente</option>
                         <?php
                           $item= null;

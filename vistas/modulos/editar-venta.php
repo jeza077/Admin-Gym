@@ -66,7 +66,7 @@
 
                     <label for="cliente">Cliente</label>
                       
-                    <select class="form-control" id="seleccionarCliente" name="seleccionarCliente" required>
+                    <select class="form-control select2-dropdown select2-search-dropdown" id="seleccionarCliente" name="seleccionarCliente" required>
                         <option value="<?php echo $venta["id_cliente"];  ?>"><?php echo $venta["nombre"];  ?></option>
                         <?php
                           $item= null;
@@ -137,20 +137,20 @@
                 <div class="form-row">
                   <div class="form-group-float-right col-md-2" style="padding-left:0px">
                     <label>Impuesto </label>
-                    <input type="number" class="form-control nuevoImpuestoVenta" name="nuevoImpuestoVenta"  id="nuevoImpuestoVenta" value="<?php echo $porcentajeImpuesto; ?>" required> 
+                    <input type="number" class="form-control nuevoImpuestoVenta" name="nuevoImpuestoVenta"  id="nuevoImpuestoVenta" value="<?php echo $porcentajeImpuesto; ?>" readonly required> 
                     <!-- <span class="input-group-addon"><i class="fa fa-percent"></i></span> -->
                   <input type="hidden" name="nuevoPrecioImpuesto" id="nuevoPrecioImpuesto" value="<?php echo $venta["impuesto"]; ?>" required> 
                   </div>
                     
 
-                  <input type="hidden" name="nuevoPrecioNeto" id="nuevoPrecioNeto" value="<?php echo $venta["neto"]; ?>" required> 
+                  <!-- <input type="hidden" name="nuevoPrecioNeto" id="nuevoPrecioNeto" value="<?php echo $venta["neto"]; ?>" required>  -->
                 
-                  <!-- <div class="form-group float-right col-md-3" style="padding-left:0px">
+                  <div class="form-group float-right col-md-3" style="padding-left:0px">
                     <label for="total_producto"> Sub Total </label>
                     <input type="number" min="1" class="form-control input-lg" total="<?php echo $venta["neto"]; ?>" id="nuevoPrecioNeto" name="nuevoTotalNeto"  value="<?php echo $venta["neto"]; ?>"  readonly required>
                     <input type="hidden"  name="nuevoPrecioNeto" id="precioNeto" value="<?php echo $venta["neto"]; ?>" required> 
 
-                  </div>   -->
+                  </div>  
 
                   <div class="form-group-float-right col-md-4" style="padding-left:0px">
                     <label for="total_producto"> Total </label>
