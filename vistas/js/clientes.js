@@ -284,19 +284,19 @@ $('.btnPagosCliente').click(function () {
         dataType: "json",
         success: function(respuesta) {
 
-            console.log("respuesta", respuesta);
+            // console.log("respuesta", respuesta);
             
-            $('#idEditarCliente').val(respuesta["id_cliente"])
+            $('#idEditarCliente').val(respuesta["id_persona"])
 
-            $('#editarPromocion').html(respuesta["tipo_descuento"])
-            $('#editarPromocion').val(respuesta["id_descuento"])
+            $('#actualizarDescuento').html(respuesta["tipo_descuento"])
+            $('#actualizarDescuento').val(respuesta["id_descuento"])
             
-             $('#editarInscripcion').html(respuesta["tipo_inscripcion"])
-            $('#editarInscripcion').val(respuesta["id_inscripcion"])
+             $('#actualizarInscripcion').html(respuesta["tipo_inscripcion"])
+            $('#actualizarInscripcion').val(respuesta["id_inscripcion"])
 
-            $('.editarPrecioPromocion').val(respuesta["pago_descuento"])
-            $('.editarPrecioInscripcion').val(respuesta["pago_inscripcion"])
-            $('.editarTotalPagar').val(respuesta["pago_total"])
+            $('.actualizarPrecioDescuento').val(respuesta["pago_descuento"])
+            $('.actualizarPagoInscripcion').val(respuesta["pago_inscripcion"])
+            $('.pagoTotalActualizado').val(respuesta["pago_total"])
             
         }
     });

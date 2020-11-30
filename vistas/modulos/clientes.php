@@ -157,8 +157,8 @@
               <div class="form-row">
                 <div class="form-group col-md-6"> 
                   <label>Tipo inscripcion</label>
-                  <select class="form-control select2 pagarInscripcion" style="width: 100%;" name="pagarInscripcion">
-                      <option selected="selected">Seleccionar...</option>
+                  <select class="form-control select2" style="width: 100%;" name="actualizarInscripcion">
+                      <option value="" id="actualizarInscripcion"></option>
                       <?php 
                           $tabla = "tbl_inscripcion";
                           $item = null;
@@ -180,15 +180,15 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text">$</span>  
                       </div>
-                    <input type="text" class="form-control text-right pagoDeInscripcion" value="" readonly>                       
+                    <input type="text" class="form-control text-right actualizarPagoInscripcion" value="" readonly>                       
                   </div>
                 </div>
               </div>
               <div class="form-row">
                 <div class="form-group col-md-6">
                   <label>Promociones</label>
-                  <select class="form-control select2 pagarPromocion" style="width: 100%;" name="pagarPromocion">
-                    <option selected="selected">Seleccionar...</option>
+                  <select class="form-control select2" style="width: 100%;" name="actualizarDescuento">
+                      <option value="" id="actualizarDescuento"></option>
                       <?php 
                           $tabla = "tbl_descuento";
                           $item = null;
@@ -209,7 +209,7 @@
                       <div class="input-group-prepend">
                           <span class="input-group-text">$</span>  
                         </div>
-                      <input type="text" class="form-control text-right precioDeDescuento" value="" readonly>
+                      <input type="text" class="form-control text-right actualizarPrecioDescuento" value="" readonly>
                     </div>
                 </div>
                 <div class="form-row">
@@ -219,7 +219,7 @@
                           <div class="input-group-prepend">
                               <span class="input-group-text">$</span>  
                           </div>
-                          <input type="text" class="form-control text-right totalPago" id="totalPago" value="" readonly>  
+                          <input type="text" class="form-control text-right pagoTotalActualizado" id="totalPago" value="" readonly>  
                           <input type="hidden" id="nuevoTotalPago"  name="nuevoTotalPago">                   
                         </div>
                     </div>

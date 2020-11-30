@@ -162,31 +162,31 @@ class ControladorClientes{
 				// return;
 				$idCliente = $personaTotal["id_cliente"];
 
-					$vigencias = $_POST["nuevaInscripcion"];
+					$editarVigencias = $_POST["editarInscripcion"];
 
 					// echo $vigencias;
 					// return;
 
-					if ($vigencias == 0) {
-						$valorVigencia = 'VIGENCIA_CLIENTE_MES';
+					if ($editarVigencias == 1) {
+						$editarValorVigencia = 'VIGENCIA_CLIENTE_MES';
 						
-						var_dump("Mes",$valorVigencia);
+						// var_dump("Mes",$valorVigencia);
 						
-					} else if ($vigencias == 1){
-						$valorVigencia = 'VIGENCIA_CLIENTE_QUINCENAL';
+					} else if ($editarVigencias == 2){
+						$editarValorVigencia = 'VIGENCIA_CLIENTE_QUINCENAL';
 						
-						var_dump("Quincenal",$valorVigencia);
+						// var_dump("Quincenal",$valorVigencia);
 						
 					} else {
-						$valorVigencia = 'VIGENCIA_CLIENTE_DIA';
+						$editarValorVigencia = 'VIGENCIA_CLIENTE_DIA';
 						
-						var_dump("Diaria",$valorVigencia);
+						// var_dump("Diaria",$valorVigencia);
 						
 					}
 
 				$item = 'parametro';
-				$valor = 'VIGENCIA_CLIENTE_QUINCENAL';
-				$parametros = ControladorUsuarios::ctrMostrarParametros($item, $valor);
+				// $valor = 'VIGENCIA_CLIENTE_QUINCENAL';
+				$parametros = ControladorUsuarios::ctrMostrarParametros($item, $editarValorVigencia);
 				// echo "<pre>";
 				// var_dump($vigencias);
 				// echo "</pre>";
