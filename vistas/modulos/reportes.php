@@ -42,6 +42,12 @@
         include 'reportes/grafico-venta.php';
       ?>
 
+      <div class="col-md-6 col-xs-12">
+        <?php 
+          include "reportes/productos-mas-vendidos.php";
+        ?>    
+      </div>
+
     </section>
     <!-- /.content -->
   </div>
