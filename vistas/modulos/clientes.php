@@ -12,7 +12,9 @@
           <button class="btn btn-orange float-right"  data-toggle="modal" data-target="#modalAgregarCliente">
             Agregar cliente       
           </button>
-          </div>
+          <button class="btn btn-danger btnExportarClientes float-right mr-3">
+              Exportar PDF          
+          </button>
         </div>
       </div>
     </section>  
@@ -113,7 +115,7 @@
                             // return;
 
                             if ($fecha_actual > $fecha_entrada)  {
-                              echo '<td><button class="btn btn-success btnPagosCliente" data-toggle="modal" data-target="#modalPagosCliente" idPagoCliente="'.$value["id_personas"].'"><i class="fas fa-sync"></i></button></td>';
+                              echo '<td><button class="btn btn-success btnPagosCliente" data-toggle="modal" data-target="#modalPagosCliente" idPagoCliente="'.$value["id_personas"].'"><i class="fas fa-dollar-sign"></i></button></td>';
                             } else {
                               echo  '<td><button class="btn btn-success btn-md">Pagado</td>';
                             }
@@ -139,8 +141,8 @@
     </section>
   </div>
 
-   <!-- =======================================
-           MODAL AGREGAR  PAGO CLIENTE
+  <!-- =======================================
+           MODAL ACTUALIZAR PAGO CLIENTE
   ======================================----->
 
   <div class="modal fade" id="modalPagosCliente" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -154,81 +156,97 @@
         </div>
           <div class="modal-body">
             <form role="form" method="post" class="formulario">
-              <div class="form-row">
-                <div class="form-group col-md-6"> 
-                  <label>Tipo inscripcion</label>
-                  <select class="form-control select2" style="width: 100%;" name="actualizarInscripcion">
-                      <option value="" id="actualizarInscripcion"></option>
-                      <?php 
-                          $tabla = "tbl_inscripcion";
-                          $item = null;
-                          $valor = null;
-                          
+              <div class="container-fluid mt-4">
+                <div class="form-row">
+                  <div class="form-group col-md-6"> 
+                    <label>Tipo inscripcion</label>
+                    <select class="form-control select2 actualizarInscripcion" style="width: 100%;" name="actualizarInscripcion">
+                        <option value="" id="actualizarInscripcion"></option>
+                        <?php 
+                            $tabla = "tbl_inscripcion";
+                            $item = null;
+                            $valor = null;
+                            
 
-                          $inscripciones = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
+                            $inscripciones = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
 
-                          foreach ($inscripciones as $key => $value) { ?>
-                            <option value="<?php echo $value['id_inscripcion']?>"><?php echo $value['tipo_inscripcion']?></option>        
-                          <?php 
-                        }
-                      ?>
-                  </select>
-                </div>
-                <div class="form-group col-md-6">
-                  <label for="">Precio inscripcion</label>
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">$</span>  
-                      </div>
-                    <input type="text" class="form-control text-right actualizarPagoInscripcion" value="" readonly>                       
-                  </div>
-                </div>
-              </div>
-              <div class="form-row">
-                <div class="form-group col-md-6">
-                  <label>Promociones</label>
-                  <select class="form-control select2" style="width: 100%;" name="actualizarDescuento">
-                      <option value="" id="actualizarDescuento"></option>
-                      <?php 
-                          $tabla = "tbl_descuento";
-                          $item = null;
-                          $valor = null;
-
-                          $matriculas = ControladorClientes::ctrMostrar($tabla, $item, $valor);
-
-                          foreach ($matriculas as $key => $value) { ?>
-                            <option value="<?php echo $value['id_descuento']?>"><?php echo $value['tipo_descuento']?></option>        
-                          <?php 
+                            foreach ($inscripciones as $key => $value) { ?>
+                              <option value="<?php echo $value['id_inscripcion']?>"><?php echo $value['tipo_inscripcion']?></option>        
+                            <?php 
                           }
-                      ?>
-                  </select> 
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="">Precio promocion</label>
+                        ?>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="">Precio inscripcion</label>
                     <div class="input-group">
                       <div class="input-group-prepend">
                           <span class="input-group-text">$</span>  
                         </div>
-                      <input type="text" class="form-control text-right actualizarPrecioDescuento" value="" readonly>
+                      <input type="text" class="form-control text-right actualizarPagoInscripcion" value="" readonly>    
+                      <input type="hidden" id="precioInscripcionActualizado" name="precioInscripcionActualizado">                    
                     </div>
+                  </div>
                 </div>
                 <div class="form-row">
-                    <div class="form-group col-md-6 float-right">
-                        <label for="">Total Pago:</label>
-                        <div class="input-group">
-                          <div class="input-group-prepend">
-                              <span class="input-group-text">$</span>  
+                  <div class="form-group col-md-6">
+                    <label>Promociones</label>
+                    <select class="form-control select2 descuentoNuevo" style="width: 100%;" name="actualizarDescuento">
+                        <option value="" id="actualizarDescuento"></option>
+                        <?php 
+                            $tabla = "tbl_descuento";
+                            $item = null;
+                            $valor = null;
+
+                            $matriculas = ControladorClientes::ctrMostrar($tabla, $item, $valor);
+
+                            foreach ($matriculas as $key => $value) { ?>
+                              <option value="<?php echo $value['id_descuento']?>"><?php echo $value['tipo_descuento']?></option>        
+                            <?php 
+                            }
+                        ?>
+                    </select> 
+                  </div>
+                  <div class="form-group col-md-6">
+                      <label for="">Precio promocion</label>
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">$</span>  
                           </div>
-                          <input type="text" class="form-control text-right pagoTotalActualizado" id="totalPago" value="" readonly>  
-                          <input type="hidden" id="nuevoTotalPago"  name="nuevoTotalPago">                   
-                        </div>
-                    </div>
+                        <input type="text" class="form-control text-right actualizarPrecioDescuento" value="" readonly>
+                        <input type="hidden" id="precioDescuentoActualizado" name="precioDescuentoActualizado">  
+                      </div>
+                  </div>
+                  <div class="form-row">
+                      <div class="form-group col-md-6 float-right">
+                          <label for="">Total Pago:</label>
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">$</span>  
+                            </div>
+                            <input type="text" class="form-control text-right pagoTotalActualizado" id="pagoTotalActualizado" value="" readonly>  
+                            <input type="hidden" id="nuevoTotalPago"  name="nuevoTotalPago">                   
+                          </div>
+                      </div>
+                  </div>
                 </div>
-                <td class="form-group mt-6 float-right">
-                  <button type="" class="btn btn-primary actualizarPago" name="actualizarPago">Actualiazar pago <i class="fas fa-sync"></i></button>
-                </td> 
-                
               </div>
+              <div class="form-group mt-4 float-right">
+                <button type="" class="btn btn-primary">Actualiazar pago</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
+              </div> 
+              <?php
+                  // $ajustes = null;
+                  $tipoPersona = 'clientes';
+                  $pantalla = 'clientes';
+                  $editarPersona = new ControladorPersonas();
+                  $editarPersona->ctrActualizarPagoCliente($tipoPersona, $pantalla);
+
+                  // echo "<pre>";
+                  // var_dump($editarPersona);
+                  // echo "</pre>";
+                  // return;
+                ?>
             </form>
           </div>
       </div>
