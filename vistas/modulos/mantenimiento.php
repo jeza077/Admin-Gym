@@ -103,7 +103,7 @@
                                   
                             <th scope="col">Estado</th>
 
-                            <th scope="col">Acciones</th>
+                         
          
                           </tr>
 
@@ -136,10 +136,8 @@
                                       
                                     }
                                     echo'
-                                    <td>
-                                    <button class="btn btn-warning btnEditarRol" editarIdRol="'.$value["id_rol"].'"><i class="fas fa-pencil-alt" style="color:#fff" data-toggle="modal" data-target="#modalModificar"></i></button>
-                                    <button class="btn btn-primary"><i class="fas fa-cog" style="color:#fff" data-toggle="modal" data-target="#modalEditarRol"></i></button>
-                                    </td>
+                                   
+                                   
                                   </tr>';
                                                     
                               }
@@ -181,7 +179,7 @@
                             <th scope="col">Tipo de inscripcion</th>
                             <th scope="col">Precio</th>
                             <th scope="col">Estado</th>
-                            <th scope="col">Accion</th>
+      
                           </tr>
                         </thead>
                         <tbody>             
@@ -206,7 +204,7 @@
                                         echo '<td><button class="btn btn-danger btn-md btnActivar" idInscripcion="'.$value["id_inscripcion"].'" estadoInscripcion="1">Desactivado</button></td>';
                                       } 
                                       echo' 
-                                      <td><button class="btn btn-warning btnEditarInscripcion" data-toggle="modal" data-target="#modalEditarInscripcion"><i class="fas fa-pencil-alt" style="color:#fff"></i></button></td>
+                                      
                                     </tr> ';
                                 }       
                           ?>     
@@ -266,11 +264,7 @@
                                             echo '<td><button class="btn btn-danger btn-md btnActivar" idMatricula="'.$value["id_Matricula"].'" estadoMatricula="1">Desactivado</button></td>';
                                           } 
                                           echo'
-                                          <td><button class="btn btn-warning btnEditarMatricula" data-toggle="modal" data-target="#modalEditarMatricula"><i class="fas fa-pencil-alt" style="color:#fff"></i></button></td>
-                                        </tr> ';
-                                        
-                                          
-                                          
+                                        </tr>  '; 
                                     }       
                               ?>                
                          
@@ -305,7 +299,7 @@
                             <th scope="col">Tipo descuento</th>
                             <th scope="col">Precio</th>
                             <th scope="col">Estado</th>
-                            <th scope="col">Accion</th>
+                            
                           </tr>
                         </thead>
                         <tbody>  
@@ -330,7 +324,7 @@
                                             echo '<td><button class="btn btn-danger btn-md btnActivar" idDescuento="'.$value["id_descuento"].'" estadoDescuento="1">Desactivado</button></td>';
                                           } 
                                           echo'
-                                          <td><button class="btn btn-warning btnEditarDescuento" data-toggle="modal" data-target="#modalEditarDescuento"><i class="fas fa-pencil-alt" style="color:#fff"></i></button></td>
+                                         
                                         </tr> ';
                                           
                                       }       
@@ -815,7 +809,7 @@ MODAL AGREGAR NUEVA INSCRIPCION
 
             <div class="form-group col-md-12">
               <label for="Descripcion">Precio</label>
-              <input type="text" class="form-control preciom  " name="nuevoPrecio" value="" required>
+              <input type="text" class="form-control preciom " name="nuevoPrecio" value="" required>
             </div>
 
           </div>
@@ -1000,230 +994,6 @@ MODAL NUEVO DESCUENTO
         
 
 </div>
-
-
-
-<!--==========================================================================
-MODAL EDITAR INSCRIPCION
-================================================================================-->
-
-<div class="modal fade" id="modalEditarInscripcion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  
-  <div class="modal-dialog " role="document">
-
-    <div class="modal-content">
-
-      <form role="form" method="post" autocomplete="off">
-
-        <!--=====================================
-        CABEZA DEL MODAL
-        ======================================-->
-
-        <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Editar inscripcion</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-
-        <!--=====================================
-        CUERPO DEL MODAL
-        ======================================-->
-        <div class="modal-body">
-          <div class="card-body">
-            <div class="form-group col-md-12">
-              <label for="Rol">Inscripcion</label>
-              <input type="text" class="form-control nombre mayus" name="EditarInscripcion" value="" required>
-            </div>
-
-            <div class="form-group col-md-12">
-              <label for="Descripcion">Precio</label>
-              <input type="text" class="form-control preciom  " name="EditarPrecio" value="" required>
-            </div>
-
-          </div>
-
-        </div>
-      
-        
-
-        <!--=====================================
-        PIE DEL MODAL
-        ======================================-->
-
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-primary">Guardar</button>
-          <button type="button" class="btn btn-orange" data-dismiss="modal">Salir</button>
-        </div>
-          <?php
-
-            $crearInscripcion = new ControladorMantenimientos();
-            $crearInscripcion -> ctrInscripcionInsertar();
-
-          ?>
-    
-      </form>
-      
-
-    </div>
-
-  </div>
-        
-
-</div>
-
-
-
-<!--=====================================
-MODAL AGREGAR NUEVA MATRICULA
-======================================-->
-
-<div class="modal fade" id="modalEditarMatricula" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  
-  <div class="modal-dialog " role="document">
-
-    <div class="modal-content">
-
-      <form role="form" method="post" autocomplete="off">
-
-        <!--=====================================
-        CABEZA DEL MODAL
-        ======================================-->
-
-        <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Editar matricula</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-
-        <!--=====================================
-        CUERPO DEL MODAL
-        ======================================-->
-
-        <div class="modal-body">
-          <div class="card-body">
-            <div class="form-group col-md-12">
-              <label for="Rol">Matricula</label>
-              <input type="text" class="form-control nombre mayus" name="EditarMatricula" value="" required>
-            </div>
-
-            <div class="form-group col-md-12">
-              <label for="Descripcion">Precio</label>
-              <input type="textarea" class="form-control preciom" name="EditarPrecio" value="" required>
-            </div>
-
-          </div>
-
-        </div>
-
-        <!--=====================================
-        PIE DEL MODAL
-        ======================================-->
-
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-primary">Guardar</button>
-          <button type="button" class="btn btn-orange" data-dismiss="modal">Salir</button>
-        </div>
-
-        <?php
-
-          $crearMatricula = new ControladorMantenimientos();
-          $crearMatricula-> ctrMatriculaInsertar();
-
-        ?>
-
-
-
-
-      </form>
-
-    
-
-    </div>
-
-  </div>
-        
-
-</div>
-
-
-<!--=====================================
-MODAL NUEVO DESCUENTO
-======================================-->
-
-<div class="modal fade" id="modalEditarDescuento" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  
-  <div class="modal-dialog " role="document">
-
-    <div class="modal-content">
-
-      <form role="form" method="post" autocomplete="off">
-
-        <!--=====================================
-        CABEZA DEL MODAL
-        ======================================-->
-
-        <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Editar Descuento</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-
-        <!--=====================================
-        CUERPO DEL MODAL
-        ======================================-->
-
-        <div class="modal-body">
-          <div class="card-body">
-            <div class="form-group col-md-12">
-              <label for="Rol">Descuento</label>
-              <input type="text" class="form-control nombre mayus" name="EditarDescuento" value="" required>
-            </div>
-
-            <div class="form-group col-md-12">
-              <label for="Descripcion">Valor</label>
-              <input type="textarea" class="form-control preciom" name="EditarValor" value="" required>
-            </div>
-
-          </div>
-
-        </div>
-
-        <!--=====================================
-        PIE DEL MODAL
-        ======================================-->
-
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-primary">Guardar</button>
-          <button type="button" class="btn btn-orange" data-dismiss="modal">Salir</button>
-        </div>
-
-        <?php
-
-           $crearDescuento = new ControladorMantenimientos();
-           $crearDescuento-> ctrDescuentoInsertar();
-
-        ?>
-
-
-
-
-      </form>
-
-    
-
-    </div>
-
-  </div>
-        
-
-</div>
-
-
-
-
 
 
 
