@@ -26,6 +26,13 @@
               <!-- <div class="card"> -->
 
                 <!-- <div class="card-body"> -->
+                <?php
+                   $descripcionEvento = " Consulto la pantalla de mantenimiento";
+                   $accion = "consulta";
+
+                   $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
+    
+                ?>
 
 
                   <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -57,6 +64,13 @@
                       <a class="nav-link" id="datosParam" data-toggle="tab" href="#thirty" role="tab" aria-controls="thirty" aria-selected="false">Parametros</a>
 
                     </li>
+
+                    <li class="nav-item" role="presentation">
+
+                      <a class="nav-link" id="datosdescuento" data-toggle="tab" href="#fithy" role="tab" aria-controls="fithy" aria-selected="false">Descuento</a>
+
+                    </li>
+
 
                   </ul>
 
@@ -166,6 +180,7 @@
                             <th scope="col">#</th>
                             <th scope="col">Tipo de inscripcion</th>
                             <th scope="col">Precio</th>
+                            <th scope="col">Estado</th>
                           </tr>
                         </thead>
                         <tbody>             
@@ -183,9 +198,14 @@
                                   
                                       <td>'.($key + 1).'</td>
                                       <td>'.$value["tipo_inscripcion"].'</td>
-                                      <td>'.$value["precio_inscripcion"].'</td>
-                                    </tr>
-                                  ';
+                                      <td>'.$value["precio_inscripcion"].'</td>';
+                                      if($value['estado'] != 0){
+                                        echo '<td><button class="btn btn-success btn-md btnActivar" idInscripcion="'.$value["id_inscripcion"].'" estadoInscripcion="0">Activado</button></td>';
+                                      }else{
+                                        echo '<td><button class="btn btn-danger btn-md btnActivar" idInscripcion="'.$value["id_inscripcion"].'" estadoInscripcion="1">Desactivado</button></td>';
+                                      } 
+                                      echo' 
+                                    </tr> ';
                                 }       
                           ?>     
                         </tbody>
@@ -219,6 +239,7 @@
                             <th scope="col">#</th>
                             <th scope="col">Tipo de matricula</th>
                             <th scope="col">Precio</th>
+                            <th scope="col">Estado</th>
                           </tr>
                         </thead>
                         <tbody>  
@@ -237,6 +258,77 @@
                                           <td>'.($key + 1).'</td>
                                           <td>'.$value["tipo_matricula"].'</td>
                                           <td>'.$value["precio_matricula"].'</td>
+                                          </tr>';
+                                          if($value['estado'] != 0){
+                                            echo '<td><button class="btn btn-success btn-md btnActivar" idMatricula="'.$value["id_Matricula"].'" estadoMatricula="0">Activado</button></td>';
+                                          }else{
+                                            echo '<td><button class="btn btn-danger btn-md btnActivar" idMatricula="'.$value["id_Matricula"].'" estadoMatricula="1">Desactivado</button></td>';
+                                          } 
+                                          echo'
+                                        </tr> ';
+                                          
+                                          
+                                    }       
+                              ?>                
+                         
+                        </tbody>
+                      </table>
+                        
+                    </div>
+
+
+
+
+
+
+
+
+
+
+
+                     <!--========================================================
+                           DESCUENTO
+                    ==========================================================-->  
+                    <div class="tab-pane fade" id="fithy" role="tabpanel" aria-labelledby=" Descuento">
+
+                                
+                      <div class="form-group">
+
+                      </div>
+
+                      <div class="card-body">
+
+                        <button class="btn btn-orange float-right"  data-toggle="modal" data-target="#modalNuevoDescuento">
+                          Nuevo       
+                        </button>
+
+                      </div>
+
+                      <table class="table table-striped table-bordered tablas text-center">
+                        
+                        <thead>
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Tipo descuento</th>
+                            <th scope="col">Precio</th>
+                          </tr>
+                        </thead>
+                        <tbody>  
+                            <?php
+                                    // $tabla = "tbl_descuento";
+                                    $item = null;
+                                    $valor = null;
+                                    
+                                    $matricula = ControladorMantenimientos::ctrMostrarDescuento($item,$valor);
+                                    // var_dump($rol);
+
+                                    foreach ($matricula as $key => $value){
+                                      echo '
+                                        <tr>
+                                      
+                                          <td>'.($key + 1).'</td>
+                                          <td>'.$value["tipo_descuento"].'</td>
+                                          <td>'.$value["valor_descuento"].'</td>
                                           </tr>';
                                         }       
                               ?>                
@@ -813,6 +905,81 @@ MODAL AGREGAR NUEVA MATRICULA
 
           $crearMatricula = new ControladorMantenimientos();
           $crearMatricula-> ctrMatriculaInsertar();
+
+        ?>
+
+
+
+
+      </form>
+
+    
+
+    </div>
+
+  </div>
+        
+
+</div>
+
+
+
+<!--=====================================
+MODAL AGREGAR NUEVA MATRICULA
+======================================-->
+
+<div class="modal fade" id="modalNuevoDescuento" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  
+  <div class="modal-dialog " role="document">
+
+    <div class="modal-content">
+
+      <form role="form" method="post" autocomplete="off">
+
+        <!--=====================================
+        CABEZA DEL MODAL
+        ======================================-->
+
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Nueva Descuento</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+        <!--=====================================
+        CUERPO DEL MODAL
+        ======================================-->
+
+        <div class="modal-body">
+          <div class="card-body">
+            <div class="form-group col-md-12">
+              <label for="Rol">Descuento</label>
+              <input type="text" class="form-control nombre" name="nuevoDescuento" value="" required>
+            </div>
+
+            <div class="form-group col-md-12">
+              <label for="Descripcion">Valor</label>
+              <input type="textarea" class="form-control id" name="nuevoValor" value="" required>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!--=====================================
+        PIE DEL MODAL
+        ======================================-->
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-orange" data-dismiss="modal">Salir</button>
+          <button type="submit" class="btn btn-primary">Guardar</button>
+        </div>
+
+        <?php
+
+           $crearDescuento = new ControladorMantenimientos();
+           $crearDescuento-> ctrDescuentoInsertar();
 
         ?>
 

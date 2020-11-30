@@ -26,6 +26,7 @@
               <!-- <div class="card"> -->
 
                 <!-- <div class="card-body"> -->
+                  
 
 
                   <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -33,15 +34,33 @@
                     <li class="nav-item" role="presentation">
 
                       <a class="nav-link active" id="datosRespaldo" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Respaldo</a>
+                      <?php
+                        $descripcionEvento = " Consulto la pantalla de Respaldo";
+                        $accion = "consulta";
 
+                        $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 7,$accion, $descripcionEvento);
+    
+                      ?>
+                   
                     </li>
+
+
 
                    
 
                     <li class="nav-item" role="presentation">
 
                       <a class="nav-link" id="datosRestauracion" data-toggle="tab" href="#second" role="tab" aria-controls="second" aria-selected="false">Restauracion</a>
+                      <?php
+                        $descripcionEvento = " Consulto la pantalla de Restauracion";
+                        $accion = "consulta";
 
+                        $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 7,$accion, $descripcionEvento);
+    
+                      ?>
+                   
+                   
+                   
                     </li>
             
 

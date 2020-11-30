@@ -37,6 +37,15 @@
  <!-- Main content -->
     <section class="content">
 
+                      <?php
+                        $descripcionEvento = " Consulto la pantalla de Usuario";
+                        $accion = "consulta";
+
+                        $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 2,$accion, $descripcionEvento);
+    
+                      ?>
+                   
+
         <div class="card">
 
           <div class="card-body">

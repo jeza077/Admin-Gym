@@ -246,7 +246,7 @@
 
      /*======================================================
      MATRICULA INSERTAR
-    =============================================================================================*/
+    =========================================================*/
    
     static public function ctrMatriculaInsertar(){
 
@@ -260,7 +260,7 @@
           
   
           $datos = array("matricula" => $_POST["nuevoMatricula"], 
-                          "descripcion" => $_POST["nuevoPrecio"]);
+                          "precio" => $_POST["nuevoPrecio"]);
 
             // echo "<pre>";
             // var_dump($_POST);
@@ -339,6 +339,110 @@
     $tabla = "tbl_matricula";
     
     $respuesta = ModeloMantenimiento::mdlMostrarMatricula($tabla, $item, $valor);
+
+    return $respuesta;
+
+    }
+
+
+
+
+    
+     /*======================================================
+     DESCUENTO INSERTAR
+    =======================================================*/
+   
+    static public function ctrDescuentoInsertar(){
+
+
+      if(isset($_POST["nuevoDescuento"])){
+
+        if(preg_match('/^[a-zA-ZñÑáéíóúÁÉÍÓÚ]+$/', $_POST["nuevoDescuento"])){
+         
+          
+          $tabla = "tbl_descuento";
+          
+  
+          $datos = array("descuento" => $_POST["nuevoDescuento"], 
+                          "valor" => $_POST["nuevoValor"]);
+
+            // echo "<pre>";
+            // var_dump($_POST);
+            // echo "</pre>";
+  
+          $respuesta = ModeloMantenimiento::mdlInsertarDescuento($tabla, $datos);
+          
+          // var_dump($respuesta);
+          if($respuesta == true){
+  
+            echo '<script>
+  
+            Swal.fire({
+  
+              icon: "success",
+              title: "¡El descuento ha sido creado exitosamente!",
+              showConfirmButton: true,
+              confirmButtonText: "Cerrar",
+              closeOnConfirm: false
+  
+            }).then((result)=>{
+  
+              if(result.value){
+  
+                window.location = "mantenimiento";
+  
+              }
+  
+            });
+  
+  
+            </script>';
+  
+  
+          }
+  
+  
+        }else{
+  
+          echo '<script>
+  
+            Swal.fire({
+  
+              icon: "error",
+              title: "¡EL descuento no puede ir vacío o llevar caracteres especiales!",
+              showConfirmButton: true,
+              confirmButtonText: "Cerrar",
+              closeOnConfirm: false
+  
+            }).then((result)=>{
+  
+              if(result.value){
+  
+                window.location = "mantenimiento";
+  
+              }
+  
+            });
+  
+  
+          </script>';
+  
+        }
+  
+  
+      }
+  
+    }
+
+      /*=============================================
+        MOSTRAR DESCUENTO
+    =============================================*/
+
+    static public function ctrMostrarDescuento($item, $valor){
+
+    $tabla = "tbl_descuento";
+    
+    $respuesta = ModeloMantenimiento::mdlMostrarDescuento($tabla, $item, $valor);
 
     return $respuesta;
 
