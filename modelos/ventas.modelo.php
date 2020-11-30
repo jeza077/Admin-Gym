@@ -105,12 +105,15 @@ class ModeloVentas
 			$fechaActual = new DateTime();
 			$fechaActual->add(new DateInterval("P1D"));
 			$fechaActualMasUno = $fechaActual->format("Y-m-d");
-
+			
 			$fechaFinal2 = new DateTime($fechaFinal);
 			$fechaFinal2->add(new DateInterval("P1D"));
 			$fechaFinalMasUno = $fechaFinal2->format("Y-m-d");
+			// return $fechaFinalMasUno;
 
 			if($fechaFinalMasUno == $fechaActualMasUno){
+
+				// return 'fecha'.$fechaFinalMasUno;
 
 				$stmt = Conexion::conectar() ->prepare("SELECT * FROM $tabla  AS v\n"
 				. "INNER JOIN tbl_clientes AS c ON v.id_cliente = c.id_cliente\n"
@@ -119,10 +122,12 @@ class ModeloVentas
 
 			} else {
 
+				// return $fechaFinal;
+
 				$stmt = Conexion::conectar() ->prepare("SELECT * FROM $tabla  AS v\n"
 				. "INNER JOIN tbl_clientes AS c ON v.id_cliente = c.id_cliente\n"
 				. "INNER JOIN tbl_personas AS p ON c.id_persona = p.id_personas\n"
-				. "WHERE fecha BETWEEN '$fechaInicial' AND '$fechaFinal'");
+				. "WHERE fecha BETWEEN '$fechaInicial' AND '$fechaFinalMasUno'");
 			
 			}
 		
@@ -131,5 +136,65 @@ class ModeloVentas
 			return $stmt ->fetchAll();
 		}
 	}
+
+	/*=============================================
+	EDITAR VENTA
+	=============================================*/
+
+	static public function mdlEditarVenta($tabla, $datos){
+		
+
+		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET id_cliente = :id_cliente, id_usuario = :id_usuario, productos = :productos, impuesto = :impuesto, neto = :neto, total = :total WHERE numero_factura = :numero_factura ");
+
+		$stmt->bindParam(":id_cliente", $datos["id_cliente"], PDO::PARAM_INT);
+		$stmt->bindParam(":id_usuario", $datos["id_vendedor"], PDO::PARAM_INT);
+		$stmt->bindParam(":productos", $datos["productos"], PDO::PARAM_STR);
+		$stmt->bindParam(":impuesto", $datos["impuesto"], PDO::PARAM_STR);
+		$stmt->bindParam(":neto", $datos["neto"], PDO::PARAM_STR);
+		$stmt->bindParam(":total", $datos["total"], PDO::PARAM_STR);
+		$stmt->bindParam(":numero_factura", $datos["numero_factura"], PDO::PARAM_INT);
+
+		if($stmt->execute()){
+
+			return true;
+
+		}else{
+
+			// return false;
+			return $stmt->errorInfo();
+		
+		}
+
+		$stmt->close();
+		$stmt = null;
+
+	}
+
+	/*=============================================
+	========ELIMINAR VENTA
+	=============================================*/
+	// static public function mdlEliminarVenta($tabla, $datos){
+
+	// 	$stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE id_ = :id");
+
+	// 	$stmt -> bindParam(":id", $datos, PDO::PARAM_INT);
+
+	// 	if($stmt -> execute()){
+
+	// 		return true;
+		
+	// 	}else{
+
+	// 		return false;	
+
+	// 	}
+
+	// 	$stmt -> close();
+
+	// 	$stmt = null;
+
+	// }
+
+
 
 }

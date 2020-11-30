@@ -19,6 +19,8 @@
   <link rel="stylesheet" href="vistas/dist/css/adminlte.min.css">
   <!-- daterange picker -->
   <link rel="stylesheet" href="vistas/plugins/daterangepicker/daterangepicker.css">
+  <!-- Morris CSS -->
+  <link rel="stylesheet" href="vistas/plugins/morris.js/morris.css">
   <!-- DataTables -->
   <link rel="stylesheet" href="vistas/plugins/datatables/css/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="vistas/plugins/datatables/css/responsive.bootstrap4.min.css">
@@ -199,6 +201,11 @@
 
 <!-- date-range-picker -->
 <script src="vistas/plugins/daterangepicker/daterangepicker.js"></script>
+
+<!-- Morris JS -->
+<script src="vistas/plugins/morris.js/morris.min.js"></script>
+<script src="vistas/plugins/raphael/raphael.min.js"></script>
+
 
 <!-- DataTables -->
 <script src="vistas/plugins/datatables/js/jquery.dataTables.min.js"></script>

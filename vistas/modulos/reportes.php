@@ -10,7 +10,7 @@
           </div>
           <div class="col-sm-6">
 
-            <button type="button" class="btn btn-default float-right mr-3" id="daterange-btn">
+            <button type="button" class="btn btn-default float-right mr-3" id="daterange-btn-reporte">
                 <span>
                 <i class="far fa-calendar-alt"></i> Rango de fechas
                 </span>
@@ -37,16 +37,16 @@
       // }
     ?>
 
+        
+      <?php
+        include 'reportes/grafico-venta.php';
+      ?>
 
-      <!-- Default box -->
-      <div class="card">
-
-        <div class="card-body">
-            
-        </div>
-        <!-- /.card-body -->
+      <div class="col-md-6 col-xs-12">
+        <?php 
+          include "reportes/productos-mas-vendidos.php";
+        ?>    
       </div>
-      <!-- /.card -->
 
     </section>
     <!-- /.content -->

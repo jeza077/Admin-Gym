@@ -49,15 +49,14 @@
           <thead>
 
             <tr>
-
               <th scope="col">#</th>
               <th scope="col">Codigo factura</th>
               <th scope="col">Cliente</th>
               <th scope="col">Vendedor</th>
+              <th scope="col" width="15px">Productos</th>
               <th scope="col">Total Neto</th>
               <th scope="col">Fecha</th>
               <th scope="col">Acciones</th>
-
             </tr>
 
           </thead>
@@ -80,10 +79,35 @@
       
               $respuesta = ControladorVentas::ctrRangoFechasVentas($fechaInicial, $fechaFinal);
               // echo "<pre>";
-              // var_dump($respuesta);
+              // var_dump($respuesta[0]['productos']);
               // echo "</pre>";
 
+              // $decod = json_decode($respuesta[0]['productos']);
+              // foreach ($respuesta as $key => $value) {
+              //   $decodif = json_decode($value['productos']);
+              //   // echo "<pre>";
+              //   // var_dump(($decodif));
+              //   // echo "</pre>";
+
+              //   foreach ($decodif as $key => $val) {
+              //     echo "<pre>";
+              //     var_dump($val->descripcion);
+              //     echo "</pre>";
+                  
+              //   }
+              // }
+              // echo "<pre>";
+              // var_dump($decod);
+              // echo "</pre>";
+
+              // $decod = json_decode($value['productos']);
+              // foreach ($decod as $value) {
+              //   var_dump($value->descripcion);
+              // //  echo  $value->descripcion;
+              // }
               foreach ($respuesta as $key => $value) {
+
+                // var_dump($value['productos']);
                 echo  '<tr>
                         <td>'.($key+1).'</td>
                         
@@ -91,9 +115,30 @@
 
                         echo '<td>'.$value["nombre"].'</td>';
 
-                        echo '<td>'.$value["nombre"].' '.$value['apellidos'].'</td>
-                     
-                        <td>$ '.number_format($value["total"],2).'</td>
+                        echo '<td>'.$value["nombre"].' '.$value['apellidos'].'</td>';
+
+                        // echo '<td>'.$value['productos'].'</td>'; 
+                        echo '<td>';
+                          error_reporting(0);
+                          
+                          $decod = json_decode($value['productos']);
+                          foreach ($decod as $key => $val) {
+                            $contador = count($val->descripcion);
+                            // echo ($contador);
+                            if($contador == 11){
+                              // echo 'mas de uno';
+                               echo  $val->descripcion.',';
+                            } else {
+                              echo  $val->descripcion.', ';
+                              // echo 'solo uno';
+
+                              // echo  $val->descripcion;
+
+                            }
+                          }
+                        echo '</td>'; 
+                        
+                        echo '<td>$ '.number_format($value["total"],2).'</td>
 
                         <td>'.$value["fecha"].'</td>
 
@@ -101,9 +146,9 @@
                           <div class="btn-group">
                                 
                              
-                              <button class="btn btn-warning btnEditarVenta" idVenta='.$value["id_venta"].'><i class="fas fa-pencil-alt" style="color:#fff"></i></button>
+                              <button class="btn btn-warning btnEditarVenta" idVenta="'.$value["id_venta"].'"><i class="fas fa-pencil-alt" style="color:#fff"></i></button>   
 
-                              <button class="btn btn-danger btnEliminarVenta"><i class="fas fa-trash-alt"></i></button>
+                              <button class="btn btn-danger btnEliminarVenta" idVenta="'.$value["id_venta"].'"><i class="fas fa-trash-alt"></i></button>
 
                           </div>  
                         </td>
@@ -118,8 +163,8 @@
 
       <?php
 
-        // $eliminarVenta = new ControladorVentas();
-        // $eliminarVenta -> ctrEliminarVenta();
+        $eliminarVenta = new ControladorVentas();
+        $eliminarVenta -> ctrEliminarVenta();
 
       ?>
 
