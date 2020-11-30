@@ -127,7 +127,7 @@
 
             <?php if($_SESSION['permisos']['Stock']['consulta'] == 1){?>
             <li class="nav-item has-treeview">
-              <a href="" class="nav-link menu-lateral">
+              <a href="stock" class="nav-link menu-lateral">
                 <i class="nav-icon fas fa-layer-group"></i>
                 <p>
                   Stock

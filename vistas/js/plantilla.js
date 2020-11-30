@@ -50,8 +50,8 @@ $(".tablas").DataTable({
 //*============================================
 var pathname = window.location.href;
 const claseActivo = $('.menu-lateral');
-// console.log(claseActivo[3]);
-var stock = claseActivo[4];
+// console.log(claseActivo[4]);
+var ventas = claseActivo[4];
 
 for (let i = 0; i < claseActivo.length -1; i++) {
     // console.log(claseActivo[i]['href']);
@@ -60,7 +60,7 @@ for (let i = 0; i < claseActivo.length -1; i++) {
         break;
     }
     if(pathname == 'http://localhost/Admin-Gym/administrar-venta' || pathname == 'http://localhost/Admin-Gym/crear-venta'){
-        $(stock).addClass('active');
+        $(ventas).addClass('active');
     }
 }
 

@@ -22,7 +22,7 @@
                         $item = 'parametro';
                         $valor = 'ADMIN_PREGUNTAS';
                         $parametros = ControladorUsuarios::ctrMostrarParametros($item, $valor);
-                        // var_dump($parametros['valor']);
+                        // var_dump($parametros);
                         $cantidadPreguntas = $parametros['valor'];
                         
                         for ($i=1; $i <=$cantidadPreguntas ; $i++) { ?>

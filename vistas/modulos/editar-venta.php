@@ -84,9 +84,9 @@
                         ?>       
                     </select>
                   </div>    
-                  <div class="form-group col-md-3 mt-4">
+                  <!-- <div class="form-group col-md-3 mt-4">
                     <span class="input-group-addon"><button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#modalAgregarCliente" data-dismiss="modal">Agregar cliente</button></span> 
-                  </div>
+                  </div> -->
                 </div>
                 <!--=====================================
                 ENTRADA PARA AGREGAR PRODUCTO

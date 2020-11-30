@@ -142,7 +142,9 @@ class ModeloInventario
 		$stmt->close();
 		$stmt = null;
 
-    }
+	}
+	
+	/*============================================
 			MOSTRAR SUMA INVENTARIO
 	=============================================*/
 	static public function mdlMostrarTotalInventario($tabla1, $tabla2, $item, $valor,$order){

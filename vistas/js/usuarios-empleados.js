@@ -370,6 +370,7 @@ function toggleCambiarFoto(){
 }
 
 $('.btnEditarFoto').click(function () { 
+    // console.log('clcik')
     toggleCambiarFoto();
     $('#datos-generales .user').hide();
     var preview = $('.contenedorFoto').children().children();
