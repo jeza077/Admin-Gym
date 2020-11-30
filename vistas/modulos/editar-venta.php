@@ -13,15 +13,7 @@
       <!--=====================================
                  FORMULARIO 
       ======================================-->
-    <section class="content"> 
-                      <?php
-                        $descripcionEvento = " Consulto la pantalla de crear ventas";
-                        $accion = "consulta";
-
-                        $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 5,$accion, $descripcionEvento);
-    
-                      ?>
-                    
+    <section class="content">  
 
       <div class="row">
         <div class="col-md-5">
@@ -30,41 +22,40 @@
             <div class="card">
               <div class="card-body"> 
                 <div class="form-group"  class="formularioVenta"> 
+
+                    <?php
+                      $tabla="tbl_clientes";
+                      $item= $item;
+                      $valor= $_GET["id_cliente"];
+                      $venta= ControladorVentas::ctrMostrarVentas($tabla, $item, $valor);
+
+                      $tabla1="tbl_clientes";
+                      $tabla2="tbl_personas";
+                      $itemUsuario = $itemUsuario;
+                      $valorUsuario = $venta["id_usuario"];
+                      $vendedor = ControladorUsuarios::ctrMostrarUsuarios($$tabla1, $tabla2, $itemUsuario, $valorUsuario);
+                       
+
+                    ?>
                  <!--=====================================
                   ENTRADA VENDEDOR/USUARIO
                 ======================================-->  
                     <label for="usuario">Usuario</label>
-                    <input type="text" class="form-control" id="nuevoVendedor" value="<?php echo $_SESSION["usuario"]  ?>" readonly>
-                    <input type="hidden" name="idVendedor" value="<?php echo $_SESSION["id_usuario"]; ?>">
+                    <input type="text" class="form-control" id="nuevoVendedor" value="<?php echo $vendedor["nombre"];  ?>" readonly>
+                    <input type="hidden" name="idVendedor" value="<?php echo $vendedor["id_usuario"]; ?>">
                 </div>       
               
-                <div class="form-group">     
+                
                   <!--=====================================
-                   ENTRADA DEL CÓDIGO
+                   ENTRADA DEL CÓDIGO y editar venta
                   ======================================-->  
-                  <label for="cod_factura">Codigo de Factura</label>
-                    <?php
-                      $item= null;
-                      $valor= null;
-
-                      $ventas= ControladorVentas::ctrMostrarVentas($item, $valor);
-                      // echo "<pre>";
-                      // var_dump($ventas);
-                      // echo "</pre>";
-                      if (!$ventas){
-                        echo '<input type="text" class="form-control" id="nuevaVenta" 
+                <div class="form-group">     
+                  <label for="cod_factura">Codigo de Factura</label>  
+                        <input type="text" class="form-control" id="nuevaVenta" 
                         name="nuevaVenta" value="1001" readonly>';
 
-                      } else {
-
-                        foreach ($ventas as $key =>$value) {
-                        
-                        }
-                        $codigo = $value["numero_factura"] + 1;
-                        echo '<input type="text" class="form-control" id="nuevaVenta" 
-                        name="nuevaVenta" value= '. $codigo.' readonly>';
-                      }
-                    ?>    
+                        <input type="text" class="form-control" id="nuevaVenta" 
+                        name="nuevaVenta" value="<?php echo $vendedor["id_usuario"]; ?>" readonly>'; 
                 </div>
 
                 <div class="form-row">

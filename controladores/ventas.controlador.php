@@ -170,6 +170,31 @@ class ControladorVentas {
 
         }
     
-    }
+	}
+	
+
+	/*=============================================
+			SUMA TOTAL VENTAS
+    =============================================*/
+	static public function ctrSumaTotalVentas(){
+
+		$tabla = 'tbl_venta';
+		
+		$respuesta = ModeloVentas::mdlSumarTotalVentas($tabla);
+		
+		return $respuesta;
+	}
+
+	/*=============================================
+			RANGO DE FECHAS
+    =============================================*/
+	static public function ctrRangoFechasVentas($fechaInicial, $fechaFinal){
+
+		$tabla = 'tbl_venta';
+		
+		$respuesta = ModeloVentas::mdlRangoFechaVentas($tabla, $fechaInicial, $fechaFinal);
+		
+		return $respuesta;
+	}
 
 }

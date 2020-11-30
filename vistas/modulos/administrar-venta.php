@@ -10,8 +10,20 @@
         
         <div class="col-sm-6">
           <a href="crear-venta" class="btn btn-orange float-right">
-              Agregar venta     
+              Nueva Venta     
           </a> 
+          
+          <button class="btn btn-danger btnExportarVentas float-right mr-3">
+            Exportar PDF          
+          </button>
+
+          <button type="button" class="btn btn-default float-right mr-3" id="daterange-btn">
+            <span>
+              <i class="far fa-calendar-alt"></i> Rango de fechas
+            </span>
+            <i class="fas fa-caret-down"></i>
+          </button>
+
         </div>
 
       </div>
@@ -54,32 +66,32 @@
             <!-- Traer todo lo que encuentre en la lista -->
             <?php
 
-              $item = null;
-              $valor = null;
+              if(isset($_GET["fechaInicial"])){
 
-              $respuesta = ControladorVentas::ctrMostrarVentas($item, $valor);
+                $fechaInicial = $_GET["fechaInicial"];
+                $fechaFinal = $_GET["fechaFinal"];
 
+              } else {
+
+                $fechaInicial = null;
+                $fechaFinal = null;
+
+              }
+      
+              $respuesta = ControladorVentas::ctrRangoFechasVentas($fechaInicial, $fechaFinal);
+              // echo "<pre>";
               // var_dump($respuesta);
+              // echo "</pre>";
 
               foreach ($respuesta as $key => $value) {
                 echo  '<tr>
                         <td>'.($key+1).'</td>
                         
-                        <td>'.$value["codigo"].'</td>';
+                        <td>'.$value["numero_factura"].'</td>';
 
-                        $itemCliente = "id_personas";
-                        $valorCliente = $value["id_cliente"];
-                        $tabla="tbl_clientes";
-                        $respuestaCliente = ControladorClientes::ctrMostrarClientes($tabla, $itemCliente, $valorCliente);
+                        echo '<td>'.$value["nombre"].'</td>';
 
-                        echo '<td>'.$respuestaCliente["nombre"].'</td>';
-
-                       
-                        $itemUsuario = "usuario";
-                        $valorUsuario = $value["id_usuario"];
-                        $respuestaUsuario = ControladorUsuarios::ctrMostrarUsuarios($tabla, $itemUsuario, $valorUsuario);
-
-                        echo '<td>'.$respuestaUsuario["nombre"].'</td>
+                        echo '<td>'.$value["nombre"].' '.$value['apellidos'].'</td>
                      
                         <td>$ '.number_format($value["total"],2).'</td>
 
@@ -88,7 +100,8 @@
                         <td>
                           <div class="btn-group">
                                 
-                              <button class="btn btn-warning btnEditarVenta"><i class="fas fa-pencil-alt" style="color:#fff"></i></button>
+                             
+                              <button class="btn btn-warning btnEditarVenta" idVenta='.$value["id_venta"].'><i class="fas fa-pencil-alt" style="color:#fff"></i></button>
 
                               <button class="btn btn-danger btnEliminarVenta"><i class="fas fa-trash-alt"></i></button>
 

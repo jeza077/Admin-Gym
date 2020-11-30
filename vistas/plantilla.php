@@ -17,6 +17,8 @@
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- overlayScrollbars -->
   <link rel="stylesheet" href="vistas/dist/css/adminlte.min.css">
+  <!-- daterange picker -->
+  <link rel="stylesheet" href="vistas/plugins/daterangepicker/daterangepicker.css">
   <!-- DataTables -->
   <link rel="stylesheet" href="vistas/plugins/datatables/css/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="vistas/plugins/datatables/css/responsive.bootstrap4.min.css">
@@ -191,6 +193,13 @@
 <!-- InputMask -->
 <script src="vistas/plugins/moment/moment.min.js"></script>
 <script src="vistas/plugins/inputmask/jquery.inputmask.bundle.min.js"></script>
+
+<!-- Chart JS -->
+<script src="vistas/plugins/chart.js/Chart.min.js"></script>
+
+<!-- date-range-picker -->
+<script src="vistas/plugins/daterangepicker/daterangepicker.js"></script>
+
 <!-- DataTables -->
 <script src="vistas/plugins/datatables/js/jquery.dataTables.min.js"></script>
 <script src="vistas/plugins/datatables/js/dataTables.bootstrap4.min.js"></script>
@@ -209,6 +218,7 @@
  <script src="vistas/js/usuarios-empleados.js"></script>
  <script src="vistas/js/clientes.js"></script>
 <script src="vistas/js/ventas.js"></script>
+<script src="vistas/js/reportes.js"></script>
 <script src="vistas/js/mantenimiento.js"></script>
 <script src="vistas/js/respaldo.js"></script>
 <script src="vistas/js/inventario.js"></script>

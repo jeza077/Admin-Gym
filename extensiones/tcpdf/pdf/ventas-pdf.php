@@ -1,7 +1,7 @@
 <?php
 // require_once "../../controladores/usuarios.controlador.php";
-require_once('../../../controladores/usuarios.controlador.php');
-require_once "../../../modelos/usuarios.modelo.php";
+require_once('../../../controladores/ventas.controlador.php');
+require_once "../../../modelos/ventas.modelo.php";
 require_once('../examples/tcpdf_include.php');
 
 
@@ -33,7 +33,7 @@ class PDF extends TCPDF{
 
         $this->Ln(20); //Espacios
         $this->SetFont('helvetica', 'B', 14);
-        $this->Cell(189, 3, 'REPORTE DE USUARIOS', 0, 1, 'C');
+        $this->Cell(189, 3, 'REPORTE DE VENTAS', 0, 1, 'C');
         $this->Ln(3);
         $this->SetFont('helvetica', 'B', 11);
         $this->Cell(189, 3, 'Año 2020', 0, 1, 'C');
@@ -58,7 +58,7 @@ $pdf = new PDF('p', 'mm', 'A4', true, 'UTF-8', false);
 // set document information
 $pdf->SetCreator(PDF_CREATOR);
 $pdf->SetAuthor('Jesus Zuniga');
-$pdf->SetTitle('Reporte de Usuarios');
+$pdf->SetTitle('Reporte de Ventas');
 $pdf->SetSubject('');
 $pdf->SetKeywords('');
 
@@ -108,22 +108,20 @@ $pdf->Ln(45);
 $pdf->SetFont('times', '', 13);
 $pdf->SetFillColor(225, 235, 255);
 $pdf->Cell(15, 5, 'No', 1, 0, 'C', 1);
-$pdf->Cell(52, 5, 'Nombre', 1, 0, 'C', 1);
-$pdf->Cell(40, 5, 'Usuario', 1, 0, 'C', 1);
-$pdf->Cell(40, 5, 'Rol', 1, 0, 'C', 1);
-$pdf->Cell(30, 5, 'Estado', 1, 0, 'C', 1);
+$pdf->Cell(55, 5, 'Codigo de Factura', 1, 0, 'C', 1);
+$pdf->Cell(50, 5, 'Cliente', 1, 0, 'C', 1);
+$pdf->Cell(40, 5, 'Total', 1, 0, 'C', 1);
 
-$tabla = "tbl_usuarios";
+
 $item = null;
 $valor = null;
-$usuarios = ControladorUsuarios::ctrMostrarSoloUsuarios($tabla, $item, $valor);
-
+$ventas = ControladorVentas::ctrMostrarVentas($item, $valor);
 // var_dump($usuarios);
 
 $i = 1; //Contador
 $max = 5; //Maximo de registros a mostrar en una pagina
 
-foreach ($usuarios as $key => $value) {
+foreach ($ventas as $key => $value) {
 
     if(($i%$max) == 0){
         $pdf->AddPage();
@@ -133,10 +131,9 @@ foreach ($usuarios as $key => $value) {
         $pdf->SetFont('times', '', 13);
         $pdf->SetFillColor(225, 235, 255);
         $pdf->Cell(15, 5, 'No', 1, 0, 'C', 1);
-        $pdf->Cell(52, 5, 'Nombre', 1, 0, 'C', 1);
-        $pdf->Cell(40, 5, 'Usuario', 1, 0, 'C', 1);
-        $pdf->Cell(40, 5, 'Rol', 1, 0, 'C', 1);
-        $pdf->Cell(30, 5, 'Estado', 1, 0, 'C', 1);
+        $pdf->Cell(55, 5, 'Codigo de Factura', 1, 0, 'C', 1);
+        $pdf->Cell(50, 5, 'Cliente', 1, 0, 'C', 1);
+        $pdf->Cell(40, 5, 'Total', 1, 0, 'C', 1);
     }
     // $pdf->Cell(15, 5, ''.$i.'', 1, 0, 'C');
 
@@ -144,14 +141,9 @@ foreach ($usuarios as $key => $value) {
     $pdf->SetFont('times', '', 12);
     // $pdf->SetFillColor(225, 235, 255);
     $pdf->Cell(15, 4, ''.($key+1).'', 0, 0, 'C');
-    $pdf->Cell(52, 4, ''.$value['nombre'].' '.$value['apellidos'].'', 0, 0, 'C');
-    $pdf->Cell(40, 4, ''.$value['usuario'].'', 0, 0, 'C');
-    $pdf->Cell(40, 4, ''.$value['rol'].'', 0, 0, 'C');
-    if($value["estado"] == 0){
-        $pdf->Cell(30, 4, 'Desactivado', 0, 0, 'C');
-    } else {
-        $pdf->Cell(30, 4, 'Activado', 0, 0, 'C');
-    }
+    $pdf->Cell(55, 4, ''.$value['numero_factura'].'', 0, 0, 'C');
+    $pdf->Cell(50, 4, ''.$value['nombre'].' '.$value['apellidos'].'' , 0, 0, 'C');
+    $pdf->Cell(40, 4, ''.$value['total'].'', 0, 0, 'C');
     $i++;
 
 }
