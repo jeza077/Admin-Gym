@@ -154,7 +154,7 @@
                     <div class="form-group col-md-3">
                       <label for="nombreproducto">Nombre Producto</label>
                       <html>
-                      <input type="text" class="form-control nombre_producto" name="nuevoNombreProducto" placeholder="Ingrese Producto" required>
+                      <input type="text" class="form-control mayus nombre_producto" name="nuevoNombreProducto" placeholder="Ingrese Producto" required>
                     </div>
                     <div class="form-group col-md-3">
                       <label for="stock">Cantidad en stock</label>
@@ -251,7 +251,7 @@
                     <div class="form-group col-md-3">
                       <label for="nombreproducto">Nombre Producto</label>
                       <html>
-                      <input type="text" value="" class="form-control" name="editarNombreProducto" id="editarNombreProducto" required>
+                      <input type="text" value="" class="form-control mayus editar_Nombre_Producto"  name="editarNombreProducto" id="editarNombreProducto" required>
                     </div>
                     <div class="form-group col-md-3">
                       <label for="stock">Cantidad en stock</label>
@@ -262,7 +262,7 @@
                     <div class="form-row">
                         <div class="form-group col-md-4">
                         <label for="precio">Precio</label>
-                        <input type="text" value="" class="form-control" name="editarPrecio" id="editarPrecio" required>
+                        <input type="text" value="" class="form-control editar_Precio" name="editarPrecio" id="editarPrecio" required>
                         </div>
                         <div class="form-group col-md-4">
                           <label for="productominimo">Producto Minimo</label>
