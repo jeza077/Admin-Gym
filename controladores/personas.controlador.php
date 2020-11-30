@@ -564,8 +564,6 @@ class ControladorPersonas{
                                     });                                              
                                 </script>';
                         }
-                        
-
                     }
                 }
 
@@ -617,7 +615,54 @@ class ControladorPersonas{
             }
         }
     }
+    /*=============================================
+            ACTUALIZAR PAGO CLIENTE
+    =============================================*/
+    static public function ctrActualizarPagoCliente($tipoPersona, $pantalla){
+        // echo "<pre>";
+        // var_dump($_POST);
+        // echo "</pre>";
+        // return;
 
+        if (isset($_POST["actualizarInscripcion"])){
+    
+            $datos = array("id_persona" => $_POST["idPago"],
+            "tipo_cliente" => $tipoPersona,
+            "id_inscripcion" => $_POST["actualizarInscripcion"],
+            "id_descuento" => $_POST["actualizarDescuento"],
+            "pagos_descuento" => $_POST["precioDescuentoActualizado"],
+            "pagos_inscripcion" => $_POST["precioInscripcionActualizado"],
+            "pagos_total" => $_POST["nuevoTotalPago"]);
+        } 
+        // echo "<pre>";
+        // var_dump($datos);
+        // echo "</pre>";
+        // return;
+        
+
+        $respuestaEditarPagoCliente = ControladorClientes::ctrEditarCliente($datos);
+
+        // echo "<pre>";
+        // var_dump($datos);
+        // echo "</pre>";
+        // return;
+
+        if($respuestaEditarPagoCliente == true){
+            
+            echo '<script>
+                    Swal.fire({
+                        title: "Pago fue editado correctamente!",
+                        icon: "success",
+                        heightAuto: false,
+                        allowOutsideClick: false
+                    }).then((result)=>{
+                        if(result.value){
+                            window.location = "'.$pantalla.'";
+                        }
+                    });                                              
+                </script>';
+        }
+    }
     
 	/*=============================================
             BORRAR PERSONAS (USUARIO/CLIENTE)

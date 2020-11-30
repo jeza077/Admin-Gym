@@ -28,6 +28,27 @@ class AjaxClientes{
         echo json_encode($respuesta);
     }
 
+     /*=============================================
+           EDITAR PAGO CLIENTE
+    =============================================*/
+    
+    
+    public $idPago;
+
+    public function ajaxEditarPagoCliente(){
+
+        $tabla = "tbl_clientes";
+        $item = "id_personas";
+        $valor = $this->idPago;
+        
+        $respuesta = ControladorClientes::ctrMostrarClientes($tabla, $item, $valor);
+        // echo "<pre>";
+        // var_dump($respuesta);
+        // echo "</pre>";
+
+        echo json_encode($respuesta);
+    }
+
     /*=============================================
            MOSTRAR DINAMICO
     =============================================*/
@@ -59,6 +80,14 @@ if(isset($_POST["idEditarCliente"])){
     $cliente = new AjaxClientes();
     $cliente->idEditarCliente = $_POST["idEditarCliente"];
     $cliente->ajaxEditarCliente();
+}
+/*=============================================
+    EDITAR PAGO CLIENTE
+=============================================*/
+if(isset($_POST["idPago"])){
+    $cliente = new AjaxClientes();
+    $cliente->idPago = $_POST["idPago"];
+    $cliente->ajaxEditarPagoCliente();
 }
 /*=============================================
     MOSTRAR DINAMICO

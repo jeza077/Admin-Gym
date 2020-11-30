@@ -76,17 +76,58 @@ class ModeloClientes{
 
 		} else {
 
-			$stmt = Conexion::conectar()->prepare( "SELECT p.*, c.*, i.fecha_creacion, i.tipo_inscripcion FROM $tabla1 as p\n"
+			$stmt = Conexion::conectar()->prepare("SELECT p.*, c.*, i.fecha_creacion, i.tipo_inscripcion, pd.* FROM $tabla1 as p\n"
             . "LEFT JOIN $tabla2 as c ON p.id_personas = c.id_persona\n"
             . "LEFT JOIN tbl_matricula as m ON c.id_matricula = m.id_matricula\n"
             . "LEFT JOIN tbl_inscripcion as i ON c.id_inscripcion = i.id_inscripcion\n"
 			. "LEFT JOIN tbl_descuento as pd ON c.id_descuento = pd.id_descuento\n"
-		    . "WHERE p.tipo_persona = 'clientes' ");
+			// . "LEFT JOIN tbl_pagos_cliente as pc ON c.id_cliente = pc.id_cliente\n"
+		    . "WHERE p.tipo_persona = 'clientes'");
 			
 			$stmt -> execute();
 			return $stmt -> fetchAll();
 
 		}
+
+		$stmt -> close();
+		$stmt = null;	
+
+	}
+	/*=============================================
+		MOSTRAR CLIENTES SIN PAGO
+	=============================================*/
+	
+	static public function mdlMostrarClientesSinPago($tabla1, $tabla2, $item, $valor){
+
+		// if($item != null){
+
+		// 	$stmt = Conexion::conectar()->prepare("SELECT p.*, c.*, d.tipo_documento, m.tipo_matricula, m.precio_matricula, pd.tipo_descuento, pd.valor_descuento, i.tipo_inscripcion,i.precio_inscripcion, i.fecha_creacion, pc.* FROM $tabla1 as p\n"
+		// 	. "LEFT JOIN $tabla2 as c ON p.id_personas = c.id_persona\n"
+		// 	. "LEFT JOIN tbl_documento as d ON p.id_documento = d.id_documento\n"
+		// 	. "LEFT JOIN tbl_matricula as m ON c.id_matricula = m.id_matricula\n"
+		// 	. "LEFT JOIN tbl_inscripcion as i ON c.id_inscripcion = i.id_inscripcion\n"
+		// 	. "LEFT JOIN tbl_descuento as pd ON c.id_descuento = pd.id_descuento\n"
+		// 	. "LEFT JOIN tbl_pagos_cliente as pc ON c.id_cliente = pc.id_cliente\n"
+		// 	. " WHERE $item = :$item"); 
+
+		// 	$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+		// 	$stmt -> execute();
+		// 	return $stmt -> fetch();
+
+		// } else {
+
+			$stmt = Conexion::conectar()->prepare("SELECT p.*, c.*, i.fecha_creacion, i.tipo_inscripcion, pd.* FROM $tabla1 as p\n"
+            . "LEFT JOIN $tabla2 as c ON p.id_personas = c.id_persona\n"
+            . "LEFT JOIN tbl_matricula as m ON c.id_matricula = m.id_matricula\n"
+            . "LEFT JOIN tbl_inscripcion as i ON c.id_inscripcion = i.id_inscripcion\n"
+			. "LEFT JOIN tbl_descuento as pd ON c.id_descuento = pd.id_descuento\n"
+			// . "LEFT JOIN tbl_pagos_cliente as pc ON c.id_cliente = pc.id_cliente\n"
+		    . "WHERE p.tipo_persona = 'clientes'");
+			
+			$stmt -> execute();
+			return $stmt -> fetchAll();
+
+		// }
 
 		$stmt -> close();
 		$stmt = null;	
@@ -179,11 +220,11 @@ class ModeloClientes{
 
 		if($stmt -> execute()){
 
-			return "ok";
+			return true;
 		
 		}else{
 
-			return "error";	
+			return false;	
 
 		}
 
@@ -197,13 +238,14 @@ class ModeloClientes{
 	=============================================*/
 	static public function mdlCrearPago($tabla3, $datos){
 
-		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla3 (id_cliente, pago_matricula, pago_descuento, pago_inscripcion, pago_total) VALUES (:id_cliente, :pago_matricula, :pago_descuento, :pago_inscripcion, :pago_total)");
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla3 (id_cliente, pago_matricula, pago_descuento, pago_inscripcion, pago_total, fecha_vencimiento) VALUES (:id_cliente, :pago_matricula, :pago_descuento, :pago_inscripcion, :pago_total, :fecha_vencimiento)");
 
 		$stmt->bindParam(":id_cliente", $datos["id_cliente"], PDO::PARAM_INT);
 		$stmt->bindParam(":pago_matricula", $datos["pago_matricula"], PDO::PARAM_STR);
 		$stmt->bindParam(":pago_descuento", $datos["pago_descuento"], PDO::PARAM_STR);
 		$stmt->bindParam(":pago_inscripcion", $datos["pago_inscripcion"], PDO::PARAM_STR);
 		$stmt->bindParam(":pago_total", $datos["pago_total"], PDO::PARAM_STR);
+		$stmt->bindParam(":fecha_vencimiento", $datos["fecha_vencimiento"], PDO::PARAM_STR);
 
 		if($stmt->execute()){
 

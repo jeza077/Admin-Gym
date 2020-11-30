@@ -55,6 +55,12 @@ $(document).on('change', '.tipoCliente', function () {
 //     }
    
 // });
+//** ------------------------------------*/
+//         IMPRIMIR USUARIOS 
+// --------------------------------------*/ 
+$(document).on('click', '.btnExportarClientes', function () {
+    window.open("extensiones/tcpdf/pdf/clientes-pdf.php", "_blank");
+});
 
 /*=============================================
         EDITAR CLIENTE
@@ -130,6 +136,7 @@ function mostrarDinamico(selector1,tablaDB,itemDB,selector2,precio) {
         var item = itemDB;
         var valor = selector1.val();
         // console.log(valor)
+        // return;
         var tabla = tablaDB;
         var datos = new FormData();
         datos.append("tabla", tabla);
@@ -166,6 +173,10 @@ function mostrarDinamico(selector1,tablaDB,itemDB,selector2,precio) {
 mostrarDinamico($('.nuevaInscripcion'),'tbl_inscripcion','id_inscripcion',$('.nuevoPrecioInscripcion'),'precio_inscripcion')
 // MOSTRAR TABLA PROMOCIONES
 mostrarDinamico($('.nuevaPromocion'),'tbl_descuento', 'id_descuento',$('.nuevoPrecioPromocion'),'valor_descuento')
+
+mostrarDinamico($('.actualizarInscripcion'),'tbl_inscripcion','id_inscripcion',$('.actualizarPagoInscripcion'),'precio_inscripcion')
+
+mostrarDinamico($('.descuentoNuevo'),'tbl_descuento', 'id_descuento',$('.actualizarPrecioDescuento'),'valor_descuento')
 
 /*=============================================
         SUMAR TOTAL CLIENTES
@@ -235,6 +246,58 @@ SumaTotal($('.nuevaInscripcion'))
 // SumaTotal($('.nuevaPromocion'))
 // SumaTotal($('.nuevaMatricula'))
 
+/*=============================================
+        SUMAR TOTAL PAGO ACTUALIZADO CLIENTES
+=============================================*/
+
+function actualizarSumaTotal(selector) {  
+
+    selector.change(function (e) { 
+        e.preventDefault();
+        
+        var actualizarPrecioDescuento = $('.actualizarPrecioDescuento');
+        var actualizarPrecioInscripcion = $('.actualizarPagoInscripcion');
+        // console.log("Descuento", actualizarPrecioDescuento)
+        // console.log("Inscripcion", actualizarPrecioInscripcion)
+        // return;
+     
+        var arrayNuevoDescuento = [];
+        var arrayNuevaInscripcion = [];
+     
+        var arrayActualizarTotal =[];
+    
+        for (var i = 0; i  < actualizarPrecioDescuento.length; i++) {
+            arrayNuevoDescuento.push(Number($(actualizarPrecioDescuento[i]).val()));   
+        }
+        for (var i = 0; i  < actualizarPrecioInscripcion.length; i++) {
+            arrayNuevaInscripcion.push(Number($(actualizarPrecioInscripcion[i]).val()));   
+        }
+        
+        function sumaArrayTotal(total, numero) {
+            return total + numero;
+        }
+
+        // console.log("descuento",arrayDescuento)
+        // console.log("inscripcion", arrayInscripcion)
+        var descuento = arrayNuevoDescuento.reduce(sumaArrayTotal);
+        var inscripcion = arrayNuevaInscripcion.reduce(sumaArrayTotal);
+        
+        arrayActualizarTotal = inscripcion - descuento;
+
+        $('#precioDescuentoActualizado').val(arrayNuevoDescuento);
+        $('#precioInscripcionActualizado').val(arrayNuevaInscripcion);
+        $('#nuevoTotalPago').val(arrayActualizarTotal);
+        $('#pagoTotalActualizado').val(arrayActualizarTotal);
+            
+        // console.log("arrayNuevoDescuento", arrayNuevaInscripcion)
+        // console.log("arrayNuevoDescuento", arrayNuevoDescuento)
+        // return;
+    });
+
+
+}
+actualizarSumaTotal($('.descuentoNuevo'))
+
 
 
 /*=============================================
@@ -257,6 +320,47 @@ $('.btnEliminarCliente').click(function () {
         if (result.value) {
           
             window.location = "index.php?ruta=clientes&idPersona="+idCliente;
+        }
+    });
+});
+
+/*=============================================
+        EDITAR CLIENTE
+=============================================*/
+
+$('.btnPagosCliente').click(function () { 
+    
+    var idPago = $(this).attr("idPagoCliente");
+    // console.log(idPago)
+    var datos = new FormData();
+    datos.append("idPago", idPago);
+    
+
+    $.ajax({
+    
+        url:"ajax/clientes.ajax.php",
+        method: "POST",
+        data: datos,
+        cache: false,
+        contentType: false,
+        processData: false,  
+        dataType: "json",
+        success: function(respuesta) {
+
+            // console.log("respuesta", respuesta);
+            
+            $('#idEditarCliente').val(respuesta["id_persona"])
+
+            $('#actualizarDescuento').html(respuesta["tipo_descuento"])
+            $('#actualizarDescuento').val(respuesta["id_descuento"])
+            
+             $('#actualizarInscripcion').html(respuesta["tipo_inscripcion"])
+            $('#actualizarInscripcion').val(respuesta["id_inscripcion"])
+
+            $('.actualizarPrecioDescuento').val(respuesta["pago_descuento"])
+            $('.actualizarPagoInscripcion').val(respuesta["pago_inscripcion"])
+            $('.pagoTotalActualizado').val(respuesta["pago_total"])
+            
         }
     });
 });
