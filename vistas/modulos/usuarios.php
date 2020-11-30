@@ -26,7 +26,7 @@
               Nuevo Usuario          
             </button>
           <?php } ?>
-            <button class="btn btn-danger btnExportarUsuarios float-right mr-3">
+            <button class="btn btn-danger btnExportarUsuarios float-right mr-3 ">
               Exportar PDF          
             </button>
           </div>

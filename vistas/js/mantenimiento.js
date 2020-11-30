@@ -135,6 +135,54 @@ $(".btnActivar").click(function(){
 
 })
 
+/*=====================================
+ACTIVAR DESCUENTO
+========================================*/
+$(".btnActivar").click(function(){
+
+    var idDescuento = $(this).attr("idDescuento");
+    var estadoDescuento = $(this).attr("estadoDescuento");
+    // console.log(idInscripcion)
+    var datos = new FormData();
+    datos.append("activarid", idDescuento);
+    datos.append("activarDescuento",estadoDescuento);
+
+    $.ajax({
+        
+      url:"ajax/mantenimiento.ajax.php",
+      method:"POST",
+      data: datos,
+      cache: false,
+      contentType:false,
+      processData:false,
+      success:function(respuesta){ 
+        //   console.log(respuesta)
+     } 
+
+    }) 
+
+    if(estadoRol == 0){
+        $(this).removeClass('btn-success');
+        $(this).addClass('btn-danger');
+        $(this).html('Desactivado');
+        $(this).attr('estadoDescuento',1);
+
+    }else{
+
+
+        $(this).addClass('btn-success');
+        $(this).removeClass('btn-danger');
+        $(this).html('Activado');
+        $(this).attr('estadoDescuento',0);
+
+    }
+
+})
+
+
+
+
+
 
 
 $(document).ready(function () {

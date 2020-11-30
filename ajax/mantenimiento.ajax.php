@@ -141,3 +141,48 @@ if(isset($_POST["activarMatricula"])){
 
 }  
 
+
+class AjaxDescuento{
+
+
+
+    /*=============================================
+                   Activar DESCUENTO
+    ==============================================*/
+    public $activarDescuento;
+    public $activarid;
+    
+    public function ajaxActivarDescuento(){ 
+
+        $tabla = "tbl_Descuento";
+
+        $item1 = "estado";
+        $valor1 = $this->activarDescuento;
+
+        $item2 = "id_matricula";
+        $valor2 = $this->activarid;
+
+
+        $respuesta = ModeloMantenimiento::mdlActualizarDescuento($tabla,$item1,$valor1,$item2,$valor2);
+        echo json_encode($respuesta);
+
+
+    }    
+
+
+}    
+
+/*========================================
+Activar DESCUENTO
+==========================================*/ 
+
+if(isset($_POST["activarDescuento"])){ 
+
+    $activarDescuento = new ajaxDescuento();
+    $activarDescuento->activarMatricula = $_POST["activarDescuento"];
+    $activarDescuento->activarid = $_POST["activarid"];
+    $activarDescuento->ajaxActivarDescuento();
+
+
+}  
+

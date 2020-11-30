@@ -166,6 +166,7 @@ $(document).on('click', '.btnActivar', function () {
         $(this).addClass('btn-success');
         $(this).html('Activado');
         $(this).attr('estadoUsuario',0);
+        
     }
 });
 

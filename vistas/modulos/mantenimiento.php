@@ -103,7 +103,7 @@
                                   
                             <th scope="col">Estado</th>
 
-                            <th scope="col">Acciones</th>
+                         
          
                           </tr>
 
@@ -136,10 +136,8 @@
                                       
                                     }
                                     echo'
-                                    <td>
-                                    <button class="btn btn-warning btnEditarRol" editarIdRol="'.$value["id_rol"].'"><i class="fas fa-pencil-alt" style="color:#fff" data-toggle="modal" data-target="#modalModificar"></i></button>
-                                    <button class="btn btn-primary"><i class="fas fa-cog" style="color:#fff" data-toggle="modal" data-target="#modalEditarRol"></i></button>
-                                    </td>
+                                   
+                                   
                                   </tr>';
                                                     
                               }
@@ -181,6 +179,7 @@
                             <th scope="col">Tipo de inscripcion</th>
                             <th scope="col">Precio</th>
                             <th scope="col">Estado</th>
+      
                           </tr>
                         </thead>
                         <tbody>             
@@ -205,6 +204,7 @@
                                         echo '<td><button class="btn btn-danger btn-md btnActivar" idInscripcion="'.$value["id_inscripcion"].'" estadoInscripcion="1">Desactivado</button></td>';
                                       } 
                                       echo' 
+                                      
                                     </tr> ';
                                 }       
                           ?>     
@@ -264,9 +264,7 @@
                                             echo '<td><button class="btn btn-danger btn-md btnActivar" idMatricula="'.$value["id_Matricula"].'" estadoMatricula="1">Desactivado</button></td>';
                                           } 
                                           echo'
-                                        </tr> ';
-                                          
-                                          
+                                        </tr>  '; 
                                     }       
                               ?>                
                          
@@ -274,16 +272,6 @@
                       </table>
                         
                     </div>
-
-
-
-
-
-
-
-
-
-
 
                      <!--========================================================
                            DESCUENTO
@@ -310,6 +298,8 @@
                             <th scope="col">#</th>
                             <th scope="col">Tipo descuento</th>
                             <th scope="col">Precio</th>
+                            <th scope="col">Estado</th>
+                            
                           </tr>
                         </thead>
                         <tbody>  
@@ -327,9 +317,17 @@
                                       
                                           <td>'.($key + 1).'</td>
                                           <td>'.$value["tipo_descuento"].'</td>
-                                          <td>'.$value["valor_descuento"].'</td>
-                                          </tr>';
-                                        }       
+                                          <td>'.$value["valor_descuento"].'</td>';
+                                          if($value['estado'] != 0){
+                                            echo '<td><button class="btn btn-success btn-md btnActivar" idDescuento="'.$value["id_descuento"].'" estadoDescuento="0">Activado</button></td>';
+                                          }else{
+                                            echo '<td><button class="btn btn-danger btn-md btnActivar" idDescuento="'.$value["id_descuento"].'" estadoDescuento="1">Desactivado</button></td>';
+                                          } 
+                                          echo'
+                                         
+                                        </tr> ';
+                                          
+                                      }       
                               ?>                
                          
                         </tbody>
@@ -447,12 +445,12 @@ MODAL AGREGAR ROL
           <div class="card-body">
             <div class="form-group col-md-12">
               <label for="Rol"> Rol</label>
-              <input type="text" class="form-control id" name="nuevoRol" value="" required>
+              <input type="text" class="form-control nombre mayus" name="nuevoRol" value="" required>
             </div>
 
             <div class="form-group col-md-12">
               <label for="Descripcion">Descripcion</label>
-              <input type="textarea" class="form-control nombre" name="nuevaDescripcion" value="" required>
+              <input type="textarea" class="form-control nombre mayus" name="nuevaDescripcion" value="" required>
             </div>
 
           </div>
@@ -464,8 +462,9 @@ MODAL AGREGAR ROL
         ======================================-->
 
         <div class="modal-footer">
-          <button type="button" class="btn btn-orange" data-dismiss="modal">Salir</button>
           <button type="submit" class="btn btn-primary">Guardar</button>
+          <button type="button" class="btn btn-orange" data-dismiss="modal">Salir</button>
+          
         </div>
 
         <?php
@@ -650,11 +649,11 @@ MODAL Modificar ROL
            <div class="card-body">
               <div class= "form-group col-md-12">
                <label for="rol">Rol</label>
-               <input type="text" class="form-control mayus" id="editarRol" name="editarRol" value=""requiered>
+               <input type="text" class="form-control  nombre mayus" id="editarRol" name="editarRol" value=""requiered>
               </div>
               <div class= "form-group col-md-12">
                <label for="Descripcion">Descripción</label>
-               <input type="text" class="form-control mayus" id="editarDescripcionRol" name="editarDescripcionRol" value=""requiered>
+               <input type="text" class="form-control nombre mayus" id="editarDescripcionRol" name="editarDescripcionRol" value=""requiered>
               </div>
               <input type="hidden" id="editarIdRol" name="editarIdRol">
           </div>
@@ -725,14 +724,14 @@ MODIFIRCAR PARAMETROS
            <div class="card-body">
               <div class= "form-group col-md-12">
                <label for="parametro">Parametro</label>
-               <input type="text" class="form-control mayus" id="editarParametro" name="editarParametro" value="" readonly >
+               <input type="text" class="form-control nombre mayus" id="editarParametro" name="editarParametro" value="" readonly >
               </div>
           
            
 
               <div class= "form-group col-md-12">
                <label for="Valor">Valor</label>
-               <input type="text" class="form-control mayus" id="editarValorParametro" name="editarValorParametro" placeholder="Escriba el nuevo valor del parametro"requiered>
+               <input type="text" class="form-control " id="editarValorParametro" name="editarValorParametro" placeholder="Escriba el nuevo valor del parametro"requiered>
               </div>
 
               <input type="hidden" id="editarIdParametro" name="editarIdParametro">
@@ -805,12 +804,12 @@ MODAL AGREGAR NUEVA INSCRIPCION
           <div class="card-body">
             <div class="form-group col-md-12">
               <label for="Rol">Inscripcion</label>
-              <input type="text" class="form-control nombre" name="nuevoInscripcion" value="" required>
+              <input type="text" class="form-control nombre mayus" name="nuevoInscripcion" value="" required>
             </div>
 
             <div class="form-group col-md-12">
               <label for="Descripcion">Precio</label>
-              <input type="text" class="form-control id" name="nuevoPrecio" value="" required>
+              <input type="text" class="form-control preciom " name="nuevoPrecio" value="" required>
             </div>
 
           </div>
@@ -879,12 +878,12 @@ MODAL AGREGAR NUEVA MATRICULA
           <div class="card-body">
             <div class="form-group col-md-12">
               <label for="Rol">Matricula</label>
-              <input type="text" class="form-control nombre" name="nuevoMatricula" value="" required>
+              <input type="text" class="form-control nombre mayus" name="nuevoMatricula" value="" required>
             </div>
 
             <div class="form-group col-md-12">
               <label for="Descripcion">Precio</label>
-              <input type="textarea" class="form-control id" name="nuevoPrecio" value="" required>
+              <input type="textarea" class="form-control preciom" name="nuevoPrecio" value="" required>
             </div>
 
           </div>
@@ -896,8 +895,8 @@ MODAL AGREGAR NUEVA MATRICULA
         ======================================-->
 
         <div class="modal-footer">
-          <button type="button" class="btn btn-orange" data-dismiss="modal">Salir</button>
           <button type="submit" class="btn btn-primary">Guardar</button>
+          <button type="button" class="btn btn-orange" data-dismiss="modal">Salir</button>
         </div>
 
         <?php
@@ -924,7 +923,7 @@ MODAL AGREGAR NUEVA MATRICULA
 
 
 <!--=====================================
-MODAL AGREGAR NUEVA MATRICULA
+MODAL NUEVO DESCUENTO
 ======================================-->
 
 <div class="modal fade" id="modalNuevoDescuento" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -940,7 +939,7 @@ MODAL AGREGAR NUEVA MATRICULA
         ======================================-->
 
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Nueva Descuento</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Nuevo Descuento</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -954,12 +953,12 @@ MODAL AGREGAR NUEVA MATRICULA
           <div class="card-body">
             <div class="form-group col-md-12">
               <label for="Rol">Descuento</label>
-              <input type="text" class="form-control nombre" name="nuevoDescuento" value="" required>
+              <input type="text" class="form-control nombre mayus" name="nuevoDescuento" value="" required>
             </div>
 
             <div class="form-group col-md-12">
               <label for="Descripcion">Valor</label>
-              <input type="textarea" class="form-control id" name="nuevoValor" value="" required>
+              <input type="textarea" class="form-control preciom" name="nuevoValor" value="" required>
             </div>
 
           </div>
@@ -971,8 +970,8 @@ MODAL AGREGAR NUEVA MATRICULA
         ======================================-->
 
         <div class="modal-footer">
-          <button type="button" class="btn btn-orange" data-dismiss="modal">Salir</button>
           <button type="submit" class="btn btn-primary">Guardar</button>
+          <button type="button" class="btn btn-orange" data-dismiss="modal">Salir</button>
         </div>
 
         <?php
@@ -995,9 +994,6 @@ MODAL AGREGAR NUEVA MATRICULA
         
 
 </div>
-
-
-
 
 
 

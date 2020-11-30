@@ -133,7 +133,14 @@ class ControladorGlobales{
 
         $respuesta =  ModeloGlobales::mdlEditarParametro($tabla,$datos);
     
-        if($respuesta == "ok"){
+        if($respuesta == true){
+            
+            $descripcionEvento = "Actualizo parametro";
+            $accion = "Actualizo";
+            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
+
+          
+       
     
             echo'<script>
     
@@ -197,7 +204,13 @@ class ControladorGlobales{
 
     
         if($respuesta == true){
-    
+            
+            $descripcionEvento = "Actualizo rol";
+            $accion = "Actualizo";
+            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 2,$accion, $descripcionEvento);
+
+          
+
             echo'<script>
     
             Swal.fire({
