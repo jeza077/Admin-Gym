@@ -126,15 +126,30 @@
             <?php }?>
 
             <?php if($_SESSION['permisos']['Stock']['consulta'] == 1){?>
-            <li class="nav-item">
-              <a href="stock" class="nav-link menu-lateral">
+            <li class="nav-item has-treeview">
+              <a href="" class="nav-link menu-lateral">
                 <i class="nav-icon fas fa-layer-group"></i>
                 <p>
                   Stock
-                  <!-- <span class="right badge badge-danger">New</span> -->
+                  <i class="right fas fa-angle-left"></i>
                 </p>
               </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="productos" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Productos</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="equipo" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Equipo</p>
+                  </a>
+                </li>
+              </ul>
             </li>
+
             <?php }?>
             <?php if($_SESSION['permisos']['Ventas']['consulta'] == 1){?>
             <li class="nav-item has-treeview">
