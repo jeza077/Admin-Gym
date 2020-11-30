@@ -23,7 +23,7 @@
           <div class="col-sm-6">
           <?php if($permisoAgregar == 1){ ?>
             <button class="btn btn-orange float-right"  data-toggle="modal" data-target="#modalAgregarUsuario">
-              Agregar Usuario          
+              Nuevo Usuario          
             </button>
           <?php } ?>
             <button class="btn btn-danger btnExportarUsuarios float-right mr-3">

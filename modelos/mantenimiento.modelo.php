@@ -304,7 +304,67 @@ class ModeloMantenimiento{
     }
 
 
-    
+    /*=============================================
+			RANGO DE FECHAS BITACORA
+	=============================================*/
+    static public function mdlRangoFechasBitacora($tabla, $fechaInicial, $fechaFinal){
+
+        if($fechaInicial == null){
+
+			$stmt = Conexion::conectar() ->prepare("SELECT b.id_bitacora, u.usuario, o.objeto,b.accion,b.descripcion,b.fecha FROM tbl_bitacora as b \n"
+            . "inner join tbl_usuarios as u on b.id_usuario=u.id_usuario\n"
+            . "inner join tbl_objetos as o on b.id_objeto =o.id_objeto\n"
+			. "ORDER BY id_bitacora DESC");
+            $stmt-> execute();
+			return $stmt ->fetchAll();
+			
+		} else if($fechaInicial == $fechaFinal){
+
+			$stmt = Conexion::conectar() ->prepare("SELECT b.id_bitacora, u.usuario, o.objeto,b.accion,b.descripcion,b.fecha FROM tbl_bitacora as b \n"
+            . "inner join tbl_usuarios as u on b.id_usuario=u.id_usuario\n"
+            . "inner join tbl_objetos as o on b.id_objeto =o.id_objeto\n"
+			. "WHERE fecha LIKE '%$fechaFinal%'");
+			$stmt->bindParam(":fecha", $fechaFinal, PDO::PARAM_STR);
+            $stmt-> execute();
+			return $stmt ->fetchAll();
+			
+		} else {
+
+			$fechaActual = new DateTime();
+			$fechaActual->add(new DateInterval("P1D"));
+			$fechaActualMasUno = $fechaActual->format("Y-m-d");
+			
+			$fechaFinal2 = new DateTime($fechaFinal);
+			$fechaFinal2->add(new DateInterval("P1D"));
+			$fechaFinalMasUno = $fechaFinal2->format("Y-m-d");
+			// return $fechaFinalMasUno;
+
+			if($fechaFinalMasUno == $fechaActualMasUno){
+
+				// return 'fecha'.$fechaFinalMasUno;
+
+				$stmt = Conexion::conectar() ->prepare("SELECT b.id_bitacora, u.usuario, o.objeto,b.accion,b.descripcion,b.fecha FROM tbl_bitacora as b \n"
+                . "inner join tbl_usuarios as u on b.id_usuario=u.id_usuario\n"
+                . "inner join tbl_objetos as o on b.id_objeto =o.id_objeto\n"
+				. "WHERE fecha BETWEEN '$fechaInicial' AND '$fechaFinalMasUno'");
+
+			} else {
+
+				// return $fechaFinal;
+
+				$stmt = Conexion::conectar() ->prepare("SELECT b.id_bitacora, u.usuario, o.objeto,b.accion,b.descripcion,b.fecha FROM tbl_bitacora as b \n"
+                . "inner join tbl_usuarios as u on b.id_usuario=u.id_usuario\n"
+                . "inner join tbl_objetos as o on b.id_objeto =o.id_objeto\n"
+				. "WHERE fecha BETWEEN '$fechaInicial' AND '$fechaFinalMasUno'");
+			
+			}
+		
+
+            $stmt-> execute();
+			return $stmt ->fetchAll();
+		}
+
+    }
 
     
 

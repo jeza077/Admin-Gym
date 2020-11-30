@@ -450,6 +450,22 @@
 
 
 
+	/*=============================================
+			RANGO DE FECHAS BITACORA
+	=============================================*/
+
+	static public function ctrRangoFechasBitacora($fechaInicial, $fechaFinal) {
+
+		$tabla1 = "tbl_bitacora";
+		
+		$respuesta = ModeloMantenimiento::mdlRangoFechasBitacora($tabla1, $fechaInicial, $fechaFinal);
+
+		return $respuesta;
+
+  }
+
+
+
 }
 
 

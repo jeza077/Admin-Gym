@@ -498,23 +498,23 @@ $(document).on('click', '.btnExportarVentas', function (e) {
         }
     }
     return false;
- }
+  }
  
  // console.log(window.location.search.substring(15));
  // console.log(getQueryVariable('fechaFinal'));
  
- var fechaInicial = getQueryVariable('fechaInicial');
- var fechaFinal = getQueryVariable('fechaFinal')
-// console.log(fechaInicial)
- 
-if(fechaInicial == false && fechaFinal == false) {
-  // console.log('si')
-  // window.open("extensiones/tcpdf/pdf/ventas-pdf.php?&fechaInicial="+null+"&fechaFinal="+null);
-  window.open("extensiones/tcpdf/pdf/ventas-pdf.php", "_blank");
-} else {
-  // console.log('no')
-  window.open("extensiones/tcpdf/pdf/ventas-pdf.php?&fechaInicial="+fechaInicial+"&fechaFinal="+fechaFinal);
-}
+  var fechaInicial = getQueryVariable('fechaInicial');
+  var fechaFinal = getQueryVariable('fechaFinal')
+  // console.log(fechaInicial)
+  
+  if(fechaInicial == false && fechaFinal == false) {
+    // console.log('si')
+    // window.open("extensiones/tcpdf/pdf/ventas-pdf.php?&fechaInicial="+null+"&fechaFinal="+null);
+    window.open("extensiones/tcpdf/pdf/ventas-pdf.php", "_blank");
+  } else {
+    // console.log('no')
+    window.open("extensiones/tcpdf/pdf/ventas-pdf.php?&fechaInicial="+fechaInicial+"&fechaFinal="+fechaFinal);
+  }
 
 });
 

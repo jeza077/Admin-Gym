@@ -7,7 +7,7 @@
     </ul>
 
     <!-- SEARCH FORM -->
-    <form class="form-inline ml-3">
+    <!-- <form class="form-inline ml-3">
       <div class="input-group input-group-sm">
         <input class="form-control form-control-navbar" type="search" placeholder="Buscar..." aria-label="Search">
         <div class="input-group-append">
@@ -16,7 +16,7 @@
           </button>
         </div>
       </div>
-    </form>
+    </form> -->
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
@@ -73,13 +73,13 @@
         <!-- </div>
       </li> -->
 
-        <li class="nav-item mr-4">
+        <!-- <li class="nav-item mr-4">
           <a class="nav-link" href="agregar-persona">
             <i class="fas fa-user mr-1"></i>
             <span class="badge badge-orange navbar-badge"><i class="fas fa-plus"></i></span>
-            <!-- <span class="hidden-xs">Agregar persona</span> -->
+            <span class="hidden-xs">Agregar persona</span>
           </a>
-        </li>
+        </li> -->
 
         <li class="dropdown nav-item user user-menu" style="margin: 0.5em 1.5em 0 0">
           <a href="#"  data-toggle="dropdown">

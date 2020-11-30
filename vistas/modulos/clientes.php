@@ -10,7 +10,7 @@
           </div>
           <div class="col-sm-6">
           <button class="btn btn-orange float-right"  data-toggle="modal" data-target="#modalAgregarCliente">
-            Agregar cliente       
+            Nuevo Cliente       
           </button>
           <button class="btn btn-danger btnExportarClientes float-right mr-3">
               Exportar PDF          

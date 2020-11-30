@@ -7,11 +7,18 @@
           <div class="col-sm-6">
             <h1>Bitacora</h1>
           </div>
+
           <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#"><a></li>
-              <li class="breadcrumb-item active"></li>
-            </ol>
+            <button class="btn btn-danger btnExportarBitacora float-right mr-3">
+                Exportar PDF          
+            </button> 
+
+            <button type="button" class="btn btn-default float-right mr-3" id="daterange-btn-bitacora">
+              <span>
+                <i class="far fa-calendar-alt"></i> Rango de fechas
+              </span>
+              <i class="fas fa-caret-down"></i>
+          </button>
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -42,13 +49,29 @@
 
                   <tbody>
                     <?php
-                        $item=null;
-                        $valor=null;
-                        $Bitacora = ControladorMantenimientos::ctrMostrarBitacora( $item, $valor);
+                    
+                        if(isset($_GET["fechaInicial"])){
+
+                          $fechaInicial = $_GET["fechaInicial"];
+                          $fechaFinal = $_GET["fechaFinal"];
+
+                        } else {
+
+                          $fechaInicial = null;
+                          $fechaFinal = null;
+
+                        }
+
+                        $bitac = ControladorMantenimientos::ctrRangoFechasBitacora($fechaInicial, $fechaFinal);
+                        // var_dump($Bitac);
+
+                        // $item=null;
+                        // $valor=null;
+                        // $Bitacora = ControladorMantenimientos::ctrMostrarBitacora( $item, $valor);
 
                         /*var_dump($Bitacora);*/
                       
-                        foreach ($Bitacora as $key => $value){
+                        foreach ($bitac as $key => $value){
                           echo ' 
                           <tr>
                               <td>'.($key+1).'</td>
