@@ -1,79 +1,31 @@
+/*--=====================================
+        VARIABLE LOCAL STORAGE
+======================================--*/
+var pathname = window.location.href;
+
+if(localStorage.getItem("capturarRangoGraficaVentas") != null && pathname == 'http://localhost/Admin-Gym/reportes'){
+
+  $("#daterange-btn-reporte span").html('<i class="fa fa-calendar"></i> Rango de fecha');
+  localStorage.removeItem("capturarRangoGraficaVentas");
+  localStorage.clear();
+  
+} else if(localStorage.getItem("capturarRangoGraficaVentas") != null) {
+  $("#daterange-btn-reporte span").html(localStorage.getItem("capturarRangoGraficaVentas"));
+
+} else {
+  $("#daterange-btn-reporte span").html('<i class="fa fa-calendar"></i> Rango de fecha');
+}
+
+$('#daterange-btn-reporte').on('click', function () {  
+    $('.daterangepicker').addClass('graficoVentas');
+})
+
 // /*=============================================
 //     DATERANGE PICKER
 //   ===========================================*/
-// $('#daterange-btn').daterangepicker({
-//     ranges   : {
-//     'Hoy'       : [moment(), moment()],
-//     'Ayer'   : [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-//     'Últimos 7 días' : [moment().subtract(6, 'days'), moment()],
-//     'Últimos 30 días': [moment().subtract(29, 'days'), moment()],
-//     'Este mes'  : [moment().startOf('month'), moment().endOf('month')],
-//     'Último mes'  : [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-//     },
-//     startDate: moment(),
-//     endDate  : moment()
-//     },
-//     function (start, end) {
-//         $('#daterange-btn span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
-        
-//         var fechaInicial = start.format('YYYY-MM-DD');
+datarangeDinamico($('#daterange-btn-reporte'), $('#daterange-btn-reporte span'), 'capturarRangoGraficaVentas', 'reportes');
 
-//         var fechaFinal = end.format('YYYY-MM-DD');
-
-//         var capturarRango = $("#daterange-btn span").html();
-//         console.log(capturarRango)
-//         localStorage.setItem("capturarRango", capturarRango);
-
-//         window.location = "index.php?ruta=reportes&fechaInicial="+fechaInicial+"&fechaFinal="+fechaFinal;
-//     }
-// )
 // /*=============================================
 //         CAPTURAR HOY
 // =============================================*/  
-// $(".daterangepicker .ranges li").on("click", function(){
-
-// var textoHoy = $(this).attr("data-range-key");
-// console.log(textoHoy)
-// if(textoHoy == "Hoy"){
-
-//     var d = new Date();
-
-//     var dia = d.getDate();
-//     var mes = d.getMonth()+1;
-//     var año = d.getFullYear();
-
-//     //   if(mes < 10){
-
-//     //       var fechaInicial = año+"-0"+mes+"-"+dia;
-//     //       var fechaFinal = año+"-0"+mes+"-"+dia;
-
-//     //   }else if(dia < 10){
-
-//     //       var fechaInicial = año+"-"+mes+"-0"+dia;
-//     //       var fechaFinal = año+"-"+mes+"-0"+dia;
-
-//     //   }else if(mes < 10 && dia < 10){
-
-//     //       var fechaInicial = año+"-0"+mes+"-0"+dia;
-//     //       var fechaFinal = año+"-0"+mes+"-0"+dia;
-
-//     //   }else{
-
-//     //       var fechaInicial = año+"-"+mes+"-"+dia;
-//     //       var fechaFinal = año+"-"+mes+"-"+dia;
-
-//     //   }	
-
-//     // dia = ("0"+dia).slice(-2);
-//     // mes = ("0"+mes).slice(-2);
-
-//     var fechaInicial = año+"-"+mes+"-"+dia;
-//     var fechaFinal = año+"-"+mes+"-"+dia;	
-
-//     localStorage.setItem("capturarRango", "Hoy");
-
-//     window.location = "index.php?ruta=reportes&fechaInicial="+fechaInicial+"&fechaFinal="+fechaFinal;
-
-// }
-
-// })
+datarangeDinamicoHoy(".daterangepicker.graficoVentas .ranges li", 'capturarRangoGraficaVentas', 'Hoy', 'reportes');
