@@ -39,7 +39,7 @@
 
         
       <?php
-        include 'reportes/grafico-ventas.php';
+        include 'reportes/grafico-venta.php';
       ?>
 
     </section>

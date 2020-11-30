@@ -9,6 +9,10 @@
     $productos = ControladorInventario::ctrMostrarInventario($tabla, $item, $valor,$order);
     $totalProductos = count($productos);
 
+    $valor = 'Bodega';
+    $equipo = ControladorInventario::ctrMostrarInventario($tabla, $item, $valor,$order);
+    $totalEquipo = count($equipo);
+
     $tabla = 'tbl_clientes';
     $item = null;
     $valor = null;
