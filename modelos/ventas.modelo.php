@@ -105,12 +105,15 @@ class ModeloVentas
 			$fechaActual = new DateTime();
 			$fechaActual->add(new DateInterval("P1D"));
 			$fechaActualMasUno = $fechaActual->format("Y-m-d");
-
+			
 			$fechaFinal2 = new DateTime($fechaFinal);
 			$fechaFinal2->add(new DateInterval("P1D"));
 			$fechaFinalMasUno = $fechaFinal2->format("Y-m-d");
+			// return $fechaFinalMasUno;
 
 			if($fechaFinalMasUno == $fechaActualMasUno){
+
+				// return 'fecha'.$fechaFinalMasUno;
 
 				$stmt = Conexion::conectar() ->prepare("SELECT * FROM $tabla  AS v\n"
 				. "INNER JOIN tbl_clientes AS c ON v.id_cliente = c.id_cliente\n"
@@ -119,10 +122,12 @@ class ModeloVentas
 
 			} else {
 
+				// return $fechaFinal;
+
 				$stmt = Conexion::conectar() ->prepare("SELECT * FROM $tabla  AS v\n"
 				. "INNER JOIN tbl_clientes AS c ON v.id_cliente = c.id_cliente\n"
 				. "INNER JOIN tbl_personas AS p ON c.id_persona = p.id_personas\n"
-				. "WHERE fecha BETWEEN '$fechaInicial' AND '$fechaFinal'");
+				. "WHERE fecha BETWEEN '$fechaInicial' AND '$fechaFinalMasUno'");
 			
 			}
 		

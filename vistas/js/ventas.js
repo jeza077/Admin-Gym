@@ -505,9 +505,15 @@ $(document).on('click', '.btnExportarVentas', function (e) {
  var fechaFinal = getQueryVariable('fechaFinal')
 // console.log(fechaInicial)
  
-window.open("extensiones/tcpdf/pdf/ventas-pdf.php?&fechaInicial="+fechaInicial+"&fechaFinal="+fechaFinal);
+if(fechaInicial == false && fechaFinal == false) {
+  // console.log('si')
+  // window.open("extensiones/tcpdf/pdf/ventas-pdf.php?&fechaInicial="+null+"&fechaFinal="+null);
+  window.open("extensiones/tcpdf/pdf/ventas-pdf.php", "_blank");
+} else {
+  // console.log('no')
+  window.open("extensiones/tcpdf/pdf/ventas-pdf.php?&fechaInicial="+fechaInicial+"&fechaFinal="+fechaFinal);
+}
 
-  // window.open("extensiones/tcpdf/pdf/ventas-pdf.php", "_blank");
 });
 
 
