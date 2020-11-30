@@ -137,8 +137,8 @@ class ControladorGlobales{
     
             echo'<script>
     
-            swal({
-                  type: "success",
+            Swal.fire({
+                  icon: "success",
                   title: "El parametro ha sido editado correctamente",
                   showConfirmButton: true,
                   confirmButtonText: "Cerrar",
@@ -146,7 +146,7 @@ class ControladorGlobales{
                   }).then((result) => {
                             if (result.value) {
     
-                            window.location = "mantenimientos";
+                            window.location = "mantenimiento";
     
                             }
                         })
@@ -157,8 +157,8 @@ class ControladorGlobales{
 
           echo'<script>
     
-            swal({
-                  type: "warning",
+            Swal.fire({
+                  icon: "error",
                   title: "Error al editar parametro",
                   showConfirmButton: true,
                   confirmButtonText: "Cerrar",
@@ -166,7 +166,7 @@ class ControladorGlobales{
                   }).then((result) => {
                             if (result.value) {
     
-                            window.location = "mantenimientos";
+                            window.location = "mantenimiento";
     
                             }
                         })
