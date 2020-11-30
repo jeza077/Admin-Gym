@@ -13,7 +13,15 @@
       <!--=====================================
                  FORMULARIO 
       ======================================-->
-    <section class="content">  
+    <section class="content"> 
+                      <?php
+                        $descripcionEvento = " Consulto la pantalla de crear ventas";
+                        $accion = "consulta";
+
+                        $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 5,$accion, $descripcionEvento);
+    
+                      ?>
+                    
 
       <div class="row">
         <div class="col-md-5">

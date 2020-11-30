@@ -651,6 +651,11 @@ class ControladorPersonas{
                     </script>';
 
             } else if($tipoPersona == 'usuario') {
+                $descripcionEvento = " Elimino un usuario.";
+                $accion = "Elimino";
+    
+                $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 2,$accion, $descripcionEvento);
+    
                           
                 if($_GET['fotoUsuario'] != ""){
                     unlink($_GET['fotoUsuario']);
@@ -669,6 +674,13 @@ class ControladorPersonas{
                     </script>';
                     
             } else {
+                
+                $descripcionEvento = " Elimino un cliente.";
+                $accion = "Elimino";
+    
+                $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 3,$accion, $descripcionEvento);
+    
+              
                 echo '<script>
                         Swal.fire({
                             title: "El cliente ha sido borrado correctamente!",

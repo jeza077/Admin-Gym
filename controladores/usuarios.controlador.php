@@ -585,11 +585,15 @@ class ControladorUsuarios{
 	/*=============================================
 			EDITAR USUARIOS
 	=============================================*/
+	
 	static public function ctrEditarUsuario($datos){
 
 		// return var_dump($datos);
 		// return;
+
+		
 		if(isset($datos["usuario"])){
+			
 
 			if(preg_match('/^[A-Z]+$/', $datos["usuario"])){
 
@@ -710,6 +714,14 @@ class ControladorUsuarios{
 
 					if($respuestaEmpleado == true){
 
+					
+						$descripcionEvento = " Actualizo registro en la pantalla de usuario";
+						$accion = "Actualizo";
+			
+						$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 2,$accion, $descripcionEvento);
+			
+					
+
 						// return true;
 
 						if($contraSinEncriptar != ""){
@@ -765,6 +777,11 @@ class ControladorUsuarios{
 					</script>";
 
 		}
+		
+	    
+        
+	  
+		
 
 
 	}

@@ -257,8 +257,7 @@
                                       
                                           <td>'.($key + 1).'</td>
                                           <td>'.$value["tipo_matricula"].'</td>
-                                          <td>'.$value["precio_matricula"].'</td>
-                                          </tr>';
+                                          <td>'.$value["precio_matricula"].'</td>';
                                           if($value['estado'] != 0){
                                             echo '<td><button class="btn btn-success btn-md btnActivar" idMatricula="'.$value["id_Matricula"].'" estadoMatricula="0">Activado</button></td>';
                                           }else{

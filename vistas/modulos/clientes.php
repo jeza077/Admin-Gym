@@ -29,6 +29,12 @@
       // foreach ($permisos_pantalla as $key => $value) {
       //   echo $key;
       // }
+      
+      $descripcionEvento = " Consulto la pantalla de cliente";
+      $accion = "consulta";
+
+      $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 3,$accion, $descripcionEvento);
+
     ?>
 
         <div class="card">

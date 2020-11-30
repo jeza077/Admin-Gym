@@ -20,6 +20,15 @@
     
   </section>  
   <section class="content">
+
+                      <?php
+                        $descripcionEvento = " Consulto la pantalla de Administracion de Ventas";
+                        $accion = "consulta";
+
+                        $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 4,$accion, $descripcionEvento);
+    
+                      ?>
+                   
     <div class="card">
       <div class="card-body">
 
