@@ -307,7 +307,9 @@ function sumarTotalPrecios(){
 	}
 
 	var sumaTotalPrecio = arraySumaPrecio.reduce(sumaArrayPrecios);
-	
+  
+  $("#nuevoPrecioNeto").val(sumaTotalPrecio);
+  $("#precioNeto").val(sumaTotalPrecio);
 	$("#nuevoTotalVenta").val(sumaTotalPrecio);
 	$("#totalVenta").val(sumaTotalPrecio);
 	$("#nuevoTotalVenta").attr("total",sumaTotalPrecio);
@@ -322,7 +324,7 @@ function sumarTotalPrecios(){
 function agregarImpuesto(){
 
   var impuesto = $("#nuevoImpuestoVenta").val();
-  console.log(impuesto)
+  // console.log(impuesto)
 	var precioTotal = $("#nuevoTotalVenta").attr("total");
 
 	var precioImpuesto = Number(precioTotal * impuesto/100);
@@ -527,4 +529,32 @@ $(".tablas").on("click", ".btnEditarVenta", function(){
 	window.location = "index.php?ruta=editar-venta&idVenta="+idVenta;
 
 
+})
+
+
+/*=============================================
+BORRAR VENTA
+=============================================*/
+$(".tablas").on("click", ".btnEliminarVenta", function(){
+
+  var idVenta = $(this).attr("idVenta");
+
+  swal.fire({
+        title: '¿Está seguro de borrar la venta?',
+        text: "¡Si no lo está puede cancelar la accíón!",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        cancelButtonText: 'Cancelar',
+        confirmButtonText: 'Si, borrar venta!'
+      }).then(function(result){
+        if (result.value) {
+          
+          window.location = "index.php?ruta=administrar-venta&idVenta="+idVenta;
+        }
+
+  })
+  
+  
 })
