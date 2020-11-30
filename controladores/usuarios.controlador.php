@@ -539,6 +539,15 @@ class ControladorUsuarios{
 
 								if($respuestaCorreo = true){
 
+								
+									$descripcionEvento = "Nuevo Usuario";
+									$accion = "Nuevo";
+			                        $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 2,$accion, $descripcionEvento);
+				
+								 
+							   
+									
+
 									return true;
 
 								} else {

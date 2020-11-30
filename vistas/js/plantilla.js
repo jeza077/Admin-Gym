@@ -557,6 +557,9 @@ longitudString($('input[type=password]'),16); //Longitud maxima Input tipo Passw
 $('input[type=password]').keydown(impedirEspacios); //Evitar espacios en Input de tipo Password, Global.
 $('input[type=email]').keydown(impedirEspacios); // Evitar espacios en Input de tipo Email, Global.
 
+$( '.preciom').keydown(impedirEspacios)
+$( '.preciom').keydown(sinCaracteres)
+$( '.preciom').keydown(sinLetras)
 
 
 

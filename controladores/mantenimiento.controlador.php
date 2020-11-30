@@ -59,6 +59,13 @@
           
           // var_dump($respuesta);
           if($respuesta == true){
+         
+            $descripcionEvento = "Nuevo rol ";
+            $accion = "Nuevo";
+            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
+
+        
+       
   
             echo '<script>
   
@@ -166,6 +173,13 @@
           // var_dump($respuesta);
           if($respuesta == true){
   
+           
+            $descripcionEvento = "Nueva inscripcion del gimnasio";
+            $accion = "Nuevo";
+            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
+
+         
+       
             echo '<script>
   
             Swal.fire({
@@ -270,6 +284,14 @@
           
           // var_dump($respuesta);
           if($respuesta == true){
+            
+            $descripcionEvento = "Nueva matricula del gimnasio";
+            $accion = "Nuevo";
+
+            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
+
+     
+       
   
             echo '<script>
   
@@ -374,6 +396,14 @@
           
           // var_dump($respuesta);
           if($respuesta == true){
+            
+            $descripcionEvento = "Nuevo descuento del gimnasio";
+            $accion = "Nuevo";
+
+            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 7,$accion, $descripcionEvento);
+
+        
+       
   
             echo '<script>
   

@@ -491,7 +491,7 @@ class ModeloUsuarios{
 	
 			} else {
 	
-				$stmt = Conexion::conectar()->prepare(" SELECT b.id_bitacora, u.usuario, o.objeto,b.accion,b.descripcion,b.fecha FROM tbl_bitacora as b inner join tbl_usuarios as u on b.id_usuario=u.id_usuario inner join tbl_objetos as o on b.id_objeto =o.id_objeto order by b.fecha desc");
+				$stmt = Conexion::conectar()->prepare(" SELECT b.id_bitacora, u.usuario, o.objeto,b.accion,b.descripcion,b.fecha FROM tbl_bitacora as b inner join tbl_usuarios as u on b.id_usuario=u.id_usuario inner join tbl_objetos as o on b.id_objeto =o.id_objeto order by b.fecha asc");
 				$stmt -> execute();
 				return $stmt -> fetchAll();
 	

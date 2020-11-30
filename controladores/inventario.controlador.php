@@ -113,6 +113,14 @@ class ControladorInventario
                         $crearInventario = ModeloInventario::mdlCrearStock($tabla, $datos);
 
                                 if($crearInventario == true){
+                                    
+                                    $descripcionEvento = "  Nuevo Producto";
+                                    $accion = "Nuevo";
+            
+                                    $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 4,$accion, $descripcionEvento);
+                
+                                  
+                               
     
                                     echo '<script>
                                             Swal.fire({
@@ -261,6 +269,12 @@ class ControladorInventario
                     // AQUI CAMBIE A PRODUCTOS CON S
 
                     if($tipostock == 'producto'){
+
+                        
+                        $descripcionEvento = "Actualizo un producto del stock";
+                        $accion = "Actualizo";
+                        $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 4,$accion, $descripcionEvento);
+                   
                         $datos = array("nombre_producto" => $_POST["editarNombreProducto"],
                         "codigo" => $_POST["editarCodigo"],
                         "id_inventario" => $_POST["editarTipoProducto"],
@@ -414,6 +428,11 @@ class ControladorInventario
                     // AQUI CAMBIE A PRODUCTOS CON S
 
                     if($tipostock == 'Equipo'){
+                        
+                        $descripcionEvento = "Actualizo un equipo del stock";
+                        $accion = "Actualizo";
+                        $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 2,$accion, $descripcionEvento);
+                   
                         $datos = array("nombre_producto" => $_POST["editarNombreEquipo"],
                         "codigo" => $_POST["editarCodigoE"],
                         "id_inventario" => $_POST["editarTipoEquipo"],

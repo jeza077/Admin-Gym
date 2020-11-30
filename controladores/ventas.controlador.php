@@ -132,6 +132,11 @@ class ControladorVentas {
 
 			if ($respuesta == true){
 
+				
+				$descripcionEvento = "Nueva venta ";
+				$accion = "Nueva";
+                $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 5,$accion, $descripcionEvento);
+
 				if($_POST['idPersona'] != ""){
 
 					$tabla1 = "tbl_personas";
@@ -1115,6 +1120,14 @@ class ControladorVentas {
 			$respuesta = ModeloVentas::mdlEditarVenta($tabla, $datos);
 
 			if($respuesta == true ){
+				
+				$descripcionEvento = "Actualizo una venta";
+				$accion = "Actualizo";
+
+				$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 5,$accion, $descripcionEvento);
+
+			  
+		   
 
 				echo'<script>
 

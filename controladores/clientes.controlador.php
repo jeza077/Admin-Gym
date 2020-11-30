@@ -101,6 +101,13 @@ class ControladorClientes{
 				// var_dump($datos);
 				// echo "</pre>";
 				// return;
+			
+				$descripcionEvento = "Nuevo cliente";
+				$accion = "Nuevo";
+                $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 3,$accion, $descripcionEvento);
+
+			   
+		   
 
                 return true;
 
@@ -214,6 +221,14 @@ class ControladorClientes{
 				// return;
                 if ($respuestaEditarPago == true) {
 					
+					$descripcionEvento = "Actualizo cliente";
+					$accion = "Actualizo";
+
+					$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 3,$accion, $descripcionEvento);
+
+				
+			   
+					
 					return true;
 				} else {
 					return false;
@@ -317,6 +332,15 @@ class ControladorClientes{
 			$respuesta = ModeloClientes::mdlEliminarCliente($tabla, $datos);
 
 			if($respuesta == true){
+				
+				$descripcionEvento = "Elimino cliente";
+				$accion = "Elimino";
+
+				$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 3,$accion, $descripcionEvento);
+
+			  
+		   
+
 				echo '<script>
 						Swal.fire({
 							title: "Cliente eliminado correctamente!",
