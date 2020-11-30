@@ -40,7 +40,6 @@
           <thead>
 
             <tr>
-
               <th scope="col">#</th>
               <th scope="col">Codigo factura</th>
               <th scope="col">Cliente</th>
@@ -48,7 +47,6 @@
               <th scope="col">Total Neto</th>
               <th scope="col">Fecha</th>
               <th scope="col">Acciones</th>
-
             </tr>
 
           </thead>
@@ -92,9 +90,9 @@
                           <div class="btn-group">
                                 
                              
-                              <button class="btn btn-warning btnEditarVenta" idVenta='.$value["id_venta"].'><i class="fas fa-pencil-alt" style="color:#fff"></i></button>
+                              <button class="btn btn-warning btnEditarVenta" idVenta="'.$value["id_venta"].'"><i class="fas fa-pencil-alt" style="color:#fff"></i></button>   
 
-                              <button class="btn btn-danger btnEliminarVenta"><i class="fas fa-trash-alt"></i></button>
+                              <button class="btn btn-danger btnEliminarVenta" idVenta="'.$value["id_venta"].'"><i class="fas fa-trash-alt"></i></button>
 
                           </div>  
                         </td>
@@ -109,8 +107,8 @@
 
       <?php
 
-        // $eliminarVenta = new ControladorVentas();
-        // $eliminarVenta -> ctrEliminarVenta();
+        $eliminarVenta = new ControladorVentas();
+        $eliminarVenta -> ctrEliminarVenta();
 
       ?>
 

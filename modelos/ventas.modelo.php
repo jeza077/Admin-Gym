@@ -132,4 +132,64 @@ class ModeloVentas
 		}
 	}
 
+	/*=============================================
+	EDITAR VENTA
+	=============================================*/
+
+	static public function mdlEditarVenta($tabla, $datos){
+		
+
+		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET id_cliente = :id_cliente, id_usuario = :id_usuario, productos = :productos, impuesto = :impuesto, neto = :neto, total = :total WHERE numero_factura = :numero_factura ");
+
+		$stmt->bindParam(":id_cliente", $datos["id_cliente"], PDO::PARAM_INT);
+		$stmt->bindParam(":id_usuario", $datos["id_vendedor"], PDO::PARAM_INT);
+		$stmt->bindParam(":productos", $datos["productos"], PDO::PARAM_STR);
+		$stmt->bindParam(":impuesto", $datos["impuesto"], PDO::PARAM_STR);
+		$stmt->bindParam(":neto", $datos["neto"], PDO::PARAM_STR);
+		$stmt->bindParam(":total", $datos["total"], PDO::PARAM_STR);
+		$stmt->bindParam(":numero_factura", $datos["numero_factura"], PDO::PARAM_INT);
+
+		if($stmt->execute()){
+
+			return true;
+
+		}else{
+
+			// return false;
+			return $stmt->errorInfo();
+		
+		}
+
+		$stmt->close();
+		$stmt = null;
+
+	}
+
+	/*=============================================
+	========ELIMINAR VENTA
+	=============================================*/
+	// static public function mdlEliminarVenta($tabla, $datos){
+
+	// 	$stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE id_ = :id");
+
+	// 	$stmt -> bindParam(":id", $datos, PDO::PARAM_INT);
+
+	// 	if($stmt -> execute()){
+
+	// 		return true;
+		
+	// 	}else{
+
+	// 		return false;	
+
+	// 	}
+
+	// 	$stmt -> close();
+
+	// 	$stmt = null;
+
+	// }
+
+
+
 }
