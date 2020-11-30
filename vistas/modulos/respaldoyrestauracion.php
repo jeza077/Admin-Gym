@@ -48,7 +48,7 @@
                   </ul>
 
                  <!--========================================================
-                              ROL
+                              Respaldo
                     ==========================================================-->  
                   <!-- Tab panes -->
                   <div class="tab-content" id="myTabContent">
@@ -92,7 +92,7 @@
                                   <div class="input-group-prepend">
                                       <span class="input-group-text"><i class="fas fa-database"></i></span>
                                   </div>
-                                      <input type="text-center" class="form-control" minlength="1" maxlength="30" id="nombrebd" name="nombrebd" value="gym_lr" readonly placeholder="Nombre de la base de datos a respaldar" required>
+                                      <input type="text-center" class="form-control" minlength="1" maxlength="30" id="nombrebd" name="nombrebd" value="gym_la_roca" readonly placeholder="Nombre de la base de datos a respaldar" required>
                                 </div>
                             </div>
 
@@ -147,7 +147,7 @@
                                   <div class="input-group-prepend">
                                       <span class="input-group-text"><i class="fas fa-database"></i></span>
                                   </div>
-                                      <input type="text-center" class="form-control" minlength="1" maxlength="30" id="nombrebd2" name="nombrebd2" value="gym_lr" readonly placeholder="Nombre de la base de datos a respaldar" required>
+                                      <input type="text-center" class="form-control" minlength="1" maxlength="30" id="nombrebd2" name="nombrebd2" value="gym_la_roca" readonly placeholder="Nombre de la base de datos a respaldar" required>
                                 </div>
                             </div>
 

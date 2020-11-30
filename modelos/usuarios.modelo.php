@@ -441,7 +441,7 @@ class ModeloUsuarios{
     
     static public function mdlMostrarParametros($tabla, $item, $valor){
 		if($item != null){
-			$stmt = Conexion::conectar()->prepare("SELECT parametro, valor FROM $tabla WHERE $item = :$item");
+			$stmt = Conexion::conectar()->prepare("SELECT tbl_parametro, valor FROM $tabla WHERE $item = :$item");
 			$stmt->bindParam(":".$item, $valor, PDO::PARAM_STR);
 			$stmt->execute();
 			return $stmt->fetch();
@@ -458,9 +458,9 @@ class ModeloUsuarios{
 	/*============================================
 		INSERTAR BITACORA
 	==============================================*/
-	static public function mdlInsertarBitacora($tabla, $fecha, $usuario, $modulo, $accion, $descripcion){
+	static public function mdlInsertarBitacora($tabla, $fecha, $usuario, $objeto, $accion, $descripcion){
 
-		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(fecha, id_usuario, id_modulos, accion, descripcion) VALUES ('$fecha', $usuario, $modulo, '$accion', '$descripcion')");
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(fecha, id_usuario, id_objeto, accion, descripcion) VALUES ('$fecha', $usuario, $objeto, '$accion', '$descripcion')");
 
 		if($stmt->execute()){
 
@@ -491,9 +491,7 @@ class ModeloUsuarios{
 	
 			} else {
 	
-				$stmt = Conexion::conectar()->prepare("SELECT b.id_bita, u.usuario, m.nombre_modulo, b.accion, b.descripcion, b.fecha FROM tbl_bitacora as b\n"
-				. "INNER JOIN usuarios as u ON b.id_usuario = u.id\n"
-				. "INNER JOIN modulos as m ON b.Id_Modulos = m.id order by b.fecha desc");
+				$stmt = Conexion::conectar()->prepare(" SELECT b.id_bitacora, u.usuario, o.objeto,b.accion,b.descripcion,b.fecha FROM tbl_bitacora as b inner join tbl_usuarios as u on b.id_usuario=u.id_usuario inner join tbl_objetos as o on b.id_objeto =o.id_objeto order by b.fecha desc");
 				$stmt -> execute();
 				return $stmt -> fetchAll();
 	

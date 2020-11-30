@@ -25,7 +25,7 @@
      
         <div class="card-body">
 
-        <table class="table table-bordered table-striped tablas text-center">
+          <table class="table table-bordered table-striped tablas text-center">
                   <thead>
                     <tr>
                     <!-- Esto es un comentario cambiar arriba  -->
@@ -41,63 +41,32 @@
                   </thead>
 
                   <tbody>
-                  <?php
-                  $item=null;
-                  $valor=null;
-                  $Bitacora=ControladorMantenimientos::ctrMostrarBitacora( $item, $valor);
+                    <?php
+                        $item=null;
+                        $valor=null;
+                        $Bitacora = ControladorMantenimientos::ctrMostrarBitacora( $item, $valor);
 
-                  // var_dump($Bitacora);
-                
-                  foreach ($Bitacora as $key => $value){
-                    echo ' <tr>
-                    <td>'.($key+1).'</td>
-                    <td>'.$value["usuario"].'</td>
-                    <td>'.$value["nombre_modulo"].'</td>
-                    <td>'.$value["accion"].'</td>
-                    <td>'.$value["descripcion"].'</td>
-                    <td>'.$value["fecha"].'</td>
-                   
-                  </tr>';
-                  
-                  }
-                  
-                  
-                  
-                  ?>
-                   
-
-                   
-                   
+                        /*var_dump($Bitacora);*/
+                      
+                        foreach ($Bitacora as $key => $value){
+                          echo ' 
+                          <tr>
+                              <td>'.($key+1).'</td>
+                              <td>'.$value["usuario"].'</td>
+                              <td>'.$value["objeto"].'</td>
+                              <td>'.$value["accion"].'</td>
+                              <td>'.$value["descripcion"].'</td>
+                              <td>'.$value["fecha"].'</td>
+                            
+                          </tr>';
+                        
+                        }
+                    ?>
+ 
                   </tbody>
 
-                  <tfoot>
-                    <tr>
-                    <th width="15px">Id</th>
-                 
-                 <th width="100px">Usuario</th>
-                 <th width="100px">Objeto</th>
-                 <th width="100px">Accion</th>
-                 <th width="100px">Descripcion</th>
-                 <th width="100px">Fecha</th>
-                    </tr>
-                  </tfoot>
-                </table>
-          <?php
-                // $item1 = "usuario";
-                // $valor1 = "JEZA";
-                // $item2 = "rol";
-                // $valor2 = "Administrador";
-
-                // $modulos = ControladorUsuarios::ctrMostrarUsuarioModulo($item1, $item2, $valor1, $valor2);
-
-                // $user_os        =   ControladorGlobales::ctrGetOS();
-                // $user_browser   =   ControladorGlobales::ctrGetBrowser();
-                // $device_details =   "<strong>Browser: </strong>" . $user_browser . 
-                //                     "<br /><strong>Operating System: </strong>" . $user_os;
-                // print_r($device_details);
-
-            
-          ?>
+                
+          </table>
 
         </div>
         

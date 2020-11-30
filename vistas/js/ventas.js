@@ -334,7 +334,7 @@ $("#nuevoImpuestoVenta").change(function(){
 // FORMATO AL PRECIO FINAL
 // =============================================*/
 
-$("#nuevoTotalVenta").number(true, 2);
+// $("#nuevoTotalVenta").number(true, 2);
 
 
 /*=============================================

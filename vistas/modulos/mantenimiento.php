@@ -40,7 +40,13 @@
 
                     <li class="nav-item" role="presentation">
 
-                      <a class="nav-link" id="datosInsmatri" data-toggle="tab" href="#second" role="tab" aria-controls="second" aria-selected="false">Inscripciones y Matriculas</a>
+                      <a class="nav-link" id="datosInsmatri" data-toggle="tab" href="#second" role="tab" aria-controls="second" aria-selected="false">Inscripciones</a>
+
+                    </li>
+
+                      <li class="nav-item" role="presentation">
+
+                      <a class="nav-link" id="datosmatricula" data-toggle="tab" href="#fourt" role="tab" aria-controls="fourt" aria-selected="false">Matriculas</a>
 
                     </li>
 
@@ -61,9 +67,9 @@
                   <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="Rol">
                       <div class="card-header">
-                      <button class="btn btn-orange float-center"  data-toggle="modal" data-target="#modalExportar">
+                      <!-- <button class="btn btn-orange float-center"  data-toggle="modal" data-target="#modalExportar">
                          Exportar PDF      
-                        </button>
+                        </button> -->
                         <button class="btn btn-orange float-right"  data-toggle="modal" data-target="#modalNuevoRol">
                           Nuevo rol        
                         </button>
@@ -82,8 +88,6 @@
                             <th scope="col">Descripcion</th>
                                   
                             <th scope="col">Estado</th>
-
-                            <th scope="col">Editar</th>
 
                             <th scope="col">Acciones</th>
          
@@ -119,10 +123,7 @@
                                     }
                                     echo'
                                     <td>
-                                    <button class="btn btn-warning"><i class="fas fa-pencil-alt" style="color:#fff" data-toggle="modal" data-target="#modalModificar"></i></button>
-                                    </td>
-
-                                    <td>
+                                    <button class="btn btn-warning btnEditarRol" editarIdRol="'.$value["id_rol"].'"><i class="fas fa-pencil-alt" style="color:#fff" data-toggle="modal" data-target="#modalModificar"></i></button>
                                     <button class="btn btn-primary"><i class="fas fa-cog" style="color:#fff" data-toggle="modal" data-target="#modalEditarRol"></i></button>
                                     </td>
                                   </tr>';
@@ -141,9 +142,9 @@
 
                   
                      <!--========================================================
-                              INSCRIPCIONES Y MATRICULA
+                              INSCRIPCIONES 
                     ==========================================================-->  
-                    <div class="tab-pane fade" id="second" role="tabpanel" aria-labelledby="Inscripciones  y   Matricula">
+                    <div class="tab-pane fade" id="second" role="tabpanel" aria-labelledby="Inscripciones">
 
                                 
                       <div class="form-group">
@@ -152,7 +153,7 @@
 
                       <div class="card-body">
 
-                        <button class="btn btn-orange float-right"  data-toggle="modal" data-target="#modalNuevoRol">
+                        <button class="btn btn-orange float-right"  data-toggle="modal" data-target="#modalNuevainscripcion">
                           Nuevo       
                         </button>
 
@@ -163,35 +164,83 @@
                         <thead>
                           <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Matricula</th>
-                            <th scope="col">Inscripcion</th>
-                            <th scope="col">Descuento</th>
-                            <th scope="col">Promocion</th>
-                            <th scope="col">Editar</th>
-                  
+                            <th scope="col">Tipo de inscripcion</th>
+                            <th scope="col">Precio</th>
                           </tr>
                         </thead>
                         <tbody>             
+                          <?php
+                                // $tabla = "tbl_inscripcion";
+                                $item = null;
+                                $valor = null;
+                                
+                                $inscripcion = ControladorMantenimientos:: ctrMostrarInscripcion($item,$valor);
+                                // var_dump($inscripcion);
+
+                                foreach ($inscripcion as $key => $value){
+                                  echo '
+                                    <tr>
+                                  
+                                      <td>'.($key + 1).'</td>
+                                      <td>'.$value["tipo_inscripcion"].'</td>
+                                      <td>'.$value["precio_inscripcion"].'</td>
+                                    </tr>
+                                  ';
+                                }       
+                          ?>     
+                        </tbody>
+                      </table>
+                        
+                    </div>
+
+
+                     <!--========================================================
+                               MATRICULA
+                    ==========================================================-->  
+                    <div class="tab-pane fade" id="fourt" role="tabpanel" aria-labelledby=" Matricula">
+
+                                
+                      <div class="form-group">
+
+                      </div>
+
+                      <div class="card-body">
+
+                        <button class="btn btn-orange float-right"  data-toggle="modal" data-target="#modalNuevaMatricula">
+                          Nuevo       
+                        </button>
+
+                      </div>
+
+                      <table class="table table-striped table-bordered tablas text-center">
+                        
+                        <thead>
                           <tr>
-                            <td>01</td>
-                            <td>50</td>
-                            <td><div class="form-group col-md-9">
-                            <label></label>
-                            <select class="form-control select2" name="nuevoSexo" style="width: 100%;" required>
-                              <option selected="selected">Seleccionar...</option>
-                              <option value="M">Mensual</option>
-                              <option value="F">Quincenal</option>
-                            </select>
-                            <td>Tercera</td>
-                            <td>Dos por uno</td>
-                            <td>
-                              <div class="btn-group">
-                                <button class="btn btn-warning" style="color:white;"><i class="fas fa-pen"></i></button>
-                                      
-                                </div>
-                                    </td>
-                      
+                            <th scope="col">#</th>
+                            <th scope="col">Tipo de matricula</th>
+                            <th scope="col">Precio</th>
                           </tr>
+                        </thead>
+                        <tbody>  
+                            <?php
+                                    // $tabla = "tbl_matricula";
+                                    $item = null;
+                                    $valor = null;
+                                    
+                                    $matricula = ControladorMantenimientos::ctrMostrarMatricula($item,$valor);
+                                    // var_dump($rol);
+
+                                    foreach ($matricula as $key => $value){
+                                      echo '
+                                        <tr>
+                                      
+                                          <td>'.($key + 1).'</td>
+                                          <td>'.$value["tipo_matricula"].'</td>
+                                          <td>'.$value["precio_matricula"].'</td>
+                                          </tr>';
+                                        }       
+                              ?>                
+                         
                         </tbody>
                       </table>
                         
@@ -205,10 +254,10 @@
                                 
                       <div class="form-group">
                                 <div class="card-header">
-
+                                  <!-- 
                                   <button class="btn btn-orange float-right"  data-toggle="modal" data-target="#modalNuevoParametro">
                                     Nuevo parametro     
-                                  </button>
+                                  </button> -->
 
                                 </div>
 
@@ -230,7 +279,7 @@
                               $valor = null;
                               
                               $parametros = ControladorUsuarios::ctrMostrarParametros($item, $valor);
-                              // var_dump($rol);
+                               //var_dump($parametros);
 
                               foreach ($parametros as $key => $value){
                                 echo '
@@ -240,8 +289,8 @@
                                 <td>'.$value["parametro"].'</td>
                                 <td>'.$value["valor"].'</td>
                                 <td>
-                                  <button class="btn btn-warning"><i class="fas fa-pencil-alt" style="color:#fff"></i></button>
-                                 
+                                  <div class="btn-group">
+                                    <button class="btn btn-warning  btnEditarParametro" idParametro="'.$value["id_parametro"].'" ><i class="fas fa-pencil-alt" style="color:#fff" data-toggle="modal" data-target="#modalParametros"></i></button>
                               </tr>
                               ';
                               }
@@ -305,23 +354,14 @@ MODAL AGREGAR ROL
 
         <div class="modal-body">
           <div class="card-body">
-            <div class="form-group col-md-9">
+            <div class="form-group col-md-12">
               <label for="Rol"> Rol</label>
               <input type="text" class="form-control id" name="nuevoRol" value="" required>
             </div>
 
-            <div class="form-group col-md-9">
+            <div class="form-group col-md-12">
               <label for="Descripcion">Descripcion</label>
               <input type="textarea" class="form-control nombre" name="nuevaDescripcion" value="" required>
-            </div>
-
-            <div class="form-group col-md-9">
-              <label>Estado</label>
-              <select class="form-control select2" name="nuevoEstado" style="width: 100%;" required>
-                <option selected="selected">Seleccionar...</option>
-                <option value="1">Activo</option>
-                <option value="0">Desactivado</option>
-              </select>
             </div>
 
           </div>
@@ -359,7 +399,7 @@ MODAL AGREGAR ROL
 </div>
 
 <!--==============================================================================
-MODAL PERMISOS ROL
+           MODAL PERMISOS ROL
 ======================================-->
 
 <div class="modal fade" id="modalEditarRol" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -402,48 +442,50 @@ MODAL PERMISOS ROL
                   
                           </tr>
                         </thead>
-                        <tbody>             
-                                      <?php 
-                                          $tabla = "tbl_roles";
-                                          $item = null;
-                                          $valor = null;
-
-                                          $roles = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
+                        <tbody>  
+                             <?php
+                                         $tabla = "tbl_objetos";
+                                         $item = null;
+                                         $valor = null;
+                       
+                                        $roles = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
+                       
 
                                           foreach ($roles as $key => $value) {
+                                          
                                             echo'
                                               <tr>
                                                   <td>'.($key + 1).'</td>';
-                                                  if($value["rol"] == 'Default'){
+                                                  if($value["objeto"] == 'Default'){
                                                   echo '
-                                                  <td><option selected="selected" value="'.$value["id_rol"].'">'.$value["rol"].'</option></td>';
+                                                  <td><option selected="selected" value="'.$value["id_objeto"].'">'.$value["objeto"].'</option></td>';
                                                   } else {
                                                   echo '
-                                                  <td><option value="'.$value["id_rol"].'">'.$value["rol"].'</option></td>';
+                                                  <td><option value="'.$value["id_objeto"].'">'.$value["objeto"].'</option></td>';
                                                   }
                                                   echo '
                                                   <td><div class="form-group">
                                                   <div class="custom-control custom-checkbox">
                                                     <input class="chkAutoriza" type="checkbox" id="chkAutoriza" value="option1">
-                                                    <label for="customCheckbox1" >Visualizar</label>
+                                                    <label for="customCheckbox1" ></label>
                                                   </div></td>
                                                   <td><div class="custom-control custom-checkbox">
                                                     <input class="chkAutoriza" type="checkbox" id="chkAutoriza" checked="">
-                                                    <label for="customCheckbox2">Guardar</label>
+                                                    <label for="customCheckbox2"></label>
                                                   </div></td>
                                                   <td><div class="custom-control custom-checkbox">
                                                     <input class="chkAutoriza" type="checkbox" id="chkAutoriza" checked="">
-                                                    <label for="customCheckbox3">Actuzalizar</label>
+                                                    <label for="customCheckbox3"></label>
                                                   </div></td>
                                                   <td><div class="custom-control custom-checkbox">
                                                     <input class="chkAutoriza" type="checkbox" id="chkAutoriza" checked="">
-                                                    <label for="customCheckbox4">Eliminar</label>
+                                                    <label for="customCheckbox4"></label>
                                                   </div></td>
                                                </tr>';
 
-                                          }
-                                          
-                                      ?>
+                                          }   
+                          ?>            
+                                     
                         </tbody>
                         
                       </table>
@@ -502,7 +544,7 @@ MODAL Modificar ROL
         ======================================-->
 
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Editar</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Editar  rol</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -515,14 +557,15 @@ MODAL Modificar ROL
         <div class="modal-body">
 
            <div class="card-body">
-              <div class= "form-group col-md-6">
-               <label for="rol">Nuevo nombre del rol</label>
-               <input type="text" class="form-control mayus" name="editarRol" value=""requiered>
+              <div class= "form-group col-md-12">
+               <label for="rol">Rol</label>
+               <input type="text" class="form-control mayus" id="editarRol" name="editarRol" value=""requiered>
               </div>
-              <div class= "form-group col-md-6">
-               <label for="Descripcion">Nueva descripcion</label>
-               <input type="text" class="form-control mayus" name="editarDescripcion" value=""requiered>
+              <div class= "form-group col-md-12">
+               <label for="Descripcion">Descripción</label>
+               <input type="text" class="form-control mayus" id="editarDescripcionRol" name="editarDescripcionRol" value=""requiered>
               </div>
+              <input type="hidden" id="editarIdRol" name="editarIdRol">
           </div>
 
         </div>
@@ -538,8 +581,8 @@ MODAL Modificar ROL
 
         <?php
 
-          // $crearRol = new ControladorMantenimientos();
-          // $crearRol->ctrRolesInsertar();
+          $EditarRol = new ControladorGlobales();
+          $EditarRol->ctrEditarRol();
 
         ?>
 
@@ -557,6 +600,238 @@ MODAL Modificar ROL
         
 
 </div>
+
+
+
+<!--=======================================================
+MODIFIRCAR PARAMETROS
+=========================================================-->
+<div class="modal fade" id="modalParametros" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  
+  <div class="modal-dialog  " role="document">
+
+    <div class="modal-content">
+
+      <form role="form" method="post" autocomplete="off">
+
+        <!--=====================================
+        CABEZA DEL MODAL
+        ======================================-->
+
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Editar Parametro</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+        <!--=====================================
+        CUERPO DEL MODAL
+        ======================================-->
+
+        <div class="modal-body">
+
+           <div class="card-body">
+              <div class= "form-group col-md-12">
+               <label for="parametro">Parametro</label>
+               <input type="text" class="form-control mayus" id="editarParametro" name="editarParametro" value="" readonly >
+              </div>
+          
+           
+
+              <div class= "form-group col-md-12">
+               <label for="Valor">Valor</label>
+               <input type="text" class="form-control mayus" id="editarValorParametro" name="editarValorParametro" placeholder="Escriba el nuevo valor del parametro"requiered>
+              </div>
+
+              <input type="hidden" id="editarIdParametro" name="editarIdParametro">
+          </div>  
+           
+
+        </div>
+
+        <!--=====================================
+        PIE DEL MODAL
+        ======================================-->
+
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Guardar</button>
+           <button type="button" class="btn btn-orange" data-dismiss="modal">Salir</button>
+        </div>
+
+        <?php
+
+          $EditarParametro = new ControladorGlobales();
+          $EditarParametro->ctrEditarParametro();
+
+        ?>
+
+
+
+
+      </form>
+
+
+    
+
+    </div>
+
+  </div>
+        
+
+</div>
+
+
+
+<!--=====================================
+MODAL AGREGAR NUEVA INSCRIPCION
+======================================-->
+
+<div class="modal fade" id="modalNuevainscripcion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  
+  <div class="modal-dialog " role="document">
+
+    <div class="modal-content">
+
+      <form role="form" method="post" autocomplete="off">
+
+        <!--=====================================
+        CABEZA DEL MODAL
+        ======================================-->
+
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Nueva Inscripcion</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+        <!--=====================================
+        CUERPO DEL MODAL
+        ======================================-->
+
+        <div class="modal-body">
+          <div class="card-body">
+            <div class="form-group col-md-12">
+              <label for="Rol">Inscripcion</label>
+              <input type="text" class="form-control nombre" name="nuevoInscripcion" value="" required>
+            </div>
+
+            <div class="form-group col-md-12">
+              <label for="Descripcion">Precio</label>
+              <input type="text" class="form-control id" name="nuevoPrecio" value="" required>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!--=====================================
+        PIE DEL MODAL
+        ======================================-->
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-orange" data-dismiss="modal">Salir</button>
+          <button type="submit" class="btn btn-primary">Guardar</button>
+        </div>
+
+        <?php
+
+          $crearInscripcion = new ControladorMantenimientos();
+          $crearInscripcion -> ctrInscripcionInsertar();
+
+        ?>
+
+
+
+
+      </form>
+
+    
+
+    </div>
+
+  </div>
+        
+
+</div>
+
+
+<!--=====================================
+MODAL AGREGAR NUEVA MATRICULA
+======================================-->
+
+<div class="modal fade" id="modalNuevaMatricula" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  
+  <div class="modal-dialog " role="document">
+
+    <div class="modal-content">
+
+      <form role="form" method="post" autocomplete="off">
+
+        <!--=====================================
+        CABEZA DEL MODAL
+        ======================================-->
+
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Nueva Matricula</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+        <!--=====================================
+        CUERPO DEL MODAL
+        ======================================-->
+
+        <div class="modal-body">
+          <div class="card-body">
+            <div class="form-group col-md-12">
+              <label for="Rol">Matricula</label>
+              <input type="text" class="form-control nombre" name="nuevoMatricula" value="" required>
+            </div>
+
+            <div class="form-group col-md-12">
+              <label for="Descripcion">Precio</label>
+              <input type="textarea" class="form-control id" name="nuevoPrecio" value="" required>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!--=====================================
+        PIE DEL MODAL
+        ======================================-->
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-orange" data-dismiss="modal">Salir</button>
+          <button type="submit" class="btn btn-primary">Guardar</button>
+        </div>
+
+        <?php
+
+          $crearMatricula = new ControladorMantenimientos();
+          $crearMatricula-> ctrMatriculaInsertar();
+
+        ?>
+
+
+
+
+      </form>
+
+    
+
+    </div>
+
+  </div>
+        
+
+</div>
+
+
+
 
 
 

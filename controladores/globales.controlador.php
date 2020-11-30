@@ -82,11 +82,11 @@ class ControladorGlobales{
 			MOSTRAR PARAMETROS
     =============================================*/
     
-    static public function ctrMostrarParametros(){
-        $tabla = 'parametros';
-		$respuesta = ModeloGlobales::mdlMostrarParametros($tabla);
+    static public function ctrMostrarParametros($item,$valor){
+      $tabla = 'tbl_parametros';
+		  $respuesta = ModeloGlobales::mdlMostrarParametros($tabla, $item, $valor);
 
-		return $respuesta;
+		  return $respuesta;
     }
 
     /*=============================================
@@ -115,6 +115,130 @@ class ControladorGlobales{
             </script>';
         }
   
+    }
+
+    /*=============================================
+			EDITAR PARAMETROS
+    =============================================*/
+    
+    public function ctrEditarParametro(){
+
+      if(isset($_POST["editarParametro"])){
+
+        $tabla = "tbl_parametros";
+
+        $datos = array ("valor"=> $_POST["editarValorParametro"],
+                        "id_parametro"=>$_POST["editarIdParametro"]);
+
+
+        $respuesta =  ModeloGlobales::mdlEditarParametro($tabla,$datos);
+    
+        if($respuesta == "ok"){
+    
+            echo'<script>
+    
+            swal({
+                  type: "success",
+                  title: "El parametro ha sido editado correctamente",
+                  showConfirmButton: true,
+                  confirmButtonText: "Cerrar",
+                  closeOnConfirm: false
+                  }).then((result) => {
+                            if (result.value) {
+    
+                            window.location = "mantenimientos";
+    
+                            }
+                        })
+    
+            </script>';
+    
+        }else{
+
+          echo'<script>
+    
+            swal({
+                  type: "warning",
+                  title: "Error al editar parametro",
+                  showConfirmButton: true,
+                  confirmButtonText: "Cerrar",
+                  closeOnConfirm: false
+                  }).then((result) => {
+                            if (result.value) {
+    
+                            window.location = "mantenimientos";
+    
+                            }
+                        })
+    
+            </script>';
+        }
+
+      }
+
+    }
+
+    /*=============================================
+      EDITAR ROL
+    =============================================*/
+    
+    public function ctrEditarRol(){
+
+      if(isset($_POST["editarRol"])){
+
+        $tabla = "tbl_roles";
+
+        $datos = array ("rol"=> $_POST["editarRol"],
+                        "descripcion"=>$_POST["editarDescripcionRol"],
+                        "id_rol"=>$_POST["editarIdRol"]);
+
+
+        $respuesta =  ModeloGlobales::mdlEditarRol($tabla,$datos);
+
+    
+        if($respuesta == true){
+    
+            echo'<script>
+    
+            Swal.fire({
+                 icon: "success",
+                  title: "El rol ha sido editado correctamente",
+                  showConfirmButton: true,
+                  confirmButtonText: "Cerrar",
+                  closeOnConfirm: false
+                  }).then((result) => {
+                            if (result.value) {
+    
+                            window.location = "mantenimiento";
+    
+                            }
+                        })
+    
+            </script>';
+    
+        }else{
+
+          echo'<script>
+    
+            Swal.fire({
+                  icon: "warning",
+                  title: "Error al editar rol",
+                  showConfirmButton: true,
+                  confirmButtonText: "Cerrar",
+                  closeOnConfirm: false
+                  }).then((result) => {
+                            if (result.value) {
+    
+                            window.location = "mantenimiento";
+    
+                            }
+                        })
+    
+            </script>';
+        }
+
+      }
+
     }
 
 }

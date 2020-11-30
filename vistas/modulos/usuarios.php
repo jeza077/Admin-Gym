@@ -94,6 +94,8 @@
                   ';
                 }
               ?>
+            
+
               
               </tbody>
             </table>
@@ -492,7 +494,7 @@
     </div>
   </div>
     
-
+      
 <?php 
   $tipoPersona = 'usuario';
   $pantalla = 'usuarios';

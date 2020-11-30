@@ -81,6 +81,120 @@ class ModeloMantenimiento{
         $stmt = null;
         
     }     
+
+
+
+     /*============================================
+		INSERTAR INSCRIPCION
+	==============================================*/
+	static public function mdlInsertarInscripcion($tabla, $datos){
+
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(tipo_inscripcion, precio_inscripcion) VALUES (:tipo_inscripcion, :precio_inscripcion)");
+       
+        $stmt->bindParam(":tipo_inscripcion", $datos["inscripcion"], PDO::PARAM_STR);
+        $stmt->bindParam(":precio_inscripcion", $datos["precio"], PDO::PARAM_STR);
+        
+
+		if($stmt->execute()){
+			return true;
+
+		}else{
+			return false;
+		
+		}
+
+		$stmt->close();
+		$stmt = null;
+    }
+
+     /*=============================================
+		MOSTRAR INSCRIPCION
+	=============================================*/
+		
+	static public function mdlMostrarInscripcion($tabla1, $item, $valor){
+	
+        if($item != null){
+
+            $stmt = Conexion::conectar()->prepare("SELECT * from $tabla1 where $item = :$item");		
+            $stmt->bindParam(":".$item, $valor, PDO::PARAM_STR);
+            $stmt->execute();
+            return $stmt -> fetch();
+
+        } else {
+
+            $stmt = Conexion::conectar()->prepare("SELECT * from $tabla1");		
+            
+            $stmt->execute();
+
+            return $stmt -> fetchAll();
+
+        }
+
+        $stmt -> close();
+        $stmt = null;	
+
+
+
+    }
+
+
+
+
+      /*============================================
+		INSERTAR MATRICULA
+	==============================================*/
+	static public function mdlInsertarMatricula($tabla, $datos){
+
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(tipo_matricula, precio_matricula) VALUES (:tipo_matricula, :precio_matricula)");
+       
+        $stmt->bindParam(":tipo_matricula", $datos["tipo_matricula"], PDO::PARAM_STR);
+        $stmt->bindParam(":precio_matricula", $datos["precio_matricula"], PDO::PARAM_STR);
+        /*$stmt->bindParam(":estado", $datos["estado"], PDO::PARAM_INT);*/
+
+		if($stmt->execute()){
+			return true;
+
+		}else{
+			return false;
+		
+		}
+
+		$stmt->close();
+		$stmt = null;
+    }
+
+     /*=============================================
+		MOSTRAR MATRICULA
+	=============================================*/
+		
+	static public function mdlMostrarMatricula($tabla1, $item, $valor){
+	
+        if($item != null){
+
+            $stmt = Conexion::conectar()->prepare("SELECT * from $tabla1 where $item = :$item");		
+            $stmt->bindParam(":".$item, $valor, PDO::PARAM_STR);
+            $stmt->execute();
+            return $stmt -> fetch();
+
+        } else {
+
+            $stmt = Conexion::conectar()->prepare("SELECT * from $tabla1");		
+            
+            $stmt->execute();
+
+            return $stmt -> fetchAll();
+
+        }
+
+        $stmt -> close();
+        $stmt = null;	
+
+
+
+    }
+
+    
+
     
 
 

@@ -42,10 +42,8 @@ $( document ).ready(function() {
                       Swal.fire({
                         title: "Respaldo realizado con éxito.",
                         icon: "success",
-                        toast: true,
-                        position: "top-end",
-                        showConfirmButton: false,
-                        timer: 3000,
+                        showConfirmButton: true
+                        
                       });
     
     
@@ -54,10 +52,8 @@ $( document ).ready(function() {
                       Swal.fire({
                         title: "Error al realizar el respaldo.",
                         icon: "error",
-                        toast: true,
-                        position: "top-end",
-                        showConfirmButton: false,
-                        timer: 3000,
+                        showConfirmButton: true
+                        
                       });
     
                     } 
@@ -98,8 +94,14 @@ $( document ).ready(function() {
                     //var datar = data[0];
                     //console.log(datar[0].res);
                     if(data==1){
-    
-                      console.log("exito");
+                      Swal.fire({
+                        title: "Restauracion exitosa!",
+                        icon: "success",
+                        // background: "rgb(255 75 75 / 85%)",
+                        showConfirmButton: true
+                        
+                      });
+                      // console.log("exito");
     
                       // swal({title: "<div style='color:#636262'>Restauracion realizada con exito</div>",html: true,confirmButtonText: "Continuar"},function(){
                         
@@ -110,7 +112,14 @@ $( document ).ready(function() {
     
                     }else {
     
-                      console.log("sorry");
+                      Swal.fire({
+                        title: "Algo salio mal, intenta de nuevo!",
+                        icon: "error",
+                        // background: "rgb(255 75 75 / 85%)",
+                        showConfirmButton: true
+                        
+                      });
+                      // console.log("sorry");
     
                       // swal({
                       //   title: "<div style='color:#636262'>Hubo un Problema en el Servidor</div>",

@@ -4,7 +4,7 @@
    /*===========================================================
    BITACORA
    =============================================================*/
-    static public function ctrBitacoraInsertar($usuario, $modulo,$accion,$descripcion){
+    static public function ctrBitacoraInsertar($usuario, $objeto,$accion,$descripcion){
 
      $tabla = "tbl_bitacora";
      date_default_timezone_set('America/Tegucigalpa');
@@ -17,7 +17,7 @@
    
 
 
-     $respuesta = ModeloUsuarios::mdlInsertarBitacora($tabla, $fechaActual, $usuario, $modulo, $accion, $descripcion);
+     $respuesta = ModeloUsuarios::mdlInsertarBitacora($tabla, $fechaActual, $usuario, $objeto, $accion, $descripcion);
     }
   	/*=============================================
 				MOSTRAR BITACORA
@@ -57,7 +57,7 @@
   
           $respuesta = ModeloMantenimiento::mdlInsertarRoles($tabla, $datos);
           
-          
+          // var_dump($respuesta);
           if($respuesta == true){
   
             echo '<script>
@@ -74,7 +74,7 @@
   
               if(result.value){
   
-                window.location = "roles";
+                window.location = "mantenimiento";
   
               }
   
@@ -103,7 +103,7 @@
   
               if(result.value){
   
-                window.location = "roles";
+                window.location = "mantenimiento";
   
               }
   
@@ -117,7 +117,7 @@
   
       }
   
-     }
+    }
 
       /*=============================================
         MOSTRAR ROLES
@@ -128,6 +128,217 @@
     $tabla = "tbl_roles";
     
     $respuesta = ModeloMantenimiento::mdlMostrarRoles($tabla, $item, $valor);
+
+    return $respuesta;
+
+    }
+
+
+    // /*======================================================
+    //  Inscripciones Insertar
+    // =============================================================================================*/
+    static public function ctrInscripcionInsertar(){
+
+
+      if(isset($_POST["nuevoInscripcion"])){
+
+       
+
+
+
+        if(preg_match('/^[a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevoInscripcion"]) && 
+           preg_match('/^[0-9]+$/', $_POST["nuevoPrecio"])){
+         
+          
+          $tabla = "tbl_inscripcion";
+          
+  
+          $datos = array("inscripcion" => $_POST["nuevoInscripcion"], 
+                          "precio" => $_POST["nuevoPrecio"]);
+
+            // echo "<pre>";
+            // var_dump($_POST);
+            // echo "</pre>";
+            // return;
+  
+          $respuesta = ModeloMantenimiento::mdlInsertarInscripcion($tabla, $datos);
+          
+          // var_dump($respuesta);
+          if($respuesta == true){
+  
+            echo '<script>
+  
+            Swal.fire({
+  
+              icon: "success",
+              title: "¡La inscripcion ha sido creado exitosamente!",
+              showConfirmButton: true,
+              confirmButtonText: "Cerrar",
+              closeOnConfirm: false
+  
+            }).then((result)=>{
+  
+              if(result.value){
+  
+                window.location = "mantenimiento";
+  
+              }
+  
+            });
+  
+  
+            </script>';
+  
+  
+          }
+  
+  
+        }else{
+  
+          echo '<script>
+  
+            Swal.fire({
+  
+              icon: "error",
+              title: "¡La inscrpcion no puede ir vacío o llevar caracteres especiales!",
+              showConfirmButton: true,
+              confirmButtonText: "Cerrar",
+              closeOnConfirm: false
+  
+            }).then((result)=>{
+  
+              if(result.value){
+  
+                window.location = "mantenimiento";
+  
+              }
+  
+            });
+  
+  
+          </script>';
+  
+        }
+  
+  
+      }
+  
+    }
+
+     
+      /*=============================================
+        MOSTRAR INSCRIPCION
+    =============================================*/
+
+    static public function ctrMostrarInscripcion($item, $valor){
+
+      $tabla = "tbl_inscripcion";
+      
+      $respuesta = ModeloMantenimiento::mdlMostrarInscripcion($tabla, $item, $valor);
+  
+      return $respuesta;
+  
+    }
+
+
+
+
+
+     /*======================================================
+     MATRICULA INSERTAR
+    =============================================================================================*/
+   
+    static public function ctrMatriculaInsertar(){
+
+
+      if(isset($_POST["nuevoMatricula"])){
+
+        if(preg_match('/^[a-zA-ZñÑáéíóúÁÉÍÓÚ]+$/', $_POST["nuevoMatricula"])){
+         
+          
+          $tabla = "tbl_matricula";
+          
+  
+          $datos = array("matricula" => $_POST["nuevoMatricula"], 
+                          "descripcion" => $_POST["nuevoPrecio"]);
+
+            // echo "<pre>";
+            // var_dump($_POST);
+            // echo "</pre>";
+  
+          $respuesta = ModeloMantenimiento::mdlInsertarMatricula($tabla, $datos);
+          
+          // var_dump($respuesta);
+          if($respuesta == true){
+  
+            echo '<script>
+  
+            Swal.fire({
+  
+              icon: "success",
+              title: "¡La matricula ha sido creado exitosamente!",
+              showConfirmButton: true,
+              confirmButtonText: "Cerrar",
+              closeOnConfirm: false
+  
+            }).then((result)=>{
+  
+              if(result.value){
+  
+                window.location = "mantenimiento";
+  
+              }
+  
+            });
+  
+  
+            </script>';
+  
+  
+          }
+  
+  
+        }else{
+  
+          echo '<script>
+  
+            Swal.fire({
+  
+              icon: "error",
+              title: "¡La matricula no puede ir vacío o llevar caracteres especiales!",
+              showConfirmButton: true,
+              confirmButtonText: "Cerrar",
+              closeOnConfirm: false
+  
+            }).then((result)=>{
+  
+              if(result.value){
+  
+                window.location = "mantenimiento";
+  
+              }
+  
+            });
+  
+  
+          </script>';
+  
+        }
+  
+  
+      }
+  
+    }
+
+      /*=============================================
+        MOSTRAR MATRICULA
+    =============================================*/
+
+    static public function ctrMostrarMatricula($item, $valor){
+
+    $tabla = "tbl_matricula";
+    
+    $respuesta = ModeloMantenimiento::mdlMostrarMatricula($tabla, $item, $valor);
 
     return $respuesta;
 
