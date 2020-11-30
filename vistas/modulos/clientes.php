@@ -44,7 +44,7 @@
                     <th scope="col">Correo</th>
                     <th scope="col">Tipo Inscripcion</th>
                     <th scope="col">Telefono</th>
-                    <th scope="col">Fecha Inscripcion</th>
+                    <th scope="col">Fecha Creacion</th>
                     <th scope="col">Estado</th>
                     <th scope="col">Acciones</th>
                   </tr>
@@ -66,8 +66,10 @@
                   $valor = null;
                   $respuestaPagos = ControladorClientes::ctrMostrarPagos($tabla, $item, $valor);
 
+          
+
                   // echo "<pre>";
-                  // var_dump($respuestaPagos);
+                  // var_dump($respuesta);
                   // echo "</pre>";
                   // return;
                   
@@ -106,12 +108,12 @@
                             $fecha_entrada = strtotime($value['fecha_vencimiento']);
 
                             // echo "<pre>";
-                            // var_dump($fecha_entrada);
+                            // var_dump($value['fecha_vencimiento']);
                             // echo "</pre>";
                             // return;
 
-                            if ($fecha_actual >= $fecha_entrada)  {
-                              echo '<td><button class="btn btn-primary btnPagosCliente" data-toggle="modal" data-target="#modalPagosCliente" idPagoCliente="'.$value["id_cliente"].'"><i class="fas fa-sync"></i></button></td>';
+                            if ($fecha_actual > $fecha_entrada)  {
+                              echo '<td><button class="btn btn-success btnPagosCliente" data-toggle="modal" data-target="#modalPagosCliente" idPagoCliente="'.$value["id_personas"].'"><i class="fas fa-sync"></i></button></td>';
                             } else {
                               echo  '<td><button class="btn btn-success btn-md">Pagado</td>';
                             }
@@ -178,9 +180,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text">$</span>  
                       </div>
-                    <input type="text" class="form-control text-right pagoDeInscripcion" value="" readonly>  
-                    <input type="hidden" id="idPagoCliente" name="idPagoCliente">      
-                    <input type="hidden" id="pagoDeInscripcion" name="pagoDeInscripcion">                       
+                    <input type="text" class="form-control text-right pagoDeInscripcion" value="" readonly>                       
                   </div>
                 </div>
               </div>

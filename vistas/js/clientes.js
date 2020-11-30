@@ -260,3 +260,44 @@ $('.btnEliminarCliente').click(function () {
         }
     });
 });
+
+/*=============================================
+        EDITAR CLIENTE
+=============================================*/
+
+$('.btnPagosCliente').click(function () { 
+    
+    var idPago = $(this).attr("idPagoCliente");
+    // console.log(idPago)
+    var datos = new FormData();
+    datos.append("idPago", idPago);
+    
+
+    $.ajax({
+    
+        url:"ajax/clientes.ajax.php",
+        method: "POST",
+        data: datos,
+        cache: false,
+        contentType: false,
+        processData: false,  
+        dataType: "json",
+        success: function(respuesta) {
+
+            console.log("respuesta", respuesta);
+            
+            $('#idEditarCliente').val(respuesta["id_cliente"])
+
+            $('#editarPromocion').html(respuesta["tipo_descuento"])
+            $('#editarPromocion').val(respuesta["id_descuento"])
+            
+             $('#editarInscripcion').html(respuesta["tipo_inscripcion"])
+            $('#editarInscripcion').val(respuesta["id_inscripcion"])
+
+            $('.editarPrecioPromocion').val(respuesta["pago_descuento"])
+            $('.editarPrecioInscripcion').val(respuesta["pago_inscripcion"])
+            $('.editarTotalPagar').val(respuesta["pago_total"])
+            
+        }
+    });
+});
