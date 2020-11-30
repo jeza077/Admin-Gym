@@ -76,11 +76,12 @@ class ModeloClientes{
 
 		} else {
 
-			$stmt = Conexion::conectar()->prepare( "SELECT p.*, c.*, i.fecha_creacion, i.tipo_inscripcion FROM $tabla1 as p\n"
+			$stmt = Conexion::conectar()->prepare( "SELECT p.*, c.*, i.fecha_creacion, i.tipo_inscripcion, pd.*, pc.* FROM $tabla1 as p\n"
             . "LEFT JOIN $tabla2 as c ON p.id_personas = c.id_persona\n"
             . "LEFT JOIN tbl_matricula as m ON c.id_matricula = m.id_matricula\n"
             . "LEFT JOIN tbl_inscripcion as i ON c.id_inscripcion = i.id_inscripcion\n"
 			. "LEFT JOIN tbl_descuento as pd ON c.id_descuento = pd.id_descuento\n"
+			. "LEFT JOIN tbl_pagos_cliente as pc ON c.id_cliente = pc.id_cliente\n"
 		    . "WHERE p.tipo_persona = 'clientes' ");
 			
 			$stmt -> execute();

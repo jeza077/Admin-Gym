@@ -123,11 +123,44 @@ class ControladorClientes{
 				// return;
 				$idCliente = $personaTotal["id_cliente"];
 
+					// $vigencias = $_POST["nuevaInscripcion"];
+
+					// if ($vigencias == 0) {
+					// 	$valorVigencia = 'VIGENCIA_CLIENTE_MES';
+						
+					// 	var_dump("Mes",$valorVigencia);
+						
+					// } else if ($vigencias == 1){
+					// 	$valorVigencia = 'VIGENCIA_CLIENTE_QUINCENAL';
+						
+					// 	var_dump("Quincenal",$valorVigencia);
+						
+					// } else if ($vigencias == 2) {
+					// 	$valorVigencia = 'VIGENCIA_CLIENTE_DIA';
+						
+					// 	var_dump("Diaria",$valorVigencia);
+						
+					// }
+
+				$item = 'parametro';
+				$valor = 'VIGENCIA_CLIENTE_QUINCENAL';
+				$parametros = ControladorUsuarios::ctrMostrarParametros($item, $valor);
+				// echo "<pre>";
+				// var_dump($vigencias);
+				// echo "</pre>";
+				// return;
+		
+				$vigenciaCliente = $parametros['valor'];
+				
+				date_default_timezone_set("America/Tegucigalpa");
+				$fechaVencimiento = date("Y-m-d", strtotime('+'.$vigenciaCliente.' days'));
+
 				$datos = array("id_cliente" =>$idCliente,
 				"pago_matricula" => $pago_matricula,
 				"pago_descuento" => $pago_descuento,
 				"pago_inscripcion" => $pago_inscripcion,
-				"pago_total" => $pago_total);
+				"pago_total" => $pago_total,
+				"fecha_vencimiento" => $fechaVencimiento);
 
 				$tabla = "tbl_pagos_cliente";
 
@@ -156,6 +189,22 @@ class ControladorClientes{
         // echo "</pre>";
 
 		$tabla1 = "tbl_personas";
+		$tabla2 = $tabla;
+
+		$respuesta = ModeloClientes::mdlMostrarClientes($tabla1, $tabla2, $item, $valor);
+
+		return $respuesta;
+	}
+	/*=============================================
+				MOSTRAR TABLA DE PAGOS
+	=============================================*/
+
+	static public function ctrMostrarPagos($tabla, $item, $valor){
+		// echo "<pre>";
+        // var_dump($respuesta);
+        // echo "</pre>";
+
+		$tabla1 = "tbl_pagos_cliente";
 		$tabla2 = $tabla;
 
 		$respuesta = ModeloClientes::mdlMostrarClientes($tabla1, $tabla2, $item, $valor);
