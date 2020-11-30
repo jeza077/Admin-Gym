@@ -77,7 +77,7 @@
                                     <td>'.$value["stock"].'</td>';
                                 echo '     
                                     <td>
-                                    <button class="btn btn-warning btnEditarInventario" idInventario="'.$value["id_inventario"].'" data-toggle="modal" data-target="#modalEditarBodega"><i class="fas fa-pencil-alt" style="color:#fff"></i></button>
+                                    <button class="btn btn-warning btnEditarEquipo" idInventario="'.$value["id_inventario"].'" data-toggle="modal" data-target="#modalEditarBodega"><i class="fas fa-pencil-alt" style="color:#fff"></i></button>
                                     <button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
                                     </td>
                                 </tr>
@@ -234,28 +234,27 @@
             
  
                     <div class="form-group col-12">
-                      <label for="nombreproducto">Codigo</label>
-                      <input type="text" value="" class="form-control" readonly id="editarCodigo" name="editarCodigo"  required>
+                      <label for="nombreEquipo">Codigo</label>
+                      <input type="text" value="" class="form-control" readonly id="editarCodigoE" name="editarCodigoE"  required>
+                      <input type="hidden" name="editarTipoEquipo" id="editarTipoEquipo">
                     </div>
                     <div class="form-group col-12">
-                      <label for="nombreproducto">Nombre Producto</label>
+                      <label for="nombreEquipo">Nombre Equipo</label>
                       <html>
-                      <input type="text" value="" class="form-control" name="editarNombreProducto" id="editarNombreProducto" required>
+                      <input type="text" value="" class="form-control" name="editarNombreEquipo" id="editarNombreEquipo" required>
                     </div>
                     <div class="form-group col-12">
                       <label for="stock">Cantidad en stock</label>
-                      <input type="number" value="" class="form-control" name="editarStock" id="editarStock"  min="0" required class="fa fa-arrow-up"></i></span>
+                      <input type="number" value="" class="form-control" name="editarStockEquipo" id="editarStockEquipo"  min="0" required class="fa fa-arrow-up"></i></span>
                     </div>
-                 
-
-                    
 
                         <div class="form-group col-12">
                             <label for="exampleInputFile">Foto</label>
                             <div class="input-group">
                             <img class="img-thumbnail previsualizar mr-2" src="vistas/img/usuarios/default/anonymous.png" alt="imagen-del-usuario" width="100px">
+                            <input type="hidden" name="imagenActual" id=imagenActual>
                             <div class="custom-file">
-                                <input type="file" class="custom-file-input nuevaFotoProducto" id="exampleInputFile" name="editarFotoProducto">
+                                <input type="file" class="custom-file-input nuevaFotoEquipo" id="exampleInputFile" name="editarFotoEquipo">
                                 <label class="custom-file-label" for="exampleInputFile">Escoger foto</label>
                             </div>
                             </div>
@@ -269,10 +268,10 @@
                     </div>
                 
                     <?php
-                    // $tipostock = 'producto';
-                    // $pantalla = 'stock';
-                    // $EditarInventario = new ControladorInventario();
-                    // $EditarInventario->ctrEditarStock($tipostock, $pantalla);
+                    $tipostock = 'Equipo';
+                    $pantalla = 'Equipo';
+                    $EditarInventario = new ControladorInventario();
+                    $EditarInventario->ctrEditarEquipo($tipostock, $pantalla);
                     ?>
                   <!-- 2tab --> 
           </form>

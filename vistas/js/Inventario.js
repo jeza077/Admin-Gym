@@ -21,6 +21,7 @@ $(document).on("click",".btnEditarInventario",function(){
 
             $("#editarCodigo").val(respuesta["codigo"]);
             $("#editarNombreProducto").val(respuesta["nombre_producto"]);
+            $("#editarTipoProducto").val(respuesta["id_inventario"]);
             $("#editarStock").val(respuesta["stock"]);
             $("#editarPrecio").val(respuesta["precio"]);
             $("#editarProductoMinimo").val(respuesta["producto_minimo"]);
@@ -33,6 +34,45 @@ $(document).on("click",".btnEditarInventario",function(){
             }
              
             
+        }    
+    });
+
+})
+
+
+
+//** ----------------- EDITAR EQUIPO  --------------------------*/
+
+
+$(document).on("click",".btnEditarEquipo",function(){
+    var idEquipo = $(this).attr("idInventario");
+    // console.log("idEquipo", idEquipo)
+
+    var datos = new FormData();
+    datos.append("idInventario", idEquipo);
+    
+    $.ajax({ 
+        url:"ajax/inventario.ajax.php",
+        method: "POST",
+        data: datos,
+        cache: false,
+        contentType: false,
+        processData: false,
+        dataType: "json",
+        success: function(respuesta){
+            console.log("respuesta",respuesta)
+
+
+            $("#editarCodigoE").val(respuesta["codigo"]);
+            $("#editarNombreEquipo").val(respuesta["nombre_producto"]);
+            $("#editarTipoEquipo").val(respuesta["id_inventario"]);
+            $("#editarStockEquipo").val(respuesta["stock"]);
+
+            if (respuesta["foto"] !=""){
+               
+                $("#editarFotoEquipo").val(respuesta["foto"]); 
+                $("#previsualizar").attr("src", respuesta["foto"]);
+            }  
         }    
     });
 

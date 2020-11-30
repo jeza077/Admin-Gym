@@ -241,11 +241,13 @@
             
            
                   <div class="form-row">
- 
+                    
                     <div class="form-group col-md-3">
                       <label for="nombreproducto">Codigo</label>
                       <input type="text" value="" class="form-control" readonly id="editarCodigo" name="editarCodigo"  required>
+                      <input type="hidden" name="editarTipoProducto" id="editarTipoProducto">
                     </div>
+                    
                     <div class="form-group col-md-3">
                       <label for="nombreproducto">Nombre Producto</label>
                       <html>
@@ -278,6 +280,7 @@
                             <label for="exampleInputFile">Foto</label>
                             <div class="input-group">
                             <img class="img-thumbnail previsualizar mr-2" src="vistas/img/usuarios/default/anonymous.png" alt="imagen-del-usuario" width="100px">
+                            <input type="hidden" name="imagenActual" id=imagenActual>
                             <div class="custom-file">
                                 <input type="file" class="custom-file-input nuevaFotoProducto" id="exampleInputFile" name="editarFotoProducto">
                                 <label class="custom-file-label" for="exampleInputFile">Escoger foto</label>

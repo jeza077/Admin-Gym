@@ -14,7 +14,18 @@ class AjaxInventario{
         echo json_encode($respuesta);
     }
 
+   //** ----------------- editar Equipo --------------------------*/
+   public $idEquipo;
+   public function ajaxEditarEquipo(){
+       $order = "DESC";
+       $tabla = "tbl_inventario";
+       $item = "id_inventario";
+       $valor = $this->idEquipo;
+       $respuesta = ControladorInventario::ctrMostrarInventario($tabla,$item,$valor,$order);
+       echo json_encode($respuesta);
+   }
     
+
     //** ----------------- GENERAR CODIGO --------------------------*/
     public $idCategoria;
     public function ajaxCradorCodigoProducto(){
@@ -32,6 +43,14 @@ if (isset($_POST["idInventario"])){
     $editar->idInventario = $_POST["idInventario"];
     $editar->ajaxEditarInventario();
 } 
+
+//** ----------------- editar Equipo --------------------------*/
+if (isset($_POST["idEquipo"])){
+    $editar = new AjaxInventario();
+    $editar->idEquipo = $_POST["idEquipo"];
+    $editar->ajaxEditarEquipo();
+} 
+
 
 //** ----------------- CODIGO --------------------------*/
 if (isset($_POST["idCategoria"])){

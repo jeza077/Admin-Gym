@@ -95,13 +95,13 @@ class ModeloInventario
 	
 
 	/*=============================================
-				editar stock
+				editar producto
 	=============================================*/	 
 	static public function mdlEditarStock($tabla, $datos){
 
-		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET nombre_producto = :nombre_producto, stock = :stock, precio = :precio, producto_minimo =:producto_minimo, producto_maximo = :producto_maximo, foto = :foto, codigo =:codigo WHERE id_tipo_producto = :id_tipo_producto");
+		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET nombre_producto = :nombre_producto, stock = :stock, precio = :precio, producto_minimo =:producto_minimo, producto_maximo = :producto_maximo, foto = :foto, codigo =:codigo WHERE id_inventario = :id_inventario");
 
-		$stmt->bindParam(":id_tipo_producto", $datos["id_tipo_producto"], PDO::PARAM_INT);
+		$stmt->bindParam(":id_inventario", $datos["id_inventario"], PDO::PARAM_INT);
 		$stmt->bindParam(":codigo", $datos["codigo"], PDO::PARAM_INT);
 		$stmt->bindParam(":nombre_producto", $datos["nombre_producto"], PDO::PARAM_STR);
 		$stmt->bindParam(":stock", $datos["stock"], PDO::PARAM_INT);
@@ -112,7 +112,7 @@ class ModeloInventario
 		if($stmt->execute()){
 			return true;
 		}else{
-			return false;
+			return $stmt->errorInfo();
 		}
 
 		$stmt->close();
@@ -120,6 +120,30 @@ class ModeloInventario
 
     }
 
+
+
+	/*=============================================
+				editar Equipo
+	=============================================*/	 
+	static public function mdlEditarEquipo($tabla, $datos){
+
+		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET nombre_producto = :nombre_producto, stock = :stock, foto = :foto, codigo =:codigo WHERE id_inventario = :id_inventario");
+
+		$stmt->bindParam(":id_inventario", $datos["id_inventario"], PDO::PARAM_INT);
+		$stmt->bindParam(":codigo", $datos["codigo"], PDO::PARAM_INT);
+		$stmt->bindParam(":nombre_producto", $datos["nombre_producto"], PDO::PARAM_STR);
+		$stmt->bindParam(":stock", $datos["stock"], PDO::PARAM_INT);
+		$stmt->bindParam(":foto", $datos["foto"], PDO::PARAM_STR);
+		if($stmt->execute()){
+			return true;
+		}else{
+			return $stmt->errorInfo();
+		}
+
+		$stmt->close();
+		$stmt = null;
+
+    }
 
 }
 
