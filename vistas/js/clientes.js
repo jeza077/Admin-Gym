@@ -116,7 +116,7 @@ $('.btnEditarCliente').click(function () {
 
             $('.editarPrecioMatricula').val(respuesta["pago_matricula"])
             $('.editarPrecioPromocion').val(respuesta["pago_descuento"])
-            $('.editarPrecioInscripcion').val(respuesta["pago_inscripcion"])
+            $('.editarPrecioInscripcion').attr('value', respuesta["pago_inscripcion"])
             $('.editarTotalPagar').val(respuesta["pago_total"])
             
         }
@@ -242,9 +242,27 @@ function SumaTotal(selector) {
 
 
 }
-SumaTotal($('.verTotalPago'),$('.nuevoPrecioMatricula'))
-SumaTotal($('.verTotalPagoEditado'),$('nuevoPrecioMatricula'))
+// SumaTotal($('.verTotalPago'))
+// SumaTotal($('.verTotalPagoEditado'))
 // SumaTotal($('.nuevaMatricula'))
+$('.verTotalPago').click(function (e) { 
+    e.preventDefault();
+
+    var totalMatricula = parseInt($('.totalMatricula').val());
+    var totalDescuento = parseInt($('.totalDescuento').val());
+    var totalInscripcion = parseInt($('.totalInscripcion').val());
+    // console.log(totalMatricula)
+    // console.log(totalDescuento)
+    // console.log(totalInscripcion)
+
+    var porcentaje = totalDescuento / 100;
+    var suma = (totalMatricula - (totalMatricula * porcentaje)) + totalInscripcion;
+    // console.log('p',porcentaje)
+    // console.log('suma',suma)
+
+    $('.totalPagar').val(suma);
+    
+});
 
 /*=============================================
         SUMAR TOTAL PAGO ACTUALIZADO CLIENTES

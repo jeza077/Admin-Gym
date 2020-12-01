@@ -397,8 +397,8 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">$</span>  
                               </div>
-                            <input type="text" class="form-control text-right nuevoPrecioMatricula" value="<?php echo $value['precio_matricula']?>" readonly>
-                            <input type="hidden" id="pagoMatricula" name="pagoMatricula">  
+                            <input type="text" class="form-control text-right nuevoPrecioMatricula totalMatricula" value="<?php echo $value['precio_matricula']?>" readonly>
+                            <!-- <input type="hidden" id="pagoMatricula" name="pagoMatricula">   -->
                          </div>
                       </div>
                     </div>
@@ -428,8 +428,8 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">$</span>  
                               </div>
-                            <input type="text" class="form-control text-right nuevoPrecioPromocion" value="" readonly>
-                            <input type="hidden" id="nuevoPrecioDescuento" name="nuevoPrecioDescuento">  
+                            <input type="text" class="form-control text-right nuevoPrecioPromocion totalDescuento" value="" readonly>
+                            <!-- <input type="hidden" id="nuevoPrecioDescuento" name="nuevoPrecioDescuento">   -->
                          </div>
                       </div>
                     </div>
@@ -459,24 +459,27 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">$</span>  
                               </div>
-                            <input type="text" class="form-control text-right nuevoPrecioInscripcion" value="" readonly>    
-                            <input type="hidden" id="pagoInscripcion" name="pagoInscripcion">                         
+                            <input type="text" class="form-control text-right nuevoPrecioInscripcion totalInscripcion" value="" readonly>    
+                            <!-- <input type="hidden" id="pagoInscripcion" name="pagoInscripcion">                          -->
                          </div>
                       </div>
                     </div>
+                    
                     <div class="form-row">
-                      <div class="form-group col-md-6 float-right">
-                         <label for="">Total a pagar:</label>
-                         <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">$</span>  
-                            </div>
-                            <input type="text" class="form-control text-right totalPagar" id="totalPagar" value="" readonly>  
-                            <input type="hidden" id="nuevoTotalCliente" name="nuevoTotalCliente">   
-                            <button type="" class="btn btn-success verTotalPago">Ver Total <i class="fas fa-dollar-sign"></i></button>                   
+                      <button type="" class="btn btn-success btn-block col-md-6 mt-5 mb-2 verTotalPago">Calcular<i class="fas fa-dollar-sign"></i></button>       
+
+                      <div class="form-group col-md-6">
+                        <label for="">Total a pagar:</label>
+                        <div class="input-group">
+                          <div class="input-group-prepend">
+                              <span class="input-group-text">$</span>  
+                          </div>
+                          <input type="text" class="form-control float-right text-right totalPagar" name="nuevoTotalCliente" value="" readonly>  
                          </div>
                       </div>
+
                     </div>
+
                   </div>
                 </div>
                 <div class="form-group mt-4 float-right">
@@ -640,7 +643,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">$</span>  
                               </div>
-                            <input type="text" class="form-control text-right editarPrecioMatricula" value="<?php echo $value['precio_matricula']?>" name="editarPrecioMatricula" readonly>
+                            <input type="text" class="form-control text-right editarPrecioMatricula totalMatricula" value="<?php echo $value['precio_matricula']?>" name="editarPrecioMatricula" readonly>
                          </div>
                       </div>
                     </div>
@@ -670,7 +673,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">$</span>  
                               </div>
-                            <input type="text" class="form-control text-right editarPrecioPromocion" value="" name="editarPrecioPromocion" readonly>
+                            <input type="text" class="form-control text-right editarPrecioPromocion totalDescuento" value="" name="editarPrecioPromocion" readonly>
                          </div>
                       </div>
                     </div>
@@ -699,7 +702,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">$</span>  
                               </div>
-                            <input type="text" class="form-control text-right editarPrecioInscripcion" value="" name="editarPrecioInscripcion" readonly>
+                            <input type="text" class="form-control text-right editarPrecioInscripcion totalInscripcion" name="editarPrecioInscripcion" readonly>
                          </div>
                       </div>
                       
@@ -711,8 +714,8 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">$</span>  
                             </div>
-                            <input type="text" class="form-control text-right editarTotalPagar" value="" name="editarTotalPagar" readonly>
-                            <button type="" class="btn btn-success verTotalPagoEditado">Ver Total <i class="fas fa-dollar-sign"></i></button>
+                            <input type="text" class="form-control text-right editarTotalPagar totalPagar" value="" name="editarTotalPagar" readonly>
+                            <button type="" class="btn btn-success verTotalPago">Ver Total<i class="fas fa-dollar-sign"></i></button>
                          </div>
                       </div>
                     </div>
