@@ -184,7 +184,7 @@ mostrarDinamico($('.descuentoNuevo'),'tbl_descuento', 'id_descuento',$('.actuali
 
 function SumaTotal(selector) {  
 
-    selector.change(function (e) { 
+    selector.click(function (e) { 
         e.preventDefault();
         var precioMatricula = $('.nuevoPrecioMatricula');
         // console.log("matricula", precioMatricula)
@@ -242,8 +242,8 @@ function SumaTotal(selector) {
 
 
 }
-SumaTotal($('.nuevaInscripcion'))
-// SumaTotal($('.nuevaPromocion'))
+SumaTotal($('.verTotalPago'),$('.nuevoPrecioMatricula'))
+SumaTotal($('.verTotalPagoEditado'),$('nuevoPrecioMatricula'))
 // SumaTotal($('.nuevaMatricula'))
 
 /*=============================================

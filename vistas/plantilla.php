@@ -108,7 +108,7 @@
             $_GET["ruta"] == "mensajeria" ||
             // $_GET["ruta"] == "stock" ||
             $_GET["ruta"] == "equipo" ||
-            $_GET["ruta"] == "configuracion" ||
+            $_GET["ruta"] == "pagos-cliente" ||
             $_GET["ruta"] == "perfil" ||
             $_GET["ruta"] == "agregar-persona" ||
             $_GET["ruta"] == "salir"){
