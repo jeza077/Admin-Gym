@@ -269,7 +269,7 @@ function validarEmail(selector) {
 					}, 3000)
 					
 					//E inmeditamente Limpiamos el input
-					selector.val("");
+					// selector.val("");
 					// selector.focus();
 					
 				}

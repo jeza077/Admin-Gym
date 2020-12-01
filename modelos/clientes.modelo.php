@@ -76,7 +76,7 @@ class ModeloClientes{
 
 		} else {
 
-			$stmt = Conexion::conectar()->prepare("SELECT p.*, c.*, i.fecha_creacion, i.tipo_inscripcion, pd.*, pc.* FROM $tabla1 as p\n"
+			$stmt = Conexion::conectar()->prepare("SELECT p.*, c.*, i.fecha_creacion, i.tipo_inscripcion, pd.tipo_descuento, valor_descuento, pc.* FROM $tabla1 as p\n"
             . "LEFT JOIN $tabla2 as c ON p.id_personas = c.id_persona\n"
             . "LEFT JOIN tbl_matricula as m ON c.id_matricula = m.id_matricula\n"
             . "LEFT JOIN tbl_inscripcion as i ON c.id_inscripcion = i.id_inscripcion\n"

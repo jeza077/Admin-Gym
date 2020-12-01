@@ -6,23 +6,23 @@ class ControladorClientes{
 		// echo "<pre>";
 		// var_dump($datos);
 		// echo "</pre>";
-		// return;
+		// return $datos;
 
 
         if(isset($datos['id_persona'])){
 
 			$tabla = "tbl_clientes";
 			
-			if ($datos['tipo_cliente'] == "Gimnasio"){
-				$datos = array("id_persona" => $datos['id_persona'],
-			                "tipo_cliente" => $datos["tipo_cliente"],
-							"id_inscripcion" =>  $datos["id_inscripcion"],
-							"id_matricula" =>  $datos["id_matricula"],
-							"id_descuento" =>  $datos["id_descuento"]);
-			} else {
-				$datos = array("id_persona" => $datos['id_persona'],
-			                  "tipo_cliente" => $datos["tipo_cliente"]);
-			}
+			// if ($datos['tipo_cliente'] == "Gimnasio"){
+			// 	$datos = array("id_persona" => $datos['id_persona'],
+			//                 "tipo_cliente" => $datos["tipo_cliente"],
+			// 				"id_inscripcion" =>  $datos["id_inscripcion"],
+			// 				"id_matricula" =>  $datos["id_matricula"],
+			// 				"id_descuento" =>  $datos["id_descuento"]);
+			// } else {
+			// 	$datos = array("id_persona" => $datos['id_persona'],
+			//                   "tipo_cliente" => $datos["tipo_cliente"]);
+			// }
 							
 			
 
@@ -32,84 +32,85 @@ class ControladorClientes{
 			// echo "</pre>";
 			// return;
             if($respuestaCrearCliente = true){
-				
-				$totalId = array();
-				$tabla1 = "tbl_personas";
-				$tabla2 = "tbl_clientes";
-				$item = null;
-				$valor = null;
 
-				$clientesTotal = ModeloClientes::mdlMostrarClientesSinPago($tabla1, $tabla2, $item, $valor);
-				// echo "<pre>";
-				// var_dump($clientesTotal[1]["id_cliente"]);
-				// echo "</pre>";
-				// return;
+				if($datos['tipo_cliente'] == 'Gimnasio'){
+
+					$totalId = array();
+					$tabla1 = "tbl_personas";
+					$tabla2 = "tbl_clientes";
+					$item = null;
+					$valor = null;
+	
+					$clientesTotal = ModeloClientes::mdlMostrarClientesSinPago($tabla1, $tabla2, $item, $valor);
+					// echo "<pre>";
+					// var_dump($clientesTotal[1]["id_cliente"]);
+					// echo "</pre>";
+					// return;
+					
+					foreach($clientesTotal as $keyCliente => $valueCliente){
+						array_push($totalId, $valueCliente["id_cliente"]);
+					}
+					
+	
+					$idCliente = end($totalId);
+	
+					$vigencias = $_POST["nuevaInscripcion"];
+	
+						// echo $vigencias;
+						// return;
+	
+						if ($vigencias == 1) {
+							$valorVigencia = 'VIGENCIA_CLIENTE_MES';
+							
+							// var_dump("Mes",$valorVigencia);
+							
+						} else if ($vigencias == 2){
+							$valorVigencia = 'VIGENCIA_CLIENTE_QUINCENAL';
+							
+							// var_dump("Quincenal",$valorVigencia);
+							
+						} else {
+							$valorVigencia = 'VIGENCIA_CLIENTE_DIA';
+							
+							// var_dump("Diaria",$valorVigencia);
+							
+						}
+	
+					$item = 'parametro';
+					$parametros = ControladorUsuarios::ctrMostrarParametros($item, $valorVigencia);
+					// var_dump($parametros);
+					// return;
+	
+					$vigenciaCliente = $parametros['valor'];
+					
+					date_default_timezone_set("America/Tegucigalpa");
+					$fechaVencimientoCliente = date("Y-m-d", strtotime('+'.$vigenciaCliente.' days'));
+					
+					$tabla3 = "tbl_pagos_cliente";
+	
+					$datos = array("id_cliente" => $idCliente,
+								   "pago_matricula" => $datos["pago_matricula"],
+								   "pago_descuento" => $datos["pago_descuento"],
+								   "pago_inscripcion" => $datos["pago_inscripcion"],
+								   "pago_total" => $datos["pago_total"],
+								   "fecha_vencimiento" => $fechaVencimientoCliente);
+	
+					$respuestaPago = ModeloClientes::mdlCrearPago($tabla3, $datos);
+					// echo "<pre>";
+					// var_dump($respuestaPago);
+					// echo "</pre>";
+					// return;
 				
-				foreach($clientesTotal as $keyCliente => $valueCliente){
-				array_push($totalId, $valueCliente["id_cliente"]);
-			
-				
+					$descripcionEvento = "Nuevo cliente";
+					$accion = "Nuevo";
+					$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 3,$accion, $descripcionEvento);
+	
+					return true;
+
+				} else {
+					return true;
 				}
 				
-
-				$idCliente = end($totalId);
-
-				$vigencias = $_POST["nuevaInscripcion"];
-
-					// echo $vigencias;
-					// return;
-
-					if ($vigencias == 1) {
-						$valorVigencia = 'VIGENCIA_CLIENTE_MES';
-						
-						// var_dump("Mes",$valorVigencia);
-						
-					} else if ($vigencias == 2){
-						$valorVigencia = 'VIGENCIA_CLIENTE_QUINCENAL';
-						
-						// var_dump("Quincenal",$valorVigencia);
-						
-					} else {
-						$valorVigencia = 'VIGENCIA_CLIENTE_DIA';
-						
-						// var_dump("Diaria",$valorVigencia);
-						
-					}
-
-				$item = 'parametro';
-				// $valor = 'VIGENCIA_CLIENTE_QUINCENAL';
-				$parametros = ControladorUsuarios::ctrMostrarParametros($item, $valorVigencia);
-				// var_dump($parametros);
-				// return;
-
-				$vigenciaCliente = $parametros['valor'];
-				
-				date_default_timezone_set("America/Tegucigalpa");
-				$fechaVencimientoCliente = date("Y-m-d", strtotime('+'.$vigenciaCliente.' days'));
-				
-				$tabla3 = "tbl_pagos_cliente";
-
-				$datos = array("id_cliente" => $idCliente,
-							   "pago_matricula" => $_POST["pagoMatricula"],
-							   "pago_descuento" => $_POST["nuevoPrecioDescuento"],
-							   "pago_inscripcion" => $_POST["pagoInscripcion"],
-							   "pago_total" => $_POST["nuevoTotalCliente"],
-							   "fecha_vencimiento" => $fechaVencimientoCliente);
-
-				$respuestaPago = ModeloClientes::mdlCrearPago($tabla3, $datos);
-				// echo "<pre>";
-				// var_dump($respuestaPago);
-				// echo "</pre>";
-				// return;
-			
-				$descripcionEvento = "Nuevo cliente";
-				$accion = "Nuevo";
-                $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 3,$accion, $descripcionEvento);
-
-			   
-		   
-
-                return true;
 
             } else {
                 return false;

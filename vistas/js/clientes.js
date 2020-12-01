@@ -248,20 +248,44 @@ function SumaTotal(selector) {
 $('.verTotalPago').click(function (e) { 
     e.preventDefault();
 
-    var totalMatricula = parseInt($('.totalMatricula').val());
-    var totalDescuento = parseInt($('.totalDescuento').val());
-    var totalInscripcion = parseInt($('.totalInscripcion').val());
+    var totalMatricula = $('.totalMatricula').val();
+    var totalDescuento = $('.totalDescuento').val();
+    var totalInscripcion = $('.totalInscripcion').val();
+
     // console.log(totalMatricula)
-    // console.log(totalDescuento)
     // console.log(totalInscripcion)
 
-    var porcentaje = totalDescuento / 100;
-    var suma = (totalMatricula - (totalMatricula * porcentaje)) + totalInscripcion;
-    // console.log('p',porcentaje)
-    // console.log('suma',suma)
+    if(!totalMatricula){
+        $('.nuevaMatricula').after('<div class="alert alert-danger fade show mt-2" role="alert">Por favor seleccione un tipo de matricula</div>');
+        $('.nuevaMatricula').focus();
+    } else if(!totalInscripcion) {
+        $('.nuevaInscripcion').after('<div class="alert alert-danger fade show mt-2" role="alert">Por favor seleccione un tipo de inscripcion</div>');
+        $('.nuevaInscripcion').focus();
 
-    $('.totalPagar').val(suma);
+    } else {
+        $('.alert').remove();
+        // console.log(totalDescuento)
+        // console.log(totalInscripcion)
+        // console.log(totalMatricula)
+        if(!totalDescuento){
+
+            var suma = (parseInt(totalMatricula) + parseInt(totalInscripcion));
+            var descuento = 0;
+            $('input[name=nuevoPrecioDescuento]').attr('value', descuento);
+        } else {
+            var porcentaje = parseInt(totalDescuento) / 100;
+            var descuento = ((parseInt(totalMatricula) * porcentaje));
+            var suma = (parseInt(totalMatricula) - descuento) + parseInt(totalInscripcion);
+            $('input[name=nuevoPrecioDescuento]').attr('value', descuento);
+            
+        }
+        console.log('desc',descuento);
+        console.log('suma',suma)
     
+        $('.totalPagar').val(suma);
+        
+
+    }
 });
 
 /*=============================================

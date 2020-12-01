@@ -119,7 +119,7 @@
                   <i class="nav-icon fas fa-user-circle"></i>
                   <p>
                     Clientes
-                    <!-- <span class="right badge badge-danger">New</span> -->
+                    <i class="right fas fa-angle-left"></i>
                   </p>
                 </a>
                 <ul class="nav nav-treeview">

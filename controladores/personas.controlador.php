@@ -251,17 +251,25 @@ class ControladorPersonas{
                                 "tipo_cliente" => $_POST["tipoCliente"],
                                 "id_inscripcion" => $_POST["nuevaInscripcion"],
                                 "id_matricula" => $_POST["nuevaMatricula"],
-                                "id_descuento" => $_POST["nuevaPromocion"]);
+                                "id_descuento" => $_POST["nuevaPromocion"],
+                                "pago_matricula" => $_POST["nuevoPrecioMatricula"],
+                                "pago_descuento" => $_POST["nuevoPrecioDescuento"],
+                                "pago_inscripcion" => $_POST["nuevoPrecioInscripcion"],
+                                "pago_total" => $_POST["nuevoTotalCliente"]);
                             } else {
                                 $datos = array("id_persona" => $idPersona,
                                 "tipo_cliente" => $_POST["tipoCliente"]);
                             }
 
-                           
+                            // echo "<pre>";
+                            // var_dump($datos);
+                            // echo "</pre>";
+                            // return;                            
     
                             $crearCliente = ControladorClientes::ctrCrearCliente($datos);
-                        
-            
+                            
+
+                            
                             if($crearCliente == true){
                                 echo '<script>
                                         Swal.fire({

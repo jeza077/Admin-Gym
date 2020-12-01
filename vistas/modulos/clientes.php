@@ -54,7 +54,6 @@
                     <th scope="col">Telefono</th>
                     <th scope="col">Fecha Creacion</th>
                     <th scope="col">Estado</th>
-                    <th scope="col">Pago</th>
                     <th scope="col">Acciones</th>
                   </tr>
                 </thead>
@@ -70,10 +69,10 @@
                   // echo "</pre>";
                   // return;
 
-                  $tabla = "tbl_clientes";
-                  $item = null;
-                  $valor = null;
-                  $respuestaPagos = ControladorClientes::ctrMostrarPagos($tabla, $item, $valor);
+                  // $tabla = "tbl_clientes";
+                  // $item = null;
+                  // $valor = null;
+                  // $respuestaPagos = ControladorClientes::ctrMostrarPagos($tabla, $item, $valor);
 
           
 
@@ -105,31 +104,11 @@
                           }
 
                           if($value['estado'] != 0){
-                            echo '<td><button class="btn btn-success btn-md btnActivar" idCliente="'.$value["id_cliente"].'" estadoUsuario="0">Activado</button></td>';
+                            echo '<td><span class="badge badge-success p-3" idCliente="'.$value["id_cliente"].'" estadoUsuario="0">Activado</span></td>';
                           } else {
-                            echo '<td><button class="btn btn-danger btn-md btnActivar" idCliente="'.$value["id_cliente"].'" estadoUsuario="1">Desactivado</button></td>';
+                            echo '<td><span class="badge badge-danger p-3" idCliente="'.$value["id_cliente"].'" estadoUsuario="1">Desactivado</span></td>';
                           }
-                          if ($value['tipo_cliente'] == "Gimnasio") {
-
-                            // Evaluar si el pago no ha vencido, si vencio activar el boton de actualizar pagos
-
-                            $fecha_actual = strtotime(date("d-m-Y",time()));
-                            $fecha_entrada = strtotime($value['fecha_vencimiento']);
-
-                            // echo "<pre>";
-                            // var_dump($value['fecha_vencimiento']);
-                            // echo "</pre>";
-                            // return;
-
-                            if ($fecha_actual > $fecha_entrada)  {
-                              echo '<td><button class="btn btn-success btnPagosCliente" data-toggle="modal" data-target="#modalPagosCliente" idPagoCliente="'.$value["id_personas"].'"><i class="fas fa-dollar-sign"></i></button></td>';
-                            } else {
-                              echo  '<td><button class="btn btn-success btn-md">Pagado</td>';
-                            }
-                            
-                          } else {
-                            echo  '<td>**Ventas**</td>';
-                          }
+                    
 
                       echo
                           '<td>
@@ -397,7 +376,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">$</span>  
                               </div>
-                            <input type="text" class="form-control text-right nuevoPrecioMatricula totalMatricula" value="<?php echo $value['precio_matricula']?>" readonly>
+                            <input type="text" class="form-control text-right nuevoPrecioMatricula totalMatricula" name="nuevoPrecioMatricula" value="<?php echo $value['precio_matricula']?>" readonly>
                             <!-- <input type="hidden" id="pagoMatricula" name="pagoMatricula">   -->
                          </div>
                       </div>
@@ -429,7 +408,7 @@
                                 <span class="input-group-text">$</span>  
                               </div>
                             <input type="text" class="form-control text-right nuevoPrecioPromocion totalDescuento" value="" readonly>
-                            <!-- <input type="hidden" id="nuevoPrecioDescuento" name="nuevoPrecioDescuento">   -->
+                            <input type="hidden" id="nuevoPrecioDescuento" name="nuevoPrecioDescuento">  
                          </div>
                       </div>
                     </div>
@@ -459,14 +438,14 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">$</span>  
                               </div>
-                            <input type="text" class="form-control text-right nuevoPrecioInscripcion totalInscripcion" value="" readonly>    
-                            <!-- <input type="hidden" id="pagoInscripcion" name="pagoInscripcion">                          -->
+                            <input type="text" class="form-control text-right nuevoPrecioInscripcion totalInscripcion" name="nuevoPrecioInscripcion" value="" readonly>    
+                            <!-- <input type="hidden" id="pagoInscripcion" name="pagoInscripcion">-->
                          </div>
                       </div>
                     </div>
                     
                     <div class="form-row">
-                      <button type="" class="btn btn-success btn-block col-md-6 mt-5 mb-2 verTotalPago">Calcular<i class="fas fa-dollar-sign"></i></button>       
+                      <button type="" class="btn btn-success btn-block col-md-6 mt-4 mb-3 verTotalPago"><i class="fas fa-dollar-sign"></i> Calcular</button>       
 
                       <div class="form-group col-md-6">
                         <label for="">Total a pagar:</label>
