@@ -114,15 +114,29 @@
             <?php }?>
 
             <?php if($_SESSION['permisos']['Clientes']['consulta'] == 1){?>
-            <li class="nav-item">
-              <a href="clientes" class="nav-link menu-lateral">
-                <i class="nav-icon fas fa-user-circle"></i>
-                <p>
-                  Clientes
-                  <!-- <span class="right badge badge-danger">New</span> -->
-                </p>
-              </a>
-            </li>
+              <li class="nav-item has-treeview">
+                <a href="clientes" class="nav-link menu-lateral">
+                  <i class="nav-icon fas fa-user-circle"></i>
+                  <p>
+                    Clientes
+                    <!-- <span class="right badge badge-danger">New</span> -->
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="clientes" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Administrar Clientes</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="pagos-cliente" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Pagos Clientes</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
             <?php }?>
 
             <?php if($_SESSION['permisos']['Stock']['consulta'] == 1){?>

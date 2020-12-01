@@ -98,7 +98,7 @@ class ControladorClientes{
 
 				$respuestaPago = ModeloClientes::mdlCrearPago($tabla3, $datos);
 				// echo "<pre>";
-				// var_dump($datos);
+				// var_dump($respuestaPago);
 				// echo "</pre>";
 				// return;
 			
