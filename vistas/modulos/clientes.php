@@ -54,6 +54,7 @@
                     <th scope="col">Telefono</th>
                     <th scope="col">Fecha Creacion</th>
                     <th scope="col">Estado</th>
+                    <th scope="col">Pago</th>
                     <th scope="col">Acciones</th>
                   </tr>
                 </thead>
