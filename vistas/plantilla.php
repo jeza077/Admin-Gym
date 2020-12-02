@@ -97,6 +97,11 @@
             $_GET["ruta"] == "administrar-venta" ||
             $_GET["ruta"] == "ventas" ||
             $_GET["ruta"] == "mantenimiento" ||
+            $_GET["ruta"] == "rol" ||
+            $_GET["ruta"] == "parametro" ||
+            $_GET["ruta"] == "inscripcion" ||
+            $_GET["ruta"] == "matricula" ||
+            $_GET["ruta"] == "descuento" ||
             $_GET["ruta"] == "respaldoyrestauracion" ||
             $_GET["ruta"] == "connet" ||
             $_GET["ruta"] == "connet2" ||
