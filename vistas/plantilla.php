@@ -110,7 +110,7 @@
             $_GET["ruta"] == "crear-venta" ||
             $_GET["ruta"] == "editar-venta" ||
             $_GET["ruta"] == "reportes" ||
-            $_GET["ruta"] == "mensajeria" ||
+            $_GET["ruta"] == "permisos-rol" ||
             // $_GET["ruta"] == "stock" ||
             $_GET["ruta"] == "equipo" ||
             $_GET["ruta"] == "pagos-cliente" ||

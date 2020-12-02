@@ -33,23 +33,24 @@
 
   }
 
+
+
    /*======================================================
      Roles
     =============================================================================================*/
    
-    static public function ctrRolesInsertar(){
+    static public function ctrRolesInsertar($rol, $descripcion){
+      // return $rol.' '.$descripcion;
 
+      if(isset($rol)){
 
-      if(isset($_POST["nuevoRol"])){
-
-        if(preg_match('/^[a-zA-ZñÑáéíóúÁÉÍÓÚ]+$/', $_POST["nuevoRol"])){
+        if(preg_match('/^[A-ZñÑáéíóúÁÉÍÓÚ ]+$/', $rol)){
          
-          
+          // return 'Bien';
           $tabla = "tbl_roles";
-          
   
-          $datos = array("rol" => $_POST["nuevoRol"], 
-                          "descripcion" => $_POST["nuevaDescripcion"]);
+          $datos = array("rol" => $rol, 
+                         "descripcion" => $descripcion);
 
             // echo "<pre>";
             // var_dump($_POST);
@@ -60,41 +61,57 @@
           // var_dump($respuesta);
           if($respuesta == true){
          
-            $descripcionEvento = "Nuevo rol ";
-            $accion = "Nuevo";
-            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
+            // $descripcionEvento = "Nuevo rol";
+            // $accion = "Nuevo";
+            // $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
 
-        
-       
-  
-            echo '<script>
-  
-            Swal.fire({
-  
-              icon: "success",
-              title: "¡El rol ha sido creado exitosamente!",
-              showConfirmButton: true,
-              confirmButtonText: "Cerrar",
-              closeOnConfirm: false
-  
-            }).then((result)=>{
-  
-              if(result.value){
-  
-                window.location = "mantenimiento";
-  
-              }
-  
-            });
-  
-  
-            </script>';
-  
+            $totalId = array();
+            $item = null;
+            $valor = null;
+            
+            $roles = ControladorMantenimientos::ctrMostrarRoles($item,$valor);
+            
+            foreach($roles as $keyRol => $valueRol){
+            array_push($totalId, $valueRol["id_rol"]);
+            }
+
+            $idRol = end($totalId);
+            // echo $idRol;
+            $id = intval($idRol);
+
+            return $id;
+
+             // echo '<script>
+    
+              // Swal.fire({
+    
+              //   icon: "success",
+              //   title: "¡El rol ha sido creado exitosamente!",
+              //   showConfirmButton: true,
+              //   confirmButtonText: "Cerrar",
+              //   closeOnConfirm: false
+    
+              // }).then((result)=>{
+    
+              //   if(result.value){
+    
+              //     window.location = "mantenimiento";
+    
+              //   }
+    
+              // });
+    
+    
+              // </script>';
+    
   
           }
   
   
         }else{
+
+          return 'Mal';
+
   
           echo '<script>
   
@@ -126,17 +143,94 @@
   
     }
 
-      /*=============================================
+    /*=============================================
         MOSTRAR ROLES
     =============================================*/
 
     static public function ctrMostrarRoles($item, $valor){
 
-    $tabla = "tbl_roles";
-    
-    $respuesta = ModeloMantenimiento::mdlMostrarRoles($tabla, $item, $valor);
+      $tabla = "tbl_roles";
+      
+      $respuesta = ModeloMantenimiento::mdlMostrarRoles($tabla, $item, $valor);
 
-    return $respuesta;
+      return $respuesta;
+
+    }
+
+
+    /*=============================================
+        MOSTRAR PERMISOS ROLES
+    =============================================*/
+
+    static public function ctrMostrarPermisosRoles($item, $valor){
+
+      $respuesta = ModeloMantenimiento::mdlMostraPermisosrRoles($item, $valor);
+
+      return $respuesta;
+
+    }
+
+
+
+    
+    /*=============================================
+        GUARDAR PERMISOS DE ROLES
+    =============================================*/
+
+    static public function ctrInsertarPermisosRoles($id, $pant, $cons, $agre, $actua, $elim){
+
+      // $datos = array('id' => $id,
+      // 'pantalla' => $pant,
+      // 'consu' => $cons,
+      // 'agre' => $agre,
+      // 'actua' => $actua,
+      // 'elim' => $elim);
+      $idRol = intval($id);
+      // return $idRol;
+
+      if(isset($pant)){
+        // $consulta = 0;
+        // $agregar = 0;
+        // $actualizar = 0;
+        // $eliminar = 0;
+
+        if($cons != 'true'){
+          $consulta = 0;
+        } else {
+          $consulta = 1;
+        }
+
+        if($agre != 'true'){
+          $agregar = 0;
+        } else {
+          $agregar = 1;
+        }
+
+        if($actua != 'true'){
+          $actualizar = 0;
+        } else {
+          $actualizar = 1;
+        }
+
+        if($elim != 'true'){
+          $eliminar = 0;
+        } else {
+          $eliminar = 1;
+        }
+
+        // $datos = array('id' => $idRol,
+        //               'pantalla' => $pant,
+        //               'consu' => $consulta,
+        //               'agre' => $agregar,
+        //               'actua' => $actualizar,
+        //               'elim' => $eliminar);
+        // return $datos;
+        $tabla = 'tbl_permisos';
+        $respuesta = ModeloMantenimiento::mdlInsertarPermisosRoles($tabla, $idRol, $pant, $consulta, $agregar, $actualizar, $eliminar);
+  
+        return $respuesta;
+      }
+
 
     }
 
@@ -352,17 +446,19 @@
   
     }
 
-      /*=============================================
+
+
+    /*=============================================
         MOSTRAR MATRICULA
     =============================================*/
 
     static public function ctrMostrarMatricula($item, $valor){
 
-    $tabla = "tbl_matricula";
-    
-    $respuesta = ModeloMantenimiento::mdlMostrarMatricula($tabla, $item, $valor);
+      $tabla = "tbl_matricula";
+      
+      $respuesta = ModeloMantenimiento::mdlMostrarMatricula($tabla, $item, $valor);
 
-    return $respuesta;
+      return $respuesta;
 
     }
 
@@ -470,11 +566,11 @@
 
     static public function ctrMostrarDescuento($item, $valor){
 
-    $tabla = "tbl_descuento";
-    
-    $respuesta = ModeloMantenimiento::mdlMostrarDescuento($tabla, $item, $valor);
+      $tabla = "tbl_descuento";
+      
+      $respuesta = ModeloMantenimiento::mdlMostrarDescuento($tabla, $item, $valor);
 
-    return $respuesta;
+      return $respuesta;
 
     }
 

@@ -202,7 +202,7 @@
                 <i class="nav-icon fas fa-sliders-h"></i>
                 <p>
                   Mantenimiento
-                  <!-- <span class="right badge badge-danger">New</span> -->
+                  <i class="right fas fa-angle-left"></i>
                 </p>
               </a>
               <ul class="nav nav-treeview">
@@ -210,6 +210,12 @@
                   <a href="rol" class="nav-link">
                     <i class="fas fa-th-list nav-icon"></i>
                     <p>Roles</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="permisos-rol" class="nav-link">
+                    <i class="fas fa-th-list nav-icon"></i>
+                    <p>Permisos Rol</p>
                   </a>
                 </li>
                 <li class="nav-item">

@@ -5,6 +5,52 @@ require_once "../modelos/mantenimiento.modelo.php";
 
 class AjaxRol{
 
+    
+
+    /*=============================================
+                GUARDAR ROL
+    ==============================================*/
+    public $nuevoRol;
+    public $nuevoRolDescripcion;
+    
+    public function ajaxGuardarRol(){ 
+
+        $rol = $this->nuevoRol;
+        $descripcion = $this->nuevoRolDescripcion;
+
+        $respuesta = ControladorMantenimientos::ctrRolesInsertar($rol, $descripcion);
+        echo json_encode($respuesta);
+
+
+    }    
+
+
+    /*=============================================
+            GUARDAR PERMISOS DE ROL
+    ==============================================*/
+    public $idRol;
+    public $pantalla;
+    public $consulta;
+    public $agregar;
+    public $actualizar;
+    public $eliminar;
+    
+    public function ajaxGuardarPermisosRol(){ 
+
+        $id = $this->idRol;
+        $pant = $this->pantalla;
+        $cons = $this->consulta;
+        $agre = $this->agregar;
+        $actua = $this->actualizar;
+        $elim = $this->eliminar;
+
+
+        $respuesta = ControladorMantenimientos::ctrInsertarPermisosRoles($id, $pant, $cons, $agre, $actua, $elim);
+        echo json_encode($respuesta);
+
+
+    }    
+
 
 
     /*=============================================
@@ -34,17 +80,42 @@ class AjaxRol{
 }    
 
 /*========================================
+        GUARDAR ROL
+==========================================*/ 
+
+if(isset($_POST["nuevoRol"])){ 
+    $guardarRol = new ajaxRol();
+    $guardarRol->nuevoRol = $_POST["nuevoRol"];
+    $guardarRol->nuevoRolDescripcion = $_POST["nuevoRolDescripcion"];
+    $guardarRol->ajaxGuardarRol();
+} 
+
+
+/*========================================
+        GUARDAR PERMISOS DE ROL
+==========================================*/ 
+
+if(isset($_POST["pantalla"])){ 
+    $guardarPermisosRol = new ajaxRol();
+    $guardarPermisosRol->idRol = $_POST["idRol"];
+    $guardarPermisosRol->pantalla = $_POST["pantalla"];
+    $guardarPermisosRol->consulta = $_POST["consulta"];
+    $guardarPermisosRol->agregar = $_POST["agregar"];
+    $guardarPermisosRol->actualizar = $_POST["actualizar"];
+    $guardarPermisosRol->eliminar = $_POST["eliminar"];
+    $guardarPermisosRol->ajaxGuardarPermisosRol();
+} 
+
+
+/*========================================
 Activar Rol
 ==========================================*/ 
 
 if(isset($_POST["activarRol"])){ 
-
     $activarRol = new ajaxRol();
     $activarRol->activarRol = $_POST["activarRol"];
     $activarRol->activarid = $_POST["activarid"];
     $activarRol->ajaxActivarRol();
-
-
 }  
 
 
