@@ -131,26 +131,40 @@ $pdf->Cell(40, 5, 'Productos', 1, 0, 'C', 1);
 $pdf->Cell(40, 5, 'Total', 1, 0, 'C', 1);
 
 
-if(isset($_GET["fechaInicial"])){
+// if(isset($_GET["fechaInicial"])){
 
 
-    $fechaInicial = $_GET["fechaInicial"];
-    $fechaFinal = $_GET["fechaFinal"];
+//     $fechaInicial = $_GET["fechaInicial"];
+//     $fechaFinal = $_GET["fechaFinal"];
 
-    // echo $fechaInicial;
+//     // echo $fechaInicial;
+//     // echo $fechaFinal;
+// } else {
+
+//     $fechaInicial = null;
+//     $fechaFinal = null;
+
+// } 
+
+if(isset($_GET["rango"])){
+
+
+    $rango = $_GET["rango"];
+    // $fechaFinal = $_GET["fechaFinal"];
+
+    // echo $rango;
     // echo $fechaFinal;
 } else {
 
-    $fechaInicial = null;
-    $fechaFinal = null;
+    $rango = null;
+    // $fechaFinal = null;
 
 } 
-
 // echo $fechaInicial;
 // echo $fechaFinal;
 // return;
 
-$ventas = ControladorVentas::ctrRangoFechasVentas($fechaInicial, $fechaFinal);
+$ventas = ControladorVentas::ctrRango($rango);
 
 // var_dump($ventas);
 // return;

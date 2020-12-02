@@ -8,6 +8,10 @@ $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
 //Money Euro
 $('[data-mask]').inputmask()
 
+window.onload = agregarClase;
+function agregarClase() {
+$('#DataTables_Table_0_filter input[type=search]').addClass('ClaseBuscar');
+}
 
 /*=============================================
     DATATABLES
@@ -67,6 +71,10 @@ for (let i = 0; i < claseActivo.length; i++) {
         $(ventas).addClass('active');
     }
 }
+
+$(document).on('blur', '.ClaseBuscar', function () {
+    console.log($('.ClaseBuscar').val())
+});
 
 
 /*=============================================
@@ -599,6 +607,7 @@ function crearGrafico(contenedor, nombre, cantidad, tipoChart, colores){
     })
 
 }
+
 
 
 

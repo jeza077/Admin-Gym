@@ -885,6 +885,19 @@ class ControladorVentas {
 	}
 
 
+	/*=============================================
+			RANGO DINAMICO
+    =============================================*/
+	static public function ctrRango($rango){
+
+		$tabla = 'tbl_venta';
+		
+		$respuesta = ModeloVentas::mdlRango($tabla, $rango);
+		
+		return $respuesta;
+	}
+
+
 	  /*=============================================
 	====================EDITAR VENTA
     =============================================*/
