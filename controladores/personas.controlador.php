@@ -261,12 +261,12 @@ class ControladorPersonas{
                                 "tipo_cliente" => $_POST["tipoCliente"]);
                             }
 
+                            
+                            $crearCliente = ControladorClientes::ctrCrearCliente($datos);
                             // echo "<pre>";
-                            // var_dump($datos);
+                            // var_dump($crearCliente);
                             // echo "</pre>";
                             // return;                            
-    
-                            $crearCliente = ControladorClientes::ctrCrearCliente($datos);
                             
 
                             

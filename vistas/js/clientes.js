@@ -341,6 +341,45 @@ function actualizarSumaTotal(selector) {
 actualizarSumaTotal($('.descuentoNuevo'))
 
 
+/*=============================================
+        EDITAR PAGOS CLIENTE
+=============================================*/
+$('.btnEditarPago').click(function (e) { 
+    e.preventDefault();
+
+    Swal.fire({
+        title: 'Actualizar Pago',
+        html: '<p class="SwalParrafo">¿Deseás mantener el Tipo de Inscripcion actual?</p>' +
+            '<button type="button" role="button" tabindex="0" class="SwalBtnMantenerInscripcion btn btn-success customSwalBtn">' + 'Si, mantener' + '</button>' +
+            '<button type="button" role="button" tabindex="0" class="SwalBtnCambiarInscripcion btn btn-danger customSwalBtn" data-toggle="modal" data-target="#modalEditarCliente">' + 'No, cambiar' + '</button>' +
+            '<button type="button" role="button" tabindex="0" class="SwalBtnCancelar btn btn-secondary customSwalBtn">' + 'Cancelar' + '</button>',
+        width: 600,
+        allowOutsideClick: false,
+        showCancelButton: false,
+        showConfirmButton: false
+    });
+});
+
+$(document).on('click', '.SwalBtnMantenerInscripcion', function (e) { 
+    e.preventDefault();
+    console.log('click')
+    // Swal.showLoading()
+
+});
+
+$(document).on('click', '.SwalBtnCambiarInscripcion', function (e) { 
+    e.preventDefault();
+    // console.log('click')
+    Swal.close();
+    // Swal.hideLoading()
+});
+
+$(document).on('click', '.SwalBtnCancelar', function (e) { 
+    e.preventDefault();
+    Swal.close();
+});
+
+
 
 /*=============================================
         ELIMINAR CLIENTE

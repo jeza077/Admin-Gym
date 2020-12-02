@@ -25,7 +25,7 @@ class ControladorClientes{
 			// }
 							
 			
-
+			// return $datos;
             $respuestaCrearCliente = ModeloClientes::mdlCrearCliente($tabla, $datos);
             // echo "<pre>";
 			// var_dump($respuestaCrearCliente);
@@ -272,7 +272,21 @@ class ControladorClientes{
 		$respuesta = ModeloClientes::mdlMostrarClientes($tabla1, $tabla2, $item, $valor);
 
 		return $respuesta;
-    }
+	}
+	
+	/*=============================================
+		MOSTRAR CLIENTES PAGOS
+	=============================================*/
+	static public function ctrMostrarClientesPagos($tabla, $item, $valor){
+		$tabla1 = "tbl_personas";
+		$tabla2 = $tabla;
+
+		$respuesta = ModeloClientes::mdlMostrarClientesPagos($tabla1, $tabla2, $item, $valor);
+
+		return $respuesta;
+	}
+
+
     /*=============================================
 				MOSTRAR (DINAMICO)
 	=============================================*/

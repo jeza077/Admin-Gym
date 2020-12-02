@@ -744,3 +744,20 @@ i.show-confir-pass{
     top: 4rem;
     left: 7rem;   
 } */
+
+/**** NOTIFICACION PARA ACTUALIZAR PAGOS ****/
+.SwalParrafo {
+    margin-top: 15px;
+    font-size: 23px;
+}
+.customSwalBtn{
+   border: 0;
+   border-radius: 3px;
+   box-shadow: none;
+   color: #fff;
+   cursor: pointer;
+   font-size: 17px;
+   font-weight: 500;
+   margin: 30px 5px 0px 5px;
+   padding: 10px 32px;
+}
