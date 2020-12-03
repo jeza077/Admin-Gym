@@ -495,6 +495,17 @@
   }
 
 
+  /*=============================================
+    RANGO DINAMICO
+  =============================================*/
+	static public function ctrRango($rango){
+
+		$tabla = 'tbl_bitacora';
+		
+		$respuesta = ModeloMantenimiento::mdlRango($tabla, $rango);
+		
+		return $respuesta;
+	}
 
 }
 

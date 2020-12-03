@@ -1753,6 +1753,20 @@ class ControladorUsuarios{
 	}
 	
 
+	/*=============================================
+		RANGO DINAMICO
+	=============================================*/
+	static public function ctrRangoUsuarios($rango){
+
+		$tabla = 'tbl_usuarios';
+		
+		$respuesta = ModeloUsuarios::mdlRango($tabla, $rango);
+		
+		return $respuesta;
+	}
+
+
+
     /*=============================================
 			GENERAR CONTRASEÑAS ALEATORIAS
     =============================================*/

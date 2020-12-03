@@ -113,10 +113,22 @@ $pdf->Cell(40, 5, 'Usuario', 1, 0, 'C', 1);
 $pdf->Cell(40, 5, 'Rol', 1, 0, 'C', 1);
 $pdf->Cell(30, 5, 'Estado', 1, 0, 'C', 1);
 
-$tabla = "tbl_usuarios";
-$item = null;
-$valor = null;
-$usuarios = ControladorUsuarios::ctrMostrarSoloUsuarios($tabla, $item, $valor);
+if(isset($_GET["rango"])){
+
+
+    $rango = $_GET["rango"];
+    // $fechaFinal = $_GET["fechaFinal"];
+
+    // echo $rango;
+    // echo $fechaFinal;
+} else {
+
+    $rango = null;
+    // $fechaFinal = null;
+
+} 
+
+$usuarios = ControladorUsuarios::ctrRangoUsuarios($rango);
 
 // var_dump($usuarios);
 

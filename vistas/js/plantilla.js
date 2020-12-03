@@ -72,10 +72,6 @@ for (let i = 0; i < claseActivo.length; i++) {
     }
 }
 
-$(document).on('blur', '.ClaseBuscar', function () {
-    console.log($('.ClaseBuscar').val())
-});
-
 
 /*=============================================
     DATERANGE PICKER
@@ -621,39 +617,56 @@ datarangeDinamico($('#daterange-btn-bitacora'), $('#daterange-btn-bitacora span'
 =============================================*/  
 datarangeDinamicoHoy(".daterangepicker.reporteBitacora .ranges li", 'capturarRangoBitacora', 'Hoy', 'bitacora');
 
+
+
+
+valorBuscar = "";
+$(document).on('blur', '.ClaseBuscar', function () {
+    // console.log($('.ClaseBuscar').val())
+  valorBuscar = $('.ClaseBuscar').val();
+});
+
 //** ------------------------------------*/
-//         IMPRIMIR PDF VENTAS
+//         IMPRIMIR PDF BITACORA
 // --------------------------------------*/ 
 $(document).on('click', '.btnExportarBitacora', function (e) {
     // console.log("click");
     // return;
-    e.preventDefault();
-    function getQueryVariable(variable) {
-      var query = window.location.search.substring(1);
-      var vars = query.split("&");
-      for (var i=0; i < vars.length; i++) {
-          var pair = vars[i].split("=");
-          if(pair[0] == variable) {
-              return pair[1];
-          }
-      }
-      return false;
-    }
-   
-   // console.log(window.location.search.substring(15));
-   // console.log(getQueryVariable('fechaFinal'));
-   
-    var fechaInicial = getQueryVariable('fechaInicial');
-    var fechaFinal = getQueryVariable('fechaFinal')
-    // console.log(fechaInicial)
-    
-    if(fechaInicial == false && fechaFinal == false) {
-      // console.log('si')
-      // window.open("extensiones/tcpdf/pdf/ventas-pdf.php?&fechaInicial="+null+"&fechaFinal="+null);
-      window.open("extensiones/tcpdf/pdf/bitacora-pdf.php", "_blank");
+    // console.log(valorBuscar);
+    if(!valorBuscar){
+        window.open("extensiones/tcpdf/pdf/bitacora-pdf.php");
     } else {
-      // console.log('no')
-      window.open("extensiones/tcpdf/pdf/bitacora-pdf.php?&fechaInicial="+fechaInicial+"&fechaFinal="+fechaFinal);
+        var rango = valorBuscar;
+        window.open("extensiones/tcpdf/pdf/bitacora-pdf.php?&rango="+rango);
     }
+
+//     e.preventDefault();
+//     function getQueryVariable(variable) {
+//       var query = window.location.search.substring(1);
+//       var vars = query.split("&");
+//       for (var i=0; i < vars.length; i++) {
+//           var pair = vars[i].split("=");
+//           if(pair[0] == variable) {
+//               return pair[1];
+//           }
+//       }
+//       return false;
+//     }
+   
+//    // console.log(window.location.search.substring(15));
+//    // console.log(getQueryVariable('fechaFinal'));
+   
+//     var fechaInicial = getQueryVariable('fechaInicial');
+//     var fechaFinal = getQueryVariable('fechaFinal')
+//     // console.log(fechaInicial)
+    
+//     if(fechaInicial == false && fechaFinal == false) {
+//       // console.log('si')
+//       // window.open("extensiones/tcpdf/pdf/ventas-pdf.php?&fechaInicial="+null+"&fechaFinal="+null);
+//       window.open("extensiones/tcpdf/pdf/bitacora-pdf.php", "_blank");
+//     } else {
+//       // console.log('no')
+//       window.open("extensiones/tcpdf/pdf/bitacora-pdf.php?&fechaInicial="+fechaInicial+"&fechaFinal="+fechaFinal);
+//     }
   
   });

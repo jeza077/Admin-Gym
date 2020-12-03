@@ -482,16 +482,16 @@ datarangeDinamicoHoy(".daterangepicker.reporteVentas .ranges li", 'capturarRango
 
 
 
-$(document).on('blur', '.ClaseBuscar', function () {
-  // console.log($('.ClaseBuscar').val())
-  valorBuscar = $('.ClaseBuscar').val();
-});
+// $(document).on('blur', '.ClaseBuscar', function () {
+//   // console.log($('.ClaseBuscar').val())
+//   valorBuscar = $('.ClaseBuscar').val();
+// });
 //** ------------------------------------*/
 //         IMPRIMIR PDF VENTAS
 // --------------------------------------*/ 
 $(document).on('click', '.btnExportarVentas', function (e) {
   e.preventDefault();
-  console.log(valorBuscar);
+  // console.log(valorBuscar);
   
   var rango = valorBuscar;
   window.open("extensiones/tcpdf/pdf/ventas-pdf.php?&rango="+rango);
