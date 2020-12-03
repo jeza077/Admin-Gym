@@ -73,7 +73,8 @@ class ControladorInventario
 
 							imagejpeg($destino, $ruta);
 
-						}
+                        }
+                        
 
 						if($_FILES["editarFotoProducto"]["type"] == "image/png"){
 
@@ -105,7 +106,8 @@ class ControladorInventario
                         "codigo" => $_POST["nuevoCodigo"],
                         "id_tipo_producto" => $_POST["nuevoTipoProducto"],
                         "stock" => $_POST["nuevoStock"],
-                        "precio" => $_POST["nuevoPrecio"],
+                        "precio_venta" => $_POST["nuevoPrecio"],
+                        "precio_compra" => $_POST["nuevoPrecioCompra"],
                         "foto" => $ruta,
                         "producto_minimo" => $_POST["nuevoProductoMinimo"],
                         "producto_maximo" => $_POST["nuevoProductoMaximo"]);
@@ -279,7 +281,8 @@ class ControladorInventario
                         "codigo" => $_POST["editarCodigo"],
                         "id_inventario" => $_POST["editarTipoProducto"],
                         "stock" => $_POST["editarStock"],
-                        "precio" => $_POST["editarPrecio"],
+                        "precio_venta" => $_POST["editarPrecio"],
+                        "precio_compra" => $_POST["editarPrecioCompra"],
                         "foto" => $ruta,
                         "producto_minimo" => $_POST["editarProductoMinimo"],
                         "producto_maximo" => $_POST["editarProductoMaximo"]);
