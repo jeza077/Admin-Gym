@@ -86,9 +86,9 @@
                         // var_dump($date1);
                         // echo $diff->days;                          
                         if($diff->days >= 10 && $diff->days <= 30){  
-                            echo '<td class="badge badge-success mt-2">'.$value["fecha_vencimiento"].'</td>';
+                            echo '<td class="badge badge-success mt-2" data-toggle="tooltip" data-placement="left" title="Suscrito">'.$value["fecha_vencimiento"].'</td>';
                         } else if($diff->days >= 1 && $diff->days <= 10) {
-                            echo '<td class="badge badge-warning mt-2">'.$value["fecha_vencimiento"].'</td>';
+                            echo '<td class="badge badge-warning mt-2" data-toggle="tooltip" data-placement="left" title="Suscripcion por Vencer">'.$value["fecha_vencimiento"].'</td>';
                         } else {
                             echo '<td class="badge badge-danger mt-2" data-toggle="tooltip" data-placement="left" title="Suscripcion vencida">'.$value["fecha_vencimiento"].'</td>';
                         }
@@ -102,11 +102,9 @@
 
                       echo
                           '<td>
-                            <button class="btn btn-success btnEditarPago" idCliente="'.$value["id_cliente"].'"><i class="fas fa-dollar-sign p-1"></i></button>
+                            <button class="btn btn-success btnEditarPago" data-toggle="tooltip" data-placement="left" title="Actualizar Pago" idCliente="'.$value["id_cliente"].'"><i class="fas fa-dollar-sign p-1"></i></button>
 
                             <button class="btn btn-warning btnEditarCliente" id="btnEditar" data-toggle="modal" data-target="#modalEditarCliente" idEditarCliente="'.$value["id_personas"].'"><i class="fas fa-pencil-alt" style="color:#fff"></i></button>
-                            
-                            <button class="btn btn-danger btnEliminarCliente" idPersona="'.$value["id_personas"].'"><i class="fas fa-trash-alt"></i></button>
                           </td>
                         </tr>
                     ';
@@ -120,11 +118,11 @@
     </section>
   </div>
 
-  <!-- =======================================
+ <!-- =======================================
            MODAL ACTUALIZAR PAGO CLIENTE
   ======================================----->
 
-  <div class="modal fade" id="modalPagosCliente" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="modalEditarPagos" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -147,11 +145,12 @@
                             $valor = null;
                             
 
-                            $inscripciones = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
-
+                            $inscripciones = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);           
+ 
                             foreach ($inscripciones as $key => $value) { ?>
                               <option value="<?php echo $value['id_inscripcion']?>"><?php echo $value['tipo_inscripcion']?></option>        
                             <?php 
+                             
                           }
                         ?>
                     </select>
@@ -162,11 +161,133 @@
                       <div class="input-group-prepend">
                           <span class="input-group-text">$</span>  
                         </div>
-                      <input type="text" class="form-control text-right actualizarPagoInscripcion" value="" readonly>    
-                      <input type="hidden" id="precioInscripcionActualizado" name="precioInscripcionActualizado">                    
+                      <input type="text" class="form-control text-right actualizarPagoInscripcion totalInscripcion" name="actualizarPagoInscripcion" value="" readonly>    
+                      <!-- <input type="hidden" id="actualizarPrecioInscripcion" name="actualizarPrecioInscripcion">                     -->
                     </div>
                   </div>
                 </div>
+
+                <div class="container-fluid">
+
+                  <div class="form-row">
+                          
+                    <div class="form-group col-md-3">
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox">
+                        <label class="form-check-label" for="gridCheck">
+                          Enero
+                        </label>
+                      </div>
+                    </div>
+
+                    <div class="form-group col-md-3">
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox">
+                        <label class="form-check-label" for="gridCheck">
+                          Febrero
+                        </label>
+                      </div>
+                    </div>
+
+                    <div class="form-group col-md-3">
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox">
+                        <label class="form-check-label" for="gridCheck">
+                          Marzo
+                        </label>
+                      </div>
+                    </div>
+
+                    <div class="form-group col-md-3">
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox">
+                        <label class="form-check-label" for="gridCheck">
+                          Abril
+                        </label>
+                      </div>
+                    </div>
+ 
+                  </div>
+                  <div class="form-row">
+                          
+                    <div class="form-group col-md-3">
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox">
+                        <label class="form-check-label" for="gridCheck">
+                          Mayo
+                        </label>
+                      </div>
+                    </div>
+
+                    <div class="form-group col-md-3">
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox">
+                        <label class="form-check-label" for="gridCheck">
+                          Junio
+                        </label>
+                      </div>
+                    </div>
+
+                    <div class="form-group col-md-3">
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox">
+                        <label class="form-check-label" for="gridCheck">
+                          Julio
+                        </label>
+                      </div>
+                    </div>
+
+                    <div class="form-group col-md-3">
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox">
+                        <label class="form-check-label" for="gridCheck">
+                          Agosto
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-row">
+                            
+                    <div class="form-group col-md-3">
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox">
+                        <label class="form-check-label" for="gridCheck">
+                          Septiembre
+                        </label>
+                      </div>
+                    </div>
+
+                    <div class="form-group col-md-3">
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox">
+                        <label class="form-check-label" for="gridCheck">
+                          Octubre
+                        </label>
+                      </div>
+                    </div>
+
+                    <div class="form-group col-md-3">
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox">
+                        <label class="form-check-label" for="gridCheck">
+                          Noviembre
+                        </label>
+                      </div>
+                    </div>
+
+                    <div class="form-group col-md-3">
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox">
+                        <label class="form-check-label" for="gridCheck">
+                          Diciembre
+                        </label>
+                      </div>
+                    </div>
+  
+                  </div>
+                </div>
+
+
                 <div class="form-row">
                   <div class="form-group col-md-6">
                     <label>Promociones</label>
@@ -183,29 +304,31 @@
                               <option value="<?php echo $value['id_descuento']?>"><?php echo $value['tipo_descuento']?></option>        
                             <?php 
                             }
+                          
                         ?>
                     </select> 
                   </div>
                   <div class="form-group col-md-6">
-                      <label for="">Precio promocion</label>
+                      <label for="">Porcentaje Promocion</label>
                       <div class="input-group">
                         <div class="input-group-prepend">
-                            <span class="input-group-text">$</span>  
+                            <span class="input-group-text">%</span>  
                           </div>
-                        <input type="text" class="form-control text-right actualizarPrecioDescuento" value="" readonly>
-                        <input type="hidden" id="precioDescuentoActualizado" name="precioDescuentoActualizado">  
+                        <input type="text" class="form-control text-right actualizarTotalDescuento totalDescuento" name="actualizarTotalDescuento" value="" readonly>
+                        <!-- <input type="hidden" id="precioDescuentoActualizado" name="precioDescuentoActualizado">   -->
                       </div>
                   </div>
+                  
                   <div class="form-row">
-                      <div class="form-group col-md-6 float-right">
-                          <label for="">Total Pago:</label>
-                          <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">$</span>  
-                            </div>
-                            <input type="text" class="form-control text-right pagoTotalActualizado" id="pagoTotalActualizado" value="" readonly>  
-                            <input type="hidden" id="nuevoTotalPago"  name="nuevoTotalPago">                   
+                      <button type="" class="btn btn-success btn-block col-md-6 mt-4 mb-3 verTotalPago"><i class="fas fa-dollar-sign"></i>Calcular </button>       
+                      <div class="form-group col-md-6">
+                        <label for="">Total a pagar:</label>
+                        <div class="input-group">
+                          <div class="input-group-prepend">
+                              <span class="input-group-text">$</span>  
                           </div>
+                          <input type="text" class="form-control float-right text-right totalPagar" name="nuevoTotalPago" value="" readonly>  
+                         </div>
                       </div>
                   </div>
                 </div>
@@ -216,10 +339,10 @@
               </div> 
               <?php
                   // $ajustes = null;
-                  $tipoPersona = 'clientes';
-                  $pantalla = 'clientes';
-                  $editarPersona = new ControladorPersonas();
-                  $editarPersona->ctrActualizarPagoCliente($tipoPersona, $pantalla);
+                  // $tipoPersona = 'clientes';
+                  // $pantalla = 'clientes';
+                  // $editarPersona = new ControladorPersonas();
+                  // $editarPersona->ctrActualizarPagoCliente($tipoPersona, $pantalla);
 
                   // echo "<pre>";
                   // var_dump($editarPersona);
@@ -231,6 +354,7 @@
       </div>
     </div>
   </div> 
+
 
   <!-- =======================================
            MODAL AGREGAR  CLIENTE

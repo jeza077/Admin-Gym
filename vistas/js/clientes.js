@@ -351,7 +351,7 @@ $('.btnEditarPago').click(function (e) {
         title: 'Actualizar Pago',
         html: '<p class="SwalParrafo">¿Deseás mantener el Tipo de Inscripcion actual?</p>' +
             '<button type="button" role="button" tabindex="0" class="SwalBtnMantenerInscripcion btn btn-success customSwalBtn">' + 'Si, mantener' + '</button>' +
-            '<button type="button" role="button" tabindex="0" class="SwalBtnCambiarInscripcion btn btn-danger customSwalBtn" data-toggle="modal" data-target="#modalEditarCliente">' + 'No, cambiar' + '</button>' +
+            '<button type="button" role="button" tabindex="0" class="SwalBtnCambiarInscripcion btn btn-danger customSwalBtn" data-toggle="modal" data-target="#modalEditarPagos">' + 'No, cambiar' + '</button>' +
             '<button type="button" role="button" tabindex="0" class="SwalBtnCancelar btn btn-secondary customSwalBtn">' + 'Cancelar' + '</button>',
         width: 600,
         allowOutsideClick: false,

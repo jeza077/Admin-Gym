@@ -50,7 +50,6 @@
                     <th scope="col">Nombre</th>
                     <th scope="col">Tipo Cliente</th>
                     <th scope="col">Correo</th>
-                    <th scope="col">Tipo Inscripcion</th>
                     <th scope="col">Telefono</th>
                     <th scope="col">Fecha Creacion</th>
                     <th scope="col">Estado</th>
@@ -88,12 +87,6 @@
                           <td>'.$value["nombre"].'</td>
                           <td>'.$value["tipo_cliente"].'</td>
                           <td>'.$value["correo"].'</td>';
-
-                          if ($value['tipo_inscripcion'] == null) {
-                            echo  '<td>**Ninguna**</td>';
-                          } else {
-                            echo  '<td>'.$value["tipo_inscripcion"].'</td>';
-                          }
 
                       echo  '<td>'.$value["telefono"].'</td>';
  
