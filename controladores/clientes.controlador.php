@@ -84,6 +84,7 @@ class ControladorClientes{
 					$vigenciaCliente = $parametros['valor'];
 					
 					date_default_timezone_set("America/Tegucigalpa");
+					$fechaHoy = date('Y-m-d');
 					$fechaVencimientoCliente = date("Y-m-d", strtotime('+'.$vigenciaCliente.' days'));
 					
 					$tabla3 = "tbl_pagos_cliente";
@@ -93,6 +94,7 @@ class ControladorClientes{
 								   "pago_descuento" => $datos["pago_descuento"],
 								   "pago_inscripcion" => $datos["pago_inscripcion"],
 								   "pago_total" => $datos["pago_total"],
+								   "fecha_ultimo_pago" => $fechaHoy,
 								   "fecha_vencimiento" => $fechaVencimientoCliente);
 	
 					$respuestaPago = ModeloClientes::mdlCrearPago($tabla3, $datos);
@@ -277,13 +279,104 @@ class ControladorClientes{
 	/*=============================================
 		MOSTRAR CLIENTES PAGOS
 	=============================================*/
-	static public function ctrMostrarClientesPagos($tabla, $item, $valor){
+	static public function ctrMostrarClientesPagos($tabla, $item, $valor, $max){
 		$tabla1 = "tbl_personas";
 		$tabla2 = $tabla;
 
-		$respuesta = ModeloClientes::mdlMostrarClientesPagos($tabla1, $tabla2, $item, $valor);
+		$respuesta = ModeloClientes::mdlMostrarClientesPagos($tabla1, $tabla2, $item, $valor, $max);
 
 		return $respuesta;
+	}
+
+
+	/*=============================================
+		MOSTRAR PAGOS POR CLIENTE
+	=============================================*/
+	static public function ctrMostrarPagoPorCliente($tabla, $item, $valor){
+		$tabla1 = "tbl_personas";
+		$tabla2 = $tabla;
+
+		$respuesta = ModeloClientes::mdlMostrarPagoPorCliente($tabla1, $tabla2, $item, $valor);
+
+		return $respuesta;
+	}
+
+
+	
+	/*=============================================
+		**** ACTUALIZAR PAGO POR CLIENTE ****
+	=============================================*/
+	static public function ctrActualizarPagoCliente($idClientePago){
+
+		if(isset($idClientePago)){
+
+			$tabla1 = "tbl_personas";
+			$tabla2 = "tbl_clientes";
+			$item = 'id_personas';
+			$valor = $idClientePago;
+			$respuesta = ModeloClientes::mdlMostrarPagoPorCliente($tabla1, $tabla2, $item, $valor);
+
+			// return $respuesta['id_cliente'];
+
+			date_default_timezone_set("America/Tegucigalpa");
+			
+			$fechaHoy = date('Y-m-d 00:00:00');
+			$fechaVencimiento = $respuesta['fecha_vencimiento'];
+			$tipoInscripcion = $respuesta['tipo_inscripcion'];
+			$precioInscripcion = $respuesta['precio_inscripcion'];
+			$idCliente = $respuesta['id_cliente'];
+			
+			if ($tipoInscripcion == 'mensual') {
+				$valorVigencia = 'VIGENCIA_CLIENTE_MES';
+				
+			} else if ($tipoInscripcion == 'quincenal'){
+				$valorVigencia = 'VIGENCIA_CLIENTE_QUINCENAL';
+				
+			} else {
+				$valorVigencia = 'VIGENCIA_CLIENTE_DIA';
+								
+			}
+
+			$item = 'parametro';
+			$parametros = ControladorUsuarios::ctrMostrarParametros($item, $valorVigencia);
+			// var_dump($parametros);
+			// return $parametros;
+
+			$vigenciaCliente = $parametros['valor'];
+
+			// return $fechaVencimiento;
+			if($fechaHoy > $fechaVencimiento || $fechaHoy == $fechaVencimiento){
+				$fechaVencimientoCliente = date("Y-m-d 00:00:00", strtotime('+'.$vigenciaCliente.' days'));
+
+				// return 'hoy es mayor:  '.$fechaVencimientoCliente;
+
+			// } 
+			// else if($fechaHoy == $fechaVencimiento) {
+			// 	// $fechaVencimientoCliente = 
+			// 	return 'igual';
+			}else {
+
+				$fechaVencimientoCliente = date("Y-m-d", strtotime($fechaVencimiento.'+'.$vigenciaCliente.' days'));
+				// return 'hoy es menor:  '.$fechaVencimientoCliente;
+			}
+
+			$tabla = 'tbl_pagos_cliente';
+
+			// $idU =  $_SESSION['id_usuario'];
+			// return $idU;
+
+			$datos = array('id_cliente' => $idCliente,
+							'pago_inscripcion' => $precioInscripcion,
+							'pago_total' => $precioInscripcion,
+							'fecha_ultimo_pago' => $fechaHoy,
+							'fecha_vencimiento' => $fechaVencimientoCliente,
+							'creado_por' => 1);
+
+			$respuesta = ModeloClientes::mdlActualizarPagoCliente($tabla, $datos);
+
+
+			return $respuesta;	
+		}
 	}
 
 

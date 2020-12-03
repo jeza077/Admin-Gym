@@ -4,7 +4,7 @@ $('.tipoDocumentoCliente').change(function (e) {
     $('.idCliente').val("");
 
     var valorTipoDocumento =$(this).val();
-    console.log(valorTipoDocumento);
+    // console.log(valorTipoDocumento);
 
     if(valorTipoDocumento === 3){
         $('.idCliente').keydown(sinNumeros);
@@ -307,8 +307,8 @@ $('.verTotalPago').click(function (e) {
             $('input[name=nuevoPrecioDescuento]').attr('value', descuento);
             
         }
-        console.log('desc',descuento);
-        console.log('suma',suma)
+        // console.log('desc',descuento);
+        // console.log('suma',suma)
     
         $('.totalPagar').val(suma);
         
@@ -372,8 +372,10 @@ actualizarSumaTotal($('.descuentoNuevo'))
 /*=============================================
         EDITAR PAGOS CLIENTE
 =============================================*/
-$('.btnEditarPago').click(function (e) { 
+$(document).on('click', '.btnEditarPago', function (e) { 
     e.preventDefault();
+    idClientePago = $(this).attr('idCliente');
+    // console.log(idClientePago)
 
     Swal.fire({
         title: 'Actualizar Pago',
@@ -388,16 +390,96 @@ $('.btnEditarPago').click(function (e) {
     });
 });
 
+//***** ======================================
+//    PROCESAR PAGO SIN CAMBIAR INSCRIPCION 
+// ========================================= *//
 $(document).on('click', '.SwalBtnMantenerInscripcion', function (e) { 
     e.preventDefault();
-    console.log('click')
-    // Swal.showLoading()
+    // console.log('click')
+    Swal.fire({
+        title: 'Procesando...',
+        allowOutsideClick: false
+    });
+    Swal.showLoading()
+    // Swal.close();
+    // return;
+
+    
+    setTimeout(function () {
+        var datos = new FormData();
+        datos.append("idClientePagoMantener", idClientePago);
+        
+        $.ajax({
+    
+            url:"ajax/clientes.ajax.php",
+            method: "POST",
+            data: datos,
+            cache: false,
+            contentType: false,
+            processData: false,  
+            dataType: "json",
+            success: function(respuesta) {
+                console.log(respuesta);
+    
+                if(respuesta == true){
+                    Swal.fire({
+                        title: 'El pago se agrego correctamente',
+                        icon: 'success',
+                        // width: 600,
+                        allowOutsideClick: false,
+                        showCancelButton: false,
+                        showConfirmButton: true,
+                        confirmButtonText: 'Cerrar'
+                    }).then((result)=>{
+                        if(result.value){
+                            window.location = "pagos-cliente";
+                        }
+                    });;   
+                }
+                
+            }
+        });
+        // $('.alert').remove();
+    }, 2000);
+    
+    
 
 });
 
 $(document).on('click', '.SwalBtnCambiarInscripcion', function (e) { 
     e.preventDefault();
     // console.log('click')
+    var datos = new FormData();
+    datos.append("idClientePago", idClientePago);
+
+    $.ajax({
+    
+        url:"ajax/clientes.ajax.php",
+        method: "POST",
+        data: datos,
+        cache: false,
+        contentType: false,
+        processData: false,  
+        dataType: "json",
+        success: function(respuesta) {
+
+            console.log(respuesta);
+            // return;
+            
+            $('#idEditarCliente').val(respuesta["id_persona"])
+
+            $('#actualizarDescuento').html(respuesta["tipo_descuento"])
+            $('#actualizarDescuento').val(respuesta["id_descuento"])
+            
+             $('#actualizarInscripcion').html(respuesta["tipo_inscripcion"])
+            $('#actualizarInscripcion').val(respuesta["id_inscripcion"])
+
+            $('.actualizarPrecioDescuento').val(respuesta["pago_descuento"])
+            $('.actualizarPagoInscripcion').val(respuesta["pago_inscripcion"])
+            $('.pagoTotalActualizado').val(respuesta["pago_total"])
+            
+        }
+    });
     Swal.close();
     // Swal.hideLoading()
 });

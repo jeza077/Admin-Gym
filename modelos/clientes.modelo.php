@@ -141,11 +141,28 @@ class ModeloClientes{
 		MOSTRAR CLIENTES PAGOS
 	=============================================*/
 	
-	static public function mdlMostrarClientesPagos($tabla1, $tabla2, $item, $valor){
+	static public function mdlMostrarClientesPagos($tabla1, $tabla2, $item, $valor, $max){
 
-		// if($item != null){
+		if($max != null){
 
-			$stmt = Conexion::conectar()->prepare("SELECT p.*, c.*, d.tipo_documento, m.tipo_matricula, m.precio_matricula, pd.tipo_descuento, pd.valor_descuento, i.tipo_inscripcion,i.precio_inscripcion, i.fecha_creacion, pc.* FROM $tabla1 as p\n"
+			$stmt = Conexion::conectar()->prepare("SELECT p.*, c.*, d.tipo_documento, m.tipo_matricula, pd.tipo_descuento, i.tipo_inscripcion, pc.pago_matricula, pc.pago_descuento, pc.pago_inscripcion, pc.pago_total, MAX(pc.fecha_ultimo_pago) as fecha_ultimo_pago, MAX(pc.fecha_vencimiento) as fecha_vencimiento FROM $tabla1 as p\n"
+			. "LEFT JOIN $tabla2 as c ON p.id_personas = c.id_persona\n"
+			. "LEFT JOIN tbl_documento as d ON p.id_documento = d.id_documento\n"
+			. "LEFT JOIN tbl_matricula as m ON c.id_matricula = m.id_matricula\n"
+			. "LEFT JOIN tbl_inscripcion as i ON c.id_inscripcion = i.id_inscripcion\n"
+			. "LEFT JOIN tbl_descuento as pd ON c.id_descuento = pd.id_descuento\n"
+			. "LEFT JOIN tbl_pagos_cliente as pc ON c.id_cliente = pc.id_cliente\n"
+			. "WHERE $item = :$item\n"
+			. "GROUP BY c.id_cliente"); 
+
+			$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+			$stmt -> execute();
+			return $stmt -> fetchAll();
+
+		} else {
+
+	
+			$stmt = Conexion::conectar()->prepare("SELECT p.*, c.*, d.tipo_documento, m.tipo_matricula, pd.tipo_descuento, i.tipo_inscripcion, pc.* FROM $tabla1 as p\n"
 			. "LEFT JOIN $tabla2 as c ON p.id_personas = c.id_persona\n"
 			. "LEFT JOIN tbl_documento as d ON p.id_documento = d.id_documento\n"
 			. "LEFT JOIN tbl_matricula as m ON c.id_matricula = m.id_matricula\n"
@@ -157,20 +174,52 @@ class ModeloClientes{
 			$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
 			$stmt -> execute();
 			return $stmt -> fetchAll();
+		}
 
-		// } else {
+		$stmt -> close();
+		$stmt = null;	
 
-		// 	$stmt = Conexion::conectar()->prepare("SELECT p.*, c.*, i.fecha_creacion, i.tipo_inscripcion, pd.tipo_descuento, valor_descuento, pc.* FROM $tabla1 as p\n"
-        //     . "LEFT JOIN $tabla2 as c ON p.id_personas = c.id_persona\n"
-        //     . "LEFT JOIN tbl_matricula as m ON c.id_matricula = m.id_matricula\n"
-        //     . "LEFT JOIN tbl_inscripcion as i ON c.id_inscripcion = i.id_inscripcion\n"
+	}
+
+
+	 /*=============================================
+		MOSTRAR PAGOS POR CLIENTE
+	=============================================*/
+	
+	static public function mdlMostrarPagoPorCliente($tabla1, $tabla2, $item, $valor){
+
+		// if($max != null){
+
+			$stmt = Conexion::conectar()->prepare("SELECT p.*, c.*, d.tipo_documento, m.tipo_matricula, pd.tipo_descuento, i.tipo_inscripcion, i.precio_inscripcion, pc.pago_matricula, pc.pago_descuento, pc.pago_inscripcion, pc.pago_total, MAX(pc.fecha_vencimiento) as fecha_vencimiento FROM $tabla1 as p\n"
+			. "LEFT JOIN $tabla2 as c ON p.id_personas = c.id_persona\n"
+			. "LEFT JOIN tbl_documento as d ON p.id_documento = d.id_documento\n"
+			. "LEFT JOIN tbl_matricula as m ON c.id_matricula = m.id_matricula\n"
+			. "LEFT JOIN tbl_inscripcion as i ON c.id_inscripcion = i.id_inscripcion\n"
+			. "LEFT JOIN tbl_descuento as pd ON c.id_descuento = pd.id_descuento\n"
+			. "LEFT JOIN tbl_pagos_cliente as pc ON c.id_cliente = pc.id_cliente\n"
+			. "WHERE $item = :$item\n"
+			. "GROUP BY c.id_cliente"); 
+
+			$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+			$stmt -> execute();
+			return $stmt -> fetch();
+
+		// } 
+		// else {
+
+	
+		// 	$stmt = Conexion::conectar()->prepare("SELECT p.*, c.*, d.tipo_documento, m.tipo_matricula, pd.tipo_descuento, i.tipo_inscripcion, pc.* FROM $tabla1 as p\n"
+		// 	. "LEFT JOIN $tabla2 as c ON p.id_personas = c.id_persona\n"
+		// 	. "LEFT JOIN tbl_documento as d ON p.id_documento = d.id_documento\n"
+		// 	. "LEFT JOIN tbl_matricula as m ON c.id_matricula = m.id_matricula\n"
+		// 	. "LEFT JOIN tbl_inscripcion as i ON c.id_inscripcion = i.id_inscripcion\n"
 		// 	. "LEFT JOIN tbl_descuento as pd ON c.id_descuento = pd.id_descuento\n"
 		// 	. "LEFT JOIN tbl_pagos_cliente as pc ON c.id_cliente = pc.id_cliente\n"
-		//     . "WHERE p.tipo_persona = 'clientes'");
-			
+		// 	. "WHERE $item = :$item"); 
+
+		// 	$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
 		// 	$stmt -> execute();
 		// 	return $stmt -> fetchAll();
-
 		// }
 
 		$stmt -> close();
@@ -283,17 +332,18 @@ class ModeloClientes{
 	=============================================*/
 	static public function mdlCrearPago($tabla3, $datos){
 
-		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla3 (id_cliente, pago_matricula, pago_descuento, pago_inscripcion, pago_total, fecha_vencimiento) VALUES (:id_cliente, :pago_matricula, :pago_descuento, :pago_inscripcion, :pago_total, :fecha_vencimiento)");
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla3 (id_cliente, pago_matricula, pago_descuento, pago_inscripcion, pago_total, fecha_ultimo_pago, fecha_vencimiento) VALUES (:id_cliente, :pago_matricula, :pago_descuento, :pago_inscripcion, :pago_total, :fecha_ultimo_pago, :fecha_vencimiento)");
 
 		$stmt->bindParam(":id_cliente", $datos["id_cliente"], PDO::PARAM_INT);
 		$stmt->bindParam(":pago_matricula", $datos["pago_matricula"], PDO::PARAM_STR);
 		$stmt->bindParam(":pago_descuento", $datos["pago_descuento"], PDO::PARAM_STR);
 		$stmt->bindParam(":pago_inscripcion", $datos["pago_inscripcion"], PDO::PARAM_STR);
 		$stmt->bindParam(":pago_total", $datos["pago_total"], PDO::PARAM_STR);
+		$stmt->bindParam(":fecha_ultimo_pago", $datos["fecha_ultimo_pago"], PDO::PARAM_STR);
 		$stmt->bindParam(":fecha_vencimiento", $datos["fecha_vencimiento"], PDO::PARAM_STR);
 
 		if($stmt->execute()){
-
+			
 			return true;	
 
 		}else{
@@ -344,6 +394,38 @@ class ModeloClientes{
 		}else{
 
 			return false;	
+
+		}
+
+		$stmt -> close();
+
+		$stmt = null;
+
+	}
+
+
+	/*=============================================
+	ACTUALIZAR PAGO CLIENTE (MANTENIENDO INSCRIPCION)
+	=============================================*/
+
+	static public function mdlActualizarPagoCliente($tabla1, $datos){
+
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla1(id_cliente, pago_inscripcion, pago_total, fecha_ultimo_pago, fecha_vencimiento,creado_por) VALUES(:id_cliente, :pago_inscripcion, :pago_total, :fecha_ultimo_pago, :fecha_vencimiento, :creado_por)");
+
+		$stmt->bindParam(":id_cliente", $datos["id_cliente"], PDO::PARAM_INT);
+		$stmt->bindParam(":pago_inscripcion", $datos["pago_inscripcion"], PDO::PARAM_STR);
+		$stmt->bindParam(":pago_total", $datos["pago_total"], PDO::PARAM_STR);
+		$stmt->bindParam(":fecha_ultimo_pago", $datos["fecha_ultimo_pago"], PDO::PARAM_STR);
+		$stmt->bindParam(":fecha_vencimiento", $datos["fecha_vencimiento"], PDO::PARAM_STR);
+		$stmt->bindParam(":creado_por", $datos["creado_por"], PDO::PARAM_STR);
+
+		if($stmt -> execute()){
+
+			return true;
+		
+		}else{
+
+			return $stmt->errorInfo();	
 
 		}
 

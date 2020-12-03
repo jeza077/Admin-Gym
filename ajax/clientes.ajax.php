@@ -28,23 +28,42 @@ class AjaxClientes{
         echo json_encode($respuesta);
     }
 
+
      /*=============================================
-           EDITAR PAGO CLIENTE
+        EDITAR PAGO CLIENTE MANTENIENDO INSCRIPCION
     =============================================*/
     
-    
-    public $idPago;
+    public $idClientePagoMantener;
+
+    public function ajaxEditarPagoClienteMantenerInscripcion(){
+
+        // $tabla = "tbl_clientes";
+        // $item = "id_personas";
+        $idClientePago = $this->idClientePagoMantener;
+        //$max = true;
+        
+        $respuesta = ControladorClientes::ctrActualizarPagoCliente($idClientePago);
+
+        echo json_encode($respuesta);
+    }
+
+
+
+
+     /*=============================================
+        EDITAR PAGO CLIENTE CAMBIANDO INSCRIPCION
+    =============================================*/
+
+    public $idClientePago;
 
     public function ajaxEditarPagoCliente(){
 
         $tabla = "tbl_clientes";
         $item = "id_personas";
-        $valor = $this->idPago;
+        $valor = $this->idClientePago;
+        $max = true;
         
-        $respuesta = ControladorClientes::ctrMostrarClientes($tabla, $item, $valor);
-        // echo "<pre>";
-        // var_dump($respuesta);
-        // echo "</pre>";
+        $respuesta = ControladorClientes::ctrMostrarPagoPorCliente($tabla, $item, $valor);
 
         echo json_encode($respuesta);
     }
@@ -74,20 +93,29 @@ class AjaxClientes{
 }
 
 /*=============================================
+EDITAR PAGO CLIENTE MANTENIENDO INSCRIPCION
+=============================================*/
+if(isset($_POST["idClientePagoMantener"])){
+    $pagoCliente = new AjaxClientes();
+    $pagoCliente->idClientePagoMantener = $_POST["idClientePagoMantener"];
+    $pagoCliente->ajaxEditarPagoClienteMantenerInscripcion();
+}
+
+/*=============================================
+    EDITAR PAGO CLIENTE CAMBIANDO INSCRIPCION
+=============================================*/
+if(isset($_POST["idClientePago"])){
+    $pagoCliente = new AjaxClientes();
+    $pagoCliente->idClientePago = $_POST["idClientePago"];
+    $pagoCliente->ajaxEditarPagoCliente();
+}
+/*=============================================
     EDITAR CLIENTE
 =============================================*/
 if(isset($_POST["idEditarCliente"])){
     $cliente = new AjaxClientes();
     $cliente->idEditarCliente = $_POST["idEditarCliente"];
     $cliente->ajaxEditarCliente();
-}
-/*=============================================
-    EDITAR PAGO CLIENTE
-=============================================*/
-if(isset($_POST["idPago"])){
-    $cliente = new AjaxClientes();
-    $cliente->idPago = $_POST["idPago"];
-    $cliente->ajaxEditarPagoCliente();
 }
 /*=============================================
     MOSTRAR DINAMICO
