@@ -67,3 +67,38 @@ $(".btnEditarRol").click(function(){
 
 
 });
+
+
+/*===================================
+MODIFICAR MATRIUCLA
+====================================*/
+$(".btnEditarMatricula").click(function(){
+    
+    var idMatricula = $(this).attr("editarIdMatricula");
+
+    var datos = new FormData();
+    datos.append("idMatricula", idMatricula);
+
+    $.ajax({
+
+        url:"ajax/parametro.ajax.php",
+        method:"POST",
+        data: datos,
+        cache: false,
+        contentType:false,
+        processData:false,
+        dataType: "json",
+        success:function(respuesta){ 
+
+            $('#editarMatricula').val(respuesta['tipo_matrula']);
+            $('#editarPrecioMatricula').val(respuesta['precio_matricula']);
+            $('#editarIdMatricula').val(respuesta['id_matricula']);
+         
+        } 
+
+    });
+
+
+
+});
+

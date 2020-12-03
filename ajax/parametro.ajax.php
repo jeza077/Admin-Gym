@@ -16,6 +16,7 @@ class AjaxParametro{
     ==============================================*/
     public $idParametro;
     public $idRol;
+    public $idMatricula;
 
     public function ajaxEditarParametro(){
 
@@ -41,6 +42,19 @@ class AjaxParametro{
     
     }  
 
+    public function ajaxEditarMatricula(){
+
+        $item = "id_matricula";
+
+        $valor = $this->idMatricula;
+
+        $respuesta = ControladorMantenimientos::ctrMostrarMatricula($item,$valor);
+
+        echo json_encode($respuesta);
+    
+    }  
+
+
 
     
 }    
@@ -65,7 +79,19 @@ class AjaxParametro{
         $editar = new AjaxParametro();
         $editar-> idRol = $_POST["idRol"];
         $editar-> ajaxEditarRol();
+    }    
+    
+       /*========================================
+        Editar Matricula
+    ==========================================*/ 
+
+    if(isset($_POST["idMatricula"])){ 
+
+        $editar = new AjaxParametro();
+        $editar-> idMatricula = $_POST["idMatricula"];
+        $editar-> ajaxEditarMatricula();
     }     
+    
     
 
  

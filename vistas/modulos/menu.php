@@ -214,7 +214,7 @@
                 </li>
                 <li class="nav-item">
                   <a href="permisos-rol" class="nav-link">
-                    <i class="fas fa-th-list nav-icon"></i>
+                    <i class="fas fa-circle nav-icon"></i>
                     <p>Permisos Rol</p>
                   </a>
                 </li>
