@@ -1,102 +1,76 @@
 <div class="content-wrapper">
 
-  <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1>Inscripciones</h1>
-          </div>
-          <div class="col-sm-6">
-       
-          </div>
-        </div>
-      </div><!-- /.container-fluid -->
-  </section>  
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                <h1>Inscripciones</h1>
+                </div>
+                <div class="col-sm-6">                       
+                <button class="btn btn-orange float-right"  data-toggle="modal" data-target="#modalNuevainscripcion">
+                    Nuevo       
+                </button>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>  
 
-     <section class="content">
+    <section class="content">
 
         <div class="card">
 
             <div class="card-body">
 
-                <div class="row">
-
-                    <div class=" col-sm-12">
-
-              
-                            <?php
-                            $descripcionEvento = " Consulto la pantalla de mantenimiento";
-                            $accion = "consulta";
-
-                            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
                 
-                            ?>
+                <?php
+                $descripcionEvento = " Consulto la pantalla de mantenimiento";
+                $accion = "consulta";
 
-                        <!--========================================================
-                                PARAMETROS
-                            ==========================================================-->   
-                    <div class="card-header">
-                        
+                $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
 
+                ?>
+
+                <!--========================================================
+                        PARAMETROS
+                    ==========================================================-->   
+
+                <table class="table table-striped table-bordered tablas text-center">
+                    
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Tipo de inscripcion</th>
+                            <th scope="col">Precio</th>
+                            <th scope="col">Estado</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>             
+                        <?php
+                                // $tabla = "tbl_inscripcion";
+                                $item = null;
+                                $valor = null;
                                 
-                      <div class="form-group">
+                                $inscripcion = ControladorMantenimientos:: ctrMostrarInscripcion($item,$valor);
+                                // var_dump($inscripcion);
 
-                      </div>
-
-                       
-                                <button class="btn btn-orange float-right"  data-toggle="modal" data-target="#modalNuevainscripcion">
-                                Nuevo       
-                                </button>
-
-                        
-
-                            <table class="table table-striped table-bordered tablas text-center">
+                                foreach ($inscripcion as $key => $value){
+                                echo '
+                                    <tr>
                                 
-                                <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Tipo de inscripcion</th>
-                                    <th scope="col">Precio</th>
-                                    <th scope="col">Estado</th>
-            
-                                </tr>
-                                </thead>
-                                <tbody>             
-                                <?php
-                                        // $tabla = "tbl_inscripcion";
-                                        $item = null;
-                                        $valor = null;
-                                        
-                                        $inscripcion = ControladorMantenimientos:: ctrMostrarInscripcion($item,$valor);
-                                        // var_dump($inscripcion);
-
-                                        foreach ($inscripcion as $key => $value){
-                                        echo '
-                                            <tr>
-                                        
-                                            <td>'.($key + 1).'</td>
-                                            <td>'.$value["tipo_inscripcion"].'</td>
-                                            <td>'.$value["precio_inscripcion"].'</td>';
-                                            if($value['estado'] != 0){
-                                                echo '<td><button class="btn btn-success btn-md btnActivar" idInscripcion="'.$value["id_inscripcion"].'" estadoInscripcion="0">Activado</button></td>';
-                                            }else{
-                                                echo '<td><button class="btn btn-danger btn-md btnActivar" idInscripcion="'.$value["id_inscripcion"].'" estadoInscripcion="1">Desactivado</button></td>';
-                                            } 
-                                            echo' 
-                                            
-                                            </tr> ';
-                                        }       
-                                ?>     
-                                </tbody>
-                            </table>
-                                
-                            </div>
-   
-                        
-
-                    </div>
-
-                </div>
+                                    <td>'.($key + 1).'</td>
+                                    <td>'.$value["tipo_inscripcion"].'</td>
+                                    <td>'.$value["precio_inscripcion"].'</td>';
+                                    if($value['estado'] != 0){
+                                        echo '<td><button class="btn btn-success btn-md btnActivar" idInscripcion="'.$value["id_inscripcion"].'" estadoInscripcion="0">Activado</button></td>';
+                                    }else{
+                                        echo '<td><button class="btn btn-danger btn-md btnActivar" idInscripcion="'.$value["id_inscripcion"].'" estadoInscripcion="1">Desactivado</button></td>';
+                                    } 
+                                    
+                                }       
+                        ?>     
+                    </tbody>
+                </table>
 
             </div>
 

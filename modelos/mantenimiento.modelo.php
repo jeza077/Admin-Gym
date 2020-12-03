@@ -122,6 +122,9 @@ class ModeloMantenimiento{
     }
 
 
+    // static public function mdlRevisarPermisosRol($item1, $valor1, $item2, $valor2){
+
+    // }
 
     /*====================================================
        Actualizar Rol

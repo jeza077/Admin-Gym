@@ -51,11 +51,11 @@ $(document).on('click', '.btnGuardarRol', function (e) {
                 //   window.location = "mantenimiento";
                     Swal.fire({
 
-                        icon: "question",
-                        title: "Agregue los permisos",
+                        icon: "info",
+                        title: "Por ultimo, agregue los permisos",
                         showConfirmButton: true,
-                        showCancelButton: true,
-                        confirmButtonText: "Si",
+                        showCancelButton: false,
+                        confirmButtonText: "Vamos",
                         cancelButtonText: "No, cerrar",
                         heightAuto: false,
                         allowOutsideClick: false
