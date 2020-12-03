@@ -44,17 +44,7 @@ $(document).on('change', '.tipoCliente', function () {
     }
    
 });
-// $('#datosCliente').hide();
-// $(document).on('change', '.editarTipoCliente', function () {
-//     var valor = $(this).val();
-//     // console.log(valor)
-//     if (valor == "Gimnasio") {
-//         $('#datosCliente').show();
-//     } else {
-//         $('#datosCliente').hide();
-//     }
-   
-// });
+
 //** ------------------------------------*/
 //         IMPRIMIR USUARIOS 
 // --------------------------------------*/ 
@@ -85,7 +75,7 @@ $('.btnEditarCliente').click(function () {
         dataType: "json",
         success: function(respuesta) {
 
-            console.log("respuesta", respuesta);
+            // console.log("respuesta", respuesta);
             
             $('#idEditarCliente').val(respuesta["id_persona"])
 
@@ -105,13 +95,23 @@ $('.btnEditarCliente').click(function () {
             $('#editarTipoCliente').html(respuesta["tipo_cliente"])
             $('#editarTipoCliente').val(respuesta["tipo_cliente"])
 
+            var tipoDeCliente = respuesta['tipo_cliente'];
+            // console.log(valor)
+            if (tipoDeCliente == "Ventas") {
+                $('#clientt').show();
+                
+            } else {
+                $('#clientt').hide();
+                
+            }
+
             $('#editarMatricula').html(respuesta["tipo_matricula"])
             $('#editarMatricula').val(respuesta["id_matricula"])
 
             $('#editarPromocion').html(respuesta["tipo_descuento"])
             $('#editarPromocion').val(respuesta["id_descuento"])
             
-             $('#editarInscripcion').html(respuesta["tipo_inscripcion"])
+            $('#editarInscripcion').html(respuesta["tipo_inscripcion"])
             $('#editarInscripcion').val(respuesta["id_inscripcion"])
 
             $('.editarPrecioMatricula').val(respuesta["pago_matricula"])

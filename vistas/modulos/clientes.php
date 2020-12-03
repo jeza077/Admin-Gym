@@ -119,119 +119,6 @@
         </div>
     </section>
   </div>
-
-  <!-- =======================================
-           MODAL ACTUALIZAR PAGO CLIENTE
-  ======================================----->
-
-  <div class="modal fade" id="modalPagosCliente" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Pago Cliente</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-          <div class="modal-body">
-            <form role="form" method="post" class="formulario">
-              <div class="container-fluid mt-4">
-                <div class="form-row">
-                  <div class="form-group col-md-6"> 
-                    <label>Tipo inscripcion</label>
-                    <select class="form-control select2 actualizarInscripcion" style="width: 100%;" name="actualizarInscripcion">
-                        <option value="" id="actualizarInscripcion"></option>
-                        <?php 
-                            $tabla = "tbl_inscripcion";
-                            $item = null;
-                            $valor = null;
-                            
-
-                            $inscripciones = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
-
-                            foreach ($inscripciones as $key => $value) { ?>
-                              <option value="<?php echo $value['id_inscripcion']?>"><?php echo $value['tipo_inscripcion']?></option>        
-                            <?php 
-                          }
-                        ?>
-                    </select>
-                  </div>
-                  <div class="form-group col-md-6">
-                    <label for="">Precio inscripcion</label>
-                    <div class="input-group">
-                      <div class="input-group-prepend">
-                          <span class="input-group-text">$</span>  
-                        </div>
-                      <input type="text" class="form-control text-right actualizarPagoInscripcion" value="" readonly>    
-                      <input type="hidden" id="precioInscripcionActualizado" name="precioInscripcionActualizado">                    
-                    </div>
-                  </div>
-                </div>
-                <div class="form-row">
-                  <div class="form-group col-md-6">
-                    <label>Promociones</label>
-                    <select class="form-control select2 descuentoNuevo" style="width: 100%;" name="actualizarDescuento">
-                        <option value="" id="actualizarDescuento"></option>
-                        <?php 
-                            $tabla = "tbl_descuento";
-                            $item = null;
-                            $valor = null;
-
-                            $matriculas = ControladorClientes::ctrMostrar($tabla, $item, $valor);
-
-                            foreach ($matriculas as $key => $value) { ?>
-                              <option value="<?php echo $value['id_descuento']?>"><?php echo $value['tipo_descuento']?></option>        
-                            <?php 
-                            }
-                        ?>
-                    </select> 
-                  </div>
-                  <div class="form-group col-md-6">
-                      <label for="">Precio promocion</label>
-                      <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">$</span>  
-                          </div>
-                        <input type="text" class="form-control text-right actualizarPrecioDescuento" value="" readonly>
-                        <input type="hidden" id="precioDescuentoActualizado" name="precioDescuentoActualizado">  
-                      </div>
-                  </div>
-                  <div class="form-row">
-                      <div class="form-group col-md-6 float-right">
-                          <label for="">Total Pago:</label>
-                          <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">$</span>  
-                            </div>
-                            <input type="text" class="form-control text-right pagoTotalActualizado" id="pagoTotalActualizado" value="" readonly>  
-                            <input type="hidden" id="nuevoTotalPago"  name="nuevoTotalPago">                   
-                          </div>
-                      </div>
-                  </div>
-                </div>
-              </div>
-              <div class="form-group mt-4 float-right">
-                <button type="" class="btn btn-primary">Actualiazar pago</button>
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
-              </div> 
-              <?php
-                  // $ajustes = null;
-                  $tipoPersona = 'clientes';
-                  $pantalla = 'clientes';
-                  $editarPersona = new ControladorPersonas();
-                  $editarPersona->ctrActualizarPagoCliente($tipoPersona, $pantalla);
-
-                  // echo "<pre>";
-                  // var_dump($editarPersona);
-                  // echo "</pre>";
-                  // return;
-                ?>
-            </form>
-          </div>
-      </div>
-    </div>
-  </div> 
-
   <!-- =======================================
            MODAL AGREGAR  CLIENTE
   ======================================----->
@@ -493,7 +380,7 @@
               <li class="nav-item" role="presentation">
                 <a class="nav-link active" id="datosEditarPersona" data-toggle="tab" href="#editarPersona" role="tab" aria-controls="home" aria-selected="true">Datos personales</a>
               </li>
-              <li class="nav-item" role="presentation">
+              <li class="nav-item" id="clientt" role="presentation">
                 <a class="nav-link" id="datosEditarCliente" data-toggle="tab" href="#editarCliente" role="tab" aria-controls="profile" aria-selected="false">Datos Cliente</a>
               </li>
             </ul>
@@ -576,15 +463,15 @@
                     <div class="form-row">
                       <div class="form-group col-md-3">
                         <label>Tipo Cliente</label>
-                        <select class="form-control select2" name="editarTipoCliente" style="width: 100%;" required>
-                          <option value="" id="editarTipoCliente"></option>
+                        <select class="form-control select2 tipoDeCliente" name="editarTipoCliente" style="width: 100%;" required>
+                          <option value="tipoCl" id="editarTipoCliente"></option>
                           <option value="Gimnasio">Clientes del gimnasio</option>
                           <option value="Ventas">Cliente de ventas</option>
                         </select>
                       </div>
                     </div>
                     
-                  <div id="datosCliente">
+                  <div id="datosCliente2">
                     <div class="form-row">
                       <div class="form-group col-md-6">
                           <label>Tipo matricula</label>
