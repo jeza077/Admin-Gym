@@ -10,13 +10,13 @@ class ModeloClientes{
 
 		if ($datos['tipo_cliente'] == "Gimnasio"){
 	
-			$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(id_persona, tipo_cliente, id_inscripcion, id_matricula, id_descuento) VALUES (:id_persona, :tipo_cliente, :id_inscripcion, :id_matricula, :id_descuento)");
+			$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(id_persona, tipo_cliente, id_matricula) VALUES (:id_persona, :tipo_cliente, :id_matricula)");
 	
 			$stmt->bindParam(":id_persona", $datos["id_persona"], PDO::PARAM_INT);
 			$stmt->bindParam(":tipo_cliente", $datos["tipo_cliente"], PDO::PARAM_STR);
-			$stmt->bindParam(":id_inscripcion", $datos["id_inscripcion"], PDO::PARAM_INT);
 			$stmt->bindParam(":id_matricula", $datos["id_matricula"], PDO::PARAM_INT);
-			$stmt->bindParam(":id_descuento", $datos["id_descuento"], PDO::PARAM_INT);
+			// $stmt->bindParam(":id_inscripcion", $datos["id_inscripcion"], PDO::PARAM_INT);
+			// $stmt->bindParam(":id_descuento", $datos["id_descuento"], PDO::PARAM_INT);
 	
 			if($stmt->execute()){
 	
@@ -117,11 +117,11 @@ class ModeloClientes{
 
 		// } else {
 
-			$stmt = Conexion::conectar()->prepare("SELECT p.*, c.*, i.fecha_creacion, i.tipo_inscripcion, pd.* FROM $tabla1 as p\n"
+			$stmt = Conexion::conectar()->prepare("SELECT p.*, c.*, m.* FROM $tabla1 as p\n"
             . "LEFT JOIN $tabla2 as c ON p.id_personas = c.id_persona\n"
             . "LEFT JOIN tbl_matricula as m ON c.id_matricula = m.id_matricula\n"
-            . "LEFT JOIN tbl_inscripcion as i ON c.id_inscripcion = i.id_inscripcion\n"
-			. "LEFT JOIN tbl_descuento as pd ON c.id_descuento = pd.id_descuento\n"
+            // . "LEFT JOIN tbl_inscripcion as i ON c.id_inscripcion = i.id_inscripcion\n"
+			// . "LEFT JOIN tbl_descuento as pd ON c.id_descuento = pd.id_descuento\n"
 			// . "LEFT JOIN tbl_pagos_cliente as pc ON c.id_cliente = pc.id_cliente\n"
 		    . "WHERE p.tipo_persona = 'clientes'");
 			
@@ -332,11 +332,13 @@ class ModeloClientes{
 	=============================================*/
 	static public function mdlCrearPago($tabla3, $datos){
 
-		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla3 (id_cliente, pago_matricula, pago_descuento, pago_inscripcion, pago_total, fecha_ultimo_pago, fecha_vencimiento) VALUES (:id_cliente, :pago_matricula, :pago_descuento, :pago_inscripcion, :pago_total, :fecha_ultimo_pago, :fecha_vencimiento)");
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla3 (id_cliente, pago_matricula, id_descuento, pago_descuento, id_inscripcion, pago_inscripcion, pago_total, fecha_ultimo_pago, fecha_vencimiento) VALUES (:id_cliente, :pago_matricula, :id_descuento, :pago_descuento, :id_inscripcion, :pago_inscripcion, :pago_total, :fecha_ultimo_pago, :fecha_vencimiento)");
 
 		$stmt->bindParam(":id_cliente", $datos["id_cliente"], PDO::PARAM_INT);
 		$stmt->bindParam(":pago_matricula", $datos["pago_matricula"], PDO::PARAM_STR);
+		$stmt->bindParam(":id_descuento", $datos["id_descuento"], PDO::PARAM_INT);		
 		$stmt->bindParam(":pago_descuento", $datos["pago_descuento"], PDO::PARAM_STR);
+		$stmt->bindParam(":id_inscripcion", $datos["id_inscripcion"], PDO::PARAM_INT);
 		$stmt->bindParam(":pago_inscripcion", $datos["pago_inscripcion"], PDO::PARAM_STR);
 		$stmt->bindParam(":pago_total", $datos["pago_total"], PDO::PARAM_STR);
 		$stmt->bindParam(":fecha_ultimo_pago", $datos["fecha_ultimo_pago"], PDO::PARAM_STR);
@@ -348,7 +350,7 @@ class ModeloClientes{
 
 		}else{
 
-			return false;
+			return $stmt->errorInfo();
 		
 		}
 	}

@@ -241,7 +241,7 @@ class ControladorPersonas{
 
                             $idPersona = end($totalId);
                             // echo "<pre>";
-                            // var_dump($_POST);
+                            // var_dump($idPersona);
                             // echo "</pre>";
                             // return;
 

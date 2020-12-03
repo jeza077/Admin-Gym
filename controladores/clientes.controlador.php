@@ -54,6 +54,7 @@ class ControladorClientes{
 	
 					$idCliente = end($totalId);
 	
+					// return $idCliente;
 					$vigencias = $_POST["nuevaInscripcion"];
 	
 						// echo $vigencias;
@@ -91,7 +92,9 @@ class ControladorClientes{
 	
 					$datos = array("id_cliente" => $idCliente,
 								   "pago_matricula" => $datos["pago_matricula"],
+								   "id_descuento" => $datos["id_descuento"],
 								   "pago_descuento" => $datos["pago_descuento"],
+								   "id_inscripcion" => $datos["id_inscripcion"],
 								   "pago_inscripcion" => $datos["pago_inscripcion"],
 								   "pago_total" => $datos["pago_total"],
 								   "fecha_ultimo_pago" => $fechaHoy,
@@ -101,7 +104,7 @@ class ControladorClientes{
 					// echo "<pre>";
 					// var_dump($respuestaPago);
 					// echo "</pre>";
-					// return;
+					// return $respuestaPago;
 				
 					$descripcionEvento = "Nuevo cliente";
 					$accion = "Nuevo";

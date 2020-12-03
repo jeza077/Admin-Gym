@@ -139,7 +139,7 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-          <div class="modal-body">
+          <div class="modal-body p-4">
             <form role="form" method="post" class="formulario">
               <div class="container-fluid mt-4">
                 <div class="form-row">
@@ -175,171 +175,185 @@
                   </div>
                 </div>
 
-                <div class="container-fluid">
+                <!-- <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                  + Pagar mas de 1 mes
+                </button>
+                <div class="collapse" id="collapseExample">
+                  <div class="card card-body">
+                  <div class="container-fluid">
 
-                  <div class="form-row">
-                          
-                    <div class="form-group col-md-3">
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox">
-                        <label class="form-check-label" for="gridCheck">
-                          Enero
-                        </label>
-                      </div>
-                    </div>
-
-                    <div class="form-group col-md-3">
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox">
-                        <label class="form-check-label" for="gridCheck">
-                          Febrero
-                        </label>
-                      </div>
-                    </div>
-
-                    <div class="form-group col-md-3">
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox">
-                        <label class="form-check-label" for="gridCheck">
-                          Marzo
-                        </label>
-                      </div>
-                    </div>
-
-                    <div class="form-group col-md-3">
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox">
-                        <label class="form-check-label" for="gridCheck">
-                          Abril
-                        </label>
-                      </div>
-                    </div>
- 
-                  </div>
-                  <div class="form-row">
-                          
-                    <div class="form-group col-md-3">
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox">
-                        <label class="form-check-label" for="gridCheck">
-                          Mayo
-                        </label>
-                      </div>
-                    </div>
-
-                    <div class="form-group col-md-3">
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox">
-                        <label class="form-check-label" for="gridCheck">
-                          Junio
-                        </label>
-                      </div>
-                    </div>
-
-                    <div class="form-group col-md-3">
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox">
-                        <label class="form-check-label" for="gridCheck">
-                          Julio
-                        </label>
-                      </div>
-                    </div>
-
-                    <div class="form-group col-md-3">
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox">
-                        <label class="form-check-label" for="gridCheck">
-                          Agosto
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-row">
+                    <div class="form-row">
                             
-                    <div class="form-group col-md-3">
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox">
-                        <label class="form-check-label" for="gridCheck">
-                          Septiembre
-                        </label>
+                      <div class="form-group col-md-3">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox">
+                          <label class="form-check-label" for="gridCheck">
+                            Enero
+                          </label>
+                        </div>
                       </div>
-                    </div>
 
-                    <div class="form-group col-md-3">
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox">
-                        <label class="form-check-label" for="gridCheck">
-                          Octubre
-                        </label>
+                      <div class="form-group col-md-3">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox">
+                          <label class="form-check-label" for="gridCheck">
+                            Febrero
+                          </label>
+                        </div>
                       </div>
-                    </div>
 
-                    <div class="form-group col-md-3">
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox">
-                        <label class="form-check-label" for="gridCheck">
-                          Noviembre
-                        </label>
+                      <div class="form-group col-md-3">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox">
+                          <label class="form-check-label" for="gridCheck">
+                            Marzo
+                          </label>
+                        </div>
                       </div>
-                    </div>
 
-                    <div class="form-group col-md-3">
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox">
-                        <label class="form-check-label" for="gridCheck">
-                          Diciembre
-                        </label>
+                      <div class="form-group col-md-3">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox">
+                          <label class="form-check-label" for="gridCheck">
+                            Abril
+                          </label>
+                        </div>
                       </div>
-                    </div>
   
+                    </div>
+                    <div class="form-row">
+                            
+                      <div class="form-group col-md-3">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox">
+                          <label class="form-check-label" for="gridCheck">
+                            Mayo
+                          </label>
+                        </div>
+                      </div>
+
+                      <div class="form-group col-md-3">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox">
+                          <label class="form-check-label" for="gridCheck">
+                            Junio
+                          </label>
+                        </div>
+                      </div>
+
+                      <div class="form-group col-md-3">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox">
+                          <label class="form-check-label" for="gridCheck">
+                            Julio
+                          </label>
+                        </div>
+                      </div>
+
+                      <div class="form-group col-md-3">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox">
+                          <label class="form-check-label" for="gridCheck">
+                            Agosto
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-row">
+                              
+                      <div class="form-group col-md-3">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox">
+                          <label class="form-check-label" for="gridCheck">
+                            Septiembre
+                          </label>
+                        </div>
+                      </div>
+
+                      <div class="form-group col-md-3">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox">
+                          <label class="form-check-label" for="gridCheck">
+                            Octubre
+                          </label>
+                        </div>
+                      </div>
+
+                      <div class="form-group col-md-3">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox">
+                          <label class="form-check-label" for="gridCheck">
+                            Noviembre
+                          </label>
+                        </div>
+                      </div>
+
+                      <div class="form-group col-md-3">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox">
+                          <label class="form-check-label" for="gridCheck">
+                            Diciembre
+                          </label>
+                        </div>
+                      </div>
+    
+                    </div>
                   </div>
-                </div>
+                  </div>
+                </div> -->
 
+                <button class="btn btn-orange mt-3" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                  + Agregar Promocion
+                </button>
 
-                <div class="form-row">
-                  <div class="form-group col-md-6">
-                    <label>Promociones</label>
-                    <select class="form-control select2 descuentoNuevo" style="width: 100%;" name="actualizarDescuento">
-                        <option value="" id="actualizarDescuento"></option>
-                        <?php 
-                            $tabla = "tbl_descuento";
-                            $item = null;
-                            $valor = null;
-
-                            $matriculas = ControladorClientes::ctrMostrar($tabla, $item, $valor);
-
-                            foreach ($matriculas as $key => $value) { ?>
-                              <option value="<?php echo $value['id_descuento']?>"><?php echo $value['tipo_descuento']?></option>        
+                <div class="collapse mt-3" id="collapseExample">
+                  <!-- <div class="card card-body"> -->
+                    <div class="form-row">
+                      <div class="form-group col-md-6">
+                        <label>Promociones</label>
+                        <select class="form-control select2 descuentoNuevo" style="width: 100%;" name="actualizarDescuento">
+                            <option value="" id="actualizarDescuento"></option>
                             <?php 
-                            }
-                          
-                        ?>
-                    </select> 
+                                $tabla = "tbl_descuento";
+                                $item = null;
+                                $valor = null;
+
+                                $matriculas = ControladorClientes::ctrMostrar($tabla, $item, $valor);
+
+                                foreach ($matriculas as $key => $value) { ?>
+                                  <option value="<?php echo $value['id_descuento']?>"><?php echo $value['tipo_descuento']?></option>        
+                                <?php 
+                                }
+                              
+                            ?>
+                        </select> 
+                      </div>
+                      <div class="form-group col-md-6">
+                          <label for="">Porcentaje Promocion</label>
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">%</span>  
+                            </div>
+                            <input type="text" class="form-control text-right actualizarTotalDescuento totalDescuento" name="actualizarTotalDescuento" value="" readonly>
+                            <!-- <input type="hidden" id="precioDescuentoActualizado" name="precioDescuentoActualizado">   -->
+                          </div>
+                      </div>
+                    </div>  
+                    <!-- </div> -->
                   </div>
-                  <div class="form-group col-md-6">
-                      <label for="">Porcentaje Promocion</label>
+                <div class="form-row">
+                    <button type="" class="btn btn-success btn-ms col-md-6 mt-4 mb-3 verTotalPago"><i class="fas fa-dollar-sign"></i>Calcular </button>       
+                    <div class="form-group col-md-6">
+                      <label for="">Total a pagar:</label>
                       <div class="input-group">
                         <div class="input-group-prepend">
-                            <span class="input-group-text">%</span>  
-                          </div>
-                        <input type="text" class="form-control text-right actualizarTotalDescuento totalDescuento" name="actualizarTotalDescuento" value="" readonly>
-                        <!-- <input type="hidden" id="precioDescuentoActualizado" name="precioDescuentoActualizado">   -->
-                      </div>
-                  </div>
-                  
-                  <div class="form-row">
-                      <button type="" class="btn btn-success btn-block col-md-6 mt-4 mb-3 verTotalPago"><i class="fas fa-dollar-sign"></i>Calcular </button>       
-                      <div class="form-group col-md-6">
-                        <label for="">Total a pagar:</label>
-                        <div class="input-group">
-                          <div class="input-group-prepend">
-                              <span class="input-group-text">$</span>  
-                          </div>
-                          <input type="text" class="form-control float-right text-right totalPagar" name="nuevoTotalPago" value="" readonly>  
-                         </div>
-                      </div>
-                  </div>
+                            <span class="input-group-text">$</span>  
+                        </div>
+                        <input type="text" class="form-control float-right text-right totalPagar" name="nuevoTotalPago" value="" readonly>  
+                        </div>
+                    </div>
                 </div>
+                
               </div>
               <div class="form-group mt-4 float-right">
                 <button type="" class="btn btn-primary">Actualiazar pago</button>
