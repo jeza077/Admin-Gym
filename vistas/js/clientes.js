@@ -44,6 +44,20 @@ $(document).on('change', '.tipoCliente', function () {
     }
    
 });
+$('#datosClientes').hide();
+$(document).on('change', '.tipoCliente', function () {
+    var valor = $(this).val();
+    // console.log(valor)
+    if (valor == "Gimnasio") {
+        // SumaTotal()
+       
+        $('#datosClientes').show();
+        // sumar();
+    } else {
+        $('#datosClientes').hide();
+    }
+   
+});
 
 //** ------------------------------------*/
 //         IMPRIMIR USUARIOS 
@@ -56,12 +70,26 @@ $(document).on('click', '.btnExportarClientes', function () {
         EDITAR CLIENTE
 =============================================*/
 
-$('.btnEditarCliente').click(function () { 
+$('#editarCliente').hide();
+$('.tabEditarCliente').hide();
+$('.btnDatosGimnasio').hide();
+$(document).on('click', '.btnEditarCliente', function () { 
     
     var idEditarCliente = $(this).attr("idEditarCliente");
-    // console.log(idEditarCliente)
+    var tipoCliente = $(this).attr("tipoCliente");
+    // console.log(tipoCliente)
     var datos = new FormData();
     datos.append("idEditarCliente", idEditarCliente);
+
+    if (tipoCliente == "Ventas") {
+        $('#editarCliente').show();
+        $('.tabEditarCliente').show();
+        $('.btnDarosGimnasio').show();
+    } else {
+        $('#editarCliente').hide();
+        $('.tabEditarCliente').hide();
+        $('.btnDatosGimnasio').show();
+    }
     
 
     $.ajax({
@@ -95,15 +123,15 @@ $('.btnEditarCliente').click(function () {
             $('#editarTipoCliente').html(respuesta["tipo_cliente"])
             $('#editarTipoCliente').val(respuesta["tipo_cliente"])
 
-            var tipoDeCliente = respuesta['tipo_cliente'];
+            // var tipoDeCliente = respuesta['tipo_cliente'];
             // console.log(valor)
-            if (tipoDeCliente == "Ventas") {
-                $('#clientt').show();
+            // if (tipoDeCliente == "Ventas") {
+            //     $('#editarCliente').show();
                 
-            } else {
-                $('#clientt').hide();
-                
-            }
+            // } else {
+            //     $('#editarCliente').hide();
+            //     $('.tabEditarCliente').hide();
+            // }
 
             $('#editarMatricula').html(respuesta["tipo_matricula"])
             $('#editarMatricula').val(respuesta["id_matricula"])

@@ -695,7 +695,7 @@
                 </div>
               </div>
 
-              <div class="tab-pane fade" id="editarCliente" role="tabpanel" aria-labelledby="datoseditarCLiente">
+              <div class="tab-pane fade" role="tabpanel" aria-labelledby="datoseditarCLiente">
                 <div class="container-fluid mt-4">
                     <div class="form-row">
                       <div class="form-group col-md-3">

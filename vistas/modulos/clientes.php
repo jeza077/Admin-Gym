@@ -105,7 +105,7 @@
 
                       echo
                           '<td>
-                            <button class="btn btn-warning btnEditarCliente" id="btnEditar" data-toggle="modal" data-target="#modalEditarCliente" idEditarCliente="'.$value["id_personas"].'"><i class="fas fa-pencil-alt" style="color:#fff"></i></button>
+                            <button class="btn btn-warning btnEditarCliente" tipoCliente="'.$value['tipo_cliente'].'" id="btnEditar" data-toggle="modal" data-target="#modalEditarCliente" idEditarCliente="'.$value["id_personas"].'"><i class="fas fa-pencil-alt" style="color:#fff"></i></button>
                             <button class="btn btn-danger btnEliminarCliente" idPersona="'.$value["id_personas"].'"><i class="fas fa-trash-alt"></i></button>
                           </td>
                         </tr>
@@ -380,7 +380,7 @@
               <li class="nav-item" role="presentation">
                 <a class="nav-link active" id="datosEditarPersona" data-toggle="tab" href="#editarPersona" role="tab" aria-controls="home" aria-selected="true">Datos personales</a>
               </li>
-              <li class="nav-item" id="clientt" role="presentation">
+              <li class="nav-item tabEditarCliente" id="clientt" role="presentation">
                 <a class="nav-link" id="datosEditarCliente" data-toggle="tab" href="#editarCliente" role="tab" aria-controls="profile" aria-selected="false">Datos Cliente</a>
               </li>
             </ul>
@@ -453,8 +453,13 @@
                         <option value="F">Femenino</option>
                       </select>
                     </div>
-                   
+                          
                   </div>
+                  <div class="form-group mt-4 float-right btnDatosGimnasio">
+                  
+                  <button type="" class="btn btn-primary">Guardar Cambios</button>
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
+                </div>
                 </div>
               </div>
 
