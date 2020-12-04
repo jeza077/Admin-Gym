@@ -203,14 +203,53 @@
             </li>
             <?php } ?>
             <?php if($_SESSION['permisos']['Mantenimiento']['consulta'] == 1){?>
-            <li class="nav-item">
+            <li class="nav-item has-treeview">
               <a href="mantenimiento" class="nav-link menu-lateral">
                 <i class="nav-icon fas fa-sliders-h"></i>
                 <p>
                   Mantenimiento
-                  <!-- <span class="right badge badge-danger">New</span> -->
+                  <i class="right fas fa-angle-left"></i>
                 </p>
               </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="rol" class="nav-link">
+                    <i class="fas fa-th-list nav-icon"></i>
+                    <p>Roles</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="permisos-rol" class="nav-link">
+                    <i class="fas fa-circle nav-icon"></i>
+                    <p>Permisos Rol</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="parametro" class="nav-link">
+                    <i class="fab fa-product-hunt nav-icon"></i>
+                    <p>Parametros</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="inscripcion" class="nav-link">
+                    <i class="fas fa-wallet nav-icon"></i>
+                    <p>Inscripcion</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="matricula" class="nav-link">
+                    <i class="fas fa-money-bill-alt nav-icon"></i>
+                    <p>Matricula</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="descuento" class="nav-link">
+                    <i class="fas fa-cash-register nav-icon"></i>
+                    <p>Descuento</p>
+                  </a>
+                </li>
+              </ul>
+              
             </li>
             <?php } ?>
 

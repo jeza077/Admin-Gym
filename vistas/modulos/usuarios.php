@@ -37,14 +37,14 @@
  <!-- Main content -->
     <section class="content">
 
-                      <?php
-                        $descripcionEvento = " Consulto la pantalla de Usuario";
-                        $accion = "consulta";
+          <?php
+            $descripcionEvento = " Consulto la pantalla de Usuario";
+            $accion = "consulta";
 
-                        $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 2,$accion, $descripcionEvento);
-    
-                      ?>
-                   
+            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 2,$accion, $descripcionEvento);
+
+          ?>
+        
 
         <div class="card">
 
@@ -75,6 +75,7 @@
                 // echo "<pre>";
                 // var_dump($usuarios);
                 // echo "</pre>";
+                
 
                 foreach ($usuarios as $key => $value) {
                   echo '

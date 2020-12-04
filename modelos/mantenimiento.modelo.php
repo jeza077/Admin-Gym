@@ -57,6 +57,75 @@ class ModeloMantenimiento{
 
     }
 
+    /*=============================================
+		MOSTRAR PERMISOS ROlES
+	=============================================*/
+		
+	static public function mdlMostraPermisosrRoles($item, $valor){
+	
+        if($item != null){
+
+            $stmt = Conexion::conectar()->prepare("SELECT r.rol, pe.*, o.objeto FROM tbl_roles AS r \n"
+            . "LEFT JOIN tbl_permisos AS pe ON r.id_rol = pe.id_rol\n"
+            . "LEFT JOIN tbl_objetos AS o ON pe.id_objeto = o.id_objeto\n"
+            . "WHERE $item = :$item");	
+
+            $stmt->bindParam(":".$item, $valor, PDO::PARAM_STR);
+            $stmt->execute();
+            return $stmt -> fetch();
+
+        } else {
+
+            $stmt = Conexion::conectar()->prepare("SELECT r.rol, pe.*, o.objeto FROM tbl_roles AS r\n"
+            . "LEFT JOIN tbl_permisos AS pe ON r.id_rol = pe.id_rol\n"
+            . "LEFT JOIN tbl_objetos AS o ON pe.id_objeto = o.id_objeto");		
+            
+            $stmt->execute();
+
+            return $stmt -> fetchAll();
+
+        }
+
+        $stmt -> close();
+        $stmt = null;	
+
+
+
+    }
+
+
+    /*============================================
+		GUARDAR PERMISOS DE ROLES
+	==============================================*/
+	static public function mdlInsertarPermisosRoles($tabla, $id, $pant, $consulta, $agregar, $actualizar, $eliminar){
+
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(id_rol, id_objeto, agregar, eliminar, actualizar, consulta) VALUES (:id_rol, :id_objeto, :agregar, :eliminar, :actualizar, :consulta)");
+       
+        $stmt->bindParam(":id_rol", $id, PDO::PARAM_STR);
+        $stmt->bindParam(":id_objeto", $pant, PDO::PARAM_STR);
+        $stmt->bindParam(":agregar", $agregar, PDO::PARAM_STR);
+        $stmt->bindParam(":eliminar", $eliminar, PDO::PARAM_STR);
+        $stmt->bindParam(":actualizar", $actualizar, PDO::PARAM_STR);
+        $stmt->bindParam(":consulta", $consulta, PDO::PARAM_STR);
+        /*$stmt->bindParam(":estado", $datos["estado"], PDO::PARAM_INT);*/
+
+		if($stmt->execute()){
+			return true;
+
+		}else{
+			return $stmt->errorInfo();
+		
+		}
+
+		$stmt->close();
+		$stmt = null;
+    }
+
+
+    // static public function mdlRevisarPermisosRol($item1, $valor1, $item2, $valor2){
+
+    // }
+
     /*====================================================
        Actualizar Rol
     ======================================================*/
@@ -426,11 +495,7 @@ class ModeloMantenimiento{
         
     }     
 
-
+   
     
-
-    
-
-
 		
 }    
