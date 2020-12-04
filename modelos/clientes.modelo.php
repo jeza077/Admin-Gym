@@ -186,7 +186,7 @@ class ModeloClientes{
 
 		$stmt -> close();
 		$stmt = null;	
-
+		
 	}
 
 

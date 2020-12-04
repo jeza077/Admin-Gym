@@ -631,6 +631,7 @@ $(document).on('blur', '.ClaseBuscar', function () {
 // --------------------------------------*/ 
 
 exportarPdf('.btnExportarBitacora', 'bitacora');
+
 function exportarPdf(btnExportar, rutaArchivoPdf) {
     
     $(document).on('click', btnExportar, function (e) {
