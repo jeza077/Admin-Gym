@@ -527,4 +527,66 @@ class ModeloClientes{
 			
 		} 		
 	}
+
+
+	/*=============================================
+		RANGO PAGOS CLIENTES
+    =============================================*/
+	static public function mdlRangoPagosCliente($tabla, $rango){
+			
+		if($rango == null){
+
+			$stmt = Conexion::conectar()->prepare("SELECT p.*, c.*, d.tipo_documento, m.tipo_matricula, pd.tipo_descuento, i.tipo_inscripcion, pc.pago_matricula, pc.id_descuento, pc.pago_descuento, pc.id_inscripcion, pc.pago_inscripcion, pc.pago_total, pc.fecha_ultimo_pago, pc.fecha_vencimiento FROM tbl_personas as p\n"
+
+			. "	LEFT JOIN tbl_clientes as c ON p.id_personas = c.id_persona\n"
+		
+			. "	LEFT JOIN tbl_documento as d ON p.id_documento = d.id_documento\n"
+		
+			. "	LEFT JOIN tbl_matricula as m ON c.id_matricula = m.id_matricula\n"
+		
+			. "	LEFT JOIN tbl_pagos_cliente as pc ON c.id_cliente = pc.id_cliente\n"
+		
+			. "	LEFT JOIN tbl_inscripcion as i ON pc.id_inscripcion = i.id_inscripcion\n"
+		
+			. "	LEFT JOIN tbl_descuento as pd ON pc.id_descuento = pd.id_descuento\n"
+		
+			. "	WHERE c.tipo_cliente = 'Gimnasio' AND pc.fecha_ultimo_pago = (SELECT MAX(fecha_ultimo_pago) FROM tbl_pagos_cliente as 			pc1 WHERE pc1.id_cliente = pc.id_cliente)\n"
+		
+			. " GROUP BY c.id_cliente"); 
+
+			$stmt -> execute();
+			return $stmt -> fetchAll();
+
+		} else {
+
+			$stmt = Conexion::conectar()->prepare("SELECT p.*, c.*, d.tipo_documento, m.tipo_matricula, pd.tipo_descuento, i.tipo_inscripcion, pc.pago_matricula, pc.id_descuento, pc.pago_descuento, pc.id_inscripcion, pc.pago_inscripcion, pc.pago_total, pc.fecha_ultimo_pago, pc.fecha_vencimiento FROM tbl_personas as p\n"
+
+			. "	LEFT JOIN tbl_clientes as c ON p.id_personas = c.id_persona\n"
+		
+			. "	LEFT JOIN tbl_documento as d ON p.id_documento = d.id_documento\n"
+		
+			. "	LEFT JOIN tbl_matricula as m ON c.id_matricula = m.id_matricula\n"
+		
+			. "	LEFT JOIN tbl_pagos_cliente as pc ON c.id_cliente = pc.id_cliente\n"
+		
+			. "	LEFT JOIN tbl_inscripcion as i ON pc.id_inscripcion = i.id_inscripcion\n"
+		
+			. "	LEFT JOIN tbl_descuento as pd ON pc.id_descuento = pd.id_descuento\n"
+		
+			. "	WHERE c.tipo_cliente = 'Gimnasio' AND  nombre LIKE '%$rango%' OR tipo_inscripcion LIKE '%$rango%' OR pago_total LIKE '%$rango%' OR fecha_ultimo_pago LIKE '%$rango%' OR fecha_vencimiento LIKE '%$rango%' AND pc.fecha_ultimo_pago = (SELECT MAX(fecha_ultimo_pago) FROM tbl_pagos_cliente as 			pc1 WHERE pc1.id_cliente = pc.id_cliente)\n"
+		
+			. " GROUP BY c.id_cliente"); 
+			
+			// . "WHERE nombre LIKE '%$rango%' OR tipo_inscripcion LIKE '%$rango%' OR fecha_ultimo_pago LIKE '%$rango%' OR fecha_vencimiento LIKE '%$rango%'"); 
+
+			$stmt->bindParam(":nombre", $rango, PDO::PARAM_STR);
+			$stmt->bindParam(":tipo_inscripcion", $rango, PDO::PARAM_STR);
+			$stmt->bindParam(":fecha_ultimo_pago", $rango, PDO::PARAM_STR);
+			$stmt->bindParam(":fecha_vencimiento", $rango, PDO::PARAM_STR);
+
+            $stmt-> execute();
+			return $stmt ->fetchAll();
+			
+		} 		
+	}
 }

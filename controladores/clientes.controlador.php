@@ -607,5 +607,17 @@ class ControladorClientes{
 		return $respuesta;
 	}
 
+
+	/*=============================================
+		RANGO PAGOS CLIENTES
+    =============================================*/
+	static public function ctrRangoPagosCliente($rango){
+
+		$tabla = 'tbl_clientes';
+		
+		$respuesta = ModeloClientes::mdlRangoPagosCliente($tabla, $rango);
+		
+		return $respuesta;
+	}
 }
 

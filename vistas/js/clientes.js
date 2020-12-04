@@ -64,7 +64,7 @@ $(document).on('change', '.tipoCliente', function () {
 // --------------------------------------*/ 
 exportarPdf('.btnExportarClientes', 'clientes');
 exportarPdf('.btnExportarHistorialPagosClientes', 'historial-pagos-clientes');
-
+exportarPdf('.btnExportarPagosClientes', 'pagos-clientes');
 
 
 /*=============================================
