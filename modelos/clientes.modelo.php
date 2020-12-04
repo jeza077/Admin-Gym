@@ -24,7 +24,7 @@ class ModeloClientes{
 	
 			}else{
 	
-				return false;
+				return $stmt->errorInfo();
 			
 			}
 
@@ -42,7 +42,7 @@ class ModeloClientes{
 	
 			}else{
 	
-				return false;
+				return $stmt->errorInfo();
 			
 			}
 		}

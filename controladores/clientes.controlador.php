@@ -26,8 +26,8 @@ class ControladorClientes{
 			// }
 							
 			
-			// return $datos;
             $respuestaCrearCliente = ModeloClientes::mdlCrearCliente($tabla, $datos);
+			// return $respuestaCrearCliente;
             // echo "<pre>";
 			// var_dump($respuestaCrearCliente);
 			// echo "</pre>";
@@ -89,6 +89,8 @@ class ControladorClientes{
 					$fechaHoy = date('Y-m-d');
 					$fechaVencimientoCliente = date("Y-m-d", strtotime('+'.$vigenciaCliente.' days'));
 					
+					// echo $fechaVencimientoCliente;
+					// return;
 					$tabla3 = "tbl_pagos_cliente";
 	
 					$datos = array("id_cliente" => $idCliente,
