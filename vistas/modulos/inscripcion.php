@@ -4,12 +4,15 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                <h1>Inscripciones</h1>
+                 <h1>Inscripciones</h1>
                 </div>
                 <div class="col-sm-6">                       
-                <button class="btn btn-orange float-right"  data-toggle="modal" data-target="#modalNuevainscripcion">
-                    Nuevo       
-                </button>
+                    <button class="btn btn-orange float-right"  data-toggle="modal" data-target="#modalNuevainscripcion">
+                        Nueva Inscripcion    
+                    </button>
+                    <button class="btn btn-danger btnExportarInscripcion float-right mr-3 ">
+                    Exportar PDF          
+                    </button>
                 </div>
             </div>
         </div><!-- /.container-fluid -->
@@ -23,11 +26,11 @@
 
                 
                 <?php
-                $descripcionEvento = " Consulto la pantalla de mantenimiento";
-                $accion = "consulta";
+                    $descripcionEvento = " Consulto la pantalla de mantenimiento";
+                    $accion = "consulta";
 
-                $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
-
+                    $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
+       
                 ?>
 
                 <!--========================================================
@@ -39,9 +42,14 @@
                     <thead>
                         <tr>
                             <th scope="col">#</th>
+
                             <th scope="col">Tipo de inscripcion</th>
+
                             <th scope="col">Precio</th>
+
                             <th scope="col">Estado</th>
+
+                            <th scope="col">Acciones</th>
 
                         </tr>
                     </thead>
@@ -51,7 +59,7 @@
                                 $item = null;
                                 $valor = null;
                                 
-                                $inscripcion = ControladorMantenimientos:: ctrMostrarInscripcion($item,$valor);
+                                $inscripcion = ControladorMantenimientos::ctrMostrarInscripcion($item,$valor);
                                 // var_dump($inscripcion);
 
                                 foreach ($inscripcion as $key => $value){
@@ -66,6 +74,12 @@
                                     }else{
                                         echo '<td><button class="btn btn-danger btn-md btnActivar" idInscripcion="'.$value["id_inscripcion"].'" estadoInscripcion="1">Desactivado</button></td>';
                                     } 
+                                    echo'
+                                        <td>
+                                        <button class="btn btn-warning btnEditarInscripcion" editarIdInscripcion="'.$value["id_inscripcion"].'" data-toggle="modal" data-target="#modalEditarInscripcion"><i class="fas fa-pencil-alt" style="color:#fff"></i></button>
+
+                                        <button class="btn btn-danger btnEliminarInscripcion" ideliminarInscripcion="'.$value["id_inscripcion"].'"><i class="fas fa-trash-alt"></i></button></td>
+                                    </tr>  '; 
                                     
                                 }       
                         ?>     
@@ -83,15 +97,16 @@
 
 
 
+
 <!--=====================================
 MODAL AGREGAR NUEVA INSCRIPCION
 ======================================-->
 
 <div class="modal fade" id="modalNuevainscripcion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             
-            <div class="modal-dialog " role="document">
+    <div class="modal-dialog " role="document">
 
-                <div class="modal-content">
+         <div class="modal-content">
 
                 <form role="form" method="post" autocomplete="off">
 
@@ -149,83 +164,89 @@ MODAL AGREGAR NUEVA INSCRIPCION
 
                 
 
-                </div>
+        </div>
 
-            </div>
+     </div>
                     
 
-            </div>
+</div>
 
-            <!--==============================================================================
-                            MODAL EDITAR INSCRIPCION
-            ==================================================================================-->
+<!--=====================================
+MODAL EDITAR MATRICULA
+======================================-->
 
-<div class="modal fade" id="modalEditarIns" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modalEditarInscripcion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  
+    <div class="modal-dialog " role="document">
+
+        <div class="modal-content">
+
+            <form role="form" method="post" autocomplete="off">
             
-    <div class="modal-dialog  " role="document">
 
-         <div class="modal-content">
+                <!--=====================================
+                CABEZA DEL MODAL
+                ======================================-->
 
-             <form role="form" method="post" autocomplete="off">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Editar Inscripcion</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
 
-                            <!--=====================================
-                            CABEZA DEL MODAL
-                            ======================================-->
+                <!--=====================================
+                CUERPO DEL MODAL
+                ======================================-->
 
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Editar Inscripcon</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
+                <div class="modal-body">
+                    <div class="card-body">
+                        <div class="form-group col-md-12">
+                            <label for="Rol">Inscripcion</label>
+                            <input type="text" class="form-control nombre mayus" id="editarInscripcion" name="editarInscripcion" value="" required>
+                        </div>
 
-                            <!--=====================================
-                            CUERPO DEL MODAL
-                            ======================================-->
+                        <div class="form-group col-md-12">
+                            <label for="Descripcion">Precio</label>
+                            <input type="textarea" class="form-control preciom" id="editarPrecioInscripcion" name="editarPrecioInscripcion" value="" required>
+                        </div>
+                        <input type="hidden" id="editarIdInscripcion" name="editarIdInscripcion">
 
-                            <div class="modal-body">
+                    </div>
 
-                                <div class="card-body">
-                                    <div class= "form-group col-md-12">
-                                    <label for="Inscripcion">Inscripcion</label>
-                                    <input type="text" class="form-control  nombre mayus" id="editarInscripcion" name="editarInscripcion" value=""requiered>
-                                    </div>
-                                    <div class= "form-group col-md-12">
-                                    <label for="Precio">Precio</label>
-                                    <input type="text" class="form-control nombre mayus" id="editarPrecioI" name="editarPrecioI" value=""requiered>
-                                    </div>
-                                    <input type="hidden" id="editarIdinscripcion" name="editarIdinscripcion">
-                                </div>
+                </div>
 
-                            </div>
+                <!--=====================================
+                PIE DEL MODAL
+                ======================================-->
 
-                            <!--=====================================
-                            PIE DEL MODAL
-                            ======================================-->
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                    <button type="button" class="btn btn-orange" data-dismiss="modal">Salir</button>
+                </div>
 
-                            <div class="modal-footer">
-                                <button type="submit" class="btn btn-primary">Guardar</button>
-                                <button type="button" class="btn btn-orange" data-dismiss="modal">Salir</button>
-                            </div>
+                     <?php
 
-                            <?php
+                        $editarInscripcion = new ControladorGlobales();
+                        $editarInscripcion->ctrEditarInscripcion();
 
-                                $EditarInscripcion = new ControladorMantenimientos();
-                                $EditarInscripcion->ctrEditarInscripcion();
-
-                            ?>
-
-
-
-
-            </form>
-
-
-                        
+                    ?>
+            </form>        
 
         </div>
 
     </div>
-            
+        
 
 </div>
+
+                    <?php
+
+                        $borrarInscripcion = new ControladorGlobales();
+                        $borrarInscripcion->ctrBorrarInscripcion();
+
+                    ?>
+
+
+
+

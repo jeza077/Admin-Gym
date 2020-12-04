@@ -379,6 +379,16 @@ $(".btnActivar").click(function(){
 
 })
 
+//** ------------------------------------*/
+//         IMPRIMIR INSCRIPCION
+// --------------------------------------*/ 
+$(document).on('click', '.btnExportarInscripcion', function () {
+     var rango = valorBuscar;
+
+    window.open("extensiones/tcpdf/pdf/inscripcion-pdf.php?&rango="+rango);
+    
+});
+
 
 
 

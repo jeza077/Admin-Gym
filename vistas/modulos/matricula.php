@@ -1,10 +1,10 @@
-div class="content-wrapper">
+<div class="content-wrapper">
 
   <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Roles</h1>
+            <h1>Matricula</h1>
           </div>
           <div class="col-sm-6">
                 <button class="btn btn-orange float-right"  data-toggle="modal" data-target="#modalNuevaMatricula">
@@ -40,10 +40,15 @@ div class="content-wrapper">
                         <thead>
                           <tr>
                             <th scope="col">#</th>
+
                             <th scope="col">Tipo de matricula</th>
+
                             <th scope="col">Precio</th>
+
                             <th scope="col">Estado</th>
+
                             <th scope="col">Acciones</th>
+
                           </tr>
                         </thead>
                         <tbody>  
@@ -59,19 +64,20 @@ div class="content-wrapper">
                                       echo '
                                         <tr>
                                       
-                                          <td>'.($key + 1).'</td>
-                                          <td>'.$value["tipo_matricula"].'</td>
-                                          <td>'.$value["precio_matricula"].'</td>';
-                                          if($value['estado'] != 0){
-                                            echo '<td><button class="btn btn-success btn-md btnActivar" idMatricula="'.$value["id_Matricula"].'" estadoMatricula="0">Activado</button></td>';
-                                          }else{
-                                            echo '<td><button class="btn btn-danger btn-md btnActivar" idMatricula="'.$value["id_Matricula"].'" estadoMatricula="1">Desactivado</button></td>';
-                                          } 
-                                          echo'
-                                          <td>
-                                          <button class="btn btn-warning btnEditarMatricula" editarIdMatricula="'.$value["id_matricula"].'" data-toggle="modal" data-target="#modalEditarMatricula"><i class="fas fa-pencil-alt" style="color:#fff"></i></button>
-                                          <button class="btn btn-danger "><i class="fas fa-trash-alt"></i></button><td>
-                                        </tr>  '; 
+                                        <td>'.($key + 1).'</td>
+                                        <td>'.$value["tipo_matricula"].'</td>
+                                        <td>'.$value["precio_matricula"].'</td>';
+                                        if($value['estado'] != 0){
+                                          echo '<td><button class="btn btn-success btn-md btnActivar" idMatricula="'.$value["id_Matricula"].'" estadoMatricula="0">Activado</button></td>';
+                                        }else{
+                                          echo '<td><button class="btn btn-danger btn-md btnActivar" idMatricula="'.$value["id_Matricula"].'" estadoMatricula="1">Desactivado</button></td>';
+                                        } 
+                                        echo'
+                                        <td>
+                                        <button class="btn btn-warning btnEditarMatricula" editarIdMatricula="'.$value["id_matricula"].'" data-toggle="modal" data-target="#modalEditarMatricula"><i class="fas fa-pencil-alt" style="color:#fff"></i></button>
+
+                                        <button class="btn btn-danger btnEliminarMatricula" ideliminarMatricula="'.$value["id_matricula"].'"><i class="fas fa-trash-alt"></i></button></td>
+                                    </tr>  '; 
                                     }       
                               ?>                
                          
@@ -164,7 +170,7 @@ MODAL AGREGAR NUEVA MATRICULA
 
 
 <!--=====================================
-MODAL AGREGAR NUEVA MATRICULA
+MODAL EDITAR MATRICULA
 ======================================-->
 
 <div class="modal fade" id="modalEditarMatricula" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -194,12 +200,12 @@ MODAL AGREGAR NUEVA MATRICULA
           <div class="card-body">
             <div class="form-group col-md-12">
               <label for="Rol">Matricula</label>
-              <input type="text" class="form-control nombre mayus" name="editarMatricula" value="" required>
+              <input type="text" class="form-control nombre mayus" id="editarMatricula" name="editarMatricula" value="" required>
             </div>
 
             <div class="form-group col-md-12">
               <label for="Descripcion">Precio</label>
-              <input type="textarea" class="form-control preciom" name="editarPrecioMatricula" value="" required>
+              <input type="textarea" class="form-control preciom" id="editarPrecioMatricula" name="editarPrecioMatricula" value="" required>
             </div>
             <input type="hidden" id="editarIdMatricula" name="editarIdMatricula">
 
@@ -236,3 +242,12 @@ MODAL AGREGAR NUEVA MATRICULA
         
 
 </div>
+
+
+<?php
+
+ $borrarMatricula = new ControladorGlobales();
+ $borrarMatricula->ctrBorrarMatricula();
+
+?>
+

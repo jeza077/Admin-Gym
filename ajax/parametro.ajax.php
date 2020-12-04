@@ -16,7 +16,10 @@ class AjaxParametro{
     ==============================================*/
     public $idParametro;
     public $idRol;
+    public $idInscripcion;
     public $idMatricula;
+    public $idDescuento;
+    
 
     public function ajaxEditarParametro(){
 
@@ -42,6 +45,18 @@ class AjaxParametro{
     
     }  
 
+    public function ajaxEditarInscripcion(){
+
+        $item = "id_inscripcion";
+
+        $valor = $this->idInscripcion;
+
+        $respuesta = ControladorMantenimientos::ctrMostrarInscripcion($item,$valor);
+
+        echo json_encode($respuesta);
+    
+    }  
+
     public function ajaxEditarMatricula(){
 
         $item = "id_matricula";
@@ -49,6 +64,19 @@ class AjaxParametro{
         $valor = $this->idMatricula;
 
         $respuesta = ControladorMantenimientos::ctrMostrarMatricula($item,$valor);
+
+        echo json_encode($respuesta);
+    
+    }  
+
+    
+    public function ajaxEditarDescuento(){
+
+        $item = "id_descuento";
+
+        $valor = $this->idDescuento;
+
+        $respuesta = ControladorMantenimientos::ctrMostrarDescuento($item,$valor);
 
         echo json_encode($respuesta);
     
@@ -80,6 +108,18 @@ class AjaxParametro{
         $editar-> idRol = $_POST["idRol"];
         $editar-> ajaxEditarRol();
     }    
+
+
+    /*========================================
+        Editar Inscripcion
+    ==========================================*/ 
+
+    if(isset($_POST["idInscripcion"])){ 
+
+        $editar = new AjaxParametro();
+        $editar-> idInscripcion = $_POST["idInscripcion"];
+        $editar-> ajaxEditarInscripcion();
+    }    
     
        /*========================================
         Editar Matricula
@@ -90,7 +130,19 @@ class AjaxParametro{
         $editar = new AjaxParametro();
         $editar-> idMatricula = $_POST["idMatricula"];
         $editar-> ajaxEditarMatricula();
+    }  
+    
+     /*========================================
+        Editar DESCUENTO
+    ==========================================*/ 
+
+    if(isset($_POST["idDescuento"])){ 
+
+        $editar = new AjaxParametro();
+        $editar-> idDescuento = $_POST["idDescuento"];
+        $editar-> ajaxEditarDescuento();
     }     
+    
     
     
 

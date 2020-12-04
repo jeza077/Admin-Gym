@@ -83,7 +83,7 @@
 
                         <button class="btn btn-primary" data-toggle="modal" data-target="#modalEditarPermisos"><i class="fas fa-cog" style="color:#fff"></i></button>
 
-                        <button class="btn btn-danger btnEliminarUsuario"><i class="fas fa-trash-alt"></i></button>
+                        <button class="btn btn-danger btnEliminarRoles" ideliminarRoles="'.$value["id_rol"].'"><i class="fas fa-trash-alt"></i></button>
                         </td>
 
                       </tr>';
@@ -446,3 +446,12 @@ MODAL EDITAR ROL
         
 
 </div>
+
+
+<?php
+
+$borrarRol = new ControladorGlobales();
+$borrarRol->ctrBorrarRoles();
+
+?>
+

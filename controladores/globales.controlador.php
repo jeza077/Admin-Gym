@@ -255,8 +255,78 @@ class ControladorGlobales{
     }
 
 
+       /*=============================================
+      EDITAR INSCRIPCION
+    =============================================*/
+    
+    static public function ctrEditarInscripcion(){
+
+      if(isset($_POST["editarInscripcion"])){
+
+        $tabla = "tbl_inscripcion";
+
+        $datos = array ("tipo_inscripcion"=> $_POST["editarInscripcion"],
+                        "precio_inscripcion"=>$_POST["editarPrecioInscripcion"],
+                        "id_inscripcion"=>$_POST["editarIdInscripcion"]);
+
+
+        $respuesta =  ModeloGlobales::mdlEditarInscripcion($tabla,$datos);
+
+    
+        if($respuesta == true){
+            
+            $descripcionEvento = "Actualizo rol";
+            $accion = "Actualizo";
+            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 2,$accion, $descripcionEvento);
+
+          
+
+            echo'<script>
+    
+            Swal.fire({
+                 icon: "success",
+                  title: "La inscripcion ha sido editado correctamente",
+                  showConfirmButton: true,
+                  confirmButtonText: "Cerrar",
+                  closeOnConfirm: false
+                  }).then((result) => {
+                            if (result.value) {
+    
+                            window.location = "inscripcion";
+    
+                            }
+                        })
+    
+            </script>';
+    
+        }else{
+
+          echo'<script>
+    
+            Swal.fire({
+                  icon: "warning",
+                  title: "Error al editar inscripcion",
+                  showConfirmButton: true,
+                  confirmButtonText: "Cerrar",
+                  closeOnConfirm: false
+                  }).then((result) => {
+                            if (result.value) {
+    
+                            window.location = "inscripcion";
+    
+                            }
+                        })
+    
+            </script>';
+        }
+
+      }
+
+    }
+
+
      /*=============================================
-      EDITAR ROL
+      EDITAR MATRICULA
     =============================================*/
     
     public function ctrEditarMatricula(){
@@ -275,7 +345,7 @@ class ControladorGlobales{
       
           if($respuesta == true){
               
-              $descripcionEvento = "Actualizo rol";
+              $descripcionEvento = "Actualizo ";
               $accion = "Actualizo";
               $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 2,$accion, $descripcionEvento);
   
@@ -323,6 +393,314 @@ class ControladorGlobales{
         }
   
       }
+
+      
+    /*=============================================
+      EDITAR DESCUENTO
+    =============================================*/
+    
+    public function ctrEditarDescuento(){
+
+      if(isset($_POST["editarDescuento"])){
+
+        $tabla = "tbl_descuento";
+
+        $datos = array ("tipo_descuento"=> $_POST["editarDescuento"],
+                        "valor_descuento"=>$_POST["editarValorDescuento"],
+                        "id_descuento"=>$_POST["editarIdDescuento"]);
+
+
+        $respuesta =  ModeloGlobales::mdlEditarDescuento($tabla,$datos);
+
+    
+        if($respuesta == true){
+          
+            echo'<script>
+    
+            Swal.fire({
+                 icon: "success",
+                  title: "El descuento ha sido editado correctamente",
+                  showConfirmButton: true,
+                  confirmButtonText: "Cerrar",
+                  closeOnConfirm: false
+                  }).then((result) => {
+                            if (result.value) {
+    
+                            window.location = "descuento";
+    
+                            }
+                        })
+    
+            </script>';
+    
+        }else{
+
+          echo'<script>
+    
+            Swal.fire({
+                  icon: "warning",
+                  title: "Error al editar descuento",
+                  showConfirmButton: true,
+                  confirmButtonText: "Cerrar",
+                  closeOnConfirm: false
+                  }).then((result) => {
+                            if (result.value) {
+    
+                            window.location = "descuento";
+    
+                            }
+                        })
+    
+            </script>';
+        }
+
+      }
+
+    }
+
+
+
+    	/*=============================================
+            BORRAR INSCRIPCION
+	=============================================*/
+  static public function ctrBorrarInscripcion(){
+    // var_dump($_GET);
+     //return;
+
+    if(isset($_GET['idEliminarInscripcion'])){
+        $tabla = 'tbl_inscripcion';
+        $datos = $_GET['idEliminarInscripcion'];
+
+
+        $respuesta = ModeloGlobales::mdlBorrarInscripcion($tabla, $datos);
+        
+        // var_dump($respuesta);
+        // return;
+        
+        if($respuesta == true){
+          
+          echo'<script>
+  
+          Swal.fire({
+               icon: "success",
+                title: "Se a eliminado correctamente",
+                showConfirmButton: true,
+                confirmButtonText: "Cerrar",
+                closeOnConfirm: false
+                }).then((result) => {
+                          if (result.value) {
+  
+                          window.location = "inscripcion";
+  
+                          }
+                      })
+  
+          </script>';
+  
+      }else{
+
+        echo'<script>
+  
+          Swal.fire({
+                icon: "warning",
+                title: "Error al borrar inscripcion",
+                showConfirmButton: true,
+                confirmButtonText: "Cerrar",
+                closeOnConfirm: false
+                }).then((result) => {
+                          if (result.value) {
+  
+                          window.location = "inscripcion";
+  
+                          }
+                      })
+  
+          </script>';
+      }
+    }
+  }
+
+  	/*=============================================
+            BORRAR INSCRIPCION
+	=============================================*/
+  static public function ctrBorrarMatricula(){
+    // var_dump($_GET);
+     //return;
+
+    if(isset($_GET['idEliminarMatricula'])){
+        $tabla = 'tbl_matricula';
+        $datos = $_GET['idEliminarMatricula'];
+
+
+        $respuesta = ModeloGlobales::mdlBorrarMatricula($tabla, $datos);
+        
+        // var_dump($respuesta);
+        // return;
+        
+        if($respuesta == true){
+          
+          echo'<script>
+  
+          Swal.fire({
+               icon: "success",
+                title: "Se a eliminado correctamente",
+                showConfirmButton: true,
+                confirmButtonText: "Cerrar",
+                closeOnConfirm: false
+                }).then((result) => {
+                          if (result.value) {
+  
+                          window.location = "matricula";
+  
+                          }
+                      })
+  
+          </script>';
+  
+      }else{
+
+        echo'<script>
+  
+          Swal.fire({
+                icon: "warning",
+                title: "Error al borrar matricula",
+                showConfirmButton: true,
+                confirmButtonText: "Cerrar",
+                closeOnConfirm: false
+                }).then((result) => {
+                          if (result.value) {
+  
+                          window.location = "matricula";
+  
+                          }
+                      })
+  
+          </script>';
+      }
+    }
+  }
+
+  	/*=============================================
+            BORRAR Descuento
+	=============================================*/
+  static public function ctrBorrarDescuento(){
+    // var_dump($_GET);
+     //return;
+
+    if(isset($_GET['idEliminarDescuento'])){
+        $tabla = 'tbl_descuento';
+        $datos = $_GET['idEliminarDescuento'];
+
+
+        $respuesta = ModeloGlobales::mdlBorrarDescuento($tabla, $datos);
+        
+        // var_dump($respuesta);
+        // return;
+        
+        if($respuesta == true){
+          
+          echo'<script>
+  
+          Swal.fire({
+               icon: "success",
+                title: "Se a eliminado correctamente",
+                showConfirmButton: true,
+                confirmButtonText: "Cerrar",
+                closeOnConfirm: false
+                }).then((result) => {
+                          if (result.value) {
+  
+                          window.location = "descuento";
+  
+                          }
+                      })
+  
+          </script>';
+  
+      }else{
+
+        echo'<script>
+  
+          Swal.fire({
+                icon: "warning",
+                title: "Error al borrar descuento",
+                showConfirmButton: true,
+                confirmButtonText: "Cerrar",
+                closeOnConfirm: false
+                }).then((result) => {
+                          if (result.value) {
+  
+                          window.location = "descuento";
+  
+                          }
+                      })
+  
+          </script>';
+      }
+    }
+  }
+
+  /*=============================================
+            BORRAR ROLES
+	=============================================*/
+  static public function ctrBorrarRoles(){
+    // var_dump($_GET);
+    // return;
+
+    if(isset($_GET['idEliminarRoles'])){
+        $tabla = 'tbl_rol';
+        $datos = $_GET['idEliminarRoles'];
+
+
+        $respuesta = ModeloGlobales::mdlBorrarRol($tabla, $datos);
+        
+        // var_dump($respuesta);
+        // return;
+        
+        if($respuesta == true){
+          
+          echo'<script>
+  
+          Swal.fire({
+               icon: "success",
+                title: "Se a eliminado correctamente",
+                showConfirmButton: true,
+                confirmButtonText: "Cerrar",
+                closeOnConfirm: false
+                }).then((result) => {
+                          if (result.value) {
+  
+                          window.location = "rol";
+  
+                          }
+                      })
+  
+          </script>';
+  
+      }else{
+
+        echo'<script>
+  
+          Swal.fire({
+                icon: "warning",
+                title: "Error al borrar rol",
+                showConfirmButton: true,
+                confirmButtonText: "Cerrar",
+                closeOnConfirm: false
+                }).then((result) => {
+                          if (result.value) {
+  
+                          window.location = "rol";
+  
+                          }
+                      })
+  
+          </script>';
+      }
+    }
+  }
+
+
   
 
 }

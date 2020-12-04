@@ -590,6 +590,22 @@
 
   }
 
+  /*=============================================
+			RANGO DE INSCRIPCION
+	=============================================*/
+
+	static public function ctrRangoInscripcion($rango) {
+
+		$tabla1 = "tbl_inscripcion";
+		
+		$respuesta = ModeloMantenimiento::mdlRangoInscripcion($tabla,$rango);
+
+		return $respuesta;
+
+  }
+
+
+
 
 
 }
