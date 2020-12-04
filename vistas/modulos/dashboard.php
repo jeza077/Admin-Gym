@@ -60,6 +60,14 @@
           ?>    
         </div>
 
+        <div class="row mb-3">
+          <div class="col-md-12 col-xs-12">
+            <?php 
+              include "reportes/grafico-pago-clientes.php";
+            ?>    
+          </div>
+        </div>
+
         <div class="row">
           <div class="col-md-6 col-xs-12">
             <?php 
