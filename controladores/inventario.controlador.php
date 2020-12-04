@@ -284,6 +284,7 @@ class ControladorInventario
                         "stock" => $_POST["editarStock"],
                         "precio_venta" => $_POST["editarPrecio"],
                         "precio_compra" => $_POST["editarPrecioCompra"],
+                        "proveedor" => $_POST["editarProveedor"],
                         "foto" => $ruta,
                         "producto_minimo" => $_POST["editarProductoMinimo"],
                         "producto_maximo" => $_POST["editarProductoMaximo"]);

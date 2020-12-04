@@ -24,6 +24,7 @@ $(document).on("click",".btnEditarInventario",function(){
             $("#editarTipoProducto").val(respuesta["id_inventario"]);
             $("#editarStock").val(respuesta["stock"]);
             $("#editarPrecio").val(respuesta["precio_venta"]);
+            $("#editarProveedor").val(respuesta["proveedor"]);
             $("#editarProductoMinimo").val(respuesta["producto_minimo"]);
             $("#editarProductoMaximo").val(respuesta["producto_maximo"]);
 

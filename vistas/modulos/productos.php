@@ -47,11 +47,11 @@
                     <th scope="col">#</th>
                     <th scope="col">Codigo</th>
                     <th scope="col">Foto</th>
-                    <th scope="col">Tipo inventario</th>
+                    <!-- <th scope="col">Tipo inventario</th> -->
                     <th scope="col">Nombre</th>
                     <th scope="col">Stock</th>
                     <th scope="col">Precio venta</th>
-                    <th scope="col">Precio compra</th>
+                    <!-- <th scope="col">Precio compra</th> -->
                     <th scope="col">Producto min.</th>
                     <th scope="col">Producto max.</th>
                     <th scope="col">Acciones</th>
@@ -78,12 +78,12 @@
                                   } else {
                                     echo '<td><img src="vistas/img/usuarios/default/default2.jpg" class="img-thumbnail" width="40px"></td>';
                                   }
-                                    echo '<td>'.$value["tipo_producto"].'</td>
+                                    echo '<td>'.$value["nombre_producto"].'</td>
          
-                              <td>'.$value["nombre_producto"].'</td>
+                              
                               <td>'.$value["stock"].'</td>
                               <td>'.$value["precio_venta"].'</td>
-                              <td>'.$value["precio_compra"].'</td>
+                             
                               <td>'.$value["producto_minimo"].'</td>
                               <td>'.$value["producto_maximo"].'</td>     
                               <td>

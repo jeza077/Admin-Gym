@@ -223,6 +223,96 @@
   </div>
 
 
+ <!-- =======================================
+           MODAL EDITAR
+  ======================================----->
+
+  <div class="modal fade" id="modalEditarProducto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Editar</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form role="form" method="post" class="formulario" enctype="multipart/form-data">
+            
+           
+                  <div class="form-row">
+                    
+                    <div class="form-group col-md-3">
+                      <label for="nombreproducto">Codigo</label>
+                      <input type="text" value="" class="form-control" readonly id="editarCodigo" name="editarCodigo"  required>
+                      <input type="hidden" name="editarTipoProducto" id="editarTipoProducto">
+                    </div>
+                    
+                    <div class="form-group col-md-3">
+                      <label for="nombreproducto">Nombre Producto</label>
+                      <html>
+                      <input type="text" value="" class="form-control mayus editar_Nombre_Producto"  name="editarNombreProducto" id="editarNombreProducto" required>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="nombreproducto">Proveedor</label>
+                        <html>
+                        <input type="text" class="form-control mayus proveedor" name="editarProveedor" id="editarProveedor" placeholder="Nuevo Proveedor" required>
+                      </div>
+                    <div class="form-group col-md-3">
+                      <label for="stock">Cantidad en stock</label>
+                      <input type="number" value="" class="form-control" name="editarStock" id="editarStock"  min="0" required class="fa fa-arrow-up"></i></span>
+                    </div>
+                  </div>
+      
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                        <label for="precio">Precio</label>
+                        <input type="text" value="" class="form-control editar_Precio" name="editarPrecio" id="editarPrecio" required>
+                        </div>
+                        <div class="form-group col-md-4">
+                          <label for="productominimo">Producto Minimo</label>
+                          <input type="number" value="" class="form-control" name="editarProductoMinimo" id="editarProductoMinimo" min="0" required class="fa fa-arrow-up"></i></span>
+                        </div>
+                        <div class="form-group col-md-4">
+                          <label for="productomaximo">Producto Maximo</label>
+                          <input type="number" value="" class="form-control" name="editarProductoMaximo" id="editarProductoMaximo" min="0" required class="fa fa-arrow-up"></i></span>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+
+                        <div class="form-group col-md-5">
+                            <label for="exampleInputFile">Foto</label>
+                            <div class="input-group">
+                            <img class="img-thumbnail previsualizar mr-2" src="vistas/img/usuarios/default/anonymous.png" alt="imagen-del-usuario" width="100px">
+                            <input type="hidden" name="imagenActual" id=imagenActual>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input nuevaFotoProducto" id="exampleInputFile" name="editarFotoProducto">
+                                <label class="custom-file-label" for="exampleInputFile">Escoger foto</label>
+                            </div>
+                            </div>
+                                <p class="p-foto help-block ml-4">Peso máximo de la foto 2 MB</p>
+                        </div>
+                    </div>
+
+                    <div class="form-group mt-4 float-right">
+                        <button type="" class="btn btn-primary">Guardar</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
+                    </div>
+                
+                    <?php
+                    $tipostock = 'producto';
+                    $pantalla = 'compras';
+                    $EditarInventario = new ControladorInventario();
+                    $EditarInventario->ctrEditarStock($tipostock, $pantalla);
+                    ?>
+                  <!-- 2tab --> 
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
 
 
   </div>
