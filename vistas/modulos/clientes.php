@@ -103,7 +103,7 @@
                           }
                     
 
-                      echo '<td></td>';
+                      // echo '<td></td>';
 
                           if($value['tipo_cliente'] == "Gimnasio"){
                             echo '<td><button class="btn btn-warning btnEditarCliente" tipoCliente="'.$value['tipo_cliente'].'" id="btnEditar" data-toggle="modal" data-target="#modalEditarClienteGimnasio" idEditarCliente="'.$value["id_personas"].'"><i class="fas fa-pencil-alt" style="color:#fff"></i></button>
