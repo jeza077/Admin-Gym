@@ -57,7 +57,7 @@ class PDF extends TCPDF{
 
         $this->Ln(20); //Espacios
         $this->SetFont('helvetica', 'B', 14);
-        $this->Cell(260, 3, 'REPORTE DE CLIENTES', 0, 1, 'C');
+        $this->Cell(260, 3, 'REPORTE HISTORIAL PAGOS DE CLIENTES', 0, 1, 'C');
         $this->Ln(3);
         $this->SetFont('helvetica', 'B', 11);
 
@@ -88,7 +88,7 @@ $pdf = new PDF('l', 'mm', 'A4', true, 'UTF-8', false);
 // set document information
 $pdf->SetCreator(PDF_CREATOR);
 $pdf->SetAuthor('Jesus Zuniga');
-$pdf->SetTitle('Reporte de Clientes');
+$pdf->SetTitle('Reporte Historial de Pagos');
 $pdf->SetSubject('');
 $pdf->SetKeywords('');
 
@@ -139,9 +139,10 @@ $pdf->SetFont('times', '', 13);
 $pdf->SetFillColor(225, 235, 255);
 $pdf->Cell(15, 5, 'No', 1, 0, 'C', 1);
 $pdf->Cell(75, 5, 'Nombre', 1, 0, 'C', 1);
-$pdf->Cell(40, 5, 'Tipo Cliente', 1, 0, 'C', 1);
-$pdf->Cell(70, 5, 'Correo', 1, 0, 'C', 1);
-$pdf->Cell(50, 5, 'Telefono', 1, 0, 'C', 1);
+$pdf->Cell(40, 5, 'Tipo Inscripcion', 1, 0, 'C', 1);
+$pdf->Cell(45, 5, 'Valor Ultimo Pago', 1, 0, 'C', 1);
+$pdf->Cell(50, 5, 'Fecha Ultimo Pago', 1, 0, 'C', 1);
+$pdf->Cell(50, 5, 'Fecha Vencimiento', 1, 0, 'C', 1);
 
 if(isset($_GET["rango"])){
 
@@ -153,13 +154,13 @@ if(isset($_GET["rango"])){
 
 } 
 
-$clientes = ControladorClientes::ctrRangoCliente($rango);
+$clientes = ControladorClientes::ctrRangoHistorialPagosCliente($rango);
 
 // var_dump($clientes);
 // return;
 
 $i = 1; //Contador
-$max = 21; //Maximo de registros a mostrar en una pagina
+$max = 12; //Maximo de registros a mostrar en una pagina
 if(!$clientes){
     // echo 'vacio';
     $pdf->Ln(15);
@@ -179,9 +180,10 @@ if(!$clientes){
             $pdf->SetFillColor(225, 235, 255);
             $pdf->Cell(15, 5, 'No', 1, 0, 'C', 1);
             $pdf->Cell(75, 5, 'Nombre', 1, 0, 'C', 1);
-            $pdf->Cell(40, 5, 'Tipo Cliente', 1, 0, 'C', 1);
-            $pdf->Cell(70, 5, 'Correo', 1, 0, 'C', 1);
-            $pdf->Cell(50, 5, 'Telefono', 1, 0, 'C', 1);
+            $pdf->Cell(40, 5, 'Tipo Inscripcion', 1, 0, 'C', 1);
+            $pdf->Cell(45, 5, 'Valor Ultimo Pägo', 1, 0, 'C', 1);
+            $pdf->Cell(50, 5, 'Fecha Ultimo Pago', 1, 0, 'C', 1);
+            $pdf->Cell(50, 5, 'Fecha Vencimiento', 1, 0, 'C', 1);
         }
         // $pdf->Cell(15, 5, ''.$i.'', 1, 0, 'C');
     
@@ -190,9 +192,10 @@ if(!$clientes){
         // $pdf->SetFillColor(225, 235, 255);
         $pdf->Cell(15, 4, ''.($key+1).'', 0, 0, 'C');
         $pdf->Cell(75, 4, ''.$value['nombre'].' '.$value['apellidos'].'', 0, 0, 'C');
-        $pdf->Cell(40, 4, ''.$value['tipo_cliente'].'', 0, 0, 'C');
-        $pdf->Cell(70, 4, ''.$value['correo'].'', 0, 0, 'C');
-        $pdf->Cell(50, 4, ''.$value['telefono'].'', 0, 0, 'C');
+        $pdf->Cell(40, 4, ''.$value['tipo_inscripcion'].'', 0, 0, 'C');
+        $pdf->Cell(45, 4, 'L.'.$value['pago_total'].'.00', 0, 0, 'C');
+        $pdf->Cell(50, 4, ''.$value['fecha_ultimo_pago'].'', 0, 0, 'C');
+        $pdf->Cell(50, 4, ''.$value['fecha_vencimiento'].'', 0, 0, 'C');
     
         // if($value["estado"] == 0){
         //     $pdf->Cell(30, 4, 'Desactivado', 0, 0, 'C');
@@ -205,6 +208,6 @@ if(!$clientes){
 }
 
 // Close and output PDF document
-$pdf->Output('reporte_total_clientes.pdf', 'I');
+$pdf->Output('reporte_historial_pagos_clientes.pdf', 'I');
 
 ?>

@@ -52,6 +52,11 @@
     }      
 
     $noRepetirFechas = array_unique($arrayFechas);
+    // echo $key;
+    //         echo '<pre>';
+    //         var_dump($sumaPagosMes[$key]);
+    //         echo '</pre>';
+            
 ?>
 
 <div class="card bg-gradient-teal">

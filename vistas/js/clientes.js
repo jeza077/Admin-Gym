@@ -62,35 +62,24 @@ $(document).on('change', '.tipoCliente', function () {
 //** ------------------------------------*/
 //         IMPRIMIR USUARIOS 
 // --------------------------------------*/ 
-$(document).on('click', '.btnExportarClientes', function () {
-    window.open("extensiones/tcpdf/pdf/clientes-pdf.php", "_blank");
-});
+exportarPdf('.btnExportarClientes', 'clientes');
+exportarPdf('.btnExportarHistorialPagosClientes', 'historial-pagos-clientes');
+exportarPdf('.btnExportarPagosClientes', 'pagos-clientes');
+
 
 /*=============================================
-        EDITAR CLIENTE
+        EDITAR CLIENTE GIMNASIO
 =============================================*/
 
-$('#editarCliente').hide();
-$('.tabEditarCliente').hide();
-$('.btnDatosGimnasio').hide();
-$(document).on('click', '.btnEditarCliente', function () { 
+$(document).on('click', '.btnEditarClienteGimnasio', function () { 
     
     var idEditarCliente = $(this).attr("idEditarCliente");
     var tipoCliente = $(this).attr("tipoCliente");
-    // console.log(tipoCliente)
+    // console.log(tipoClienteGimnasio)
     var datos = new FormData();
     datos.append("idEditarCliente", idEditarCliente);
-
-    if (tipoCliente == "Ventas") {
-        $('#editarCliente').show();
-        $('.tabEditarCliente').show();
-        $('.btnDarosGimnasio').show();
-    } else {
-        $('#editarCliente').hide();
-        $('.tabEditarCliente').hide();
-        $('.btnDatosGimnasio').show();
-    }
-    
+    datos.append("tipoCliente", tipoCliente)
+    // console.log(tipoClienteGimnasio)
 
     $.ajax({
     
@@ -120,36 +109,30 @@ $(document).on('click', '.btnEditarCliente', function () {
             $('#editarSexo').html(respuesta["sexo"])
             $('#editarSexo').val(respuesta["sexo"])
 
+            // $tipoClienteGimnasio = respuesta["tipo_cliente"];
+            // console.log(tipoClienteGimnasio)
+
             $('#editarTipoCliente').html(respuesta["tipo_cliente"])
-            $('#editarTipoCliente').val(respuesta["tipo_cliente"])
+            $('#editarTipoCliente').val($tipoClienteGimnasio)
 
-            // var tipoDeCliente = respuesta['tipo_cliente'];
-            // console.log(valor)
-            // if (tipoDeCliente == "Ventas") {
-            //     $('#editarCliente').show();
-                
-            // } else {
-            //     $('#editarCliente').hide();
-            //     $('.tabEditarCliente').hide();
-            // }
+            // $('#editarMatricula').html(respuesta["tipo_matricula"])
+            // $('#editarMatricula').val(respuesta["id_matricula"])
 
-            $('#editarMatricula').html(respuesta["tipo_matricula"])
-            $('#editarMatricula').val(respuesta["id_matricula"])
-
-            $('#editarPromocion').html(respuesta["tipo_descuento"])
-            $('#editarPromocion').val(respuesta["id_descuento"])
+            // $('#editarPromocion').html(respuesta["tipo_descuento"])
+            // $('#editarPromocion').val(respuesta["id_descuento"])
             
-            $('#editarInscripcion').html(respuesta["tipo_inscripcion"])
-            $('#editarInscripcion').val(respuesta["id_inscripcion"])
+            // $('#editarInscripcion').html(respuesta["tipo_inscripcion"])
+            // $('#editarInscripcion').val(respuesta["id_inscripcion"])
 
-            $('.editarPrecioMatricula').val(respuesta["pago_matricula"])
-            $('.editarPrecioPromocion').val(respuesta["pago_descuento"])
-            $('.editarPrecioInscripcion').attr('value', respuesta["pago_inscripcion"])
-            $('.editarTotalPagar').val(respuesta["pago_total"])
+            // $('.editarPrecioMatricula').val(respuesta["pago_matricula"])
+            // $('.editarPrecioPromocion').val(respuesta["pago_descuento"])
+            // $('.editarPrecioInscripcion').attr('value', respuesta["pago_inscripcion"])
+            // $('.editarTotalPagar').val(respuesta["pago_total"])
             
         }
     });
 });
+
 /*============================================================
     MOSTRAR PRECIOS DE MATRICULA, DESCUENTO Y INSCRIPCION
 ============================================================*/
@@ -419,12 +402,26 @@ $(document).on('click', '.SwalBtnMantenerInscripcion', function (e) {
             processData: false,  
             dataType: "json",
             success: function(respuesta) {
-                // console.log(respuesta);
+                console.log(respuesta);
     
                 if(respuesta == true){
                     Swal.fire({
                         title: 'El pago se agrego correctamente',
                         icon: 'success',
+                        // width: 600,
+                        allowOutsideClick: false,
+                        showCancelButton: false,
+                        showConfirmButton: true,
+                        confirmButtonText: 'Cerrar'
+                    }).then((result)=>{
+                        if(result.value){
+                            window.location = "pagos-cliente";
+                        }
+                    });;   
+                } else {
+                    Swal.fire({
+                        title: 'Error',
+                        icon: 'error',
                         // width: 600,
                         allowOutsideClick: false,
                         showCancelButton: false,
@@ -538,16 +535,17 @@ $('.btnEliminarCliente').click(function () {
 });
 
 /*=============================================
-        EDITAR CLIENTE
+        EDITAR CLIENTE VENTA
 =============================================*/
 
-$('.btnPagosCliente').click(function () { 
+$(document).on('click', '.btnEditarClienteVenta', function () { 
     
-    var idPago = $(this).attr("idPagoCliente");
-    // console.log(idPago)
+    var idEditarCliente = $(this).attr("idEditarClienteVenta");
+    var tipoCliente = $(this).attr("tipoCliente");
+    // console.log(tipoCliente)
     var datos = new FormData();
-    datos.append("idPago", idPago);
-    
+    datos.append("tipoCliente", tipoCliente);
+    // console.log(idEditarClienteVenta)
 
     $.ajax({
     
@@ -562,17 +560,37 @@ $('.btnPagosCliente').click(function () {
 
             // console.log("respuesta", respuesta);
             
-            $('#idEditarCliente').val(respuesta["id_persona"])
+            $('#idEditarClienteVenta').val(respuesta["id_persona"])
 
-            $('#actualizarDescuento').html(respuesta["tipo_descuento"])
-            $('#actualizarDescuento').val(respuesta["id_descuento"])
+            $('#tipoDocumentoClienteVentas').html(respuesta["tipo_documento"])
+            $('#tipoDocumentoClienteVentas').val(respuesta["id_documento"])
+
+            $('.numeroDocumentoClienteVentas').val(respuesta["num_documento"])
+            $('.nombreClienteVentas').val(respuesta["nombre"])
+            $('.apellidoClienteVentas').val(respuesta["apellidos"])
+            $('.editarEmailVentas').val(respuesta["correo"])
+            $('.telefonoClienteVentas').val(respuesta["telefono"])
+            $('.fechaNacimientoClienteVentas').val(respuesta["fecha_nacimiento"])
+            $('.direccionClienteVentas').val(respuesta["direccion"])
+            $('#editarSexoClienteVentas').html(respuesta["sexo"])
+            $('#editarSexoClienteVentas').val(respuesta["sexo"])
+
+            $('#tipoDeClienteVenta').html(respuesta["tipo_cliente"])
+            $('#tipoDeClienteVenta').val(respuesta["tipo_cliente"])
+
+            $('#tipoMatriculaClienteVenta').html(respuesta["tipo_matricula"])
+            $('#tipoMatriculaClienteVenta').val(respuesta["id_matricula"])
+
+            $('#editarPromocionClienteVenta').html(respuesta["tipo_descuento"])
+            $('#editarPromocionClienteVenta').val(respuesta["id_descuento"])
             
-             $('#actualizarInscripcion').html(respuesta["tipo_inscripcion"])
-            $('#actualizarInscripcion').val(respuesta["id_inscripcion"])
+            $('#inscripcionClienteVenta').html(respuesta["tipo_inscripcion"])
+            $('#inscripcionClienteVenta').val(respuesta["id_inscripcion"])
 
-            $('.actualizarPrecioDescuento').val(respuesta["pago_descuento"])
-            $('.actualizarPagoInscripcion').val(respuesta["pago_inscripcion"])
-            $('.pagoTotalActualizado').val(respuesta["pago_total"])
+            $('.precioMatriculaClienteVentas').val(respuesta["pago_matricula"])
+            $('.valorPromocionClienteVenta').val(respuesta["pago_descuento"])
+            $('.precioInscripcionClienteVenta').attr('value', respuesta["pago_inscripcion"])
+            $('.totalPagarClienteVenta').val(respuesta["pago_total"])
             
         }
     });

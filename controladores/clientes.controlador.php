@@ -26,8 +26,8 @@ class ControladorClientes{
 			// }
 							
 			
-			// return $datos;
             $respuestaCrearCliente = ModeloClientes::mdlCrearCliente($tabla, $datos);
+			// return $respuestaCrearCliente;
             // echo "<pre>";
 			// var_dump($respuestaCrearCliente);
 			// echo "</pre>";
@@ -89,6 +89,8 @@ class ControladorClientes{
 					$fechaHoy = date('Y-m-d');
 					$fechaVencimientoCliente = date("Y-m-d", strtotime('+'.$vigenciaCliente.' days'));
 					
+					// echo $fechaVencimientoCliente;
+					// return;
 					$tabla3 = "tbl_pagos_cliente";
 	
 					$datos = array("id_cliente" => $idCliente,
@@ -579,6 +581,45 @@ class ControladorClientes{
 					</script>';
 			}
 		}
+	}
+
+
+	/*=============================================
+			RANGO CLIENTES
+    =============================================*/
+	static public function ctrRangoCliente($rango){
+
+		$tabla = 'tbl_clientes';
+		
+		$respuesta = ModeloClientes::mdlRangoCliente($tabla, $rango);
+		
+		return $respuesta;
+	}
+
+
+	/*=============================================
+		RANGO HISTORIAL PAGOS CLIENTES
+    =============================================*/
+	static public function ctrRangoHistorialPagosCliente($rango){
+
+		$tabla = 'tbl_clientes';
+		
+		$respuesta = ModeloClientes::mdlRangoHistorialPagosCliente($tabla, $rango);
+		
+		return $respuesta;
+	}
+
+
+	/*=============================================
+		RANGO PAGOS CLIENTES
+    =============================================*/
+	static public function ctrRangoPagosCliente($rango){
+
+		$tabla = 'tbl_clientes';
+		
+		$respuesta = ModeloClientes::mdlRangoPagosCliente($tabla, $rango);
+		
+		return $respuesta;
 	}
 }
 
