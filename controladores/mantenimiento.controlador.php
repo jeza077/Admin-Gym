@@ -317,7 +317,7 @@
   
               if(result.value){
   
-                window.location = "inscripcion|";
+                window.location = "inscripcion";
   
               }
   
@@ -401,7 +401,7 @@
   
               if(result.value){
   
-                window.location = "mantenimiento";
+                window.location = "matricula";
   
               }
   
@@ -430,7 +430,7 @@
   
               if(result.value){
   
-                window.location = "mantenimiento";
+                window.location = "matricula";
   
               }
   
@@ -515,7 +515,7 @@
   
               if(result.value){
   
-                window.location = "mantenimiento";
+                window.location = "descuento";
   
               }
   
@@ -544,7 +544,7 @@
   
               if(result.value){
   
-                window.location = "mantenimiento";
+                window.location = "descuento";
   
               }
   
