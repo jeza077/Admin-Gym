@@ -61,7 +61,7 @@ class ModeloClientes{
 
 		if($item != null){
 
-			$stmt = Conexion::conectar()->prepare("SELECT p.*, c.*, d.tipo_documento, m.tipo_matricula, m.precio_matricula, pd.tipo_descuento, pd.valor_descuento, i.tipo_inscripcion,i.precio_inscripcion, pc.* FROM $tabla1 as p\n"
+			$stmt = Conexion::conectar()->prepare("SELECT p.*, c.*, d.tipo_documento, m.tipo_matricula, m.precio_matricula, pd.tipo_descuento, pd.valor_descuento, i.tipo_inscripcion, i.precio_inscripcion, pc.* FROM $tabla1 as p\n"
 			. "LEFT JOIN $tabla2 as c ON p.id_personas = c.id_persona\n"
 			. "LEFT JOIN tbl_documento as d ON p.id_documento = d.id_documento\n"
 			. "LEFT JOIN tbl_matricula as m ON c.id_matricula = m.id_matricula\n"
@@ -75,9 +75,11 @@ class ModeloClientes{
 			return $stmt -> fetch();
 
 		} else {
+			
 
-			$stmt = Conexion::conectar()->prepare("SELECT p.*, c.*, i.fecha_creacion, i.tipo_inscripcion, pd.tipo_descuento, valor_descuento, pc.* FROM $tabla1 as p\n"
-            . "LEFT JOIN $tabla2 as c ON p.id_personas = c.id_persona\n"
+			$stmt = Conexion::conectar()->prepare("SELECT p.*, c.*, d.tipo_documento, i.fecha_creacion, i.tipo_inscripcion, pd.tipo_descuento, valor_descuento, pc.* FROM $tabla1 as p\n"
+			. "LEFT JOIN $tabla2 as c ON p.id_personas = c.id_persona\n"
+			. "LEFT JOIN tbl_documento as d ON p.id_documento = d.id_documento\n"
             . "LEFT JOIN tbl_matricula as m ON c.id_matricula = m.id_matricula\n"
 			. "LEFT JOIN tbl_pagos_cliente as pc ON c.id_cliente = pc.id_cliente\n"
             . "LEFT JOIN tbl_inscripcion as i ON pc.id_inscripcion = i.id_inscripcion\n"
@@ -87,7 +89,8 @@ class ModeloClientes{
 			$stmt -> execute();
 			return $stmt -> fetchAll();
 
-		}
+		} 
+		
 
 		$stmt -> close();
 		$stmt = null;	

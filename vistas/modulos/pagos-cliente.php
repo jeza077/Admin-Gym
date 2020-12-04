@@ -112,8 +112,6 @@
                     echo
                         '<td>
                           <button class="btn btn-success btnEditarPago" data-toggle="tooltip" data-placement="left" title="Actualizar Pago" idCliente="'.$value["id_personas"].'"><i class="fas fa-dollar-sign p-1"></i></button>
-
-                          <button class="btn btn-warning btnEditarCliente" id="btnEditar" data-toggle="modal" data-target="#modalEditarCliente" idEditarCliente="'.$value["id_personas"].'"><i class="fas fa-pencil-alt" style="color:#fff"></i></button>
                         </td>
                       </tr>
                   ';

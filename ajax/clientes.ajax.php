@@ -28,6 +28,27 @@ class AjaxClientes{
         echo json_encode($respuesta);
     }
 
+    /*=============================================
+           EDITAR CLIENTE VENTA
+    =============================================*/
+    
+    
+    public $idEditarClienteVenta;
+
+    public function ajaxEditarClienteVenta(){
+
+        $tabla = "tbl_clientes";
+        $item = "id_personas";
+        $valor = $this->idEditarClienteVenta;
+        
+        $respuesta = ControladorClientes::ctrMostrarClientes($tabla, $item, $valor);
+        // echo "<pre>";
+        // var_dump($respuesta);
+        // echo "</pre>";
+
+        echo json_encode($respuesta);
+    }
+
 
      /*=============================================
         EDITAR PAGO CLIENTE MANTENIENDO INSCRIPCION
@@ -110,12 +131,20 @@ if(isset($_POST["idClientePago"])){
     $pagoCliente->ajaxEditarPagoCliente();
 }
 /*=============================================
-    EDITAR CLIENTE
+    EDITAR CLIENTE GIMNASIO
 =============================================*/
 if(isset($_POST["idEditarCliente"])){
     $cliente = new AjaxClientes();
     $cliente->idEditarCliente = $_POST["idEditarCliente"];
     $cliente->ajaxEditarCliente();
+}
+/*=============================================
+    EDITAR CLIENTE VENTA
+=============================================*/
+if(isset($_POST["idEditarClienteVenta"])){
+    $clienteVenta = new AjaxClientes();
+    $clienteVenta->idEditarClienteVenta = $_POST["idEditarClienteVenta"];
+    $clienteVenta->ajaxEditarClienteVenta();
 }
 /*=============================================
     MOSTRAR DINAMICO

@@ -518,7 +518,7 @@ class ControladorPersonas{
                     "telefono" => $_POST["editarTelefono"],
                     "direccion" => $_POST["editarDireccion"],
                     "email" => $_POST["editarEmail"],
-                    "id_persona" => $_POST["idEditarCliente"]);
+                    "id_persona" => $tipoClienteGimnasio);
                     
 
                     $respuestaDeEditarPersona = ModeloPersonas::mdlEditarPersona($tabla, $datos);
@@ -529,28 +529,28 @@ class ControladorPersonas{
 
                     if($respuestaDeEditarPersona == true){
 
-                        if ($_POST['editarTipoCliente'] == "Gimnasio"){
+                        if ($_POST['tipoDeClienteVenta'] == "Gimnasio"){
     
                             $datos = array("id_persona" => $_POST["idEditarCliente"],
-                            "tipo_cliente" => $_POST["editarTipoCliente"],
-                            "id_inscripcion" => $_POST["editarInscripcion"],
-                            "id_matricula" => $_POST["editarMatricula"],
-                            "id_descuento" => $_POST["editarPromocion"],
-                            "pagos_matricula" => $_POST["editarPrecioMatricula"],
-                            "pagos_descuento" => $_POST["editarPrecioPromocion"],
-                            "pagos_inscripcion" => $_POST["editarPrecioInscripcion"],
-                            "pagos_total" => $_POST["editarTotalPagar"]);
+                            "tipo_cliente" => $_POST["tipoCliente"],
+                            "id_inscripcion" => $_POST["inscripcionClienteVenta"],
+                            "id_matricula" => $_POST["tipoMatriculaClienteVenta"],
+                            "id_descuento" => $_POST["editarPromocionClienteVenta"],
+                            "pagos_matricula" => $_POST["precioMatriculaClienteVentas"],
+                            "pagos_descuento" => $_POST["valorPromocionClienteVenta"],
+                            "pagos_inscripcion" => $_POST["valorPromocionClienteVenta"],
+                            "pagos_total" => $_POST["totalPagarClienteVenta"]);
                         } else {
                             $datos = array("id_persona" => $_POST["idEditarCliente"],
-                            "tipo_cliente" => $_POST["editarTipoCliente"]);
+                            "tipo_cliente" => $_POST["tipoCliente"]);
                         }
-                        // echo "<pre>";
-                        // var_dump($datos);
-                        // echo "</pre>";
-                        // return;
+                        echo "<pre>";
+                        var_dump($datos);
+                        echo "</pre>";
+                        return;
                         
     
-                        $respuestaEditarCliente = ControladorClientes::ctrEditarCliente($datos);
+                        $respuestaEditarCliente = ControladorClientes::ctrCrearCliente($datos);
 
                         // echo "<pre>";
                         // var_dump($respuestaEditarCliente);
