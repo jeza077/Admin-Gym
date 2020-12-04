@@ -258,6 +258,43 @@ $(document).on('click', '.btnEliminarRoles', function () {
     });
 });
 
+//** ------------------------------------*/
+//         IMPRIMIR PDF INSCRIPCiON
+// --------------------------------------*/ 
+exportarPdf('.btnExportarInscripcion', 'inscripcion');
+
+//** ------------------------------------*/
+//         IMPRIMIR PDF MATRICULA
+// --------------------------------------*/ 
+exportarPdf('.btnExportarMatricula', 'matricula');
+
+//** ------------------------------------*/
+//         IMPRIMIR PDF DESCUENTO
+// --------------------------------------*/ 
+exportarPdf('.btnExportarDescuento', 'descuento');
+
+//** ------------------------------------*/
+//         IMPRIMIR PDF ROl
+// --------------------------------------*/ 
+exportarPdf('.btnExportarRol', 'roles');
+
+//** ------------------------------------*/
+//         IMPRIMIR PDF Parametros
+// --------------------------------------*/ 
+exportarPdf('.btnExportarParametro', 'parametross');
+
+//** ------------------------------------*/
+//         IMPRIMIR PDF Parametros
+// --------------------------------------*/ 
+exportarPdf('.btnExportarAdministrar', 'administrarrol');
+
+
+
+
+
+
+
+
 
 
 

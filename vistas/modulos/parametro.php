@@ -7,6 +7,9 @@
             <h1>Parametros</h1>
           </div>
           <div class="col-sm-6">
+              <button class="btn btn-danger btnExportarParametro float-right mr-3 ">
+                Exportar PDF      
+              </button>
        
           </div>
         </div>

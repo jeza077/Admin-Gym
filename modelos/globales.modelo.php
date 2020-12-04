@@ -254,7 +254,137 @@ class ModeloGlobales{
 		$stmt->close();
 
 		$stmt = null;
+    }
+    
+    /*=============================================
+			RANGO DINAMICO INSCRIPCION
+	=============================================*/
+	static public function mdlRangoInscripcion($tabla, $rango){
+	
+		if($rango == null){
+
+			$stmt = Conexion::conectar() ->prepare("SELECT * FROM $tabla");
+            $stmt-> execute();
+			return $stmt ->fetchAll();
+			
+		} else {
+
+			$stmt = Conexion::conectar() ->prepare("SELECT * FROM $tabla  where inscripcion LIKE '%$rango%'");
+
+            $stmt-> execute();
+			return $stmt ->fetchAll();
+			
+		} 	
+    }
+    
+
+    /*=============================================
+			RANGO DINAMICO MATRICULA
+	=============================================*/
+	static public function mdlRangoMatricula($tabla, $rango){
+	
+		if($rango == null){
+
+			$stmt = Conexion::conectar() ->prepare("SELECT * FROM $tabla");
+            $stmt-> execute();
+			return $stmt ->fetchAll();
+			
+		} else {
+
+			$stmt = Conexion::conectar() ->prepare("SELECT * FROM $tabla  where matricula LIKE '%$rango%'");
+
+            $stmt-> execute();
+			return $stmt ->fetchAll();
+			
+		} 	
+    }
+    
+    /*=============================================
+			RANGO DINAMICO DESCUENTO
+	=============================================*/
+	static public function mdlRangoDescuento($tabla, $rango){
+	
+		if($rango == null){
+
+			$stmt = Conexion::conectar() ->prepare("SELECT * FROM $tabla");
+            $stmt-> execute();
+			return $stmt ->fetchAll();
+			
+		} else {
+
+			$stmt = Conexion::conectar() ->prepare("SELECT * FROM $tabla  where descuento LIKE '%$rango%'");
+
+            $stmt-> execute();
+			return $stmt ->fetchAll();
+			
+		} 	
+    }
+    
+    /*=============================================
+			RANGO DINAMICO ROL
+	=============================================*/
+	static public function mdlRangoRol($tabla, $rango){
+	
+		if($rango == null){
+
+			$stmt = Conexion::conectar() ->prepare("SELECT * FROM $tabla");
+            $stmt-> execute();
+			return $stmt ->fetchAll();
+			
+		} else {
+
+			$stmt = Conexion::conectar() ->prepare("SELECT * FROM $tabla  where roles LIKE '%$rango%'");
+
+            $stmt-> execute();
+			return $stmt ->fetchAll();
+			
+		} 	
+    }
+    
+
+     /*=============================================
+			RANGO DINAMICO PARAMETRO
+	=============================================*/
+	static public function mdlRangoParametro($tabla, $rango){
+	
+		if($rango == null){
+
+			$stmt = Conexion::conectar() ->prepare("SELECT * FROM $tabla");
+            $stmt-> execute();
+			return $stmt ->fetchAll();
+			
+		} else {
+
+			$stmt = Conexion::conectar() ->prepare("SELECT * FROM $tabla  where parametross LIKE '%$rango%'");
+
+            $stmt-> execute();
+			return $stmt ->fetchAll();
+			
+		} 	
+    }
+    
+    /*=============================================
+			RANGO DINAMICO ADMINISTRAR
+	=============================================*/
+	static public function mdlRangoAdministrar($tabla, $rango){
+	
+		if($rango == null){
+
+			$stmt = Conexion::conectar() ->prepare("SELECT * FROM $tabla");
+            $stmt-> execute();
+			return $stmt ->fetchAll();
+			
+		} else {
+
+			$stmt = Conexion::conectar() ->prepare("SELECT * FROM $tabla  where administrarrol LIKE '%$rango%'");
+
+            $stmt-> execute();
+			return $stmt ->fetchAll();
+			
+		} 	
 	}
+
+
 
 
 
