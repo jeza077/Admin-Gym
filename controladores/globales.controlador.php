@@ -648,11 +648,11 @@ class ControladorGlobales{
     // return;
 
     if(isset($_GET['idEliminarRoles'])){
-        $tabla = 'tbl_rol';
+        $tabla = 'tbl_roles';
         $datos = $_GET['idEliminarRoles'];
 
 
-        $respuesta = ModeloGlobales::mdlBorrarRol($tabla, $datos);
+        $respuesta = ModeloGlobales::mdlBorrarRoles($tabla, $datos);
         
         // var_dump($respuesta);
         // return;

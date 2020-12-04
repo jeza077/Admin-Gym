@@ -1305,7 +1305,7 @@ class ControladorVentas {
 				echo'<script>
 
 				Swal.fire({
-					  icons: "success",
+					  icon: "success",
 					  title: "La venta ha sido borrada correctamente",
 					  showConfirmButton: true,
 					  confirmButtonText: "Cerrar",

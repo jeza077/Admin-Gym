@@ -10,7 +10,7 @@ $colores = array("red","green","yellow","lightblue","purple","blue","cyan","mage
 
 $totalVentas = ControladorInventario::ctrMostrarSumaVentas($tabla);
 // echo "<pre>";
-// var_dump($productos[0]['venta']);
+// var_dump($productos);
 // echo "</pre>";
 // $producto = array();
 //     $cantidad = array();

@@ -276,7 +276,7 @@ exportarPdf('.btnExportarDescuento', 'descuento');
 //** ------------------------------------*/
 //         IMPRIMIR PDF ROl
 // --------------------------------------*/ 
-exportarPdf('.btnExportarRol', 'roles');
+exportarPdf('.btnExportarRol', 'rol');
 
 //** ------------------------------------*/
 //         IMPRIMIR PDF Parametros

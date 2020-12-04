@@ -115,7 +115,7 @@
 
             <?php if($_SESSION['permisos']['Clientes']['consulta'] == 1){?>
               <li class="nav-item has-treeview">
-                <a href="clientes" class="nav-link menu-lateral">
+                <a href="#" class="nav-link menu-lateral">
                   <i class="nav-icon fas fa-user-circle"></i>
                   <p>
                     Clientes
@@ -147,7 +147,7 @@
 
             <?php if($_SESSION['permisos']['Stock']['consulta'] == 1){?>
             <li class="nav-item has-treeview">
-              <a href="stock" class="nav-link menu-lateral">
+              <a href="#" class="nav-link menu-lateral">
                 <i class="nav-icon fas fa-layer-group"></i>
                 <p>
                   Stock
@@ -179,7 +179,7 @@
             <?php }?>
             <?php if($_SESSION['permisos']['Ventas']['consulta'] == 1){?>
             <li class="nav-item has-treeview">
-              <a href="ventas" class="nav-link menu-lateral">
+              <a href="#" class="nav-link menu-lateral">
                 <i class="nav-icon fas fa-cart-plus"></i>
                 <p>
                   Ventas
@@ -210,7 +210,7 @@
             <?php } ?>
             <?php if($_SESSION['permisos']['Mantenimiento']['consulta'] == 1){?>
             <li class="nav-item has-treeview">
-              <a href="mantenimiento" class="nav-link menu-lateral">
+              <a href="#" class="nav-link menu-lateral">
                 <i class="nav-icon fas fa-sliders-h"></i>
                 <p>
                   Mantenimiento

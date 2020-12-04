@@ -72,6 +72,17 @@
                     <!--=====================================
                     ENTRADA DEL CLIENTE
                     ======================================--> 
+                    <?php 
+                    
+                    // $item= null;
+                    // $valor= null;
+                    // $tabla= "tbl_clientes";
+
+                    // $clientes= ControladorClientes::ctrMostrarClientes($tabla, $item, $valor);
+                    // echo "<pre>";
+                    //  var_dump($clientes);
+                    //  echo "</pre>";
+                    ?>
 
                     <label for="cliente">Cliente</label>
                       

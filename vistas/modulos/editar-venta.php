@@ -127,7 +127,7 @@
                             <div class="col-md-3 ingresoPrecio">
                               <div class="input-group" style="padding-left:0px">
                                 <span class="input-group-prepend btn btn-default"><i class="fas fa-dollar-sign"></i></span>
-                                <input type="text" class="form-control nuevoPrecioProducto" precioReal="'.$respuesta["precio"].'" name="nuevoPrecioProducto" value="'.$value["total"].'" readonly required>
+                                <input type="text" class="form-control nuevoPrecioProducto" precioReal="'.$respuesta["precio_venta"].'" name="nuevoPrecioProducto" value="'.$value["total"].'" readonly required>
                               </div>
                             </div>
                       </div>';

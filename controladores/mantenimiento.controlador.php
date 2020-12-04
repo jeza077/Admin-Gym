@@ -288,7 +288,7 @@
   
               if(result.value){
   
-                window.location = "mantenimiento";
+                window.location = "inscripcion";
   
               }
   
@@ -317,7 +317,7 @@
   
               if(result.value){
   
-                window.location = "mantenimiento";
+                window.location = "inscripcion|";
   
               }
   

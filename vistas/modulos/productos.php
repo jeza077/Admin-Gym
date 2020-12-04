@@ -308,7 +308,7 @@
                 
                     <?php
                     $tipostock = 'producto';
-                    $pantalla = 'producto';
+                    $pantalla = 'productos';
                     $EditarInventario = new ControladorInventario();
                     $EditarInventario->ctrEditarStock($tipostock, $pantalla);
                     ?>

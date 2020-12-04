@@ -17,12 +17,12 @@
             Exportar PDF          
           </button>
 
-          <button type="button" class="btn btn-default float-right mr-3" id="daterange-btn">
+          <!-- <button type="button" class="btn btn-default float-right mr-3" id="daterange-btn">
             <span>
               <i class="far fa-calendar-alt"></i> Rango de fechas
             </span>
             <i class="fas fa-caret-down"></i>
-          </button>
+          </button> -->
 
         </div>
 
