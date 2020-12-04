@@ -145,7 +145,8 @@
                         <td>
                           <div class="btn-group">
                                 
-                             
+                               <button class="btn btn-info btnImprimirFactura" codigoVenta="'.$value["numero_factura"].'"><i class="fa fa-print" style="color:#fff"></i></button>  
+
                               <button class="btn btn-warning btnEditarVenta" idVenta="'.$value["id_venta"].'"><i class="fas fa-pencil-alt" style="color:#fff"></i></button>   
 
                               <button class="btn btn-danger btnEliminarVenta" idVenta="'.$value["id_venta"].'"><i class="fas fa-trash-alt"></i></button>

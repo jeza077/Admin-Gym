@@ -256,7 +256,7 @@ function validarEmail(selector) {
 					});
 					
 					//E inmeditamente Limpiamos el input
-					selector.val("");
+					// selector.val("");
 					// selector.focus();
 				} else if(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.([a-zA-Z]{2,4})+$/.test(emailIngresado) && respuesta == false) {
 					selector.addClass('border-valid').removeClass('border-invalid');
@@ -267,7 +267,7 @@ function validarEmail(selector) {
 					selector.removeClass('border-valid border-invalid');
 				} else {
 					selector.addClass('border-invalid').removeClass('border-valid');
-					selector.after('<div class="alert alert-warning mt-2">Correo invalidido, intente de nuevo.</div>');
+					selector.after('<div class="alert alert-warning mt-2">Correo invalido, intente de nuevo.</div>');
 					setTimeout(function () {
 						$('.alert').remove();
 					}, 3000)

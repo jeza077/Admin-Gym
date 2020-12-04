@@ -65,9 +65,12 @@
                     ======================================--> 
 
                     <label for="cliente">Cliente</label>
-                      
-                    <select class="form-control select2-dropdown select2-search-dropdown" id="seleccionarCliente" name="seleccionarCliente" required>
-                        <option value="<?php echo $venta["id_cliente"];  ?>"><?php echo $venta["nombre"];  ?></option>
+                    <input type ="text" class="form-control" id="seleccionarCliente" name="seleccionarCliente" 
+                     value="<?php echo $venta["nombre"];  ?><?php echo $venta["apellidos"];  ?>" readonly>
+
+
+                    <!-- <select class="form-control select2-dropdown select2-search-dropdown"  required>
+                        <option value="<?php echo $venta["id_cliente"];  ?>"><?php echo $venta["nombre"];  ?>  </option>
                         <?php
                           $item= null;
                           $valor= null;
@@ -81,9 +84,10 @@
                             {
                               echo '<option value="'.$value["id_cliente"].'">' .$value["nombre"]. ' '.$value["apellidos"]. '</option>';
                             }
-                        ?>       
-                    </select>
+                        ?>      
+                    </select> -->
                   </div>    
+
                   <!-- <div class="form-group col-md-3 mt-4">
                     <span class="input-group-addon"><button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#modalAgregarCliente" data-dismiss="modal">Agregar cliente</button></span> 
                   </div> -->
@@ -139,7 +143,7 @@
                     <label>Impuesto </label>
                     <input type="number" class="form-control nuevoImpuestoVenta" name="nuevoImpuestoVenta"  id="nuevoImpuestoVenta" value="<?php echo $porcentajeImpuesto; ?>" readonly required> 
                     <!-- <span class="input-group-addon"><i class="fa fa-percent"></i></span> -->
-                  <input type="hidden" name="nuevoPrecioImpuesto" id="nuevoPrecioImpuesto" value="<?php echo $venta["impuesto"]; ?>" required> 
+                   <!-- <input type="hidden" name="nuevoPrecioImpuesto" id="nuevoPrecioImpuesto" value="<?php echo $venta["impuesto"]; ?>" required>  -->
                   </div>
                     
 

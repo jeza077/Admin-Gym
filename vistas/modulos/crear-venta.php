@@ -42,7 +42,7 @@
                   <!--=====================================
                    ENTRADA DEL CÓDIGO
                   ======================================-->  
-                  <label for="cod_factura">Codigo de Factura</label>
+                  <label for="cod_factura">Numero de Recibo</label>
                     <?php
                       $item= null;
                       $valor= null;
@@ -140,7 +140,7 @@
 
                 <div class="form-check float-right">
                     <input type="checkbox" class="form-check-input" id="exampleCheck1" name="enviarFactura">
-                    <label class="form-check-label" for="exampleCheck1">Enviar Factura</label>
+                    <label class="form-check-label" for="exampleCheck1">RECIBO DE PAGO</label>
                 </div>
 
               </div>

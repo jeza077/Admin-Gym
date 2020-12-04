@@ -568,3 +568,16 @@ $(".tablas").on("click", ".btnEliminarVenta", function(){
   
   
 })
+
+/*=============================================
+IMPRIMIR PAGO EN PDF
+=============================================*/
+$(".tablas").on("click", ".btnImprimirFactura", function(){
+
+  var $codigoVenta = $(this).attr("numero_factura");
+
+
+  window.open("extensiones/tcpdf/pdf/recibo-pdf.php", "_blank");
+
+  
+})

@@ -92,18 +92,18 @@ class ControladorVentas {
 			// echo $valor;
 			// return;
 
-			// $item1 = "ultima_compra";
+			$item1 = "ultima_compra";
 
-			// date_default_timezone_set('America/Tegucigalpa');
+			date_default_timezone_set('America/Tegucigalpa');
 
-			// $fecha = date('Y-m-d');
-			// $hora = date('H:i:s');
-			// $valor1 = $fecha.' '.$hora;
+			$fecha = date('Y-m-d');
+			$hora = date('H:i:s');
+			$valor1 = $fecha.' '.$hora;
 
-			// $item2 = "id_cliente";
-			// $valor2 = $valor;
+			$item2 = "id_cliente";
+			$valor2 = $valor;
 
-            // $fechaCliente = ModeloClientes::mdlActualizarCliente($tabla2, $item1, $valor1, $item2, $valor2);
+            $fechaCliente = ModeloClientes::mdlActualizarCliente($tabla2, $item1, $valor1, $item2, $valor2);
 
             /*=============================================
 			GUARDAR LA COMPRA
@@ -155,7 +155,7 @@ class ControladorVentas {
 					$impuesto= $_POST["nuevaPrecioImpuesto"];
 					$neto= $_POST["nuevoPrecioNeto"];
 					$total= $_POST["totalVenta"];
-					$asunto = 'Envio de factura';
+					$asunto = 'RECIBO DE PAGO, GIMNASIO LA ROCA.';
 					$require = false;
 	
 
@@ -644,7 +644,7 @@ class ControladorVentas {
 										<tr>
 										  <td class="attributes_item">
 											<span class="f-fallback">
-					 						 <strong>Monto:</strong> '.$total.'
+					 						 <strong>Monto:</strong> L.'.$total.'
 											</span>
 										  </td>
 										</tr>
@@ -668,7 +668,7 @@ class ControladorVentas {
 									  <table width="100%" border="0" cellspacing="0" cellpadding="0" role="presentation">
 										<tr>
 										  <td align="center">
-											<a href="{{action_url}}" class="f-fallback button button--green" target="_blank">Factura de Compra</a>
+											<h2><a href="{{action_url}}" class="f-fallback button button--green" target="_blank">Recibo de Pago</a></h2>
 										  </td>
 										</tr>
 									  </table>
@@ -681,7 +681,7 @@ class ControladorVentas {
 									  <h3>N° Factura: '.$numeroFactura.'</h3>
 									</td>
 									<td>
-									  <h3 class="align-right">Fecha de envío: '.date("Y-m-d").'</h3>
+									  <h3 class="align-right">Fecha de envío: '.date("Y-m-d H:i:s").'</h3>
 									</td>
 								  </tr>
 								  <tr>
@@ -701,8 +701,8 @@ class ControladorVentas {
 					
 										foreach ($decodificar_productos as $productos ) {
 										   $template= $template.'<tr>
-										  <td width="80%" class="purchase_item"><span class="f-fallback">'.$productos->descripcion.'</span></td>
-										  <td class="align-right" width="20%" class="purchase_item"><span class="f-fallback">'.$productos->total.'</span></td>
+										  <td width="100%" class="purchase_item"><span class="f-fallback">'.$productos->descripcion.'</span></td>
+										  <td class="align-right" width="20%" class="purchase_item"><span class="f-fallback">L.'.$productos->total.'</span></td>
 										</tr>';
 		
 										}
@@ -712,11 +712,11 @@ class ControladorVentas {
 									   $template = $template.'
 									   <tr><td><hr></td></tr>
 										<tr>
-										  <td width="80%" class="purchase_footer" valign="middle">
+										  <td width="20%" class="purchase_footer" valign="middle">
 											<p class="f-fallback purchase_total purchase_total--label">SubTotal</p>
 										  </td>
 										  <td width="20%" class="purchase_footer" valign="middle">
-											<p class="f-fallback purchase_total">'.$neto.'</p>
+											<p class="f-fallback purchase_total">L.'.$neto.'</p>
 										  </td>
 										</tr>
 										<tr>
@@ -724,7 +724,7 @@ class ControladorVentas {
 											<p class="f-fallback purchase_total purchase_total--label">ISV</p>
 										  </td>
 										  <td width="20%" class="purchase_footer" valign="middle">
-											<p class="f-fallback purchase_total">'.$impuesto.'</p>
+											<p class="f-fallback purchase_total">L.'.$impuesto.'</p>
 										  </td>
 										</tr>
 										<tr>
@@ -732,7 +732,7 @@ class ControladorVentas {
 											<strong><p class="f-fallback purchase_total purchase_total--label">Total</p></strong>
 										  </td>
 										  <td width="20%" class="purchase_footer" valign="middle">
-											<strong><p class="f-fallback purchase_total">'.$total.'</p></strong>
+											<strong><p class="f-fallback purchase_total">L.'.$total.'</p></strong>
 										  </td>
 										</tr>
 									  </table>
@@ -791,7 +791,7 @@ class ControladorVentas {
 					// var_dump($respuestaCorreo);
 					// return;
 					if($respuestaCorreo){
-				echo'<script>
+					echo'<script>
 
 				localStorage.removeItem("rango");
 
@@ -899,7 +899,7 @@ class ControladorVentas {
 
 
 	  /*=============================================
-	====================EDITAR VENTA
+		====================EDITAR VENTA
     =============================================*/
     static public function ctrEditarVenta(){
     
@@ -1178,6 +1178,7 @@ class ControladorVentas {
 				
 			$traerVenta =ModeloVentas::mdlMostrarVentas($tabla, $item, $valor);
 			// var_dump($traerVenta);
+			// return;
 
 			/*=============================================
 			ACTUALIZAR FECHA ÚLTIMA COMPRA
@@ -1196,32 +1197,39 @@ class ControladorVentas {
 				
 				if($value["id_cliente"] == $traerVenta["id_cliente"]){
 					// var_dump($value["fecha"]);
+					
 					array_push($guardarFechas, $value["fecha"]);
 				}
+
+				// var_dump($guardarFechas);
 
 				if (count($guardarFechas) > 1){
 					if($traerVenta["fecha"] > $guardarFechas[count($guardarFechas)-2]){
 
-						$item = "ultima_compra";
-						$valor = $guardarFechas[count($guardarFechas)-2];
-						$valorIdCliente = $traerVenta["id_cliente"];
+						$item1 = "ultima_compra";
+						$valor1 = $guardarFechas[count($guardarFechas)-2];
+						$item2 = "id_cliente";
 
-						$comprasCliente = ModeloClientes::mdlActualizarCliente($tablaClientes, $item, $valor, $valorIdCliente);
+						$valor2 = $traerVenta["id_cliente"];
+
+						$comprasCliente = ModeloClientes::mdlActualizarCliente($tablaClientes, $item1, $valor1, $item2, $valor2);
 
 					
-					}else{
+					}
+					else{
 
-						$item = "ultima_compra";
-						$valor = $guardarFechas[count($guardarFechas)-1];
+						$item1 = "ultima_compra";
+						$item2 = "id_cliente";
+						$valor1 = $guardarFechas[count($guardarFechas)-1];
 						$valorIdCliente = $traerVenta["id_cliente"];
 
-						$comprasCliente = ModeloClientes::mdlActualizarCliente($tablaClientes, $item, $valor, $valorIdCliente);
+						$comprasCliente = ModeloClientes::mdlActualizarCliente($tablaClientes, $item1, $valor1, $item2, $valorIdCliente);
 
 					}
 
 				}else{
 
-					$item1 = "compras";
+					$item1 = "ultima_compra";
 					$valor1 = "0000-00-00 00:00:00";
 					$item2 = "id_cliente";
 					$valorIdCliente = $traerVenta["id_cliente"];
@@ -1236,11 +1244,11 @@ class ControladorVentas {
 			/*=============================================
 	 		FORMATEAR TABLA DE PRODUCTOS Y LA DE CLIENTES
 	   		=============================================*/
-			$productos =  json_decode($traerVenta["id_inventario"], true);
+			$productos =  json_decode($traerVenta["productos"], true);
 
 			$totalProductosComprados = array();
 
-			foreach($listaProductos as $key => $value) {
+			foreach($productos as $key => $value) {
 				array_push($totalProductosComprados, $value["cantidad"]);
 
 				$item = "id_inventario";
@@ -1249,15 +1257,16 @@ class ControladorVentas {
 				$tablaProductos = "tbl_inventario"; 
 				$traerProducto = ModeloProductos::mdlMostrarProductos($tablaProductos, $item, $valor);
 
-				$item1 = "stock";
-				$valor1 = $value["cantidad"]+ $traerProducto["stock"];
+				$item1 = "devolucion";
+				// $item1 = "devolucion";
+				$valor1 = $value["cantidad"] + $traerProducto["stock"];
+				// $valor1 = $value"cantidad";  editar, sera agregar la cant a campo de devolucion.
 				$item2 = $item;
 				$valor2 = $valor;
-
 				$nuevoStock = ModeloProductos::mdlActualizarProducto($tablaProductos, $item1, $valor1, $item2, $valor2);
 
-				$item1 = "ventas";
-				$valor1 = $traerProducto["ventas"] - $value["cantidad"];
+				$item1 = "venta";
+				$valor1 = $traerProducto["venta"] - $value["cantidad"];
 				$item2 = $item;
 				$valor2 = $valor;
 
@@ -1273,7 +1282,7 @@ class ControladorVentas {
 			$traerCliente = ModeloClientes::mdlMostrarClientes($tabla1, $tabla2, $item, $valor);
 
 			$item1 = "compras";
-			$valor1 = 2 + $traerCliente["compras"] - array_sum($totalProductosComprados);
+			$valor1 = $traerCliente["compras"] - array_sum($totalProductosComprados);
 			// // echo $valor1;
 			// // return;
 
@@ -1281,18 +1290,22 @@ class ControladorVentas {
 			$valor2 = $valor;
 			$comprasCliente = ModeloClientes::mdlActualizarCliente($tabla2, $item1, $valor1, $item2, $valor2);
 
-			/*=============================================
-	  			ELIMINAR VENTA
-	 		=============================================*/
+	// 		/*=============================================
+	//   			ELIMINAR VENTA
+	//  		=============================================*/
+			$idVenta= $_GET["idVenta"];
+			// echo $idVenta;
+			// return;
+			$respuesta = ModeloVentas::mdlEliminarVenta($tabla, $idVenta);
+			// var_dump($respuesta);
+		
 
-			$respuesta = ModeloVentas::mdlEliminarVenta($tabla, $_GET["idVenta"]);
-
-			if($respuesta == "ok"){
+			if($respuesta == true){
 
 				echo'<script>
 
-				swal({
-					  type: "success",
+				Swal.fire({
+					  icons: "success",
 					  title: "La venta ha sido borrada correctamente",
 					  showConfirmButton: true,
 					  confirmButtonText: "Cerrar",

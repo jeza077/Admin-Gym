@@ -86,7 +86,7 @@ class ModeloVentas
 			$stmt = Conexion::conectar() ->prepare("SELECT * FROM $tabla AS v\n"
 			. "INNER JOIN tbl_clientes AS c ON v.id_cliente = c.id_cliente\n"
 			. "INNER JOIN tbl_personas AS p ON c.id_persona = p.id_personas\n"
-			. "ORDER BY id_venta ASC");
+			. "ORDER BY id_venta DESC");
             $stmt-> execute();
 			return $stmt ->fetchAll();
 			
@@ -205,27 +205,27 @@ class ModeloVentas
 	/*=============================================
 	========ELIMINAR VENTA
 	=============================================*/
-	// static public function mdlEliminarVenta($tabla, $datos){
+	static public function mdlEliminarVenta($tabla, $idVenta){
 
-	// 	$stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE id_ = :id");
+		$stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE id_venta = :id_venta");
 
-	// 	$stmt -> bindParam(":id", $datos, PDO::PARAM_INT);
+		$stmt -> bindParam(":id_venta", $idVenta, PDO::PARAM_INT);
 
-	// 	if($stmt -> execute()){
+		if($stmt -> execute()){
 
-	// 		return true;
+			return true;
 		
-	// 	}else{
+		}else{
 
-	// 		return false;	
+			return false;	
 
-	// 	}
+		}
 
-	// 	$stmt -> close();
+		$stmt -> close();
 
-	// 	$stmt = null;
+		$stmt = null;
 
-	// }
+	}
 
 
 

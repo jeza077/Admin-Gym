@@ -235,25 +235,26 @@ if(!$ventas){
         
         // $decod = json_decode($value['productos']);
         // //   $contador = count($val->descripcion);
-        //   echo ($val->descripcion);
-        // //   if($key = 0){
-            //     // echo 'mas de uno';
-        // $decod = json_decode($value['productos']);
-        // $pdf->Cell(55, 4, ''.
-        //     foreach ($decod as $key => $val) {
-        //         echo  $val->descripcion.',';
+        // //   echo ($val->descripcion);
+        //   if($key = 0){
+        //         // echo 'mas de uno';
+        //         $decod = json_decode($value['productos']);
+        //         $pdf->Cell(40, 4, 'productos'. .'', 0, 0, 'C');
+        //         foreach ($decod as $key => $val) {
+        //         // echo  $val->descripcion.',';
+        //         }
         //     }
-        // .'', 0, 0, 'C');
+               
 
-        //     //  echo  $val->descripcion.',';
-        // //   } 
-        // //   else {
-        //     // echo  $val->descripcion.', ';
-        //     // echo 'solo uno';
-        //     // $pdf->Cell(55, 4, ''.$val->descripcion.'', 0, 0, 'C');
-        //     // echo  $val->descripcion;
+            //  echo  $val->descripcion.',';
+        //   } 
+        //   else {
+            // echo  $val->descripcion.', ';
+            // echo 'solo uno';
+            // $pdf->Cell(55, 4, ''.$val->descripcion.'', 0, 0, 'C');
+            // echo  $val->descripcion;
 
-        // //   }
+        //   }
         // }
 
         $pdf->Cell(40, 4, ''.$value['impuesto'].'', 0, 0, 'C');
