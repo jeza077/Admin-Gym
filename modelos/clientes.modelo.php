@@ -159,7 +159,7 @@ class ModeloClientes{
 		
 			. "	LEFT JOIN tbl_descuento as pd ON pc.id_descuento = pd.id_descuento\n"
 		
-			. "	WHERE c.tipo_cliente = 'Gimnasio' AND pc.fecha_ultimo_pago = (SELECT MAX(fecha_ultimo_pago) FROM tbl_pagos_cliente as 			pc1 WHERE pc1.id_cliente = pc.id_cliente)\n"
+			. "	WHERE c.tipo_cliente = 'Gimnasio' AND pc.fecha_vencimiento = (SELECT MAX(fecha_vencimiento) FROM tbl_pagos_cliente as 			pc1 WHERE pc1.id_cliente = pc.id_cliente)\n"
 		
 			. " GROUP BY c.id_cliente"); 
 
@@ -550,7 +550,7 @@ class ModeloClientes{
 		
 			. "	LEFT JOIN tbl_descuento as pd ON pc.id_descuento = pd.id_descuento\n"
 		
-			. "	WHERE c.tipo_cliente = 'Gimnasio' AND pc.fecha_ultimo_pago = (SELECT MAX(fecha_ultimo_pago) FROM tbl_pagos_cliente as 			pc1 WHERE pc1.id_cliente = pc.id_cliente)\n"
+			. "	WHERE c.tipo_cliente = 'Gimnasio' AND pc.fecha_vencimiento = (SELECT MAX(fecha_vencimiento) FROM tbl_pagos_cliente as 			pc1 WHERE pc1.id_cliente = pc.id_cliente)\n"
 		
 			. " GROUP BY c.id_cliente"); 
 
@@ -573,7 +573,7 @@ class ModeloClientes{
 		
 			. "	LEFT JOIN tbl_descuento as pd ON pc.id_descuento = pd.id_descuento\n"
 		
-			. "	WHERE c.tipo_cliente = 'Gimnasio' AND  nombre LIKE '%$rango%' OR tipo_inscripcion LIKE '%$rango%' OR pago_total LIKE '%$rango%' OR fecha_ultimo_pago LIKE '%$rango%' OR fecha_vencimiento LIKE '%$rango%' AND pc.fecha_ultimo_pago = (SELECT MAX(fecha_ultimo_pago) FROM tbl_pagos_cliente as 			pc1 WHERE pc1.id_cliente = pc.id_cliente)\n"
+			. "	WHERE c.tipo_cliente = 'Gimnasio' AND  (nombre LIKE '%$rango%' OR tipo_inscripcion LIKE '%$rango%' OR pago_total LIKE '%$rango%' OR fecha_ultimo_pago LIKE '%$rango%' OR fecha_vencimiento LIKE '%$rango%') AND pc.fecha_vencimiento = (SELECT MAX(fecha_vencimiento) FROM tbl_pagos_cliente as pc1 WHERE pc1.id_cliente = pc.id_cliente)\n"
 		
 			. " GROUP BY c.id_cliente"); 
 			
