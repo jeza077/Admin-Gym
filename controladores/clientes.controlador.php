@@ -594,5 +594,18 @@ class ControladorClientes{
 		return $respuesta;
 	}
 
+
+	/*=============================================
+		RANGO HISTORIAL PAGOS CLIENTES
+    =============================================*/
+	static public function ctrRangoHistorialPagosCliente($rango){
+
+		$tabla = 'tbl_clientes';
+		
+		$respuesta = ModeloClientes::mdlRangoHistorialPagosCliente($tabla, $rango);
+		
+		return $respuesta;
+	}
+
 }
 

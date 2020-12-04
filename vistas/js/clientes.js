@@ -63,6 +63,9 @@ $(document).on('change', '.tipoCliente', function () {
 //         IMPRIMIR USUARIOS 
 // --------------------------------------*/ 
 exportarPdf('.btnExportarClientes', 'clientes');
+exportarPdf('.btnExportarHistorialPagosClientes', 'historial-pagos-clientes');
+
+
 
 /*=============================================
         EDITAR CLIENTE

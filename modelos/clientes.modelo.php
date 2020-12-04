@@ -486,4 +486,45 @@ class ModeloClientes{
 			
 		} 	
 	}
+
+
+	/*=============================================
+		RANGO HISTORIAL PAGOS CLIENTES
+    =============================================*/
+	static public function mdlRangoHistorialPagosCliente($tabla, $rango){
+			
+		if($rango == null){
+
+			$stmt = Conexion::conectar()->prepare("SELECT p.*, c.*, d.tipo_documento, m.tipo_matricula, pd.tipo_descuento, i.tipo_inscripcion, pc.* FROM tbl_personas as p\n"
+			. "LEFT JOIN $tabla as c ON p.id_personas = c.id_persona\n"
+			. "LEFT JOIN tbl_documento as d ON p.id_documento = d.id_documento\n"
+			. "LEFT JOIN tbl_matricula as m ON c.id_matricula = m.id_matricula\n"
+			. "LEFT JOIN tbl_pagos_cliente as pc ON c.id_cliente = pc.id_cliente\n"
+			. "LEFT JOIN tbl_inscripcion as i ON pc.id_inscripcion = i.id_inscripcion\n"
+			. "LEFT JOIN tbl_descuento as pd ON pc.id_descuento = pd.id_descuento\n"
+			. "WHERE tipo_cliente = 'Gimnasio'"); 
+			$stmt -> execute();
+			return $stmt -> fetchAll();
+
+		} else {
+
+			$stmt = Conexion::conectar()->prepare("SELECT p.*, c.*, d.tipo_documento, m.tipo_matricula, pd.tipo_descuento, i.tipo_inscripcion, pc.* FROM tbl_personas as p\n"
+			. "LEFT JOIN $tabla as c ON p.id_personas = c.id_persona\n"
+			. "LEFT JOIN tbl_documento as d ON p.id_documento = d.id_documento\n"
+			. "LEFT JOIN tbl_matricula as m ON c.id_matricula = m.id_matricula\n"
+			. "LEFT JOIN tbl_pagos_cliente as pc ON c.id_cliente = pc.id_cliente\n"
+			. "LEFT JOIN tbl_inscripcion as i ON pc.id_inscripcion = i.id_inscripcion\n"
+			. "LEFT JOIN tbl_descuento as pd ON pc.id_descuento = pd.id_descuento\n"
+			. "WHERE nombre LIKE '%$rango%' OR tipo_inscripcion LIKE '%$rango%' OR fecha_ultimo_pago LIKE '%$rango%' OR fecha_vencimiento LIKE '%$rango%'"); 
+
+			$stmt->bindParam(":nombre", $rango, PDO::PARAM_STR);
+			$stmt->bindParam(":tipo_inscripcion", $rango, PDO::PARAM_STR);
+			$stmt->bindParam(":fecha_ultimo_pago", $rango, PDO::PARAM_STR);
+			$stmt->bindParam(":fecha_vencimiento", $rango, PDO::PARAM_STR);
+
+            $stmt-> execute();
+			return $stmt ->fetchAll();
+			
+		} 		
+	}
 }
