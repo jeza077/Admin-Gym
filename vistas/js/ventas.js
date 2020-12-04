@@ -489,42 +489,44 @@ datarangeDinamicoHoy(".daterangepicker.reporteVentas .ranges li", 'capturarRango
 //** ------------------------------------*/
 //         IMPRIMIR PDF VENTAS
 // --------------------------------------*/ 
-$(document).on('click', '.btnExportarVentas', function (e) {
-  e.preventDefault();
-  // console.log(valorBuscar);
-  
-  var rango = valorBuscar;
-  window.open("extensiones/tcpdf/pdf/ventas-pdf.php?&rango="+rango);
+exportarPdf('.btnExportarVentas', 'ventas');
 
-//   function getQueryVariable(variable) {
-//     var query = window.location.search.substring(1);
-//     var vars = query.split("&");
-//     for (var i=0; i < vars.length; i++) {
-//         var pair = vars[i].split("=");
-//         if(pair[0] == variable) {
-//             return pair[1];
-//         }
-//     }
-//     return false;
-//   }
- 
-//  // console.log(window.location.search.substring(15));
-//  // console.log(getQueryVariable('fechaFinal'));
- 
-//   var fechaInicial = getQueryVariable('fechaInicial');
-//   var fechaFinal = getQueryVariable('fechaFinal')
-//   // console.log(fechaInicial)
+// $(document).on('click', '.btnExportarVentas', function (e) {
+//   e.preventDefault();
+//   // console.log(valorBuscar);
   
-//   if(fechaInicial == false && fechaFinal == false) {
-//     // console.log('si')
-//     // window.open("extensiones/tcpdf/pdf/ventas-pdf.php?&fechaInicial="+null+"&fechaFinal="+null);
-//     window.open("extensiones/tcpdf/pdf/ventas-pdf.php", "_blank");
-//   } else {
-//     // console.log('no')
-//     window.open("extensiones/tcpdf/pdf/ventas-pdf.php?&fechaInicial="+fechaInicial+"&fechaFinal="+fechaFinal);
-//   }
+//   var rango = valorBuscar;
+//   window.open("extensiones/tcpdf/pdf/ventas-pdf.php?&rango="+rango);
 
-});
+// //   function getQueryVariable(variable) {
+// //     var query = window.location.search.substring(1);
+// //     var vars = query.split("&");
+// //     for (var i=0; i < vars.length; i++) {
+// //         var pair = vars[i].split("=");
+// //         if(pair[0] == variable) {
+// //             return pair[1];
+// //         }
+// //     }
+// //     return false;
+// //   }
+ 
+// //  // console.log(window.location.search.substring(15));
+// //  // console.log(getQueryVariable('fechaFinal'));
+ 
+// //   var fechaInicial = getQueryVariable('fechaInicial');
+// //   var fechaFinal = getQueryVariable('fechaFinal')
+// //   // console.log(fechaInicial)
+  
+// //   if(fechaInicial == false && fechaFinal == false) {
+// //     // console.log('si')
+// //     // window.open("extensiones/tcpdf/pdf/ventas-pdf.php?&fechaInicial="+null+"&fechaFinal="+null);
+// //     window.open("extensiones/tcpdf/pdf/ventas-pdf.php", "_blank");
+// //   } else {
+// //     // console.log('no')
+// //     window.open("extensiones/tcpdf/pdf/ventas-pdf.php?&fechaInicial="+fechaInicial+"&fechaFinal="+fechaFinal);
+// //   }
+
+// });
 
 
 //** ------------------------------------*/
