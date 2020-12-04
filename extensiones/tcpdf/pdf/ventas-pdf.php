@@ -50,26 +50,26 @@ class PDF extends TCPDF{
 
         // Title
         // $this->Cell(189, 5, 'GIMNASIO LA "ROCA"', 0, 1, 'C', 0, '', 0, false, 'M', 'M');
-        $this->Cell(250, 10, ''.$nombre.'', 0, 1, 'C');
+        $this->Cell(260, 10, ''.$nombre.'', 0, 1, 'C');
         
         $this->SetTextColor(0,0,0);
         $this->SetFont('helvetica', '', 9);
         // $this->Cell(180, 3, 'Gimnasio La roca', 0, 1, 'C');
-        $this->Cell(250, 7, 'Direccion: '.$direccion.'', 0, 1, 'C');
-        // $this->Cell(250, 3, 'Calle xxxxxxxxxx.....', 0, 1, 'C');
-        $this->Cell(250, 3, 'Correo: '.$correo.'', 0, 1, 'C');
+        $this->Cell(260, 7, 'Direccion: '.$direccion.'', 0, 1, 'C');
+        // $this->Cell(260, 3, 'Calle xxxxxxxxxx.....', 0, 1, 'C');
+        $this->Cell(260, 3, 'Correo: '.$correo.'', 0, 1, 'C');
 
         $this->Ln(20); //Espacios
         $this->SetFont('helvetica', 'B', 14);
-        $this->Cell(250, 3, 'REPORTE DE VENTAS', 0, 1, 'C');
+        $this->Cell(260, 3, 'REPORTE DE VENTAS', 0, 1, 'C');
         $this->Ln(3);
         $this->SetFont('helvetica', 'B', 11);
         $año = date('Y-m-d');
         // echo $año;
 
-        // $this->Cell(250, 3, 'Del '.$fecha.'', 0, 1, 'C');
+        // $this->Cell(260, 3, 'Del '.$fecha.'', 0, 1, 'C');
 
-        $this->Cell(250, 3, 'Año '.$año.'', 0, 1, 'C');
+        $this->Cell(260, 3, 'Año '.$año.'', 0, 1, 'C');
     }
 
     // Footer de la pagina
@@ -267,6 +267,6 @@ if(!$ventas){
 }
 
 // Close and output PDF document
-$pdf->Output('example_001.pdf', 'I');
+$pdf->Output('reporte_ventas.pdf', 'I');
 
 ?>
