@@ -419,7 +419,7 @@ $(document).on('click', '.SwalBtnMantenerInscripcion', function (e) {
             processData: false,  
             dataType: "json",
             success: function(respuesta) {
-                console.log(respuesta);
+                // console.log(respuesta);
     
                 if(respuesta == true){
                     Swal.fire({
@@ -448,7 +448,7 @@ $(document).on('click', '.verTotalActualizarPago', function (e) {
     e.preventDefault();
     
     var valorInscripcion = $('.actualizarPagoInscripcion').val();
-    
+
     // var valorPromocion = $('.actualizarTotalDescuento').val();
 
     // if(!valorPromocion){
@@ -472,6 +472,7 @@ $(document).on('click', '.verTotalActualizarPago', function (e) {
 $(document).on('click', '.SwalBtnCambiarInscripcion', function (e) { 
     e.preventDefault();
     // console.log('click')
+    // console.log(idClientePago);
     var datos = new FormData();
     datos.append("idClientePago", idClientePago);
 
@@ -485,7 +486,7 @@ $(document).on('click', '.SwalBtnCambiarInscripcion', function (e) {
         processData: false,  
         dataType: "json",
         success: function(respuesta) {
-            // console.log(respuesta);
+            console.log(respuesta);
             // return;
             
             $('#idClientePago').val(respuesta["id_personas"]);
