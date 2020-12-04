@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set("America/Tegucigalpa");
 
 class ControladorClientes{
 
@@ -307,7 +308,7 @@ class ControladorClientes{
 
 	
 	/*=============================================
-		**** ACTUALIZAR PAGO POR CLIENTE ****
+	**** ACTUALIZAR PAGO POR CLIENTE MANTENIENDO INSCRIPCION ****
 	=============================================*/
 	static public function ctrActualizarPagoCliente($idClientePago){
 
@@ -381,6 +382,116 @@ class ControladorClientes{
 
 
 			return $respuesta;	
+		}
+	}
+
+
+	/*=============================================
+	**** ACTUALIZAR PAGO POR CLIENTE CAMBIANDO INSCRIPCION ****
+	=============================================*/
+	static public function ctrActualizarPagoClienteCambiandoInscripcion(){
+		// var_dump($_POST);
+		// return;
+		if(isset($_POST['actualizarTipoInscripcion'])){
+			$tabla1 = "tbl_personas";
+			$tabla2 = "tbl_clientes";
+			$item = 'id_personas';
+			$valor = $_POST['idClientePago'];
+			$respuesta = ModeloClientes::mdlMostrarPagoPorCliente($tabla1, $tabla2, $item, $valor);
+			
+			// var_dump($respuesta['fecha_vencimiento']);
+			// return;
+
+			$fechaHoy = date('Y-m-d 00:00:00');
+			$fechaVencimiento = $respuesta['fecha_vencimiento'];
+			$idInscripcion = $_POST['actualizarTipoInscripcion'];
+
+			$tabla = "tbl_inscripcion";
+			$item = "id_inscripcion";
+			$valor = $idInscripcion;
+			
+			$inscripciones = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);  
+
+			// var_dump($inscripciones);
+			// return;
+
+			$tipoInscripcion = $inscripciones['tipo_inscripcion'];
+			$precioInscripcion = $inscripciones['precio_inscripcion'];
+			$idCliente = $respuesta['id_cliente'];
+			
+			if ($tipoInscripcion == 'mensual') {
+				$valorVigencia = 'VIGENCIA_CLIENTE_MES';
+				
+			} else if ($tipoInscripcion == 'quincenal'){
+				$valorVigencia = 'VIGENCIA_CLIENTE_QUINCENAL';
+				
+			} else {
+				$valorVigencia = 'VIGENCIA_CLIENTE_DIA';
+								
+			}
+
+			$item = 'parametro';
+			$parametros = ControladorUsuarios::ctrMostrarParametros($item, $valorVigencia);
+			// var_dump($parametros);
+			// return $parametros;
+
+			$vigenciaCliente = $parametros['valor'];
+			
+
+			if($fechaHoy > $fechaVencimiento || $fechaHoy == $fechaVencimiento){
+				$fechaVencimientoCliente = date("Y-m-d 00:00:00", strtotime('+'.$vigenciaCliente.' days'));
+
+				// echo'hoy es mayor:  '.$fechaVencimientoCliente;
+				// return;
+
+			// } 
+			// else if($fechaHoy == $fechaVencimiento) {
+			// 	// $fechaVencimientoCliente = 
+			// 	return 'igual';
+			}else {
+
+				$fechaVencimientoCliente = date("Y-m-d", strtotime($fechaVencimiento.'+'.$vigenciaCliente.' days'));
+				
+				// echo 'hoy es menor:  '.$fechaVencimientoCliente;
+				// return;
+			}
+
+			$tabla = 'tbl_pagos_cliente';
+
+			$idUsuario =  $_SESSION['id_usuario'];
+
+			$datos = array('id_cliente' => $idCliente,
+							'id_inscripcion' => $idInscripcion,
+							'pago_inscripcion' => $precioInscripcion,
+							'pago_total' => $precioInscripcion,
+							'fecha_ultimo_pago' => $fechaHoy,
+							'fecha_vencimiento' => $fechaVencimientoCliente,
+							'creado_por' => $idUsuario);
+
+			// echo '<pre>';
+			// var_dump($datos);
+			// echo '</pre>';
+			// return;
+			$respuesta = ModeloClientes::mdlActualizarPagoCliente($tabla, $datos);
+
+			if($respuesta == true){
+				echo "<script>
+						Swal.fire({
+							title: 'El pago se agrego correctamente',
+							icon: 'success',
+							allowOutsideClick: false,
+							showCancelButton: false,
+							showConfirmButton: true,
+							confirmButtonText: 'Cerrar'
+						}).then((result)=>{
+							if(result.value){
+								window.location = 'pagos-cliente';
+							}
+						});;
+					</script>";
+			}
+
+
 		}
 	}
 

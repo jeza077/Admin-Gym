@@ -53,6 +53,13 @@ border-color: var(--orangeThird);;
 box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.5);
 } */
 
+/* BOTON CALCULAR PAGO INSCRIPCION CLIENTE */
+.verTotalActualizarPago {
+    margin: 32px 0;
+}
+
+
+
 .login-page {
     /* background: rgb(255, 158, 30); */
     /* background: rgb(255 103 30 / 38%); */

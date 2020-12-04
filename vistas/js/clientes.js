@@ -441,8 +441,31 @@ $(document).on('click', '.SwalBtnMantenerInscripcion', function (e) {
         });
         // $('.alert').remove();
     }, 1000);
+
+});
+
+$(document).on('click', '.verTotalActualizarPago', function (e) {
+    e.preventDefault();
     
+    var valorInscripcion = $('.actualizarPagoInscripcion').val();
     
+    // var valorPromocion = $('.actualizarTotalDescuento').val();
+
+    // if(!valorPromocion){
+
+    //     var suma = parseInt(valorInscripcion);
+    //     var descuento = 0;
+    //     $('input[name=actualizarTotalDescuento]').attr('value', descuento);
+    // } else {
+    //     var porcentaje = parseInt(valorPromocion) / 100;
+    //     var descuento = ((parseInt(totalMatricula) * porcentaje));
+    //     var suma = (parseInt(totalMatricula) - descuento) + parseInt(valorInscripcion);
+    //     $('input[name=actualizarTotalDescuento]').attr('value', descuento);
+        
+    // }
+
+    $('.totalActualizarPago').attr('value', valorInscripcion);
+
 
 });
 
@@ -462,20 +485,18 @@ $(document).on('click', '.SwalBtnCambiarInscripcion', function (e) {
         processData: false,  
         dataType: "json",
         success: function(respuesta) {
-
-            console.log(respuesta);
+            // console.log(respuesta);
             // return;
             
-            $('#idEditarCliente').val(respuesta["id_persona"])
-
-            $('#actualizarDescuento').html(respuesta["tipo_descuento"])
-            $('#actualizarDescuento').val(respuesta["id_descuento"])
+            $('#idClientePago').val(respuesta["id_personas"]);
             
-             $('#actualizarInscripcion').html(respuesta["tipo_inscripcion"])
+            $('#actualizarInscripcion').html(respuesta["tipo_inscripcion"])
             $('#actualizarInscripcion').val(respuesta["id_inscripcion"])
+            $('#actualizarPagoInscripcion').attr('value', respuesta["pago_inscripcion"])            
 
-            $('.actualizarPrecioDescuento').val(respuesta["pago_descuento"])
-            $('.actualizarPagoInscripcion').val(respuesta["pago_inscripcion"])
+            // $('#actualizarDescuento').html(respuesta["tipo_descuento"])
+            // $('#actualizarDescuento').val(respuesta["id_descuento"])
+            // $('.actualizarPrecioDescuento').val(respuesta["pago_descuento"])
             $('.pagoTotalActualizado').val(respuesta["pago_total"])
             
         }
