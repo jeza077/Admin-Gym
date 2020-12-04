@@ -486,7 +486,7 @@ $(document).on('click', '.SwalBtnCambiarInscripcion', function (e) {
         processData: false,  
         dataType: "json",
         success: function(respuesta) {
-            console.log(respuesta);
+            // console.log(respuesta);
             // return;
             
             $('#idClientePago').val(respuesta["id_personas"]);
