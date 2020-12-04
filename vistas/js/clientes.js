@@ -73,9 +73,9 @@ exportarPdf('.btnExportarPagosClientes', 'pagos-clientes');
 
 $(document).on('click', '.btnEditarClienteGimnasio', function () { 
     
-    var idEditarCliente = $(this).attr("idEditarCliente");
-    var tipoCliente = $(this).attr("tipoCliente");
-    // console.log(tipoClienteGimnasio)
+    var idEditarCliente = $(this).attr("idEditarClienteGimnasio");
+    var tipoCliente = $(this).attr("tipoClienteGimnasio");
+    // console.log(idEditarCliente)
     var datos = new FormData();
     datos.append("idEditarCliente", idEditarCliente);
     datos.append("tipoCliente", tipoCliente)
@@ -112,8 +112,8 @@ $(document).on('click', '.btnEditarClienteGimnasio', function () {
             // $tipoClienteGimnasio = respuesta["tipo_cliente"];
             // console.log(tipoClienteGimnasio)
 
-            $('#editarTipoCliente').html(respuesta["tipo_cliente"])
-            $('#editarTipoCliente').val($tipoClienteGimnasio)
+            $('#EditarTipoClienteGimnasio').html(respuesta["tipo_cliente"])
+            
 
             // $('#editarMatricula').html(respuesta["tipo_matricula"])
             // $('#editarMatricula').val(respuesta["id_matricula"])
@@ -541,10 +541,11 @@ $('.btnEliminarCliente').click(function () {
 $(document).on('click', '.btnEditarClienteVenta', function () { 
     
     var idEditarCliente = $(this).attr("idEditarClienteVenta");
-    var tipoCliente = $(this).attr("tipoCliente");
-    // console.log(tipoCliente)
+    var tipoCliente = $(this).attr("tipoClienteVenta");
+    // console.log(idEditarCliente)
     var datos = new FormData();
-    datos.append("tipoCliente", tipoCliente);
+    datos.append("idEditarClienteVenta", idEditarCliente);
+    datos.append("idEditarClienteVenta", idEditarCliente);
     // console.log(idEditarClienteVenta)
 
     $.ajax({
@@ -575,8 +576,8 @@ $(document).on('click', '.btnEditarClienteVenta', function () {
             $('#editarSexoClienteVentas').html(respuesta["sexo"])
             $('#editarSexoClienteVentas').val(respuesta["sexo"])
 
-            $('#tipoDeClienteVenta').html(respuesta["tipo_cliente"])
-            $('#tipoDeClienteVenta').val(respuesta["tipo_cliente"])
+            $('#editarTipoClienteVenta').html(respuesta["tipo_cliente"])
+            $('#editarTipoClienteVenta').val(respuesta["tipo_cliente"])
 
             $('#tipoMatriculaClienteVenta').html(respuesta["tipo_matricula"])
             $('#tipoMatriculaClienteVenta').val(respuesta["id_matricula"])

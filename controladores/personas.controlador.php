@@ -507,7 +507,8 @@ class ControladorPersonas{
                     // var_dump($_POST);
                     // echo "</pre>";
                     // return;
-                    
+                    // if ($_POST["idEditarCliente"] == "Gimnasio") {
+                        
                     $datos = array("nombre" => $_POST["editarNombre"],
                     "apellido" => $_POST["editarApellido"],
                     "id_documento" => $_POST["editarTipoDocumento"],
@@ -518,7 +519,9 @@ class ControladorPersonas{
                     "telefono" => $_POST["editarTelefono"],
                     "direccion" => $_POST["editarDireccion"],
                     "email" => $_POST["editarEmail"],
-                    "id_persona" => $tipoClienteGimnasio);
+                    "id_persona" => $_POST['idEditarCliente']);
+                    // }
+                    
                     
 
                     $respuestaDeEditarPersona = ModeloPersonas::mdlEditarPersona($tabla, $datos);
@@ -527,52 +530,24 @@ class ControladorPersonas{
                     // echo "</pre>";
                     // return;
 
+                    
+    
                     if($respuestaDeEditarPersona == true){
-
-                        if ($_POST['tipoDeClienteVenta'] == "Gimnasio"){
-    
-                            $datos = array("id_persona" => $_POST["idEditarCliente"],
-                            "tipo_cliente" => $_POST["tipoCliente"],
-                            "id_inscripcion" => $_POST["inscripcionClienteVenta"],
-                            "id_matricula" => $_POST["tipoMatriculaClienteVenta"],
-                            "id_descuento" => $_POST["editarPromocionClienteVenta"],
-                            "pagos_matricula" => $_POST["precioMatriculaClienteVentas"],
-                            "pagos_descuento" => $_POST["valorPromocionClienteVenta"],
-                            "pagos_inscripcion" => $_POST["valorPromocionClienteVenta"],
-                            "pagos_total" => $_POST["totalPagarClienteVenta"]);
-                        } else {
-                            $datos = array("id_persona" => $_POST["idEditarCliente"],
-                            "tipo_cliente" => $_POST["tipoCliente"]);
-                        }
-                        echo "<pre>";
-                        var_dump($datos);
-                        echo "</pre>";
-                        return;
                         
-    
-                        $respuestaEditarCliente = ControladorClientes::ctrCrearCliente($datos);
-
-                        // echo "<pre>";
-                        // var_dump($respuestaEditarCliente);
-                        // echo "</pre>";
-                        // return;
-    
-                        if($respuestaEditarCliente == true){
-                            
-                            echo '<script>
-                                    Swal.fire({
-                                        title: "Cliente fue editado correctamente!",
-                                        icon: "success",
-                                        heightAuto: false,
-                                        allowOutsideClick: false
-                                    }).then((result)=>{
-                                        if(result.value){
-                                            window.location = "'.$pantalla.'";
-                                        }
-                                    });                                              
-                                </script>';
-                        }
+                        echo '<script>
+                                Swal.fire({
+                                    title: "Cliente fue editado correctamente!",
+                                    icon: "success",
+                                    heightAuto: false,
+                                    allowOutsideClick: false
+                                }).then((result)=>{
+                                    if(result.value){
+                                        window.location = "'.$pantalla.'";
+                                    }
+                                });                                              
+                            </script>';
                     }
+                    // }
                 }
 
             } else {

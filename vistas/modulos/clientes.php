@@ -106,10 +106,10 @@
                       // echo '<td></td>';
 
                           if($value['tipo_cliente'] == "Gimnasio"){
-                            echo '<td><button class="btn btn-warning btnEditarClienteGimnasio" tipoCliente="'.$value['tipo_cliente'].'" id="btnEditar" data-toggle="modal" data-target="#modalEditarClienteGimnasio" idEditarCliente="'.$value["id_personas"].'"><i class="fas fa-pencil-alt" style="color:#fff"></i></button>
+                            echo '<td><button class="btn btn-warning btnEditarClienteGimnasio" tipoClienteGimnasio="'.$value['tipo_cliente'].'" id="btnEditarClienteGimnasio" data-toggle="modal" data-target="#modalEditarClienteGimnasio" idEditarClienteGimnasio="'.$value["id_personas"].'"><i class="fas fa-pencil-alt" style="color:#fff"></i></button>
                             <button class="btn btn-danger btnEliminarCliente" idPersona="'.$value["id_personas"].'"><i class="fas fa-trash-alt"></i></button>';
                           } else {
-                            echo '<td><button class="btn btn-warning btnEditarClienteVenta" tipoCliente="'.$value['tipo_cliente'].'" id="btnEditar" data-toggle="modal" data-target="#modalEditarClienteVenta" idEditarClienteVenta="'.$value["id_personas"].'"><i class="fas fa-pencil-alt" style="color:#fff"></i></button>
+                            echo '<td><button class="btn btn-warning btnEditarClienteVenta" tipoClienteVenta="'.$value['tipo_cliente'].'" id="btnEditarClienteVenta" data-toggle="modal" data-target="#modalEditarClienteVenta" idEditarClienteVenta="'.$value["id_personas"].'"><i class="fas fa-pencil-alt" style="color:#fff"></i></button>
                             <button class="btn btn-danger btnEliminarCliente" idPersona="'.$value["id_personas"].'"><i class="fas fa-trash-alt"></i></button>';
                           }
                           '<td>
@@ -412,7 +412,7 @@
                     <div class="form-group col-md-3">
                       <label for="nombre">Nombre</label>
                       <input type="text" class="form-control editarNombre mayus" name="editarNombre" required>
-                      <input type="hidden" id="idEditarCliente" name="idEditarCliente">
+                      <input type="hidden" id="EditarTipoClienteGimnasio" name="EditarTipoClienteGimnasio">
                     </div>
                     <div class="form-group col-md-3">
                       <label for="apellido">Apellido</label>
@@ -453,7 +453,8 @@
                 </div>
               
                 <div class="form-group mt-4 float-right">
-                  
+                 <input type="hidden" id="idEditarCliente" name="idEditarCliente">
+                <input type="hidden" id="editarTipoCliente" name="editarTipoCliente">
                   <button type="" class="btn btn-primary">Guardar Cambios</button>
                   <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
                 </div>
@@ -528,7 +529,7 @@
                     <div class="form-group col-md-3">
                       <label for="nombre">Nombre</label>
                       <input type="text" class="form-control nombreClienteVentas mayus" name="nombreClienteVentas" required>
-                      <input type="hidden" id="idEditarClienteVenta" name="idEditarClienteVenta">
+                      <input type="hidden" id="editarTipoClienteVenta" name="editarTipoClienteVenta">
                     </div>
                     <div class="form-group col-md-3">
                       <label for="apellido">Apellido</label>
