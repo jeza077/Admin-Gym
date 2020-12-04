@@ -36,6 +36,8 @@
 
 
 
+
+
 <!-- TAB PRINCIPAL -->
 <div class="card">
 
@@ -51,7 +53,7 @@
     </div>
               <!-- TAB INVENTARIO -->
 
-    <div class="tab-content" id="myTabContent"> 
+        <div class="tab-content" id="myTabContent"> 
         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="inventario">
         <div class="container-fluid mt-4">
 
@@ -71,7 +73,7 @@
 
       <div class="card-body">
             <!-- CUERPPO INVENTARIO -->
-                <table class="table table-striped table-bordered tablas text-center">
+            <table class="table table-striped table-bordered tablas text-center">
                     <thead>
                     <tr>
                     <th scope="col">#</th>
@@ -131,70 +133,68 @@
 
             <!-- TAB BODEGA -->
         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="bodega">
-
-        <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-1">
-          <div class="col-sm-12">
-          <button class="btn btn-orange float-right"  data-toggle="modal" data-target="#modalAgregarBodega">
-            Nuevo Bodega      
-          </button>
-          </div>
-        </div>
-
-            <div class="container-fluid mt-3">
-                <div class="card-body">
-                    <table class="table table-striped table-bordered tablas text-center">
-                        <thead>
-                            <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Codigo</th>
-                            <th scope="col">Foto</th>
-                            <th scope="col">Tipo producto</th>
-                            <th scope="col">Nombre</th>
-                            <th scope="col">Stock</th>
-                            <th scope="col">Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        <?php 
-                            $tabla = "tbl_inventario";
-                            $item = "tipo_producto";
-                            $valor = "bodega";
-                            $order = null;
-                            $inventarios=ControladorInventario::ctrMostrarInventario($tabla, $item, $valor,$order);
-                            // var_dump($inventarios);
-                            foreach ($inventarios as $key => $value) {
-                            echo '
-                                    <tr>
-                                    <td scope="row">'.($key+1).'</td>
-                                    <td>'.$value["codigo"].'</td>';
-
-                                        if($value["foto"] != ""){
-                                          echo '<td><img src="'.$value["foto"].'" class="img-thumbnail" width="40px"></td>';
-                                        } else {
-                                          echo '<td><img src="vistas/img/usuarios/default/default2.jpg" class="img-thumbnail" width="40px"></td>';
-                                        }
-                                          echo '<td>'.$value["tipo_producto"].'</td>
-
-                                    <td>'.$value["nombre_producto"].'</td>
-                                    <td>'.$value["stock"].'</td>';
-                                echo '     
-                                    <td>
-                                    <button class="btn btn-warning btnEditarInventario" idInventario="'.$value["id_inventario"].'" data-toggle="modal" data-target="#modalEditarStock"><i class="fas fa-pencil-alt" style="color:#fff"></i></button>
-                                    <button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
-                                    </td>
+            <section class="content-header">
+            <div class="container-fluid">
+                    <div class="row mb-1">
+                    <div class="col-sm-12">
+                    <button class="btn btn-orange float-right"  data-toggle="modal" data-target="#modalAgregarBodega">
+                        Nuevo Bodega      
+                    </button>
+                    </div>
+                    </div>
+                <div class="container-fluid mt-3">
+                    <div class="card-body">
+                        <table class="table table-striped table-bordered tablas text-center">
+                            <thead>
+                                <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Codigo</th>
+                                <th scope="col">Foto</th>
+                                <th scope="col">Tipo producto</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Stock</th>
+                                <th scope="col">Acciones</th>
                                 </tr>
-                            ';
-                            }
-                        ?>
-                        </tbody>
-                    </table>
-            
-                </div> 
-            </div>
-        </div> 
-           </div>  
+                            </thead>
+                            <tbody>
+                            <?php 
+                                $tabla = "tbl_inventario";
+                                $item = "tipo_producto";
+                                $valor = "bodega";
+                                $order = null;
+                                $inventarios=ControladorInventario::ctrMostrarInventario($tabla, $item, $valor,$order);
+                                // var_dump($inventarios);
+                                foreach ($inventarios as $key => $value) {
+                                echo '
+                                        <tr>
+                                        <td scope="row">'.($key+1).'</td>
+                                        <td>'.$value["codigo"].'</td>';
+
+                                            if($value["foto"] != ""){
+                                            echo '<td><img src="'.$value["foto"].'" class="img-thumbnail" width="40px"></td>';
+                                            } else {
+                                            echo '<td><img src="vistas/img/usuarios/default/default2.jpg" class="img-thumbnail" width="40px"></td>';
+                                            }
+                                            echo '<td>'.$value["tipo_producto"].'</td>
+
+                                        <td>'.$value["nombre_producto"].'</td>
+                                        <td>'.$value["stock"].'</td>';
+                                    echo '     
+                                        <td>
+                                        <button class="btn btn-warning btnEditarInventario" idInventario="'.$value["id_inventario"].'" data-toggle="modal" data-target="#modalEditarStock"><i class="fas fa-pencil-alt" style="color:#fff"></i></button>
+                                        <button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                                        </td>
+                                    </tr>
+                                ';
+                                }
+                            ?>
+                            </tbody>
+                        </table>
+                
+                    </div> 
+                </div>
+            </div> 
+        </div>  
       </div>    
  </div> <!-- Fin del TAB -->
 

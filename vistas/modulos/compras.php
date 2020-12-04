@@ -6,15 +6,15 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Productos</h1>
+            <h1>Compras</h1>
           </div>
           <div class="col-sm-6">
           <button class="btn btn-orange float-right"  data-toggle="modal" data-target="#modalAgregarInventario">
-            Nuevo Producto         
+              Nueva Compra         
           </button>
           <button class="btn btn-danger btnExportarProductos float-right mr-3">
               Exportar PDF          
-            </button>
+          </button>
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -35,11 +35,9 @@
       // }
     ?>
 
+<div class="card">
 
-      <!-- Default box -->
-      <div class="card">
-
-      <div class="card-body">
+<div class="card-body">
             <!-- CUERPPO INVENTARIO -->
                 <table class="table table-striped table-bordered tablas text-center">
                     <thead>
@@ -47,11 +45,11 @@
                     <th scope="col">#</th>
                     <th scope="col">Codigo</th>
                     <th scope="col">Foto</th>
-                    <!-- <th scope="col">Tipo inventario</th> -->
                     <th scope="col">Nombre</th>
+                    <th scope="col">Proveedor</th>
                     <th scope="col">Stock</th>
                     <th scope="col">Precio venta</th>
-                    <!-- <th scope="col">Precio compra</th> -->
+                    <th scope="col">Precio compra</th>
                     <th scope="col">Producto min.</th>
                     <th scope="col">Producto max.</th>
                     <th scope="col">Acciones</th>
@@ -81,14 +79,14 @@
                                     echo '<td>'.$value["nombre_producto"].'</td>
          
                               
+                              <td>'.$value["proveedor"].'</td>
                               <td>'.$value["stock"].'</td>
                               <td>'.$value["precio_venta"].'</td>
-                             
+                              <td>'.$value["precio_compra"].'</td>
                               <td>'.$value["producto_minimo"].'</td>
                               <td>'.$value["producto_maximo"].'</td>     
                               <td>
-                              <button class="btn btn-warning btnEditarInventario" idInventario="'.$value["id_inventario"].'" data-toggle="modal" data-target="#modalEditarProducto"><i class="fas fa-pencil-alt" style="color:#fff"></i></button>
-                              <button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                              <button class="btn btn-warning btnEditarInventario"  idInventario="'.$value["id_inventario"].'" data-toggle="modal" data-target="#modalEditarProducto"></i>  EDITAR COMPRA </button>
                               </td>
                           </tr>
                       ';
@@ -99,13 +97,7 @@
             <!-- -------------------------- -->
       </div> 
 
-      </div>
-      <!-- /.card -->
 
-    </section>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
 
 <!-- =======================================
            MODAL AGREGAR INVENTARIO
@@ -133,9 +125,7 @@
                   <div class="form-row">
                       <div class="form-group col-md-3">
                         <label for="">Tipo<?php echo $i?></label>
-                        <select class="form-control select2 "  id="nuevoTipoProducto" style="width: 100%;" name="nuevoTipoProducto">
-                            
-                            
+                        <select class="form-control select2 "  id="nuevoTipoProducto" style="width: 100%;" name="nuevoTipoProducto">                           
                             <option selected="selected">Seleccionar...</option>
                             <?php 
                                 $tabla = "tbl_tipo_producto";
@@ -159,25 +149,32 @@
                         <input type="text" class="form-control mayus nombre_producto" name="nuevoNombreProducto" placeholder="Ingrese Producto" required>
                       </div>
                       <div class="form-group col-md-3">
-                        <label for="stock">Cantidad en stock</label>
-                        <input type="number" class="form-control stock" name="nuevoStock" placeholder="Cantidad en stock" min="0" required class="fa fa-arrow-up"></i></span>
+                        <label for="nombreproducto">Proveedor</label>
+                        <html>
+                        <input type="text" class="form-control mayus proveedor" name="nuevoProveedor" placeholder="Ingrese Proveedor" required>
                       </div>
                     </div>
         
                 <div class="form-row">
 
 
-
-                      <div class="form-group col-md-4">
-                        <label for="precio">Precio</label>
-                        <input type="text" class="form-control precio" name="nuevoPrecio" placeholder="Ingrese Precio"  required>
-                      
+                <div class="form-group col-md-3">
+                        <label for="stock">Cantidad en stock</label>
+                        <input type="number" class="form-control stock" name="nuevoStock" placeholder="Cantidad en stock" min="0" required class="fa fa-arrow-up"></i></span>
                       </div>
-                          <div class="form-group col-md-4">
+                      <div class="form-group col-md-3">
+                        <label for="precio">Precio Venta</label>
+                        <input type="text" class="form-control precio" name="nuevoPrecio" placeholder="Ingrese Precio"  required>
+                      </div>
+                      <div class="form-group col-md-3">
+                        <label for="precio">Precio Compra</label>
+                        <input type="text" class="form-control precio" name="nuevoPrecioCompra" placeholder="Ingrese Precio"  required>
+                      </div>
+                          <div class="form-group col-md-3">
                             <label for="productominimo">Producto Minimo</label>
                             <input type="number" class="form-control precio" name="nuevoProductoMinimo" placeholder="Cantidad Minima" min="0" required class="fa fa-arrow-up"></i></span>
                           </div>
-                          <div class="form-group col-md-4">
+                          <div class="form-group col-md-3">
                             <label for="productomaximo">Producto Maximo</label>
                             <input type="number" class="form-control precio" name="nuevoProductoMaximo" placeholder="Cantidad Maximo" min="0" required class="fa fa-arrow-up"></i></span>
                           </div>
@@ -226,9 +223,7 @@
   </div>
 
 
-
-
-    <!-- =======================================
+ <!-- =======================================
            MODAL EDITAR
   ======================================----->
 
@@ -258,6 +253,11 @@
                       <html>
                       <input type="text" value="" class="form-control mayus editar_Nombre_Producto"  name="editarNombreProducto" id="editarNombreProducto" required>
                     </div>
+                    <div class="form-group col-md-3">
+                        <label for="nombreproducto">Proveedor</label>
+                        <html>
+                        <input type="text" class="form-control mayus proveedor" name="editarProveedor" id="editarProveedor" placeholder="Nuevo Proveedor" required>
+                      </div>
                     <div class="form-group col-md-3">
                       <label for="stock">Cantidad en stock</label>
                       <input type="number" value="" class="form-control" name="editarStock" id="editarStock"  min="0" required class="fa fa-arrow-up"></i></span>
@@ -302,7 +302,7 @@
                 
                     <?php
                     $tipostock = 'producto';
-                    $pantalla = 'productos';
+                    $pantalla = 'compras';
                     $EditarInventario = new ControladorInventario();
                     $EditarInventario->ctrEditarStock($tipostock, $pantalla);
                     ?>
@@ -313,3 +313,6 @@
     </div>
   </div>
 
+
+
+  </div>

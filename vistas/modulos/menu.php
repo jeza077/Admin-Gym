@@ -155,6 +155,12 @@
                 </p>
               </a>
               <ul class="nav nav-treeview">
+              <li class="nav-item">
+                  <a href="compras" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Compras</p>
+                  </a>
+                </li>
                 <li class="nav-item">
                   <a href="productos" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>

@@ -23,7 +23,8 @@ $(document).on("click",".btnEditarInventario",function(){
             $("#editarNombreProducto").val(respuesta["nombre_producto"]);
             $("#editarTipoProducto").val(respuesta["id_inventario"]);
             $("#editarStock").val(respuesta["stock"]);
-            $("#editarPrecio").val(respuesta["precio"]);
+            $("#editarPrecio").val(respuesta["precio_venta"]);
+            $("#editarProveedor").val(respuesta["proveedor"]);
             $("#editarProductoMinimo").val(respuesta["producto_minimo"]);
             $("#editarProductoMaximo").val(respuesta["producto_maximo"]);
 
