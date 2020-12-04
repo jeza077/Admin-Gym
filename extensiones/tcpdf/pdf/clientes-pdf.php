@@ -1,17 +1,41 @@
 <?php
-// require_once "../../controladores/usuarios.controlador.php";
+require_once("../../../controladores/usuarios.controlador.php");
+require_once "../../../modelos/usuarios.modelo.php";
 require_once('../../../controladores/clientes.controlador.php');
 require_once "../../../modelos/clientes.modelo.php";
 require_once('../examples/tcpdf_include.php');
+date_default_timezone_set("America/Tegucigalpa");
 
 
 class PDF extends TCPDF{
     
     // Header de la pagina
     public function Header() {
+
+        $item="parametro";
+        $valor="ADMIN_NOMBRE_EMPRESA";
+
+        $nombreEmpresa = ControladorUsuarios::ctrMostrarParametros($item, $valor);
+        // var_dump($nombreEmpresa ['valor']);
+        $nombre = $nombreEmpresa ['valor'];
+    
+        $item="parametro";
+        $valor="ADMIN_DIRECCION_EMPRESA";
+
+        $direccionEmpresa = ControladorUsuarios::ctrMostrarParametros($item, $valor);
+        // var_dump($direccionEmpresa ['valor']);
+        $direccion = $direccionEmpresa ['valor'];
+    
+        $item="parametro";
+        $valor="ADMIN_CORREO";
+
+        $correoEmpresa = ControladorUsuarios::ctrMostrarParametros($item, $valor);
+        // var_dump($correoEmpresa ['valor']);
+        $correo = $correoEmpresa ['valor'];
+
         // Logo
         $image_file = K_PATH_IMAGES.'logo_gym.png';
-        $this->Image($image_file, 40, 10, 25, '', 'PNG', '', 'T', false, 300, '', false, false, 0, false, false, false);
+        $this->Image($image_file, 65, 10, 25, '', 'PNG', '', 'T', false, 300, '', false, false, 0, false, false, false);
         
         // Fuente
         $this->Ln(2);
@@ -22,21 +46,23 @@ class PDF extends TCPDF{
 
         // Title
         // $this->Cell(189, 5, 'GIMNASIO LA "ROCA"', 0, 1, 'C', 0, '', 0, false, 'M', 'M');
-        $this->Cell(189, 5, 'GIMNASIO LA "ROCA"', 0, 1, 'C');
+        $this->Cell(260, 10, ''.$nombre.'', 0, 1, 'C');
         
         $this->SetTextColor(0,0,0);
         $this->SetFont('helvetica', '', 9);
-        // $this->Cell(189, 3, 'Gimnasio La roca', 0, 1, 'C');
-        $this->Cell(189, 3, 'Col. xxxxxxxxxx....', 0, 1, 'C');
-        $this->Cell(189, 3, 'Calle xxxxxxxxxx.....', 0, 1, 'C');
-        $this->Cell(189, 3, 'correo: gym@gmail.com', 0, 1, 'C');
+        // $this->Cell(260, 3, 'Gimnasio La roca', 0, 1, 'C');
+        $this->Cell(260, 3, ''.$direccion.'', 0, 1, 'C');
+        // $this->Cell(260, 3, 'Calle xxxxxxxxxx.....', 0, 1, 'C');
+        $this->Cell(260, 5, ''.$correo.'', 0, 1, 'C');
 
         $this->Ln(20); //Espacios
         $this->SetFont('helvetica', 'B', 14);
-        $this->Cell(189, 3, 'REPORTE DE CLIENTES', 0, 1, 'C');
+        $this->Cell(260, 3, 'REPORTE DE CLIENTES', 0, 1, 'C');
         $this->Ln(3);
         $this->SetFont('helvetica', 'B', 11);
-        $this->Cell(189, 3, 'Año 2020', 0, 1, 'C');
+
+        $año = date('Y-m-d');
+        $this->Cell(260, 3, 'Año '.$año.'', 0, 1, 'C');
     }
 
     // Footer de la pagina
@@ -46,6 +72,10 @@ class PDF extends TCPDF{
         // Set font
         $this->SetFont('helvetica', 'I', 8);
         // Page number
+        // $this->Cell(0, 10, 'Page '.$this->getAliasNumPage().'/'.$this->getAliasNbPages(), 0, false, 'C', 0, '', 0, false, 'T', 'M');
+
+        $fecha = date('Y-m-d H:i:s');
+        $this->Cell(0, 10, ''.$fecha.'', 0, false, 'C', 0, '', 0, false, 'T', 'M');
         $this->Cell(0, 10, 'Page '.$this->getAliasNumPage().'/'.$this->getAliasNbPages(), 0, false, 'C', 0, '', 0, false, 'T', 'M');
     }
 }
@@ -53,7 +83,7 @@ class PDF extends TCPDF{
 
 // Crear un nuevo documento PDF
 // $pdf = new MYPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
-$pdf = new PDF('p', 'mm', 'A4', true, 'UTF-8', false);
+$pdf = new PDF('l', 'mm', 'A4', true, 'UTF-8', false);
 
 // set document information
 $pdf->SetCreator(PDF_CREATOR);
@@ -108,56 +138,73 @@ $pdf->Ln(45);
 $pdf->SetFont('times', '', 13);
 $pdf->SetFillColor(225, 235, 255);
 $pdf->Cell(15, 5, 'No', 1, 0, 'C', 1);
-$pdf->Cell(55, 5, 'Nombre', 1, 0, 'C', 1);
-$pdf->Cell(40, 5, 'Usuario', 1, 0, 'C', 1);
-$pdf->Cell(40, 5, 'Rol', 1, 0, 'C', 1);
-$pdf->Cell(30, 5, 'Estado', 1, 0, 'C', 1);
+$pdf->Cell(75, 5, 'Nombre', 1, 0, 'C', 1);
+$pdf->Cell(40, 5, 'Tipo Cliente', 1, 0, 'C', 1);
+$pdf->Cell(70, 5, 'Correo', 1, 0, 'C', 1);
+$pdf->Cell(50, 5, 'Telefono', 1, 0, 'C', 1);
 
-$tabla = "tbl_clientes";
-$item = null;
-$valor = null;
-$usuarios = ControladorClientes::ctrMostrarClientes($tabla, $item, $valor);
+if(isset($_GET["rango"])){
 
-var_dump($usuarios);
-return;
+    $rango = $_GET["rango"];
+    
+} else {
+
+    $rango = null;
+
+} 
+
+$clientes = ControladorClientes::ctrRangoCliente($rango);
+
+// var_dump($clientes);
+// return;
 
 $i = 1; //Contador
-$max = 2; //Maximo de registros a mostrar en una pagina
-
-foreach ($usuarios as $key => $value) {
-
-    if(($i%$max) == 0){
-        $pdf->AddPage();
-
-        $pdf->Ln(40);
-        
-        $pdf->SetFont('times', '', 13);
-        $pdf->SetFillColor(225, 235, 255);
-        $pdf->Cell(15, 5, 'No', 1, 0, 'C', 1);
-        $pdf->Cell(55, 5, 'Nombre', 1, 0, 'C', 1);
-        $pdf->Cell(40, 5, 'Usuario', 1, 0, 'C', 1);
-        $pdf->Cell(40, 5, 'Rol', 1, 0, 'C', 1);
-        $pdf->Cell(30, 5, 'Estado', 1, 0, 'C', 1);
-    }
-    // $pdf->Cell(15, 5, ''.$i.'', 1, 0, 'C');
-
-    $pdf->Ln(8);
+$max = 21; //Maximo de registros a mostrar en una pagina
+if(!$clientes){
+    // echo 'vacio';
+    $pdf->Ln(15);
     $pdf->SetFont('times', '', 12);
-    // $pdf->SetFillColor(225, 235, 255);
-    $pdf->Cell(15, 4, ''.($key+1).'', 0, 0, 'C');
-    $pdf->Cell(55, 4, ''.$value['nombre'].' '.$value['apellidos'].'', 0, 0, 'C');
-    $pdf->Cell(40, 4, ''.$value['usuario'].'', 0, 0, 'C');
-    $pdf->Cell(40, 4, ''.$value['rol'].'', 0, 0, 'C');
-    if($value["estado"] == 0){
-        $pdf->Cell(30, 4, 'Desactivado', 0, 0, 'C');
-    } else {
-        $pdf->Cell(30, 4, 'Activado', 0, 0, 'C');
-    }
-    $i++;
+    $pdf->Cell(170, 4, '******* NO HAS VENTAS PARA MOSTRAR *******', 0, 0, 'C');
+} else {
 
+    
+    foreach ($clientes as $key => $value) {
+    
+        if(($i%$max) == 0){
+            $pdf->AddPage();
+    
+            $pdf->Ln(40);
+            
+            $pdf->SetFont('times', '', 13);
+            $pdf->SetFillColor(225, 235, 255);
+            $pdf->Cell(15, 5, 'No', 1, 0, 'C', 1);
+            $pdf->Cell(75, 5, 'Nombre', 1, 0, 'C', 1);
+            $pdf->Cell(40, 5, 'Tipo Cliente', 1, 0, 'C', 1);
+            $pdf->Cell(70, 5, 'Correo', 1, 0, 'C', 1);
+            $pdf->Cell(50, 5, 'Telefono', 1, 0, 'C', 1);
+        }
+        // $pdf->Cell(15, 5, ''.$i.'', 1, 0, 'C');
+    
+        $pdf->Ln(8);
+        $pdf->SetFont('times', '', 12);
+        // $pdf->SetFillColor(225, 235, 255);
+        $pdf->Cell(15, 4, ''.($key+1).'', 0, 0, 'C');
+        $pdf->Cell(75, 4, ''.$value['nombre'].' '.$value['apellidos'].'', 0, 0, 'C');
+        $pdf->Cell(40, 4, ''.$value['tipo_cliente'].'', 0, 0, 'C');
+        $pdf->Cell(70, 4, ''.$value['correo'].'', 0, 0, 'C');
+        $pdf->Cell(50, 4, ''.$value['telefono'].'', 0, 0, 'C');
+    
+        // if($value["estado"] == 0){
+        //     $pdf->Cell(30, 4, 'Desactivado', 0, 0, 'C');
+        // } else {
+        //     $pdf->Cell(30, 4, 'Activado', 0, 0, 'C');
+        // }
+        $i++;
+    
+    }
 }
 
 // Close and output PDF document
-$pdf->Output('example_001.pdf', 'I');
+$pdf->Output('reporte_total_clientes.pdf', 'I');
 
 ?>

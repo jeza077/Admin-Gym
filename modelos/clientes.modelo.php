@@ -445,4 +445,45 @@ class ModeloClientes{
 		$stmt = null;
 
 	}
+
+
+
+	/*=============================================
+			RANGO CLIENTES
+	=============================================*/
+	static public function mdlRangoCliente($tabla, $rango){
+	
+		if($rango == null){
+
+			$stmt = Conexion::conectar()->prepare("SELECT p.*, c.*, i.fecha_creacion, i.tipo_inscripcion, pd.tipo_descuento, valor_descuento, pc.* FROM tbl_personas as p\n"
+            . "LEFT JOIN $tabla as c ON p.id_personas = c.id_persona\n"
+            . "LEFT JOIN tbl_matricula as m ON c.id_matricula = m.id_matricula\n"
+			. "LEFT JOIN tbl_pagos_cliente as pc ON c.id_cliente = pc.id_cliente\n"
+            . "LEFT JOIN tbl_inscripcion as i ON pc.id_inscripcion = i.id_inscripcion\n"
+			. "LEFT JOIN tbl_descuento as pd ON pc.id_descuento = pd.id_descuento\n"
+		    . "WHERE p.tipo_persona = 'clientes'");
+			
+			$stmt -> execute();
+			return $stmt -> fetchAll();
+
+		} else {
+
+			$stmt = Conexion::conectar()->prepare("SELECT p.*, c.*, d.tipo_documento, m.tipo_matricula, m.precio_matricula, pd.tipo_descuento, pd.valor_descuento, i.tipo_inscripcion,i.precio_inscripcion, pc.* FROM tbl_personas as p\n"
+			. "LEFT JOIN $tabla as c ON p.id_personas = c.id_persona\n"
+			. "LEFT JOIN tbl_documento as d ON p.id_documento = d.id_documento\n"
+			. "LEFT JOIN tbl_matricula as m ON c.id_matricula = m.id_matricula\n"
+			. "LEFT JOIN tbl_pagos_cliente as pc ON c.id_cliente = pc.id_cliente\n"
+			. "LEFT JOIN tbl_inscripcion as i ON pc.id_inscripcion = i.id_inscripcion\n"
+			. "LEFT JOIN tbl_descuento as pd ON pc.id_descuento = pd.id_descuento\n"
+			. "WHERE nombre LIKE '%$rango%' OR correo LIKE '%$rango%' OR tipo_cliente LIKE '%$rango%' OR telefono LIKE '%$rango%'"); 
+			$stmt->bindParam(":nombre", $rango, PDO::PARAM_STR);
+			$stmt->bindParam(":correo", $rango, PDO::PARAM_STR);
+			$stmt->bindParam(":tipo_cliente", $rango, PDO::PARAM_STR);
+			$stmt->bindParam(":telefono", $rango, PDO::PARAM_STR);
+
+            $stmt-> execute();
+			return $stmt ->fetchAll();
+			
+		} 	
+	}
 }

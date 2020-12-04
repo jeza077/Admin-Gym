@@ -62,9 +62,7 @@ $(document).on('change', '.tipoCliente', function () {
 //** ------------------------------------*/
 //         IMPRIMIR USUARIOS 
 // --------------------------------------*/ 
-$(document).on('click', '.btnExportarClientes', function () {
-    window.open("extensiones/tcpdf/pdf/clientes-pdf.php", "_blank");
-});
+exportarPdf('.btnExportarClientes', 'clientes');
 
 /*=============================================
         EDITAR CLIENTE
@@ -150,6 +148,7 @@ $(document).on('click', '.btnEditarCliente', function () {
         }
     });
 });
+
 /*============================================================
     MOSTRAR PRECIOS DE MATRICULA, DESCUENTO Y INSCRIPCION
 ============================================================*/
