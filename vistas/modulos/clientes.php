@@ -453,7 +453,8 @@
                 </div>
               
                 <div class="form-group mt-4 float-right">
-                  
+                  <input type="hidden" class="editarTipoCliente" name="editarTipoPersona">
+
                   <button type="" class="btn btn-primary">Guardar Cambios</button>
                   <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
                 </div>
@@ -574,8 +575,9 @@
                   <div class="form-row">
                     <div class="form-group col-md-3">
                       <label>Tipo Cliente</label>
-                      <select class="form-control select2 tipoDeClienteVenta" name="tipoClienteVenta" style="width: 100%;" required>
-                        <option value="tipoCl" id="tipoClienteVenta"></option>
+                      <input type="hidden" class="tipoDeClienteVenta" value="" name="actualTipoCliente">
+                      <select class="form-control select2" name="tipoClienteVenta" style="width: 100%;" required>
+                        <option value="" class="tipoDeClienteVenta"></option>
                         <option value="Gimnasio">Clientes del gimnasio</option>
                         <option value="Ventas">Cliente de ventas</option>
                       </select>
@@ -620,7 +622,7 @@
                     <div class="form-row">
                       <div class="form-group col-md-6">
                         <label>Promociones</label>
-                        <select class="form-control select2" style="width: 100%;" name="editarPromocionClienteVenta">
+                        <select class="form-control select2 nuevaPromocion" style="width: 100%;" name="editarPromocionClienteVenta">
                             <option value="" id="editarPromocionClienteVenta"></option> 
                           
                             <?php 
@@ -650,7 +652,7 @@
                     <div class="form-row">
                         <div class="form-group col-md-6"> 
                           <label>Tipo inscripcion</label>
-                          <select class="form-control select2 nueva inscripcionClienteVenta"  name="inscripcionClienteVenta" style="width: 100%;" name="inscripcionClienteVenta">
+                          <select class="form-control select2 nueva nuevaInscripcion inscripcionClienteVenta"  name="inscripcionClienteVenta" style="width: 100%;" name="inscripcionClienteVenta">
                               <option value="" id="inscripcionClienteVenta"></option>
                               <?php 
                                   $tabla = "tbl_inscripcion";

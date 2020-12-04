@@ -529,7 +529,7 @@ class ControladorPersonas{
 
                     if($respuestaDeEditarPersona == true){
 
-                        if ($_POST['tipoDeClienteVenta'] == "Gimnasio"){
+                        if ($_POST['tipoClienteVenta'] == "Gimnasio"){
     
                             $datos = array("id_persona" => $_POST["idEditarCliente"],
                             "tipo_cliente" => $_POST["tipoCliente"],

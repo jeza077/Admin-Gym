@@ -92,7 +92,7 @@ $(document).on('click', '.btnEditarClienteGimnasio', function () {
         dataType: "json",
         success: function(respuesta) {
 
-            // console.log("respuesta", respuesta);
+            console.log("respuesta", respuesta);
             
             $('#idEditarCliente').val(respuesta["id_persona"])
 
@@ -112,8 +112,8 @@ $(document).on('click', '.btnEditarClienteGimnasio', function () {
             // $tipoClienteGimnasio = respuesta["tipo_cliente"];
             // console.log(tipoClienteGimnasio)
 
-            $('#editarTipoCliente').html(respuesta["tipo_cliente"])
-            $('#editarTipoCliente').val($tipoClienteGimnasio)
+            // $('.editarTipoCliente').html(respuesta["tipo_cliente"])
+            $('.editarTipoCliente').attr('value', tipoCliente)
 
             // $('#editarMatricula').html(respuesta["tipo_matricula"])
             // $('#editarMatricula').val(respuesta["id_matricula"])
@@ -544,6 +544,7 @@ $(document).on('click', '.btnEditarClienteVenta', function () {
     var tipoCliente = $(this).attr("tipoCliente");
     // console.log(tipoCliente)
     var datos = new FormData();
+    datos.append("idEditarCliente", idEditarCliente);
     datos.append("tipoCliente", tipoCliente);
     // console.log(idEditarClienteVenta)
 
@@ -558,7 +559,7 @@ $(document).on('click', '.btnEditarClienteVenta', function () {
         dataType: "json",
         success: function(respuesta) {
 
-            // console.log("respuesta", respuesta);
+            console.log("respuesta", respuesta);
             
             $('#idEditarClienteVenta').val(respuesta["id_persona"])
 
@@ -575,8 +576,8 @@ $(document).on('click', '.btnEditarClienteVenta', function () {
             $('#editarSexoClienteVentas').html(respuesta["sexo"])
             $('#editarSexoClienteVentas').val(respuesta["sexo"])
 
-            $('#tipoDeClienteVenta').html(respuesta["tipo_cliente"])
-            $('#tipoDeClienteVenta').val(respuesta["tipo_cliente"])
+            $('.tipoDeClienteVenta').html(respuesta["tipo_cliente"])
+            $('.tipoDeClienteVenta').val(respuesta["tipo_cliente"])
 
             $('#tipoMatriculaClienteVenta').html(respuesta["tipo_matricula"])
             $('#tipoMatriculaClienteVenta').val(respuesta["id_matricula"])
