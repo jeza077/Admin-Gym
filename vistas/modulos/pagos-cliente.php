@@ -77,6 +77,7 @@
                 // echo "</pre>";
                 // return;
                 foreach ($clientes as $key => $value) {
+                  // echo $value['id_personas'];
                   echo '
                       <tr>
                       <th scope="row">'.($key+1).'</th>

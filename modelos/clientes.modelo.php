@@ -145,15 +145,23 @@ class ModeloClientes{
 
 		if($max != null){
 
-			$stmt = Conexion::conectar()->prepare("SELECT p.*, c.*, d.tipo_documento, m.tipo_matricula, pd.tipo_descuento, MAX(i.tipo_inscripcion) as tipo_inscripcion, pc.pago_matricula, pc.pago_descuento, pc.pago_inscripcion, pc.pago_total, fecha_ultimo_pago, MAX(pc.fecha_vencimiento) as fecha_vencimiento FROM $tabla1 as p\n"
-			. "LEFT JOIN $tabla2 as c ON p.id_personas = c.id_persona\n"
-			. "LEFT JOIN tbl_documento as d ON p.id_documento = d.id_documento\n"
-			. "LEFT JOIN tbl_matricula as m ON c.id_matricula = m.id_matricula\n"
-			. "LEFT JOIN tbl_pagos_cliente as pc ON c.id_cliente = pc.id_cliente\n"
-			. "LEFT JOIN tbl_inscripcion as i ON pc.id_inscripcion = i.id_inscripcion\n"
-			. "LEFT JOIN tbl_descuento as pd ON pc.id_descuento = pd.id_descuento\n"
-			. "WHERE $item = :$item\n"
-			. "GROUP BY c.id_cliente"); 
+			$stmt = Conexion::conectar()->prepare("SELECT p.*, c.*, d.tipo_documento, m.tipo_matricula, pd.tipo_descuento, i.tipo_inscripcion, pc.pago_matricula, pc.id_descuento, pc.pago_descuento, pc.id_inscripcion, pc.pago_inscripcion, pc.pago_total, pc.fecha_ultimo_pago, pc.fecha_vencimiento FROM tbl_personas as p\n"
+
+			. "	LEFT JOIN tbl_clientes as c ON p.id_personas = c.id_persona\n"
+		
+			. "	LEFT JOIN tbl_documento as d ON p.id_documento = d.id_documento\n"
+		
+			. "	LEFT JOIN tbl_matricula as m ON c.id_matricula = m.id_matricula\n"
+		
+			. "	LEFT JOIN tbl_pagos_cliente as pc ON c.id_cliente = pc.id_cliente\n"
+		
+			. "	LEFT JOIN tbl_inscripcion as i ON pc.id_inscripcion = i.id_inscripcion\n"
+		
+			. "	LEFT JOIN tbl_descuento as pd ON pc.id_descuento = pd.id_descuento\n"
+		
+			. "	WHERE c.tipo_cliente = 'Gimnasio' AND pc.fecha_ultimo_pago = (SELECT MAX(fecha_ultimo_pago) FROM tbl_pagos_cliente as 			pc1 WHERE pc1.id_cliente = pc.id_cliente)\n"
+		
+			. " GROUP BY c.id_cliente"); 
 
 			$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
 			$stmt -> execute();
