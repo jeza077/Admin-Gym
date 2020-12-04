@@ -10,9 +10,9 @@
                 <button class="btn btn-orange float-right"  data-toggle="modal" data-target="#modalNuevaMatricula">
                   Nueva Matricula      
                 </button>
-              <button class="btn btn-danger float-right mr-3"  data-toggle="modal" data-target="#modalExportar">
+                <button class="btn btn-danger btnExportarMatricula float-right mr-3 ">
                 Exportar PDF      
-              </button>
+               </button>
           </div>
         </div>
       </div><!-- /.container-fluid -->

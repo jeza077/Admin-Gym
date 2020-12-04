@@ -700,6 +700,80 @@ class ControladorGlobales{
     }
   }
 
+  /*=============================================
+			RANGO DINAMICO INSCRIPCION
+    =============================================*/
+	static public function ctrRangoInscripcion($rango){
+
+		$tabla = 'tbl_inscripcion';
+		
+		$respuesta = ModeloGlobales::mdlRangoInscripcion($tabla, $rango);
+		
+		return $respuesta;
+  }
+  
+  /*=============================================
+			RANGO DINAMICO MATRICULA
+    =============================================*/
+	static public function ctrRangoMatricula($rango){
+
+		$tabla = 'tbl_matricula';
+		
+		$respuesta = ModeloGlobales::mdlRangoMatricula($tabla, $rango);
+		
+		return $respuesta;
+	}
+
+  /*=============================================
+			RANGO DINAMICO DESCUENTO
+    =============================================*/
+	static public function ctrRangoDescuento($rango){
+
+		$tabla = 'tbl_descuento';
+		
+		$respuesta = ModeloGlobales::mdlRangoDescuento($tabla, $rango);
+		
+		return $respuesta;
+  }
+  
+  /*=============================================
+			RANGO DINAMICO ROL
+    =============================================*/
+	static public function ctrRangoRol($rango){
+
+		$tabla = 'tbl_roles';
+		
+		$respuesta = ModeloGlobales::mdlRangoRol($tabla, $rango);
+		
+		return $respuesta;
+  }
+  
+   /*=============================================
+			RANGO DINAMICO PARAMETRO
+    =============================================*/
+	static public function ctrRangoParametro($rango){
+
+		$tabla = 'tbl_parametros';
+		
+		$respuesta = ModeloGlobales::mdlRangoParametro($tabla, $rango);
+		
+		return $respuesta;
+  }
+  
+  /*=============================================
+			RANGO DINAMICO ADMINISTRAR
+    =============================================*/
+	static public function ctrRangoAdministrar($rango){
+
+		$tabla = 'tbl_roles';
+		
+		$respuesta = ModeloGlobales::mdlRangoAdministrar($tabla, $rango);
+		
+		return $respuesta;
+	}
+
+
+
 
   
 

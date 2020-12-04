@@ -10,6 +10,9 @@
               <button class="btn btn-orange float-right"  data-toggle="modal" data-target="#modalNuevoDescuento">
               Nuevo Descuento     
               </button>
+              <button class="btn btn-danger btnExportarDescuento float-right mr-3 ">
+                Exportar PDF      
+              </button>
 
                   
        
