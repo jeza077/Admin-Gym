@@ -203,17 +203,19 @@ $(document).on('blur', '.ClaseBuscar', function () {
 //** ------------------------------------*/
 //         IMPRIMIR USUARIOS 
 // --------------------------------------*/ 
-$(document).on('click', '.btnExportarUsuarios', function () {
+exportarPdf('.btnExportarUsuarios', 'usuarios');
+
+// $(document).on('click', '.btnExportarUsuarios', function () {
 
 
-    if(!valorBuscar){
-        window.open("extensiones/tcpdf/pdf/usuarios-pdf.php");
-    } else {
-        var rango = valorBuscar;
-        window.open("extensiones/tcpdf/pdf/usuarios-pdf.php?&rango="+rango);
-    }
+//     if(!valorBuscar){
+//         window.open("extensiones/tcpdf/pdf/usuarios-pdf.php");
+//     } else {
+//         var rango = valorBuscar;
+//         window.open("extensiones/tcpdf/pdf/usuarios-pdf.php?&rango="+rango);
+//     }
 
-});
+// });
 
 
 //**------------ PERFIL ------------ **//

@@ -1,29 +1,44 @@
 <?php
-// require_once "../../controladores/usuarios.controlador.php";
+require_once("../../../controladores/usuarios.controlador.php");
 require_once('../../../controladores/ventas.controlador.php');
 require_once "../../../modelos/ventas.modelo.php";
+require_once "../../../modelos/usuarios.modelo.php";
 require_once('../examples/tcpdf_include.php');
-
-// var_dump($_GET);
-
-// $host= $_SERVER["HTTP_HOST"];
-// echo $host;
-// $url= $_SERVER["REQUEST_URI"];
-// echo $url;
-// var_dump($_SERVER['PATH_INFO']);
 
 
 
 class PDF extends TCPDF{
     
     // Header de la pagina
-    // public $fechaInic;
-    // public $fechaFin;
 
+    
     public function Header() {
+        
+        $item="parametro";
+        $valor="ADMIN_NOMBRE_EMPRESA";
+
+        $nombreEmpresa = ControladorUsuarios::ctrMostrarParametros($item, $valor);
+        // var_dump($nombreEmpresa ['valor']);
+        $nombre = $nombreEmpresa ['valor'];
+    
+        $item="parametro";
+        $valor="ADMIN_DIRECCION_EMPRESA";
+
+        $direccionEmpresa = ControladorUsuarios::ctrMostrarParametros($item, $valor);
+        // var_dump($direccionEmpresa ['valor']);
+        $direccion = $direccionEmpresa ['valor'];
+    
+        $item="parametro";
+        $valor="ADMIN_CORREO";
+
+        $correoEmpresa = ControladorUsuarios::ctrMostrarParametros($item, $valor);
+        // var_dump($correoEmpresa ['valor']);
+        $correo = $correoEmpresa ['valor'];
+
+
         // Logo
         $image_file = K_PATH_IMAGES.'logo_gym.png';
-        $this->Image($image_file, 40, 10, 25, '', 'PNG', '', 'T', false, 300, '', false, false, 0, false, false, false);
+        $this->Image($image_file, 80, 10, 25, '', 'PNG', '', 'T', false, 300, '', false, false, 0, false, false, false);
         
         // Fuente
         $this->Ln(2);
@@ -34,26 +49,26 @@ class PDF extends TCPDF{
 
         // Title
         // $this->Cell(189, 5, 'GIMNASIO LA "ROCA"', 0, 1, 'C', 0, '', 0, false, 'M', 'M');
-        $this->Cell(189, 5, 'GIMNASIO LA "ROCA"', 0, 1, 'C');
+        $this->Cell(250, 10, ''.$nombre.'', 0, 1, 'C');
         
         $this->SetTextColor(0,0,0);
         $this->SetFont('helvetica', '', 9);
-        // $this->Cell(189, 3, 'Gimnasio La roca', 0, 1, 'C');
-        $this->Cell(189, 3, 'Col. xxxxxxxxxx....', 0, 1, 'C');
-        $this->Cell(189, 3, 'Calle xxxxxxxxxx.....', 0, 1, 'C');
-        $this->Cell(189, 3, 'correo: gym@gmail.com', 0, 1, 'C');
+        // $this->Cell(180, 3, 'Gimnasio La roca', 0, 1, 'C');
+        $this->Cell(250, 7, 'Direccion: '.$direccion.'', 0, 1, 'C');
+        // $this->Cell(250, 3, 'Calle xxxxxxxxxx.....', 0, 1, 'C');
+        $this->Cell(250, 3, 'Correo: '.$correo.'', 0, 1, 'C');
 
         $this->Ln(20); //Espacios
         $this->SetFont('helvetica', 'B', 14);
-        $this->Cell(189, 3, 'REPORTE DE VENTAS', 0, 1, 'C');
+        $this->Cell(250, 3, 'REPORTE DE VENTAS', 0, 1, 'C');
         $this->Ln(3);
         $this->SetFont('helvetica', 'B', 11);
-        $año = date('Y');
+        $año = date('Y-m-d');
         // echo $año;
 
-        // $this->Cell(189, 3, 'Del '.$fecha.'', 0, 1, 'C');
+        // $this->Cell(250, 3, 'Del '.$fecha.'', 0, 1, 'C');
 
-        $this->Cell(189, 3, 'Año '.$año.'', 0, 1, 'C');
+        $this->Cell(250, 3, 'Año '.$año.'', 0, 1, 'C');
     }
 
     // Footer de la pagina
@@ -70,7 +85,7 @@ class PDF extends TCPDF{
 
 // Crear un nuevo documento PDF
 // $pdf = new MYPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
-$pdf = new PDF('p', 'mm', 'A4', true, 'UTF-8', false);
+$pdf = new PDF('l', 'mm', 'A4', true, 'UTF-8', false);
 
 // set document information
 $pdf->SetCreator(PDF_CREATOR);
@@ -128,6 +143,8 @@ $pdf->Cell(15, 5, 'No', 1, 0, 'C', 1);
 $pdf->Cell(30, 5, 'Cod. Factura', 1, 0, 'C', 1);
 $pdf->Cell(50, 5, 'Cliente', 1, 0, 'C', 1);
 $pdf->Cell(40, 5, 'Productos', 1, 0, 'C', 1);
+$pdf->Cell(40, 5, 'Impuesto', 1, 0, 'C', 1);
+$pdf->Cell(40, 5, 'Neto', 1, 0, 'C', 1);
 $pdf->Cell(40, 5, 'Total', 1, 0, 'C', 1);
 
 
@@ -136,13 +153,15 @@ $pdf->Cell(40, 5, 'Total', 1, 0, 'C', 1);
 
 //     $fechaInicial = $_GET["fechaInicial"];
 //     $fechaFinal = $_GET["fechaFinal"];
+//     $ventas = ControladorVentas::ctrRangoFechasVentas($fechaInicial, $fechaFinal);
 
-//     // echo $fechaInicial;
+// //     // echo $fechaInicial;
 //     // echo $fechaFinal;
 // } else {
 
 //     $fechaInicial = null;
 //     $fechaFinal = null;
+//     $ventas = ControladorVentas::ctrRangoFechasVentas($fechaInicial, $fechaFinal);
 
 // } 
 
@@ -151,6 +170,7 @@ if(isset($_GET["rango"])){
 
     $rango = $_GET["rango"];
     // $fechaFinal = $_GET["fechaFinal"];
+    // $ventas = ControladorVentas::ctrRango($rango);
 
     // echo $rango;
     // echo $fechaFinal;
@@ -158,6 +178,7 @@ if(isset($_GET["rango"])){
 
     $rango = null;
     // $fechaFinal = null;
+    // $ventas = ControladorVentas::ctrRango($rango);
 
 } 
 // echo $fechaInicial;
@@ -194,6 +215,8 @@ if(!$ventas){
             $pdf->Cell(30, 5, 'Cod. Factura', 1, 0, 'C', 1);
             $pdf->Cell(50, 5, 'Cliente', 1, 0, 'C', 1);
             $pdf->Cell(40, 5, 'Productos', 1, 0, 'C', 1);
+            $pdf->Cell(40, 5, 'Impuesto', 1, 0, 'C', 1);
+            $pdf->Cell(40, 5, 'Neto', 1, 0, 'C', 1);
             $pdf->Cell(40, 5, 'Total', 1, 0, 'C', 1);
         }
         // $pdf->Cell(15, 5, ''.$i.'', 1, 0, 'C');
@@ -229,6 +252,8 @@ if(!$ventas){
         // //   }
         // }
 
+        $pdf->Cell(40, 4, ''.$value['impuesto'].'', 0, 0, 'C');
+        $pdf->Cell(40, 4, ''.$value['neto'].'', 0, 0, 'C');
         $pdf->Cell(40, 4, ''.$value['total'].'', 0, 0, 'C');
         $i++;
 

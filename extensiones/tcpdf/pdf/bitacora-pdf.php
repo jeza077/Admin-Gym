@@ -70,7 +70,7 @@ class PDF extends TCPDF{
 
 // Crear un nuevo documento PDF
 // $pdf = new MYPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
-$pdf = new PDF('p', 'mm', 'A4', true, 'UTF-8', false);
+$pdf = new PDF('l', 'mm', 'A4', true, 'UTF-8', false);
 
 // set document information
 $pdf->SetCreator(PDF_CREATOR);
@@ -124,11 +124,11 @@ $pdf->Ln(45);
 
 $pdf->SetFont('times', '', 13);
 $pdf->SetFillColor(225, 235, 255);
-$pdf->Cell(10, 5, 'No', 1, 0, 'C', 1);
-$pdf->Cell(30, 5, 'Usuario', 1, 0, 'C', 1);
-$pdf->Cell(30, 5, 'Objeto', 1, 0, 'C', 1);
+$pdf->Cell(15, 5, 'No', 1, 0, 'C', 1);
+$pdf->Cell(50, 5, 'Usuario', 1, 0, 'C', 1);
+$pdf->Cell(40, 5, 'Objeto', 1, 0, 'C', 1);
 $pdf->Cell(30, 5, 'Accion', 1, 0, 'C', 1);
-$pdf->Cell(75, 5, 'Descripcion', 1, 0, 'C', 1);
+$pdf->Cell(130, 5, 'Descripcion', 1, 0, 'C', 1);
 
 
 // if(isset($_GET["fechaInicial"])){
@@ -192,22 +192,23 @@ if(!$bitac){
             
             $pdf->SetFont('times', '', 13);
             $pdf->SetFillColor(225, 235, 255);
-            $pdf->Cell(10, 5, 'No', 1, 0, 'C', 1);
-            $pdf->Cell(30, 5, 'Usuario', 1, 0, 'C', 1);
-            $pdf->Cell(30, 5, 'Objeto', 1, 0, 'C', 1);
+            $pdf->Cell(15, 5, 'No', 1, 0, 'C', 1);
+            $pdf->Cell(50, 5, 'Usuario', 1, 0, 'C', 1);
+            $pdf->Cell(40, 5, 'Objeto', 1, 0, 'C', 1);
             $pdf->Cell(30, 5, 'Accion', 1, 0, 'C', 1);
-            $pdf->Cell(75, 5, 'Descripcion', 1, 0, 'C', 1);
+            $pdf->Cell(130, 5, 'Descripcion', 1, 0, 'C', 1);
+            
         }
         // $pdf->Cell(15, 5, ''.$i.'', 1, 0, 'C');
 
         $pdf->Ln(8);
         $pdf->SetFont('times', '', 12);
         // $pdf->SetFillColor(225, 235, 255);
-        $pdf->Cell(10, 4, ''.($key+1).'', 0, 0, 'C');
-        $pdf->Cell(30, 4, ''.$value['usuario'].'', 0, 0, 'C');
-        $pdf->Cell(30, 4, ''.$value['objeto'].'' , 0, 0, 'C');
+        $pdf->Cell(15, 4, ''.($key+1).'', 0, 0, 'C');
+        $pdf->Cell(50, 4, ''.$value['usuario'].'', 0, 0, 'C');
+        $pdf->Cell(40, 4, ''.$value['objeto'].'' , 0, 0, 'C');
         $pdf->Cell(30, 4, ''.$value['accion'].'' , 0, 0, 'C');
-        $pdf->Cell(75, 4, ''.$value['descripcion'].'', 0, 0, 'C');
+        $pdf->Cell(130, 4, ''.$value['descripcion'].'', 0, 0, 'C');
         $i++;
 
     }

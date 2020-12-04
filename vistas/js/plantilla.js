@@ -644,6 +644,49 @@ function exportarPdf(btnExportar, rutaArchivoPdf) {
             window.open("extensiones/tcpdf/pdf/"+rutaArchivoPdf+"-pdf.php?&rango="+rango);
         }
 
+        /*
+        function getQueryVariable(variable) {
+            var query = window.location.search.substring(1);
+            var vars = query.split("&");
+            for (var i=0; i < vars.length; i++) {
+                var pair = vars[i].split("=");
+                if(pair[0] == variable) {
+                    return pair[1];
+                }
+            }
+            return false;
+          }
+
+
+          var fechaInicial = getQueryVariable('fechaInicial');
+          var fechaFinal = getQueryVariable('fechaFinal')
+          // console.log(fechaInicial)
+          
+        //   if(fechaInicial == false && fechaFinal == false) {
+        //     // console.log('si')
+        //     // window.open("extensiones/tcpdf/pdf/ventas-pdf.php?&fechaInicial="+null+"&fechaFinal="+null);
+        //     window.open("extensiones/tcpdf/pdf/"+rutaArchivoPdf+"-pdf.php", "_blank");
+        //   } else {
+        //     // console.log('no')
+        //     window.open("extensiones/tcpdf/pdf/"+rutaArchivoPdf+"-pdf.php?&fechaInicial="+fechaInicial+"&fechaFinal="+fechaFinal);
+        //   }
+      
+
+        if(!valorBuscar && fechaInicial == false && fechaFinal == false){
+            window.open("extensiones/tcpdf/pdf/"+rutaArchivoPdf+"-pdf.php");
+        
+        } else if(valorBuscar && fechaInicial == false && fechaFinal == false){
+            var rango = valorBuscar;
+            window.open("extensiones/tcpdf/pdf/"+rutaArchivoPdf+"-pdf.php?&rango="+rango);
+        
+        }else {
+            window.open("extensiones/tcpdf/pdf/"+rutaArchivoPdf+"-pdf.php?&fechaInicial="+fechaInicial+"&fechaFinal="+fechaFinal);
+            // var rango = valorBuscar;
+            // window.open("extensiones/tcpdf/pdf/"+rutaArchivoPdf+"-pdf.php?&rango="+rango);
+        }
+        */
+
+
     //     e.preventDefault();
     //     function getQueryVariable(variable) {
     //       var query = window.location.search.substring(1);
