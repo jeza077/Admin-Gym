@@ -9,9 +9,6 @@
             <h1>Productos</h1>
           </div>
           <div class="col-sm-6">
-          <button class="btn btn-orange float-right"  data-toggle="modal" data-target="#modalAgregarInventario">
-            Nuevo Producto         
-          </button>
           <button class="btn btn-danger btnExportarProductos float-right mr-3">
               Exportar PDF          
             </button>
@@ -228,7 +225,7 @@
 
 
 
-    <!-- =======================================
+   <!-- =======================================
            MODAL EDITAR
   ======================================----->
 
@@ -259,15 +256,24 @@
                       <input type="text" value="" class="form-control mayus editar_Nombre_Producto"  name="editarNombreProducto" id="editarNombreProducto" required>
                     </div>
                     <div class="form-group col-md-3">
+                        <label for="nombreproducto">Proveedor</label>
+                        <html>
+                        <input type="text" class="form-control mayus proveedor" readonly name="editarProveedor" id="editarProveedor" placeholder="Nuevo Proveedor" required>
+                      </div>
+                    <div class="form-group col-md-3">
                       <label for="stock">Cantidad en stock</label>
-                      <input type="number" value="" class="form-control" name="editarStock" id="editarStock"  min="0" required class="fa fa-arrow-up"></i></span>
+                      <input type="number" value="" class="form-control" readonly name="editarStock" id="editarStock"  min="0" required class="fa fa-arrow-up"></i></span>
                     </div>
                   </div>
       
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                        <label for="precio">Precio</label>
-                        <input type="text" value="" class="form-control editar_Precio" name="editarPrecio" id="editarPrecio" required>
+                        <label for="precio">Precio Venta</label>
+                        <input type="text" value="" class="form-control editar_Precio" readonly name="editarPrecio" id="editarPrecio" required>
+                        </div>
+                        <div class="form-group col-md-4">
+                        <label for="precio">Precio compra</label>
+                        <input type="text" value="" class="form-control editar_Precio" readonly name="editarPrecioCompra" id="editarPrecioCompra" required>
                         </div>
                         <div class="form-group col-md-4">
                           <label for="productominimo">Producto Minimo</label>
@@ -302,7 +308,7 @@
                 
                     <?php
                     $tipostock = 'producto';
-                    $pantalla = 'productos';
+                    $pantalla = 'producto';
                     $EditarInventario = new ControladorInventario();
                     $EditarInventario->ctrEditarStock($tipostock, $pantalla);
                     ?>

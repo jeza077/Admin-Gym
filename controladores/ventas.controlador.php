@@ -14,7 +14,7 @@ class ControladorVentas {
         $respuesta = ModeloVentas::mdlMostrarVentas($tabla, $item, $valor);
         return $respuesta;   
     }
-
+	
     /*=============================================
 	CREAR VENTA
     =============================================*/

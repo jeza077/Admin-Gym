@@ -491,6 +491,14 @@ datarangeDinamicoHoy(".daterangepicker.reporteVentas .ranges li", 'capturarRango
 // --------------------------------------*/ 
 exportarPdf('.btnExportarVentas', 'ventas');
 
+
+//** ------------------------------------*/
+//         IMPRIMIR compras
+// --------------------------------------*/ 
+exportarPdf('.btnExportarCompras', 'compras');
+
+
+
 // $(document).on('click', '.btnExportarVentas', function (e) {
 //   e.preventDefault();
 //   // console.log(valorBuscar);

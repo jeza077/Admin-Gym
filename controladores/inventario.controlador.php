@@ -491,5 +491,18 @@ class ControladorInventario
 		
 		return $respuesta;
 	}
-        
+   
+    
+ /*=============================================
+			RANGO DINAMICO
+    =============================================*/
+	static public function ctrRangoC($rango){
+		$tabla = 'tbl_inventario';
+		$respuesta = ModeloInventario::mdlRangoC($tabla, $rango);	
+		return $respuesta;
+	}
+
 }
+
+
+	

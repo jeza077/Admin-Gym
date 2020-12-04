@@ -176,6 +176,39 @@ class ModeloInventario
 		// }
 	}
 
+
+
+	/*=============================================
+			RANGO DINAMICO
+	=============================================*/
+	static public function mdlRangoC($tabla, $rango){
+	
+		if($rango == null){
+
+			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla AS i\n"
+			// . "INNER JOIN tbl_inventario AS t ON i.id_tipo_producto = t.id_tipo_producto\n"
+			. "INNER JOIN tbl_tipo_producto AS p ON i.id_tipo_producto = p.id_tipo_producto\n"
+			." WHERE tipo_producto ='Productos'"
+			. "ORDER BY id_inventario ASC");	
+            $stmt-> execute();
+			return $stmt ->fetchAll();
+			
+		} else {
+
+			$stmt = Conexion::conectar() ->prepare("SELECT * FROM $tabla AS i\n"
+			// . " INNER JOIN tbl_inventario AS t ON i.id_tipo_producto = t.id_tipo_producto\n"
+			. "INNER JOIN tbl_tipo_producto AS p ON i.id_tipo_producto = p.id_tipo_producto\n"
+			. "WHERE tipo_producto ='Productos' AND nombre_producto LIKE '%$rango%' OR codigo LIKE '%$rango%' OR proveedor LIKE '%$rango%'");
+			$stmt->bindParam(":nombre_producto", $rango, PDO::PARAM_STR);
+			$stmt->bindParam(":codigo", $rango, PDO::PARAM_STR);
+			$stmt->bindParam(":proveedor", $rango, PDO::PARAM_STR);
+			
+
+            $stmt-> execute();
+			return $stmt ->fetchAll();
+			
+		} 	
+	}
 }
 
 

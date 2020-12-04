@@ -24,6 +24,7 @@ $(document).on("click",".btnEditarInventario",function(){
             $("#editarTipoProducto").val(respuesta["id_inventario"]);
             $("#editarStock").val(respuesta["stock"]);
             $("#editarPrecio").val(respuesta["precio_venta"]);
+            $("#editarPrecioCompra").val(respuesta["precio_compra"]);
             $("#editarProveedor").val(respuesta["proveedor"]);
             $("#editarProductoMinimo").val(respuesta["producto_minimo"]);
             $("#editarProductoMaximo").val(respuesta["producto_maximo"]);
@@ -173,5 +174,25 @@ $('.editar_Nombre_Producto').keydown(sinNumeros)
 $('.precio').keydown(sinLetras)
 $('.editar_Precio').keydown(sinLetras)
 
+//** ------------------------------------*/
+//         IMPRIMIR PDF BITACORA
+// --------------------------------------*/ 
 
+exportarPdf('.btnExportarCompras', 'compras');
 
+function exportarPdf(btnExportar, rutaArchivoPdf) {
+    
+    $(document).on('click', btnExportar, function (e) {
+        // console.log("click");
+        // return;
+        // console.log(valorBuscar);
+        if(!valorBuscar){
+            window.open("extensiones/tcpdf/pdf/"+rutaArchivoPdf+"-pdf.php");
+        } else {
+            var rango = valorBuscar;
+            window.open("extensiones/tcpdf/pdf/"+rutaArchivoPdf+"-pdf.php?&rango="+rango);
+        }
+
+    
+    });
+}

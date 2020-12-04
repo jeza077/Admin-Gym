@@ -12,7 +12,7 @@
           <button class="btn btn-orange float-right"  data-toggle="modal" data-target="#modalAgregarInventario">
               Nueva Compra         
           </button>
-          <button class="btn btn-danger btnExportarProductos float-right mr-3">
+          <button class="btn btn-danger btnExportarCompras float-right mr-3">
               Exportar PDF          
           </button>
           </div>
@@ -86,7 +86,7 @@
                               <td>'.$value["producto_minimo"].'</td>
                               <td>'.$value["producto_maximo"].'</td>     
                               <td>
-                              <button class="btn btn-warning btnEditarInventario"  idInventario="'.$value["id_inventario"].'" data-toggle="modal" data-target="#modalEditarProducto"></i>  EDITAR COMPRA </button>
+                              <button class="btn btn-warning btnEditarInventario"  idInventario="'.$value["id_inventario"].'" data-toggle="modal" data-target="#modalEditarProducto"></i>  Comprar/Editar </button>
                               </td>
                           </tr>
                       ';
@@ -266,8 +266,12 @@
       
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                        <label for="precio">Precio</label>
+                        <label for="precio">Precio Venta</label>
                         <input type="text" value="" class="form-control editar_Precio" name="editarPrecio" id="editarPrecio" required>
+                        </div>
+                        <div class="form-group col-md-4">
+                        <label for="precio">Precio compra</label>
+                        <input type="text" value="" class="form-control editar_Precio" name="editarPrecioCompra" id="editarPrecioCompra" required>
                         </div>
                         <div class="form-group col-md-4">
                           <label for="productominimo">Producto Minimo</label>
