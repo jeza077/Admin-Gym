@@ -137,6 +137,38 @@ class ModeloVentas
 		}
 	}
 
+
+	/*=============================================
+			RANGO DINAMICO
+	=============================================*/
+	static public function mdlRango($tabla, $rango){
+	
+		if($rango == null){
+
+			$stmt = Conexion::conectar() ->prepare("SELECT * FROM $tabla AS v\n"
+			. "INNER JOIN tbl_clientes AS c ON v.id_cliente = c.id_cliente\n"
+			. "INNER JOIN tbl_personas AS p ON c.id_persona = p.id_personas\n"
+			. "ORDER BY id_venta ASC");
+            $stmt-> execute();
+			return $stmt ->fetchAll();
+			
+		} else {
+
+			$stmt = Conexion::conectar() ->prepare("SELECT * FROM $tabla AS v\n"
+			. "INNER JOIN tbl_clientes AS c ON v.id_cliente = c.id_cliente\n"
+			. "INNER JOIN tbl_personas AS p ON c.id_persona = p.id_personas\n"
+			. "WHERE  nombre LIKE '%$rango%' OR fecha LIKE '%$rango%' OR numero_factura LIKE '%$rango%'");
+			$stmt->bindParam(":nombre", $rango, PDO::PARAM_STR);
+			$stmt->bindParam(":fecha", $rango, PDO::PARAM_STR);
+			$stmt->bindParam(":numero_factura", $rango, PDO::PARAM_STR);
+
+            $stmt-> execute();
+			return $stmt ->fetchAll();
+			
+		} 	
+	}
+
+
 	/*=============================================
 	EDITAR VENTA
 	=============================================*/

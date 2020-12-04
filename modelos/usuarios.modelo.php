@@ -531,4 +531,37 @@ class ModeloUsuarios{
 
 	}
 
+
+	/*=============================================
+			RANGO DINAMICO
+	=============================================*/
+	static public function mdlRango($tabla, $rango){
+	
+		if($rango == null){
+
+			$stmt = Conexion::conectar() ->prepare("SELECT p.*, u.*, d.tipo_documento, r.rol FROM tbl_personas AS p\n"
+			. " INNER JOIN $tabla AS u ON p.id_personas = u.id_persona\n"
+			. " INNER JOIN tbl_documento AS d ON p.id_documento = d.id_documento\n"
+			. " INNER JOIN tbl_roles AS r ON u.id_rol = r.id_rol\n"
+			. "	ORDER BY id_usuario ASC");
+            $stmt-> execute();
+			return $stmt ->fetchAll();
+			
+		} else {
+
+			$stmt = Conexion::conectar() ->prepare("SELECT p.*, u.*, d.tipo_documento, r.rol FROM tbl_personas AS p\n"
+			. " INNER JOIN $tabla AS u ON p.id_personas = u.id_persona\n"
+			. " INNER JOIN tbl_documento AS d ON p.id_documento = d.id_documento\n"
+			. " INNER JOIN tbl_roles AS r ON u.id_rol = r.id_rol\n"
+			. " WHERE  nombre LIKE '%$rango%' OR usuario LIKE '%$rango%' OR rol LIKE '%$rango%'");
+			$stmt->bindParam(":nombre", $rango, PDO::PARAM_STR);
+			$stmt->bindParam(":usuario", $rango, PDO::PARAM_STR);
+            $stmt->bindParam(":rol", $rango, PDO::PARAM_STR);
+        
+            $stmt-> execute();
+			return $stmt ->fetchAll();
+			
+		} 	
+	}
+
 }

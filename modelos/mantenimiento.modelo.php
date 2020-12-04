@@ -366,6 +366,41 @@ class ModeloMantenimiento{
 
     }
 
+
+	/*=============================================
+			RANGO DINAMICO
+	=============================================*/
+	static public function mdlRango($tabla, $rango){
+	
+		if($rango == null){
+
+			$stmt = Conexion::conectar() ->prepare("SELECT b.id_bitacora, u.usuario, o.objeto,b.accion,b.descripcion,b.fecha FROM $tabla AS b\n"
+            . "inner join tbl_usuarios as u on b.id_usuario=u.id_usuario\n"
+            . "inner join tbl_objetos as o on b.id_objeto =o.id_objeto\n"
+			. "ORDER BY id_bitacora DESC");
+            $stmt-> execute();
+			return $stmt ->fetchAll();
+			
+		} else {
+
+			$stmt = Conexion::conectar() ->prepare("SELECT b.id_bitacora, u.usuario, o.objeto,b.accion,b.descripcion,b.fecha FROM $tabla AS b\n"
+            . "inner join tbl_usuarios as u on b.id_usuario=u.id_usuario\n"
+            . "inner join tbl_objetos as o on b.id_objeto =o.id_objeto\n"
+			. "WHERE  usuario LIKE '%$rango%' OR fecha LIKE '%$rango%' OR objeto LIKE '%$rango%' OR accion LIKE '%$rango%'");
+			$stmt->bindParam(":usuario", $rango, PDO::PARAM_STR);
+			$stmt->bindParam(":fecha", $rango, PDO::PARAM_STR);
+            $stmt->bindParam(":objeto", $rango, PDO::PARAM_STR);
+			$stmt->bindParam(":accion", $rango, PDO::PARAM_STR);
+        
+
+            $stmt-> execute();
+			return $stmt ->fetchAll();
+			
+		} 	
+	}
+
+
+
      /*====================================================
        Actualizar DESCUENTO
     ======================================================*/

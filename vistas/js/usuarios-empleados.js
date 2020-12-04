@@ -194,12 +194,28 @@ $(document).on('click', '.btnEliminarUsuario', function () {
 });
 
 
+
+valorBuscar = "";
+$(document).on('blur', '.ClaseBuscar', function () {
+    // console.log($('.ClaseBuscar').val())
+  valorBuscar = $('.ClaseBuscar').val();
+});
 //** ------------------------------------*/
 //         IMPRIMIR USUARIOS 
 // --------------------------------------*/ 
-$(document).on('click', '.btnExportarUsuarios', function () {
-    window.open("extensiones/tcpdf/pdf/usuarios-pdf.php", "_blank");
-});
+exportarPdf('.btnExportarUsuarios', 'usuarios');
+
+// $(document).on('click', '.btnExportarUsuarios', function () {
+
+
+//     if(!valorBuscar){
+//         window.open("extensiones/tcpdf/pdf/usuarios-pdf.php");
+//     } else {
+//         var rango = valorBuscar;
+//         window.open("extensiones/tcpdf/pdf/usuarios-pdf.php?&rango="+rango);
+//     }
+
+// });
 
 
 //**------------ PERFIL ------------ **//

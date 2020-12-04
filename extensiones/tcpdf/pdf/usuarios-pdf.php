@@ -113,48 +113,70 @@ $pdf->Cell(40, 5, 'Usuario', 1, 0, 'C', 1);
 $pdf->Cell(40, 5, 'Rol', 1, 0, 'C', 1);
 $pdf->Cell(30, 5, 'Estado', 1, 0, 'C', 1);
 
-$tabla = "tbl_usuarios";
-$item = null;
-$valor = null;
-$usuarios = ControladorUsuarios::ctrMostrarSoloUsuarios($tabla, $item, $valor);
+if(isset($_GET["rango"])){
+
+
+    $rango = $_GET["rango"];
+    // $fechaFinal = $_GET["fechaFinal"];
+
+    // echo $rango;
+    // echo $fechaFinal;
+} else {
+
+    $rango = null;
+    // $fechaFinal = null;
+
+} 
+
+$usuarios = ControladorUsuarios::ctrRangoUsuarios($rango);
 
 // var_dump($usuarios);
 
-$i = 1; //Contador
-$max = 5; //Maximo de registros a mostrar en una pagina
-
-foreach ($usuarios as $key => $value) {
-
-    if(($i%$max) == 0){
-        $pdf->AddPage();
-
-        $pdf->Ln(40);
-        
-        $pdf->SetFont('times', '', 13);
-        $pdf->SetFillColor(225, 235, 255);
-        $pdf->Cell(15, 5, 'No', 1, 0, 'C', 1);
-        $pdf->Cell(52, 5, 'Nombre', 1, 0, 'C', 1);
-        $pdf->Cell(40, 5, 'Usuario', 1, 0, 'C', 1);
-        $pdf->Cell(40, 5, 'Rol', 1, 0, 'C', 1);
-        $pdf->Cell(30, 5, 'Estado', 1, 0, 'C', 1);
-    }
-    // $pdf->Cell(15, 5, ''.$i.'', 1, 0, 'C');
-
-    $pdf->Ln(8);
+if(!$usuarios){
+    // echo 'vacio';
+    $pdf->Ln(15);
     $pdf->SetFont('times', '', 12);
-    // $pdf->SetFillColor(225, 235, 255);
-    $pdf->Cell(15, 4, ''.($key+1).'', 0, 0, 'C');
-    $pdf->Cell(52, 4, ''.$value['nombre'].' '.$value['apellidos'].'', 0, 0, 'C');
-    $pdf->Cell(40, 4, ''.$value['usuario'].'', 0, 0, 'C');
-    $pdf->Cell(40, 4, ''.$value['rol'].'', 0, 0, 'C');
-    if($value["estado"] == 0){
-        $pdf->Cell(30, 4, 'Desactivado', 0, 0, 'C');
-    } else {
-        $pdf->Cell(30, 4, 'Activado', 0, 0, 'C');
-    }
-    $i++;
+    $pdf->Cell(170, 4, '******* NO HAY USUARIOS PARA MOSTRAR *******', 0, 0, 'C');
 
+} else {
+
+    $i = 1; //Contador
+    $max = 5; //Maximo de registros a mostrar en una pagina
+    
+    foreach ($usuarios as $key => $value) {
+    
+        if(($i%$max) == 0){
+            $pdf->AddPage();
+    
+            $pdf->Ln(40);
+            
+            $pdf->SetFont('times', '', 13);
+            $pdf->SetFillColor(225, 235, 255);
+            $pdf->Cell(15, 5, 'No', 1, 0, 'C', 1);
+            $pdf->Cell(52, 5, 'Nombre', 1, 0, 'C', 1);
+            $pdf->Cell(40, 5, 'Usuario', 1, 0, 'C', 1);
+            $pdf->Cell(40, 5, 'Rol', 1, 0, 'C', 1);
+            $pdf->Cell(30, 5, 'Estado', 1, 0, 'C', 1);
+        }
+        // $pdf->Cell(15, 5, ''.$i.'', 1, 0, 'C');
+    
+        $pdf->Ln(8);
+        $pdf->SetFont('times', '', 12);
+        // $pdf->SetFillColor(225, 235, 255);
+        $pdf->Cell(15, 4, ''.($key+1).'', 0, 0, 'C');
+        $pdf->Cell(52, 4, ''.$value['nombre'].' '.$value['apellidos'].'', 0, 0, 'C');
+        $pdf->Cell(40, 4, ''.$value['usuario'].'', 0, 0, 'C');
+        $pdf->Cell(40, 4, ''.$value['rol'].'', 0, 0, 'C');
+        if($value["estado"] == 0){
+            $pdf->Cell(30, 4, 'Desactivado', 0, 0, 'C');
+        } else {
+            $pdf->Cell(30, 4, 'Activado', 0, 0, 'C');
+        }
+        $i++;
+    
+    }
 }
+
 
 // Close and output PDF document
 $pdf->Output('example_001.pdf', 'I');
