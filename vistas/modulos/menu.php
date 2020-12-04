@@ -135,6 +135,12 @@
                       <p>Pagos Clientes</p>
                     </a>
                   </li>
+                  <li class="nav-item">
+                    <a href="historial-pagos-clientes" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Historial Pagos Clientes</p>
+                    </a>
+                  </li>
                 </ul>
               </li>
             <?php }?>

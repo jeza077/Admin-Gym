@@ -110,7 +110,7 @@
             $_GET["ruta"] == "equipo" ||
             $_GET["ruta"] == "pagos-cliente" ||
             $_GET["ruta"] == "perfil" ||
-            $_GET["ruta"] == "agregar-persona" ||
+            $_GET["ruta"] == "historial-pagos-clientes" ||
             $_GET["ruta"] == "salir"){
 
             include "modulos/".$_GET["ruta"].".php";

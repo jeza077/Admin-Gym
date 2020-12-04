@@ -377,15 +377,3 @@
       </div>
     </div>
   </div> 
-
-
-<!-- =======================================
-           ELIMINAR CLIENTE
-  ======================================----->
-  <?php
-    // $tipoPersona = 'cliente';
-    // $pantalla = 'clientes';
-    
-    // $eliminarCliente = new ControladorPersonas();
-    // $eliminarCliente->ctrBorrarPersona($tipoPersona, $pantalla);
-  ?>
