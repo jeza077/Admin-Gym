@@ -319,12 +319,13 @@ class ControladorClientes{
 			$valor = $idClientePago;
 			$respuesta = ModeloClientes::mdlMostrarPagoPorCliente($tabla1, $tabla2, $item, $valor);
 
-			// return $respuesta['id_cliente'];
+			// return $respuesta;
 
 			date_default_timezone_set("America/Tegucigalpa");
 			
 			$fechaHoy = date('Y-m-d 00:00:00');
 			$fechaVencimiento = $respuesta['fecha_vencimiento'];
+			$idInscripcion = $respuesta['id_inscripcion'];
 			$tipoInscripcion = $respuesta['tipo_inscripcion'];
 			$precioInscripcion = $respuesta['precio_inscripcion'];
 			$idCliente = $respuesta['id_cliente'];
@@ -369,6 +370,7 @@ class ControladorClientes{
 			// return $idU;
 
 			$datos = array('id_cliente' => $idCliente,
+							'id_inscripcion' => $idInscripcion,
 							'pago_inscripcion' => $precioInscripcion,
 							'pago_total' => $precioInscripcion,
 							'fecha_ultimo_pago' => $fechaHoy,

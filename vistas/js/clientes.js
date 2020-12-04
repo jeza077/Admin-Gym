@@ -440,7 +440,7 @@ $(document).on('click', '.SwalBtnMantenerInscripcion', function (e) {
             }
         });
         // $('.alert').remove();
-    }, 2000);
+    }, 1000);
     
     
 
