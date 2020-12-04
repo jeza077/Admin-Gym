@@ -62,9 +62,10 @@ $(document).on('change', '.tipoCliente', function () {
 //** ------------------------------------*/
 //         IMPRIMIR USUARIOS 
 // --------------------------------------*/ 
-$(document).on('click', '.btnExportarClientes', function () {
-    window.open("extensiones/tcpdf/pdf/clientes-pdf.php", "_blank");
-});
+exportarPdf('.btnExportarClientes', 'clientes');
+exportarPdf('.btnExportarHistorialPagosClientes', 'historial-pagos-clientes');
+exportarPdf('.btnExportarPagosClientes', 'pagos-clientes');
+
 
 /*=============================================
         EDITAR CLIENTE GIMNASIO
@@ -131,6 +132,7 @@ $(document).on('click', '.btnEditarClienteGimnasio', function () {
         }
     });
 });
+
 /*============================================================
     MOSTRAR PRECIOS DE MATRICULA, DESCUENTO Y INSCRIPCION
 ============================================================*/
@@ -400,12 +402,26 @@ $(document).on('click', '.SwalBtnMantenerInscripcion', function (e) {
             processData: false,  
             dataType: "json",
             success: function(respuesta) {
-                // console.log(respuesta);
+                console.log(respuesta);
     
                 if(respuesta == true){
                     Swal.fire({
                         title: 'El pago se agrego correctamente',
                         icon: 'success',
+                        // width: 600,
+                        allowOutsideClick: false,
+                        showCancelButton: false,
+                        showConfirmButton: true,
+                        confirmButtonText: 'Cerrar'
+                    }).then((result)=>{
+                        if(result.value){
+                            window.location = "pagos-cliente";
+                        }
+                    });;   
+                } else {
+                    Swal.fire({
+                        title: 'Error',
+                        icon: 'error',
                         // width: 600,
                         allowOutsideClick: false,
                         showCancelButton: false,

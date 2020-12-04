@@ -1,9 +1,10 @@
 <?php
 require_once("../../../controladores/usuarios.controlador.php");
+require_once "../../../modelos/usuarios.modelo.php";
 require_once('../../../controladores/ventas.controlador.php');
 require_once "../../../modelos/ventas.modelo.php";
-require_once "../../../modelos/usuarios.modelo.php";
 require_once('../examples/tcpdf_include.php');
+date_default_timezone_set("America/Tegucigalpa");
 
 
 
@@ -49,26 +50,26 @@ class PDF extends TCPDF{
 
         // Title
         // $this->Cell(189, 5, 'GIMNASIO LA "ROCA"', 0, 1, 'C', 0, '', 0, false, 'M', 'M');
-        $this->Cell(250, 10, ''.$nombre.'', 0, 1, 'C');
+        $this->Cell(260, 10, ''.$nombre.'', 0, 1, 'C');
         
         $this->SetTextColor(0,0,0);
         $this->SetFont('helvetica', '', 9);
         // $this->Cell(180, 3, 'Gimnasio La roca', 0, 1, 'C');
-        $this->Cell(250, 7, 'Direccion: '.$direccion.'', 0, 1, 'C');
-        // $this->Cell(250, 3, 'Calle xxxxxxxxxx.....', 0, 1, 'C');
-        $this->Cell(250, 3, 'Correo: '.$correo.'', 0, 1, 'C');
+        $this->Cell(260, 7, 'Direccion: '.$direccion.'', 0, 1, 'C');
+        // $this->Cell(260, 3, 'Calle xxxxxxxxxx.....', 0, 1, 'C');
+        $this->Cell(260, 3, 'Correo: '.$correo.'', 0, 1, 'C');
 
         $this->Ln(20); //Espacios
         $this->SetFont('helvetica', 'B', 14);
-        $this->Cell(250, 3, 'REPORTE DE VENTAS', 0, 1, 'C');
+        $this->Cell(260, 3, 'REPORTE DE VENTAS', 0, 1, 'C');
         $this->Ln(3);
         $this->SetFont('helvetica', 'B', 11);
         $año = date('Y-m-d');
         // echo $año;
 
-        // $this->Cell(250, 3, 'Del '.$fecha.'', 0, 1, 'C');
+        // $this->Cell(260, 3, 'Del '.$fecha.'', 0, 1, 'C');
 
-        $this->Cell(250, 3, 'Año '.$año.'', 0, 1, 'C');
+        $this->Cell(260, 3, 'Año '.$año.'', 0, 1, 'C');
     }
 
     // Footer de la pagina
@@ -79,10 +80,9 @@ class PDF extends TCPDF{
         $this->SetFont('helvetica', 'I', 8);
         // Page number
 
-        date_default_timezone_set("America/Tegucigalpa");
         $fecha = date('Y-m-d H:i:s');
+        $this->Cell(0, 10, ''.$fecha.'', 0, false, 'C', 0, '', 0, false, 'T', 'M');
         $this->Cell(0, 10, 'Page '.$this->getAliasNumPage().'/'.$this->getAliasNbPages(), 0, false, 'C', 0, '', 0, false, 'T', 'M');
-        $this->Cell(0, 5, ''.$fecha.'', 0, false, 'C', 0, '', 0, false, 'T', 'M');
     }
 }
 
@@ -267,6 +267,6 @@ if(!$ventas){
 }
 
 // Close and output PDF document
-$pdf->Output('example_001.pdf', 'I');
+$pdf->Output('reporte_ventas.pdf', 'I');
 
 ?>
