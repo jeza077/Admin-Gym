@@ -26,7 +26,7 @@ class ModeloInventario
 			$stmt -> execute();
 			return $stmt -> fetchAll();
 		} else {
-			$stmt = Conexion::conectar()->prepare("SELECT i.id_inventario, t.tipo_producto, i.nombre_producto, i.stock, i.precio_venta, i.precio_compra, i.producto_minimo, i.producto_maximo, i.codigo FROM tbl_inventario AS i\n"
+			$stmt = Conexion::conectar()->prepare("SELECT i.id_inventario, t.tipo_producto, i.nombre_producto, i.stock, i.precio_venta, i.precio_compra, i.proveedor, i.producto_minimo, i.producto_maximo, i.codigo FROM tbl_inventario AS i\n"
 			. "INNER JOIN tbl_tipo_producto AS t ON id_tipo_producto = id_tipo_producto");
 			$stmt -> execute();
 			return $stmt -> fetchAll();
@@ -70,7 +70,7 @@ class ModeloInventario
 	=============================================*/	 
 	static public function mdlCrearStock($tabla, $datos){
 
-		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(id_tipo_producto, nombre_producto, stock, precio_venta, precio_compra, producto_minimo, producto_maximo, foto, codigo) VALUES (:id_tipo_producto, :nombre_producto, :stock, :precio_venta, :precio_compra, :producto_minimo, :producto_maximo, :foto ,:codigo)");
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(id_tipo_producto, nombre_producto, stock, precio_venta, precio_compra,proveedor, producto_minimo, producto_maximo, foto, codigo) VALUES (:id_tipo_producto, :nombre_producto, :stock, :precio_venta, :precio_compra, :proveedor, :producto_minimo, :producto_maximo, :foto ,:codigo)");
 
 		$stmt->bindParam(":id_tipo_producto", $datos["id_tipo_producto"], PDO::PARAM_INT);
 		$stmt->bindParam(":codigo", $datos["codigo"], PDO::PARAM_INT);
@@ -78,6 +78,7 @@ class ModeloInventario
 		$stmt->bindParam(":stock", $datos["stock"], PDO::PARAM_INT);
 		$stmt->bindParam(":precio_venta", $datos["precio_venta"], PDO::PARAM_STR);
 		$stmt->bindParam(":precio_compra", $datos["precio_compra"], PDO::PARAM_STR);
+		$stmt->bindParam(":proveedor", $datos["proveedor"], PDO::PARAM_STR);
 		$stmt->bindParam(":producto_minimo", $datos["producto_minimo"], PDO::PARAM_INT);
 		$stmt->bindParam(":producto_maximo", $datos["producto_maximo"], PDO::PARAM_INT);
 		$stmt->bindParam(":foto", $datos["foto"], PDO::PARAM_STR);
