@@ -791,7 +791,7 @@ class ControladorVentas {
 					// var_dump($respuestaCorreo);
 					// return;
 					if($respuestaCorreo){
-				echo'<script>
+					echo'<script>
 
 				localStorage.removeItem("rango");
 

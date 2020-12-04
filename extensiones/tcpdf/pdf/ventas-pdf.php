@@ -34,13 +34,13 @@ class PDF extends TCPDF{
 
         // Title
         // $this->Cell(189, 5, 'GIMNASIO LA "ROCA"', 0, 1, 'C', 0, '', 0, false, 'M', 'M');
-        $this->Cell(189, 5, 'GIMNASIO LA "ROCA"', 0, 1, 'C');
+        $this->Cell(189, 5, 'GIMNASIO "LA ROCA"', 0, 1, 'C');
         
         $this->SetTextColor(0,0,0);
         $this->SetFont('helvetica', '', 9);
         // $this->Cell(189, 3, 'Gimnasio La roca', 0, 1, 'C');
-        $this->Cell(189, 3, 'Col. xxxxxxxxxx....', 0, 1, 'C');
-        $this->Cell(189, 3, 'Calle xxxxxxxxxx.....', 0, 1, 'C');
+        $this->Cell(189, 3, 'Comayagüela, M.D.C.', 0, 1, 'C');
+        $this->Cell(189, 3, 'Bulevar del norte, Barrio Belen.', 0, 1, 'C');
         $this->Cell(189, 3, 'correo: gym@gmail.com', 0, 1, 'C');
 
         $this->Ln(20); //Espacios
@@ -194,25 +194,26 @@ if(!$ventas){
         
         // $decod = json_decode($value['productos']);
         // //   $contador = count($val->descripcion);
-        //   echo ($val->descripcion);
-        // //   if($key = 0){
-            //     // echo 'mas de uno';
-        // $decod = json_decode($value['productos']);
-        // $pdf->Cell(55, 4, ''.
-        //     foreach ($decod as $key => $val) {
-        //         echo  $val->descripcion.',';
+        // //   echo ($val->descripcion);
+        //   if($key = 0){
+        //         // echo 'mas de uno';
+        //         $decod = json_decode($value['productos']);
+        //         $pdf->Cell(40, 4, 'productos'. .'', 0, 0, 'C');
+        //         foreach ($decod as $key => $val) {
+        //         // echo  $val->descripcion.',';
+        //         }
         //     }
-        // .'', 0, 0, 'C');
+               
 
-        //     //  echo  $val->descripcion.',';
-        // //   } 
-        // //   else {
-        //     // echo  $val->descripcion.', ';
-        //     // echo 'solo uno';
-        //     // $pdf->Cell(55, 4, ''.$val->descripcion.'', 0, 0, 'C');
-        //     // echo  $val->descripcion;
+            //  echo  $val->descripcion.',';
+        //   } 
+        //   else {
+            // echo  $val->descripcion.', ';
+            // echo 'solo uno';
+            // $pdf->Cell(55, 4, ''.$val->descripcion.'', 0, 0, 'C');
+            // echo  $val->descripcion;
 
-        // //   }
+        //   }
         // }
 
         $pdf->Cell(40, 4, ''.$value['total'].'', 0, 0, 'C');
