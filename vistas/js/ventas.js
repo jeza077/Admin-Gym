@@ -80,7 +80,7 @@ $(".tablaVentas tbody").on("click", "button.agregarProducto", function(){
 
       var descripcion = respuesta["nombre_producto"];
       var stock = respuesta["stock"];
-      var precio = respuesta["precio"];
+      var precio = respuesta["precio_venta"];
 
       /*=============================================
       EVITAR AGREGAR PRODUTO CUANDO EL STOCK ESTÁ EN CERO
@@ -574,10 +574,10 @@ IMPRIMIR PAGO EN PDF
 =============================================*/
 $(".tablas").on("click", ".btnImprimirFactura", function(){
 
-  var $codigoVenta = $(this).attr("numero_factura");
+  var codigoVenta = $(this).attr("codigoVenta");
 
 
-  window.open("extensiones/tcpdf/pdf/recibo-pdf.php", "_blank");
+  window.open("extensiones/tcpdf/pdf/recibo-pdf.php?codigo="+codigoVenta, "_blank");
 
   
 })
