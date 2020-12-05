@@ -14,24 +14,62 @@ class ControladorClientes{
 
 			$tabla = "tbl_clientes";
 			
-			// if ($datos['tipo_cliente'] == "Gimnasio"){
-			// 	$datos = array("id_persona" => $datos['id_persona'],
-			//                 "tipo_cliente" => $datos["tipo_cliente"],
-			// 				"id_inscripcion" =>  $datos["id_inscripcion"],
-			// 				"id_matricula" =>  $datos["id_matricula"],
-			// 				"id_descuento" =>  $datos["id_descuento"]);
-			// } else {
-			// 	$datos = array("id_persona" => $datos['id_persona'],
-			//                   "tipo_cliente" => $datos["tipo_cliente"]);
-			// }
+			$pago_matricula = $datos['pago_matricula'];
+			$pago_descuento = $datos['pago_descuento'];
+			$pago_inscripcion = $datos['pago_inscripcion'];
+			$pago_total = $datos['pago_total'];
+
+			
+			$idInscripcion = $_POST["nuevaInscripcion"];
+
+			$tabla = "tbl_inscripcion";
+			$item = "id_inscripcion";
+			$valor = $idInscripcion;
+			$inscripcion = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
+			// echo "<pre>";
+			// var_dump($valor);
+			// echo "</pre>";
+			// return;
+			$cantidadDias = $inscripcion['cantidad_dias'];
+			// echo "<pre>";
+			// var_dump($dfg);
+			// echo "</pre>";
+			// return;
+
+			
+			
+			date_default_timezone_set("America/Tegucigalpa");
+			$fechaHoy = date('Y-m-d');
+			$fechaVencimientoCliente = date("Y-m-d", strtotime('+'.$cantidadDias.' days'));
+			$fecha_proximo_pago = $fechaVencimientoCliente;	
+
+			// echo "<pre>";
+			// var_dump($fechaVencimientoCliente);
+			// echo "</pre>";
+			// return;
+
+			if ($datos['tipo_cliente'] == "Gimnasio") {
+				
+				$datos = array("id_persona" => $datos['id_persona'],
+							"tipo_cliente" => $datos["tipo_cliente"],
+							"id_matricula" =>  $datos["id_matricula"],
+							"id_descuento" => $datos["id_descuento"],
+							"id_inscripcion" =>  $datos["id_inscripcion"],
+							"fecha_ultimo_pago" => $fechaHoy,
+							"fecha_vencimiento" => $fechaVencimientoCliente,
+							"fecha_proximo_pago" => $fecha_proximo_pago);
+			} else {
+				$datos = array("id_persona" => $datos['id_persona'],
+							"tipo_cliente" => $datos["tipo_cliente"]);
+			}
 							
 			
             $respuestaCrearCliente = ModeloClientes::mdlCrearCliente($tabla, $datos);
 			// return $respuestaCrearCliente;
-            // echo "<pre>";
-			// var_dump($respuestaCrearCliente);
-			// echo "</pre>";
-			// return;
+            echo "<pre>";
+			var_dump($respuestaCrearCliente);
+			echo "</pre>";
+			return;
             if($respuestaCrearCliente = true){
 
 				if($datos['tipo_cliente'] == 'Gimnasio'){
@@ -56,58 +94,23 @@ class ControladorClientes{
 					$idCliente = end($totalId);
 	
 					// return $idCliente;
-					$vigencias = $_POST["nuevaInscripcion"];
-	
-						// echo $vigencias;
-						// return;
-	
-						if ($vigencias == 1) {
-							$valorVigencia = 'VIGENCIA_CLIENTE_MES';
-							
-							// var_dump("Mes",$valorVigencia);
-							
-						} else if ($vigencias == 2){
-							$valorVigencia = 'VIGENCIA_CLIENTE_QUINCENAL';
-							
-							// var_dump("Quincenal",$valorVigencia);
-							
-						} else {
-							$valorVigencia = 'VIGENCIA_CLIENTE_DIA';
-							
-							// var_dump("Diaria",$valorVigencia);
-							
-						}
-	
-					$item = 'parametro';
-					$parametros = ControladorUsuarios::ctrMostrarParametros($item, $valorVigencia);
-					// var_dump($parametros);
-					// return;
-	
-					$vigenciaCliente = $parametros['valor'];
 					
-					date_default_timezone_set("America/Tegucigalpa");
-					$fechaHoy = date('Y-m-d');
-					$fechaVencimientoCliente = date("Y-m-d", strtotime('+'.$vigenciaCliente.' days'));
 					
 					// echo $fechaVencimientoCliente;
 					// return;
 					$tabla3 = "tbl_pagos_cliente";
 	
 					$datos = array("id_cliente" => $idCliente,
-								   "pago_matricula" => $datos["pago_matricula"],
-								   "id_descuento" => $datos["id_descuento"],
-								   "pago_descuento" => $datos["pago_descuento"],
-								   "id_inscripcion" => $datos["id_inscripcion"],
-								   "pago_inscripcion" => $datos["pago_inscripcion"],
-								   "pago_total" => $datos["pago_total"],
-								   "fecha_ultimo_pago" => $fechaHoy,
-								   "fecha_vencimiento" => $fechaVencimientoCliente);
+								   "pago_matricula" => $pago_matricula,
+								   "pago_descuento" => $pago_descuento,
+								   "pago_inscripcion" => $pago_inscripcion,
+								   "pago_total" => $pago_total);
 	
 					$respuestaPago = ModeloClientes::mdlCrearPago($tabla3, $datos);
 					// echo "<pre>";
-					// var_dump($respuestaPago);
+					// var_dump($datos);
 					// echo "</pre>";
-					// return $respuestaPago;
+					// return;
 				
 					$descripcionEvento = "Nuevo cliente";
 					$accion = "Nuevo";

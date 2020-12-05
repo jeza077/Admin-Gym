@@ -264,7 +264,7 @@ class ControladorPersonas{
                             
                             $crearCliente = ControladorClientes::ctrCrearCliente($datos);
                             // echo "<pre>";
-                            // var_dump($crearCliente);
+                            // var_dump($datos);
                             // echo "</pre>";
                             // return;                            
                             
@@ -595,6 +595,121 @@ class ControladorPersonas{
                             }
                     }
                 }
+            }
+        }
+    }
+
+    /*=============================================
+				EDITAR PERSONAS CLIENTE VENTAS
+    =============================================*/
+    
+    static public function ctrEditarClienteVentas($tipoCliente, $pantalla) {
+        // echo "<pre>";
+        // var_dump($_POST);
+        // echo "</pre>";
+        // return;
+
+        if (isset($_POST["tipoClienteDeVenta"])) {
+
+            if(preg_match('/^[a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nombreClienteVentas"]) && 
+            preg_match('/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.([a-zA-Z]{2,4})+$/', $_POST["editarEmailClienteVentas"])){
+
+
+                $datos = array("nombre" => $_POST["nombreClienteVentas"],
+                "apellido" => $_POST["apellidoClienteVentas"],
+                "id_documento" => $_POST["nuevoTipoDocumento"],
+                "numero_documento" => $_POST["nuevoNumeroDocumento"],
+                "tipo_persona" => $tipoCliente,
+                "fecha_nacimiento" => $_POST["fechaNacimientoClienteVentas"],
+                "sexo" => $_POST["editarSexoClienteVentas"],
+                "telefono" => $_POST["telefonoClienteVentas"],
+                "direccion" => $_POST["direccionClienteVentas"],
+                "email" => $_POST["editarEmailClienteVentas"]);
+        
+                $respuestaPersona = ModeloPersonas::mdlCrearPersona($tabla, $datos);
+                // echo "<pre>";
+                // var_dump($datos);
+                // echo "</pre>";
+                // return;
+                    
+                
+                if($respuestaPersona == true){
+                    
+                    if ($_POST['editarTipoClienteVenta'] == "Gimnasio") {
+                        
+                        $totalId = array();
+                        $tabla = "tbl_personas";
+                        // $tabla2 = "tbl_clientes";
+                        // $item = null;
+                        // $valor = null;
+            
+                        $personaTotal = ModeloPersonas::mdlMostrarPersonas($tabla);
+                        
+                        foreach($personaTotal as $keyPersona => $valuePersona){
+                        array_push($totalId, $valuePersona["id_personas"]);
+                        }
+            
+                        $idPersona = end($totalId);
+                        // echo "<pre>";
+                        // var_dump($idPersona);
+                        // echo "</pre>";
+                        // return;
+            
+                        if ($_POST['tipoCliente'] == "Gimnasio"){
+            
+                            $datos = array("id_persona" => $idPersona,
+                            "tipo_cliente" => $_POST["tipoCliente"],
+                            "id_inscripcion" => $_POST["nuevaInscripcion"],
+                            "id_matricula" => $_POST["nuevaMatricula"],
+                            "id_descuento" => $_POST["nuevaPromocion"],
+                            "pago_matricula" => $_POST["nuevoPrecioMatricula"],
+                            "pago_descuento" => $_POST["nuevoPrecioDescuento"],
+                            "pago_inscripcion" => $_POST["nuevoPrecioInscripcion"],
+                            "pago_total" => $_POST["nuevoTotalCliente"]);
+                        } else {
+                            $datos = array("id_persona" => $idPersona,
+                            "tipo_cliente" => $_POST["tipoCliente"]);
+                        }
+            
+                        
+                        $crearCliente = ControladorClientes::ctrCrearCliente($datos);
+                        // echo "<pre>";
+                        // var_dump($crearCliente);
+                        // echo "</pre>";
+                        // return;                            
+                        if($crearCliente == true){
+                            echo '<script>
+                                    Swal.fire({
+                                        title: "Cliente tipo ventas editado correctamente!",
+                                        icon: "success",
+                                        heightAuto: false,
+                                        allowOutsideClick: false
+                                    }).then((result)=>{
+                                        if(result.value){
+                                            window.location = "'.$pantalla.'";
+                                        }
+                                    });                                              
+                                </script>';
+                        }
+                    } else {
+    
+    
+                        if($crearCliente == true){
+                            echo '<script>
+                                    Swal.fire({
+                                        title: "Cliente tipo gimnasio editado correctamente!",
+                                        icon: "success",
+                                        heightAuto: false,
+                                        allowOutsideClick: false
+                                    }).then((result)=>{
+                                        if(result.value){
+                                            window.location = "'.$pantalla.'";
+                                        }
+                                    });                                              
+                                </script>';
+                        }
+                    } 
+                }  
             }
         }
     }

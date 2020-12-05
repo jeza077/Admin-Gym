@@ -185,9 +185,15 @@ mostrarDinamico($('.nuevaInscripcion'),'tbl_inscripcion','id_inscripcion',$('.nu
 // MOSTRAR TABLA PROMOCIONES
 mostrarDinamico($('.nuevaPromocion'),'tbl_descuento', 'id_descuento',$('.nuevoPrecioPromocion'),'valor_descuento')
 
-mostrarDinamico($('.actualizarInscripcion'),'tbl_inscripcion','id_inscripcion',$('.actualizarPagoInscripcion'),'precio_inscripcion')
+// mostrarDinamico($('.actualizarInscripcion'),'tbl_inscripcion','id_inscripcion',$('.actualizarPagoInscripcion'),'precio_inscripcion')
 
-mostrarDinamico($('.descuentoNuevo'),'tbl_descuento', 'id_descuento',$('.actualizarPrecioDescuento'),'valor_descuento')
+// mostrarDinamico($('.descuentoNuevo'),'tbl_descuento', 'id_descuento',$('.actualizarPrecioDescuento'),'valor_descuento')  
+// MOSTRAR PRECIOS EN EDITAR CLIENTE VENTAS
+mostrarDinamico($('.nuevaMatriculaClienteVenta'),'tbl_matricula', 'id_dmatricula',$('.precioMatriculaClienteVentas'),'precio_matricula')  
+
+mostrarDinamico($('.nuevoDescuentoClienteVenta'),'tbl_descuento', 'id_descuento',$('.valorDescuentoClienteVenta'),'valor_descuento')  
+
+mostrarDinamico($('.nuevaInscripcionClienteVenta'),'tbl_inscripcion', 'id_inscripcion',$('.precioInscripcionClienteVenta'),'precio_inscripcion') 
 
 /*=============================================
         SUMAR TOTAL CLIENTES
@@ -540,12 +546,12 @@ $('.btnEliminarCliente').click(function () {
 
 $(document).on('click', '.btnEditarClienteVenta', function () { 
     
-    var idEditarCliente = $(this).attr("idEditarClienteVenta");
-    var tipoCliente = $(this).attr("tipoClienteVenta");
-    // console.log(idEditarCliente)
+    var idEditarClienteVenta = $(this).attr("idEditarClienteVenta");
+    var tipoClienteDeVenta = $(this).attr("tipoClienteVenta");
+    // console.log(tipoClienteVenta)
     var datos = new FormData();
-    datos.append("idEditarClienteVenta", idEditarCliente);
-    datos.append("idEditarClienteVenta", idEditarCliente);
+    datos.append("idEditarClienteVenta", idEditarClienteVenta);
+    datos.append("tipoClienteDeVenta", tipoClienteDeVenta);
     // console.log(idEditarClienteVenta)
 
     $.ajax({
@@ -569,7 +575,7 @@ $(document).on('click', '.btnEditarClienteVenta', function () {
             $('.numeroDocumentoClienteVentas').val(respuesta["num_documento"])
             $('.nombreClienteVentas').val(respuesta["nombre"])
             $('.apellidoClienteVentas').val(respuesta["apellidos"])
-            $('.editarEmailVentas').val(respuesta["correo"])
+            $('.editarEmailClienteVentas').val(respuesta["correo"])
             $('.telefonoClienteVentas').val(respuesta["telefono"])
             $('.fechaNacimientoClienteVentas').val(respuesta["fecha_nacimiento"])
             $('.direccionClienteVentas').val(respuesta["direccion"])
@@ -579,19 +585,19 @@ $(document).on('click', '.btnEditarClienteVenta', function () {
             $('#editarTipoClienteVenta').html(respuesta["tipo_cliente"])
             $('#editarTipoClienteVenta').val(respuesta["tipo_cliente"])
 
-            $('#tipoMatriculaClienteVenta').html(respuesta["tipo_matricula"])
-            $('#tipoMatriculaClienteVenta').val(respuesta["id_matricula"])
+            // $('#tipoMatriculaClienteVenta').html(respuesta["tipo_matricula"])
+            // $('#tipoMatriculaClienteVenta').val(respuesta["id_matricula"])
 
-            $('#editarPromocionClienteVenta').html(respuesta["tipo_descuento"])
-            $('#editarPromocionClienteVenta').val(respuesta["id_descuento"])
+            // $('#editarPromocionClienteVenta').html(respuesta["tipo_descuento"])
+            // $('#editarPromocionClienteVenta').val(respuesta["id_descuento"])
             
-            $('#inscripcionClienteVenta').html(respuesta["tipo_inscripcion"])
-            $('#inscripcionClienteVenta').val(respuesta["id_inscripcion"])
+            // $('#inscripcionClienteVenta').html(respuesta["tipo_inscripcion"])
+            // $('#inscripcionClienteVenta').val(respuesta["id_inscripcion"])
 
-            $('.precioMatriculaClienteVentas').val(respuesta["pago_matricula"])
-            $('.valorPromocionClienteVenta').val(respuesta["pago_descuento"])
-            $('.precioInscripcionClienteVenta').attr('value', respuesta["pago_inscripcion"])
-            $('.totalPagarClienteVenta').val(respuesta["pago_total"])
+            // $('.precioMatriculaClienteVentas').val(respuesta["pago_matricula"])
+            // $('.valorDescuentoClienteVenta').val(respuesta["pago_descuento"])
+            // $('.precioInscripcionClienteVenta').val(respuesta["pago_inscripcion"])
+            // $('.totalPagarClienteVenta').val(respuesta["pago_total"])
             
         }
     });
