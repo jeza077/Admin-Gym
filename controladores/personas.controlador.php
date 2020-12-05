@@ -240,10 +240,7 @@ class ControladorPersonas{
                             }
 
                             $idPersona = end($totalId);
-                            // echo "<pre>";
-                            // var_dump($idPersona);
-                            // echo "</pre>";
-                            // return;
+                            
 
                             if ($_POST['tipoCliente'] == "Gimnasio"){
 

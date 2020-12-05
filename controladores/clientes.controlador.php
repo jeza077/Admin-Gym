@@ -10,7 +10,7 @@ class ControladorClientes{
 		// return $datos;
 
 
-        if(isset($datos['id_persona'])){
+        if(isset($datos["id_persona"])){
 
 			$tabla = "tbl_clientes";
 			
@@ -20,7 +20,7 @@ class ControladorClientes{
 			$pago_total = $datos['pago_total'];
 
 			
-			$idInscripcion = $_POST["nuevaInscripcion"];
+			$idInscripcion = $datos["id_inscripcion"];
 
 			$tabla = "tbl_inscripcion";
 			$item = "id_inscripcion";
@@ -44,13 +44,13 @@ class ControladorClientes{
 			$fecha_proximo_pago = $fechaVencimientoCliente;	
 
 			// echo "<pre>";
-			// var_dump($fechaVencimientoCliente);
+			// var_dump($datos);
 			// echo "</pre>";
 			// return;
 
 			if ($datos['tipo_cliente'] == "Gimnasio") {
 				
-				$datos = array("id_persona" => $datos['id_persona'],
+				$datos = array("id_persona" => $datos["id_persona"],
 							"tipo_cliente" => $datos["tipo_cliente"],
 							"id_matricula" =>  $datos["id_matricula"],
 							"id_descuento" => $datos["id_descuento"],
@@ -59,17 +59,18 @@ class ControladorClientes{
 							"fecha_vencimiento" => $fechaVencimientoCliente,
 							"fecha_proximo_pago" => $fecha_proximo_pago);
 			} else {
-				$datos = array("id_persona" => $datos['id_persona'],
+				$datos = array("id_persona" => $datos["id_persona"],
 							"tipo_cliente" => $datos["tipo_cliente"]);
 			}
 							
 			
             $respuestaCrearCliente = ModeloClientes::mdlCrearCliente($tabla, $datos);
 			// return $respuestaCrearCliente;
-            echo "<pre>";
-			var_dump($respuestaCrearCliente);
-			echo "</pre>";
-			return;
+            // echo "<pre>";
+			// var_dump($respuestaCrearCliente);
+			// echo "</pre>";
+			// return;
+
             if($respuestaCrearCliente = true){
 
 				if($datos['tipo_cliente'] == 'Gimnasio'){
