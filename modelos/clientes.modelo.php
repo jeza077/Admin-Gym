@@ -10,13 +10,14 @@ class ModeloClientes{
 
 		if ($datos['tipo_cliente'] == "Gimnasio"){
 	
-			$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(id_persona, tipo_cliente, id_matricula, id_inscripcion, id_descuento, fecha_ultimo_pago, fecha_vencimiento, fecha_proximo_pago) VALUES (:id_persona, :tipo_cliente, :id_matricula, :id_inscripcion, :id_descuento, :fecha_ultimo_pago, :fecha_vencimiento, :fecha_proximo_pago)");
+			$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(id_persona, tipo_cliente, id_matricula, id_descuento, id_inscripcion, fecha_inscripcion, fecha_ultimo_pago, fecha_vencimiento, fecha_proximo_pago) VALUES (:id_persona, :tipo_cliente, :id_matricula, :id_descuento, :id_inscripcion, :fecha_inscripcion, :fecha_ultimo_pago, :fecha_vencimiento, :fecha_proximo_pago)");
 	
 			$stmt->bindParam(":id_persona", $datos["id_persona"], PDO::PARAM_INT);
 			$stmt->bindParam(":tipo_cliente", $datos["tipo_cliente"], PDO::PARAM_STR);
 			$stmt->bindParam(":id_matricula", $datos["id_matricula"], PDO::PARAM_INT);
-			$stmt->bindParam(":id_inscripcion", $datos["id_inscripcion"], PDO::PARAM_INT);
 			$stmt->bindParam(":id_descuento", $datos["id_descuento"], PDO::PARAM_INT);
+			$stmt->bindParam(":id_inscripcion", $datos["id_inscripcion"], PDO::PARAM_INT);
+			$stmt->bindParam(":fecha_inscripcion", $datos["fecha_inscripcion"], PDO::PARAM_STR);
 			$stmt->bindParam(":fecha_ultimo_pago", $datos["fecha_ultimo_pago"], PDO::PARAM_STR);
 			$stmt->bindParam(":fecha_vencimiento", $datos["fecha_vencimiento"], PDO::PARAM_STR);
 			$stmt->bindParam(":fecha_proximo_pago", $datos["fecha_proximo_pago"], PDO::PARAM_STR);
@@ -24,7 +25,8 @@ class ModeloClientes{
 			if($stmt->execute()){
 	
 				return true;	
-	
+				// return Conexion::conectar()->lastInsertId();
+
 			}else{
 	
 				return $stmt->errorInfo();
@@ -45,7 +47,8 @@ class ModeloClientes{
 	
 			}else{
 	
-				return $stmt->errorInfo();
+				return false;
+				// return $stmt->errorInfo();
 			
 			}
 		}
@@ -68,9 +71,9 @@ class ModeloClientes{
 			. "LEFT JOIN $tabla2 as c ON p.id_personas = c.id_persona\n"
 			. "LEFT JOIN tbl_documento as d ON p.id_documento = d.id_documento\n"
 			. "LEFT JOIN tbl_matricula as m ON c.id_matricula = m.id_matricula\n"
+			. "LEFT JOIN tbl_inscripcion as i ON c.id_inscripcion = i.id_inscripcion\n"
 			. "LEFT JOIN tbl_pagos_cliente as pc ON c.id_cliente = pc.id_cliente\n"
-			. "LEFT JOIN tbl_inscripcion as i ON pc.id_inscripcion = i.id_inscripcion\n"
-			. "LEFT JOIN tbl_descuento as pd ON pc.id_descuento = pd.id_descuento\n"
+			. "LEFT JOIN tbl_descuento as pd ON c.id_descuento = pd.id_descuento\n"
 			. "WHERE $item = :$item"); 
 
 			$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
@@ -84,9 +87,9 @@ class ModeloClientes{
 			. "LEFT JOIN $tabla2 as c ON p.id_personas = c.id_persona\n"
 			. "LEFT JOIN tbl_documento as d ON p.id_documento = d.id_documento\n"
             . "LEFT JOIN tbl_matricula as m ON c.id_matricula = m.id_matricula\n"
+            . "LEFT JOIN tbl_inscripcion as i ON c.id_inscripcion = i.id_inscripcion\n"
+			. "LEFT JOIN tbl_descuento as pd ON c.id_descuento = pd.id_descuento\n"
 			. "LEFT JOIN tbl_pagos_cliente as pc ON c.id_cliente = pc.id_cliente\n"
-            . "LEFT JOIN tbl_inscripcion as i ON pc.id_inscripcion = i.id_inscripcion\n"
-			. "LEFT JOIN tbl_descuento as pd ON pc.id_descuento = pd.id_descuento\n"
 		    . "WHERE p.tipo_persona = 'clientes'");
 			
 			$stmt -> execute();
