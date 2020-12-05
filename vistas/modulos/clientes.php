@@ -623,7 +623,7 @@
                       <div class="form-group col-md-6">
                         <label>Promociones</label>
                         <select class="form-control select2 nuevaPromocion" style="width: 100%;" name="editarPromocionClienteVenta">
-                            <option value="" id="editarPromocionClienteVenta"></option> 
+                            <option></option> 
                           
                             <?php 
                                 $tabla = "tbl_descuento";
@@ -645,7 +645,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">$</span>  
                               </div>
-                            <input type="text" class="form-control text-right valorPromocionClienteVenta totalDescuento" value="" name="valorPromocionClienteVenta" readonly>
+                            <input type="text" class="form-control text-right nuevoPrecioPromocion valorPromocionClienteVenta totalDescuento" value="" name="valorPromocionClienteVenta" readonly>
                          </div>
                       </div>
                     </div>
@@ -674,7 +674,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">$</span>  
                               </div>
-                            <input type="text" class="form-control text-right precioInscripcionClienteVenta totalInscripcion" name="precioInscripcionClienteVenta" readonly>
+                            <input type="text" class="form-control text-right nuevoPrecioInscripcion precioInscripcionClienteVenta totalInscripcion" name="precioInscripcionClienteVenta" readonly>
                          </div>
                       </div>
                     </div>

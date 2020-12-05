@@ -165,14 +165,14 @@ function mostrarDinamico(selector1,tablaDB,itemDB,selector2,precio) {
             processData: false,  
             dataType: "json",
             success: function(respuesta) {
-                // console.log(respuesta[precio]);
+                // console.log(respuesta);
                 // SumaTotal();
                 var precioInscripcion = respuesta[precio];            
                 //    if (selector1 == $('.nuevaPromocion')){
                     
                     // } 
                 selector2.attr("value",precioInscripcion);
-            
+                console.log(selector2.attr("value",precioInscripcion))
 
             }
         });   
