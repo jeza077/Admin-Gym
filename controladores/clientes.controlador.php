@@ -12,6 +12,12 @@ class ControladorClientes{
 
         if(isset($datos['id_persona'])){
 
+			$idDeInscripcion = $datos["id_inscripcion"];
+			$pago_matricula = $datos['pagos_matricula'];
+			$pago_descuento = $datos['pagos_descuento'];
+			$pago_inscripcion = $datos['pagos_inscripcion'];
+			$pago_total = $datos['pagos_total'];
+
 			$tabla = "tbl_clientes";
 			
 			if ($datos['tipo_cliente'] == "Gimnasio"){
@@ -61,9 +67,9 @@ class ControladorClientes{
 			
 				$idCliente = end($totalId);
 				
-				return $idCliente;	
+				// return $idCliente;	
 				
-				$vigencias = $_POST["id_matricula"];
+				$idInscripcion = $idDeInscripcion;
 				
 				
 				$tabla = "tbl_inscripcion";
@@ -78,8 +84,8 @@ class ControladorClientes{
 				$fechaHoy = date('Y-m-d');
 				$fechaVencimientoCliente = date("Y-m-d", strtotime('+'.$cantidadDias.' days'));
 
-				$datos = array("id_cliente" =>  $idClienteInscripcion,
-								"id_inscripcion" => $idInscripcionCliente,
+				$datos = array("id_cliente" =>  $idCliente,
+								"id_inscripcion" => $idDeInscripcion,
 								"fecha_inscripcion" => $fechaHoy,
 								"fecha_pago" => $fechaHoy,
 								"fecha_proximo_pago" => $fechaVencimientoCliente,
@@ -89,77 +95,59 @@ class ControladorClientes{
 	
 				$respuestaClienteInscripcion = ModeloClientes::mdlCrearClienteInscripcion($tabla, $datos);
 
-
+				// echo "<pre>";
+				// var_dump($datos);
+				// echo "</pre>";
+				// return $respuestaClienteInscripcion;
 
 					
 				// GUARDAR EN LA TABLA PAGOS
 				// 
 				// 
-					
-						
-						
-						
-						
-						
-		
-		
-		
-		
-		
-		
-		
-		
-	
-	
-	
-	
-
-
-
-
+							
 				$totalId = array();
-				$tabla1 = "tbl_personas";
-				$tabla2 = "tbl_clientes";
+				$tabla = "tbl_cliente_inscripcion";
+				// $tabla2 = "tbl_clientes";
 				$item = null;
 				$valor = null;
 
-				$clientesTotal = ModeloClientes::mdlMostrarClientesSinPago($tabla1, $tabla2, $item, $valor);
+				$pagoClienteTotal = ModeloClientes::mdlMostrar($tabla, $item, $valor);
 				// echo "<pre>";
-				// var_dump($clientesTotal[1]["id_cliente"]);
+				// var_dump($pagoClienteTotal[1]["id_cliente"]);
 				// echo "</pre>";
 				// return;
 				
-				foreach($clientesTotal as $keyCliente => $valueCliente){
-				array_push($totalId, $valueCliente["id_cliente"]);
+				foreach($pagoClienteTotal as $keyCliente => $valuePagoCliente){
+				array_push($totalId, $valuePagoCliente["id_cliente_inscripcion"]);
 			
 				
 				}
 				
 
-				$idCliente = end($totalId);
+				$idPagoCliente = end($totalId);
 
 				// var_dump($parametros);
-				// return;
+				// return $idPagoCliente;
 				
 				$tabla3 = "tbl_pagos_cliente";
 
-				$datos = array("id_cliente_inscripcion" => $idCliente,
-								"pago_matricula" => $_POST["pagoMatricula"],
-								"pago_descuento" => $_POST["nuevoPrecioDescuento"],
-								"pago_inscripcion" => $_POST["pagoInscripcion"],
-								"pago_total" => $_POST["nuevoTotalCliente"]);
-
-								$datos = array("id_cliente_inscripcion" => $idCliente,
+				$datos = array("id_cliente_inscripcion" => $idPagoCliente,
 								"pago_matricula" => $pago_matricula,
 								"pago_descuento" => $pago_descuento,
 								"pago_inscripcion" => $pago_inscripcion,
 								"pago_total" => $pago_total);
 
+								// $datos = array("id_cliente_inscripcion" => $idCliente,
+								// "pago_matricula" => $pago_matricula,
+								// "pago_descuento" => $pago_descuento,
+								// "pago_inscripcion" => $pago_inscripcion,
+								// "pago_total" => $pago_total);
+
 				$respuestaPago = ModeloClientes::mdlCrearPago($tabla3, $datos);
 				// echo "<pre>";
 				// var_dump($respuestaPago);
 				// echo "</pre>";
-				// return;
+				// return $respuestaPago;
 			
 				$descripcionEvento = "Nuevo cliente";
 				$accion = "Nuevo";
@@ -174,16 +162,16 @@ class ControladorClientes{
 				return true;
 
             } else {
-				echo '<script>
-				Swal.fire({
-					title: "Llene los campos correctamente.",
-					icon: "error",
-					toast: true,
-					position: "top",
-					showConfirmButton: false,
-					timer: 3000,
-					});					
-				</script>';
+				// echo '<script>
+				// Swal.fire({
+				// 	title: "Llene los campos correctamente.",
+				// 	icon: "error",
+				// 	toast: true,
+				// 	position: "top",
+				// 	showConfirmButton: false,
+				// 	timer: 3000,
+				// 	});					
+				// </script>';
                 return false;
             }
         } 
@@ -241,7 +229,7 @@ class ControladorClientes{
 				// return;
 				$idCliente = $personaTotal["id_cliente"];
 
-					$editarVigencias = $_POST["editarInscripcion"];
+					$editar = $_POST["editarInscripcion"];
 
 					// echo $vigencias;
 					// return;

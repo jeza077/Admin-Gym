@@ -174,7 +174,7 @@ function mostrarDinamico(selector1,tablaDB,itemDB,selector2,precio) {
                     
                     // } 
                 selector2.attr("value",precioInscripcion);
-                console.log(selector2.attr("value",precioInscripcion))
+                // console.log(selector2.attr("value",precioInscripcion))
 
             }
         });   

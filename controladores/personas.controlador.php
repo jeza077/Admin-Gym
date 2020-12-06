@@ -250,7 +250,7 @@ class ControladorPersonas{
                                 "id_matricula" => $_POST["nuevaMatricula"],
                                 "id_descuento" => $_POST["nuevaPromocion"],
                                 "pago_matricula" => $_POST["nuevoPrecioMatricula"],
-                                "pago_descuento" => $_POST["nuevoPrecioDescuento"],
+                                "pago_descuento" => $_POST["nuevoPrecioPromocion"],
                                 "pago_inscripcion" => $_POST["nuevoPrecioInscripcion"],
                                 "pago_total" => $_POST["nuevoTotalCliente"]);
                             } else {
@@ -270,7 +270,7 @@ class ControladorPersonas{
                             if($crearCliente == true){
                                 echo '<script>
                                         Swal.fire({
-                                            title: "Cliente no se guardo correctamente!",
+                                            title: "Cliente guardado correctamente!",
                                             icon: "success",
                                             heightAuto: false,
                                             allowOutsideClick: false

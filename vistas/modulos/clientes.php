@@ -293,7 +293,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">%</span>  
                               </div>
-                            <input type="text" class="form-control text-right nuevoPrecioPromocion totalDescuento" value="" readonly>
+                            <input type="text" class="form-control text-right nuevoPrecioPromocion totalDescuento" name="nuevoPrecioPromocion" value="" readonly>
                             <input type="hidden" id="nuevoPrecioDescuento" name="nuevoPrecioDescuento">  
                          </div>
                       </div>
