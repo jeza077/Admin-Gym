@@ -384,12 +384,13 @@ $(document).on('click', '.btnEditarPago', function (e) {
 // ========================================= *//
 $(document).on('click', '.SwalBtnMantenerInscripcion', function (e) { 
     e.preventDefault();
+    console.log(idClientePago);
     // console.log('click')
-    Swal.fire({
-        title: 'Procesando...',
-        allowOutsideClick: false
-    });
-    Swal.showLoading()
+    // Swal.fire({
+    //     title: 'Procesando...',
+    //     allowOutsideClick: false
+    // });
+    // Swal.showLoading()
     // Swal.close();
     // return;
 
@@ -421,7 +422,7 @@ $(document).on('click', '.SwalBtnMantenerInscripcion', function (e) {
                         confirmButtonText: 'Cerrar'
                     }).then((result)=>{
                         if(result.value){
-                            window.location = "pagos-cliente";
+                            window.location = "clientes-inscripciones";
                         }
                     });;   
                 } else {
@@ -435,7 +436,7 @@ $(document).on('click', '.SwalBtnMantenerInscripcion', function (e) {
                         confirmButtonText: 'Cerrar'
                     }).then((result)=>{
                         if(result.value){
-                            window.location = "pagos-cliente";
+                            window.location = "clientes-inscripciones";
                         }
                     });;   
                 }
