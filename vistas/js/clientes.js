@@ -389,7 +389,7 @@ $(document).on('click', '.btnEditarPago', function (e) {
 // ========================================= *//
 $(document).on('click', '.SwalBtnMantenerInscripcion', function (e) { 
     e.preventDefault();
-    console.log(idClientePago);
+    // console.log(idClientePago);
     // console.log('click')
     Swal.fire({
         title: 'Procesando...',
@@ -414,11 +414,13 @@ $(document).on('click', '.SwalBtnMantenerInscripcion', function (e) {
             processData: false,  
             dataType: "json",
             success: function(respuesta) {
-                console.log(respuesta);
-    
-                if(respuesta == true){
+                // console.log(respuesta);
+                var fechaProximaPago = respuesta.fecha_proximo_pago;
+
+                if(respuesta){
                     Swal.fire({
-                        title: 'El pago se agrego correctamente',
+                        title: 'El pago se agrego correctamente!',
+                        text: 'Fecha proximo pago actualizada al '+fechaProximaPago,
                         icon: 'success',
                         // width: 600,
                         allowOutsideClick: false,
@@ -457,30 +459,36 @@ $(document).on('click', '.SwalBtnMantenerInscripcion', function (e) {
 //***** ======================================
 // CALCULANDO TOTAL A PAGAR AL CAMBIAR INSCRIPCION 
 // ========================================= *//
-$(document).on('click', '.verTotalActualizarPago', function (e) {
-    e.preventDefault();
-    
-    var valorInscripcion = $('.actualizarPagoInscripcion').val();
+calcularPagoNuevaInscripcion('.verTotalActualizarPago', '.actualizarPagoInscripcion', '.totalActualizarPago');
 
-    // var valorPromocion = $('.actualizarTotalDescuento').val();
-
-    // if(!valorPromocion){
-
-    //     var suma = parseInt(valorInscripcion);
-    //     var descuento = 0;
-    //     $('input[name=actualizarTotalDescuento]').attr('value', descuento);
-    // } else {
-    //     var porcentaje = parseInt(valorPromocion) / 100;
-    //     var descuento = ((parseInt(totalMatricula) * porcentaje));
-    //     var suma = (parseInt(totalMatricula) - descuento) + parseInt(valorInscripcion);
-    //     $('input[name=actualizarTotalDescuento]').attr('value', descuento);
+function calcularPagoNuevaInscripcion(btnTotal, inputTotalInscripcion, inputTotal) {
+    $(document).on('click', btnTotal, function (e) {
+        e.preventDefault();
         
-    // }
+        var valorInscripcion = $(inputTotalInscripcion).val();
+        // var valorInscripcion = $('.actualizarPagoInscripcion').val();
 
-    $('.totalActualizarPago').attr('value', valorInscripcion);
+        // var valorPromocion = $('.actualizarTotalDescuento').val();
+
+        // if(!valorPromocion){
+
+        //     var suma = parseInt(valorInscripcion);
+        //     var descuento = 0;
+        //     $('input[name=actualizarTotalDescuento]').attr('value', descuento);
+        // } else {
+        //     var porcentaje = parseInt(valorPromocion) / 100;
+        //     var descuento = ((parseInt(totalMatricula) * porcentaje));
+        //     var suma = (parseInt(totalMatricula) - descuento) + parseInt(valorInscripcion);
+        //     $('input[name=actualizarTotalDescuento]').attr('value', descuento);
+            
+        // }
+
+        $(inputTotal).attr('value', valorInscripcion);
+        // $('.totalActualizarPago').attr('value', valorInscripcion);
 
 
-});
+    });
+}
 
 
 //***** ======================================
@@ -533,9 +541,15 @@ $(document).on('click', '.SwalBtnCancelar', function (e) {
 $(document).on('click', '.btnCancelarInscripcion', function (e) {
     e.preventDefault();
     idClienteInscripcion = $(this).attr('idClienteInscripcion');
+    idClientePagoInscripcion = $(this).attr('idClientePagoInscripcion');
+    // console.log(idClientePagoInscripcion)
     // estadoClienteInscripcion = $(this).attr('estadoClienteInscripcion');
 
-    // console.log('click')
+    var idClientePago = idClientePagoInscripcion;
+    // console.log(idClientePago)
+    var datos = new FormData();
+    datos.append("idClientePago", idClientePago);
+
     Swal.fire({
         icon: 'info',
         title: '¿Está seguro de cancelar la inscripción?',
@@ -547,6 +561,7 @@ $(document).on('click', '.btnCancelarInscripcion', function (e) {
         showConfirmButton: false
     });
 });
+
 $(document).on('click', '.SwalBtnCancelarInscripcion', function () {
     // console.log(idClienteInscripcion+' estado:'+ estadoClienteInscripcion)
     var estadoClienteInscripcion = 0;
@@ -565,6 +580,7 @@ $(document).on('click', '.SwalBtnCancelarInscripcion', function () {
         processData: false,
         success: function(respuesta) {
             // console.log(respuesta);
+            // return;
 
             if(respuesta == 'true'){
                 Swal.fire({
@@ -573,11 +589,52 @@ $(document).on('click', '.SwalBtnCancelarInscripcion', function () {
                     // width: 600,
                     allowOutsideClick: false,
                     showCancelButton: false,
-                    showConfirmButton: true,
-                    confirmButtonText: 'Cerrar'
+                    showConfirmButton: true
                 }).then((result)=>{
                     if(result.value){
-                        window.location = "clientes-inscripciones";
+                        Swal.fire({
+                            title: 'Agrega una nueva inscripción',
+                            icon: 'info',
+                            html: '<button type="button" role="button" tabindex="0" class="SwalBtnNuevaInscripcion btn btn-success customSwalBtn" data-toggle="modal" data-target="#modalNuevaInscripcion">' + 'Vamos' + '</button>',
+                            // width: 600,
+                            allowOutsideClick: false,
+                            showCancelButton: false,
+                            showConfirmButton: false,
+                        })
+                    
+                        $(document).on('click', '.SwalBtnNuevaInscripcion', function () {
+
+                            // console.log(idClientePagoInscripcion)
+                            var idCliente = idClientePagoInscripcion;
+                            // console.log(idClientePago)
+                            var datos = new FormData();
+                            datos.append("idCliente", idCliente);
+
+                            $.ajax({
+                            
+                                url:"ajax/clientes.ajax.php",
+                                method: "POST",
+                                data: datos,
+                                cache: false,
+                                contentType: false,
+                                processData: false,  
+                                dataType: "json",
+                                success: function(respuesta) {
+                                    // console.log(respuesta);
+
+                                    $('.nuevoClienteInscripcion').val(respuesta['nombre'] +' '+ respuesta['apellidos']);
+                                    $('#nuevoClienteInscripcion').attr('value', respuesta['id_cliente']);
+                                }
+                            });
+                            Swal.close();
+                            mostrarDinamico($('.actualizarNuevaInscripcion'),'tbl_inscripcion','id_inscripcion',$('.actualizarPagoNuevaInscripcion'),'precio_inscripcion');
+                            calcularPagoNuevaInscripcion('.verTotalActualizarPago', '.actualizarPagoNuevaInscripcion', '.totalActualizarPago');
+
+
+                            // idClienteInscripcion
+                        });
+
+                        // window.location = "clientes-inscripciones";
                     }
                 });;
 

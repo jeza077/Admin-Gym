@@ -9,9 +9,9 @@
             <h1>Clientes Inscripciones</h1>
           </div>
           <div class="col-sm-6">
-          <!-- <button class="btn btn-orange float-right"  data-toggle="modal" data-target="#modalAgregarCliente">
-            Nuevo Cliente       
-          </button> -->
+          <button class="btn btn-orange float-right"  data-toggle="modal" data-target="#modalNuevaInscripcion">
+            Nuevo Inscripción       
+          </button>
           <button class="btn btn-danger btnExportarPagosClientes float-right mr-3">
               Exportar PDF          
           </button>
@@ -47,12 +47,12 @@
               <thead>
                 <tr>
                   <th scope="col">#</th>
-                  <th scope="col">Numero Documento</th>
+                  <th scope="col">Num. Documento</th>
                   <th scope="col">Nombre</th>
                   <th scope="col">Tipo Inscripcion</th>
-                  <!-- <th scope="col">Ultimo Pago</th> -->
+                  <th scope="col">Fecha Inscripcion</th>
                   <th scope="col">Fecha Ultimo Pago</th>
-                  <th scope="col">Fecha Vencimiento</th>
+                  <th scope="col">Fecha Proxim Pago</th>
                   <th scope="col">Estado</th>
                   <th scope="col">Acciones</th>
                 </tr>
@@ -77,6 +77,8 @@
                 // var_dump($clientes);
                 // echo "</pre>";
                 // return;
+
+
                 foreach ($clientes as $key => $value) {
                   // echo $value['id_personas'];
                   echo '
@@ -85,7 +87,9 @@
                       <td>'.$value["num_documento"].'</td>
                       <td>'.$value["nombre"].' '.$value["apellidos"].'</td>
                       <td>'.$value["tipo_inscripcion"].'</td>
+                      <td>'.$value["fecha_inscripcion"].'</td>
                       <td>'.$value["fecha_pago"].'</td>';
+
 
                       $fechaVencimientoPago = $value['fecha_proximo_pago'];
                       $fechaHoy = date('Y-m-d');
@@ -93,14 +97,21 @@
                       $date2 = new DateTime($fechaVencimientoPago);
                       $diff = $date1->diff($date2);
 
+                      
+                // $fechainicial = new DateTime($fechaVencimientoPago);
+                // $fechafinal = new DateTime($fechaHoy);
+                // $diferencia = $fechainicial->diff($fechafinal);
+                // $meses = ( $diferencia->y * 12 ) + $diferencia->m;
+                // echo $meses;
+
                       // var_dump($date1);
                       // echo $diff->days;                          
                       if($diff->days >= 10){  
-                          echo '<td class="badge badge-success mt-2" data-toggle="tooltip" data-placement="left" title="Suscrito">'.$value["fecha_vencimiento"].'</td>';
+                          echo '<td class="badge badge-success mt-2" data-toggle="tooltip" data-placement="left" title="Inscrito">'.$value["fecha_proximo_pago"].'</td>';
                       } else if($diff->days >= 1 && $diff->days <= 10) {
-                          echo '<td class="badge badge-warning mt-2" data-toggle="tooltip" data-placement="left" title="Suscripcion por Vencer">'.$value["fecha_vencimiento"].'</td>';
+                          echo '<td class="badge badge-warning mt-2" data-toggle="tooltip" data-placement="left" title="Inscripcion por Vencer">'.$value["fecha_proximo_pago"].'</td>';
                       } else {
-                          echo '<td class="badge badge-danger mt-2" data-toggle="tooltip" data-placement="left" title="Suscripcion vencida">'.$value["fecha_vencimiento"].'</td>';
+                          echo '<td class="badge badge-danger mt-2" data-toggle="tooltip" data-placement="left" title="Inscripcion vencida">'.$value["fecha_proximo_pago"].'</td>';
                       }
 
                         if($value['estado'] != 0){
@@ -112,9 +123,9 @@
 
                     echo
                         '<td>
-                          <button class="btn btn-success btnEditarPago" data-toggle="tooltip" data-placement="left" title="Actualizar Pago" idCliente="'.$value["id_cliente"].'"><i class="fas fa-dollar-sign p-1"></i></button>
+                          <button class="btn btn-success btnEditarPago" data-toggle="tooltip" data-placement="left" title="Pagar" idCliente="'.$value["id_cliente"].'"><i class="fas fa-dollar-sign p-1"></i></button>
 
-                          <button class="btn btn-danger btnCancelarInscripcion" data-toggle="tooltip" data-placement="left" title="Cancelar Inscripcion" idClienteInscripcion="'.$value["id_cliente_inscripcion"].'"><i class="fas fa-strikethrough" style="color:#fff"></i></button>
+                          <button class="btn btn-danger btnCancelarInscripcion" data-toggle="tooltip" data-placement="left" title="Cancelar Inscripcion" idClienteInscripcion="'.$value["id_cliente_inscripcion"].'" idClientePagoInscripcion="'.$value["id_cliente"].'"><i class="fas fa-strikethrough" style="color:#fff"></i></button>
                         </td>
                       </tr>
                   ';
@@ -368,6 +379,102 @@
                   // $pantalla = 'clientes';
                   $editarPagosCliente = new ControladorClientes();
                   $editarPagosCliente->ctrActualizarPagoClienteCambiandoInscripcion();
+
+                  // echo "<pre>";
+                  // var_dump($editarPersona);
+                  // echo "</pre>";
+                  // return;
+                ?>
+            </form>
+          </div>
+      </div>
+    </div>
+  </div> 
+
+
+
+
+  <div class="modal fade" id="modalNuevaInscripcion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Nueva Inscripción</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+          <div class="modal-body p-4">
+            <form role="form" method="post" class="formulario">
+              <div class="container-fluid mt-4">
+
+                  <div class="form-group col-md-12">
+                    <label for="">Cliente</label>
+                    <input type="text" class="form-control nuevoClienteInscripcion" value="" readonly>    
+                      <input type="hidden" id="nuevoClienteInscripcion" name="nuevoClienteInscripcion">
+                    </div>
+                  </div>
+
+                <!-- <div class="form-row"> -->
+                  <div class="form-group col-md-12"> 
+                    <label>Tipo inscripcion</label>
+                    <select class="form-control select2 actualizarNuevaInscripcion" style="width: 100%;" name="nuevaTipoInscripcion">
+                        <option selected="selected">Seleccionar...</option>
+                        <?php 
+                            $tabla = "tbl_inscripcion";
+                            $item = null;
+                            $valor = null;
+                            
+
+                            $inscripciones = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);           
+ 
+                            foreach ($inscripciones as $key => $value) { ?>
+                              <option value="<?php echo $value['id_inscripcion']?>"><?php echo $value['tipo_inscripcion']?></option>        
+                            <?php 
+                             
+                          }
+                        ?>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-12">
+                    <label for="">Precio inscripcion</label>
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                          <span class="input-group-text">$</span>  
+                        </div>
+                      <input type="text" class="form-control text-right actualizarPagoNuevaInscripcion totalInscripcion" name="nuevaPagoInscripcion" readonly>    
+                      <!-- <input type="hidden" id="actualizarPrecioInscripcion" name="actualizarPrecioInscripcion">-->
+                    </div>
+                  </div>
+
+                  
+                <div class="form-row">
+                    <button type="" class="btn btn-success btn-ms col-md-6 verTotalActualizarPago"><i class="fas fa-dollar-sign"></i>Calcular </button>       
+                    <div class="form-group col-md-6">
+                      <label for="">Total a pagar:</label>
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">$</span>  
+                        </div>
+                        <input type="text" class="form-control float-right text-right totalActualizarPago" name="nuevoPagoTotal" value="" readonly>  
+                        </div>
+                    </div>
+                </div>
+                <!-- <input type="hidden" name="idClientePago"> -->
+                
+              </div>
+              <!-- <div class="form-row"> -->
+                <div class="form-group mt-4">
+                  <button type="" class="btn btn-primary float-right mr-4">Actualiazar pago</button>
+                  <button type="button" class="btn btn-danger float-right mr-3" data-dismiss="modal">Salir</button>
+                </div> 
+              <!-- </div>   -->
+
+              <?php
+                  // $ajustes = null;
+                  // $tipoPersona = 'clientes';
+                  // $pantalla = 'clientes';
+                  $nuevaInscripcionCliente = new ControladorClientes();
+                  $nuevaInscripcionCliente->ctrNuevaInscripcionCliente();
 
                   // echo "<pre>";
                   // var_dump($editarPersona);

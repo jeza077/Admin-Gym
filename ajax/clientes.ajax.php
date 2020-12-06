@@ -8,6 +8,27 @@ require_once "../modelos/usuarios.modelo.php";
 class AjaxClientes{
 
     /*=============================================
+           MOSTRAR CLIENTE
+    =============================================*/
+    public $idCliente;
+
+    public function ajaxMostrarClientes(){
+
+        $tabla = "tbl_clientes";
+        $item = "id_cliente";
+        $valor = $this->idCliente;
+        
+        $respuesta = ControladorClientes::ctrMostrarClientesSinPago($tabla, $item, $valor);
+        // echo "<pre>";
+        // var_dump($respuesta);
+        // echo "</pre>";
+
+        echo json_encode($respuesta);
+    }
+
+
+
+    /*=============================================
            EDITAR CLIENTE
     =============================================*/
     
@@ -130,6 +151,15 @@ class AjaxClientes{
 
         echo json_encode($respuesta);
     }
+}
+
+/*=============================================
+    MOATRAR CLIENTE 
+=============================================*/
+if(isset($_POST["idCliente"])){
+    $cliente = new AjaxClientes();
+    $cliente->idCliente = $_POST["idCliente"];
+    $cliente->ajaxMostrarClientes();
 }
 
 /*=============================================

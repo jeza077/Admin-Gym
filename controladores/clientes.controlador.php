@@ -382,6 +382,11 @@ class ControladorClientes{
 
 		if(isset($idClientePago)){
 
+			
+			// $respuestaFinal = array('true' => true,
+			// 						'fecha_proximo_pago' => $fechaVencimientoCliente);
+			// return $respuestaFinal;
+
 			$tabla1 = "tbl_personas";
 			$tabla2 = "tbl_clientes";
 			$item = 'id_cliente';
@@ -447,7 +452,10 @@ class ControladorClientes{
 				$fecha = null;
 				$respuesta = ModeloClientes::mdlActualizarPagoCliente($tabla, $datos, $fecha);
 			}
-			return $respuesta;	
+
+			$respuestaFinal = array('true' => true,
+									'fecha_proximo_pago' => $fechaVencimientoCliente);
+			return $respuestaFinal;	
 		}
 	}
 
@@ -537,7 +545,9 @@ class ControladorClientes{
 					echo "<script>
 							Swal.fire({
 								title: 'El cambio y pago de inscripcion, se realizo exitosamente!',
+								text: 'Fecha proximo pago actualizada al ".$fechaVencimientoCliente."',
 								icon: 'success',
+								width: 600,
 								allowOutsideClick: false,
 								showCancelButton: false,
 								showConfirmButton: true,
@@ -587,6 +597,179 @@ class ControladorClientes{
 		}
 	}
 
+
+
+	/*=============================================
+	**** ACTUALIZAR PAGO POR CLIENTE CAMBIANDO INSCRIPCION ****
+	=============================================*/
+	static public function ctrNuevaInscripcionCliente(){
+		// var_dump($_POST);
+		// return;
+		if(isset($_POST['nuevoClienteInscripcion'])){
+			// $tabla1 = "tbl_personas";
+			// $tabla2 = "tbl_clientes";
+			// $item = 'id_cliente';
+			// $valor = $_POST['nuevoClienteInscripcion'];
+			// $respuesta = ModeloClientes::mdlMostrarPagoPorCliente($tabla1, $tabla2, $item, $valor);
+			
+			// var_dump($respuesta);
+			// return;
+
+			// $fechaHoy = date('Y-m-d');
+			// $fechaVencimiento = $respuesta['fecha_proximo_pago'];
+			// $idCliente = $respuesta['id_cliente'];
+			// $idClienteInscripcion = $respuesta['id_cliente_inscripcion'];
+
+			$idCliente = $_POST['nuevoClienteInscripcion'];
+
+			$idInscripcion = $_POST['nuevaTipoInscripcion'];
+			$tabla = "tbl_inscripcion";
+			$item = "id_inscripcion";
+			$valor = $idInscripcion;
+			
+			$inscripciones = ControladorUsuarios::ctrMostrar($tabla, $item, $valor); 
+
+			if($inscripciones){
+
+				$cantidadDias = $inscripciones['cantidad_dias'];
+
+				// echo $cantidadDias;
+				// return;
+	
+				date_default_timezone_set("America/Tegucigalpa");
+				$fechaHoy = date('Y-m-d');
+				$fechaVencimientoCliente = date("Y-m-d", strtotime('+'.$cantidadDias.' days'));
+	
+				$datos = array("id_cliente" =>  $idCliente,
+								"id_inscripcion" => $idInscripcion,
+								"fecha_inscripcion" => $fechaHoy,
+								"fecha_pago" => $fechaHoy,
+								"fecha_proximo_pago" => $fechaVencimientoCliente,
+								"fecha_vencimiento" => $fechaVencimientoCliente);
+	
+				// return $datos;
+								
+				$tabla = "tbl_cliente_inscripcion";
+	
+				$respuestaClienteInscripcion = ModeloClientes::mdlCrearClienteInscripcion($tabla, $datos);
+	
+				// var_dump($respuestaClienteInscripcion);
+				// return;
+				if($respuestaClienteInscripcion == true){
+					$totalId = array();
+					$tabla = "tbl_cliente_inscripcion";
+					// $tabla2 = "tbl_clientes";
+					$item = null;
+					$valor = null;
+	
+					$pagoClienteTotal = ModeloClientes::mdlMostrar($tabla, $item, $valor);
+					// echo "<pre>";
+					// var_dump($pagoClienteTotal[1]["id_cliente"]);
+					// echo "</pre>";
+					// return;
+					
+					foreach($pagoClienteTotal as $keyCliente => $valuePagoCliente){
+						array_push($totalId, $valuePagoCliente["id_cliente_inscripcion"]);					
+					}
+					
+	
+					$idPagoCliente = end($totalId);
+	
+					// var_dump($idPagoCliente);
+					// return;
+					
+					$tabla3 = "tbl_pagos_cliente";
+	
+					$datos = array("id_cliente_inscripcion" => $idPagoCliente,
+									"pago_matricula" => 0,
+									"pago_descuento" => 0,
+									"pago_inscripcion" => $_POST['nuevaPagoInscripcion'],
+									"pago_total" => $_POST['nuevoPagoTotal']);
+	
+									// $datos = array("id_cliente_inscripcion" => $idCliente,
+									// "pago_matricula" => $pago_matricula,
+									// "pago_descuento" => $pago_descuento,
+									// "pago_inscripcion" => $pago_inscripcion,
+									// "pago_total" => $pago_total);
+	
+					$respuestaPago = ModeloClientes::mdlCrearPago($tabla3, $datos);
+					// echo "<pre>";
+					// var_dump($respuestaPago);
+					// echo "</pre>";
+					// return $respuestaPago;
+				
+				
+		
+					if($respuestaPago == true){
+						echo "<script>
+								Swal.fire({
+									title: 'Inscripcion agregada exitosamente!',
+									icon: 'success',
+									allowOutsideClick: false,
+									showCancelButton: false,
+									showConfirmButton: true,
+									confirmButtonText: 'Cerrar'
+								}).then((result)=>{
+									if(result.value){
+										window.location = 'clientes-inscripciones';
+									}
+								});;
+							</script>";
+					} else {
+						echo "<script>
+								Swal.fire({
+									title: 'Oops, algo salio. Intenta de nuevo!',
+									icon: 'error',
+									allowOutsideClick: false,
+									showCancelButton: false,
+									showConfirmButton: true,
+									confirmButtonText: 'Cerrar'
+								}).then((result)=>{
+									if(result.value){
+										window.location = 'clientes-inscripciones';
+									}
+								});;
+							</script>";
+					}
+				
+				} else {
+					echo "<script>
+								Swal.fire({
+									title: 'Oops, algo salio. Intenta de nuevo!',
+									icon: 'error',
+									allowOutsideClick: false,
+									showCancelButton: false,
+									showConfirmButton: true,
+									confirmButtonText: 'Cerrar'
+								}).then((result)=>{
+									if(result.value){
+										window.location = 'clientes-inscripciones';
+									}
+								});;
+							</script>";
+				}
+			} else {
+				echo "<script>
+						Swal.fire({
+							title: 'Oops, algo salio. Intenta de nuevo!',
+							icon: 'error',
+							allowOutsideClick: false,
+							showCancelButton: false,
+							showConfirmButton: true,
+							confirmButtonText: 'Cerrar'
+						}).then((result)=>{
+							if(result.value){
+								window.location = 'clientes-inscripciones';
+							}
+						});;
+					</script>";
+			}
+
+
+
+
+		}
+	}
 	
 
     /*=============================================
