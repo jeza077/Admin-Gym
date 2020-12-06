@@ -260,10 +260,10 @@ class ControladorPersonas{
 
                             
                             $crearCliente = ControladorClientes::ctrCrearCliente($datos);
-                            // echo "<pre>";
-                            // var_dump($crearCliente);
-                            // echo "</pre>";
-                            // return;                            
+                            echo "<pre>";
+                            var_dump($crearCliente);
+                            echo "</pre>";
+                            return;                            
                             
 
                             
