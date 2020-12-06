@@ -183,6 +183,8 @@ function mostrarDinamico(selector1,tablaDB,itemDB,selector2,precio) {
 }
 
 // MOSTRAR TABLA INSCRIPCION
+mostrarDinamico($('.nuevaMatricula'),'tbl_matricula','id_matricula',$('.nuevoPrecioMatricula'),'precio_matricula')
+
 mostrarDinamico($('.nuevaInscripcion'),'tbl_inscripcion','id_inscripcion',$('.nuevoPrecioInscripcion'),'precio_inscripcion')
 // MOSTRAR TABLA PROMOCIONES
 mostrarDinamico($('.nuevaPromocion'),'tbl_descuento', 'id_descuento',$('.nuevoPrecioPromocion'),'valor_descuento')
