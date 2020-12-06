@@ -386,11 +386,11 @@ $(document).on('click', '.SwalBtnMantenerInscripcion', function (e) {
     e.preventDefault();
     console.log(idClientePago);
     // console.log('click')
-    // Swal.fire({
-    //     title: 'Procesando...',
-    //     allowOutsideClick: false
-    // });
-    // Swal.showLoading()
+    Swal.fire({
+        title: 'Procesando...',
+        allowOutsideClick: false
+    });
+    Swal.showLoading()
     // Swal.close();
     // return;
 

@@ -95,7 +95,7 @@
 
                       // var_dump($date1);
                       // echo $diff->days;                          
-                      if($diff->days >= 10 && $diff->days <= 30){  
+                      if($diff->days >= 10){  
                           echo '<td class="badge badge-success mt-2" data-toggle="tooltip" data-placement="left" title="Suscrito">'.$value["fecha_vencimiento"].'</td>';
                       } else if($diff->days >= 1 && $diff->days <= 10) {
                           echo '<td class="badge badge-warning mt-2" data-toggle="tooltip" data-placement="left" title="Suscripcion por Vencer">'.$value["fecha_vencimiento"].'</td>';
