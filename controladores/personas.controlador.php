@@ -260,17 +260,17 @@ class ControladorPersonas{
 
                             
                             $crearCliente = ControladorClientes::ctrCrearCliente($datos);
-                            echo "<pre>";
-                            var_dump($crearCliente);
-                            echo "</pre>";
-                            return;                            
+                            // echo "<pre>";
+                            // var_dump($crearCliente);
+                            // echo "</pre>";
+                            // return;                            
                             
 
                             
                             if($crearCliente == true){
                                 echo '<script>
                                         Swal.fire({
-                                            title: "Cliente guardado correctamente!",
+                                            title: "Cliente no se guardo correctamente!",
                                             icon: "success",
                                             heightAuto: false,
                                             allowOutsideClick: false
@@ -280,6 +280,7 @@ class ControladorPersonas{
                                             }
                                         });                                              
                                     </script>';
+
                             }
                         }   
                 }                

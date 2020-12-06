@@ -3,104 +3,83 @@ date_default_timezone_set("America/Tegucigalpa");
 
 class ControladorClientes{
 
-    static public function ctrCrearCliente($datos){
+	static public function ctrCrearCliente($datos){
 		// echo "<pre>";
 		// var_dump($datos);
 		// echo "</pre>";
-		// return $datos;
+		// return;
 
 
-        if(isset($datos["id_persona"])){
+        if(isset($datos['id_persona'])){
 
-			$pago_matricula = $datos['pago_matricula'];
-			$pago_descuento = $datos['pago_descuento'];
-			$pago_inscripcion = $datos['pago_inscripcion'];
-			$pago_total = $datos['pago_total'];
-
-			// echo "<pre>";
-			// var_dump($pago_total);
-			// echo "</pre>";
-			// return;
-
-			if ($datos['tipo_cliente'] == "Gimnasio") {
-				
-				$datos = array("id_persona" => $datos["id_persona"],
-							"tipo_cliente" => $datos["tipo_cliente"],
-							"id_matricula" =>  $datos["id_matricula"],
-							"id_descuento" => $datos["id_descuento"]);
-			} else {
-				$datos = array("id_persona" => $datos["id_persona"],
-							"tipo_cliente" => $datos["tipo_cliente"]);
-			}
+			$tabla = "tbl_clientes";
 			
+			if ($datos['tipo_cliente'] == "Gimnasio"){
+				$datos = array("id_persona" => $datos['id_persona'],
+			                "tipo_cliente" => $datos["tipo_cliente"],		
+							"id_matricula" =>  $datos["id_matricula"],
+							"id_descuento" =>  $datos["id_descuento"]);
+			} else {
+				$datos = array("id_persona" => $datos['id_persona'],
+			                  "tipo_cliente" => $datos["tipo_cliente"]);
+			}
+
 							
-			// return $datos;
-			$tabla = 'tbl_clientes';
+			
 
             $respuestaCrearCliente = ModeloClientes::mdlCrearCliente($tabla, $datos);
-			// return $respuestaCrearCliente;
             // echo "<pre>";
-			// var_dump($respuestaCrearCliente);
+			// var_dump($datos);
 			// echo "</pre>";
-			// return $respuestaCrearCliente;
-			
-
-			if ($respuestaCrearCliente == true) {
-
-
-				// echo "<pre>";
-				// var_dump($pago_matricula);
-				// echo "</pre>";
-				// return;
+			// return;
+            if($respuestaCrearCliente = true){
 				
+				
+				
+				
+				// GUARDAR EN LA TABLA CLIENTE INSCRIPCION
+				// 
+				// 
+
 
 				$totalId = array();
 				$tabla1 = "tbl_personas";
 				$tabla2 = "tbl_clientes";
 				$item = null;
 				$valor = null;
-	
-				$clienteInscripcionTotal = ModeloClientes::mdlMostrarClientesSinPago($tabla1, $tabla2, $item, $valor);
-				// echo "<pre>";
-				// var_dump($clienteInscripcionTotal);
-				// echo "</pre>";
-				// return $clienteInscripcionTotal;
-				
-				foreach($clienteInscripcionTotal as $keyCliente => $valueClienteInscripcion){
-					array_push($totalId, $valueClienteInscripcion["id_cliente"]);
-				}
-				
-	
-				$idClienteInscripcion = end($totalId);
-				
-				$idInscripcion = $datos["id_inscripcion"];
 
-				return $idClienteInscripcion;
-	
+				$clientesTotal = ModeloClientes::mdlMostrarClientesSinPago($tabla1, $tabla2, $item, $valor);
+				// echo "<pre>";
+				// var_dump($clientesTotal);
+				// echo "</pre>";
+				// return;
+				
+				foreach($clientesTotal as $keyCliente => $valueCliente){
+				array_push($totalId, $valueCliente["id_cliente"]);
+			
+				}
+			
+				$idCliente = end($totalId);
+				
+				return $idCliente;	
+				
+				$vigencias = $_POST["id_matricula"];
+				
+				
 				$tabla = "tbl_inscripcion";
 				$item = "id_inscripcion";
 				$valor = $idInscripcion;
+
 				$inscripcion = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
-				// echo "<pre>";
-				// var_dump($valor);
-				// echo "</pre>";
-				// return $idInscripcion;
-	
+
 				$cantidadDias = $inscripcion['cantidad_dias'];
-				// echo "<pre>";
-				// var_dump($cantidadDias);
-				// echo "</pre>";
-				// return $cantidadDia
-				
+
 				date_default_timezone_set("America/Tegucigalpa");
 				$fechaHoy = date('Y-m-d');
 				$fechaVencimientoCliente = date("Y-m-d", strtotime('+'.$cantidadDias.' days'));
-				// $fecha_proximo_pago = $fechaVencimientoCliente;	
 
-				
-					
 				$datos = array("id_cliente" =>  $idClienteInscripcion,
-								"id_inscripcion" => $datos["id_inscripcion"],
+								"id_inscripcion" => $idInscripcionCliente,
 								"fecha_inscripcion" => $fechaHoy,
 								"fecha_pago" => $fechaHoy,
 								"fecha_proximo_pago" => $fechaVencimientoCliente,
@@ -110,11 +89,34 @@ class ControladorClientes{
 	
 				$respuestaClienteInscripcion = ModeloClientes::mdlCrearClienteInscripcion($tabla, $datos);
 
-				// echo "<pre>";
-				// var_dump($datos);
-				// echo "</pre>";
-				return $datos;
+
+
 					
+				// GUARDAR EN LA TABLA PAGOS
+				// 
+				// 
+					
+						
+						
+						
+						
+						
+		
+		
+		
+		
+		
+		
+		
+		
+	
+	
+	
+	
+
+
+
+
 				$totalId = array();
 				$tabla1 = "tbl_personas";
 				$tabla2 = "tbl_clientes";
@@ -128,20 +130,26 @@ class ControladorClientes{
 				// return;
 				
 				foreach($clientesTotal as $keyCliente => $valueCliente){
-					array_push($totalId, $valueCliente["id_cliente_inscripcion"]);
+				array_push($totalId, $valueCliente["id_cliente"]);
+			
+				
 				}
 				
 
 				$idCliente = end($totalId);
 
-				// return $idCliente;
-				
-				
-				// echo $fechaVencimientoCliente;
+				// var_dump($parametros);
 				// return;
+				
 				$tabla3 = "tbl_pagos_cliente";
 
 				$datos = array("id_cliente_inscripcion" => $idCliente,
+								"pago_matricula" => $_POST["pagoMatricula"],
+								"pago_descuento" => $_POST["nuevoPrecioDescuento"],
+								"pago_inscripcion" => $_POST["pagoInscripcion"],
+								"pago_total" => $_POST["nuevoTotalCliente"]);
+
+								$datos = array("id_cliente_inscripcion" => $idCliente,
 								"pago_matricula" => $pago_matricula,
 								"pago_descuento" => $pago_descuento,
 								"pago_inscripcion" => $pago_inscripcion,
@@ -149,7 +157,7 @@ class ControladorClientes{
 
 				$respuestaPago = ModeloClientes::mdlCrearPago($tabla3, $datos);
 				// echo "<pre>";
-				// var_dump($datos);
+				// var_dump($respuestaPago);
 				// echo "</pre>";
 				// return;
 			
@@ -157,17 +165,28 @@ class ControladorClientes{
 				$accion = "Nuevo";
 				$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 3,$accion, $descripcionEvento);
 
-					
-				
-					
-				return true;
 
 				
 				
+
+				
+
+				return true;
+
             } else {
+				echo '<script>
+				Swal.fire({
+					title: "Llene los campos correctamente.",
+					icon: "error",
+					toast: true,
+					position: "top",
+					showConfirmButton: false,
+					timer: 3000,
+					});					
+				</script>';
                 return false;
             }
-        }
+        } 
 
 	}
 	/*=============================================

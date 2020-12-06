@@ -241,6 +241,7 @@
                       <div class="form-group col-md-6">
                           <label>Tipo matricula</label>
                           <select class="form-control select2 nuevaMatricula" style="width: 100%;" name="nuevaMatricula">
+                          <option selected="selected">Seleccionar...</option>
                             <?php 
                                 $tabla = "tbl_matricula";
                                 $item = null;
@@ -248,12 +249,9 @@
 
                                 $matriculas = ControladorClientes::ctrMostrar($tabla, $item, $valor);
                               
-                                foreach ($matriculas as $key => $value) {
-                                  if($value["tipo_matricula"] == 'Normal'){
-                                    echo '<option selected="selected" value="'.$value["id_matricula"].'">'.$value["tipo_matricula"].'</option>';
-                                  } else {
-                                    echo '<option value="'.$value["id_matricula"].'">'.$value["tipo_matricula"].'</option>';
-                                  }
+                                foreach ($matriculas as $key => $value) { ?>
+                                  <option value="<?php echo $value['id_matricula']?>"><?php echo $value['tipo_matricula']?></option>        
+                                <?php 
                                 }                             
                             ?>                           
                           </select> 
@@ -264,7 +262,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">$</span>  
                               </div>
-                            <input type="text" class="form-control text-right nuevoPrecioMatricula totalMatricula" name="nuevoPrecioMatricula" value="<?php echo $value['precio_matricula']?>" readonly>
+                            <input type="text" class="form-control text-right nuevoPrecioMatricula totalMatricula" name="nuevoPrecioMatricula" value="" readonly>
                             <!-- <input type="hidden" id="pagoMatricula" name="pagoMatricula">   -->
                          </div>
                       </div>
@@ -280,9 +278,9 @@
                                 $item = null;
                                 $valor = null;
 
-                                $matriculas = ControladorClientes::ctrMostrar($tabla, $item, $valor);
+                                $descuentos = ControladorClientes::ctrMostrar($tabla, $item, $valor);
 
-                                foreach ($matriculas as $key => $value) { ?>
+                                foreach ($descuentos as $key => $value) { ?>
                                   <option value="<?php echo $value['id_descuento']?>"><?php echo $value['tipo_descuento']?></option>        
                                 <?php 
                                 }
