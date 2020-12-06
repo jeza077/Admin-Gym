@@ -80,7 +80,7 @@ class AjaxClientes{
     public function ajaxEditarPagoCliente(){
 
         $tabla = "tbl_clientes";
-        $item = "id_personas";
+        $item = "id_cliente";
         $valor = $this->idClientePago;
         $max = true;
         

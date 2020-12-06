@@ -63,9 +63,9 @@
                   $valor = null;
                   $clientes = ControladorClientes::ctrMostrarClientes($tabla, $item, $valor);
 
-                  // echo "<pre>";
-                  // var_dump($parametros);
-                  // echo "</pre>";
+                  echo "<pre>";
+                  var_dump($clientes);
+                  echo "</pre>";
                   // return;
 
                   // $tabla = "tbl_clientes";

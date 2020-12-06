@@ -446,15 +446,18 @@ class ControladorClientes{
 		if(isset($_POST['actualizarTipoInscripcion'])){
 			$tabla1 = "tbl_personas";
 			$tabla2 = "tbl_clientes";
-			$item = 'id_personas';
+			$item = 'id_cliente';
 			$valor = $_POST['idClientePago'];
 			$respuesta = ModeloClientes::mdlMostrarPagoPorCliente($tabla1, $tabla2, $item, $valor);
 			
-			// var_dump($respuesta['fecha_vencimiento']);
+			// var_dump($respuesta);
 			// return;
 
-			$fechaHoy = date('Y-m-d 00:00:00');
-			$fechaVencimiento = $respuesta['fecha_vencimiento'];
+			$fechaHoy = date('Y-m-d');
+			$fechaVencimiento = $respuesta['fecha_proximo_pago'];
+			$idCliente = $respuesta['id_cliente'];
+			$idClienteInscripcion = $respuesta['id_cliente_inscripcion'];
+
 			$idInscripcion = $_POST['actualizarTipoInscripcion'];
 
 			$tabla = "tbl_inscripcion";
@@ -468,29 +471,10 @@ class ControladorClientes{
 
 			$tipoInscripcion = $inscripciones['tipo_inscripcion'];
 			$precioInscripcion = $inscripciones['precio_inscripcion'];
-			$idCliente = $respuesta['id_cliente'];
-			
-			if ($tipoInscripcion == 'mensual') {
-				$valorVigencia = 'VIGENCIA_CLIENTE_MES';
-				
-			} else if ($tipoInscripcion == 'quincenal'){
-				$valorVigencia = 'VIGENCIA_CLIENTE_QUINCENAL';
-				
-			} else {
-				$valorVigencia = 'VIGENCIA_CLIENTE_DIA';
-								
-			}
-
-			$item = 'parametro';
-			$parametros = ControladorUsuarios::ctrMostrarParametros($item, $valorVigencia);
-			// var_dump($parametros);
-			// return $parametros;
-
-			$vigenciaCliente = $parametros['valor'];
-			
+			$cantidadDias = $inscripciones['cantidad_dias'];	
 
 			if($fechaHoy > $fechaVencimiento || $fechaHoy == $fechaVencimiento){
-				$fechaVencimientoCliente = date("Y-m-d 00:00:00", strtotime('+'.$vigenciaCliente.' days'));
+				$fechaVencimientoCliente = date("Y-m-d 00:00:00", strtotime('+'.$cantidadDias.' days'));
 
 				// echo'hoy es mayor:  '.$fechaVencimientoCliente;
 				// return;
@@ -501,46 +485,88 @@ class ControladorClientes{
 			// 	return 'igual';
 			}else {
 
-				$fechaVencimientoCliente = date("Y-m-d", strtotime($fechaVencimiento.'+'.$vigenciaCliente.' days'));
+				$fechaVencimientoCliente = date("Y-m-d", strtotime($fechaVencimiento.'+'.$cantidadDias.' days'));
 				
 				// echo 'hoy es menor:  '.$fechaVencimientoCliente;
 				// return;
 			}
 
-			$tabla = 'tbl_pagos_cliente';
+			
+			$tabla = 'tbl_cliente_inscripcion';
 
+			// $idU =  $_SESSION['id_usuario'];
+			// return $idU;
 			$idUsuario =  $_SESSION['id_usuario'];
 
 			$datos = array('id_cliente' => $idCliente,
 							'id_inscripcion' => $idInscripcion,
-							'pago_inscripcion' => $precioInscripcion,
-							'pago_total' => $precioInscripcion,
-							'fecha_ultimo_pago' => $fechaHoy,
+							'fecha_pago' => $fechaHoy,
+							'fecha_proximo_pago' => $fechaVencimientoCliente,
 							'fecha_vencimiento' => $fechaVencimientoCliente,
 							'creado_por' => $idUsuario);
 
-			// echo '<pre>';
-			// var_dump($datos);
-			// echo '</pre>';
-			// return;
-			$respuesta = ModeloClientes::mdlActualizarPagoCliente($tabla, $datos);
+			$fecha = true;
+			$respuestaActualizarInscripcion = ModeloClientes::mdlActualizarInscripcionPagoCliente($tabla, $datos, $fecha);
 
-			if($respuesta == true){
+			if($respuestaActualizarInscripcion == true){
+
+				$tabla = 'tbl_pagos_cliente';
+				$datos = array('id_cliente_inscripcion' => $idClienteInscripcion,
+								'pago_inscripcion' => $precioInscripcion,
+								'pago_total' => $precioInscripcion);
+
+				$fecha = null;
+				$respuestaPagoCliente = ModeloClientes::mdlActualizarInscripcionPagoCliente($tabla, $datos, $fecha);
+	
+				if($respuestaPagoCliente == true){
+					echo "<script>
+							Swal.fire({
+								title: 'El cambio y pago de inscripcion, se realizo exitosamente!',
+								icon: 'success',
+								allowOutsideClick: false,
+								showCancelButton: false,
+								showConfirmButton: true,
+								confirmButtonText: 'Cerrar'
+							}).then((result)=>{
+								if(result.value){
+									window.location = 'clientes-inscripciones';
+								}
+							});;
+						</script>";
+				} else {
+					echo "<script>
+							Swal.fire({
+								title: 'Oops, algo salio. Intenta de nuevo!',
+								icon: 'error',
+								allowOutsideClick: false,
+								showCancelButton: false,
+								showConfirmButton: true,
+								confirmButtonText: 'Cerrar'
+							}).then((result)=>{
+								if(result.value){
+									window.location = 'clientes-inscripciones';
+								}
+							});;
+						</script>";
+				}
+			
+			} else {
 				echo "<script>
-						Swal.fire({
-							title: 'El pago se agrego correctamente',
-							icon: 'success',
-							allowOutsideClick: false,
-							showCancelButton: false,
-							showConfirmButton: true,
-							confirmButtonText: 'Cerrar'
-						}).then((result)=>{
-							if(result.value){
-								window.location = 'pagos-cliente';
-							}
-						});;
-					</script>";
+							Swal.fire({
+								title: 'Oops, algo salio. Intenta de nuevo!',
+								icon: 'error',
+								allowOutsideClick: false,
+								showCancelButton: false,
+								showConfirmButton: true,
+								confirmButtonText: 'Cerrar'
+							}).then((result)=>{
+								if(result.value){
+									window.location = 'clientes-inscripciones';
+								}
+							});;
+						</script>";
 			}
+
 
 
 		}

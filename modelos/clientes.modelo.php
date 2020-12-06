@@ -518,6 +518,49 @@ class ModeloClientes{
 
 
 	/*=============================================
+	ACTUALIZAR PAGO CLIENTE  (CAMBIANDO INSCRIPCION)
+	=============================================*/
+
+	static public function mdlActualizarInscripcionPagoCliente($tabla1, $datos, $fecha){
+
+		if($fecha != null) {
+
+			$stmt = Conexion::conectar()->prepare("UPDATE $tabla1 SET id_inscripcion = :id_inscripcion, fecha_pago = :fecha_pago, fecha_proximo_pago = :fecha_proximo_pago, fecha_vencimiento = :fecha_vencimiento, creado_por = :creado_por WHERE id_cliente = :id_cliente");
+	
+			$stmt->bindParam(":id_inscripcion", $datos["id_inscripcion"], PDO::PARAM_STR);
+			$stmt->bindParam(":fecha_pago", $datos["fecha_pago"], PDO::PARAM_STR);
+			$stmt->bindParam(":fecha_proximo_pago", $datos["fecha_proximo_pago"], PDO::PARAM_STR);
+			$stmt->bindParam(":fecha_vencimiento", $datos["fecha_vencimiento"], PDO::PARAM_STR);
+			$stmt->bindParam(":id_cliente", $datos["id_cliente"], PDO::PARAM_INT);
+			$stmt->bindParam(":creado_por", $datos["creado_por"], PDO::PARAM_STR);
+		} else {
+
+			$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla1(id_cliente_inscripcion, pago_inscripcion, pago_total) VALUES(:id_cliente_inscripcion, :pago_inscripcion, :pago_total)");
+	
+			$stmt->bindParam(":id_cliente_inscripcion", $datos["id_cliente_inscripcion"], PDO::PARAM_INT);
+			$stmt->bindParam(":pago_inscripcion", $datos["pago_inscripcion"], PDO::PARAM_STR);
+			$stmt->bindParam(":pago_total", $datos["pago_total"], PDO::PARAM_STR);
+			// $stmt->bindParam(":creado_por", $datos["creado_por"], PDO::PARAM_STR);
+		} 
+
+		if($stmt -> execute()){
+
+			return true;
+		
+		}else{
+
+			return $stmt->errorInfo();	
+
+		}
+
+		$stmt -> close();
+
+		$stmt = null;
+
+	}
+
+
+	/*=============================================
 			RANGO CLIENTES
 	=============================================*/
 	static public function mdlRangoCliente($tabla, $rango){

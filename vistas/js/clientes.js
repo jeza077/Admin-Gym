@@ -189,7 +189,8 @@ mostrarDinamico($('.nuevaInscripcion'),'tbl_inscripcion','id_inscripcion',$('.nu
 // MOSTRAR TABLA PROMOCIONES
 mostrarDinamico($('.nuevaPromocion'),'tbl_descuento', 'id_descuento',$('.nuevoPrecioPromocion'),'valor_descuento')
 
-// mostrarDinamico($('.actualizarInscripcion'),'tbl_inscripcion','id_inscripcion',$('.actualizarPagoInscripcion'),'precio_inscripcion')
+// ALEX, DEJAME ESTA DE ABAJO QUE YO LA OCUPO NO LA COMENTES
+mostrarDinamico($('.actualizarInscripcion'),'tbl_inscripcion','id_inscripcion',$('.actualizarPagoInscripcion'),'precio_inscripcion')
 
 // mostrarDinamico($('.descuentoNuevo'),'tbl_descuento', 'id_descuento',$('.actualizarPrecioDescuento'),'valor_descuento')  
 // MOSTRAR PRECIOS EN EDITAR CLIENTE VENTAS
@@ -480,7 +481,7 @@ $(document).on('click', '.verTotalActualizarPago', function (e) {
 $(document).on('click', '.SwalBtnCambiarInscripcion', function (e) { 
     e.preventDefault();
     // console.log('click')
-    // console.log(idClientePago);
+    console.log(idClientePago);
     var datos = new FormData();
     datos.append("idClientePago", idClientePago);
 
@@ -497,16 +498,13 @@ $(document).on('click', '.SwalBtnCambiarInscripcion', function (e) {
             // console.log(respuesta);
             // return;
             
-            $('#idClientePago').val(respuesta["id_personas"]);
+            $('#idClientePago').val(respuesta["id_cliente"]);
             
             $('#actualizarInscripcion').html(respuesta["tipo_inscripcion"])
             $('#actualizarInscripcion').val(respuesta["id_inscripcion"])
-            $('#actualizarPagoInscripcion').attr('value', respuesta["pago_inscripcion"])            
+            $('#actualizarPagoInscripcion').attr('value', respuesta["precio_inscripcion"])            
 
-            // $('#actualizarDescuento').html(respuesta["tipo_descuento"])
-            // $('#actualizarDescuento').val(respuesta["id_descuento"])
-            // $('.actualizarPrecioDescuento').val(respuesta["pago_descuento"])
-            $('.pagoTotalActualizado').val(respuesta["pago_total"])
+            // $('.pagoTotalActualizado').val(respuesta["pago_total"])
             
         }
     });
