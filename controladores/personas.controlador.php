@@ -202,7 +202,7 @@ class ControladorPersonas{
 
                 } else {
                     // echo "<pre>";
-                    // var_dump($datos);
+                    // var_dump($_POST);
                     // echo "</pre>";
                     // return;
 

@@ -61,11 +61,11 @@
                   $tabla = "tbl_clientes";
                   $item = null;
                   $valor = null;
-                  $clientes = ControladorClientes::ctrMostrarClientes($tabla, $item, $valor);
+                  $clientes = ControladorClientes::ctrMostrarClientesSinPago($tabla, $item, $valor);
 
-                  echo "<pre>";
-                  var_dump($clientes);
-                  echo "</pre>";
+                  // echo "<pre>";
+                  // var_dump($clientes);
+                  // echo "</pre>";
                   // return;
 
                   // $tabla = "tbl_clientes";
@@ -86,15 +86,10 @@
                           <th scope="row">'.($key+1).'</th>
                           <td>'.$value["nombre"].'</td>
                           <td>'.$value["tipo_cliente"].'</td>
-                          <td>'.$value["correo"].'</td>';
-
-                      echo  '<td>'.$value["telefono"].'</td>';
+                          <td>'.$value["correo"].'</td>
+                          <td>'.$value["telefono"].'</td>
+                          <td>'.$value["fecha_creacion"].'</td>';
  
-                          if ($value['fecha_inscripcion'] == null) {
-                            echo  '<td>**Ninguna**</td>';
-                          } else {
-                            echo   '<td>'.$value["fecha_inscripcion"].'</td>';                          
-                          }
 
                           if($value['estado'] != 0){
                             echo '<td><span class="badge badge-success p-3" idCliente="'.$value["id_cliente"].'" estadoUsuario="0">Activado</span></td>';

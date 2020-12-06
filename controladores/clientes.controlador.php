@@ -13,10 +13,10 @@ class ControladorClientes{
         if(isset($datos['id_persona'])){
 
 			$idDeInscripcion = $datos["id_inscripcion"];
-			$pago_matricula = $datos['pagos_matricula'];
-			$pago_descuento = $datos['pagos_descuento'];
-			$pago_inscripcion = $datos['pagos_inscripcion'];
-			$pago_total = $datos['pagos_total'];
+			$pago_matricula = $datos['pago_matricula'];
+			$pago_descuento = $datos['pago_descuento'];
+			$pago_inscripcion = $datos['pago_inscripcion'];
+			$pago_total = $datos['pago_total'];
 
 			$tabla = "tbl_clientes";
 			
@@ -34,19 +34,11 @@ class ControladorClientes{
 			
 
             $respuestaCrearCliente = ModeloClientes::mdlCrearCliente($tabla, $datos);
-            // echo "<pre>";
-			// var_dump($datos);
-			// echo "</pre>";
-			// return;
-            if($respuestaCrearCliente = true){
-				
-				
-				
-				
-				// GUARDAR EN LA TABLA CLIENTE INSCRIPCION
-				// 
-				// 
+			// return $respuestaCrearCliente;
 
+            if($respuestaCrearCliente = true){			
+
+				// GUARDAR EN LA TABLA CLIENTE INSCRIPCION
 
 				$totalId = array();
 				$tabla1 = "tbl_personas";
@@ -90,6 +82,8 @@ class ControladorClientes{
 								"fecha_pago" => $fechaHoy,
 								"fecha_proximo_pago" => $fechaVencimientoCliente,
 								"fecha_vencimiento" => $fechaVencimientoCliente);
+
+				// return $datos;
 								
 				$tabla = "tbl_cliente_inscripcion";
 	
@@ -300,6 +294,7 @@ class ControladorClientes{
         }
 
 	}
+
    /*=============================================
 				MOSTRAR CLIENTES
 	=============================================*/
@@ -316,6 +311,26 @@ class ControladorClientes{
 
 		return $respuesta;
 	}
+
+
+   /*=============================================
+				MOSTRAR CLIENTES
+	=============================================*/
+
+	static public function ctrMostrarClientesSinPago($tabla, $item, $valor){
+		// echo "<pre>";
+        // var_dump($respuesta);
+        // echo "</pre>";
+
+		$tabla1 = "tbl_personas";
+		$tabla2 = $tabla;
+
+		$respuesta = ModeloClientes::mdlMostrarClientesSinPago($tabla1, $tabla2, $item, $valor);
+
+		return $respuesta;
+	}
+
+
 	/*=============================================
 				MOSTRAR TABLA DE PAGOS
 	=============================================*/
