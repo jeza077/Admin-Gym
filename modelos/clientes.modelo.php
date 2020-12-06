@@ -71,9 +71,10 @@ class ModeloClientes{
 			. "LEFT JOIN $tabla2 as c ON p.id_personas = c.id_persona\n"
 			. "LEFT JOIN tbl_documento as d ON p.id_documento = d.id_documento\n"
 			. "LEFT JOIN tbl_matricula as m ON c.id_matricula = m.id_matricula\n"
-			. "LEFT JOIN tbl_inscripcion as i ON c.id_inscripcion = i.id_inscripcion\n"
-			. "LEFT JOIN tbl_pagos_cliente as pc ON c.id_cliente = pc.id_cliente\n"
 			. "LEFT JOIN tbl_descuento as pd ON c.id_descuento = pd.id_descuento\n"
+			. "LEFT JOIN tbl_cliente_inscripcion as ci ON c.id_cliente = ci.id_cliente\n"
+			. "LEFT JOIN tbl_inscripcion as i ON ci.id_inscripcion = i.id_inscripcion\n"
+			. "LEFT JOIN tbl_pagos_cliente as pc ON ci.id_cliente_inscripcion = pc.id_cliente_inscripcion\n"
 			. "WHERE $item = :$item"); 
 
 			$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
@@ -86,14 +87,15 @@ class ModeloClientes{
 			$stmt = Conexion::conectar()->prepare("SELECT p.*, c.*, d.tipo_documento, i.fecha_creacion, i.tipo_inscripcion, pd.tipo_descuento, valor_descuento, pc.* FROM $tabla1 as p\n"
 			. "LEFT JOIN $tabla2 as c ON p.id_personas = c.id_persona\n"
 			. "LEFT JOIN tbl_documento as d ON p.id_documento = d.id_documento\n"
-            . "LEFT JOIN tbl_matricula as m ON c.id_matricula = m.id_matricula\n"
-            . "LEFT JOIN tbl_inscripcion as i ON c.id_inscripcion = i.id_inscripcion\n"
+			. "LEFT JOIN tbl_matricula as m ON c.id_matricula = m.id_matricula\n"
 			. "LEFT JOIN tbl_descuento as pd ON c.id_descuento = pd.id_descuento\n"
-			. "LEFT JOIN tbl_pagos_cliente as pc ON c.id_cliente = pc.id_cliente\n"
+			. "LEFT JOIN tbl_cliente_inscripcion as ci ON c.id_cliente = ci.id_cliente\n"
+            . "LEFT JOIN tbl_inscripcion as i ON ci.id_inscripcion = i.id_inscripcion\n"
+			. "LEFT JOIN tbl_pagos_cliente as pc ON ci.id_cliente_inscripcion = pc.id_cliente_inscripcion\n"
 		    . "WHERE p.tipo_persona = 'clientes'");
 			
 			$stmt -> execute();
-			return $stmt -> fetchAll();
+			return $stmt -> errorInfo();
 
 		} 
 		
@@ -397,7 +399,7 @@ class ModeloClientes{
 	=============================================*/
 	static public function mdlCrearClienteInscripcion($tabla, $datos){
 
-		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla3 (id_cliente, id_inscripcion, fecha_inscripcion, fecha_pago, fecha_proximo_pago, fecha_vencimiento) VALUES (:id_cliente_inscripcion, :id_inscripcion, :fecha_inscripcion, :fecha_pago, :fecha_proximo_pago, :fecha_vencimiento)");
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla (id_cliente, id_inscripcion, fecha_inscripcion, fecha_pago, fecha_proximo_pago, fecha_vencimiento) VALUES (:id_cliente, :id_inscripcion, :fecha_inscripcion, :fecha_pago, :fecha_proximo_pago, :fecha_vencimiento)");
 
 		$stmt->bindParam(":id_cliente", $datos["id_cliente"], PDO::PARAM_INT);
 		$stmt->bindParam(":id_inscripcion", $datos["id_inscripcion"], PDO::PARAM_INT);

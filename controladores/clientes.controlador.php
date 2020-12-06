@@ -42,7 +42,8 @@ class ControladorClientes{
             // echo "<pre>";
 			// var_dump($respuestaCrearCliente);
 			// echo "</pre>";
-			// return;
+			// return $respuestaCrearCliente;
+			
 
 			if ($respuestaCrearCliente == true) {
 
@@ -51,6 +52,7 @@ class ControladorClientes{
 				// var_dump($pago_matricula);
 				// echo "</pre>";
 				// return;
+				
 
 				$totalId = array();
 				$tabla1 = "tbl_personas";
@@ -62,7 +64,7 @@ class ControladorClientes{
 				// echo "<pre>";
 				// var_dump($clienteInscripcionTotal);
 				// echo "</pre>";
-				// return;
+				// return $clienteInscripcionTotal;
 				
 				foreach($clienteInscripcionTotal as $keyCliente => $valueClienteInscripcion){
 					array_push($totalId, $valueClienteInscripcion["id_cliente"]);
@@ -70,9 +72,10 @@ class ControladorClientes{
 				
 	
 				$idClienteInscripcion = end($totalId);
-	
-					
+				
 				$idInscripcion = $datos["id_inscripcion"];
+
+				return $idClienteInscripcion;
 	
 				$tabla = "tbl_inscripcion";
 				$item = "id_inscripcion";
@@ -81,28 +84,26 @@ class ControladorClientes{
 				// echo "<pre>";
 				// var_dump($valor);
 				// echo "</pre>";
-				// return;
+				// return $idInscripcion;
 	
 				$cantidadDias = $inscripcion['cantidad_dias'];
 				// echo "<pre>";
-				// var_dump($dfg);
+				// var_dump($cantidadDias);
 				// echo "</pre>";
-				// return;
-	
-				
+				// return $cantidadDia
 				
 				date_default_timezone_set("America/Tegucigalpa");
 				$fechaHoy = date('Y-m-d');
 				$fechaVencimientoCliente = date("Y-m-d", strtotime('+'.$cantidadDias.' days'));
-				$fecha_proximo_pago = $fechaVencimientoCliente;	
+				// $fecha_proximo_pago = $fechaVencimientoCliente;	
 
 				
 					
-				$datos = array("id_cliente" =>  $datos["id_cliente"],
-								"id_inscripcion" =>  $datos["id_inscripcion"],
+				$datos = array("id_cliente" =>  $idClienteInscripcion,
+								"id_inscripcion" => $datos["id_inscripcion"],
 								"fecha_inscripcion" => $fechaHoy,
 								"fecha_pago" => $fechaHoy,
-								"fecha_proximo_pago" => $fecha_proximo_pago,
+								"fecha_proximo_pago" => $fechaVencimientoCliente,
 								"fecha_vencimiento" => $fechaVencimientoCliente);
 								
 				$tabla = "tbl_cliente_inscripcion";
@@ -112,7 +113,7 @@ class ControladorClientes{
 				// echo "<pre>";
 				// var_dump($datos);
 				// echo "</pre>";
-				// return;
+				return $datos;
 					
 				$totalId = array();
 				$tabla1 = "tbl_personas";
@@ -127,7 +128,7 @@ class ControladorClientes{
 				// return;
 				
 				foreach($clientesTotal as $keyCliente => $valueCliente){
-					array_push($totalId, $valueCliente["id_cliente"]);
+					array_push($totalId, $valueCliente["id_cliente_inscripcion"]);
 				}
 				
 
