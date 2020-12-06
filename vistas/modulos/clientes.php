@@ -6,7 +6,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Clientes</h1>
+            <h1>Administrar Clientes</h1>
           </div>
           <div class="col-sm-6">
           <button class="btn btn-orange float-right"  data-toggle="modal" data-target="#modalAgregarCliente">
@@ -64,7 +64,7 @@
                   $clientes = ControladorClientes::ctrMostrarClientes($tabla, $item, $valor);
 
                   // echo "<pre>";
-                  // var_dump($clientes);
+                  // var_dump($parametros);
                   // echo "</pre>";
                   // return;
 
@@ -106,10 +106,10 @@
                       // echo '<td></td>';
 
                           if($value['tipo_cliente'] == "Gimnasio"){
-                            echo '<td><button class="btn btn-warning btnEditarClienteGimnasio" tipoCliente="'.$value['tipo_cliente'].'" id="btnEditar" data-toggle="modal" data-target="#modalEditarClienteGimnasio" idEditarCliente="'.$value["id_personas"].'"><i class="fas fa-pencil-alt" style="color:#fff"></i></button>
+                            echo '<td><button class="btn btn-warning btnEditarClienteGimnasio" tipoClienteGimnasio="'.$value['tipo_cliente'].'" id="btnEditarClienteGimnasio" data-toggle="modal" data-target="#modalEditarClienteGimnasio" idEditarClienteGimnasio="'.$value["id_personas"].'"><i class="fas fa-pencil-alt" style="color:#fff"></i></button>
                             <button class="btn btn-danger btnEliminarCliente" idPersona="'.$value["id_personas"].'"><i class="fas fa-trash-alt"></i></button>';
                           } else {
-                            echo '<td><button class="btn btn-warning btnEditarClienteVenta" tipoCliente="'.$value['tipo_cliente'].'" id="btnEditar" data-toggle="modal" data-target="#modalEditarClienteVenta" idEditarClienteVenta="'.$value["id_personas"].'"><i class="fas fa-pencil-alt" style="color:#fff"></i></button>
+                            echo '<td><button class="btn btn-warning btnEditarClienteVenta" tipoClienteVenta="'.$value['tipo_cliente'].'" id="btnEditarClienteVenta" data-toggle="modal" data-target="#modalEditarClienteVenta" idEditarClienteVenta="'.$value["id_personas"].'"><i class="fas fa-pencil-alt" style="color:#fff"></i></button>
                             <button class="btn btn-danger btnEliminarCliente" idPersona="'.$value["id_personas"].'"><i class="fas fa-trash-alt"></i></button>';
                           }
                           '<td>
@@ -412,7 +412,7 @@
                     <div class="form-group col-md-3">
                       <label for="nombre">Nombre</label>
                       <input type="text" class="form-control editarNombre mayus" name="editarNombre" required>
-                      <input type="hidden" id="idEditarCliente" name="idEditarCliente">
+                      <input type="hidden" id="EditarTipoClienteGimnasio" name="EditarTipoClienteGimnasio">
                     </div>
                     <div class="form-group col-md-3">
                       <label for="apellido">Apellido</label>
@@ -453,8 +453,8 @@
                 </div>
               
                 <div class="form-group mt-4 float-right">
-                  <input type="hidden" class="editarTipoCliente" name="editarTipoPersona">
-
+                 <input type="hidden" id="idEditarCliente" name="idEditarCliente">
+                <!-- <input type="hidden" id="editarTipoCliente" name="editarTipoCliente"> -->
                   <button type="" class="btn btn-primary">Guardar Cambios</button>
                   <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
                 </div>
@@ -529,7 +529,6 @@
                     <div class="form-group col-md-3">
                       <label for="nombre">Nombre</label>
                       <input type="text" class="form-control nombreClienteVentas mayus" name="nombreClienteVentas" required>
-                      <input type="hidden" id="idEditarClienteVenta" name="idEditarClienteVenta">
                     </div>
                     <div class="form-group col-md-3">
                       <label for="apellido">Apellido</label>
@@ -540,7 +539,7 @@
                   <div class="form-row">
                     <div class="form-group col-md-4">
                       <label for="email">Email</label>
-                      <input type="email" class="form-control editarEmailVentas" name= "editarEmailVentas" required>
+                      <input type="email" class="form-control editarEmailClienteVentas" name= "editarEmailVentas" required>
                     </div>
                     <div class="form-group col-md-4">
                       <label>Teléfono</label>
@@ -575,9 +574,8 @@
                   <div class="form-row">
                     <div class="form-group col-md-3">
                       <label>Tipo Cliente</label>
-                      <input type="hidden" class="tipoDeClienteVenta" value="" name="actualTipoCliente">
-                      <select class="form-control select2" name="tipoClienteVenta" style="width: 100%;" required>
-                        <option value="" class="tipoDeClienteVenta"></option>
+                      <select class="form-control select2" name="editarTipoClienteVenta" style="width: 100%;" required>
+                        <option value="tipoCl" id="editarTipoClienteVenta"></option>
                         <option value="Gimnasio">Clientes del gimnasio</option>
                         <option value="Ventas">Cliente de ventas</option>
                       </select>
@@ -588,8 +586,9 @@
                     <div class="form-row">
                       <div class="form-group col-md-6">
                           <label>Tipo matricula</label>
-                          <select class="form-control select2" style="width: 100%;" name="editarMatriculaClienteVenta">
+                          <select class="form-control select2 nuevaMatriculaClienteVenta" style="width: 100%;" name="tipoMatriculaClienteVenta">
                             <option value="" id="tipoMatriculaClienteVenta"></option>
+                            <option selected="selected">Seleccionar...</option>
                             <?php 
                                 $tabla = "tbl_matricula";
                                 $item = null;
@@ -598,12 +597,9 @@
                                 $matriculas = ControladorClientes::ctrMostrar($tabla, $item, $valor);
 
                               
-                                foreach ($matriculas as $key => $value) {
-                                  if($value["tipo_matricula"] == 'Normal'){
-                                    echo '<option selected="selected" value="'.$value["id_matricula"].'">'.$value["tipo_matricula"].'</option>';
-                                  } else {
-                                    echo '<option value="'.$value["id_matricula"].'">'.$value["tipo_matricula"].'</option>';
-                                  }
+                                  foreach ($matriculas as $key => $value) { ?>
+                                    <option value="<?php echo $value['id_matricula']?>"><?php echo $value['tipo_matricula']?></option>        
+                                  <?php 
                                 }
                             ?>
                             
@@ -615,24 +611,26 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">$</span>  
                               </div>
-                            <input type="text" class="form-control text-right precioMatriculaClienteVentas totalMatricula" value="<?php echo $value['precio_matricula']?>" name="precioMatriculaClienteVentas" readonly>
+                            <input type="text" class="form-control text-right precioMatriculaClienteVentas totalMatriculaCliente" name="precioMatriculaClienteVentas" readonly>
+                            <!-- <input type="hidden" id="nuevoMatriculaClienteVentas" name="nuevoMatriculaClienteVentas"> -->
                          </div>
                       </div>
                     </div>
                     <div class="form-row">
                       <div class="form-group col-md-6">
                         <label>Promociones</label>
-                        <select class="form-control select2 nuevaPromocion" style="width: 100%;" name="editarPromocionClienteVenta">
-                            <option></option> 
+                        <select class="form-control select2 nuevoDescuentoClienteVenta" style="width: 100%;" name="editarPromocionClienteVenta">
+                            <option value="" id="editarPromocionClienteVenta"></option> 
+                            <option selected="selected">Seleccionar...</option>
                           
                             <?php 
                                 $tabla = "tbl_descuento";
                                 $item = null;
                                 $valor = null;
 
-                                $matriculas = ControladorClientes::ctrMostrar($tabla, $item, $valor);
+                                $descuentos = ControladorClientes::ctrMostrar($tabla, $item, $valor);
 
-                                foreach ($matriculas as $key => $value) { ?>
+                                foreach ($descuentos as $key => $value) { ?>
                                   <option value="<?php echo $value['id_descuento']?>"><?php echo $value['tipo_descuento']?></option>        
                                 <?php 
                                 }
@@ -645,15 +643,17 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">$</span>  
                               </div>
-                            <input type="text" class="form-control text-right nuevoPrecioPromocion valorPromocionClienteVenta totalDescuento" value="" name="valorPromocionClienteVenta" readonly>
+                            <input type="text" class="form-control text-right valorDescuentoClienteVenta totalDescuentoCliente" value="" name="valorDescuentoClienteVenta" readonly>
+                            <!-- <input type="hidden" id="nuevoDescuentoClienteVenta" name="nuevoDescuentoClienteVenta"> -->
                          </div>
                       </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6"> 
                           <label>Tipo inscripcion</label>
-                          <select class="form-control select2 nueva nuevaInscripcion inscripcionClienteVenta"  name="inscripcionClienteVenta" style="width: 100%;" name="inscripcionClienteVenta">
+                          <select class="form-control select2 nuevaInscripcionClienteVenta" style="width: 100%;" name="inscripcionClienteVenta">
                               <option value="" id="inscripcionClienteVenta"></option>
+                              <option selected="selected">Seleccionar...</option>
                               <?php 
                                   $tabla = "tbl_inscripcion";
                                   $item = null;
@@ -674,7 +674,8 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">$</span>  
                               </div>
-                            <input type="text" class="form-control text-right nuevoPrecioInscripcion precioInscripcionClienteVenta totalInscripcion" name="precioInscripcionClienteVenta" readonly>
+                            <input type="text" class="form-control text-right precioInscripcionClienteVenta totalInscripcionCliente" name="precioInscripcionClienteVenta" readonly>
+                            <!-- <input type="hidden" id="nuevaInscripcionClienteVenta" name="nuevaInscripcionClienteVenta"> -->
                          </div>
                       </div>
                     </div>
@@ -694,16 +695,16 @@
                 </div>
 
                 <div class="form-group mt-4 float-right">
-                  
+                  <input type="hidden" id="idEditarClienteVenta" name="idEditarClienteVenta">
                   <button type="" class="btn btn-primary">Guardar Cambios</button>
                   <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
                 </div>
                 <?php
-                  $ajustes = null;
-                  $tipoPersona = 'clientes';
+                  
+                  $tipoCliente = 'clientes';
                   $pantalla = 'clientes';
                   $editarPersona = new ControladorPersonas();
-                  $editarPersona->ctrEditarPersona($ajustes, $tipoPersona, $pantalla);
+                  $editarPersona->ctrEditarClienteVentas($tipoCliente, $pantalla);
                 ?>
 
               </div>

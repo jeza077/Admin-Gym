@@ -130,15 +130,15 @@
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="pagos-cliente" class="nav-link">
+                    <a href="clientes-inscripciones" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
-                      <p>Pagos Clientes</p>
+                      <p>Clientes Inscripciones</p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="historial-pagos-clientes" class="nav-link">
+                    <a href="clientes-inscripciones-historico" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
-                      <p>Historial Pagos Clientes</p>
+                      <p>Clientes Inscripciones Historico</p>
                     </a>
                   </li>
                 </ul>
