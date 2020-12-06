@@ -375,7 +375,7 @@ $(document).on('click', '.btnEditarPago', function (e) {
         title: 'Actualizar Pago',
         html: '<p class="SwalParrafo">¿Deseás mantener el Tipo de Inscripcion actual?</p>' +
             '<button type="button" role="button" tabindex="0" class="SwalBtnMantenerInscripcion btn btn-success customSwalBtn">' + 'Si, mantener' + '</button>' +
-            '<button type="button" role="button" tabindex="0" class="SwalBtnCambiarInscripcion btn btn-danger customSwalBtn" data-toggle="modal" data-target="#modalEditarPagos">' + 'No, cambiar' + '</button>' +
+            '<button type="button" role="button" tabindex="0" class="SwalBtnCambiarInscripcion btn btn-primary customSwalBtn" data-toggle="modal" data-target="#modalEditarPagos">' + 'No, cambiar' + '</button>' +
             '<button type="button" role="button" tabindex="0" class="SwalBtnCancelar btn btn-secondary customSwalBtn">' + 'Cancelar' + '</button>',
         width: 600,
         allowOutsideClick: false,
@@ -453,6 +453,10 @@ $(document).on('click', '.SwalBtnMantenerInscripcion', function (e) {
 
 });
 
+
+//***** ======================================
+// CALCULANDO TOTAL A PAGAR AL CAMBIAR INSCRIPCION 
+// ========================================= *//
 $(document).on('click', '.verTotalActualizarPago', function (e) {
     e.preventDefault();
     
@@ -478,6 +482,10 @@ $(document).on('click', '.verTotalActualizarPago', function (e) {
 
 });
 
+
+//***** ======================================
+//    PROCESAR PAGO CAMBIANDO INSCRIPCION 
+// ========================================= *//
 $(document).on('click', '.SwalBtnCambiarInscripcion', function (e) { 
     e.preventDefault();
     // console.log('click')
@@ -515,6 +523,83 @@ $(document).on('click', '.SwalBtnCambiarInscripcion', function (e) {
 $(document).on('click', '.SwalBtnCancelar', function (e) { 
     e.preventDefault();
     Swal.close();
+});
+
+
+
+//***** ======================================
+//  BOTON CANCELAR INSCRIPCION DE CLIENTES 
+// ========================================= *//
+$(document).on('click', '.btnCancelarInscripcion', function (e) {
+    e.preventDefault();
+    idClienteInscripcion = $(this).attr('idClienteInscripcion');
+    // estadoClienteInscripcion = $(this).attr('estadoClienteInscripcion');
+
+    // console.log('click')
+    Swal.fire({
+        icon: 'info',
+        title: '¿Está seguro de cancelar la inscripción?',
+        html: '<button type="button" role="button" tabindex="0" class="SwalBtnCancelarInscripcion btn btn-success customSwalBtn" data-toggle="modal" data-target="">' + 'Si, cancelar' + '</button>' +
+            '<button type="button" role="button" tabindex="0" class="SwalBtnCancelar btn btn-secondary customSwalBtn">' + 'No, salir' + '</button>',
+        width: 500,
+        allowOutsideClick: false,
+        showCancelButton: false,
+        showConfirmButton: false
+    });
+});
+$(document).on('click', '.SwalBtnCancelarInscripcion', function () {
+    // console.log(idClienteInscripcion+' estado:'+ estadoClienteInscripcion)
+    var estadoClienteInscripcion = 0;
+
+    var datos = new FormData();
+    datos.append('idClienteInscripcion', idClienteInscripcion);
+    datos.append('estadoClienteInscripcion', estadoClienteInscripcion);
+
+    $.ajax({
+
+        url:"ajax/clientes.ajax.php",
+        method: "POST",
+        data: datos,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function(respuesta) {
+            // console.log(respuesta);
+
+            if(respuesta == 'true'){
+                Swal.fire({
+                    title: 'Inscripcion cancelada!',
+                    icon: 'success',
+                    // width: 600,
+                    allowOutsideClick: false,
+                    showCancelButton: false,
+                    showConfirmButton: true,
+                    confirmButtonText: 'Cerrar'
+                }).then((result)=>{
+                    if(result.value){
+                        window.location = "clientes-inscripciones";
+                    }
+                });;
+
+            } else {
+                Swal.fire({
+                    title: 'Oops, algo salio mal. Intenta de nuevo!',
+                    icon: 'error',
+                    // width: 600,
+                    allowOutsideClick: false,
+                    showCancelButton: false,
+                    showConfirmButton: true,
+                    confirmButtonText: 'Cerrar'
+                }).then((result)=>{
+                    if(result.value){
+                        window.location = "clientes-inscripciones";
+                    }
+                });;   
+            }
+        }
+
+    });
+
 });
 
 

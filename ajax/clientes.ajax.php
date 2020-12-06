@@ -74,7 +74,6 @@ class AjaxClientes{
      /*=============================================
         EDITAR PAGO CLIENTE CAMBIANDO INSCRIPCION
     =============================================*/
-
     public $idClientePago;
 
     public function ajaxEditarPagoCliente(){
@@ -89,11 +88,31 @@ class AjaxClientes{
         echo json_encode($respuesta);
     }
 
+
+
+    /*=============================================
+        ACTUALIZAR ESTADO INSCRIPCION CLIENTE
+    =============================================*/
+    public $estadoClienteInscripcion;
+    public $idClienteInscripcion;
+
+    public function ajaxActualizarEstadoInscripcionCliente(){
+
+        $tabla = 'tbl_cliente_inscripcion';
+        $item1 = 'estado';
+        $valor1 = $this->estadoClienteInscripcion;
+        $item2 = 'id_cliente_inscripcion';
+        $valor2 = $this->idClienteInscripcion;
+        
+        $respuesta = ModeloClientes::mdlActualizarCliente($tabla, $item1, $valor1, $item2, $valor2);
+
+        echo json_encode($respuesta);
+    }
+
+
     /*=============================================
            MOSTRAR DINAMICO
     =============================================*/
-    
-    
     public $tabla;
     public $valor;
     public $item;
@@ -146,8 +165,9 @@ if(isset($_POST["idEditarClienteVenta"])){
     $clienteVenta->idEditarClienteVenta = $_POST["idEditarClienteVenta"];
     $clienteVenta->ajaxEditarClienteVenta();
 }
+
 /*=============================================
-    MOSTRAR DINAMICO
+    ACTUALIZAR ESTADO INSCRIPCION CLIENTE
 =============================================*/
 if(isset($_POST["tabla"])){
     $mostrar = new AjaxClientes();
@@ -155,4 +175,15 @@ if(isset($_POST["tabla"])){
     $mostrar->valor = $_POST["valor"];
     $mostrar->item = $_POST["item"];
     $mostrar->ajaxMostrar();
+}
+
+
+/*=============================================
+    MOSTRAR DINAMICO
+=============================================*/
+if(isset($_POST["idClienteInscripcion"])){
+    $estadoInscripcion = new AjaxClientes();
+    $estadoInscripcion->idClienteInscripcion = $_POST["idClienteInscripcion"];
+    $estadoInscripcion->estadoClienteInscripcion = $_POST["estadoClienteInscripcion"];
+    $estadoInscripcion->ajaxActualizarEstadoInscripcionCliente();
 }

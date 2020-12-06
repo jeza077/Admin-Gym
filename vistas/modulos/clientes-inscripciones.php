@@ -47,7 +47,7 @@
               <thead>
                 <tr>
                   <th scope="col">#</th>
-                  <th scope="col">Identidad</th>
+                  <th scope="col">Numero Documento</th>
                   <th scope="col">Nombre</th>
                   <th scope="col">Tipo Inscripcion</th>
                   <!-- <th scope="col">Ultimo Pago</th> -->
@@ -113,6 +113,8 @@
                     echo
                         '<td>
                           <button class="btn btn-success btnEditarPago" data-toggle="tooltip" data-placement="left" title="Actualizar Pago" idCliente="'.$value["id_cliente"].'"><i class="fas fa-dollar-sign p-1"></i></button>
+
+                          <button class="btn btn-danger btnCancelarInscripcion" data-toggle="tooltip" data-placement="left" title="Cancelar Inscripcion" idClienteInscripcion="'.$value["id_cliente_inscripcion"].'"><i class="fas fa-strikethrough" style="color:#fff"></i></button>
                         </td>
                       </tr>
                   ';
