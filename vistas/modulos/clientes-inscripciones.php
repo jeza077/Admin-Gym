@@ -6,7 +6,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Pagos Clientes</h1>
+            <h1>Clientes Inscripciones</h1>
           </div>
           <div class="col-sm-6">
           <!-- <button class="btn btn-orange float-right"  data-toggle="modal" data-target="#modalAgregarCliente">
@@ -47,9 +47,10 @@
               <thead>
                 <tr>
                   <th scope="col">#</th>
+                  <th scope="col">Identidad</th>
                   <th scope="col">Nombre</th>
                   <th scope="col">Tipo Inscripcion</th>
-                  <th scope="col">Ultimo Pago</th>
+                  <!-- <th scope="col">Ultimo Pago</th> -->
                   <th scope="col">Fecha Ultimo Pago</th>
                   <th scope="col">Fecha Vencimiento</th>
                   <th scope="col">Estado</th>
@@ -69,8 +70,8 @@
                 $tabla = "tbl_clientes";
                 $item = 'tipo_cliente';
                 $valor = 'Gimnasio';
-                $max = true;
-                $clientes = ControladorClientes::ctrMostrarClientesPagos($tabla, $item, $valor, $max);
+                $max = null;
+                $clientes = ControladorClientes::ctrMostrarClientesInscripcionPagos($tabla, $item, $valor, $max);
 
                 // echo "<pre>";
                 // var_dump($clientes);
@@ -81,12 +82,12 @@
                   echo '
                       <tr>
                       <th scope="row">'.($key+1).'</th>
+                      <td>'.$value["num_documento"].'</td>
                       <td>'.$value["nombre"].' '.$value["apellidos"].'</td>
                       <td>'.$value["tipo_inscripcion"].'</td>
-                      <td>'.$value["pago_total"].'</td>
-                      <td>'.$value["fecha_ultimo_pago"].'</td>';
+                      <td>'.$value["fecha_pago"].'</td>';
 
-                      $fechaVencimientoPago = $value['fecha_vencimiento'];
+                      $fechaVencimientoPago = $value['fecha_proximo_pago'];
                       $fechaHoy = date('Y-m-d');
                       $date1 = new DateTime($fechaHoy);
                       $date2 = new DateTime($fechaVencimientoPago);
@@ -94,7 +95,7 @@
 
                       // var_dump($date1);
                       // echo $diff->days;                          
-                      if($diff->days >= 10 && $diff->days <= 30){  
+                      if($diff->days >= 10){  
                           echo '<td class="badge badge-success mt-2" data-toggle="tooltip" data-placement="left" title="Suscrito">'.$value["fecha_vencimiento"].'</td>';
                       } else if($diff->days >= 1 && $diff->days <= 10) {
                           echo '<td class="badge badge-warning mt-2" data-toggle="tooltip" data-placement="left" title="Suscripcion por Vencer">'.$value["fecha_vencimiento"].'</td>';
@@ -111,7 +112,7 @@
 
                     echo
                         '<td>
-                          <button class="btn btn-success btnEditarPago" data-toggle="tooltip" data-placement="left" title="Actualizar Pago" idCliente="'.$value["id_personas"].'"><i class="fas fa-dollar-sign p-1"></i></button>
+                          <button class="btn btn-success btnEditarPago" data-toggle="tooltip" data-placement="left" title="Actualizar Pago" idCliente="'.$value["id_cliente"].'"><i class="fas fa-dollar-sign p-1"></i></button>
                         </td>
                       </tr>
                   ';

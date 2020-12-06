@@ -326,13 +326,13 @@ class ControladorClientes{
 	}
 	
 	/*=============================================
-		MOSTRAR CLIENTES PAGOS
+		MOSTRAR CLIENTES INSCRIPCIONES
 	=============================================*/
-	static public function ctrMostrarClientesPagos($tabla, $item, $valor, $max){
+	static public function ctrMostrarClientesInscripcionPagos($tabla, $item, $valor, $max){
 		$tabla1 = "tbl_personas";
 		$tabla2 = $tabla;
 
-		$respuesta = ModeloClientes::mdlMostrarClientesPagos($tabla1, $tabla2, $item, $valor, $max);
+		$respuesta = ModeloClientes::mdlMostrarClientesInscripcionPagos($tabla1, $tabla2, $item, $valor, $max);
 
 		return $respuesta;
 	}
@@ -361,9 +361,11 @@ class ControladorClientes{
 
 			$tabla1 = "tbl_personas";
 			$tabla2 = "tbl_clientes";
-			$item = 'id_personas';
+			$item = 'id_cliente';
 			$valor = $idClientePago;
+
 			$respuesta = ModeloClientes::mdlMostrarPagoPorCliente($tabla1, $tabla2, $item, $valor);
+			// $respuesta = ModeloClientes::mdlMostrarPagoPorCliente($tabla1, $tabla2, $item, $valor);
 
 			// return $respuesta;
 
@@ -373,30 +375,19 @@ class ControladorClientes{
 			$fechaVencimiento = $respuesta['fecha_vencimiento'];
 			$idInscripcion = $respuesta['id_inscripcion'];
 			$tipoInscripcion = $respuesta['tipo_inscripcion'];
+			$cantidadDias = $respuesta['cantidad_dias'];
 			$precioInscripcion = $respuesta['precio_inscripcion'];
 			$idCliente = $respuesta['id_cliente'];
+			$idClienteInscripcion = $respuesta['id_cliente_inscripcion'];
 			
-			if ($tipoInscripcion == 'mensual') {
-				$valorVigencia = 'VIGENCIA_CLIENTE_MES';
-				
-			} else if ($tipoInscripcion == 'quincenal'){
-				$valorVigencia = 'VIGENCIA_CLIENTE_QUINCENAL';
-				
-			} else {
-				$valorVigencia = 'VIGENCIA_CLIENTE_DIA';
-								
-			}
-
-			$item = 'parametro';
-			$parametros = ControladorUsuarios::ctrMostrarParametros($item, $valorVigencia);
 			// var_dump($parametros);
-			// return $parametros;
+			// return $fechaVencimiento;
 
 			$vigenciaCliente = $parametros['valor'];
 
 			// return $fechaVencimiento;
 			if($fechaHoy > $fechaVencimiento || $fechaHoy == $fechaVencimiento){
-				$fechaVencimientoCliente = date("Y-m-d 00:00:00", strtotime('+'.$vigenciaCliente.' days'));
+				$fechaVencimientoCliente = date("Y-m-d 00:00:00", strtotime('+'.$cantidadDias.' days'));
 
 				// return 'hoy es mayor:  '.$fechaVencimientoCliente;
 
@@ -406,26 +397,33 @@ class ControladorClientes{
 			// 	return 'igual';
 			}else {
 
-				$fechaVencimientoCliente = date("Y-m-d", strtotime($fechaVencimiento.'+'.$vigenciaCliente.' days'));
+				$fechaVencimientoCliente = date("Y-m-d", strtotime($fechaVencimiento.'+'.$cantidadDias.' days'));
 				// return 'hoy es menor:  '.$fechaVencimientoCliente;
 			}
 
-			$tabla = 'tbl_pagos_cliente';
+			$tabla = 'tbl_cliente_inscripcion';
 
 			// $idU =  $_SESSION['id_usuario'];
 			// return $idU;
 
 			$datos = array('id_cliente' => $idCliente,
-							'id_inscripcion' => $idInscripcion,
-							'pago_inscripcion' => $precioInscripcion,
-							'pago_total' => $precioInscripcion,
-							'fecha_ultimo_pago' => $fechaHoy,
-							'fecha_vencimiento' => $fechaVencimientoCliente,
-							'creado_por' => 1);
+							'fecha_pago' => $fechaHoy,
+							'fecha_proximo_pago' => $fechaVencimientoCliente,
+							'fecha_vencimiento' => $fechaVencimientoCliente);
 
-			$respuesta = ModeloClientes::mdlActualizarPagoCliente($tabla, $datos);
+			$fecha = true;
+			$respuesta = ModeloClientes::mdlActualizarPagoCliente($tabla, $datos, $fecha);
 
+			if($respuesta == true){
 
+				$tabla = 'tbl_pagos_cliente';
+				$datos = array('id_cliente_inscripcion' => $idClienteInscripcion,
+								'pago_inscripcion' => $precioInscripcion,
+								'pago_total' => $precioInscripcion);
+
+				$fecha = null;
+				$respuesta = ModeloClientes::mdlActualizarPagoCliente($tabla, $datos, $fecha);
+			}
 			return $respuesta;	
 		}
 	}

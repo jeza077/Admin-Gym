@@ -6,7 +6,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Clientes</h1>
+            <h1>Administrar Clientes</h1>
           </div>
           <div class="col-sm-6">
           <button class="btn btn-orange float-right"  data-toggle="modal" data-target="#modalAgregarCliente">
