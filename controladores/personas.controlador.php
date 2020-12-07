@@ -664,7 +664,7 @@ class ControladorPersonas{
                         
                         $crearClienteVenta = ControladorClientes::ctrEditarCliente($datos);
                         // echo "<pre>";
-                        // var_dump($datos);
+                        // var_dump($crearClienteVenta);
                         // echo "</pre>";
                         // return;     
                                                
