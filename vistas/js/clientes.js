@@ -44,17 +44,17 @@ $(document).on('change', '.tipoCliente', function () {
     }
    
 });
-$('#datosClientes').hide();
-$(document).on('change', '.tipoCliente', function () {
+$('#datosClienteVenta').hide();
+$(document).on('change', '.tipoClienteVenta', function () {
     var valor = $(this).val();
     // console.log(valor)
     if (valor == "Gimnasio") {
         // SumaTotal()
        
-        $('#datosClientes').show();
+        $('#datosClienteVenta').show();
         // sumar();
     } else {
-        $('#datosClientes').hide();
+        $('#datosClienteVenta').hide();
     }
    
 });

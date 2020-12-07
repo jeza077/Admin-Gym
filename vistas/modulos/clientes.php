@@ -213,7 +213,6 @@
                         <option value="F">Femenino</option>
                       </select>
                     </div>
-                   
                   </div>
                 </div>
               </div>
@@ -567,15 +566,15 @@
                   <div class="form-row">
                     <div class="form-group col-md-3">
                       <label>Tipo Cliente</label>
-                      <select class="form-control select2" name="editarTipoClienteVenta" style="width: 100%;" required>
-                        <option value="tipoCl" id="editarTipoClienteVenta"></option>
+                      <select class="form-control select2 tipoClienteVenta" name="tipoClienteVenta" style="width: 100%;" required>
+                        <option value="tipoCl" id="editarTipoClienteVenta" name="editarTipoClienteVenta"></option>
+                        <option selected="selected">Seleccionar...</option>
                         <option value="Gimnasio">Clientes del gimnasio</option>
                         <option value="Ventas">Cliente de ventas</option>
                       </select>
                     </div>
                   </div>
-                    
-                  <div id="datosCliente2">
+                  <div id="datosClienteVenta">
                     <div class="form-row">
                       <div class="form-group col-md-6">
                           <label>Tipo matricula</label>

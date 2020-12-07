@@ -255,11 +255,6 @@ class ControladorClientes{
 				
 				$idClienteVenta = end($totalIdInscripcion);
 				
-				// return $totalIdInscripcion;
-				// echo "<pre>";
-				// var_dump($totalIdInscripcion);
-				// echo "</pre>";
-				// return;
 				
 				$idInscripcion = $idDeInscripcion;
 				
@@ -289,10 +284,10 @@ class ControladorClientes{
 	
 				$respuestaClienteInscripcion = ModeloClientes::mdlCrearClienteInscripcion($tabla, $datos);
 
-				echo "<pre>";
-				var_dump($datos);
-				echo "</pre>";
-				return;
+				// echo "<pre>";
+				// var_dump($datos);
+				// echo "</pre>";
+				// return;
 
 					
 				// GUARDAR EN LA TABLA PAGOS

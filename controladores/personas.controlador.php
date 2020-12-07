@@ -663,10 +663,10 @@ class ControladorPersonas{
             
                         
                         $crearClienteVenta = ControladorClientes::ctrEditarCliente($datos);
-                        echo "<pre>";
-                        var_dump($datos);
-                        echo "</pre>";
-                        return;     
+                        // echo "<pre>";
+                        // var_dump($datos);
+                        // echo "</pre>";
+                        // return;     
                                                
                         if($crearClienteVenta == true){
                             echo '<script>
