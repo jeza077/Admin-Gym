@@ -92,7 +92,7 @@ $(document).on('click', '.btnEditarClienteGimnasio', function () {
         dataType: "json",
         success: function(respuesta) {
 
-            console.log("respuesta", respuesta);
+            // console.log("respuesta", respuesta);
             
             $('#idEditarCliente').val(respuesta["id_persona"])
 
