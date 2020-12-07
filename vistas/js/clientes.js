@@ -274,12 +274,12 @@ $('.verTotalPago').click(function (e) {
     var totalDescuento = $('.totalDescuento').val();
     var totalInscripcion = $('.totalInscripcion').val();
 
-    var totalMatricula = $('.precioMatriculaClienteVentas').val();
-    var totalDescuento = $('.valorDescuentoClienteVenta').val();
-    var totalInscripcion = $('.precioInscripcionClienteVenta').val();
+    // var totalMatricula = $('.precioMatriculaClienteVentas').val();
+    // var totalDescuento = $('.valorDescuentoClienteVenta').val();
+    // var totalInscripcion = $('.precioInscripcionClienteVenta').val();
 
-    console.log(totalMatricula)
-    console.log(totalInscripcion)
+    // console.log(totalMatricula)
+    // console.log(totalInscripcion)
 
     if(!totalMatricula){
         $('.nuevaMatricula').after('<div class="alert alert-danger fade show mt-2" role="alert">Por favor seleccione un tipo de matricula</div>');

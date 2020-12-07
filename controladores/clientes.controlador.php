@@ -374,6 +374,14 @@ class ControladorClientes{
 	}
 
 
+	/*=============================================
+		MOSTRAR TODOS LOS PAGOS DE LOS CLIENTES
+	=============================================*/
+	static public function ctrMostrarPagosClientes(){
+
+		$respuesta = ModeloClientes::mdlMostrarPagosClientes();
+		return $respuesta;
+	}
 	
 	/*=============================================
 	**** ACTUALIZAR PAGO POR CLIENTE MANTENIENDO INSCRIPCION ****

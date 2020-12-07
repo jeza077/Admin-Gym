@@ -141,6 +141,12 @@
                       <p>Clientes Inscripciones Historico</p>
                     </a>
                   </li>
+                  <li class="nav-item">
+                    <a href="clientes-pagos-historico" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Clientes Pagos Historico</p>
+                    </a>
+                  </li>
                 </ul>
               </li>
             <?php }?>

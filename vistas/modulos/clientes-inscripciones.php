@@ -105,12 +105,17 @@
                         }
 
                           if($fecha_actual > $fecha_entrada){
+                          
+                            $diasInscripcion = $value['cantidad_dias'];
                             $segundos = $fecha_entrada - $fecha_actual;
-                            $meses = ceil(($segundos / 2419200));
+                            $dias = $segundos / 86400;
+                            $diasFinal = ceil($dias / $diasInscripcion);
+                            // echo $diasFinal;
+                            // $meses = ceil(($segundos / 2419200));
                             // echo $meses;
-                            $deuda = abs($value['precio_inscripcion'] * $meses);
+                            $deuda = abs($value['precio_inscripcion'] * $diasFinal);
       
-                            echo '<td data-toggle="tooltip" data-placement="left" title="Adeuda '.abs($meses).' meses">L.'.$deuda.'</td>';
+                            echo '<td>L.'.$deuda.'</td>';
                           
                           } else {
                             echo '<td data-toggle="tooltip" data-placement="left" title="No debe">L.0000.00</td>';
