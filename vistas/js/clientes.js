@@ -274,12 +274,8 @@ $('.verTotalPago').click(function (e) {
     var totalDescuento = $('.totalDescuento').val();
     var totalInscripcion = $('.totalInscripcion').val();
 
-    var totalMatricula = $('.precioMatriculaClienteVentas').val();
-    var totalDescuento = $('.valorDescuentoClienteVenta').val();
-    var totalInscripcion = $('.precioInscripcionClienteVenta').val();
-
-    console.log(totalMatricula)
-    console.log(totalInscripcion)
+    // console.log(totalMatricula)
+    // console.log(totalInscripcion)
 
     if(!totalMatricula){
         $('.nuevaMatricula').after('<div class="alert alert-danger fade show mt-2" role="alert">Por favor seleccione un tipo de matricula</div>');
@@ -314,6 +310,53 @@ $('.verTotalPago').click(function (e) {
         // console.log('suma',suma)
     
         $('.totalPagar').val(suma);
+        
+
+    }
+});
+// SUMA TOTAL PAGO CLIENTE VENTAS
+
+$('.verTotalPagoCliente').click(function (e) { 
+    e.preventDefault();
+
+    var totalMatricula = $('.precioMatriculaClienteVentas').val();
+    var totalDescuento = $('.valorDescuentoClienteVenta').val();
+    var totalInscripcion = $('.precioInscripcionClienteVenta').val();
+
+    console.log(totalMatricula)
+    console.log(totalInscripcion)
+
+    if(!totalMatricula){
+        $('.nuevaMatriculaClienteVenta').after('<div class="alert alert-danger fade show mt-2" role="alert">Por favor seleccione un tipo de matricula</div>');
+        $('.nuevaMatriculaClienteVenta').focus();
+
+    } else if(!totalInscripcion) {
+        $('.nuevaInscripcionClienteVenta').after('<div class="alert alert-danger fade show mt-2" role="alert">Por favor seleccione un tipo de inscripcion</div>');
+        $('.nuevaInscripcionClienteVenta').focus();
+
+  
+
+    } else {
+        $('.alert').remove();
+        // console.log(totalDescuento)
+        // console.log(totalInscripcion)
+        // console.log(totalMatricula)
+        if(!totalDescuento){
+
+            var suma = (parseInt(totalMatricula) + parseInt(totalInscripcion));
+            var descuento = 0;
+            $('input[name=editarPrecioDescuento]').attr('value', descuento);
+        } else {
+            var porcentaje = parseInt(totalDescuento) / 100;
+            var descuento = ((parseInt(totalMatricula) * porcentaje));
+            var suma = (parseInt(totalMatricula) - descuento) + parseInt(totalInscripcion);
+            $('input[name=editarPrecioDescuento]').attr('value', descuento);
+            
+        }
+        // console.log('desc',descuento);
+        // console.log('suma',suma)
+    
+        $('.totalPagarClienteVenta').val(suma);
         
 
     }

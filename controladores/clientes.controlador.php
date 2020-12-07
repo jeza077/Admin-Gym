@@ -172,7 +172,7 @@ class ControladorClientes{
 
 	}
 	/*=============================================
-				EDITAR CLIENTE GIMNASIO
+				EDITAR CLIENTE VENTA
 	=============================================*/
 	
 	static public function ctrEditarCliente($datos){
@@ -180,6 +180,8 @@ class ControladorClientes{
 		// var_dump($datos);
 		// echo "</pre>";
 		// return;
+
+	
 
 
         if(isset($datos['id_persona'])){
@@ -190,6 +192,10 @@ class ControladorClientes{
 			$pago_inscripcion = $datos['pago_inscripcion'];
 			$pago_total = $datos['pago_total'];
 			$idDelCliente = $datos['id_persona'];
+			
+			// echo "<pre>";
+			// var_dump();
+			// echo "</pre>";
 
 			$tabla = "tbl_clientes";
 			$item = "id_persona";
@@ -230,30 +236,35 @@ class ControladorClientes{
 			// echo "<pre>";
 			// var_dump($datos);
 			// echo "</pre>";
-			// return $datos;			
+			// return;			
 
             if($respuestaEditarCliente = true){			
 
 				// GUARDAR EN LA TABLA CLIENTE INSCRIPCION
 
-				$totalId = array();
+				$totalIdInscripcion = array();
 				$tabla1 = "tbl_personas";
 				$tabla2 = "tbl_clientes";
 				$item = null;
 				$valor = null;
-
+		
 				$clientesInscripcionTotal = ModeloClientes::mdlMostrarClientesSinPago($tabla1, $tabla2, $item, $valor);
 				// echo "<pre>";
 				// var_dump($clientesInscripcionTotal);
 				// echo "</pre>";
 				// return;
+		
 				
 				foreach($clientesInscripcionTotal as $keyCliente => $valueClienteInscripcion){
 					array_push($totalIdInscripcion, $valueClienteInscripcion["id_cliente"]);
 					
 				}
 				
-				$idClienteVenta = end($totalIdInscripcion);
+				$idClienteInscripcion = end($totalIdInscripcion);
+				// echo "<pre>";
+				// var_dump($idClienteInscripcion);
+				// echo "</pre>";
+				// return;
 				
 				
 				$idInscripcion = $idDeInscripcion;
@@ -271,7 +282,7 @@ class ControladorClientes{
 				$fechaHoy = date('Y-m-d');
 				$fechaVencimientoCliente = date("Y-m-d", strtotime('+'.$cantidadDias.' days'));
 
-				$datos = array("id_cliente" =>  $idClienteVenta,
+				$datos = array("id_cliente" =>  $idClienteInscripcion,
 								"id_inscripcion" => $idDeInscripcion,
 								"fecha_inscripcion" => $fechaHoy,
 								"fecha_pago" => $fechaHoy,
@@ -294,7 +305,7 @@ class ControladorClientes{
 				// 
 				// 
 							
-				$totalId = array();
+				$totalIdPagoCliente = array();
 				$tabla = "tbl_cliente_inscripcion";
 				// $tabla2 = "tbl_clientes";
 				$item = null;
@@ -306,14 +317,14 @@ class ControladorClientes{
 				// echo "</pre>";
 				// return;
 				
-				foreach($pagoClienteTotal as $keyCliente => $valuePagoCliente){
-				array_push($totalId, $valuePagoCliente["id_cliente_inscripcion"]);
+				foreach($pagoClienteTotal as $keyPagoCliente => $valuePagoCliente){
+				array_push($totalIdPagoCliente, $valuePagoCliente["id_cliente_inscripcion"]);
 			
 				
 				}
 				
 
-				$idPagoCliente = end($totalId);
+				$idPagoCliente = end($totalIdPagoCliente);
 
 				// var_dump($parametros);
 				// return $idPagoCliente;
@@ -334,9 +345,10 @@ class ControladorClientes{
 
 				$respuestaPago = ModeloClientes::mdlCrearPago($tabla3, $datos);
 				// echo "<pre>";
-				// var_dump($respuestaPago);
+				// var_dump($datos);
 				// echo "</pre>";
-				// return $respuestaPago;
+				// return;
+			
 			
 				$descripcionEvento = "Nuevo cliente";
 				$accion = "Nuevo";
