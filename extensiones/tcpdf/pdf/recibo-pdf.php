@@ -59,7 +59,7 @@ $tabla= "tbl_clientes";
 $itemCliente = "id_cliente";
 $valorCliente = $respuestaVenta["id_cliente"];
 
-$respuestaCliente = ControladorClientes::ctrMostrarClientes($tabla, $itemCliente, $valorCliente);
+$respuestaClientes = ControladorClientes::ctrMostrarClientes($tabla, $itemCliente, $valorCliente);
 
 // //TRAEMOS LA INFORMACIÓN DEL VENDEDOR
 $tabla= "tbl_personas";
@@ -138,7 +138,7 @@ $bloque2 = <<<EOF
 		
 		<td style="border: 1px solid #666; background-color:white; width:390px">
 
-			Cliente: $respuestaCliente
+			Cliente: $respuestaClientes
 
 		</td>
 
