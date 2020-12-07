@@ -154,7 +154,7 @@ class ModeloClientes{
 		MOSTRAR CLIENTES INSCRIPCION (mdlMostrarClientesPagos)
 	=============================================*/
 	
-	static public function mdlMostrarClientesInscripcionPagos($tabla1, $tabla2, $item, $valor, $max){
+	static public function mdlMostrarClientesInscripcionPagos($tabla1, $tabla2, $item1, $valor1, $item2, $valor2, $max){
 
 		if($max != null){
 
@@ -183,7 +183,7 @@ class ModeloClientes{
 		} else {
 
 	
-			$stmt = Conexion::conectar()->prepare("SELECT p.*, c.*, d.tipo_documento, m.tipo_matricula, pd.tipo_descuento, i.tipo_inscripcion, ci.* FROM $tabla1 as p\n"
+			$stmt = Conexion::conectar()->prepare("SELECT p.*, c.*, d.tipo_documento, m.tipo_matricula, pd.tipo_descuento, i.*, ci.* FROM $tabla1 as p\n"
 			. "LEFT JOIN $tabla2 as c ON p.id_personas = c.id_persona\n"
 			. "LEFT JOIN tbl_documento as d ON p.id_documento = d.id_documento\n"
 			. "LEFT JOIN tbl_matricula as m ON c.id_matricula = m.id_matricula\n"
@@ -191,9 +191,10 @@ class ModeloClientes{
 			. "LEFT JOIN tbl_cliente_inscripcion as ci ON c.id_cliente = ci.id_cliente\n"
 			. "LEFT JOIN tbl_inscripcion as i ON ci.id_inscripcion = i.id_inscripcion\n"
 			// . "LEFT JOIN tbl_pagos_cliente as pc ON c.id_cliente = pc.id_cliente\n"
-			. "WHERE $item = :$item AND ci.estado = 1"); 
+			. "WHERE $item1 = :$item1 AND ci.$item2 = :$item2"); 
 
-			$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+			$stmt -> bindParam(":".$item1, $valor1, PDO::PARAM_STR);
+			$stmt -> bindParam(":".$item2, $valor2, PDO::PARAM_STR);
 			$stmt -> execute();
 			return $stmt -> fetchAll();
 		}

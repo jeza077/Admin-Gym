@@ -47,91 +47,94 @@
               <thead>
                 <tr>
                   <th scope="col">#</th>
-                  <th scope="col">Num. Documento</th>
+                  <th scope="col">No. Documento</th>
                   <th scope="col">Nombre</th>
-                  <th scope="col">Tipo Inscripcion</th>
-                  <th scope="col">Fecha Inscripcion</th>
-                  <th scope="col">Fecha Ultimo Pago</th>
-                  <th scope="col">Fecha Proxim Pago</th>
+                  <th scope="col">T. Inscripcion</th>
+                  <th scope="col">F. Inscripcion</th>
+                  <th scope="col">F. Ultimo Pago</th>
+                  <th scope="col">F. Proximo Pago</th>
+                  <th scope="col">Deuda</th>
                   <th scope="col">Estado</th>
                   <th scope="col">Acciones</th>
                 </tr>
               </thead>
               <tbody>
-              <?php 
-                // echo  $_SESSION['id_usuario'];
-              
-              // $tabla = "tbl_clientes";
-              // $item = 'id_personas';
-              // $valor = 37;
-              // $cli = ControladorClientes::ctrMostrarClientesPagos($tabla, $item, $valor, $max);
-              // var_dump($cli);
+                <?php 
 
-                $tabla = "tbl_clientes";
-                $item = 'tipo_cliente';
-                $valor = 'Gimnasio';
-                $max = null;
-                $clientes = ControladorClientes::ctrMostrarClientesInscripcionPagos($tabla, $item, $valor, $max);
+                  $tabla = "tbl_clientes";
+                  $item1 = 'tipo_cliente';
+                  $valor1 = 'Gimnasio';
+                  $item2 = 'estado';
+                  $valor2 = 1;
+                  $max = null;
+                  $clientes = ControladorClientes::ctrMostrarClientesInscripcionPagos($tabla, $item1, $valor1, $item2, $valor2, $max);
 
-                // echo "<pre>";
-                // var_dump($clientes);
-                // echo "</pre>";
-                // return;
+                  // echo "<pre>";
+                  // var_dump($clientes);
+                  // echo "</pre>";
+                  // return;
 
+                  
+                  foreach ($clientes as $key => $value) {
 
-                foreach ($clientes as $key => $value) {
-                  // echo $value['id_personas'];
-                  echo '
-                      <tr>
-                      <th scope="row">'.($key+1).'</th>
-                      <td>'.$value["num_documento"].'</td>
-                      <td>'.$value["nombre"].' '.$value["apellidos"].'</td>
-                      <td>'.$value["tipo_inscripcion"].'</td>
-                      <td>'.$value["fecha_inscripcion"].'</td>
-                      <td>'.$value["fecha_pago"].'</td>';
+                    echo '
+                        <tr>
+                        <th scope="row">'.($key+1).'</th>
+                        <td>'.$value["num_documento"].'</td>
+                        <td>'.$value["nombre"].' '.$value["apellidos"].'</td>
+                        <td>'.$value["tipo_inscripcion"].'</td>
+                        <td>'.$value["fecha_inscripcion"].'</td>
+                        <td>'.$value["fecha_pago"].'</td>';
 
+                        // $fechaVencimientoPago = $value['fecha_proximo_pago'];
+                        // $fechaHoy = date('Y-m-d');
+                        // $date1 = new DateTime($fechaVencimientoPago);
+                        // $date2 = new DateTime($fechaHoy);
+                        // $diff = $date1->diff($date2);         
+                        
+                        $fecha_actual = strtotime(date("Y-m-d"));
+                        $fecha_entrada = strtotime($value['fecha_proximo_pago']);
 
-                      $fechaVencimientoPago = $value['fecha_proximo_pago'];
-                      $fechaHoy = date('Y-m-d');
-                      $date1 = new DateTime($fechaHoy);
-                      $date2 = new DateTime($fechaVencimientoPago);
-                      $diff = $date1->diff($date2);
-
-                      
-                // $fechainicial = new DateTime($fechaVencimientoPago);
-                // $fechafinal = new DateTime($fechaHoy);
-                // $diferencia = $fechainicial->diff($fechafinal);
-                // $meses = ( $diferencia->y * 12 ) + $diferencia->m;
-                // echo $meses;
-
-                      // var_dump($date1);
-                      // echo $diff->days;                          
-                      if($diff->days >= 10){  
-                          echo '<td class="badge badge-success mt-2" data-toggle="tooltip" data-placement="left" title="Inscrito">'.$value["fecha_proximo_pago"].'</td>';
-                      } else if($diff->days >= 1 && $diff->days <= 10) {
-                          echo '<td class="badge badge-warning mt-2" data-toggle="tooltip" data-placement="left" title="Inscripcion por Vencer">'.$value["fecha_proximo_pago"].'</td>';
-                      } else {
-                          echo '<td class="badge badge-danger mt-2" data-toggle="tooltip" data-placement="left" title="Inscripcion vencida">'.$value["fecha_proximo_pago"].'</td>';
-                      }
-
-                        if($value['estado'] != 0){
-                          echo '<td><span class="badge badge-success p-2" idCliente="'.$value["id_cliente"].'" estadoUsuario="0">Activado</span></td>';
+                        if($fecha_actual < $fecha_entrada){  
+                            echo '<td class="badge badge-success mt-2" data-toggle="tooltip" data-placement="left" title="Inscrito">'.$value["fecha_proximo_pago"].'</td>';
+                            
+                        // } else if($diff->days >= 1 && $diff->days <= 10) {
+                        //     echo '<td class="badge badge-warning mt-2" data-toggle="tooltip" data-placement="left" title="Inscripcion por Vencer">'.$value["fecha_proximo_pago"].'</t<d>';
                         } else {
-                          echo '<td><span class="badge badge-danger p-2" idCliente="'.$value["id_cliente"].'" estadoUsuario="1">Desactivado</span></td>';
+                            echo '<td class="badge badge-danger mt-2" data-toggle="tooltip" data-placement="left" title="Inscripcion vencida">'.$value["fecha_proximo_pago"].'</td>';
                         }
-                  
 
-                    echo
-                        '<td>
-                          <button class="btn btn-success btnEditarPago" data-toggle="tooltip" data-placement="left" title="Pagar" idCliente="'.$value["id_cliente"].'"><i class="fas fa-dollar-sign p-1"></i></button>
+                          if($fecha_actual > $fecha_entrada){
+                            $segundos = $fecha_entrada - $fecha_actual;
+                            $meses = ceil(($segundos / 2419200));
+                            // echo $meses;
+                            $deuda = abs($value['precio_inscripcion'] * $meses);
+      
+                            echo '<td data-toggle="tooltip" data-placement="left" title="Adeuda '.abs($meses).' meses">L.'.$deuda.'</td>';
+                          
+                          } else {
+                            echo '<td data-toggle="tooltip" data-placement="left" title="No debe">L.0000.00</td>';
 
-                          <button class="btn btn-danger btnCancelarInscripcion" data-toggle="tooltip" data-placement="left" title="Cancelar Inscripcion" idClienteInscripcion="'.$value["id_cliente_inscripcion"].'" idClientePagoInscripcion="'.$value["id_cliente"].'"><i class="fas fa-strikethrough" style="color:#fff"></i></button>
-                        </td>
-                      </tr>
-                  ';
-                  
-                }
-              ?>
+                          }
+                      
+                          if($value['estado'] != 0){
+                            echo '<td><span class="badge badge-success p-3">A</span></td>';
+                          } else {
+                            echo '<td><span class="badge badge-danger p-3">D</span></td>';
+                          }
+                    
+
+                      echo
+                          '<td>
+                            <button class="btn btn-success btnEditarPago" data-toggle="tooltip" data-placement="left" title="Pagar" idCliente="'.$value["id_cliente"].'"><i class="fas fa-dollar-sign p-1"></i></button>
+
+                            <button class="btn btn-danger btnCancelarInscripcion" data-toggle="tooltip" data-placement="left" title="Cancelar Inscripcion" idClienteInscripcion="'.$value["id_cliente_inscripcion"].'" idClientePagoInscripcion="'.$value["id_cliente"].'"><i class="fas fa-strikethrough" style="color:#fff"></i></button>
+                          </td>
+                        </tr>
+                    ';
+                    
+                  }
+                ?>
               </tbody>
             </table>
           </div>
