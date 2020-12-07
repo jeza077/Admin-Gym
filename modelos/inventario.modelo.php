@@ -36,11 +36,130 @@ class ModeloInventario
 	}
 
 
+/*=============================================
+		MOSTRAR COMPRAS
+	=============================================*/
+
+
+
+
+
+
+	static public function mdlMostrarCompras($tabla1, $tabla2, $tabla3,$item, $valor){
+		if ($item != null){
+			$stmt = Conexion::conectar()->prepare("SELECT c.*, i.nombre_producto,p.nombre FROM $tabla1 AS c\n"
+			. " LEFT JOIN $tabla2 AS i ON c.id_inventario = i.id_inventario\n"
+			. " LEFT JOIN $tabla3 AS p ON c.id_proveedor = p.id_proveedor\n");
+
+			$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+			$stmt -> execute();
+			return $stmt -> fetch();
+		
+	
+		} else {
+			$stmt = Conexion::conectar()->prepare("SELECT i.nombre_producto, c.*,p.nombre FROM tbl_compras AS c\n"
+			. " LEFT JOIN tbl_inventario AS i ON c.id_inventario = i.id_inventario"
+			. " LEFT JOIN tbl_proveedor AS p ON c.id_proveedor = p.id_proveedor");
+			$stmt -> execute();
+			return $stmt -> fetchAll();
+		}
+		$stmt -> close();
+		$stmt = null;	
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+    // static public function mdlMostrarCompras($tabla1, $tabla2, $item, $valor){
+	// 	if ($item != null) {
+	// 		$stmt = Conexion::conectar()->prepare("SELECT c.*, i.nombre_producto FROM $tabla1 AS c\n"
+	// 		. " LEFT JOIN $tabla2 AS i ON c.id_inventario = i.id_inventario\n"
+	// 		// . " LEFT JOIN $tabla3 AS p ON c.id_proveedor = p.id_proveedor\n"
+	// 		. "WHERE $item = :$item"); 
+
+	// 		$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+	// 		$stmt -> execute();
+	// 		return $stmt -> fetch();
+
+	// 	} else {
+	// 		$stmt = Conexion::conectar()->prepare("SELECT i.nombre_producto, c.* FROM tbl_compras AS c\n"
+	// 		. "LEFT JOIN tbl_inventario AS i ON c.id_inventario = i.id_inventario");			
+	// 		// . "LEFT JOIN tbl_proveedores AS p ON c.id_proveedor = p.id_proveedor");
+	// 		$stmt -> execute();
+	// 		return $stmt -> fetchAll();
+	// 	}
+	// 	$stmt -> close();
+	// 	$stmt = null;	
+	// }
+
+
+
 	/*=============================================
-			MOSTRAR (DINAMICO)
+			MOSTRAR TIPOPRODUCTO (DINAMICO)
 	=============================================*/
 
 	static public function mdlMostrarTipoProducto($tabla, $item, $valor){
+
+		if($item != null){
+
+			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item");
+			$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+			$stmt -> execute();
+			return $stmt -> fetch();
+
+		} else {
+
+			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla");
+			$stmt -> execute();
+			return $stmt -> fetchAll();
+
+		}
+
+		$stmt -> close();
+		$stmt = null;
+		
+	} 
+
+
+	/*=============================================
+			MOSTRAR PRODUCTO (DINAMICO)
+	=============================================*/
+
+	static public function mdlMostrarProducto($tabla, $item, $valor){
+
+		if($item != null){
+
+			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item");
+			$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+			$stmt -> execute();
+			return $stmt -> fetch();
+
+		} else {
+
+			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla");
+			$stmt -> execute();
+			return $stmt -> fetchAll();
+
+		}
+
+		$stmt -> close();
+		$stmt = null;
+		
+	} 
+
+	/*=============================================
+			MOSTRAR PROveedores (DINAMICO)
+	=============================================*/
+
+	static public function mdlMostrarProveedores($tabla, $item, $valor){
 
 		if($item != null){
 
@@ -94,6 +213,33 @@ class ModeloInventario
 
     }
 		
+
+/*=============================================
+				CREAR COMPRA
+	=============================================*/	 
+	static public function mdlCrearCompra($tabla, $datos){
+
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(id_proveedor,id_inventario,id_tipo_producto,cantidad,precio) VALUES (:id_proveedor, :id_inventario,:id_tipo_producto, :cantidad, :precio)");
+
+		$stmt->bindParam(":id_proveedor", $datos["id_proveedor"], PDO::PARAM_INT);
+		$stmt->bindParam(":id_inventario", $datos["id_inventario"], PDO::PARAM_INT);
+		$stmt->bindParam(":id_tipo_producto", $datos["id_tipo_producto"], PDO::PARAM_INT);
+		$stmt->bindParam(":cantidad", $datos["cantidad"], PDO::PARAM_STR);
+		$stmt->bindParam(":stock", $datos["stock"], PDO::PARAM_INT);
+		$stmt->bindParam(":precio", $datos["precio"], PDO::PARAM_STR);
+		if($stmt->execute()){
+			return true;
+		}else{
+			return false;
+		}
+
+		$stmt->close();
+		
+		$stmt = null;
+
+    }
+
+
 
 	/*=============================================
 				editar producto

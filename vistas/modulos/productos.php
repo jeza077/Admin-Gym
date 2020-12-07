@@ -9,9 +9,12 @@
             <h1>Productos</h1>
           </div>
           <div class="col-sm-6">
+          <button class="btn btn-orange float-right"  data-toggle="modal" data-target="#modalAgregarInventario">
+              Nuevo Producto        
+          </button>
           <button class="btn btn-danger btnExportarProductos float-right mr-3">
               Exportar PDF          
-            </button>
+            </button> 
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -46,7 +49,7 @@
                     <th scope="col">Foto</th>
                     <!-- <th scope="col">Tipo inventario</th> -->
                     <th scope="col">Nombre</th>
-                    <th scope="col">Stock</th>
+                    <!-- <th scope="col">Stock</th> -->
                     <th scope="col">Precio venta</th>
                     <!-- <th scope="col">Precio compra</th> -->
                     <th scope="col">Producto min.</th>
@@ -66,7 +69,7 @@
                     // echo"</pre>";
                     foreach ($inventarios as $key => $value) {
                       echo '
-                              <tr>
+                          <tr>
                               <td scope="row">'.($key+1).'</td>
                               <td>'.$value["codigo"].'</td>';
 
@@ -78,7 +81,7 @@
                                     echo '<td>'.$value["nombre_producto"].'</td>
          
                               
-                              <td>'.$value["stock"].'</td>
+                             
                               <td>'.$value["precio_venta"].'</td>
                              
                               <td>'.$value["producto_minimo"].'</td>
@@ -155,10 +158,6 @@
                         <html>
                         <input type="text" class="form-control mayus nombre_producto" name="nuevoNombreProducto" placeholder="Ingrese Producto" required>
                       </div>
-                      <div class="form-group col-md-3">
-                        <label for="stock">Cantidad en stock</label>
-                        <input type="number" class="form-control stock" name="nuevoStock" placeholder="Cantidad en stock" min="0" required class="fa fa-arrow-up"></i></span>
-                      </div>
                     </div>
         
                 <div class="form-row">
@@ -166,9 +165,12 @@
 
 
                       <div class="form-group col-md-4">
-                        <label for="precio">Precio</label>
+                        <label for="precio">Precio de venta</label>
                         <input type="text" class="form-control precio" name="nuevoPrecio" placeholder="Ingrese Precio"  required>
-                      
+                      </div>
+                      <div class="form-group col-md-4">
+                        <label for="precio">Precio de compra</label>
+                        <input type="text" class="form-control precio" name="nuevoPrecio" placeholder="Ingrese Precio"  required>
                       </div>
                           <div class="form-group col-md-4">
                             <label for="productominimo">Producto Minimo</label>
@@ -255,11 +257,11 @@
                       <html>
                       <input type="text" value="" class="form-control mayus editar_Nombre_Producto"  name="editarNombreProducto" id="editarNombreProducto" required>
                     </div>
-                    <div class="form-group col-md-3">
+                    <!-- <div class="form-group col-md-3">
                         <label for="nombreproducto">Proveedor</label>
                         <html>
                         <input type="text" class="form-control mayus proveedor" readonly name="editarProveedor" id="editarProveedor" placeholder="Nuevo Proveedor" required>
-                      </div>
+                      </div> -->
                     <div class="form-group col-md-3">
                       <label for="stock">Cantidad en stock</label>
                       <input type="number" value="" class="form-control" readonly name="editarStock" id="editarStock"  min="0" required class="fa fa-arrow-up"></i></span>
@@ -269,12 +271,12 @@
                     <div class="form-row">
                         <div class="form-group col-md-4">
                         <label for="precio">Precio Venta</label>
-                        <input type="text" value="" class="form-control editar_Precio" readonly name="editarPrecio" id="editarPrecio" required>
+                        <input type="text" value="" class="form-control editar_Precio" name="editarPrecio" id="editarPrecio" required>
                         </div>
-                        <div class="form-group col-md-4">
+                        <!-- <div class="form-group col-md-4">
                         <label for="precio">Precio compra</label>
                         <input type="text" value="" class="form-control editar_Precio" readonly name="editarPrecioCompra" id="editarPrecioCompra" required>
-                        </div>
+                        </div> -->
                         <div class="form-group col-md-4">
                           <label for="productominimo">Producto Minimo</label>
                           <input type="number" value="" class="form-control" name="editarProductoMinimo" id="editarProductoMinimo" min="0" required class="fa fa-arrow-up"></i></span>

@@ -1,6 +1,10 @@
 <?php
 
 class ControladorInventario
+
+        /*=============================================
+                MOSTRAR INVENTARIO
+        =============================================*/
 {
         static public function ctrMostrarInventario($tabla, $item, $valor,$order)
         {
@@ -10,6 +14,21 @@ class ControladorInventario
                 return $respuesta;
         }
 
+        /*=============================================
+               MOSTRAR COMPRAS
+        =============================================*/
+        static public function ctrMostrarCompras($tabla, $item, $valor)
+        {
+                $tabla1 = $tabla;
+                $tabla2 = "tbl_inventario";
+                $tabla3 = "tbl_proveedores";
+                $respuesta = ModeloInventario::mdlMostrarCompras($tabla1, $tabla2, $tabla3,$item, $valor);
+                return $respuesta;
+        }
+
+        /*=============================================
+               MOSTRAR TIPOS DE PRODUCTOS
+        =============================================*/
         static public function ctrMostrarTipoProducto($tabla, $item, $valor)
 
         {
@@ -17,6 +36,25 @@ class ControladorInventario
                 return $respuesta;
         }
 
+        /*=============================================
+               MOSTRAR PRODUCTOS
+        =============================================*/
+        static public function ctrMostrarProducto($tabla, $item, $valor)
+
+        {
+                $respuesta = ModeloInventario::mdlMostrarProducto($tabla, $item, $valor);
+                return $respuesta;
+        }
+
+        /*=============================================
+               MOSTRAR PROVEEDORES
+        =============================================*/
+        static public function ctrMostrarProveedores($tabla, $item, $valor)
+
+        {
+                $respuesta = ModeloInventario::mdlMostrarProveedores($tabla, $item, $valor);
+                return $respuesta;
+        }
 
         /*=============================================
                 CREAR STOCK
@@ -121,10 +159,7 @@ class ControladorInventario
                                     $accion = "Nuevo";
             
                                     $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 4,$accion, $descripcionEvento);
-                
-                                  
-                               
-    
+
                                     echo '<script>
                                             Swal.fire({
                                                 title: "Tus datos han sido guardados correctamente!",
@@ -155,6 +190,70 @@ class ControladorInventario
                 } 
             }
         }
+
+
+
+        /*=============================================
+                CREAR COMPRA
+        =============================================*/
+
+        static public function ctrCrearCompra($tipostock, $pantalla){
+            // var_dump($_POST);
+            // return;
+            if(isset($_POST["nuevoProducto"])){
+    
+                if(preg_match('/^[a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevoProducto"])){
+          
+
+                    $tabla = "tbl_compras";
+                    if($tipostock == 'Productos'){
+                        $datos = array("id_inventario" => $_POST["nuevoProducto"],
+                        "id_proveedor" => $_POST["nuevoProveedor"],
+                        "cantidad" => $_POST["nuevoCantidad"],
+                        "precio" => $_POST["nuevoPrecio"]);
+
+                        $crearInventario = ModeloInventario::mdlCrearCompra($tabla, $datos);
+
+                                if($crearInventario == true){
+                                    
+                                    $descripcionEvento = "  Nuevo Producto";
+                                    $accion = "Nuevo";
+            
+                                    $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 4,$accion, $descripcionEvento);
+                
+
+                                    echo '<script>
+                                            Swal.fire({
+                                                title: "Tus datos han sido guardados correctamente!",
+                                                icon: "success",
+                                                heightAuto: false,
+                                                allowOutsideClick: false
+                                            }).then((result)=>{
+                                                if(result.value){
+                                                    window.location = "'.$pantalla.'";
+                                                }
+                                            });                       
+                                        </script>';
+                                }
+                                else {
+                                    echo '<script>
+                                            Swal.fire({
+                                                title: "No se pudo guardar tus datos. Intenta de nuevo!",
+                                                icon: "error",
+                                                heightAuto: false,
+                                                allowOutsideClick: false,
+                                                timer: 4000
+                                            });					
+                                        </script>';
+                                }
+    
+                    } 
+              
+                } 
+            }
+        }
+
+
 
 
         /*=============================================
