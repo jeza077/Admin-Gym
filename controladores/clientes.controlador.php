@@ -172,7 +172,7 @@ class ControladorClientes{
 
 	}
 	/*=============================================
-				EDITAR CLIENTE
+				EDITAR CLIENTE GIMNASIO
 	=============================================*/
 	static public function ctrEditarCliente($datos){
 		// // echo "<pre>";

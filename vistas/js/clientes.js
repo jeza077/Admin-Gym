@@ -194,7 +194,7 @@ mostrarDinamico($('.actualizarInscripcion'),'tbl_inscripcion','id_inscripcion',$
 
 // mostrarDinamico($('.descuentoNuevo'),'tbl_descuento', 'id_descuento',$('.actualizarPrecioDescuento'),'valor_descuento')  
 // MOSTRAR PRECIOS EN EDITAR CLIENTE VENTAS
-mostrarDinamico($('.nuevaMatriculaClienteVenta'),'tbl_matricula', 'id_dmatricula',$('.precioMatriculaClienteVentas'),'precio_matricula')  
+mostrarDinamico($('.nuevaMatriculaClienteVenta'),'tbl_matricula', 'id_matricula',$('.precioMatriculaClienteVentas'),'precio_matricula')  
 
 mostrarDinamico($('.nuevoDescuentoClienteVenta'),'tbl_descuento', 'id_descuento',$('.valorDescuentoClienteVenta'),'valor_descuento')  
 
@@ -204,66 +204,66 @@ mostrarDinamico($('.nuevaInscripcionClienteVenta'),'tbl_inscripcion', 'id_inscri
         SUMAR TOTAL CLIENTES
 =============================================*/
 
-function SumaTotal(selector) {  
+// function SumaTotal(selector) {  
 
-    selector.click(function (e) { 
-        e.preventDefault();
-        var precioMatricula = $('.nuevoPrecioMatricula');
-        // console.log("matricula", precioMatricula)
+//     selector.click(function (e) { 
+//         e.preventDefault();
+//         var precioMatricula = $('.nuevoPrecioMatricula');
+//         // console.log("matricula", precioMatricula)
         
-        // var precioMatricula = $('.nuevoPrecioMatricula');
-        var precioDescuento = $('.nuevoPrecioPromocion');
-        var precioInscripcion = $('.nuevoPrecioInscripcion');
-        // console.log("Descuento", precioDescuento)
-        // console.log("Inscripcion", precioInscripcion)
-        // return;
+//         // var precioMatricula = $('.nuevoPrecioMatricula');
+//         var precioDescuento = $('.nuevoPrecioPromocion');
+//         var precioInscripcion = $('.nuevoPrecioInscripcion');
+//         // console.log("Descuento", precioDescuento)
+//         // console.log("Inscripcion", precioInscripcion)
+//         // return;
      
-        var arrayMatricula = [];
-        var arrayDescuento = [];
-        var arrayInscripcion = [];
+//         var arrayMatricula = [];
+//         var arrayDescuento = [];
+//         var arrayInscripcion = [];
      
-        var arrayTotal =[];
+//         var arrayTotal =[];
     
-        for (var i = 0; i  < precioMatricula.length; i++) {
-            arrayMatricula.push(Number($(precioMatricula[i]).val()));   
-        }
-        for (var i = 0; i  < precioDescuento.length; i++) {
-            arrayDescuento.push(Number($(precioDescuento[i]).val()));   
-        }
-        for (var i = 0; i  < precioInscripcion.length; i++) {
-            arrayInscripcion.push(Number($(precioInscripcion[i]).val()));   
-        }
+//         for (var i = 0; i  < precioMatricula.length; i++) {
+//             arrayMatricula.push(Number($(precioMatricula[i]).val()));   
+//         }
+//         for (var i = 0; i  < precioDescuento.length; i++) {
+//             arrayDescuento.push(Number($(precioDescuento[i]).val()));   
+//         }
+//         for (var i = 0; i  < precioInscripcion.length; i++) {
+//             arrayInscripcion.push(Number($(precioInscripcion[i]).val()));   
+//         }
         
-        function sumaArrayTotal(total, numero) {
-            return total + numero;
-        }
-        // console.log("matricula", arrayMatricula)
-        // console.log("descuento",arrayDescuento)
-        // console.log("inscripcion", arrayInscripcion)
-        var matricula = arrayMatricula.reduce(sumaArrayTotal);
-        var descuento = arrayDescuento.reduce(sumaArrayTotal);
-        var matriculaTotal = matricula - descuento;
-        var inscripcion = arrayInscripcion.reduce(sumaArrayTotal);
+//         function sumaArrayTotal(total, numero) {
+//             return total + numero;
+//         }
+//         // console.log("matricula", arrayMatricula)
+//         // console.log("descuento",arrayDescuento)
+//         // console.log("inscripcion", arrayInscripcion)
+//         var matricula = arrayMatricula.reduce(sumaArrayTotal);
+//         var descuento = arrayDescuento.reduce(sumaArrayTotal);
+//         var matriculaTotal = matricula - descuento;
+//         var inscripcion = arrayInscripcion.reduce(sumaArrayTotal);
         
-        arrayTotal = matriculaTotal + inscripcion;
-        $('#pagoMatricula').val(arrayMatricula);
-        $('#nuevoPrecioDescuento').val(arrayDescuento);
-        $('#pagoInscripcion').val(arrayInscripcion);
-        $('#nuevoTotalCliente').val(arrayTotal);
-        $('#totalPagar').val(arrayTotal);
-        // if (selector.change("nuevaPromocion")) {
-        //     $('.totalPagar').val(matriculaTotal);
-        // } else if (selector.change("nuevaInscripcion")){
+//         arrayTotal = matriculaTotal + inscripcion;
+//         $('#pagoMatricula').val(arrayMatricula);
+//         $('#nuevoPrecioDescuento').val(arrayDescuento);
+//         $('#pagoInscripcion').val(arrayInscripcion);
+//         $('#nuevoTotalCliente').val(arrayTotal);
+//         $('#totalPagar').val(arrayTotal);
+//         // if (selector.change("nuevaPromocion")) {
+//         //     $('.totalPagar').val(matriculaTotal);
+//         // } else if (selector.change("nuevaInscripcion")){
 
-            // }
+//             // }
             
             
         
-        console.log("arrayDescuento", arrayDescuento)
-    });
+//         console.log("arrayDescuento", arrayDescuento)
+//     });
 
 
-}
+// }
 // SumaTotal($('.verTotalPago'))
 // SumaTotal($('.verTotalPagoEditado'))
 // SumaTotal($('.nuevaMatricula'))
@@ -274,15 +274,22 @@ $('.verTotalPago').click(function (e) {
     var totalDescuento = $('.totalDescuento').val();
     var totalInscripcion = $('.totalInscripcion').val();
 
-    // console.log(totalMatricula)
-    // console.log(totalInscripcion)
+    var totalMatricula = $('.precioMatriculaClienteVentas').val();
+    var totalDescuento = $('.valorDescuentoClienteVenta').val();
+    var totalInscripcion = $('.precioInscripcionClienteVenta').val();
+
+    console.log(totalMatricula)
+    console.log(totalInscripcion)
 
     if(!totalMatricula){
         $('.nuevaMatricula').after('<div class="alert alert-danger fade show mt-2" role="alert">Por favor seleccione un tipo de matricula</div>');
         $('.nuevaMatricula').focus();
+
     } else if(!totalInscripcion) {
         $('.nuevaInscripcion').after('<div class="alert alert-danger fade show mt-2" role="alert">Por favor seleccione un tipo de inscripcion</div>');
         $('.nuevaInscripcion').focus();
+
+  
 
     } else {
         $('.alert').remove();
@@ -294,11 +301,13 @@ $('.verTotalPago').click(function (e) {
             var suma = (parseInt(totalMatricula) + parseInt(totalInscripcion));
             var descuento = 0;
             $('input[name=nuevoPrecioDescuento]').attr('value', descuento);
+            $('input[name=editarPrecioDescuento]').attr('value', descuento);
         } else {
             var porcentaje = parseInt(totalDescuento) / 100;
             var descuento = ((parseInt(totalMatricula) * porcentaje));
             var suma = (parseInt(totalMatricula) - descuento) + parseInt(totalInscripcion);
             $('input[name=nuevoPrecioDescuento]').attr('value', descuento);
+            $('input[name=editarPrecioDescuento]').attr('value', descuento);
             
         }
         // console.log('desc',descuento);
@@ -710,7 +719,7 @@ $(document).on('click', '.btnEditarClienteVenta', function () {
         dataType: "json",
         success: function(respuesta) {
 
-            console.log("respuesta", respuesta);
+            // console.log("respuesta", respuesta);
             
             $('#idEditarClienteVenta').val(respuesta["id_persona"])
 
@@ -720,7 +729,7 @@ $(document).on('click', '.btnEditarClienteVenta', function () {
             $('.numeroDocumentoClienteVentas').val(respuesta["num_documento"])
             $('.nombreClienteVentas').val(respuesta["nombre"])
             $('.apellidoClienteVentas').val(respuesta["apellidos"])
-            $('.editarEmailClienteVentas').val(respuesta["correo"])
+            $('.editarEmailVentas').val(respuesta["correo"])
             $('.telefonoClienteVentas').val(respuesta["telefono"])
             $('.fechaNacimientoClienteVentas').val(respuesta["fecha_nacimiento"])
             $('.direccionClienteVentas').val(respuesta["direccion"])

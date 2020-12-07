@@ -242,9 +242,9 @@
                                 $item = null;
                                 $valor = null;
 
-                                $matriculas = ControladorClientes::ctrMostrar($tabla, $item, $valor);
+                                $matriculasClienteVenta = ControladorClientes::ctrMostrar($tabla, $item, $valor);
                               
-                                foreach ($matriculas as $key => $value) { ?>
+                                foreach ($matriculasClienteVenta as $key => $value) { ?>
                                   <option value="<?php echo $value['id_matricula']?>"><?php echo $value['tipo_matricula']?></option>        
                                 <?php 
                                 }                             
@@ -532,7 +532,7 @@
                   <div class="form-row">
                     <div class="form-group col-md-4">
                       <label for="email">Email</label>
-                      <input type="email" class="form-control editarEmailClienteVentas" name= "editarEmailVentas" required>
+                      <input type="email" class="form-control editarEmailVentas" name= "editarEmailVentas" required>
                     </div>
                     <div class="form-group col-md-4">
                       <label>Teléfono</label>
@@ -579,8 +579,8 @@
                     <div class="form-row">
                       <div class="form-group col-md-6">
                           <label>Tipo matricula</label>
-                          <select class="form-control select2 nuevaMatriculaClienteVenta" style="width: 100%;" name="tipoMatriculaClienteVenta">
-                            <option value="" id="tipoMatriculaClienteVenta"></option>
+                          <select class="form-control select2 nuevaMatriculaClienteVenta nuevaMatricula" style="width: 100%;" name="tipoMatriculaClienteVenta">
+                            <option value="" id="tipoMatriculaClienteVenta" ></option>
                             <option selected="selected">Seleccionar...</option>
                             <?php 
                                 $tabla = "tbl_matricula";
@@ -604,7 +604,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">$</span>  
                               </div>
-                            <input type="text" class="form-control text-right precioMatriculaClienteVentas totalMatriculaCliente" name="precioMatriculaClienteVentas" readonly>
+                            <input type="text" class="form-control text-right precioMatriculaClienteVentas totalMatricula" name="precioMatriculaClienteVentas" readonly>
                             <!-- <input type="hidden" id="nuevoMatriculaClienteVentas" name="nuevoMatriculaClienteVentas"> -->
                          </div>
                       </div>
@@ -636,15 +636,15 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">$</span>  
                               </div>
-                            <input type="text" class="form-control text-right valorDescuentoClienteVenta totalDescuentoCliente" value="" name="valorDescuentoClienteVenta" readonly>
-                            <!-- <input type="hidden" id="nuevoDescuentoClienteVenta" name="nuevoDescuentoClienteVenta"> -->
+                            <input type="text" class="form-control text-right valorDescuentoClienteVenta totalDescuento" value="" name="valorDescuentoClienteVenta" readonly>
+                            <!-- <input type="hidden" id="editarPrecioDescuento" name="editarPrecioDescuento">   -->
                          </div>
                       </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6"> 
                           <label>Tipo inscripcion</label>
-                          <select class="form-control select2 nuevaInscripcionClienteVenta" style="width: 100%;" name="inscripcionClienteVenta">
+                          <select class="form-control select2 nuevaInscripcionClienteVenta nuevaInscripcion" style="width: 100%;" name="inscripcionClienteVenta">
                               <option value="" id="inscripcionClienteVenta"></option>
                               <option selected="selected">Seleccionar...</option>
                               <?php 
@@ -667,12 +667,12 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">$</span>  
                               </div>
-                            <input type="text" class="form-control text-right precioInscripcionClienteVenta totalInscripcionCliente" name="precioInscripcionClienteVenta" readonly>
+                            <input type="text" class="form-control text-right precioInscripcionClienteVenta totalInscripcion" name="precioInscripcionClienteVenta" readonly>
                             <!-- <input type="hidden" id="nuevaInscripcionClienteVenta" name="nuevaInscripcionClienteVenta"> -->
                          </div>
                       </div>
                     </div>
-                    <div class="form-row">
+                    <!-- <div class="form-row">
                       <div class="form-group col-md-6 float-right">
                          <label for="">Total a pagar:</label>
                          <div class="input-group">
@@ -683,6 +683,20 @@
                             <button type="" class="btn btn-success verTotalPago">Ver Total<i class="fas fa-dollar-sign"></i></button>
                          </div>
                       </div>
+                    </div> -->
+                    <div class="form-row">
+                      <button type="" class="btn btn-success btn-block col-md-6 mt-4 mb-3 verTotalPago"><i class="fas fa-dollar-sign"></i> Calcular</button>       
+
+                      <div class="form-group col-md-6">
+                        <label for="">Total a pagar:</label>
+                        <div class="input-group">
+                          <div class="input-group-prepend">
+                              <span class="input-group-text">$</span>  
+                          </div>
+                          <input type="text" class="form-control float-right text-right totalPagarClienteVenta totalPagar" name="totalPagarClienteVenta" value="" readonly>  
+                         </div>
+                      </div>
+
                     </div>
                   </div>
                 </div>
