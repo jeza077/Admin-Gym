@@ -190,7 +190,10 @@ mostrarDinamico($('.nuevaInscripcion'),'tbl_inscripcion','id_inscripcion',$('.nu
 mostrarDinamico($('.nuevaPromocion'),'tbl_descuento', 'id_descuento',$('.nuevoPrecioPromocion'),'valor_descuento')
 
 // ALEX, DEJAME ESTA DE ABAJO QUE YO LA OCUPO NO LA COMENTES
+// Inscripcion nuevas
 mostrarDinamico($('.actualizarInscripcion'),'tbl_inscripcion','id_inscripcion',$('.actualizarPagoInscripcion'),'precio_inscripcion')
+mostrarDinamico($('.nuevaTipoInscripcion2'),'tbl_inscripcion','id_inscripcion',$('.nuevaPagoInscripcion2'),'precio_inscripcion')
+
 
 // mostrarDinamico($('.descuentoNuevo'),'tbl_descuento', 'id_descuento',$('.actualizarPrecioDescuento'),'valor_descuento')  
 // MOSTRAR PRECIOS EN EDITAR CLIENTE VENTAS
@@ -499,6 +502,8 @@ function calcularPagoNuevaInscripcion(btnTotal, inputTotalInscripcion, inputTota
     });
 }
 
+//TOTAL NUEVA INSCRIPCION
+calcularPagoNuevaInscripcion('.verTotalActualizarPago', '.nuevaPagoInscripcion2', '.nuevoTotalPago');
 
 //***** ======================================
 //    PROCESAR PAGO CAMBIANDO INSCRIPCION 
@@ -544,6 +549,7 @@ $(document).on('click', '.SwalBtnCancelar', function (e) {
 
 
 
+
 //***** ======================================
 //  BOTON CANCELAR INSCRIPCION DE CLIENTES 
 // ========================================= *//
@@ -572,12 +578,14 @@ $(document).on('click', '.btnCancelarInscripcion', function (e) {
 });
 
 $(document).on('click', '.SwalBtnCancelarInscripcion', function () {
-    // console.log(idClienteInscripcion+' estado:'+ estadoClienteInscripcion)
+    // console.log(idClienteInscripcion)
     var estadoClienteInscripcion = 0;
+    var inscrito = 0;
 
     var datos = new FormData();
     datos.append('idClienteInscripcion', idClienteInscripcion);
     datos.append('estadoClienteInscripcion', estadoClienteInscripcion);
+    datos.append('inscrito', inscrito);
 
     $.ajax({
 

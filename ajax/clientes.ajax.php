@@ -116,16 +116,27 @@ class AjaxClientes{
     =============================================*/
     public $estadoClienteInscripcion;
     public $idClienteInscripcion;
+    public $inscrito;
+
 
     public function ajaxActualizarEstadoInscripcionCliente(){
 
-        $tabla = 'tbl_cliente_inscripcion';
-        $item1 = 'estado';
+        $tabla1 = "tbl_cliente_inscripcion";
+        $item1 = "estado";
         $valor1 = $this->estadoClienteInscripcion;
-        $item2 = 'id_cliente_inscripcion';
-        $valor2 = $this->idClienteInscripcion;
+
+        // $item2 = "id_cliente_inscripcion";
+        // $valor2 = $this->idClienteInscripcion;
+
+        $item2 = 'inscrito';
+        $valor2 = $this->inscrito;
+
+        $item3 = 'id_cliente_inscripcion';
+        $valor3 = $this->idClienteInscripcion;
         
-        $respuesta = ModeloClientes::mdlActualizarCliente($tabla, $item1, $valor1, $item2, $valor2);
+        // $respuesta = ModeloClientes::mdlActualizarCliente($tabla1, $item1, $valor1, $item2, $valor2);
+
+        $respuesta = ModeloClientes::mdlActualizarClienteVarios($tabla1, $item1, $valor1, $item2, $valor2, $item3, $valor3);
 
         echo json_encode($respuesta);
     }
@@ -211,9 +222,10 @@ if(isset($_POST["tabla"])){
 /*=============================================
     MOSTRAR DINAMICO
 =============================================*/
-if(isset($_POST["idClienteInscripcion"])){
+if(isset($_POST['idClienteInscripcion'])){
     $estadoInscripcion = new AjaxClientes();
-    $estadoInscripcion->idClienteInscripcion = $_POST["idClienteInscripcion"];
-    $estadoInscripcion->estadoClienteInscripcion = $_POST["estadoClienteInscripcion"];
+    $estadoInscripcion->idClienteInscripcion = $_POST['idClienteInscripcion'];
+    $estadoInscripcion->estadoClienteInscripcion = $_POST['estadoClienteInscripcion'];
+    $estadoInscripcion->inscrito = $_POST["inscrito"];
     $estadoInscripcion->ajaxActualizarEstadoInscripcionCliente();
 }

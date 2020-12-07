@@ -303,6 +303,40 @@ class ModeloClientes{
 
 
 	/*=============================================
+	MOSTRAR TODOS LOS CLIENTES QUE NO TENGAN INSCRIPCION		
+	=============================================*/
+	static public function mdlMostrarClientesSinInscripcion(){
+		
+		$stmt = Conexion::conectar()->prepare("SELECT p.*, c.*, d.tipo_documento, m.tipo_matricula, pd.tipo_descuento, i.*, ci.* FROM tbl_personas as p\n"
+
+		. "	LEFT JOIN tbl_clientes as c ON p.id_personas = c.id_persona\n"
+	
+		. "	LEFT JOIN tbl_documento as d ON p.id_documento = d.id_documento\n"
+	
+		. "	LEFT JOIN tbl_matricula as m ON c.id_matricula = m.id_matricula\n"
+	
+		. "	LEFT JOIN tbl_descuento as pd ON c.id_descuento = pd.id_descuento\n"
+	
+		. "	LEFT JOIN tbl_cliente_inscripcion as ci ON c.id_cliente = ci.id_cliente\n"
+	
+		. "	LEFT JOIN tbl_inscripcion as i ON ci.id_inscripcion = i.id_inscripcion\n"
+
+		. "	WHERE c.tipo_cliente = 'Gimnasio' AND ci.id_cliente_inscripcion =\n"
+
+    . "    (SELECT MAX(id_cliente_inscripcion) FROM tbl_cliente_inscripcion as ci1 WHERE ci1.id_cliente = ci.id_cliente AND ci1.estado = 0 AND ci1.inscrito = 0)\n"
+
+    . "    GROUP by ci.id_cliente");
+
+		$stmt -> execute();
+		return $stmt -> fetchAll();
+		
+		$stmt -> close();
+		$stmt = null;	
+
+	}	
+
+
+	/*=============================================
 			MOSTRAR (DINAMICO)
 	=============================================*/
 
@@ -488,6 +522,8 @@ class ModeloClientes{
 
 	static public function mdlActualizarCliente($tabla1, $item1, $valor1, $item2, $valor2){
 
+		// return $item1;
+
 		$stmt = Conexion::conectar()->prepare("UPDATE $tabla1 SET $item1 = :$item1 WHERE $item2 = :$item2");
 
 		$stmt -> bindParam(":".$item1, $valor1, PDO::PARAM_STR);
@@ -499,7 +535,7 @@ class ModeloClientes{
 		
 		}else{
 
-			return false;	
+			return $stmt->errorInfo();	
 
 		}
 
@@ -509,6 +545,34 @@ class ModeloClientes{
 
 	}
 
+
+	/*=============================================
+	ACTUALIZAR CLIENTE VARIOS CAMPOS
+	=============================================*/
+
+	static public function mdlActualizarClienteVarios($tabla1, $item1, $valor1, $item2, $valor2, $item3, $valor3){
+
+		$stmt = Conexion::conectar()->prepare("UPDATE $tabla1 SET $item1 = :$item1, $item2 = :$item2 WHERE $item3 = :$item3");
+
+		$stmt -> bindParam(":".$item1, $valor1, PDO::PARAM_STR);
+		$stmt -> bindParam(":".$item2, $valor2, PDO::PARAM_STR);
+		$stmt -> bindParam(":".$item3, $valor3, PDO::PARAM_STR);
+
+		if($stmt -> execute()){
+
+			return true;
+		
+		}else{
+
+			return $stmt->errorInfo();	
+
+		}
+
+		$stmt -> close();
+
+		$stmt = null;
+
+	}
 
 	/*=============================================
 	ACTUALIZAR PAGO CLIENTE  (MANTENIENDO INSCRIPCION)
