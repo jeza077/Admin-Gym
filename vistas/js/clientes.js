@@ -29,7 +29,8 @@ $('.apellidoCliente').keydown(sinNumeros)
 $('.apellidoCliente').keydown(permitirUnEspacio);
 longitudString($('.apellidoCliente'),30); 
 ;
-
+// AGREGAR CLIENTE 
+// MUESTRA LOS DATOS DE PAGO DEL CLIENTE, AL ELEGIR TIPO CLIENTE GIMNASIO
 $('#datosClientes').hide();
 $(document).on('change', '.tipoCliente', function () {
     var valor = $(this).val();
@@ -44,6 +45,8 @@ $(document).on('change', '.tipoCliente', function () {
     }
    
 });
+// EDITAR CLIENTE VENTA
+// AL ELEJIR TIPO CLIENTE GIMNASIO MUESTRA LOS DATOS A AGREGAR DE PAGOS CLIENTE
 $('#datosClienteVenta').hide();
 $(document).on('change', '.tipoClienteVenta', function () {
     var valor = $(this).val();
@@ -323,8 +326,8 @@ $('.verTotalPagoCliente').click(function (e) {
     var totalDescuento = $('.valorDescuentoClienteVenta').val();
     var totalInscripcion = $('.precioInscripcionClienteVenta').val();
 
-    console.log(totalMatricula)
-    console.log(totalInscripcion)
+    // console.log(totalMatricula)
+    // console.log(totalInscripcion)
 
     if(!totalMatricula){
         $('.nuevaMatriculaClienteVenta').after('<div class="alert alert-danger fade show mt-2" role="alert">Por favor seleccione un tipo de matricula</div>');

@@ -348,9 +348,9 @@ class ControladorClientes{
 						return true;
 					}
 				
-					// $descripcionEvento = "Nuevo cliente";
-					// $accion = "Nuevo";
-					// $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 3,$accion, $descripcionEvento);
+					$descripcionEvento = "Nuevo cliente";
+					$accion = "Nuevo";
+					$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 3,$accion, $descripcionEvento);
 
 
 				}	
@@ -373,34 +373,6 @@ class ControladorClientes{
         } 
 
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	
 
    /*=============================================
 				MOSTRAR CLIENTES
