@@ -57,7 +57,7 @@ class PDF extends TCPDF{
 
         $this->Ln(20); //Espacios
         $this->SetFont('helvetica', 'B', 14);
-        $this->Cell(260, 3, 'REPORTE ULTIMO PAGO DE CLIENTES', 0, 1, 'C');
+        $this->Cell(260, 3, 'REPORTE INSCRIPCIONES ACTIVAS DE CLIENTES', 0, 1, 'C');
         $this->Ln(3);
         $this->SetFont('helvetica', 'B', 11);
 
@@ -88,7 +88,7 @@ $pdf = new PDF('l', 'mm', 'A4 LANDSCAPE', true, 'UTF-8', false);
 // set document information
 $pdf->SetCreator(PDF_CREATOR);
 $pdf->SetAuthor('Jesus Zuniga');
-$pdf->SetTitle('Reporte Ultimo Pago Clientes');
+$pdf->SetTitle('Reporte Inscripciones Activas de Clientes');
 $pdf->SetSubject('');
 $pdf->SetKeywords('');
 
@@ -139,10 +139,13 @@ $pdf->SetFont('times', '', 13);
 $pdf->SetFillColor(225, 235, 255);
 $pdf->Cell(15, 5, 'No', 1, 0, 'C', 1);
 $pdf->Cell(75, 5, 'Nombre', 1, 0, 'C', 1);
-$pdf->Cell(40, 5, 'Tipo Inscripcion', 1, 0, 'C', 1);
-$pdf->Cell(43, 5, 'Valor Ultimo Pago', 1, 0, 'C', 1);
-$pdf->Cell(50, 5, 'Fecha Ultimo Pago', 1, 0, 'C', 1);
-$pdf->Cell(50, 5, 'Fecha Vencimiento', 1, 0, 'C', 1);
+$pdf->Cell(35, 5, 'Tipo Inscripcion', 1, 0, 'C', 1);
+// $pdf->Cell(35, 5, 'Ultimo Pago', 1, 0, 'C', 1);
+$pdf->Cell(38, 5, 'Fecha Prox. Pago', 1, 0, 'C', 1);
+$pdf->Cell(38, 5, 'Fecha Vencimiento', 1, 0, 'C', 1);
+$pdf->Cell(30, 5, 'Estado', 1, 0, 'C', 1);
+$pdf->Cell(25, 5, 'Deuda', 1, 0, 'C', 1);
+
 
 if(isset($_GET["rango"])){
 
@@ -153,8 +156,8 @@ if(isset($_GET["rango"])){
     $rango = null;
 
 } 
-
-$clientes = ControladorClientes::ctrRangoPagosCliente($rango);
+ 
+$clientes = ControladorClientes::ctrRangoClienteInscripcionActiva($rango);
 
 // var_dump($clientes);
 // return;
@@ -165,11 +168,12 @@ if(!$clientes){
     // echo 'vacio';
     $pdf->Ln(15);
     $pdf->SetFont('times', '', 12);
-    $pdf->Cell(170, 4, '******* NO HAS DATOS PARA MOSTRAR *******', 0, 0, 'C');
+    $pdf->Cell(250, 4, '******* NO HAS DATOS PARA MOSTRAR *******', 0, 0, 'C');
 } else {
 
     
     foreach ($clientes as $key => $value) {
+        
     
         if(($i%$max) == 0){
             $pdf->AddPage();
@@ -180,10 +184,13 @@ if(!$clientes){
             $pdf->SetFillColor(225, 235, 255);
             $pdf->Cell(15, 5, 'No', 1, 0, 'C', 1);
             $pdf->Cell(75, 5, 'Nombre', 1, 0, 'C', 1);
-            $pdf->Cell(40, 5, 'Tipo Inscripcion', 1, 0, 'C', 1);
-            $pdf->Cell(43, 5, 'Valor Ultimo Pägo', 1, 0, 'C', 1);
-            $pdf->Cell(50, 5, 'Fecha Ultimo Pago', 1, 0, 'C', 1);
-            $pdf->Cell(50, 5, 'Fecha Vencimiento', 1, 0, 'C', 1);
+            $pdf->Cell(35, 5, 'Tipo Inscripcion', 1, 0, 'C', 1);
+            // $pdf->Cell(35, 5, 'Ultimo Pägo', 1, 0, 'C', 1);
+            $pdf->Cell(38, 5, 'Fecha Prox. Pago', 1, 0, 'C', 1);
+            $pdf->Cell(38, 5, 'Fecha Vencimiento', 1, 0, 'C', 1);
+            $pdf->Cell(30, 5, 'Estado', 1, 0, 'C', 1);
+            $pdf->Cell(25, 5, 'Deuda', 1, 0, 'C', 1);
+
         }
         // $pdf->Cell(15, 5, ''.$i.'', 1, 0, 'C');
     
@@ -192,22 +199,46 @@ if(!$clientes){
         // $pdf->SetFillColor(225, 235, 255);
         $pdf->Cell(15, 4, ''.($key+1).'', 0, 0, 'C');
         $pdf->Cell(75, 4, ''.$value['nombre'].' '.$value['apellidos'].'', 0, 0, 'C');
-        $pdf->Cell(40, 4, ''.$value['tipo_inscripcion'].'', 0, 0, 'C');
-        $pdf->Cell(43, 4, 'L.'.$value['pago_total'].'.00', 0, 0, 'C');
-        $pdf->Cell(50, 4, ''.$value['fecha_ultimo_pago'].'', 0, 0, 'C');
-        $pdf->Cell(50, 4, ''.$value['fecha_vencimiento'].'', 0, 0, 'C');
+        $pdf->Cell(35, 4, ''.$value['tipo_inscripcion'].'', 0, 0, 'C');
+        // $pdf->Cell(35, 4, 'L.'.$value['pago_total'].'.00', 0, 0, 'C');   
+        $pdf->Cell(38, 4, ''.$value['fecha_proximo_pago'].'', 0, 0, 'C');
+        $pdf->Cell(38, 4, ''.$value['fecha_vencimiento'].'', 0, 0, 'C');
+
+        if($value["estado"] == 1){
+            $pdf->Cell(30, 4, 'Activado', 0, 0, 'C');
+        } else {
+            $pdf->Cell(30, 4, 'Activado', 0, 0, 'C');
+        }
+        
+        $fecha_actual = strtotime(date("Y-m-d"));
+        $fecha_entrada = strtotime($value['fecha_proximo_pago']);
+
+        if($fecha_actual > $fecha_entrada){
+                          
+            $diasInscripcion = $value['cantidad_dias'];
+            $segundos = $fecha_entrada - $fecha_actual;
+            $dias = $segundos / 86400;
+            $diasFinal = ceil($dias / $diasInscripcion);
+            // echo $diasFinal;
+
+            $deuda = abs($value['precio_inscripcion'] * $diasFinal);
+            // echo '<td>L.'.$deuda.'</td>';
+            $pdf->Cell(25, 4, 'L.'.$deuda.'', 0, 0, 'C');
+
+          
+        } else {
+            // echo '<td data-toggle="tooltip" data-placement="left" title="No debe">L.0000.00</td>';
+            $pdf->Cell(25, 4, 'L.00.00', 0, 0, 'C');
+
+        }
     
-        // if($value["estado"] == 0){
-        //     $pdf->Cell(30, 4, 'Desactivado', 0, 0, 'C');
-        // } else {
-        //     $pdf->Cell(30, 4, 'Activado', 0, 0, 'C');
-        // }
+
         $i++;
     
     }
 }
 
 // Close and output PDF document
-$pdf->Output('reporte_ultimo_pago_clientes.pdf', 'I');
+$pdf->Output('reporte-inscripciones-activas-clientes.pdf', 'I');
 
 ?>

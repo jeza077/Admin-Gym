@@ -1069,15 +1069,28 @@ class ControladorClientes{
 
 
 	/*=============================================
-		RANGO PAGOS CLIENTES
+		RANGO INSCRIPCIONES ACTIVAS DE CLIENTES
     =============================================*/
-	static public function ctrRangoPagosCliente($rango){
+	static public function ctrRangoClienteInscripcionActiva($rango){
 
 		$tabla = 'tbl_clientes';
 		
-		$respuesta = ModeloClientes::mdlRangoPagosCliente($tabla, $rango);
+		$respuesta = ModeloClientes::mdlRangoClienteInscripcionActiva($tabla, $rango);
 		
 		return $respuesta;
 	}
+
+	/*=============================================
+	RANGO INSCRIPCIONES DESACTIVADAS DE CLIENTES
+    =============================================*/
+	static public function ctrRangoClienteInscripcionDesactivado($rango){
+
+		$tabla = 'tbl_clientes';
+		
+		$respuesta = ModeloClientes::mdlRangoClienteInscripcionDesactivado($tabla, $rango);
+		
+		return $respuesta;
+	}
+	
 }
 
