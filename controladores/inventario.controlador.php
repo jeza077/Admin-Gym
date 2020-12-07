@@ -20,9 +20,7 @@ class ControladorInventario
         static public function ctrMostrarCompras($tabla, $item, $valor)
         {
                 $tabla1 = $tabla;
-                $tabla2 = "tbl_inventario";
-                $tabla3 = "tbl_proveedores";
-                $respuesta = ModeloInventario::mdlMostrarCompras($tabla1, $tabla2, $tabla3,$item, $valor);
+                $respuesta = ModeloInventario::mdlMostrarCompras($tabla1,$item, $valor);
                 return $respuesta;
         }
 

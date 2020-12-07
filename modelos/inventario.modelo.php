@@ -26,8 +26,8 @@ class ModeloInventario
 			$stmt -> execute();
 			return $stmt -> fetchAll();
 		} else {
-			$stmt = Conexion::conectar()->prepare("SELECT i.id_inventario, t.tipo_producto, i.nombre_producto, i.stock, i.precio_venta, i.precio_compra, i.proveedor, i.producto_minimo, i.producto_maximo, i.codigo FROM tbl_inventario AS i\n"
-			. "INNER JOIN tbl_tipo_producto AS t ON id_tipo_producto = id_tipo_producto");
+			$stmt = Conexion::conectar()->prepare("SELECT i.*,t.* FROM tbl_inventario AS i\n"
+			. "INNER JOIN tbl_tipo_producto AS t ON i.id_tipo_producto = t.id_tipo_producto");
 			$stmt -> execute();
 			return $stmt -> fetchAll();
 		}
@@ -45,11 +45,11 @@ class ModeloInventario
 
 
 
-	static public function mdlMostrarCompras($tabla1, $tabla2, $tabla3,$item, $valor){
+	static public function mdlMostrarCompras($tabla1,$item, $valor){
 		if ($item != null){
-			$stmt = Conexion::conectar()->prepare("SELECT c.*, i.nombre_producto,p.nombre FROM $tabla1 AS c\n"
-			. " LEFT JOIN $tabla2 AS i ON c.id_inventario = i.id_inventario\n"
-			. " LEFT JOIN $tabla3 AS p ON c.id_proveedor = p.id_proveedor\n");
+			$stmt = Conexion::conectar()->prepare("SELECT c.*,i.*,p.nombre FROM $tabla1 AS c\n"
+			. " LEFT JOIN tbl_inventario AS i ON c.id_inventario = i.id_inventario\n"
+			. " LEFT JOIN tbl_proveedores AS p ON c.id_proveedor = p.id_proveedor\n");
 
 			$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
 			$stmt -> execute();
@@ -57,9 +57,9 @@ class ModeloInventario
 		
 	
 		} else {
-			$stmt = Conexion::conectar()->prepare("SELECT i.nombre_producto, c.*,p.nombre FROM tbl_compras AS c\n"
+			$stmt = Conexion::conectar()->prepare("SELECT c.*,i.*,p.nombre FROM $tabla1 AS c\n"
 			. " LEFT JOIN tbl_inventario AS i ON c.id_inventario = i.id_inventario"
-			. " LEFT JOIN tbl_proveedor AS p ON c.id_proveedor = p.id_proveedor");
+			. " LEFT JOIN tbl_proveedores AS p ON c.id_proveedor = p.id_proveedor");
 			$stmt -> execute();
 			return $stmt -> fetchAll();
 		}
@@ -67,38 +67,6 @@ class ModeloInventario
 		$stmt = null;	
 	}
 
-
-
-
-
-
-
-
-
-
-
-
-    // static public function mdlMostrarCompras($tabla1, $tabla2, $item, $valor){
-	// 	if ($item != null) {
-	// 		$stmt = Conexion::conectar()->prepare("SELECT c.*, i.nombre_producto FROM $tabla1 AS c\n"
-	// 		. " LEFT JOIN $tabla2 AS i ON c.id_inventario = i.id_inventario\n"
-	// 		// . " LEFT JOIN $tabla3 AS p ON c.id_proveedor = p.id_proveedor\n"
-	// 		. "WHERE $item = :$item"); 
-
-	// 		$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
-	// 		$stmt -> execute();
-	// 		return $stmt -> fetch();
-
-	// 	} else {
-	// 		$stmt = Conexion::conectar()->prepare("SELECT i.nombre_producto, c.* FROM tbl_compras AS c\n"
-	// 		. "LEFT JOIN tbl_inventario AS i ON c.id_inventario = i.id_inventario");			
-	// 		// . "LEFT JOIN tbl_proveedores AS p ON c.id_proveedor = p.id_proveedor");
-	// 		$stmt -> execute();
-	// 		return $stmt -> fetchAll();
-	// 	}
-	// 	$stmt -> close();
-	// 	$stmt = null;	
-	// }
 
 
 

@@ -10,7 +10,7 @@
           </div>
           <div class="col-sm-6">
           <button class="btn btn-orange float-right"  data-toggle="modal" data-target="#modalAgregarCompra">
-              Nueva Compra         
+              Comprar Producto       
           </button>
           <button class="btn btn-danger btnExportarCompras float-right mr-3">
               Exportar PDF          
@@ -57,9 +57,9 @@
                     $item = null;
                     $valor = null;
                     $compras=ControladorInventario::ctrMostrarCompras($tabla, $item, $valor);
-                    echo"<pre>";
-                    var_dump($compras);
-                    echo"</pre>";
+                    // echo"<pre>";
+                    // var_dump($compras);
+                    // echo"</pre>";
                     foreach ($compras as $key => $value) {
                       echo '
                           <tr>

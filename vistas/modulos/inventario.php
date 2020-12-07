@@ -6,7 +6,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Compras</h1>
+            <h1>Inventario</h1>
           </div>
           <div class="col-sm-6">
           <button class="btn btn-orange float-right"  data-toggle="modal" data-target="#modalAgregarCompra">
@@ -47,19 +47,19 @@
                     <th scope="col">Nombre producto</th>
                     <th scope="col">Tipo Producto</th>
                     <th scope="col">Stock</th>
-                    
-                    
-                  
+
                     </tr>
                 </thead>
                 <tbody>
                 <?php
                             $tabla = "tbl_inventario";
-                            $item = "foto";
+                            $item = null;
                             $valor = null;
                             $order = null;
                     $inventarios=ControladorInventario::ctrMostrarInventario($tabla, $item, $valor,$order);
-                 
+                    // echo"<pre>";
+                    // var_dump($inventarios);
+                    // echo"</pre>";
                     foreach ($inventarios as $key => $value) {
                       echo '
                           <tr>
