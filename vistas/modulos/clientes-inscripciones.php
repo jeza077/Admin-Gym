@@ -52,7 +52,7 @@
                   <th scope="col">T. Inscripcion</th>
                   <th scope="col">F. Inscripcion</th>
                   <th scope="col">F. Ultimo Pago</th>
-                  <th scope="col">F. Proxim Pago</th>
+                  <th scope="col">F. Proximo Pago</th>
                   <th scope="col">Deuda</th>
                   <th scope="col">Estado</th>
                   <th scope="col">Acciones</th>
