@@ -59,80 +59,82 @@
                 </tr>
               </thead>
               <tbody>
-              <?php 
+                <?php 
 
-                $tabla = "tbl_clientes";
-                $item = 'tipo_cliente';
-                $valor = 'Gimnasio';
-                $max = null;
-                $clientes = ControladorClientes::ctrMostrarClientesInscripcionPagos($tabla, $item, $valor, $max);
+                  $tabla = "tbl_clientes";
+                  $item1 = 'tipo_cliente';
+                  $valor1 = 'Gimnasio';
+                  $item2 = 'estado';
+                  $valor2 = 1;
+                  $max = null;
+                  $clientes = ControladorClientes::ctrMostrarClientesInscripcionPagos($tabla, $item1, $valor1, $item2, $valor2, $max);
 
-                // echo "<pre>";
-                // var_dump($clientes);
-                // echo "</pre>";
-                // return;
+                  // echo "<pre>";
+                  // var_dump($clientes);
+                  // echo "</pre>";
+                  // return;
 
-                
-                foreach ($clientes as $key => $value) {
+                  
+                  foreach ($clientes as $key => $value) {
 
-                  echo '
-                      <tr>
-                      <th scope="row">'.($key+1).'</th>
-                      <td>'.$value["num_documento"].'</td>
-                      <td>'.$value["nombre"].' '.$value["apellidos"].'</td>
-                      <td>'.$value["tipo_inscripcion"].'</td>
-                      <td>'.$value["fecha_inscripcion"].'</td>
-                      <td>'.$value["fecha_pago"].'</td>';
+                    echo '
+                        <tr>
+                        <th scope="row">'.($key+1).'</th>
+                        <td>'.$value["num_documento"].'</td>
+                        <td>'.$value["nombre"].' '.$value["apellidos"].'</td>
+                        <td>'.$value["tipo_inscripcion"].'</td>
+                        <td>'.$value["fecha_inscripcion"].'</td>
+                        <td>'.$value["fecha_pago"].'</td>';
 
-                      // $fechaVencimientoPago = $value['fecha_proximo_pago'];
-                      // $fechaHoy = date('Y-m-d');
-                      // $date1 = new DateTime($fechaVencimientoPago);
-                      // $date2 = new DateTime($fechaHoy);
-                      // $diff = $date1->diff($date2);         
-                      
-                      $fecha_actual = strtotime(date("Y-m-d"));
-                      $fecha_entrada = strtotime($value['fecha_proximo_pago']);
-
-                      if($fecha_actual < $fecha_entrada){  
-                          echo '<td class="badge badge-success mt-2" data-toggle="tooltip" data-placement="left" title="Inscrito">'.$value["fecha_proximo_pago"].'</td>';
-                          
-                      // } else if($diff->days >= 1 && $diff->days <= 10) {
-                      //     echo '<td class="badge badge-warning mt-2" data-toggle="tooltip" data-placement="left" title="Inscripcion por Vencer">'.$value["fecha_proximo_pago"].'</t<d>';
-                      } else {
-                          echo '<td class="badge badge-danger mt-2" data-toggle="tooltip" data-placement="left" title="Inscripcion vencida">'.$value["fecha_proximo_pago"].'</td>';
-                      }
-
-                        if($fecha_actual > $fecha_entrada){
-                          $segundos = $fecha_entrada - $fecha_actual;
-                          $meses = ceil(($segundos / 2419200));
-                          // echo $meses;
-                          $deuda = abs($value['precio_inscripcion'] * $meses);
-    
-                          echo '<td data-toggle="tooltip" data-placement="left" title="Adeuda '.abs($meses).' meses">L.'.$deuda.'</td>';
+                        // $fechaVencimientoPago = $value['fecha_proximo_pago'];
+                        // $fechaHoy = date('Y-m-d');
+                        // $date1 = new DateTime($fechaVencimientoPago);
+                        // $date2 = new DateTime($fechaHoy);
+                        // $diff = $date1->diff($date2);         
                         
-                        } else {
-                          echo '<td data-toggle="tooltip" data-placement="left" title="No debe">L.0000.00</td>';
+                        $fecha_actual = strtotime(date("Y-m-d"));
+                        $fecha_entrada = strtotime($value['fecha_proximo_pago']);
 
+                        if($fecha_actual < $fecha_entrada){  
+                            echo '<td class="badge badge-success mt-2" data-toggle="tooltip" data-placement="left" title="Inscrito">'.$value["fecha_proximo_pago"].'</td>';
+                            
+                        // } else if($diff->days >= 1 && $diff->days <= 10) {
+                        //     echo '<td class="badge badge-warning mt-2" data-toggle="tooltip" data-placement="left" title="Inscripcion por Vencer">'.$value["fecha_proximo_pago"].'</t<d>';
+                        } else {
+                            echo '<td class="badge badge-danger mt-2" data-toggle="tooltip" data-placement="left" title="Inscripcion vencida">'.$value["fecha_proximo_pago"].'</td>';
                         }
+
+                          if($fecha_actual > $fecha_entrada){
+                            $segundos = $fecha_entrada - $fecha_actual;
+                            $meses = ceil(($segundos / 2419200));
+                            // echo $meses;
+                            $deuda = abs($value['precio_inscripcion'] * $meses);
+      
+                            echo '<td data-toggle="tooltip" data-placement="left" title="Adeuda '.abs($meses).' meses">L.'.$deuda.'</td>';
+                          
+                          } else {
+                            echo '<td data-toggle="tooltip" data-placement="left" title="No debe">L.0000.00</td>';
+
+                          }
+                      
+                          if($value['estado'] != 0){
+                            echo '<td><span class="badge badge-success p-3">A</span></td>';
+                          } else {
+                            echo '<td><span class="badge badge-danger p-3">D</span></td>';
+                          }
                     
-                        if($value['estado'] != 0){
-                          echo '<td><span class="badge badge-success p-3">A</span></td>';
-                        } else {
-                          echo '<td><span class="badge badge-danger p-3">D</span></td>';
-                        }
-                  
 
-                    echo
-                        '<td>
-                          <button class="btn btn-success btnEditarPago" data-toggle="tooltip" data-placement="left" title="Pagar" idCliente="'.$value["id_cliente"].'"><i class="fas fa-dollar-sign p-1"></i></button>
+                      echo
+                          '<td>
+                            <button class="btn btn-success btnEditarPago" data-toggle="tooltip" data-placement="left" title="Pagar" idCliente="'.$value["id_cliente"].'"><i class="fas fa-dollar-sign p-1"></i></button>
 
-                          <button class="btn btn-danger btnCancelarInscripcion" data-toggle="tooltip" data-placement="left" title="Cancelar Inscripcion" idClienteInscripcion="'.$value["id_cliente_inscripcion"].'" idClientePagoInscripcion="'.$value["id_cliente"].'"><i class="fas fa-strikethrough" style="color:#fff"></i></button>
-                        </td>
-                      </tr>
-                  ';
-                  
-                }
-              ?>
+                            <button class="btn btn-danger btnCancelarInscripcion" data-toggle="tooltip" data-placement="left" title="Cancelar Inscripcion" idClienteInscripcion="'.$value["id_cliente_inscripcion"].'" idClientePagoInscripcion="'.$value["id_cliente"].'"><i class="fas fa-strikethrough" style="color:#fff"></i></button>
+                          </td>
+                        </tr>
+                    ';
+                    
+                  }
+                ?>
               </tbody>
             </table>
           </div>

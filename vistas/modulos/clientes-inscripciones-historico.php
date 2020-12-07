@@ -6,7 +6,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Clientes Inscripciones</h1>
+            <h1>Clientes Inscripciones Historico</h1>
           </div>
           <div class="col-sm-6">
           <!-- <button class="btn btn-orange float-right"  data-toggle="modal" data-target="#modalAgregarCliente">
@@ -47,46 +47,84 @@
               <thead>
                 <tr>
                   <th scope="col">#</th>
+                  <th scope="col">No. Documento</th>
                   <th scope="col">Nombre</th>
-                  <th scope="col">Tipo Inscripcion</th>
-                  <th scope="col">Ultimo Pago</th>
-                  <th scope="col">Fecha Ultimo Pago</th>
-                  <th scope="col">Fecha Vencimiento</th>
-                  <!-- <th scope="col">Estado</th>
-                  <th scope="col">Acciones</th> -->
+                  <th scope="col">T. Inscripcion</th>
+                  <th scope="col">F. Inscripcion</th>
+                  <th scope="col">F. Ultimo Pago</th>
+                  <th scope="col">F. Proxim Pago</th>
+                  <th scope="col">Deuda</th>
+                  <th scope="col">Estado</th>
+                  <!-- <th scope="col">Acciones</th> -->
                 </tr>
               </thead>
               <tbody>
-              <?php 
-                // echo  $_SESSION['id_usuario'];
-              
-              // $tabla = "tbl_clientes";
-              // $item = 'id_personas';
-              // $valor = 37;
-              // $cli = ControladorClientes::ctrMostrarClientesPagos($tabla, $item, $valor, $max);
-              // var_dump($cli);
+                <?php 
 
-                $tabla = "tbl_clientes";
-                $item = 'tipo_cliente';
-                $valor = 'Gimnasio';
-                $max = null;
-                $clientes = ControladorClientes::ctrMostrarClientesPagos($tabla, $item, $valor, $max);
+                  $tabla = "tbl_clientes";
+                  $item1 = 'tipo_cliente';
+                  $valor1 = 'Gimnasio';
+                  $item2 = 'estado';
+                  $valor2 = 0;
+                  $max = null;
+                  $clientes = ControladorClientes::ctrMostrarClientesInscripcionPagos($tabla, $item1, $valor1, $item2, $valor2, $max);
 
-                // echo "<pre>";
-                // var_dump($clientes);
-                // echo "</pre>";
-                // return;
-                foreach ($clientes as $key => $value) {
-                  echo '
-                      <tr>
-                      <th scope="row">'.($key+1).'</th>
-                      <td>'.$value["nombre"].' '.$value["apellidos"].'</td>
-                      <td>'.$value["tipo_inscripcion"].'</td>
-                      <td>'.$value["pago_total"].'</td>
-                      <td>'.$value["fecha_ultimo_pago"].'</td>
-                      <td>'.$value["fecha_vencimiento"].'</td>';
-                }
-              ?>
+                  // echo "<pre>";
+                  // var_dump($clientes);
+                  // echo "</pre>";
+                  // return;
+
+
+                  foreach ($clientes as $key => $value) {
+
+                    echo '
+                        <tr>
+                        <th scope="row">'.($key+1).'</th>
+                        <td>'.$value["num_documento"].'</td>
+                        <td>'.$value["nombre"].' '.$value["apellidos"].'</td>
+                        <td>'.$value["tipo_inscripcion"].'</td>
+                        <td>'.$value["fecha_inscripcion"].'</td>
+                        <td>'.$value["fecha_pago"].'</td>';
+
+                        // $fechaVencimientoPago = $value['fecha_proximo_pago'];
+                        // $fechaHoy = date('Y-m-d');
+                        // $date1 = new DateTime($fechaVencimientoPago);
+                        // $date2 = new DateTime($fechaHoy);
+                        // $diff = $date1->diff($date2);         
+                        
+                        $fecha_actual = strtotime(date("Y-m-d"));
+                        $fecha_entrada = strtotime($value['fecha_proximo_pago']);
+
+                        if($fecha_actual < $fecha_entrada){  
+                            echo '<td class="badge badge-success mt-2" data-toggle="tooltip" data-placement="left" title="Inscrito">'.$value["fecha_proximo_pago"].'</td>';
+                            
+                        // } else if($diff->days >= 1 && $diff->days <= 10) {
+                        //     echo '<td class="badge badge-warning mt-2" data-toggle="tooltip" data-placement="left" title="Inscripcion por Vencer">'.$value["fecha_proximo_pago"].'</t<d>';
+                        } else {
+                            echo '<td class="badge badge-danger mt-2" data-toggle="tooltip" data-placement="left" title="Inscripcion vencida">'.$value["fecha_proximo_pago"].'</td>';
+                        }
+
+                          if($fecha_actual > $fecha_entrada){
+                            $segundos = $fecha_entrada - $fecha_actual;
+                            $meses = ceil(($segundos / 2419200));
+                            // echo $meses;
+                            $deuda = abs($value['precio_inscripcion'] * $meses);
+
+                            echo '<td data-toggle="tooltip" data-placement="left" title="Adeuda '.abs($meses).' meses">L.'.$deuda.'</td>';
+                          
+                          } else {
+                            echo '<td data-toggle="tooltip" data-placement="left" title="No debe">L.0000.00</td>';
+
+                          }
+                      
+                          if($value['estado'] != 0){
+                            echo '<td><span class="badge badge-success p-3">A</span></td>';
+                          } else {
+                            echo '<td><span class="badge badge-danger p-3">D</span></td>';
+                          }
+                    
+                  }
+                ?>
               </tbody>
             </table>
           </div>

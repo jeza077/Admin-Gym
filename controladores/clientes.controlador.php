@@ -351,11 +351,11 @@ class ControladorClientes{
 	/*=============================================
 		MOSTRAR CLIENTES INSCRIPCIONES
 	=============================================*/
-	static public function ctrMostrarClientesInscripcionPagos($tabla, $item, $valor, $max){
+	static public function ctrMostrarClientesInscripcionPagos($tabla, $item1, $valor1, $item2, $valor2, $max){
 		$tabla1 = "tbl_personas";
 		$tabla2 = $tabla;
 
-		$respuesta = ModeloClientes::mdlMostrarClientesInscripcionPagos($tabla1, $tabla2, $item, $valor, $max);
+		$respuesta = ModeloClientes::mdlMostrarClientesInscripcionPagos($tabla1, $tabla2, $item1, $valor1, $item2, $valor2, $max);
 
 		return $respuesta;
 	}
