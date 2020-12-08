@@ -628,6 +628,17 @@ class ControladorClientes{
 
 				$cantidadDias = $inscripciones['cantidad_dias'];
 
+				$tabla = "tbl_cliente_inscripcion";
+				$item = "id_cliente";
+				$valor = $_POST['nuevoClienteInscripcion'];
+				
+				$clienteInscripcion = ControladorUsuarios::ctrMostrar($tabla, $item, $valor); 
+
+				
+				$idClienteInscripcion = $clienteInscripcion['id_cliente_inscripcion'];
+				// var_dump($idClienteInscripcion.' '. $idCliente);
+				// return;
+
 				// echo $cantidadDias;
 				// return;
 	
@@ -642,8 +653,10 @@ class ControladorClientes{
 								"fecha_proximo_pago" => $fechaVencimientoCliente,
 								"fecha_vencimiento" => $fechaVencimientoCliente);
 	
-				// return $datos;
-								
+				// var_dump($datos);
+				// return;
+
+
 				$tabla = "tbl_cliente_inscripcion";
 	
 				$respuestaClienteInscripcion = ModeloClientes::mdlCrearClienteInscripcion($tabla, $datos);
@@ -651,6 +664,15 @@ class ControladorClientes{
 				// var_dump($respuestaClienteInscripcion);
 				// return;
 				if($respuestaClienteInscripcion == true){
+
+					$item1 = 'inscrito';
+					$valor1 = 1;
+					$item2 = 'id_cliente_inscripcion';
+					$valor2 = $idClienteInscripcion;
+					
+					$ultimaInscripcion = ModeloClientes::mdlActualizarCliente($tabla, $item1, $valor1, $item2, $valor2);
+
+
 					$totalId = array();
 					$tabla = "tbl_cliente_inscripcion";
 					// $tabla2 = "tbl_clientes";

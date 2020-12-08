@@ -695,7 +695,7 @@ class ModeloClientes{
 			. "LEFT JOIN tbl_cliente_inscripcion as ci ON c.id_cliente = ci.id_cliente\n"
 			. "LEFT JOIN tbl_inscripcion as i ON ci.id_inscripcion = i.id_inscripcion\n"
 			// . "LEFT JOIN tbl_pagos_cliente as pc ON ci.id_cliente_inscripcion = pc.id_cliente_inscripcion\n"
-			. "WHERE c.tipo_cliente = 'Gimnasio' AND ci.estado = 1 AND (nombre LIKE '%$rango%' OR apellidos LIKE '%$rango%' OR tipo_inscripcion LIKE '%$rango%' OR num_documento LIKE '%$rango%')\n"
+			. "WHERE c.tipo_cliente = 'Gimnasio' AND ci.estado = 1 AND (nombre LIKE '%$rango%' OR apellidos LIKE '%$rango%' OR tipo_inscripcion LIKE '%$rango%' OR num_documento LIKE '%$rango%' OR fecha_proximo_pago LIKE '%$rango%' OR fecha_vencimiento LIKE '%$rango%')\n"
 			. "ORDER BY ci.id_cliente_inscripcion DESC"); 
 
 			// $stmt->bindParam(":".$item, $valor, PDO::PARAM_STR);
@@ -703,6 +703,8 @@ class ModeloClientes{
 			$stmt->bindParam(":apellidos", $rango, PDO::PARAM_STR);
 			$stmt->bindParam(":tipo_inscripcion", $rango, PDO::PARAM_STR);
 			$stmt->bindParam(":num_documento", $rango, PDO::PARAM_STR);
+			$stmt->bindParam(":fecha_proximo_pago", $rango, PDO::PARAM_STR);
+			$stmt->bindParam(":fecha_vencimiento", $rango, PDO::PARAM_STR);
 
             $stmt-> execute();
 			return $stmt ->fetchAll();
@@ -744,7 +746,7 @@ class ModeloClientes{
 			. "LEFT JOIN tbl_cliente_inscripcion as ci ON c.id_cliente = ci.id_cliente\n"
 			. "LEFT JOIN tbl_inscripcion as i ON ci.id_inscripcion = i.id_inscripcion\n"
 			// . "LEFT JOIN tbl_pagos_cliente as pc ON ci.id_cliente_inscripcion = pc.id_cliente_inscripcion\n"
-			. "WHERE c.tipo_cliente = 'Gimnasio' AND ci.estado = 0 AND (nombre LIKE '%$rango%' OR apellidos LIKE '%$rango%' OR tipo_inscripcion LIKE '%$rango%' OR num_documento LIKE '%$rango%')\n"
+			. "WHERE c.tipo_cliente = 'Gimnasio' AND ci.estado = 0 AND (nombre LIKE '%$rango%' OR apellidos LIKE '%$rango%' OR tipo_inscripcion LIKE '%$rango%' OR num_documento LIKE '%$rango%' OR fecha_proximo_pago LIKE '%$rango%' OR fecha_vencimiento LIKE '%$rango%')\n"
 			. "ORDER BY ci.id_cliente_inscripcion DESC"); 
 
 			// $stmt->bindParam(":".$item, $valor, PDO::PARAM_STR);
@@ -752,6 +754,8 @@ class ModeloClientes{
 			$stmt->bindParam(":apellidos", $rango, PDO::PARAM_STR);
 			$stmt->bindParam(":tipo_inscripcion", $rango, PDO::PARAM_STR);
 			$stmt->bindParam(":num_documento", $rango, PDO::PARAM_STR);
+			$stmt->bindParam(":fecha_proximo_pago", $rango, PDO::PARAM_STR);
+			$stmt->bindParam(":fecha_vencimiento", $rango, PDO::PARAM_STR);
 
             $stmt-> execute();
 			return $stmt ->fetchAll();
@@ -788,10 +792,12 @@ class ModeloClientes{
 			. "LEFT JOIN tbl_pagos_cliente as pc ON c.id_cliente = pc.id_cliente\n"
 			. "LEFT JOIN tbl_inscripcion as i ON pc.id_inscripcion = i.id_inscripcion\n"
 			. "LEFT JOIN tbl_descuento as pd ON pc.id_descuento = pd.id_descuento\n"
-			. "WHERE nombre LIKE '%$rango%' OR tipo_inscripcion LIKE '%$rango%' OR fecha_ultimo_pago LIKE '%$rango%' OR fecha_vencimiento LIKE '%$rango%'"); 
+			. "WHERE num_documento LIKE '%$rango%' OR nombre LIKE '%$rango%' OR tipo_inscripcion LIKE '%$rango%' OR fecha_pago LIKE '%$rango%' OR fecha_ultimo_pago LIKE '%$rango%' OR fecha_vencimiento LIKE '%$rango%'"); 
 
+			$stmt->bindParam(":num_documento", $rango, PDO::PARAM_STR);
 			$stmt->bindParam(":nombre", $rango, PDO::PARAM_STR);
 			$stmt->bindParam(":tipo_inscripcion", $rango, PDO::PARAM_STR);
+			$stmt->bindParam(":fecha_pago", $rango, PDO::PARAM_STR);
 			$stmt->bindParam(":fecha_ultimo_pago", $rango, PDO::PARAM_STR);
 			$stmt->bindParam(":fecha_vencimiento", $rango, PDO::PARAM_STR);
 
@@ -803,7 +809,7 @@ class ModeloClientes{
 
 
 	/*=============================================
-		RANGO PAGOS CLIENTES
+		RANGO CLIENTES TOTALES
     =============================================*/
 	static public function mdlRangoCliente($tabla, $rango){
 			
