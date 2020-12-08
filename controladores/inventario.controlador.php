@@ -371,11 +371,11 @@ class ControladorInventario
         =============================================*/
 
         static public function ctrCrearCompra($pantalla){
-            var_dump($_POST);
-            return;
+            // var_dump($_POST);
+            // return;
             if(isset($_POST["nuevoProducto"])){
     
-                if(preg_match('/^[a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevoProducto"])){
+                if(preg_match('/^[0-9]*$/', $_POST["nuevoProducto"])){
           
                     $tabla = "tbl_compras";
                     
@@ -389,10 +389,10 @@ class ControladorInventario
 
                                 if($crearInventario == true){
                                     
-                                    $descripcionEvento = "  Nuevo Producto";
-                                    $accion = "Nuevo";
+                                    // $descripcionEvento = "  Nuevo Producto";
+                                    // $accion = "Nuevo";
             
-                                    $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 4,$accion, $descripcionEvento);
+                                    // $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 4,$accion, $descripcionEvento);
                 
 
                                     echo '<script>
@@ -418,10 +418,7 @@ class ControladorInventario
                                                 timer: 4000
                                             });					
                                         </script>';
-                                }
-    
-                 
-              
+                                }     
                 } 
             }
         }
