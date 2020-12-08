@@ -26,13 +26,13 @@
               <!-- <div class="card"> -->
 
                 <!-- <div class="card-body"> -->
-                <?php
+                <!--?php
                    $descripcionEvento = " Consulto la pantalla de mantenimiento";
                    $accion = "consulta";
 
                    $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
     
-                ?>
+                ?--->
 
 
                   <ul class="nav nav-tabs" id="myTab" role="tablist">
