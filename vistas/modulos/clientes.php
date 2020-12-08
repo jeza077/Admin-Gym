@@ -213,7 +213,6 @@
                         <option value="F">Femenino</option>
                       </select>
                     </div>
-                   
                   </div>
                 </div>
               </div>
@@ -476,7 +475,7 @@
       <div class="modal-content">
       
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Editar cliente</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Editar Cliente Ventas</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -567,19 +566,19 @@
                   <div class="form-row">
                     <div class="form-group col-md-3">
                       <label>Tipo Cliente</label>
-                      <select class="form-control select2" name="editarTipoClienteVenta" style="width: 100%;" required>
+                      <select class="form-control select2 tipoClienteVenta" name="editarTipoClienteVenta" style="width: 100%;" required>
                         <option value="tipoCl" id="editarTipoClienteVenta"></option>
+                        <!-- <option selected="selected">Seleccionar...</option> -->
                         <option value="Gimnasio">Clientes del gimnasio</option>
                         <option value="Ventas">Cliente de ventas</option>
                       </select>
                     </div>
                   </div>
-                    
-                  <div id="datosCliente2">
+                  <div id="datosClienteVenta">
                     <div class="form-row">
                       <div class="form-group col-md-6">
                           <label>Tipo matricula</label>
-                          <select class="form-control select2 nuevaMatriculaClienteVenta nuevaMatricula" style="width: 100%;" name="tipoMatriculaClienteVenta">
+                          <select class="form-control select2 nuevaMatriculaClienteVenta" style="width: 100%;" name="tipoMatriculaClienteVenta">
                             <option value="" id="tipoMatriculaClienteVenta" ></option>
                             <option selected="selected">Seleccionar...</option>
                             <?php 
@@ -644,7 +643,7 @@
                     <div class="form-row">
                         <div class="form-group col-md-6"> 
                           <label>Tipo inscripcion</label>
-                          <select class="form-control select2 nuevaInscripcionClienteVenta nuevaInscripcion" style="width: 100%;" name="inscripcionClienteVenta">
+                          <select class="form-control select2 nuevaInscripcionClienteVenta" style="width: 100%;" name="inscripcionClienteVenta">
                               <option value="" id="inscripcionClienteVenta"></option>
                               <option selected="selected">Seleccionar...</option>
                               <?php 
@@ -685,7 +684,7 @@
                       </div>
                     </div> -->
                     <div class="form-row">
-                      <button type="" class="btn btn-success btn-block col-md-6 mt-4 mb-3 verTotalPago"><i class="fas fa-dollar-sign"></i> Calcular</button>       
+                      <button type="" class="btn btn-success btn-block col-md-6 mt-4 mb-3 verTotalPagoCliente"><i class="fas fa-dollar-sign"></i> Calcular</button>       
 
                       <div class="form-group col-md-6">
                         <label for="">Total a pagar:</label>
@@ -693,7 +692,7 @@
                           <div class="input-group-prepend">
                               <span class="input-group-text">$</span>  
                           </div>
-                          <input type="text" class="form-control float-right text-right totalPagarClienteVenta totalPagar" name="totalPagarClienteVenta" value="" readonly>  
+                          <input type="text" class="form-control float-right text-right totalPagarClienteVenta" name="totalPagarClienteVenta" value="" readonly>  
                          </div>
                       </div>
 

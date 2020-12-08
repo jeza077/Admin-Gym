@@ -16,9 +16,9 @@ class ModeloClientes{
 			$stmt->bindParam(":tipo_cliente", $datos["tipo_cliente"], PDO::PARAM_STR);
 			$stmt->bindParam(":id_matricula", $datos["id_matricula"], PDO::PARAM_INT);
 			$stmt->bindParam(":id_descuento", $datos["id_descuento"], PDO::PARAM_INT);
-
-			// $stmt->bindParam(":fecha_inscripcion", $datos["fecha_inscripcion"], PDO::PARAM_STR);
-			// $stmt->bindParam(":fecha_ultimo_pago", $datos["fecha_ultimo_pago"], PDO::PARAM_STR);
+			
+			// $stmt->bindParam(":compras", $datos["compras"], PDO::PARAM_STR);
+			// $stmt->bindParam(":ultima_compra", $datos["ultima_compra"], PDO::PARAM_STR);
 			// $stmt->bindParam(":fecha_vencimiento", $datos["fecha_vencimiento"], PDO::PARAM_STR);
 			// $stmt->bindParam(":fecha_proximo_pago", $datos["fecha_proximo_pago"], PDO::PARAM_STR);
 	
@@ -370,13 +370,15 @@ class ModeloClientes{
 
 		if ($datos['tipo_cliente'] == "Gimnasio"){
 	
-			$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET tipo_cliente = :tipo_cliente, id_inscripcion = :id_inscripcion, id_matricula = :id_matricula, id_descuento = :id_descuento WHERE id_persona = :id_persona");
+			$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET tipo_cliente = :tipo_cliente, id_matricula = :id_matricula, id_descuento = :id_descuento, compras = :compras, ultima_compra = :ultima_compra WHERE id_persona = :id_persona");
 	
 			$stmt->bindParam(":tipo_cliente", $datos["tipo_cliente"], PDO::PARAM_STR);
-			$stmt->bindParam(":id_inscripcion", $datos["id_inscripcion"], PDO::PARAM_INT);
+			// $stmt->bindParam(":id_inscripcion", $datos["id_inscripcion"], PDO::PARAM_INT);
 			$stmt->bindParam(":id_matricula", $datos["id_matricula"], PDO::PARAM_INT);
 			$stmt->bindParam(":id_descuento", $datos["id_descuento"], PDO::PARAM_INT);
 			$stmt->bindParam(":id_persona", $datos["id_persona"], PDO::PARAM_INT);
+			$stmt->bindParam(":compras", $datos["compras"], PDO::PARAM_INT);
+			$stmt->bindParam(":ultima_compra", $datos["ultima_compra"], PDO::PARAM_STR);
 	
 			if($stmt->execute()){
 	

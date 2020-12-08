@@ -1,35 +1,60 @@
 // VALIDACIONES DE DOCUMENTO
-$('.tipoDocumentoCliente').change(function (e) { 
-    e.preventDefault();
-    $('.idCliente').val("");
+// $('.tipoDocumentoCliente').change(function (e) { 
+//     e.preventDefault();
+//     $('.idCliente').val("");
 
-    var valorTipoDocumento =$(this).val();
-    // console.log(valorTipoDocumento);
+//     var valorTipoDocumento =$(this).val();
+//     // console.log(valorTipoDocumento);
 
-    if(valorTipoDocumento === 3){
-        $('.idCliente').keydown(sinNumeros);
-    } else {
-        $('.idCliente').keydown(sinLetras);
-        $('.idCliente').keydown(sinCaracteres);
-    }
-});
-
-validarEmail($('.emailCliente'))
-$('.numeroDocumentoCliente').keydown(impedirEspacios);
-$('.numeroDocumentoCliente').blur(validarDoc)
+//     if(valorTipoDocumento === 3){
+//         $('.idCliente').keydown(sinNumeros);
+//     } else {
+//         $('.idCliente').keydown(sinLetras);
+//         $('.idCliente').keydown(sinCaracteres);
+//     }
+// });
+verificarDocumento($('.tipoDocumentoCliente'))
 
 //VALIDACIONES AGREGAR CLIENTE
-$('.nombreCliente').keydown(sinCaracteres)
-$('.nombreCliente').keydown(sinNumeros)
-$('.nombreCliente').keydown(permitirUnEspacio);
+validarDoc($('.idCliente'))
+validarEmail($('.emailCliente'))
 longitudString($('.nombreCliente'),30); 
-//VALIDACIONES AGREGAR CLIENTE apellido
+$('.nombreCliente').keydown(sinNumeros)
+$('.nombreCliente').keydown(sinCaracteres)
+$('.nombreCliente').keydown(permitirUnEspacio);
+$('.numeroDocumentoCliente').keydown(impedirEspacios);
 $('.apellidoCliente').keydown(sinCaracteres)
 $('.apellidoCliente').keydown(sinNumeros)
 $('.apellidoCliente').keydown(permitirUnEspacio);
 longitudString($('.apellidoCliente'),30); 
-;
 
+// VALIDACIONES EDITAR CLIENTE GIMNASIO
+validarEmail($('.editarEmail'))
+longitudString($('.editarNombre'),30); 
+longitudString($('.editarApellido'),30); 
+validarDoc($('.editarNumeroDocumento'));
+$('.editarNombre').keydown(sinNumeros)
+$('.editarNombre').keydown(sinCaracteres)
+$('.editarNombre').keydown(permitirUnEspacio);
+$('.editarApellido').keydown(sinNumeros)
+$('.editarApellido').keydown(sinCaracteres)
+$('.editarApellido').keydown(permitirUnEspacio);
+$('.editarNumeroDocumento').keydown(impedirEspacios);
+// VALIDACIONES EDITAR CLIENTE VENTA
+validarEmail($('.editarEmailVentas'))
+longitudString($('.nombreClienteVentas'),30);
+longitudString($('.apellidoClienteVentas'),30); 
+validarDoc($('.numeroDocumentoClienteVentas'));
+$('.nombreClienteVentas').keydown(sinNumeros)
+$('.nombreClienteVentas').keydown(sinCaracteres)
+$('.nombreClienteVentas').keydown(permitirUnEspacio);
+$('.apellidoClienteVentas').keydown(sinNumeros)
+$('.apellidoClienteVentas').keydown(sinCaracteres)
+$('.apellidoClienteVentas').keydown(permitirUnEspacio);
+$('.numeroDocumentoClienteVentas').keydown(impedirEspacios);
+
+// AGREGAR CLIENTE 
+// MUESTRA LOS DATOS DE PAGO DEL CLIENTE, AL ELEGIR TIPO CLIENTE GIMNASIO
 $('#datosClientes').hide();
 $(document).on('change', '.tipoCliente', function () {
     var valor = $(this).val();
@@ -44,17 +69,19 @@ $(document).on('change', '.tipoCliente', function () {
     }
    
 });
-$('#datosClientes').hide();
-$(document).on('change', '.tipoCliente', function () {
+// EDITAR CLIENTE VENTA
+// AL ELEJIR TIPO CLIENTE GIMNASIO MUESTRA LOS DATOS A AGREGAR DE PAGOS CLIENTE
+$('#datosClienteVenta').hide();
+$(document).on('change', '.tipoClienteVenta', function () {
     var valor = $(this).val();
     // console.log(valor)
     if (valor == "Gimnasio") {
         // SumaTotal()
        
-        $('#datosClientes').show();
+        $('#datosClienteVenta').show();
         // sumar();
     } else {
-        $('#datosClientes').hide();
+        $('#datosClienteVenta').hide();
     }
    
 });
@@ -92,7 +119,7 @@ $(document).on('click', '.btnEditarClienteGimnasio', function () {
         dataType: "json",
         success: function(respuesta) {
 
-            console.log("respuesta", respuesta);
+            // console.log("respuesta", respuesta);
             
             $('#idEditarCliente').val(respuesta["id_persona"])
 
@@ -277,10 +304,6 @@ $('.verTotalPago').click(function (e) {
     var totalDescuento = $('.totalDescuento').val();
     var totalInscripcion = $('.totalInscripcion').val();
 
-    // var totalMatricula = $('.precioMatriculaClienteVentas').val();
-    // var totalDescuento = $('.valorDescuentoClienteVenta').val();
-    // var totalInscripcion = $('.precioInscripcionClienteVenta').val();
-
     // console.log(totalMatricula)
     // console.log(totalInscripcion)
 
@@ -317,6 +340,53 @@ $('.verTotalPago').click(function (e) {
         // console.log('suma',suma)
     
         $('.totalPagar').val(suma);
+        
+
+    }
+});
+// SUMA TOTAL PAGO CLIENTE VENTAS
+
+$('.verTotalPagoCliente').click(function (e) { 
+    e.preventDefault();
+
+    var totalMatricula = $('.precioMatriculaClienteVentas').val();
+    var totalDescuento = $('.valorDescuentoClienteVenta').val();
+    var totalInscripcion = $('.precioInscripcionClienteVenta').val();
+
+    // console.log(totalMatricula)
+    // console.log(totalInscripcion)
+
+    if(!totalMatricula){
+        $('.nuevaMatriculaClienteVenta').after('<div class="alert alert-danger fade show mt-2" role="alert">Por favor seleccione un tipo de matricula</div>');
+        $('.nuevaMatriculaClienteVenta').focus();
+
+    } else if(!totalInscripcion) {
+        $('.nuevaInscripcionClienteVenta').after('<div class="alert alert-danger fade show mt-2" role="alert">Por favor seleccione un tipo de inscripcion</div>');
+        $('.nuevaInscripcionClienteVenta').focus();
+
+  
+
+    } else {
+        $('.alert').remove();
+        // console.log(totalDescuento)
+        // console.log(totalInscripcion)
+        // console.log(totalMatricula)
+        if(!totalDescuento){
+
+            var suma = (parseInt(totalMatricula) + parseInt(totalInscripcion));
+            var descuento = 0;
+            $('input[name=editarPrecioDescuento]').attr('value', descuento);
+        } else {
+            var porcentaje = parseInt(totalDescuento) / 100;
+            var descuento = ((parseInt(totalMatricula) * porcentaje));
+            var suma = (parseInt(totalMatricula) - descuento) + parseInt(totalInscripcion);
+            $('input[name=editarPrecioDescuento]').attr('value', descuento);
+            
+        }
+        // console.log('desc',descuento);
+        // console.log('suma',suma)
+    
+        $('.totalPagarClienteVenta').val(suma);
         
 
     }
