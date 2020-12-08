@@ -158,10 +158,11 @@ class ModeloMantenimiento{
 	==============================================*/
 	static public function mdlInsertarInscripcion($tabla, $datos){
 
-		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(tipo_inscripcion, precio_inscripcion) VALUES (:tipo_inscripcion, :precio_inscripcion)");
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(tipo_inscripcion, precio_inscripcion, cantidad_dias) VALUES (:tipo_inscripcion, :precio_inscripcion, :cantidad_dias)");
        
         $stmt->bindParam(":tipo_inscripcion", $datos["inscripcion"], PDO::PARAM_STR);
         $stmt->bindParam(":precio_inscripcion", $datos["precio"], PDO::PARAM_STR);
+        $stmt->bindParam(":cantidad_dias", $datos["dias"], PDO::PARAM_STR);
         
 
 		if($stmt->execute()){

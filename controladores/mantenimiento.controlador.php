@@ -127,7 +127,7 @@
   
               if(result.value){
   
-                window.location = "mantenimiento";
+                window.location = "rol";
   
               }
   
@@ -248,14 +248,16 @@
 
 
         if(preg_match('/^[a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevoInscripcion"]) && 
-           preg_match('/^[0-9]+$/', $_POST["nuevoPrecio"])){
+           preg_match('/^[0-9]+$/', $_POST["nuevoPrecio"])&& 
+           preg_match('/^[0-9]+$/', $_POST["nuevoDias"])){
          
           
           $tabla = "tbl_inscripcion";
           
   
           $datos = array("inscripcion" => $_POST["nuevoInscripcion"], 
-                          "precio" => $_POST["nuevoPrecio"]);
+                          "precio" => $_POST["nuevoPrecio"],
+                          "dias" => $_POST["nuevoDias"]);
 
             // echo "<pre>";
             // var_dump($_POST);
