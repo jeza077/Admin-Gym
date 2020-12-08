@@ -122,7 +122,7 @@
               <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="datosPersona">
                 <div class="container-fluid mt-3">
                   <div class="form-row">
-                    <div class="form-group col-md-3">
+                    <div class="form-group col-md-5">
                       <label for="">Tipo<?php echo $i?></label>
                       <select class="form-control select2 "  id="nuevoTipoProducto" style="width: 100%;" name="nuevoTipoProducto">
                           
@@ -140,29 +140,43 @@
                           ?>
                       </select>
                     </div>
-                    <div class="form-group col-md-3">
+                    <div class="form-group col-md-5">
                       <label for="nombreproducto">Codigo</label>
                       <input type="text" readonly class="form-control nuevoCodigo" name="nuevoCodigo" placeholder="Codigo producto" required>
                     </div>
-                    <div class="form-group col-md-3">
+
+                  </div>
+      
+
+                  <div class="form-row">
+                  <div class="form-group col-md-5">
                       <label for="nombreproducto">Nombre Producto</label>
                       <html>
                       <input type="text" class="form-control mayus nombre_producto" name="nuevoNombreProducto" placeholder="Ingrese Producto" required>
                     </div>
-                    <div class="form-group col-md-3">
+                    <div class="form-group col-md-5">
                       <label for="stock">Cantidad en stock</label>
                       <input type="number" class="form-control stock" name="nuevoStock" placeholder="Cantidad en stock" min="0" required class="fa fa-arrow-up"></i></span>
                     </div>
-                  </div>
-      
-               <div class="form-row">
+
+                  </div> 
+               <!-- <div class="form-row">
 
 
 
                     <div class="form-group col-md-4">
                       <label for="precio">Precio</label>
-                      <input type="text" class="form-control precio" name="nuevoPrecio" placeholder="Ingrese Precio"  required>
+                      <input type="text" class="form-control precio" name="nuevoPrecio" placeholder="Ingrese Precio"  required>                   
+                    </div>
                     
+                    <div class="form-group col-md-4">
+                      <label for="precio">Precio compra</label>
+                      <input type="text" class="form-control precio" name="nuevoPrecioCompra" placeholder="Ingrese Precio"  required>                   
+                    </div>
+                    
+                    <div class="form-group col-md-4">
+                      <label for="precio">Proveedor</label>
+                      <input type="text" class="form-control precio" name="nuevoProveedor" placeholder="Ingrese Precio"  required>                   
                     </div>
                         <div class="form-group col-md-4">
                           <label for="productominimo">Producto Minimo</label>
@@ -172,17 +186,17 @@
                           <label for="productomaximo">Producto Maximo</label>
                           <input type="number" class="form-control precio" name="nuevoProductoMaximo" placeholder="Cantidad Maximo" min="0" required class="fa fa-arrow-up"></i></span>
                         </div>
-                     </div>
+                     </div> -->
 
 
                 <div class="form-row">
 
-                    <div class="form-group col-md-5">
+                    <div class="form-group col-md-6">
                         <label for="exampleInputFile">Foto</label>
                         <div class="input-group">
                           <img class="img-thumbnail previsualizar mr-2" src="vistas/img/usuarios/default/anonymous.png" alt="imagen-del-usuario" width="100px">
                           <div class="custom-file">
-                            <input type="file" class="custom-file-input nuevaFotoProducto" id="exampleInputFile" name="nuevaFotoProducto">
+                            <input type="file" class="custom-file-input nuevaFotoBodega" id="exampleInputFile" name="nuevaFotoBodega">
                             <label class="custom-file-label" for="exampleInputFile">Escoger foto</label>
                           </div>
                         </div>
@@ -190,17 +204,17 @@
                       </div>
                   </div>
 
-                  <div class="form-group mt-4 float-right">
+                  <div class="form-group mt-3 float-right">
                     <button type="" class="btn btn-primary">Guardar</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
                     </div>
                 
 
                     <?php
-                    $tipostock = 'producto';
+                    $tipostock = 'Bodega';
                     $pantalla = 'equipo';
                     $AgregarInventario = new ControladorInventario();
-                    $AgregarInventario->ctrCrearStock($tipostock, $pantalla);
+                    $AgregarInventario->ctrCrearBodega($tipostock, $pantalla);
                     ?>
                   </div>
                 </div>
@@ -269,7 +283,7 @@
                 
                     <?php
                     $tipostock = 'Equipo';
-                    $pantalla = 'Equipo';
+                    $pantalla = 'equipo';
                     $EditarInventario = new ControladorInventario();
                     $EditarInventario->ctrEditarEquipo($tipostock, $pantalla);
                     ?>
