@@ -59,11 +59,150 @@ $(".btnEditarRol").click(function(){
             $('#editarRol').val(respuesta['rol']);
             $('#editarDescripcionRol').val(respuesta['descripcion']);
             $('#editarIdRol').val(respuesta['id_rol']);
+
+
+            if(respuesta){
+                // Swal.fire({
+                //     icon: "success",
+                //     title: "¡El  rol sera editado!",
+                //     showConfirmButton: true,
+                //     // showCloseButton: true,
+                //     confirmButtonText: "Ok",
+                //     heightAuto: false,
+                //     allowOutsideClick: false
+        
+                //   }).then((result)=>{
+        
+                //     if(result.value){
+        
+                    //   window.location = "mantenimiento";
+                       
+    
+                            //if(result.value){
+    
+                                $('input[name=editarRol]').attr('enable',true);
+                                $('input[name=editarDescripcionRol]').attr('enable',true);
+                                
+                                //$('#modalFooterRol').hide();
+                                $('.pantalla-permisos').show();
+                                $('#modalFooterPermisosEditar').show();
+    
+                                $(document).on('click', '#btnGuardarPermisosEditar', function (e) {
+                                    e.preventDefault();
+                                    if(!$('input[name=nuevoEditarConsulta]').is(':checked') && !$('input[name=nuevoEditarAgregar]').is(':checked') && !$('input[name=nuevoEditarActualizar]').is(':checked') && !$('input[name=nuevoEditarEliminar]').is(':checked')){
+                                       
+                                        $('#modalFooterPermisosEditar').before('<div class="alert alert-danger alert-dismissible ml-3 mr-3 mt-4" role="alert"><i class="icon fas fa-ban"></i>Por favor, elige al menos un permiso!</div>');
+                                        setTimeout(function () {
+                                            $('.alert').remove();
+                                        }, 4000)
+                                    
+                                    
+                                    } else if($('#nuevaPantallaEditar').val() == 'Seleccione...' || $('#nuevaPantallaEditar').val() == "") {
+    
+                                        $('#modalFooterPermisosEditar').before('<div class="alert alert-danger alert-dismissible ml-3 mr-3 mt-4" role="alert"><i class="icon fas fa-ban"></i>Por favor, elija una pantalla!</div>');
+                                        setTimeout(function () {
+                                            $('.alert').remove();
+                                        }, 4000)
+                                    
+    
+                                    } else {
+    
+                                        // console.log(datosPermisos);
+        
+                                        var pantalla = $('#nuevaPantallaEditar').val();
+                                        var consulta = false;
+                                        var agregar = false;
+                                        var actualizar = false;
+                                        var eliminar = false;
+        
+                                        if($('input[name=nuevoEditarConsulta]').is(':checked')){
+                                            consulta = true;
+                                        } else {
+                                            consulta = false;
+                                        }
+        
+                                        if($('input[name=nuevoEditarAgregar]').is(':checked')){
+                                            agregar = true;
+                                        } else {
+                                            agregar = false;
+                                        }
+        
+                                        if($('input[name=nuevoEditarActualizar]').is(':checked')){
+                                            actualizar = true;
+                                        } else {
+                                            actualizar = false;
+                                        }
+        
+                                        if($('input[name=nuevoEditarEliminar]').is(':checked')){
+                                            eliminar = true;
+                                        } else {
+                                            eliminar = false;
+                                        }
+                                                    
+                                        // console.log(parseInt(idRol))
+                                        // console.log(pantalla)
+                                        console.log('consulta',consulta)
+                                        console.log('agregar',agregar)
+                                        console.log('actualizar',actualizar)
+                                        console.log('eliminar',eliminar)
+                                        // return;
+                                        var datos = new FormData();
+                                        datos.append('idRol', idRol);
+                                        datos.append('pantalla', pantalla);
+                                        datos.append('consulta', consulta);
+                                        datos.append('agregar', agregar);
+                                        datos.append('actualizar', actualizar);
+                                        datos.append('eliminar', eliminar);
+        
+        
+                                        $.ajax({
+                
+                                            url:"ajax/mantenimiento.ajax.php",
+                                            method:"POST",
+                                            data: datos,
+                                            cache: false,
+                                            contentType:false,
+                                            processData:false,
+                                            success:function(respuesta){ 
+                                                //console.log(respuesta)
+        
+                                                $('input[type=checkbox]').prop('checked',false);   
+                                                $('#nuevaPantallaEditar').val('Seleccione...');                                       
+                                                if(respuesta){
+                                                    $('#modalFooterPermisosEditar').before('<div class="alert alert-success alert-dismissible ml-3 mr-3 mt-4" role="alert"><i class="icon fas fa-check"></i>Los permisos se agregaron correctamente.</div>');
+                                                    setTimeout(function () {
+                                                        $('.alert').remove();
+                                                    }, 4000)
+        
+                                                    
+                                                } else {
+                                                    // $('input[type=checkbox]').prop('checked',false);
+                                                    $('#modalFooterPermisosEditar').before('<div class="alert alert-danger alert-dismissible ml-3 mr-3 mt-4" role="alert"><i class="icon fas fa-ban"></i>Opps, algo salio mal. Intenta de nuevo!</div>');
+                                                    setTimeout(function () {
+                                                        $('.alert').remove();
+                                                    }, 4000)
+                                                }
+        
+                                            }
+                                        });
+                                    }
+    
+                                });
+    
+                           // } else {
+
+                               // window.location = "rol";
+    
+                           // }
+                    //}
+        
+                 // });
+    
+                }
          
         } 
 
     });
-
 
 
 });

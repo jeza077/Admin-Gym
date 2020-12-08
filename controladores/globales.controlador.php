@@ -222,7 +222,7 @@ class ControladorGlobales{
                   }).then((result) => {
                             if (result.value) {
     
-                            window.location = "parametro";
+                            window.location = "rol";
     
                             }
                         })
@@ -242,7 +242,7 @@ class ControladorGlobales{
                   }).then((result) => {
                             if (result.value) {
     
-                            window.location = "parametro";
+                            window.location = "rol";
     
                             }
                         })

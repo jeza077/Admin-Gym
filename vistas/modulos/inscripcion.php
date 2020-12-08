@@ -47,6 +47,8 @@
 
                             <th scope="col">Precio</th>
 
+                            <th scope="col">Dias</th>
+
                             <th scope="col">Estado</th>
 
                             <th scope="col">Acciones</th>
@@ -68,7 +70,8 @@
                                 
                                     <td>'.($key + 1).'</td>
                                     <td>'.$value["tipo_inscripcion"].'</td>
-                                    <td>'.$value["precio_inscripcion"].'</td>';
+                                    <td>'.$value["precio_inscripcion"].'</td>
+                                    <td>'.$value["cantidad_dias"].'</td>';
                                     if($value['estado'] != 0){
                                         echo '<td><button class="btn btn-success btn-md btnActivar" idInscripcion="'.$value["id_inscripcion"].'" estadoInscripcion="0">Activado</button></td>';
                                     }else{
@@ -135,6 +138,11 @@ MODAL AGREGAR NUEVA INSCRIPCION
                         <div class="form-group col-md-12">
                         <label for="Descripcion">Precio</label>
                         <input type="text" class="form-control preciom " name="nuevoPrecio" value="" required>
+                        </div>
+
+                        <div class="form-group col-md-12">
+                        <label for="Descripcion">Dias</label>
+                        <input type="text" class="form-control preciom " name="nuevoDias" value="" required>
                         </div>
 
                     </div>

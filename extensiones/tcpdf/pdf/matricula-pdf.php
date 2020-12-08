@@ -60,7 +60,7 @@ class PDF extends TCPDF{
 
         $this->Ln(20); //Espacios
         $this->SetFont('helvetica', 'B', 14);
-        $this->Cell(180, 3, 'REPORTE DE TIPOS DE INSCRIPCION', 0, 1, 'C');
+        $this->Cell(180, 3, 'REPORTE DE MATRICULAS', 0, 1, 'C');
         $this->Ln(3);
         $this->SetFont('helvetica', 'B', 11);
         $año = date('Y-m-d');
@@ -93,7 +93,7 @@ $pdf = new PDF('p', 'mm', 'A4', true, 'UTF-8', false);
 
 // set document information
 $pdf->SetCreator(PDF_CREATOR);
-$pdf->SetAuthor('Jesus Zuniga');
+$pdf->SetAuthor('Carlos Ortez');
 $pdf->SetTitle('Reporte de Matricula');
 $pdf->SetSubject('');
 $pdf->SetKeywords('');
@@ -144,9 +144,9 @@ $pdf->Ln(45);
 $pdf->SetFont('times', '', 13);
 $pdf->SetFillColor(225, 235, 255);
 $pdf->Cell(15, 5, 'No', 1, 0, 'C', 1);
-$pdf->Cell(52, 5, 'Tipo de Matricula', 1, 0, 'C', 1);
-$pdf->Cell(40, 5, 'Precio', 1, 0, 'C', 1);
-$pdf->Cell(30, 5, 'Estado', 1, 0, 'C', 1);
+$pdf->Cell(70, 5, 'Tipo de Matricula', 1, 0, 'C', 1);
+$pdf->Cell(60, 5, 'Precio', 1, 0, 'C', 1);
+$pdf->Cell(40, 5, 'Estado', 1, 0, 'C', 1);
 
 //$tabla = "tbl_inscripcion";
 if(isset($_GET["rango"])){
@@ -191,8 +191,8 @@ foreach ($matricula as $key => $value) {
         $pdf->SetFont('times', '', 13);
         $pdf->SetFillColor(225, 235, 255);
         $pdf->Cell(15, 5, 'No', 1, 0, 'C', 1);
-        $pdf->Cell(52, 5, 'Tipo de Matricula', 1, 0, 'C', 1);
-        $pdf->Cell(40, 5, 'Precio', 1, 0, 'C', 1);
+        $pdf->Cell(70, 5, 'Tipo de Matricula', 1, 0, 'C', 1);
+        $pdf->Cell(60, 5, 'Precio', 1, 0, 'C', 1);
         $pdf->Cell(40, 5, 'Estado', 1, 0, 'C', 1);
     }
     // $pdf->Cell(15, 5, ''.$i.'', 1, 0, 'C');
@@ -201,12 +201,12 @@ foreach ($matricula as $key => $value) {
     $pdf->SetFont('times', '', 12);
     // $pdf->SetFillColor(225, 235, 255);
     $pdf->Cell(15, 4, ''.($key+1).'', 0, 0, 'C');
-    $pdf->Cell(52, 4, ''.$value['tipo_matricula'].' ', 0, 0, 'C');
-    $pdf->Cell(40, 4, ''.$value['precio_matricula'].'', 0, 0, 'C');
+    $pdf->Cell(70, 4, ''.$value['tipo_matricula'].' ', 0, 0, 'C');
+    $pdf->Cell(60, 4, ''.$value['precio_matricula'].'', 0, 0, 'C');
     if($value["estado"] == 0){
-        $pdf->Cell(30, 4, 'Desactivado', 0, 0, 'C');
+        $pdf->Cell(40, 4, 'Desactivado', 0, 0, 'C');
     } else {
-        $pdf->Cell(30, 4, 'Activado', 0, 0, 'C');
+        $pdf->Cell(40, 4, 'Activado', 0, 0, 'C');
     }
     $i++;
 

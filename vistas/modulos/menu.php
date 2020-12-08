@@ -259,17 +259,7 @@
             </li>
             <?php } ?>
 
-            <?php if($_SESSION['permisos']['Respaldo y Restauracion']['consulta'] == 1){?>
-            <li class="nav-item">
-              <a href="respaldoyrestauracion" class="nav-link menu-lateral">
-                <i class="nav-icon fas fa-download"></i>
-                <p>
-                  Respaldo y Restauracion
-                  <!-- <span class="right badge badge-danger">New</span> -->
-                </p>
-              </a>
-            </li>
-            <?php } ?>
+            
             <?php if($_SESSION['permisos']['Bitacora']['consulta'] == 1){?>
             <li class="nav-item">
               <a href="bitacora" class="nav-link menu-lateral">
@@ -280,7 +270,24 @@
                 </p>
               </a>
             </li>
+
             <?php } ?>
+           
+            <?php if($_SESSION['permisos']['Respaldo y Restauracion']['consulta'] == 1){?>
+            <li class="nav-item">
+              <a href="respaldoyrestauracion" class="nav-link menu-lateral">
+                <i class="nav-icon fas fa-download"></i>
+                <p>
+                  Respaldo y Restauracion
+                  <!-- <span class="right badge badge-danger">New</span> -->
+                </p>
+              </a>
+            </li>
+
+            <?php } ?>
+            
+           
+           
         </ul>
       </nav>
     </div>

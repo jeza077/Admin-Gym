@@ -39,17 +39,7 @@
                                 PARAMETROS
                             ==========================================================-->   
                             <div class="card-header">
-                            
-
-                                        
                            
-                                        
-                                        <button class="btn btn-orange float-right"  data-toggle="modal" data-target="#modalNuevoParametro">
-                                            Nuevo parametro     
-                                        </button>
-
-                                     
-
                                 <table class="table table-striped table-bordered tablas text-center">
                                     <thead>
                                     <tr>

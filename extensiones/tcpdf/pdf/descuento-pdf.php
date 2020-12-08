@@ -93,8 +93,8 @@ $pdf = new PDF('p', 'mm', 'A4', true, 'UTF-8', false);
 
 // set document information
 $pdf->SetCreator(PDF_CREATOR);
-$pdf->SetAuthor('Jesus Zuniga');
-$pdf->SetTitle('Reporte de Matricula');
+$pdf->SetAuthor('Carlos Ortez');
+$pdf->SetTitle('Reporte de Descuento');
 $pdf->SetSubject('');
 $pdf->SetKeywords('');
 
@@ -139,14 +139,14 @@ $pdf->SetFont('dejavusans', '', 14, '', true);
 // This method has several options, check the source code documentation for more information.
 $pdf->AddPage();
 
-$pdf->Ln(45);
+$pdf->Ln(60);
 
 $pdf->SetFont('times', '', 13);
 $pdf->SetFillColor(225, 235, 255);
 $pdf->Cell(15, 5, 'No', 1, 0, 'C', 1);
-$pdf->Cell(52, 5, 'Tipo de Descuento', 1, 0, 'C', 1);
-$pdf->Cell(40, 5, 'Valor', 1, 0, 'C', 1);
-$pdf->Cell(30, 5, 'Estado', 1, 0, 'C', 1);
+$pdf->Cell(70, 5, 'Tipo de Descuento', 1, 0, 'C', 1);
+$pdf->Cell(60, 5, 'Valor', 1, 0, 'C', 1);
+$pdf->Cell(40, 5, 'Estado', 1, 0, 'C', 1);
 
 //$tabla = "tbl_inscripcion";
 if(isset($_GET["rango"])){
@@ -191,8 +191,8 @@ foreach ($descuento as $key => $value) {
         $pdf->SetFont('times', '', 13);
         $pdf->SetFillColor(225, 235, 255);
         $pdf->Cell(15, 5, 'No', 1, 0, 'C', 1);
-        $pdf->Cell(52, 5, 'Tipo de Matricula', 1, 0, 'C', 1);
-        $pdf->Cell(40, 5, 'Precio', 1, 0, 'C', 1);
+        $pdf->Cell(70, 5, 'Tipo de Matricula', 1, 0, 'C', 1);
+        $pdf->Cell(60, 5, 'Precio', 1, 0, 'C', 1);
         $pdf->Cell(40, 5, 'Estado', 1, 0, 'C', 1);
     }
     // $pdf->Cell(15, 5, ''.$i.'', 1, 0, 'C');
@@ -201,12 +201,12 @@ foreach ($descuento as $key => $value) {
     $pdf->SetFont('times', '', 12);
     // $pdf->SetFillColor(225, 235, 255);
     $pdf->Cell(15, 4, ''.($key+1).'', 0, 0, 'C');
-    $pdf->Cell(52, 4, ''.$value['tipo_descuento'].' ', 0, 0, 'C');
-    $pdf->Cell(40, 4, ''.$value['valor_descuento'].'', 0, 0, 'C');
+    $pdf->Cell(70, 4, ''.$value['tipo_descuento'].' ', 0, 0, 'C');
+    $pdf->Cell(60, 4, ''.$value['valor_descuento'].'', 0, 0, 'C');
     if($value["estado"] == 0){
-        $pdf->Cell(30, 4, 'Desactivado', 0, 0, 'C');
+        $pdf->Cell(40, 4, 'Desactivado', 0, 0, 'C');
     } else {
-        $pdf->Cell(30, 4, 'Activado', 0, 0, 'C');
+        $pdf->Cell(40, 4, 'Activado', 0, 0, 'C');
     }
     $i++;
 
