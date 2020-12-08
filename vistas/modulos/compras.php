@@ -85,7 +85,7 @@
            MODAL AGREGAR COMPRA
   ======================================----->
   <div class="modal fade" id="modalAgregarCompra" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-md" role="document">
+    <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Nueva Compra</h5>
@@ -105,27 +105,6 @@
                 <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="datosPersona">
                   <div class="container-fluid mt-4">
                   <div class="form-row">
-
-                  <div class="form-group col-md-4">
-                        <label for="">Tipo<?php echo $i?></label>
-                        <select class="form-control select2 "  id="nuevoTipoProducto" style="width: 100%;" name="nuevoTipoProducto">
-                            
-                            
-                            <option selected="selected">Seleccionar...</option>
-                            <?php 
-                                $tabla = "tbl_tipo_producto";
-                                $item = null;
-                                $valor = null;
-                                $preguntas = ControladorInventario::ctrMostrarTipoProducto($tabla, $item, $valor);
-                                foreach ($preguntas as $key => $value) { ?>
-                                    <option value="<?php echo $value['id_tipo_producto']?>"><?php echo $value['tipo_producto']?></option>        
-                                <?php 
-                                }
-                            ?>
-                        </select>
-                      </div>
-
-
                       <div class="form-group col-md-4">
                         <label for="">Producto<?php echo $i?></label>
                         <select class="form-control select2 "  id="nuevoProducto" style="width: 100%;" name="nuevoProducto">                           
@@ -164,12 +143,12 @@
 
                       <div class="form-group col-md-4">
                         <label for="stock">Cantidad</label>
-                        <input type="number" class="form-control stock" name="nuevoCantidad" placeholder="Cantidad en stock" min="0" required class="fa fa-arrow-up"></i></span>
+                        <input type="number" class="form-control stock" id="nuevoCantidad" name="nuevoCantidad" placeholder="Cantidad en stock" min="0" required class="fa fa-arrow-up"></i></span>
                       </div>
      
                       <div class="form-group col-md-3">
                         <label for="stock">Precio</label>
-                        <input type="number" class="form-control stock" name="nuevoPrecio" placeholder="Cantidad en stock" min="0" required class="fa fa-arrow-up"></i></span>
+                        <input type="number" class="form-control stock" id="nuevoPrecio" name="nuevoPrecio" placeholder="Cantidad en stock" min="0" required class="fa fa-arrow-up"></i></span>
                       </div>
                   </div>
 
@@ -180,10 +159,10 @@
                   
 
                       <?php
-                      $tipostock = 'Productos';
+                      // $tipostock = 'productos';
                       $pantalla = 'compras';
                       $AgregarInventario = new ControladorInventario();
-                      $AgregarInventario->ctrCrearCompra($tipostock, $pantalla);
+                      $AgregarInventario->ctrCrearCompra($pantalla);
                       ?>
                     </div>
                   </div>

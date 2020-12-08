@@ -151,34 +151,31 @@
                       </div>
                       <div class="form-group col-md-3">
                         <label for="nombreproducto">Codigo</label>
-                        <input type="text" readonly class="form-control nuevoCodigo" name="nuevoCodigo" placeholder="Codigo producto" required>
+                        <input type="text" readonly class="form-control nuevoCodigo" id="nuevoCodigo" name="nuevoCodigo" placeholder="Codigo producto" required>
                       </div>
                       <div class="form-group col-md-3">
                         <label for="nombreproducto">Nombre Producto</label>
                         <html>
-                        <input type="text" class="form-control mayus nombre_producto" name="nuevoNombreProducto" placeholder="Ingrese Producto" required>
+                        <input type="text" class="form-control mayus nombre_producto" id="nuevoNombreProducto" name="nuevoNombreProducto" placeholder="Ingrese Producto" required>
                       </div>
                     </div>
         
                 <div class="form-row">
-
-
-
                       <div class="form-group col-md-4">
                         <label for="precio">Precio de venta</label>
-                        <input type="text" class="form-control precio" name="nuevoPrecio" placeholder="Ingrese Precio"  required>
+                        <input type="text" class="form-control precio" id="nuevoPrecio" name="nuevoPrecio" placeholder="Ingrese Precio"  required>
                       </div>
                       <div class="form-group col-md-4">
                         <label for="precio">Precio de compra</label>
-                        <input type="text" class="form-control precio" name="nuevoPrecio" placeholder="Ingrese Precio"  required>
+                        <input type="text" class="form-control precio" id="nuevoPrecioCompra" name="nuevoPrecioCompra" placeholder="Ingrese Precio"  required>
                       </div>
                           <div class="form-group col-md-4">
                             <label for="productominimo">Producto Minimo</label>
-                            <input type="number" class="form-control precio" name="nuevoProductoMinimo" placeholder="Cantidad Minima" min="0" required class="fa fa-arrow-up"></i></span>
+                            <input type="number" class="form-control precio" id="nuevoProductoMinimo" name="nuevoProductoMinimo" placeholder="Cantidad Minima" min="0" required class="fa fa-arrow-up"></i></span>
                           </div>
                           <div class="form-group col-md-4">
                             <label for="productomaximo">Producto Maximo</label>
-                            <input type="number" class="form-control precio" name="nuevoProductoMaximo" placeholder="Cantidad Maximo" min="0" required class="fa fa-arrow-up"></i></span>
+                            <input type="number" class="form-control precio" id="nuevoProductoMaximo" name="nuevoProductoMaximo" placeholder="Cantidad Maximo" min="0" required class="fa fa-arrow-up"></i></span>
                           </div>
                       </div>
 
@@ -205,7 +202,7 @@
                   
 
                       <?php
-                      $tipostock = 'producto';
+                      $tipostock = 'Productos';
                       $pantalla = 'productos';
                       $AgregarInventario = new ControladorInventario();
                       $AgregarInventario->ctrCrearStock($tipostock, $pantalla);
@@ -309,10 +306,10 @@
                     </div>
                 
                     <?php
-                    $tipostock = 'producto';
-                    $pantalla = 'producto';
-                    $EditarInventario = new ControladorInventario();
-                    $EditarInventario->ctrEditarStock($tipostock, $pantalla);
+                    $tipostock = 'Productos';
+                    $pantalla = 'productos';
+                    // $EditarInventario = new ControladorInventario();
+                    // $EditarInventario->ctrEditarStock($tipostock, $pantalla);
                     ?>
                   <!-- 2tab --> 
           </form>

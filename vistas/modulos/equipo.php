@@ -283,7 +283,7 @@
                 
                     <?php
                     $tipostock = 'Equipo';
-                    $pantalla = 'Equipo';
+                    $pantalla = 'equipo';
                     $EditarInventario = new ControladorInventario();
                     $EditarInventario->ctrEditarEquipo($tipostock, $pantalla);
                     ?>

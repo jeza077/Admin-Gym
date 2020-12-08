@@ -47,12 +47,13 @@ class ControladorInventario
         /*=============================================
                MOSTRAR PROVEEDORES
         =============================================*/
-        static public function ctrMostrarProveedores($tabla, $item, $valor)
-
-        {
+        static public function ctrMostrarProveedores($tabla, $item, $valor){
                 $respuesta = ModeloInventario::mdlMostrarProveedores($tabla, $item, $valor);
                 return $respuesta;
         }
+
+
+
 
         /*=============================================
                 CREAR STOCK
@@ -60,21 +61,22 @@ class ControladorInventario
 
         static public function ctrCrearStock($tipostock, $pantalla){
             // var_dump($_POST);
+            // echo $tipostock;
             // return;
-            if(isset($_POST["nuevoNombreProducto"])){
+            if(isset($_POST["nuevoTipoProducto"])){
     
                 if(preg_match('/^[a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevoNombreProducto"])){
 
-
+        
                     /*=============================================
 							VALIDAR IMAGEN
 					=============================================*/
 
 					$ruta = "";
 
-					if(isset($_FILES["editarFotoProducto"]["tmp_name"])){
+					if(isset($_FILES["nuevaFotoProducto"]["tmp_name"])){
 
-						list($ancho, $alto) = getimagesize($_FILES["editarFotoProducto"]["tmp_name"]);
+						list($ancho, $alto) = getimagesize($_FILES["nuevaFotoProducto"]["tmp_name"]);
 
 						$nuevoAncho = 500;
 						$nuevoAlto = 500;
@@ -91,7 +93,7 @@ class ControladorInventario
 						DE ACUERDO AL TIPO DE IMAGEN APLICAMOS LAS FUNCIONES POR DEFECTO DE PHP
 						======================================================================*/
 
-						if($_FILES["editarFotoProducto"]["type"] == "image/jpeg"){
+						if($_FILES["nuevaFotoProducto"]["type"] == "image/jpeg"){
 
 							/*=============================================
 							GUARDAMOS LA IMAGEN EN EL DIRECTORIO
@@ -101,7 +103,7 @@ class ControladorInventario
 
 							$ruta = "vistas/img/productos/".$_POST["nuevoNombreProducto"]."/".$aleatorio.".jpg";
 
-							$origen = imagecreatefromjpeg($_FILES["editarFotoProducto"]["tmp_name"]);
+							$origen = imagecreatefromjpeg($_FILES["nuevaFotoProducto"]["tmp_name"]);
 
 							$destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
 
@@ -112,7 +114,7 @@ class ControladorInventario
                         }
                         
 
-						if($_FILES["editarFotoProducto"]["type"] == "image/png"){
+						if($_FILES["nuevaFotoProducto"]["type"] == "image/png"){
 
 							/*=============================================
 							GUARDAMOS LA IMAGEN EN EL DIRECTORIO
@@ -122,7 +124,7 @@ class ControladorInventario
 
 							$ruta = "vistas/img/productos/".$_POST["nuevoNombreProducto"]."/".$aleatorio.".png";
 
-							$origen = imagecreatefrompng($_FILES["editarFotoProducto"]["tmp_name"]);
+							$origen = imagecreatefrompng($_FILES["nuevaFotoProducto"]["tmp_name"]);
 
 							$destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
 
@@ -134,29 +136,35 @@ class ControladorInventario
 
 					}
 
-                    
+           
 
                     $tabla = "tbl_inventario";
-                    if($tipostock == 'producto'){
-                        $datos = array("nombre_producto" => $_POST["nuevoNombreProducto"],
+                    if($tipostock == 'Productos'){
+                        $datos = array("id_tipo_producto" => $_POST["nuevoTipoProducto"],
                         "codigo" => $_POST["nuevoCodigo"],
-                        "id_tipo_producto" => $_POST["nuevoTipoProducto"],
-                        "stock" => $_POST["nuevoStock"],
+                        "nombre_producto" => $_POST["nuevoNombreProducto"],
+                        // "stock" => $_POST["nuevoStock"],
                         "precio_venta" => $_POST["nuevoPrecio"],
                         "precio_compra" => $_POST["nuevoPrecioCompra"],
-                        "proveedor" => $_POST["nuevoProveedor"],
-                        "foto" => $ruta,
+                        // "proveedor" => $_POST["nuevoProveedor"],                        
                         "producto_minimo" => $_POST["nuevoProductoMinimo"],
-                        "producto_maximo" => $_POST["nuevoProductoMaximo"]);
+                        "producto_maximo" => $_POST["nuevoProductoMaximo"],
+                        "foto" => $ruta);
+                        // var_dump($datos);
+                        // return;
+
+                     
 
                         $crearInventario = ModeloInventario::mdlCrearStock($tabla, $datos);
+                        // var_dump($datos);
+                        // return;
 
                                 if($crearInventario == true){
                                     
-                                    $descripcionEvento = "  Nuevo Producto";
-                                    $accion = "Nuevo";
+                                    // $descripcionEvento = "  Nuevo Producto";
+                                    // $accion = "Nuevo";
             
-                                    $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 4,$accion, $descripcionEvento);
+                                    // $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 4,$accion, $descripcionEvento);
 
                                     echo '<script>
                                             Swal.fire({
@@ -186,6 +194,17 @@ class ControladorInventario
                     } 
               
                 } 
+                else {
+                    echo '<script>
+                            Swal.fire({
+                                title: "Llenar los datos correctamente. Intenta de nuevo!",
+                                icon: "error",
+                                heightAuto: false,
+                                allowOutsideClick: false,
+                                timer: 4000
+                            });					
+                        </script>';
+                }
             }
         }
 
@@ -195,20 +214,20 @@ class ControladorInventario
                 CREAR COMPRA
         =============================================*/
 
-        static public function ctrCrearCompra($tipostock, $pantalla){
-            // var_dump($_POST);
-            // return;
+        static public function ctrCrearCompra($pantalla){
+            var_dump($_POST);
+            return;
             if(isset($_POST["nuevoProducto"])){
     
                 if(preg_match('/^[a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevoProducto"])){
           
-
                     $tabla = "tbl_compras";
-                    if($tipostock == 'Productos'){
-                        $datos = array("id_inventario" => $_POST["nuevoProducto"],
-                        "id_proveedor" => $_POST["nuevoProveedor"],
-                        "cantidad" => $_POST["nuevoCantidad"],
-                        "precio" => $_POST["nuevoPrecio"]);
+                    
+                    
+                    $datos = array("id_inventario" => $_POST["nuevoProducto"],
+                                    "id_proveedor" => $_POST["nuevoProveedor"],
+                                    "cantidad" => $_POST["nuevoCantidad"],
+                                    "precio" => $_POST["nuevoPrecio"]);
 
                         $crearInventario = ModeloInventario::mdlCrearCompra($tabla, $datos);
 
@@ -245,7 +264,7 @@ class ControladorInventario
                                         </script>';
                                 }
     
-                    } 
+                 
               
                 } 
             }

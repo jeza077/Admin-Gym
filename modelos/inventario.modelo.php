@@ -157,22 +157,22 @@ class ModeloInventario
 	=============================================*/	 
 	static public function mdlCrearStock($tabla, $datos){
 
-		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(id_tipo_producto, nombre_producto, stock, precio_venta, precio_compra,proveedor, producto_minimo, producto_maximo, foto, codigo) VALUES (:id_tipo_producto, :nombre_producto, :stock, :precio_venta, :precio_compra, :proveedor, :producto_minimo, :producto_maximo, :foto ,:codigo)");
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(id_tipo_producto, nombre_producto,precio_venta, precio_compra,producto_minimo, producto_maximo, foto, codigo) VALUES (:id_tipo_producto, :nombre_producto,:precio_venta, :precio_compra,:producto_minimo, :producto_maximo, :foto ,:codigo)");
 
 		$stmt->bindParam(":id_tipo_producto", $datos["id_tipo_producto"], PDO::PARAM_INT);
 		$stmt->bindParam(":codigo", $datos["codigo"], PDO::PARAM_INT);
 		$stmt->bindParam(":nombre_producto", $datos["nombre_producto"], PDO::PARAM_STR);
-		$stmt->bindParam(":stock", $datos["stock"], PDO::PARAM_INT);
+		// $stmt->bindParam(":stock", $datos["stock"], PDO::PARAM_INT);
 		$stmt->bindParam(":precio_venta", $datos["precio_venta"], PDO::PARAM_STR);
 		$stmt->bindParam(":precio_compra", $datos["precio_compra"], PDO::PARAM_STR);
-		$stmt->bindParam(":proveedor", $datos["proveedor"], PDO::PARAM_STR);
+		// $stmt->bindParam(":proveedor", $datos["proveedor"], PDO::PARAM_STR);
 		$stmt->bindParam(":producto_minimo", $datos["producto_minimo"], PDO::PARAM_INT);
 		$stmt->bindParam(":producto_maximo", $datos["producto_maximo"], PDO::PARAM_INT);
 		$stmt->bindParam(":foto", $datos["foto"], PDO::PARAM_STR);
 		if($stmt->execute()){
 			return true;
 		}else{
-			return false;
+			return $stmt -> errorInfo();
 		}
 
 		$stmt->close();
@@ -187,13 +187,11 @@ class ModeloInventario
 	=============================================*/	 
 	static public function mdlCrearCompra($tabla, $datos){
 
-		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(id_proveedor,id_inventario,id_tipo_producto,cantidad,precio) VALUES (:id_proveedor, :id_inventario,:id_tipo_producto, :cantidad, :precio)");
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(id_proveedor,id_inventario,cantidad,precio) VALUES (:id_proveedor, :id_inventario, :cantidad, :precio)");
 
 		$stmt->bindParam(":id_proveedor", $datos["id_proveedor"], PDO::PARAM_INT);
 		$stmt->bindParam(":id_inventario", $datos["id_inventario"], PDO::PARAM_INT);
-		$stmt->bindParam(":id_tipo_producto", $datos["id_tipo_producto"], PDO::PARAM_INT);
 		$stmt->bindParam(":cantidad", $datos["cantidad"], PDO::PARAM_STR);
-		$stmt->bindParam(":stock", $datos["stock"], PDO::PARAM_INT);
 		$stmt->bindParam(":precio", $datos["precio"], PDO::PARAM_STR);
 		if($stmt->execute()){
 			return true;
@@ -214,7 +212,7 @@ class ModeloInventario
 	=============================================*/	 
 	static public function mdlEditarStock($tabla, $datos){
 
-		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET nombre_producto = :nombre_producto, stock = :stock, precio_venta = :precio_venta, precio_compra = :precio_compra , proveedor = :proveedor ,producto_minimo =:producto_minimo, producto_maximo = :producto_maximo, foto = :foto, codigo =:codigo WHERE id_inventario = :id_inventario");
+		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET nombre_producto = :nombre_producto, stock = :stock, precio_venta = :precio_venta, precio_compra = :precio_compra ,producto_minimo =:producto_minimo, producto_maximo = :producto_maximo, foto = :foto, codigo =:codigo WHERE id_inventario = :id_inventario");
 
 		$stmt->bindParam(":id_inventario", $datos["id_inventario"], PDO::PARAM_INT);
 		$stmt->bindParam(":codigo", $datos["codigo"], PDO::PARAM_INT);
@@ -222,7 +220,7 @@ class ModeloInventario
 		$stmt->bindParam(":stock", $datos["stock"], PDO::PARAM_INT);
 		$stmt->bindParam(":precio_venta", $datos["precio_venta"], PDO::PARAM_STR);
 		$stmt->bindParam(":precio_compra", $datos["precio_compra"], PDO::PARAM_STR);
-		$stmt->bindParam(":proveedor", $datos["proveedor"], PDO::PARAM_STR);
+		// $stmt->bindParam(":proveedor", $datos["proveedor"], PDO::PARAM_STR);
 		$stmt->bindParam(":producto_minimo", $datos["producto_minimo"], PDO::PARAM_INT);
 		$stmt->bindParam(":producto_maximo", $datos["producto_maximo"], PDO::PARAM_INT);
 		$stmt->bindParam(":foto", $datos["foto"], PDO::PARAM_STR);

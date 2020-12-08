@@ -24,8 +24,8 @@ $(document).on("click",".btnEditarInventario",function(){
             $("#editarTipoProducto").val(respuesta["id_inventario"]);
             $("#editarStock").val(respuesta["stock"]);
             $("#editarPrecio").val(respuesta["precio_venta"]);
-            $("#editarPrecioCompra").val(respuesta["precio_compra"]);
-            $("#editarProveedor").val(respuesta["proveedor"]);
+            // $("#editarPrecioCompra").val(respuesta["precio_compra"]);
+            // $("#editarProveedor").val(respuesta["proveedor"]);
             $("#editarProductoMinimo").val(respuesta["producto_minimo"]);
             $("#editarProductoMaximo").val(respuesta["producto_maximo"]);
 
