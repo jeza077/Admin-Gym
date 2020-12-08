@@ -138,10 +138,11 @@ $pdf->Ln(45);
 $pdf->SetFont('times', '', 13);
 $pdf->SetFillColor(225, 235, 255);
 $pdf->Cell(15, 5, 'No', 1, 0, 'C', 1);
-$pdf->Cell(75, 5, 'Nombre', 1, 0, 'C', 1);
-$pdf->Cell(40, 5, 'Tipo Cliente', 1, 0, 'C', 1);
+$pdf->Cell(40, 5, 'No. Documento', 1, 0, 'C', 1);
+$pdf->Cell(70, 5, 'Nombre', 1, 0, 'C', 1);
+$pdf->Cell(35, 5, 'Tipo Cliente', 1, 0, 'C', 1);
 $pdf->Cell(70, 5, 'Correo', 1, 0, 'C', 1);
-$pdf->Cell(50, 5, 'Telefono', 1, 0, 'C', 1);
+$pdf->Cell(40, 5, 'Telefono', 1, 0, 'C', 1);
 
 if(isset($_GET["rango"])){
 
@@ -178,10 +179,12 @@ if(!$clientes){
             $pdf->SetFont('times', '', 13);
             $pdf->SetFillColor(225, 235, 255);
             $pdf->Cell(15, 5, 'No', 1, 0, 'C', 1);
-            $pdf->Cell(75, 5, 'Nombre', 1, 0, 'C', 1);
-            $pdf->Cell(40, 5, 'Tipo Cliente', 1, 0, 'C', 1);
+            $pdf->Cell(40, 5, 'No. Documento', 1, 0, 'C', 1);
+            $pdf->Cell(70, 5, 'Nombre', 1, 0, 'C', 1);
+            $pdf->Cell(35, 5, 'Tipo Cliente', 1, 0, 'C', 1);
             $pdf->Cell(70, 5, 'Correo', 1, 0, 'C', 1);
-            $pdf->Cell(50, 5, 'Telefono', 1, 0, 'C', 1);
+            $pdf->Cell(40, 5, 'Telefono', 1, 0, 'C', 1);
+            
         }
         // $pdf->Cell(15, 5, ''.$i.'', 1, 0, 'C');
     
@@ -189,10 +192,11 @@ if(!$clientes){
         $pdf->SetFont('times', '', 12);
         // $pdf->SetFillColor(225, 235, 255);
         $pdf->Cell(15, 4, ''.($key+1).'', 0, 0, 'C');
-        $pdf->Cell(75, 4, ''.$value['nombre'].' '.$value['apellidos'].'', 0, 0, 'C');
-        $pdf->Cell(40, 4, ''.$value['tipo_cliente'].'', 0, 0, 'C');
+        $pdf->Cell(40, 4, ''.$value['num_documento'].'', 0, 0, 'C');
+        $pdf->Cell(70, 4, ''.$value['nombre'].' '.$value['apellidos'].'', 0, 0, 'C');
+        $pdf->Cell(35, 4, ''.$value['tipo_cliente'].'', 0, 0, 'C');
         $pdf->Cell(70, 4, ''.$value['correo'].'', 0, 0, 'C');
-        $pdf->Cell(50, 4, ''.$value['telefono'].'', 0, 0, 'C');
+        $pdf->Cell(40, 4, ''.$value['telefono'].'', 0, 0, 'C');
     
         // if($value["estado"] == 0){
         //     $pdf->Cell(30, 4, 'Desactivado', 0, 0, 'C');

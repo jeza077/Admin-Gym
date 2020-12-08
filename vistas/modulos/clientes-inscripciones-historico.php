@@ -84,13 +84,7 @@
                         <td>'.$value["nombre"].' '.$value["apellidos"].'</td>
                         <td>'.$value["tipo_inscripcion"].'</td>
                         <td>'.$value["fecha_inscripcion"].'</td>
-                        <td>'.$value["fecha_pago"].'</td>';
-
-                        // $fechaVencimientoPago = $value['fecha_proximo_pago'];
-                        // $fechaHoy = date('Y-m-d');
-                        // $date1 = new DateTime($fechaVencimientoPago);
-                        // $date2 = new DateTime($fechaHoy);
-                        // $diff = $date1->diff($date2);         
+                        <td>'.$value["fecha_pago"].'</td>';    
                         
                         $fecha_actual = strtotime(date("Y-m-d"));
                         $fecha_entrada = strtotime($value['fecha_proximo_pago']);
@@ -98,31 +92,33 @@
                         if($fecha_actual < $fecha_entrada){  
                             echo '<td class="badge badge-success mt-2" data-toggle="tooltip" data-placement="left" title="Inscrito">'.$value["fecha_proximo_pago"].'</td>';
                             
-                        // } else if($diff->days >= 1 && $diff->days <= 10) {
-                        //     echo '<td class="badge badge-warning mt-2" data-toggle="tooltip" data-placement="left" title="Inscripcion por Vencer">'.$value["fecha_proximo_pago"].'</t<d>';
                         } else {
-                            echo '<td class="badge badge-danger mt-2" data-toggle="tooltip" data-placement="left" title="Inscripcion vencida">'.$value["fecha_proximo_pago"].'</td>';
+                            echo '<td class="badge badge-danger mt-2" data-toggle="tooltip" data-placement="left" title="Inscripcion Cancelada">'.$value["fecha_proximo_pago"].'</td>';
                         }
 
-                          if($fecha_actual > $fecha_entrada){
-                            $segundos = $fecha_entrada - $fecha_actual;
-                            $meses = ceil(($segundos / 2419200));
-                            // echo $meses;
-                            $deuda = abs($value['precio_inscripcion'] * $meses);
-
-                            echo '<td data-toggle="tooltip" data-placement="left" title="Adeuda '.abs($meses).' meses">L.'.$deuda.'</td>';
+                         
+                        if($fecha_actual > $fecha_entrada){
                           
-                          } else {
-                            echo '<td data-toggle="tooltip" data-placement="left" title="No debe">L.0000.00</td>';
+                          $diasInscripcion = $value['cantidad_dias'];
+                          $segundos = $fecha_entrada - $fecha_actual;
+                          $dias = $segundos / 86400;
+                          $diasFinal = ceil($dias / $diasInscripcion);
+                          // echo $diasFinal;
 
-                          }
-                      
-                          if($value['estado'] != 0){
-                            echo '<td><span class="badge badge-success p-3">A</span></td>';
-                          } else {
-                            echo '<td><span class="badge badge-danger p-3">D</span></td>';
-                          }
+                          $deuda = abs($value['precio_inscripcion'] * $diasFinal);
+    
+                          echo '<td>L.'.$deuda.'</td>';
+                        
+                        } else {
+                          echo '<td data-toggle="tooltip" data-placement="left" title="No debe">L.0000.00</td>';
+
+                        }
                     
+                        if($value['estado'] != 0){
+                          echo '<td><span class="badge badge-success p-3">A</span></td>';
+                        } else {
+                          echo '<td><span class="badge badge-danger p-3">D</span></td>';
+                        }
                   }
                 ?>
               </tbody>

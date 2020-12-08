@@ -375,6 +375,14 @@ class ControladorClientes{
 	}
 
 
+	/*=============================================
+		MOSTRAR TODOS LOS PAGOS DE LOS CLIENTES
+	=============================================*/
+	static public function ctrMostrarPagosClientes(){
+
+		$respuesta = ModeloClientes::mdlMostrarPagosClientes();
+		return $respuesta;
+	}
 	
 	/*=============================================
 	**** ACTUALIZAR PAGO POR CLIENTE MANTENIENDO INSCRIPCION ****
@@ -601,26 +609,13 @@ class ControladorClientes{
 
 
 	/*=============================================
-	**** ACTUALIZAR PAGO POR CLIENTE CAMBIANDO INSCRIPCION ****
+	NUEVA INSCRIPCION LUEGO DE CANCELAR INSCRIPCION
 	=============================================*/
 	static public function ctrNuevaInscripcionCliente(){
 		// var_dump($_POST);
 		// return;
 		if(isset($_POST['nuevoClienteInscripcion'])){
-			// $tabla1 = "tbl_personas";
-			// $tabla2 = "tbl_clientes";
-			// $item = 'id_cliente';
-			// $valor = $_POST['nuevoClienteInscripcion'];
-			// $respuesta = ModeloClientes::mdlMostrarPagoPorCliente($tabla1, $tabla2, $item, $valor);
-			
-			// var_dump($respuesta);
-			// return;
-
-			// $fechaHoy = date('Y-m-d');
-			// $fechaVencimiento = $respuesta['fecha_proximo_pago'];
-			// $idCliente = $respuesta['id_cliente'];
-			// $idClienteInscripcion = $respuesta['id_cliente_inscripcion'];
-
+		
 			$idCliente = $_POST['nuevoClienteInscripcion'];
 
 			$idInscripcion = $_POST['nuevaTipoInscripcion'];
@@ -633,6 +628,17 @@ class ControladorClientes{
 			if($inscripciones){
 
 				$cantidadDias = $inscripciones['cantidad_dias'];
+
+				$tabla = "tbl_cliente_inscripcion";
+				$item = "id_cliente";
+				$valor = $_POST['nuevoClienteInscripcion'];
+				
+				$clienteInscripcion = ControladorUsuarios::ctrMostrar($tabla, $item, $valor); 
+
+				
+				$idClienteInscripcion = $clienteInscripcion['id_cliente_inscripcion'];
+				// var_dump($idClienteInscripcion.' '. $idCliente);
+				// return;
 
 				// echo $cantidadDias;
 				// return;
@@ -648,8 +654,10 @@ class ControladorClientes{
 								"fecha_proximo_pago" => $fechaVencimientoCliente,
 								"fecha_vencimiento" => $fechaVencimientoCliente);
 	
-				// return $datos;
-								
+				// var_dump($datos);
+				// return;
+
+
 				$tabla = "tbl_cliente_inscripcion";
 	
 				$respuestaClienteInscripcion = ModeloClientes::mdlCrearClienteInscripcion($tabla, $datos);
@@ -657,6 +665,15 @@ class ControladorClientes{
 				// var_dump($respuestaClienteInscripcion);
 				// return;
 				if($respuestaClienteInscripcion == true){
+
+					$item1 = 'inscrito';
+					$valor1 = 1;
+					$item2 = 'id_cliente_inscripcion';
+					$valor2 = $idClienteInscripcion;
+					
+					$ultimaInscripcion = ModeloClientes::mdlActualizarCliente($tabla, $item1, $valor1, $item2, $valor2);
+
+
 					$totalId = array();
 					$tabla = "tbl_cliente_inscripcion";
 					// $tabla2 = "tbl_clientes";
@@ -773,6 +790,195 @@ class ControladorClientes{
 	}
 	
 
+	/*=============================================
+		 NUEVA INSCRIPCION
+	=============================================*/
+	static public function ctrNuevaInscripcion(){
+		// var_dump($_POST);
+		// return;
+		if(isset($_POST['nuevoClienteSinInscripcion'])){
+		
+			// $idCliente = $_POST['nuevoClienteSinInscripcion'];
+
+			$idInscripcion = $_POST['nuevaTipoInscripcion2'];
+			$tabla = "tbl_inscripcion";
+			$item = "id_inscripcion";
+			$valor = $idInscripcion;
+			
+			$inscripciones = ControladorUsuarios::ctrMostrar($tabla, $item, $valor); 
+
+			if($inscripciones){
+
+				$cantidadDias = $inscripciones['cantidad_dias'];
+
+				// echo $cantidadDias;
+				// return;
+
+				$tabla = "tbl_cliente_inscripcion";
+				$item = "id_cliente_inscripcion";
+				$valor = $_POST['nuevoClienteSinInscripcion'];
+				
+				$clienteInscripcion = ControladorUsuarios::ctrMostrar($tabla, $item, $valor); 
+
+				// var_dump($clienteInscripcion);
+				// return;
+	
+				$idCliente = $clienteInscripcion['id_cliente'];
+
+				date_default_timezone_set("America/Tegucigalpa");
+				$fechaHoy = date('Y-m-d');
+				$fechaVencimientoCliente = date("Y-m-d", strtotime('+'.$cantidadDias.' days'));
+	
+				// $idUsuaurio =$_SESSION['id_usuario'];
+
+				$datos = array("id_cliente" =>  $idCliente,
+								"id_inscripcion" => $idInscripcion,
+								"fecha_inscripcion" => $fechaHoy,
+								"fecha_pago" => $fechaHoy,
+								"fecha_proximo_pago" => $fechaVencimientoCliente,
+								"fecha_vencimiento" => $fechaVencimientoCliente);
+	
+				// var_dump($datos);
+				// return;
+								
+				$tabla = "tbl_cliente_inscripcion";
+	
+				$respuestaClienteInscripcion = ModeloClientes::mdlCrearClienteInscripcion($tabla, $datos);
+	
+				// var_dump($respuestaClienteInscripcion);
+				// return;
+
+				if($respuestaClienteInscripcion == true){
+
+					$item1 = 'inscrito';
+					$valor1 = 1;
+					$item2 = 'id_cliente_inscripcion';
+					$valor2 = $_POST['nuevoClienteSinInscripcion'];
+					
+					$ultimaInscripcion = ModeloClientes::mdlActualizarCliente($tabla, $item1, $valor1, $item2, $valor2);
+
+					// var_dump($ultimaInscripcion);
+					// return;
+
+					$totalId = array();
+					$tabla = "tbl_cliente_inscripcion";
+					// $tabla2 = "tbl_clientes";
+					$item = null;
+					$valor = null;
+	
+					$ultimaInscripcion = ModeloClientes::mdlMostrar($tabla, $item, $valor);
+					// echo "<pre>";
+					// var_dump($ultimaInscripcion[1]["id_cliente"]);
+					// echo "</pre>";
+					// return;
+					
+					foreach($ultimaInscripcion as $keyCliente => $valuePagoCliente){
+						array_push($totalId, $valuePagoCliente["id_cliente_inscripcion"]);					
+					}
+					
+	
+					$idPagoCliente = end($totalId);
+	
+					// var_dump($idPagoCliente);
+					// return;
+					
+					$tabla3 = "tbl_pagos_cliente";
+	
+					$datos = array("id_cliente_inscripcion" => $idPagoCliente,
+									"pago_matricula" => 0,
+									"pago_descuento" => 0,
+									"pago_inscripcion" => $_POST['nuevaPagoInscripcion2'],
+									"pago_total" => $_POST['nuevoTotalPago']);
+	
+					$respuestaPago = ModeloClientes::mdlCrearPago($tabla3, $datos);
+					// echo "<pre>";
+					// var_dump($respuestaPago);
+					// echo "</pre>";
+					// return $respuestaPago;
+				
+				
+		
+					if($respuestaPago == true){
+						echo "<script>
+								Swal.fire({
+									title: 'Inscripcion agregada exitosamente!',
+									icon: 'success',
+									allowOutsideClick: false,
+									showCancelButton: false,
+									showConfirmButton: true,
+									confirmButtonText: 'Cerrar'
+								}).then((result)=>{
+									if(result.value){
+										window.location = 'clientes-inscripciones';
+									}
+								});;
+							</script>";
+					} else {
+						echo "<script>
+								Swal.fire({
+									title: 'Oops, algo salio. Intenta de nuevo!',
+									icon: 'error',
+									allowOutsideClick: false,
+									showCancelButton: false,
+									showConfirmButton: true,
+									confirmButtonText: 'Cerrar'
+								}).then((result)=>{
+									if(result.value){
+										window.location = 'clientes-inscripciones';
+									}
+								});;
+							</script>";
+					}
+				
+				} else {
+					echo "<script>
+								Swal.fire({
+									title: 'Oops, algo salio. Intenta de nuevo!',
+									icon: 'error',
+									allowOutsideClick: false,
+									showCancelButton: false,
+									showConfirmButton: true,
+									confirmButtonText: 'Cerrar'
+								}).then((result)=>{
+									if(result.value){
+										window.location = 'clientes-inscripciones';
+									}
+								});;
+							</script>";
+				}
+			} else {
+				echo "<script>
+						Swal.fire({
+							title: 'Oops, algo salio. Intenta de nuevo!',
+							icon: 'error',
+							allowOutsideClick: false,
+							showCancelButton: false,
+							showConfirmButton: true,
+							confirmButtonText: 'Cerrar'
+						}).then((result)=>{
+							if(result.value){
+								window.location = 'clientes-inscripciones';
+							}
+						});;
+					</script>";
+			}
+
+
+
+
+		}
+	}
+	
+
+	/*=============================================
+	MOSTRAR TODOS LOS CLIENTES QUE NO TENGAN INSCRIPCION		
+	=============================================*/
+	static public function ctrMostrarClientesSinInscripcion(){
+
+		$respuesta = ModeloClientes::mdlMostrarClientesSinInscripcion();
+		return $respuesta;
+	}
+
     /*=============================================
 				MOSTRAR (DINAMICO)
 	=============================================*/
@@ -886,15 +1092,28 @@ class ControladorClientes{
 
 
 	/*=============================================
-		RANGO PAGOS CLIENTES
+		RANGO INSCRIPCIONES ACTIVAS DE CLIENTES
     =============================================*/
-	static public function ctrRangoPagosCliente($rango){
+	static public function ctrRangoClienteInscripcionActiva($rango){
 
 		$tabla = 'tbl_clientes';
 		
-		$respuesta = ModeloClientes::mdlRangoPagosCliente($tabla, $rango);
+		$respuesta = ModeloClientes::mdlRangoClienteInscripcionActiva($tabla, $rango);
 		
 		return $respuesta;
 	}
+
+	/*=============================================
+	RANGO INSCRIPCIONES DESACTIVADAS DE CLIENTES
+    =============================================*/
+	static public function ctrRangoClienteInscripcionDesactivado($rango){
+
+		$tabla = 'tbl_clientes';
+		
+		$respuesta = ModeloClientes::mdlRangoClienteInscripcionDesactivado($tabla, $rango);
+		
+		return $respuesta;
+	}
+	
 }
 
