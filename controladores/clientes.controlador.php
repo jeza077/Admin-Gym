@@ -40,7 +40,7 @@ class ControladorClientes{
 
 				// GUARDAR EN LA TABLA CLIENTE INSCRIPCION
 
-				$totalId = array();
+				$totalId = array(); 
 				$tabla1 = "tbl_personas";
 				$tabla2 = "tbl_clientes";
 				$item = null;
@@ -303,9 +303,10 @@ class ControladorClientes{
 		// echo "<pre>";
         // var_dump($respuesta);
         // echo "</pre>";
-
 		$tabla1 = "tbl_personas";
 		$tabla2 = $tabla;
+
+
 
 		$respuesta = ModeloClientes::mdlMostrarClientes($tabla1, $tabla2, $item, $valor);
 

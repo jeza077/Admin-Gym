@@ -25,7 +25,7 @@ class ControladorVentas {
 		// echo '</pre>';
 		// return;
 
-        if(isset($_POST["nuevaVenta"])){
+        if(isset($_POST["nuevaVenta"])){ 
 
 			/*=============================================
 			ACTUALIZAR LAS COMPRAS DEL CLIENTE Y REDUCIR EL STOCK 
@@ -50,8 +50,8 @@ class ControladorVentas {
 				$traerProducto = ModeloProductos::mdlMostrarProductos($tablaProductos, $item, $valor);
                 // var_dump($traerProducto["ventas"]);
 
-				$item1 = "ventas";
-				$valor1 = $value["cantidad"] + $traerProducto["ventas"];
+				$item1 = "venta";
+				$valor1 = $value["cantidad"] + $traerProducto["venta"];
 				$item2 = $item;
 			    $valor2 = $valor;
 
@@ -157,6 +157,7 @@ class ControladorVentas {
 					$total= $_POST["totalVenta"];
 					$asunto = 'RECIBO DE PAGO, GIMNASIO LA ROCA.';
 					$require = false;
+					$enviarFactura = $_POST["enviarFactura"]; ## 07.12.2020
 	
 
 					// $template = file_get_contents('extensiones/plantillas/factura.php');
@@ -181,6 +182,8 @@ class ControladorVentas {
 					// $template = str_replace("{{total_final}}", $_POST['totalVenta'], $template);
 					// $template = str_replace("{{anio}}", date('Y'), $template);
 					// $template = str_replace("{{direccion_empresa}}", date('Y-m-d'), $template);
+					
+
 
 					$template = ' 
 					<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -781,12 +784,16 @@ class ControladorVentas {
 					// echo $correoDestinatario;
 					// echo $nombreDestinatario;
 					// return;
-				
-	
-	
-					$respuestaCorreo = ControladorUsuarios::ctrGenerarCorreo($correoDestinatario, $nombreDestinatario, $asunto, $template, $require);
 
+					# 07.12.2020 
+					if($enviarFactura=="on"){
+	
+						$respuestaCorreo = ControladorUsuarios::ctrGenerarCorreo($correoDestinatario, $nombreDestinatario, $asunto, $template, $require);
 
+					}else{
+						$respuestaCorreo=true;
+					}
+					# FIN 07.12.2020 
 
 					// var_dump($respuestaCorreo);
 					// return;
@@ -1210,7 +1217,7 @@ class ControladorVentas {
 						$valor1 = $guardarFechas[count($guardarFechas)-2];
 						$item2 = "id_cliente";
 
-						$valor2 = $traerVenta["id_cliente"];
+						$valor2 = $traerVenta["id_cliente"]; 
 
 						$comprasCliente = ModeloClientes::mdlActualizarCliente($tablaClientes, $item1, $valor1, $item2, $valor2);
 
@@ -1259,7 +1266,7 @@ class ControladorVentas {
 
 				$item1 = "devolucion";
 				// $item1 = "devolucion";
-				$valor1 = $value["cantidad"] + $traerProducto["stock"];
+				$valor1 = $value["cantidad"] + $traerProducto["devolucion"];
 				// $valor1 = $value"cantidad";  editar, sera agregar la cant a campo de devolucion.
 				$item2 = $item;
 				$valor2 = $valor;

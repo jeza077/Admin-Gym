@@ -52,7 +52,7 @@
               <th scope="col">#</th>
               <th scope="col">Codigo factura</th>
               <th scope="col">Cliente</th>
-              <th scope="col">Vendedor</th>
+              <!-- <th scope="col">Vendedor</th> -->
               <th scope="col" width="15px">Productos</th>
               <th scope="col">Total Neto</th>
               <th scope="col">Fecha</th>
@@ -113,7 +113,7 @@
                         
                         <td>'.$value["numero_factura"].'</td>';
 
-                        echo '<td>'.$value["nombre"].'</td>';
+                        // echo '<td>'.$value["nombre"].'</td>';
 
                         echo '<td>'.$value["nombre"].' '.$value['apellidos'].'</td>';
 
