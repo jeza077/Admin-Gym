@@ -47,6 +47,7 @@
                 <thead>
                   <tr>
                     <th scope="col">#</th>
+                    <th scope="col">No. Documento</th>
                     <th scope="col">Nombre</th>
                     <th scope="col">Tipo Cliente</th>
                     <th scope="col">Correo</th>
@@ -83,7 +84,8 @@
                     echo '
                           <tr>
                           <th scope="row">'.($key+1).'</th>
-                          <td>'.$value["nombre"].'</td>
+                          <td>'.$value["num_documento"].'</td>
+                          <td>'.$value["nombre"].' '.$value["apellidos"].'</td>
                           <td>'.$value["tipo_cliente"].'</td>
                           <td>'.$value["correo"].'</td>
                           <td>'.$value["telefono"].'</td>
