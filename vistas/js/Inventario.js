@@ -24,8 +24,8 @@ $(document).on("click",".btnEditarInventario",function(){
             $("#editarTipoProducto").val(respuesta["id_inventario"]);
             $("#editarStock").val(respuesta["stock"]);
             $("#editarPrecio").val(respuesta["precio_venta"]);
-            $("#editarPrecioCompra").val(respuesta["precio_compra"]);
-            $("#editarProveedor").val(respuesta["proveedor"]);
+            // $("#editarPrecioCompra").val(respuesta["precio_compra"]);
+            // $("#editarProveedor").val(respuesta["proveedor"]);
             $("#editarProductoMinimo").val(respuesta["producto_minimo"]);
             $("#editarProductoMaximo").val(respuesta["producto_maximo"]);
 
@@ -100,7 +100,6 @@ $("#nuevoTipoProducto").change(function(){
             console.log("respuesta",respuesta);
             var nuevoCodigo = parseInt(respuesta["codigo"]) + 1;
             console.log("nuevoCodigo",nuevoCodigo);
-            
 
             if(!respuesta && idCategoria == 1){
                 $(".nuevoCodigo").val(100)

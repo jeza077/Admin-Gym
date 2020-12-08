@@ -168,6 +168,12 @@
                   </a>
                 </li>
                 <li class="nav-item">
+                  <a href="inventario" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Inventario</p>
+                  </a>
+                </li>
+                <li class="nav-item">
                   <a href="productos" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Productos</p>
