@@ -76,6 +76,10 @@ class AjaxUsuarios{
         $valor = $this->verificarEmail;
         
         $respuesta = ControladorUsuarios::ctrMostrarUsuarios($tabla, $item, $valor);
+        // echo "<pre>";
+        // var_dump($respuesta);
+        // echo "</pre>";
+        // return;
 
         echo json_encode($respuesta);
     }

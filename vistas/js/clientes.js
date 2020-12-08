@@ -13,22 +13,44 @@ $('.tipoDocumentoCliente').change(function (e) {
         $('.idCliente').keydown(sinCaracteres);
     }
 });
-
-validarEmail($('.emailCliente'))
-$('.numeroDocumentoCliente').keydown(impedirEspacios);
-$('.numeroDocumentoCliente').blur(validarDoc)
-
 //VALIDACIONES AGREGAR CLIENTE
-$('.nombreCliente').keydown(sinCaracteres)
-$('.nombreCliente').keydown(sinNumeros)
-$('.nombreCliente').keydown(permitirUnEspacio);
+validarDoc($('.idCliente'))
+validarEmail($('.emailCliente'))
 longitudString($('.nombreCliente'),30); 
-//VALIDACIONES AGREGAR CLIENTE apellido
+$('.nombreCliente').keydown(sinNumeros)
+$('.nombreCliente').keydown(sinCaracteres)
+$('.nombreCliente').keydown(permitirUnEspacio);
+$('.numeroDocumentoCliente').keydown(impedirEspacios);
 $('.apellidoCliente').keydown(sinCaracteres)
 $('.apellidoCliente').keydown(sinNumeros)
 $('.apellidoCliente').keydown(permitirUnEspacio);
 longitudString($('.apellidoCliente'),30); 
-;
+
+// VALIDACIONES EDITAR CLIENTE GIMNASIO
+validarEmail($('.editarEmail'))
+longitudString($('.editarNombre'),30); 
+longitudString($('.editarApellido'),30); 
+validarDoc($('.editarNumeroDocumento'));
+$('.editarNombre').keydown(sinNumeros)
+$('.editarNombre').keydown(sinCaracteres)
+$('.editarNombre').keydown(permitirUnEspacio);
+$('.editarApellido').keydown(sinNumeros)
+$('.editarApellido').keydown(sinCaracteres)
+$('.editarApellido').keydown(permitirUnEspacio);
+$('.editarNumeroDocumento').keydown(impedirEspacios);
+// VALIDACIONES EDITAR CLIENTE VENTA
+validarEmail($('.editarEmailVentas'))
+longitudString($('.nombreClienteVentas'),30);
+longitudString($('.apellidoClienteVentas'),30); 
+validarDoc($('.numeroDocumentoClienteVentas'));
+$('.nombreClienteVentas').keydown(sinNumeros)
+$('.nombreClienteVentas').keydown(sinCaracteres)
+$('.nombreClienteVentas').keydown(permitirUnEspacio);
+$('.apellidoClienteVentas').keydown(sinNumeros)
+$('.apellidoClienteVentas').keydown(sinCaracteres)
+$('.apellidoClienteVentas').keydown(permitirUnEspacio);
+$('.numeroDocumentoClienteVentas').keydown(impedirEspacios);
+
 // AGREGAR CLIENTE 
 // MUESTRA LOS DATOS DE PAGO DEL CLIENTE, AL ELEGIR TIPO CLIENTE GIMNASIO
 $('#datosClientes').hide();

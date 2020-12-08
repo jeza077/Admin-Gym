@@ -151,6 +151,26 @@ class AjaxClientes{
 
         echo json_encode($respuesta);
     }
+
+    /*=============================================
+    MOATRAR CLIENTE 
+    =============================================*/
+    public $verificarDocumento;
+
+    public function ajaxVerificarDocumento(){
+
+        $tabla = "tbl_clientes";
+        $item = "num_documento";
+        $valor = $this->verificarDocumento;
+        
+        $respuesta = ControladorClientes::ctrMostrarClientes($tabla, $item, $valor);
+        // echo "<pre>";
+        // var_dump($respuesta);
+        // echo "</pre>";
+        // return;
+
+        echo json_encode($respuesta);
+    }
 }
 
 /*=============================================
@@ -216,4 +236,13 @@ if(isset($_POST["idClienteInscripcion"])){
     $estadoInscripcion->idClienteInscripcion = $_POST["idClienteInscripcion"];
     $estadoInscripcion->estadoClienteInscripcion = $_POST["estadoClienteInscripcion"];
     $estadoInscripcion->ajaxActualizarEstadoInscripcionCliente();
+}
+
+/*=============================================
+    VERIFICAR DOCUMENTO
+=============================================*/
+if(isset($_POST["verificarDocumento"])){
+    $verificarNumDocumento = new AjaxClientes();
+    $verificarNumDocumento->verificarDocumento = $_POST["verificarDocumento"];
+    $verificarNumDocumento->ajaxVerificarDocumento();
 }

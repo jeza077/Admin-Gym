@@ -471,7 +471,7 @@ function sinCaracteres(event) {
 function validarDoc(selector) {
     selector.blur(function() {
         var documentoIngresado = selector.val();
-        // console.log(selector)
+        // console.log(documentoIngresado)
     
         var datos = new FormData();
         datos.append("verificarDocumento", documentoIngresado);
@@ -500,7 +500,7 @@ function validarDoc(selector) {
                     
                     
                     //E inmeditamente Limpiamos el input
-                    selector.val("");
+                    // selector.val("");
                     selector.focus();
                 } 
             }
