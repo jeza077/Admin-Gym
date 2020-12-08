@@ -522,42 +522,42 @@ $(document).on('keyup', '.mayus', function () {
 /*=============================================
     FUNCION VERIFCAR DOCUMENTO
 =============================================*/
-function verificarDocumento(selector) { 
-    selector.change(function (e) { 
-        e.preventDefault();
+// function verificarDocumento(selector) { 
+//     selector.change(function (e) { 
+//         e.preventDefault();
         
-        var valorTipoDocumento = $(selector).val();
-        console.log(valorTipoDocumento);
+//         var valorTipoDocumento = $(selector).val();
+//         console.log(valorTipoDocumento);
     
-        if (valorTipoDocumento == 1 ) {
-            $('.idCliente').on('keypress', (e) => {
-                //Obtenemos el código ASCII de la tecla pulsada
-                let teclaPulsada = e.charCode;
+//         if (valorTipoDocumento == 1 ) {
+//             $('.idCliente').on('keypress', (e) => {
+//                 //Obtenemos el código ASCII de la tecla pulsada
+//                 let teclaPulsada = e.charCode;
                 
-                //Validamos el rango en el que se encuentran los caracteres No permitidos
-                if (teclaPulsada >= 33 && teclaPulsada < 48 || teclaPulsada >= 58 && teclaPulsada < 128 || teclaPulsada >= 166 && teclaPulsada < 255) {
-                  //Con return false, bloqueamos el ingreso de estos caracteres
-                  return false;
-                } 
-            });
-            console.log("Uno")
-        } else if (valorTipoDocumento == 2) {
-            $('.idCliente').on('keypress', (e) => {
-                //Obtenemos el código ASCII de la tecla pulsada
-                let teclaPulsada = e.charCode;
+//                 //Validamos el rango en el que se encuentran los caracteres No permitidos
+//                 if (teclaPulsada >= 33 && teclaPulsada < 48 || teclaPulsada >= 58 && teclaPulsada < 128 || teclaPulsada >= 166 && teclaPulsada < 255) {
+//                   //Con return false, bloqueamos el ingreso de estos caracteres
+//                   return false;
+//                 } 
+//             });
+//             console.log("Uno")
+//         } else if (valorTipoDocumento == 2) {
+//             $('.idCliente').on('keypress', (e) => {
+//                 //Obtenemos el código ASCII de la tecla pulsada
+//                 let teclaPulsada = e.charCode;
                 
-                //Validamos el rango en el que se encuentran los caracteres No permitidos
-                if (teclaPulsada >= 33 && teclaPulsada < 48 || teclaPulsada >= 58 && teclaPulsada < 128 || teclaPulsada >= 166 && teclaPulsada < 255) {
-                  //Con return false, bloqueamos el ingreso de estos caracteres
-                  return false;
-                } 
-            });
-            console.log("dos")
-        } else {
-            console.log("tres")
-        }
-    });
-}
+//                 //Validamos el rango en el que se encuentran los caracteres No permitidos
+//                 if (teclaPulsada >= 33 && teclaPulsada < 48 || teclaPulsada >= 58 && teclaPulsada < 128 || teclaPulsada >= 166 && teclaPulsada < 255) {
+//                   //Con return false, bloqueamos el ingreso de estos caracteres
+//                   return false;
+//                 } 
+//             });
+//             console.log("dos")
+//         } else {
+//             console.log("tres")
+//         }
+//     });
+// }
 
 /*=============================================
     EJECUCION DE VALIDACIONES
