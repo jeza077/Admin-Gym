@@ -179,6 +179,37 @@ class ModeloInventario
 		
 		$stmt = null;
 
+	}
+	
+
+
+	/*=============================================
+				CREAR bodega
+	=============================================*/	 
+	static public function mdlCrearBodega($tabla, $datos){
+
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(id_tipo_producto, nombre_producto,stock, foto, codigo) VALUES (:id_tipo_producto, :nombre_producto,:stock, :foto ,:codigo)");
+
+		$stmt->bindParam(":id_tipo_producto", $datos["id_tipo_producto"], PDO::PARAM_INT);
+		$stmt->bindParam(":codigo", $datos["codigo"], PDO::PARAM_INT);
+		$stmt->bindParam(":nombre_producto", $datos["nombre_producto"], PDO::PARAM_STR);
+		$stmt->bindParam(":stock", $datos["stock"], PDO::PARAM_INT);
+		// $stmt->bindParam(":precio_venta", $datos["precio_venta"], PDO::PARAM_STR);
+		// $stmt->bindParam(":precio_compra", $datos["precio_compra"], PDO::PARAM_STR);
+		// $stmt->bindParam(":proveedor", $datos["proveedor"], PDO::PARAM_STR);
+		// $stmt->bindParam(":producto_minimo", $datos["producto_minimo"], PDO::PARAM_INT);
+		// $stmt->bindParam(":producto_maximo", $datos["producto_maximo"], PDO::PARAM_INT);
+		$stmt->bindParam(":foto", $datos["foto"], PDO::PARAM_STR);
+		if($stmt->execute()){
+			return true;
+		}else{
+			return $stmt -> errorInfo();
+		}
+
+		$stmt->close();
+		
+		$stmt = null;
+
     }
 		
 

@@ -196,7 +196,7 @@
                         <div class="input-group">
                           <img class="img-thumbnail previsualizar mr-2" src="vistas/img/usuarios/default/anonymous.png" alt="imagen-del-usuario" width="100px">
                           <div class="custom-file">
-                            <input type="file" class="custom-file-input nuevaFotoProducto" id="exampleInputFile" name="nuevaFotoProducto">
+                            <input type="file" class="custom-file-input nuevaFotoBodega" id="exampleInputFile" name="nuevaFotoBodega">
                             <label class="custom-file-label" for="exampleInputFile">Escoger foto</label>
                           </div>
                         </div>
@@ -211,10 +211,10 @@
                 
 
                     <?php
-                    $tipostock = 'producto';
+                    $tipostock = 'Bodega';
                     $pantalla = 'equipo';
                     $AgregarInventario = new ControladorInventario();
-                    $AgregarInventario->ctrCrearStock($tipostock, $pantalla);
+                    $AgregarInventario->ctrCrearBodega($tipostock, $pantalla);
                     ?>
                   </div>
                 </div>

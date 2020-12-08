@@ -211,6 +211,162 @@ class ControladorInventario
 
 
         /*=============================================
+                CREAR bodega
+        =============================================*/
+
+        static public function ctrCrearBodega($tipostock, $pantalla){
+            // var_dump($_POST);
+            // echo $tipostock;
+            // return;
+            if(isset($_POST["nuevoTipoProducto"])){
+    
+                if(preg_match('/^[a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevoNombreProducto"])){
+
+        
+                    /*=============================================
+							VALIDAR IMAGEN
+					=============================================*/
+
+					$ruta = "";
+
+					if(isset($_FILES["nuevaFotoBodega"]["tmp_name"])){
+
+						list($ancho, $alto) = getimagesize($_FILES["nuevaFotoBodega"]["tmp_name"]);
+
+						$nuevoAncho = 500;
+						$nuevoAlto = 500;
+
+						/*==============================================================
+						CREAMOS EL DIRECTORIO DONDE VAMOS A GUARDAR LA FOTO DEL USUARIO
+						===============================================================*/
+
+						$directorio = "vistas/img/productos/".$_POST["nuevaFotoBodega"];
+
+						mkdir($directorio, 0755); 
+
+						/*=====================================================================
+						DE ACUERDO AL TIPO DE IMAGEN APLICAMOS LAS FUNCIONES POR DEFECTO DE PHP
+						======================================================================*/
+
+						if($_FILES["nuevaFotoBodega"]["type"] == "image/jpeg"){
+
+							/*=============================================
+							GUARDAMOS LA IMAGEN EN EL DIRECTORIO
+							=============================================*/
+
+							$aleatorio = mt_rand(100,999);
+
+							$ruta = "vistas/img/productos/".$_POST["nuevoNombreProducto"]."/".$aleatorio.".jpg";
+
+							$origen = imagecreatefromjpeg($_FILES["nuevaFotoBodega"]["tmp_name"]);
+
+							$destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+
+							imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+
+							imagejpeg($destino, $ruta);
+
+                        }
+                        
+
+						if($_FILES["nuevaFotoBodega"]["type"] == "image/png"){
+
+							/*=============================================
+							GUARDAMOS LA IMAGEN EN EL DIRECTORIO
+							=============================================*/
+
+							$aleatorio = mt_rand(100,999);
+
+							$ruta = "vistas/img/productos/".$_POST["nuevoNombreProducto"]."/".$aleatorio.".png";
+
+							$origen = imagecreatefrompng($_FILES["nuevaFotoBodega"]["tmp_name"]);
+
+							$destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+
+							imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+
+							imagepng($destino, $ruta);
+
+						}
+
+					}
+
+           
+
+                    $tabla = "tbl_inventario";
+                    if($tipostock == 'Bodega'){
+                        $datos = array("id_tipo_producto" => $_POST["nuevoTipoProducto"],
+                        "codigo" => $_POST["nuevoCodigo"],
+                        "nombre_producto" => $_POST["nuevoNombreProducto"],
+                        "stock" => $_POST["nuevoStock"],
+                        // "precio_venta" => $_POST["nuevoPrecio"],
+                        // "precio_compra" => $_POST["nuevoPrecioCompra"],
+                        // "proveedor" => $_POST["nuevoProveedor"],                        
+                        // "producto_minimo" => $_POST["nuevoProductoMinimo"],
+                        // "producto_maximo" => $_POST["nuevoProductoMaximo"],
+                        "foto" => $ruta);
+                        // var_dump($datos);
+                        // return;
+
+                     
+
+                        $crearInventario = ModeloInventario::mdlCrearBodega($tabla, $datos);
+                        // var_dump($datos);
+                        // return;
+
+                                if($crearInventario == true){
+                                    
+                                    // $descripcionEvento = "  Nuevo Producto";
+                                    // $accion = "Nuevo";
+            
+                                    // $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 4,$accion, $descripcionEvento);
+
+                                    echo '<script>
+                                            Swal.fire({
+                                                title: "Tus datos han sido guardados correctamente!",
+                                                icon: "success",
+                                                heightAuto: false,
+                                                allowOutsideClick: false
+                                            }).then((result)=>{
+                                                if(result.value){
+                                                    window.location = "'.$pantalla.'";
+                                                }
+                                            });                       
+                                        </script>';
+                                }
+                                else {
+                                    echo '<script>
+                                            Swal.fire({
+                                                title: "No se pudo guardar tus datos. Intenta de nuevo!",
+                                                icon: "error",
+                                                heightAuto: false,
+                                                allowOutsideClick: false,
+                                                timer: 4000
+                                            });					
+                                        </script>';
+                                }
+    
+                    } 
+              
+                } 
+                else {
+                    echo '<script>
+                            Swal.fire({
+                                title: "Llenar los datos correctamente. Intenta de nuevo!",
+                                icon: "error",
+                                heightAuto: false,
+                                allowOutsideClick: false,
+                                timer: 4000
+                            });					
+                        </script>';
+                }
+            }
+        }
+
+
+
+
+        /*=============================================
                 CREAR COMPRA
         =============================================*/
 
