@@ -13,7 +13,7 @@
 //         $('.idCliente').keydown(sinCaracteres);
 //     }
 // });
-verificarDocumento($('.tipoDocumentoCliente'))
+// verificarDocumento($('.tipoDocumentoCliente'))
 
 //VALIDACIONES AGREGAR CLIENTE
 validarDoc($('.idCliente'))

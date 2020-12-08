@@ -52,7 +52,6 @@
                     <th scope="col">Correo</th>
                     <th scope="col">Telefono</th>
                     <th scope="col">Fecha Creacion</th>
-                    <th scope="col">Estado</th>
                     <th scope="col">Acciones</th>
                   </tr>
                 </thead>
@@ -89,14 +88,6 @@
                           <td>'.$value["correo"].'</td>
                           <td>'.$value["telefono"].'</td>
                           <td>'.$value["fecha_creacion"].'</td>';
- 
-
-                          if($value['estado'] != 0){
-                            echo '<td><span class="badge badge-success p-3" idCliente="'.$value["id_cliente"].'" estadoUsuario="0">Activado</span></td>';
-                          } else {
-                            echo '<td><span class="badge badge-danger p-3" idCliente="'.$value["id_cliente"].'" estadoUsuario="1">Desactivado</span></td>';
-                          }
-                    
 
                       // echo '<td></td>';
 

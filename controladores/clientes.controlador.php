@@ -18,13 +18,26 @@ class ControladorClientes{
 			$pago_inscripcion = $datos['pago_inscripcion'];
 			$pago_total = $datos['pago_total'];
 
+			// echo "<pre>";
+			// var_dump($pago_descuento);
+			// echo "</pre>";
+			// return $pago_descuento;
+
 			$tabla = "tbl_clientes";
 			
 			if ($datos['tipo_cliente'] == "Gimnasio"){
-				$datos = array("id_persona" => $datos['id_persona'],
-			                "tipo_cliente" => $datos["tipo_cliente"],		
-							"id_matricula" =>  $datos["id_matricula"],
-							"id_descuento" =>  $datos["id_descuento"]);
+				if ($datos['id_descuento'] == 0) {
+					
+					$datos = array("id_persona" => $datos['id_persona'],
+								"tipo_cliente" => $datos["tipo_cliente"],		
+								"id_matricula" =>  $datos["id_matricula"],
+								"id_descuento" =>  null);
+				} else {
+					$datos = array("id_persona" => $datos['id_persona'],
+								"tipo_cliente" => $datos["tipo_cliente"],		
+								"id_matricula" =>  $datos["id_matricula"],
+								"id_descuento" =>  $datos["id_descuento"]);
+				}
 			} else {
 				$datos = array("id_persona" => $datos['id_persona'],
 			                  "tipo_cliente" => $datos["tipo_cliente"]);
@@ -40,7 +53,7 @@ class ControladorClientes{
 				
 				if ($datos['tipo_cliente'] == "Gimnasio") {
 					
-						$totalId = array();
+					$totalId = array();
 					$tabla1 = "tbl_personas";
 					$tabla2 = "tbl_clientes";
 					$item = null;
@@ -121,24 +134,29 @@ class ControladorClientes{
 						// return $idPagoCliente;
 						
 						$tabla3 = "tbl_pagos_cliente";
-		
-						$datos = array("id_cliente_inscripcion" => $idPagoCliente,
-										"pago_matricula" => $pago_matricula,
-										"pago_descuento" => $pago_descuento,
-										"pago_inscripcion" => $pago_inscripcion,
-										"pago_total" => $pago_total);
-		
-										// $datos = array("id_cliente_inscripcion" => $idCliente,
-										// "pago_matricula" => $pago_matricula,
-										// "pago_descuento" => $pago_descuento,
-										// "pago_inscripcion" => $pago_inscripcion,
-										// "pago_total" => $pago_total);
+						
+						if ($datos['pago_descuento'] == 0) {
+							
+							$datos = array("id_cliente_inscripcion" => $idPagoCliente,
+											"pago_matricula" => $pago_matricula,
+											"pago_descuento" => 0,
+											"pago_inscripcion" => $pago_inscripcion,
+											"pago_total" => $pago_total);
+						} else {
+
+							$datos = array("id_cliente_inscripcion" => $idPagoCliente,
+											"pago_matricula" => $pago_matricula,
+											"pago_descuento" => $pago_descuento,
+											"pago_inscripcion" => $pago_inscripcion,
+											"pago_total" => $pago_total);
+						}
+						
 		
 						$respuestaPago = ModeloClientes::mdlCrearPago($tabla3, $datos);
 						// echo "<pre>";
-						// var_dump($respuestaPago);
+						// var_dump($datos);
 						// echo "</pre>";
-						// return $respuestaPago;
+						// return;
 						if ($respuestaPago ==true) {
 							return true;
 						}
