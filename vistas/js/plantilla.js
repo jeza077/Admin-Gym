@@ -520,33 +520,44 @@ $(document).on('keyup', '.mayus', function () {
 
 
 /*=============================================
-    FUNCION VALIDAR DOCUMENTO
+    FUNCION VERIFCAR DOCUMENTO
 =============================================*/
-$(document).on('change', '.tipoDocumento', function (e) { 
-    e.preventDefault();
-    // $('.numeroDocumento').keydown(sinCaracteres);
-    $('.numeroDocumento').val("");
-
-    var valorTipoDocumento = $(this).val();
-    console.log(valorTipoDocumento);
-
-    if(valorTipoDocumento == 1){
-        $('.numeroDocumento').keydown(sinLetras);
-        $('.numeroDocumento').keydown(sinCaracteres);
-        // longitudString($('.numeroDocumento'),13); //Longitud maxima.
-        // $('.numeroDocumento').keydown(sinCaracteres);
-    } else if(valorTipoDocumento == 2){
-        $('.numeroDocumento').keydown(sinLetras);
-        // longitudString($('.numeroDocumento'),14); //Longitud maxima.
-        $('.numeroDocumento').keydown(sinCaracteres);
+function verificarDocumento(selector) { 
+    selector.change(function (e) { 
+        e.preventDefault();
         
-    } else {
-        $('.numeroDocumento').keydown(sinCaracteres);
-        longitudString($('.numeroDocumento'),16); //Longitud maxima.
-    }
-});
-
-
+        var valorTipoDocumento = $(selector).val();
+        console.log(valorTipoDocumento);
+    
+        if (valorTipoDocumento == 1 ) {
+            $('.idCliente').on('keypress', (e) => {
+                //Obtenemos el código ASCII de la tecla pulsada
+                let teclaPulsada = e.charCode;
+                
+                //Validamos el rango en el que se encuentran los caracteres No permitidos
+                if (teclaPulsada >= 33 && teclaPulsada < 48 || teclaPulsada >= 58 && teclaPulsada < 128 || teclaPulsada >= 166 && teclaPulsada < 255) {
+                  //Con return false, bloqueamos el ingreso de estos caracteres
+                  return false;
+                } 
+            });
+            console.log("Uno")
+        } else if (valorTipoDocumento == 2) {
+            $('.idCliente').on('keypress', (e) => {
+                //Obtenemos el código ASCII de la tecla pulsada
+                let teclaPulsada = e.charCode;
+                
+                //Validamos el rango en el que se encuentran los caracteres No permitidos
+                if (teclaPulsada >= 33 && teclaPulsada < 48 || teclaPulsada >= 58 && teclaPulsada < 128 || teclaPulsada >= 166 && teclaPulsada < 255) {
+                  //Con return false, bloqueamos el ingreso de estos caracteres
+                  return false;
+                } 
+            });
+            console.log("dos")
+        } else {
+            console.log("tres")
+        }
+    });
+}
 
 /*=============================================
     EJECUCION DE VALIDACIONES

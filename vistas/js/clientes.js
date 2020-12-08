@@ -1,18 +1,20 @@
 // VALIDACIONES DE DOCUMENTO
-$('.tipoDocumentoCliente').change(function (e) { 
-    e.preventDefault();
-    $('.idCliente').val("");
+// $('.tipoDocumentoCliente').change(function (e) { 
+//     e.preventDefault();
+//     $('.idCliente').val("");
 
-    var valorTipoDocumento =$(this).val();
-    // console.log(valorTipoDocumento);
+//     var valorTipoDocumento =$(this).val();
+//     // console.log(valorTipoDocumento);
 
-    if(valorTipoDocumento === 3){
-        $('.idCliente').keydown(sinNumeros);
-    } else {
-        $('.idCliente').keydown(sinLetras);
-        $('.idCliente').keydown(sinCaracteres);
-    }
-});
+//     if(valorTipoDocumento === 3){
+//         $('.idCliente').keydown(sinNumeros);
+//     } else {
+//         $('.idCliente').keydown(sinLetras);
+//         $('.idCliente').keydown(sinCaracteres);
+//     }
+// });
+verificarDocumento($('.tipoDocumentoCliente'))
+
 //VALIDACIONES AGREGAR CLIENTE
 validarDoc($('.idCliente'))
 validarEmail($('.emailCliente'))
