@@ -288,7 +288,6 @@ EOF;
 $pdf->writeHTML($bloque5, false, false, false, false, '');
 
 
-
 // ---------------------------------------------------------
 //SALIDA DEL ARCHIVO 
 

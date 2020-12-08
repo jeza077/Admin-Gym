@@ -12,9 +12,9 @@
           <button class="btn btn-orange float-right"  data-toggle="modal" data-target="#modalAgregarInventario">
               Nuevo Producto        
           </button>
-          <button class="btn btn-danger btnExportarProductos float-right mr-3">
+          <!-- <button class="btn btn-danger btnExportarProductos float-right mr-3">
               Exportar PDF          
-            </button> 
+            </button>  -->
           </div>
         </div>
       </div><!-- /.container-fluid -->
