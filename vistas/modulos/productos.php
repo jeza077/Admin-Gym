@@ -114,107 +114,93 @@
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Agregar a Stock</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Nuevo Producto</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
           <div class="modal-body">
             <form role="form" method="post" class="formulario" enctype="multipart/form-data">
-              <ul class="nav nav-tabs" id="myTab" role="tablist">
-                <li class="nav-item" role="presentation">
-                  <a class="nav-link active" id="datosPersona" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Inventario/Bodega</a>
-                </li>
-              </ul>
-              
-              <div class="tab-content" id="myTabContent">
-                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="datosPersona">
-                  <div class="container-fluid mt-3">
-                  <div class="form-row">
-                      <div class="form-group col-md-3">
-                        <label for="">Tipo<?php echo $i?></label>
-                        <select class="form-control select2 "  id="nuevoTipoProducto" style="width: 100%;" name="nuevoTipoProducto">
-                            
-                            
-                            <option selected="selected">Seleccionar...</option>
-                            <?php 
-                                $tabla = "tbl_tipo_producto";
-                                $item = null;
-                                $valor = null;
-                                $preguntas = ControladorInventario::ctrMostrarTipoProducto($tabla, $item, $valor);
-                                foreach ($preguntas as $key => $value) { ?>
-                                    <option value="<?php echo $value['id_tipo_producto']?>"><?php echo $value['tipo_producto']?></option>        
-                                <?php 
-                                }
-                            ?>
-                        </select>
-                      </div>
-                      <div class="form-group col-md-3">
-                        <label for="nombreproducto">Codigo</label>
-                        <input type="text" readonly class="form-control nuevoCodigo" id="nuevoCodigo" name="nuevoCodigo" placeholder="Codigo producto" required>
-                      </div>
-                      <div class="form-group col-md-3">
-                        <label for="nombreproducto">Nombre Producto</label>
-                        <html>
-                        <input type="text" class="form-control mayus nombre_producto" id="nuevoNombreProducto" name="nuevoNombreProducto" placeholder="Ingrese Producto" required>
-                      </div>
-                    </div>
-        
-                <div class="form-row">
-                      <div class="form-group col-md-4">
-                        <label for="precio">Precio de venta</label>
-                        <input type="text" class="form-control precio" id="nuevoPrecio" name="nuevoPrecio" placeholder="Ingrese Precio"  required>
-                      </div>
-                      <div class="form-group col-md-4">
-                        <label for="precio">Precio de compra</label>
-                        <input type="text" class="form-control precio" id="nuevoPrecioCompra" name="nuevoPrecioCompra" placeholder="Ingrese Precio"  required>
-                      </div>
-                          <div class="form-group col-md-4">
-                            <label for="productominimo">Producto Minimo</label>
-                            <input type="number" class="form-control precio" id="nuevoProductoMinimo" name="nuevoProductoMinimo" placeholder="Cantidad Minima" min="0" required class="fa fa-arrow-up"></i></span>
-                          </div>
-                          <div class="form-group col-md-4">
-                            <label for="productomaximo">Producto Maximo</label>
-                            <input type="number" class="form-control precio" id="nuevoProductoMaximo" name="nuevoProductoMaximo" placeholder="Cantidad Maximo" min="0" required class="fa fa-arrow-up"></i></span>
-                          </div>
-                      </div>
-
-
-                  <div class="form-row">
-
-                      <div class="form-group col-md-5">
-                          <label for="exampleInputFile">Foto</label>
-                          <div class="input-group">
-                            <img class="img-thumbnail previsualizar mr-2" src="vistas/img/usuarios/default/anonymous.png" alt="imagen-del-usuario" width="100px">
-                            <div class="custom-file">
-                              <input type="file" class="custom-file-input nuevaFotoProducto" id="exampleInputFile" name="nuevaFotoProducto">
-                              <label class="custom-file-label" for="exampleInputFile">Escoger foto</label>
-                            </div>
-                          </div>
-                              <p class="p-foto help-block ml-4">Peso máximo de la foto 2 MB</p>
-                        </div>
-                    </div>
-
-                    <div class="form-group mt-4 float-right">
-                      <button type="" class="btn btn-primary">Guardar</button>
-                      <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
-                      </div>
-                  
-
-                      <?php
-                      $tipostock = 'Productos';
-                      $pantalla = 'productos';
-                      $AgregarInventario = new ControladorInventario();
-                      $AgregarInventario->ctrCrearStock($tipostock, $pantalla);
+    
+              <div class="form-row">
+                <div class="form-group col-md-4">
+                  <label for="">Tipo<?php echo $i?></label>
+                  <select class="form-control select2 "  id="nuevoTipoProducto" style="width: 100%;" name="nuevoTipoProducto">
+                      
+                      
+                      <option selected="selected">Seleccionar...</option>
+                      <?php 
+                          $tabla = "tbl_tipo_producto";
+                          $item = null;
+                          $valor = null;
+                          $preguntas = ControladorInventario::ctrMostrarTipoProducto($tabla, $item, $valor);
+                          foreach ($preguntas as $key => $value) { ?>
+                              <option value="<?php echo $value['id_tipo_producto']?>"><?php echo $value['tipo_producto']?></option>        
+                          <?php 
+                          }
                       ?>
-                    </div>
-                  </div>
-
-                  
+                  </select>
                 </div>
-                    <!-- 2tab --> 
+                <div class="form-group col-md-4">
+                  <label for="nombreproducto">Codigo</label>
+                  <input type="text" readonly class="form-control nuevoCodigo" id="nuevoCodigo" name="nuevoCodigo" placeholder="Codigo producto" required>
+                </div>
+                <div class="form-group col-md-4">
+                  <label for="nombreproducto">Nombre Producto</label>
+                  <html>
+                  <input type="text" class="form-control mayus nombre_producto" id="nuevoNombreProducto" name="nuevoNombreProducto" placeholder="Ingrese Producto" required>
+                </div>
+              </div>
+  
+              <div class="form-row">
+                <div class="form-group col-md-4">
+                  <label for="precio">Precio de venta</label>
+                  <input type="text" class="form-control precio" id="nuevoPrecio" name="nuevoPrecio" placeholder="Ingrese Precio"  required>
+                </div>
+                  <!-- <div class="form-group col-md-4">
+                    <label for="precio">Precio de compra</label>
+                    <input type="text" class="form-control precio" id="nuevoPrecioCompra" name="nuevoPrecioCompra" placeholder="Ingrese Precio"  required>
+                  </div> -->
+                <div class="form-group col-md-4">
+                  <label for="productominimo">Producto Minimo</label>
+                  <input type="number" class="form-control precio" id="nuevoProductoMinimo" name="nuevoProductoMinimo" placeholder="Cantidad Minima" min="0" required class="fa fa-arrow-up"></i></span>
+                </div>
+                <div class="form-group col-md-4">
+                  <label for="productomaximo">Producto Maximo</label>
+                  <input type="number" class="form-control precio" id="nuevoProductoMaximo" name="nuevoProductoMaximo" placeholder="Cantidad Maximo" min="0" required class="fa fa-arrow-up"></i></span>
+                </div>
               </div>
 
+
+              <div class="form-row">
+
+                <div class="form-group col-md-12">
+                    <label for="exampleInputFile">Foto</label>
+                    <div class="input-group">
+                      <img class="img-thumbnail previsualizar mr-2" src="vistas/img/usuarios/default/anonymous.png" alt="imagen-del-usuario" width="100px">
+                      <div class="custom-file">
+                        <input type="file" class="custom-file-input nuevaFotoProducto" id="exampleInputFile" name="nuevaFotoProducto">
+                        <label class="custom-file-label" for="exampleInputFile">Escoger foto</label>
+                      </div>
+                    </div>
+                        <p class="p-foto help-block ml-4">Peso máximo de la foto 2 MB</p>
+                  </div>
+              </div>
+
+              <div class="form-group mt-4 float-right">
+                <button type="" class="btn btn-primary">Guardar</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
+                </div>
+            
+
+                <?php
+                $tipostock = 'Productos';
+                $pantalla = 'productos';
+                $AgregarInventario = new ControladorInventario();
+                $AgregarInventario->ctrCrearStock($tipostock, $pantalla);
+                ?>
+              </div>
+                  
             </form>
           </div>
       </div>
@@ -232,7 +218,7 @@
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Editar</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Editar Producto</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -240,78 +226,73 @@
         <div class="modal-body">
           <form role="form" method="post" class="formulario" enctype="multipart/form-data">
             
-           
-                  <div class="form-row">
-                    
-                    <div class="form-group col-md-3">
-                      <label for="nombreproducto">Codigo</label>
-                      <input type="text" value="" class="form-control" readonly id="editarCodigo" name="editarCodigo"  required>
-                      <input type="hidden" name="editarTipoProducto" id="editarTipoProducto">
-                    </div>
-                    
-                    <div class="form-group col-md-3">
-                      <label for="nombreproducto">Nombre Producto</label>
-                      <html>
-                      <input type="text" value="" class="form-control mayus editar_Nombre_Producto"  name="editarNombreProducto" id="editarNombreProducto" required>
-                    </div>
-                    <!-- <div class="form-group col-md-3">
-                        <label for="nombreproducto">Proveedor</label>
-                        <html>
-                        <input type="text" class="form-control mayus proveedor" readonly name="editarProveedor" id="editarProveedor" placeholder="Nuevo Proveedor" required>
-                      </div> -->
-                    <div class="form-group col-md-3">
-                      <label for="stock">Cantidad en stock</label>
-                      <input type="number" value="" class="form-control" readonly name="editarStock" id="editarStock"  min="0" required class="fa fa-arrow-up"></i></span>
-                    </div>
+            <div class="form-row">
+              
+              <div class="form-group col-md-4">
+                <label for="nombreproducto">Codigo</label>
+                <input type="text" value="" class="form-control" readonly id="editarCodigo" name="editarCodigo"  required>
+                <input type="hidden" name="editarTipoProducto" id="editarTipoProducto">
+              </div>
+              
+              <div class="form-group col-md-4">
+                <label for="nombreproducto">Nombre Producto</label>
+                <html>
+                <input type="text" value="" class="form-control mayus editar_Nombre_Producto"  name="editarNombreProducto" id="editarNombreProducto" required>
+              </div>
+              
+              <div class="form-group col-md-4">
+                <label for="stock">Cantidad en stock</label>
+                <input type="number" value="" class="form-control" readonly name="editarStock" id="editarStock"  min="0" required class="fa fa-arrow-up"></i></span>
+              </div>
+            </div>
+
+                <div class="form-row">
+                  <div class="form-group col-md-4">
+                    <label for="precio">Precio Venta</label>
+                    <input type="text" value="" class="form-control editar_Precio" name="editarPrecio" id="editarPrecio" required>
                   </div>
-      
-                    <div class="form-row">
-                        <div class="form-group col-md-4">
-                        <label for="precio">Precio Venta</label>
-                        <input type="text" value="" class="form-control editar_Precio" name="editarPrecio" id="editarPrecio" required>
-                        </div>
-                        <!-- <div class="form-group col-md-4">
-                        <label for="precio">Precio compra</label>
-                        <input type="text" value="" class="form-control editar_Precio" readonly name="editarPrecioCompra" id="editarPrecioCompra" required>
-                        </div> -->
-                        <div class="form-group col-md-4">
-                          <label for="productominimo">Producto Minimo</label>
-                          <input type="number" value="" class="form-control" name="editarProductoMinimo" id="editarProductoMinimo" min="0" required class="fa fa-arrow-up"></i></span>
-                        </div>
-                        <div class="form-group col-md-4">
-                          <label for="productomaximo">Producto Maximo</label>
-                          <input type="number" value="" class="form-control" name="editarProductoMaximo" id="editarProductoMaximo" min="0" required class="fa fa-arrow-up"></i></span>
-                        </div>
-                    </div>
+                  <!-- <div class="form-group col-md-4">
+                  <label for="precio">Precio compra</label>
+                  <input type="text" value="" class="form-control editar_Precio" readonly name="editarPrecioCompra" id="editarPrecioCompra" required>
+                  </div> -->
+                  <div class="form-group col-md-4">
+                    <label for="productominimo">Producto Minimo</label>
+                    <input type="number" value="" class="form-control" name="editarProductoMinimo" id="editarProductoMinimo" min="0" required class="fa fa-arrow-up"></i></span>
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label for="productomaximo">Producto Maximo</label>
+                    <input type="number" value="" class="form-control" name="editarProductoMaximo" id="editarProductoMaximo" min="0" required class="fa fa-arrow-up"></i></span>
+                  </div>
+                </div>
 
-                    <div class="form-row">
+                <div class="form-row">
 
-                        <div class="form-group col-md-5">
-                            <label for="exampleInputFile">Foto</label>
-                            <div class="input-group">
-                            <img class="img-thumbnail previsualizar mr-2" src="vistas/img/usuarios/default/anonymous.png" alt="imagen-del-usuario" width="100px">
-                            <input type="hidden" name="imagenActual" id=imagenActual>
-                            <div class="custom-file">
-                                <input type="file" class="custom-file-input nuevaFotoProducto" id="exampleInputFile" name="editarFotoProducto">
-                                <label class="custom-file-label" for="exampleInputFile">Escoger foto</label>
-                            </div>
-                            </div>
-                                <p class="p-foto help-block ml-4">Peso máximo de la foto 2 MB</p>
-                        </div>
-                    </div>
+                  <div class="form-group col-md-12">
+                      <label for="exampleInputFile">Foto</label>
+                      <div class="input-group">
+                      <img class="img-thumbnail previsualizar mr-2" src="vistas/img/usuarios/default/anonymous.png" alt="imagen-del-usuario" width="100px">
+                      <input type="hidden" name="imagenActual" id=imagenActual>
+                      <div class="custom-file">
+                          <input type="file" class="custom-file-input nuevaFotoProducto" id="exampleInputFile" name="editarFotoProducto">
+                          <label class="custom-file-label" for="exampleInputFile">Escoger foto</label>
+                      </div>
+                      </div>
+                          <p class="p-foto help-block ml-4">Peso máximo de la foto 2 MB</p>
+                  </div>
+                </div>
 
-                    <div class="form-group mt-4 float-right">
-                        <button type="" class="btn btn-primary">Guardar</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
-                    </div>
-                
-                    <?php
-                    $tipostock = 'Productos';
-                    $pantalla = 'productos';
-                    $EditarInventario = new ControladorInventario();
-                    $EditarInventario->ctrEditarStock($tipostock, $pantalla);
-                    ?>
-                  <!-- 2tab --> 
+                <div class="form-group mt-4 float-right">
+                    <button type="" class="btn btn-primary">Guardar</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
+                </div>
+            
+                <?php
+                $tipostock = 'Productos';
+                $pantalla = 'productos';
+                $EditarInventario = new ControladorInventario();
+                $EditarInventario->ctrEditarStock($tipostock, $pantalla);
+                ?>
+              <!-- 2tab --> 
           </form>
         </div>
       </div>

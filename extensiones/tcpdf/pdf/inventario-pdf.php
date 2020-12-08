@@ -59,7 +59,7 @@ class PDF extends TCPDF{
 
         $this->Ln(20); //Espacios
         $this->SetFont('helvetica', 'B', 14);
-        $this->Cell(180, 3, 'REPORTE DE COMPRAS', 0, 1, 'C');
+        $this->Cell(180, 3, 'REPORTE DE INVENTARIO', 0, 1, 'C');
         $this->Ln(3);
         $this->SetFont('helvetica', 'B', 11);
         $año = date('Y-m-d');
@@ -93,7 +93,7 @@ $pdf = new PDF('p', 'mm', 'A4', true, 'UTF-8', false);
 // set document information
 $pdf->SetCreator(PDF_CREATOR);
 $pdf->SetAuthor('Jesus Zuniga');
-$pdf->SetTitle('Reporte de Compras');
+$pdf->SetTitle('Reporte de Inventario');
 $pdf->SetSubject('');
 $pdf->SetKeywords('');
 
@@ -143,11 +143,10 @@ $pdf->Ln(45);
 $pdf->SetFont('times', '', 13);
 $pdf->SetFillColor(225, 235, 255);
 $pdf->Cell(15, 5, 'No', 1, 0, 'C', 1);
-$pdf->Cell(50, 5, 'Nombre Producto', 1, 0, 'C', 1);
-$pdf->Cell(35, 5, 'Proveedor', 1, 0, 'C', 1);
-$pdf->Cell(20, 5, 'Cantidad', 1, 0, 'C', 1);
-$pdf->Cell(20, 5, 'Precio', 1, 0, 'C', 1);
-$pdf->Cell(45, 5, 'Fecha', 1, 0, 'C', 1);
+$pdf->Cell(40, 5, 'Codigo', 1, 0, 'C', 1);
+$pdf->Cell(40, 5, 'Tipo Producto', 1, 0, 'C', 1);
+$pdf->Cell(55, 5, 'Nombre Producto', 1, 0, 'C', 1);
+$pdf->Cell(30, 5, 'Stock', 1, 0, 'C', 1);
 
 
 
@@ -176,7 +175,7 @@ if(isset($_GET["rango"])){
 
 
 
-$inventarios=ControladorInventario::ctrRangoCompras($rango);
+$inventarios=ControladorInventario::ctrRangoC($rango);
 
 // var_dump($inventarios);
 // return;
@@ -192,7 +191,7 @@ if(!$inventarios){
 
 
         $i = 1; //Contador
-        $max = 14; //Maximo de registros a mostrar en una pagina
+        $max = 10; //Maximo de registros a mostrar en una pagina
    
 foreach ($inventarios as $key => $value) {
 
@@ -204,12 +203,10 @@ foreach ($inventarios as $key => $value) {
         $pdf->SetFont('times', '', 13);
         $pdf->SetFillColor(225, 235, 255);
         $pdf->Cell(15, 5, 'No', 1, 0, 'C', 1);
-        $pdf->Cell(50, 5, 'Nombre Producto', 1, 0, 'C', 1);
-        $pdf->Cell(35, 5, 'Proveedor', 1, 0, 'C', 1);
-        $pdf->Cell(20, 5, 'Cantidad', 1, 0, 'C', 1);
-        $pdf->Cell(20, 5, 'Precio', 1, 0, 'C', 1);
-        $pdf->Cell(45, 5, 'Fecha', 1, 0, 'C', 1);
-    
+        $pdf->Cell(40, 5, 'Codigo', 1, 0, 'C', 1);
+        $pdf->Cell(40, 5, 'Tipo Producto', 1, 0, 'C', 1);
+        $pdf->Cell(55, 5, 'Nombre Producto', 1, 0, 'C', 1);
+        $pdf->Cell(30, 5, 'Stock', 1, 0, 'C', 1);
     }
     // $pdf->Cell(15, 5, ''.$i.'', 1, 0, 'C');
 
@@ -217,11 +214,10 @@ foreach ($inventarios as $key => $value) {
     $pdf->SetFont('times', '', 12);
     // $pdf->SetFillColor(225, 235, 255);
     $pdf->Cell(15, 4, ''.($key+1).'', 0, 0, 'C');
-    $pdf->Cell(50, 4, ''.$value['nombre_producto'].'', 0, 0, 'C');
-    $pdf->Cell(35, 4, ''.$value['nombre'].'', 0, 0, 'C');
-    $pdf->Cell(20, 4, ''.$value['cantidad'].'', 0, 0, 'C');
-    $pdf->Cell(20, 4, ''.$value['precio'].'', 0, 0, 'C');
-    $pdf->Cell(45, 4, ''.$value['fecha'].'', 0, 0, 'C');
+    $pdf->Cell(40, 4, ''.$value['codigo'].'', 0, 0, 'C');
+    $pdf->Cell(40, 4, ''.$value['tipo_producto'].'', 0, 0, 'C');
+    $pdf->Cell(55, 4, ''.$value['nombre_producto'].'', 0, 0, 'C');
+    $pdf->Cell(30, 4, ''.$value['stock'].'', 0, 0, 'C');
     $i++;
 
 }

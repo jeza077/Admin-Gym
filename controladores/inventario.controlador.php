@@ -796,6 +796,15 @@ class ControladorInventario
 		$tabla = 'tbl_inventario';
 		$respuesta = ModeloInventario::mdlRangoC($tabla, $rango);	
 		return $respuesta;
+    }
+    
+    /*=============================================
+			RANGO DINAMICO
+    =============================================*/
+	static public function ctrRangoCompras($rango){
+		$tabla = 'tbl_compras';
+		$respuesta = ModeloInventario::mdlRangoCompras($tabla, $rango);	
+		return $respuesta;
 	}
 
 }

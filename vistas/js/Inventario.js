@@ -117,18 +117,18 @@ $("#nuevoTipoProducto").change(function(){
 
 //** ------------------------------------*/
 //         IMPRIMIR PRODUCTO
-// --------------------------------------*/ 
-$(document).on('click', '.btnExportarProductos', function () {
-    window.open("extensiones/tcpdf/pdf/productos-pdf.php", "_blank");
-});
+// // --------------------------------------*/ 
+// $(document).on('click', '.btnExportarProductos', function () {
+//     window.open("extensiones/tcpdf/pdf/productos-pdf.php", "_blank");
+// });
 
 
-//** ------------------------------------*/
-//         IMPRIMIR PRODUCTO
-// --------------------------------------*/ 
-$(document).on('click', '.btnExportarEquipo', function () {
-    window.open("extensiones/tcpdf/pdf/productos-pdf.php", "_blank");
-});
+// //** ------------------------------------*/
+// //         IMPRIMIR PRODUCTO
+// // --------------------------------------*/ 
+// $(document).on('click', '.btnExportarEquipo', function () {
+//     window.open("extensiones/tcpdf/pdf/productos-pdf.php", "_blank");
+// });
 
 
 
@@ -173,11 +173,14 @@ $('.editar_Nombre_Producto').keydown(sinNumeros)
 $('.precio').keydown(sinLetras)
 $('.editar_Precio').keydown(sinLetras)
 
-//** ------------------------------------*/
-//         IMPRIMIR PDF BITACORA
-// --------------------------------------*/ 
 
+
+//** ------------------------------------*/
+//         IMPRIMIR PDF INVENTARIO
+// --------------------------------------*/ 
+exportarPdf('.btnExportarInventario', 'inventario');
 exportarPdf('.btnExportarCompras', 'compras');
+
 
 function exportarPdf(btnExportar, rutaArchivoPdf) {
     

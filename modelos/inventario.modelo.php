@@ -36,14 +36,9 @@ class ModeloInventario
 	}
 
 
-/*=============================================
+	/*=============================================
 		MOSTRAR COMPRAS
 	=============================================*/
-
-
-
-
-
 
 	static public function mdlMostrarCompras($tabla1,$item, $valor){
 		if ($item != null){
@@ -332,7 +327,6 @@ class ModeloInventario
 			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla AS i\n"
 			// . "INNER JOIN tbl_inventario AS t ON i.id_tipo_producto = t.id_tipo_producto\n"
 			. "INNER JOIN tbl_tipo_producto AS p ON i.id_tipo_producto = p.id_tipo_producto\n"
-			." WHERE tipo_producto ='Productos'"
 			. "ORDER BY id_inventario ASC");	
             $stmt-> execute();
 			return $stmt ->fetchAll();
@@ -342,10 +336,11 @@ class ModeloInventario
 			$stmt = Conexion::conectar() ->prepare("SELECT * FROM $tabla AS i\n"
 			// . " INNER JOIN tbl_inventario AS t ON i.id_tipo_producto = t.id_tipo_producto\n"
 			. "INNER JOIN tbl_tipo_producto AS p ON i.id_tipo_producto = p.id_tipo_producto\n"
-			. "WHERE tipo_producto ='Productos' AND nombre_producto LIKE '%$rango%' OR codigo LIKE '%$rango%' OR proveedor LIKE '%$rango%'");
+			. "WHERE nombre_producto LIKE '%$rango%' OR codigo LIKE '%$rango%' OR tipo_producto LIKE '%$rango%' OR stock LIKE '%$rango%'");
 			$stmt->bindParam(":nombre_producto", $rango, PDO::PARAM_STR);
 			$stmt->bindParam(":codigo", $rango, PDO::PARAM_STR);
-			$stmt->bindParam(":proveedor", $rango, PDO::PARAM_STR);
+			$stmt->bindParam(":tipo_producto", $rango, PDO::PARAM_STR);
+			$stmt->bindParam(":stock", $rango, PDO::PARAM_STR);
 			
 
             $stmt-> execute();
@@ -356,52 +351,19 @@ class ModeloInventario
 
 	/*=============================================
 		ACTUALIZAR PRODUCTOS (tambien contraseña por preguntas)
-		=============================================*/
-		static public function mdlActualizarProductos($tabla, $item1, $valor1, $item2, $valor2, $item3, $valor3, $item4, $valor4){
+	=============================================*/
+	static public function mdlActualizarProductos($tabla, $item1, $valor1, $item2, $valor2, $item3, $valor3, $item4, $valor4){
+
+		if($item4 != null) {
+
+			$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET $item1 = :$item1, $item2 = :$item2, $item3 = :$item3 WHERE $item4 = :$item4");
 	
-			if($item4 != null) {
-	
-				$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET $item1 = :$item1, $item2 = :$item2, $item3 = :$item3 WHERE $item4 = :$item4");
-		
-				$stmt->bindParam(":".$item1, $valor1, PDO::PARAM_STR);
-				$stmt->bindParam(":".$item2, $valor2, PDO::PARAM_STR);
-				$stmt->bindParam(":".$item3, $valor3, PDO::PARAM_STR);
-				$stmt->bindParam(":".$item4, $valor4, PDO::PARAM_STR);
-	
-				if($stmt->execute()){
-			
-						return true;	
-			
-					}else{
-			
-						return false;
-					
-					}
-	
-			} else if($item3 != null && $item4 == null) {
-	
-				$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET $item1 = :$item1, $item2 = :$item2 WHERE $item3 = :$item3");
-		
-				$stmt->bindParam(":".$item1, $valor1, PDO::PARAM_STR);
-				$stmt->bindParam(":".$item2, $valor2, PDO::PARAM_STR);
-				$stmt->bindParam(":".$item3, $valor3, PDO::PARAM_STR);
-				if($stmt->execute()){
-			
-						return true;	
-			
-					}else{
-			
-						return false;
-					
-					}
-	
-			} else {
-				
-				$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET $item1 = :$item1 WHERE $item2 = :$item2");
-		
-				$stmt->bindParam(":".$item1, $valor1, PDO::PARAM_STR);
-				$stmt->bindParam(":".$item2, $valor2, PDO::PARAM_STR);
-				if($stmt->execute()){
+			$stmt->bindParam(":".$item1, $valor1, PDO::PARAM_STR);
+			$stmt->bindParam(":".$item2, $valor2, PDO::PARAM_STR);
+			$stmt->bindParam(":".$item3, $valor3, PDO::PARAM_STR);
+			$stmt->bindParam(":".$item4, $valor4, PDO::PARAM_STR);
+
+			if($stmt->execute()){
 		
 					return true;	
 		
@@ -410,14 +372,79 @@ class ModeloInventario
 					return false;
 				
 				}
-			}
+
+		} else if($item3 != null && $item4 == null) {
+
+			$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET $item1 = :$item1, $item2 = :$item2 WHERE $item3 = :$item3");
 	
-	
-			$stmt->close();
+			$stmt->bindParam(":".$item1, $valor1, PDO::PARAM_STR);
+			$stmt->bindParam(":".$item2, $valor2, PDO::PARAM_STR);
+			$stmt->bindParam(":".$item3, $valor3, PDO::PARAM_STR);
+			if($stmt->execute()){
+		
+					return true;	
+		
+				}else{
+		
+					return false;
+				
+				}
+
+		} else {
 			
-			$stmt = null;
+			$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET $item1 = :$item1 WHERE $item2 = :$item2");
+	
+			$stmt->bindParam(":".$item1, $valor1, PDO::PARAM_STR);
+			$stmt->bindParam(":".$item2, $valor2, PDO::PARAM_STR);
+			if($stmt->execute()){
+	
+				return true;	
+	
+			}else{
+	
+				return false;
+			
+			}
 		}
 
+
+		$stmt->close();
+		
+		$stmt = null;
+	}
+
+
+	/*=============================================
+		RANGO DE COMPRAS
+	=============================================*/
+
+	static public function mdlRangoCompras($tabla, $rango){
+		if ($rango == null){
+			$stmt = Conexion::conectar()->prepare("SELECT c.*,i.*,p.nombre FROM $tabla AS c\n"
+			. " LEFT JOIN tbl_inventario AS i ON c.id_inventario = i.id_inventario\n"
+			. " LEFT JOIN tbl_proveedores AS p ON c.id_proveedor = p.id_proveedor\n");
+			// $stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+			$stmt -> execute();
+			return $stmt -> fetchAll();
+		
+	
+		} else {
+			$stmt = Conexion::conectar()->prepare("SELECT c.*,i.*,p.nombre FROM $tabla AS c\n"
+			. " LEFT JOIN tbl_inventario AS i ON c.id_inventario = i.id_inventario\n"
+			. " LEFT JOIN tbl_proveedores AS p ON c.id_proveedor = p.id_proveedor\n"
+			. " WHERE nombre_producto LIKE '%$rango%' OR nombre LIKE '%$rango%' OR precio LIKE '%$rango%' OR c.fecha LIKE '%$rango%'");
+
+			$stmt->bindParam(":nombre_producto", $rango, PDO::PARAM_STR);
+			$stmt->bindParam(":nombre", $rango, PDO::PARAM_STR);
+			$stmt->bindParam(":precio", $rango, PDO::PARAM_STR);
+			$stmt->bindParam(":c.fecha", $rango, PDO::PARAM_STR);
+			
+			$stmt -> execute();
+			return $stmt -> fetchAll();
+		}
+		$stmt -> close();
+		$stmt = null;	
+	}
 }
 
 

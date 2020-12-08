@@ -35,9 +35,9 @@
       // }
     ?>
 
-<div class="card">
+      <div class="card">
 
-<div class="card-body">
+        <div class="card-body">
             <!-- CUERPPO INVENTARIO -->
                 <table class="table table-striped table-bordered tablas text-center">
                     <thead>
@@ -85,7 +85,7 @@
            MODAL AGREGAR COMPRA
   ======================================----->
   <div class="modal fade" id="modalAgregarCompra" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-dialog modal-md" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Nueva Compra</h5>
@@ -95,17 +95,18 @@
         </div>
           <div class="modal-body">
             <form role="form" method="post" class="formulario" enctype="multipart/form-data">
-              <ul class="nav nav-tabs" id="myTab" role="tablist">
+              <!-- <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">
                   <a class="nav-link active" id="datosPersona" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Inventario</a>
                 </li>
-              </ul>
+              </ul> -->
               
-              <div class="tab-content" id="myTabContent">
+              <!-- <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="datosPersona">
-                  <div class="container-fluid mt-4">
-                  <div class="form-row">
-                      <div class="form-group col-md-4">
+                  <div class="container-fluid mt-4"> -->
+
+                    <!-- <div class="form-row"> -->
+                      <div class="form-group col-md-12">
                         <label for="">Producto<?php echo $i?></label>
                         <select class="form-control select2 "  id="nuevoProducto" style="width: 100%;" name="nuevoProducto">                           
                             <option selected="selected">Seleccionar...</option>
@@ -121,8 +122,8 @@
                             ?>
                         </select>
                       </div>
-                      <div class="form-group col-md-4">
-                      <label for="">proveedor<?php echo $i?></label>
+                      <div class="form-group col-md-12">
+                        <label for="">Proveedor<?php echo $i?></label>
                         <select class="form-control select2 "  id="nuevoProveedor" style="width: 100%;" name="nuevoProveedor">                           
                             <option selected="selected">Seleccionar...</option>
                             <?php 
@@ -137,20 +138,20 @@
                             ?>
                         </select>
                       </div>
-                    </div>
+                    <!-- </div> -->
         
-                  <div class="form-row">
+                    <!-- <div class="form-row"> -->
 
-                      <div class="form-group col-md-4">
+                      <div class="form-group col-md-12">
                         <label for="stock">Cantidad</label>
-                        <input type="number" class="form-control stock" id="nuevoCantidad" name="nuevoCantidad" placeholder="Cantidad en stock" min="0" required class="fa fa-arrow-up"></i></span>
+                        <input type="number" min="0" class="form-control stock" id="nuevoCantidad" name="nuevoCantidad" placeholder="Cantidad en stock" min="0" required class="fa fa-arrow-up"></i></span>
                       </div>
      
-                      <div class="form-group col-md-3">
-                        <label for="stock">Precio</label>
-                        <input type="number" class="form-control stock" id="nuevoPrecio" name="nuevoPrecio" placeholder="Cantidad en stock" min="0" required class="fa fa-arrow-up"></i></span>
+                      <div class="form-group col-md-12">
+                        <label for="stock">Precio de Compra</label>
+                        <input type="number" class="form-control stock" min="0" id="nuevoPrecio" name="nuevoPrecio" placeholder="Cantidad en stock" min="0" required class="fa fa-arrow-up"></i></span>
                       </div>
-                  </div>
+                    <!-- </div> -->
 
                     <div class="form-group mt-4 float-right">
                       <button type="" class="btn btn-primary">Guardar</button>
@@ -165,12 +166,12 @@
                       $AgregarInventario->ctrCrearCompra($pantalla);
                       ?>
                     </div>
-                  </div>
+                  <!-- </div>
 
                   
                 </div>
-                    <!-- 2tab --> 
-              </div>
+                    
+              </div> -->
 
             </form>
           </div>
