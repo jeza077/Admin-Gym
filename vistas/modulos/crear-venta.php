@@ -97,6 +97,10 @@
                           // echo "<pre>";
                           //  var_dump($clientes);
                           //  echo "</pre>";
+
+
+
+
                             foreach ($clientes as $key => $value)
                             {
                               echo '<option value="'.$value["id_cliente"].'">' .$value["nombre"]. ' '.$value["apellidos"]. '</option>';

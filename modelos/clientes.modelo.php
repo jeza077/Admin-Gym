@@ -75,14 +75,14 @@ class ModeloClientes{
 			. "LEFT JOIN tbl_cliente_inscripcion as ci ON c.id_cliente = ci.id_cliente\n"
 			. "LEFT JOIN tbl_inscripcion as i ON ci.id_inscripcion = i.id_inscripcion\n"
 			. "LEFT JOIN tbl_pagos_cliente as pc ON ci.id_cliente_inscripcion = pc.id_cliente_inscripcion\n"
-			. "WHERE $item = :$item"); 
+			. "WHERE $item = :$valor"); 
 
-			$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+			$stmt -> bindParam(":$valor", $valor, PDO::PARAM_STR);
 			$stmt -> execute();
 			return $stmt -> fetch();
 
 		} else {
-			
+			 
 
 			$stmt = Conexion::conectar()->prepare("SELECT p.*, c.*, d.tipo_documento, i.fecha_creacion, i.tipo_inscripcion, pd.tipo_descuento, valor_descuento, pc.* FROM $tabla1 as p\n"
 			. "LEFT JOIN $tabla2 as c ON p.id_personas = c.id_persona\n"
@@ -95,7 +95,7 @@ class ModeloClientes{
 		    . "WHERE p.tipo_persona = 'clientes'");
 			
 			$stmt -> execute();
-			return $stmt -> errorInfo();
+			return $stmt -> fetchAll();
 
 		} 
 		
