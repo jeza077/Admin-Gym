@@ -5,7 +5,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Nueva venta</h1>
+            <h1>Editar venta</h1>
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -141,7 +141,7 @@
                 <div class="form-row">
                   <div class="form-group-float-right col-md-2" style="padding-left:0px">
                     <label>Impuesto </label>
-                    <input type="number" class="form-control nuevoImpuestoVenta" name="nuevoImpuestoVenta"  id="nuevoImpuestoVenta" value="<?php echo $porcentajeImpuesto; ?>" readonly required> 
+                    <input type="number" class="form-control nuevoImpuestoVenta" name="nuevoImpuestoVenta"  id="nuevoImpuestoVenta" value="<?php echo $porcentajeImpuesto; ?>" required> 
                     <!-- <span class="input-group-addon"><i class="fa fa-percent"></i></span> -->
                    <!-- <input type="hidden" name="nuevoPrecioImpuesto" id="nuevoPrecioImpuesto" value="<?php echo $venta["impuesto"]; ?>" required>  -->
                   </div>

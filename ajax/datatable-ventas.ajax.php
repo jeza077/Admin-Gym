@@ -13,6 +13,10 @@ class TablaProductosVentas{
 		$item = null;
     	$valor = null;
 
+
+		// $item = 'id_tipo_producto';
+    	// $valor = 1;
+
           $productos = ControladorProductos::ctrMostrarProductos($item, $valor);	
         //   echo "<pre>";
         //   var_dump($productos);
