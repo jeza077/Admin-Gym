@@ -207,7 +207,7 @@ class ControladorGlobales{
             
             $descripcionEvento = "Actualizo rol";
             $accion = "Actualizo";
-            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 2,$accion, $descripcionEvento);
+            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
 
           
 
@@ -275,9 +275,9 @@ class ControladorGlobales{
     
         if($respuesta == true){
             
-            $descripcionEvento = "Actualizo rol";
+            $descripcionEvento = "Actualizo Inscripcion";
             $accion = "Actualizo";
-            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 2,$accion, $descripcionEvento);
+            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
 
           
 
@@ -345,9 +345,9 @@ class ControladorGlobales{
       
           if($respuesta == true){
               
-              $descripcionEvento = "Actualizo ";
+              $descripcionEvento = "Actualizo Matricula ";
               $accion = "Actualizo";
-              $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 2,$accion, $descripcionEvento);
+              $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
   
             
   
@@ -414,6 +414,15 @@ class ControladorGlobales{
 
     
         if($respuesta == true){
+            
+          
+          $descripcionEvento = "Actualizo Descuento";
+          $accion = "consulta";
+
+          $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
+
+       
+      
           
             echo'<script>
     
@@ -478,6 +487,15 @@ class ControladorGlobales{
         // return;
         
         if($respuesta == true){
+
+         
+          $descripcionEvento = "Elimino la Inscripcion";
+          $accion = "Elimino";
+
+          $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
+
+       
+      
           
           echo'<script>
   
@@ -521,7 +539,7 @@ class ControladorGlobales{
   }
 
   	/*=============================================
-            BORRAR INSCRIPCION
+            BORRAR MATRICULA
 	=============================================*/
   static public function ctrBorrarMatricula(){
     // var_dump($_GET);
@@ -538,6 +556,12 @@ class ControladorGlobales{
         // return;
         
         if($respuesta == true){
+
+          $descripcionEvento = "Elimino la Matricul";
+          $accion = "Elimino";
+
+          $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
+
           
           echo'<script>
   
@@ -598,6 +622,12 @@ class ControladorGlobales{
         // return;
         
         if($respuesta == true){
+
+          $descripcionEvento = "Elimino el Descuento";
+          $accion = "Elimino";
+
+          $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
+
           
           echo'<script>
   
@@ -658,6 +688,12 @@ class ControladorGlobales{
         // return;
         
         if($respuesta == true){
+
+          $descripcionEvento = "Elimino el Rol";
+          $accion = "Elimino";
+
+          $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
+
           
           echo'<script>
   

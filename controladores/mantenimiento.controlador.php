@@ -270,7 +270,7 @@
           if($respuesta == true){
   
            
-            $descripcionEvento = "Nueva inscripcion del gimnasio";
+            $descripcionEvento = "Nueva Inscripcion del Gimnasio";
             $accion = "Nuevo";
             $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
 
@@ -381,7 +381,7 @@
           // var_dump($respuesta);
           if($respuesta == true){
             
-            $descripcionEvento = "Nueva matricula del gimnasio";
+            $descripcionEvento = "Nueva Matricula del Gimnasio";
             $accion = "Nuevo";
 
             $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
@@ -495,10 +495,10 @@
           // var_dump($respuesta);
           if($respuesta == true){
             
-            $descripcionEvento = "Nuevo descuento del gimnasio";
+            $descripcionEvento = "Nuevo Descuento del Gimnasio";
             $accion = "Nuevo";
 
-            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 7,$accion, $descripcionEvento);
+            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
 
         
        

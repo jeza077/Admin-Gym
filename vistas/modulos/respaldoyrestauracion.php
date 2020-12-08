@@ -26,6 +26,14 @@
               <!-- <div class="card"> -->
 
                 <!-- <div class="card-body"> -->
+                <?php
+                $descripcionEvento = " Consulto la pantalla de Respaldo y Restauracion";
+                $accion = "consulta";
+
+                $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 7,$accion, $descripcionEvento);
+
+                ?>
+        
                   
 
 

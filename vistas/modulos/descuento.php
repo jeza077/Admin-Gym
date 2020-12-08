@@ -20,6 +20,14 @@
         </div>
       </div><!-- /.container-fluid -->
   </section>  
+         <?php
+            $descripcionEvento = " Consulto la pantalla de Descuento";
+            $accion = "consulta";
+
+            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
+
+          ?>
+        
 
     <section class="content">
 
