@@ -13,7 +13,6 @@ require_once('../examples/tcpdf_include.php');
 // echo $_GET["codigo"];
 
 
-
 class imprimirFactura{
 
 	
@@ -157,7 +156,7 @@ $bloque2 = <<<EOF
 		
 		<td style="font-size:11.5px; border: 1px solid #666; background-color:white; width:390px">
 
-			Nombre del Cliente: $respuestaCliente[nombre]
+			Nombre del Cliente: $respuestaCliente[nombre] $respuestaCliente[apellidos]
 
 		</td>
 
@@ -166,12 +165,6 @@ $bloque2 = <<<EOF
 			Fecha: $fecha
 
 		</td>
-
-	</tr>
-
-	<tr>
-	
-		<td style="border: 1px solid #666; background-color:white; width:540px">Vendedor: $respuestaVendedor[nombre]</td>
 
 	</tr>
 
@@ -293,18 +286,7 @@ EOF;
 
 	}
 	
-	public function Footer() {
-        // Position at 15 mm from bottom
-        $this->SetY(-15);
-        // Set font
-        $this->SetFont('helvetica', 'I', 8);
-        // Page number
-
-        date_default_timezone_set("America/Tegucigalpa");
-        $fecha = date('Y-m-d H:i:s');
-        $this->Cell(0, 10, ''.$fecha.'', 0, false, 'C', 0, '', 0, false, 'T', 'M');
-        $this->Cell(0, 10, 'Page '.$this->getAliasNumPage().'/'.$this->getAliasNbPages(), 0, false, 'C', 0, '', 0, false, 'T', 'M');
-    }
+	
 	
 	
 }

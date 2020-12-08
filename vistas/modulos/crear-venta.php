@@ -89,11 +89,10 @@
                     <select class="form-control select2-dropdown select2-search-dropdown" id="seleccionarCliente" name="seleccionarCliente" required>
                         <option value="">Seleccionar cliente</option>
                         <?php
-                          $item= null;
-                          $valor= null;
-                          $tabla= "tbl_clientes";
-
-                          $clientes= ControladorClientes::ctrMostrarClientes($tabla, $item, $valor);
+                          $tabla = "tbl_clientes";
+                          $item = null;
+                          $valor = null;
+                          $clientes = ControladorClientes::ctrMostrarClientesSinPago($tabla, $item, $valor);
                           // echo "<pre>";
                           //  var_dump($clientes);
                           //  echo "</pre>";
