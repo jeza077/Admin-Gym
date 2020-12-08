@@ -161,10 +161,10 @@ class ControladorInventario
 
                                 if($crearInventario == true){
                                     
-                                    // $descripcionEvento = "  Nuevo Producto";
-                                    // $accion = "Nuevo";
+                                    $descripcionEvento = " Nuevo Producto";
+                                    $accion = "Nuevo";
             
-                                    // $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 4,$accion, $descripcionEvento);
+                                    $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 4,$accion, $descripcionEvento);
 
                                     echo '<script>
                                             Swal.fire({
@@ -570,7 +570,8 @@ class ControladorInventario
 
                     if($tipostock == 'Productos'){
 
-                        $descripcionEvento = "Actualizo un producto del stock";
+                        
+                        $descripcionEvento = "Actualizo un Producto del Stock";
                         $accion = "Actualizo";
                         $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 4,$accion, $descripcionEvento);
                    
@@ -730,7 +731,7 @@ class ControladorInventario
 
                     if($tipostock == 'Equipo'){
                         
-                        $descripcionEvento = "Actualizo un equipo del stock";
+                        $descripcionEvento = "Actualizo un Equipo del Stock";
                         $accion = "Actualizo";
                         $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 2,$accion, $descripcionEvento);
                    

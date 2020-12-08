@@ -25,7 +25,7 @@
       <div class="card-body">
 
         <?php
-            $descripcionEvento = " Consulto la pantalla de mantenimiento";
+            $descripcionEvento = " Consulto la pantalla de Rol";
             $accion = "consulta";
 
             $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
