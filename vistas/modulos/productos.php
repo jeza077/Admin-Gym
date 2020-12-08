@@ -308,8 +308,8 @@
                     <?php
                     $tipostock = 'Productos';
                     $pantalla = 'productos';
-                    // $EditarInventario = new ControladorInventario();
-                    // $EditarInventario->ctrEditarStock($tipostock, $pantalla);
+                    $EditarInventario = new ControladorInventario();
+                    $EditarInventario->ctrEditarStock($tipostock, $pantalla);
                     ?>
                   <!-- 2tab --> 
           </form>

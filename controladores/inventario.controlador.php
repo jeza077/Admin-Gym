@@ -376,7 +376,14 @@ class ControladorInventario
             if(isset($_POST["nuevoProducto"])){
     
                 if(preg_match('/^[0-9]*$/', $_POST["nuevoProducto"])){
-          
+                    
+
+                    // var_dump($producto);
+                    // echo $cantidadFinal;
+                   
+                    // return;
+
+
                     $tabla = "tbl_compras";
                     
                     
@@ -388,25 +395,45 @@ class ControladorInventario
                         $crearInventario = ModeloInventario::mdlCrearCompra($tabla, $datos);
 
                                 if($crearInventario == true){
-                                    
-                                    // $descripcionEvento = "  Nuevo Producto";
-                                    // $accion = "Nuevo";
-            
-                                    // $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 4,$accion, $descripcionEvento);
-                
 
-                                    echo '<script>
-                                            Swal.fire({
-                                                title: "Tus datos han sido guardados correctamente!",
-                                                icon: "success",
-                                                heightAuto: false,
-                                                allowOutsideClick: false
-                                            }).then((result)=>{
-                                                if(result.value){
-                                                    window.location = "'.$pantalla.'";
-                                                }
-                                            });                       
-                                        </script>';
+                                    $tabla = "tbl_inventario";
+                                    $item = "id_inventario";
+                                    $valor = $_POST["nuevoProducto"];
+                                    $producto = ControladorUsuarios::ctrMostrar($tabla,$valor,$valor);
+                                    $stockActual = $producto["stock"];
+                                    $cantidadFinal = $stockActual + $_POST["nuevoCantidad"];
+
+                                    $item1="stock";
+                                    $valor1=$cantidadFinal;
+                                    $item2="id_inventario";
+                                    $valor2=$_POST["nuevoProducto"];
+                                    $item3 = null;
+                                    $item4 = null;
+                                    $valor3 = null;
+                                    $valor4 = null;
+                                    $respuesta= ModeloInventario::mdlActualizarProductos($tabla, $item1, $valor1, $item2, $valor2, $item3, $valor3, $item4, $valor4);
+                                    if ($respuesta == true) {
+                                        // $descripcionEvento = "  Nuevo Producto";
+                                        // $accion = "Nuevo";
+                
+                                        // $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 4,$accion, $descripcionEvento);
+                    
+    
+                                        echo '<script>
+                                                Swal.fire({
+                                                    title: "Tus datos han sido guardados correctamente!",
+                                                    icon: "success",
+                                                    heightAuto: false,
+                                                    allowOutsideClick: false
+                                                }).then((result)=>{
+                                                    if(result.value){
+                                                        window.location = "'.$pantalla.'";
+                                                    }
+                                                });                       
+                                            </script>';
+
+                                    }
+
                                 }
                                 else {
                                     echo '<script>
@@ -443,15 +470,16 @@ class ControladorInventario
 
         static public function ctrEditarStock($tipostock, $pantalla){
             // var_dump($_POST);
-            // return;
-            // var_dump($_POST);
+            // // return;
+            // // var_dump($_POST);
             // var_dump($_FILES);
             // return;
 
             if(isset($_POST["editarNombreProducto"])){
     
                 if(preg_match('/^[a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarNombreProducto"])){
-
+            // var_dump($_POST);
+            // return;
 
                     /*=============================================
 							VALIDAR IMAGEN
@@ -540,9 +568,8 @@ class ControladorInventario
                 
                     // AQUI CAMBIE A PRODUCTOS CON S
 
-                    if($tipostock == 'producto'){
+                    if($tipostock == 'Productos'){
 
-                        
                         $descripcionEvento = "Actualizo un producto del stock";
                         $accion = "Actualizo";
                         $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 4,$accion, $descripcionEvento);
@@ -550,10 +577,10 @@ class ControladorInventario
                         $datos = array("nombre_producto" => $_POST["editarNombreProducto"],
                         "codigo" => $_POST["editarCodigo"],
                         "id_inventario" => $_POST["editarTipoProducto"],
-                        "stock" => $_POST["editarStock"],
+                        // "stock" => $_POST["editarStock"],
                         "precio_venta" => $_POST["editarPrecio"],
-                        "precio_compra" => $_POST["editarPrecioCompra"],
-                        "proveedor" => $_POST["editarProveedor"],
+                        // "precio_compra" => $_POST["editarPrecioCompra"],
+                        // "proveedor" => $_POST["editarProveedor"],
                         "foto" => $ruta,
                         "producto_minimo" => $_POST["editarProductoMinimo"],
                         "producto_maximo" => $_POST["editarProductoMaximo"]);

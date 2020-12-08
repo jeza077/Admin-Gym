@@ -243,18 +243,19 @@ class ModeloInventario
 	=============================================*/	 
 	static public function mdlEditarStock($tabla, $datos){
 
-		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET nombre_producto = :nombre_producto, stock = :stock, precio_venta = :precio_venta, precio_compra = :precio_compra ,producto_minimo =:producto_minimo, producto_maximo = :producto_maximo, foto = :foto, codigo =:codigo WHERE id_inventario = :id_inventario");
+		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET nombre_producto = :nombre_producto, precio_venta = :precio_venta, producto_minimo =:producto_minimo, producto_maximo = :producto_maximo, foto = :foto, codigo =:codigo WHERE id_inventario = :id_inventario");
 
-		$stmt->bindParam(":id_inventario", $datos["id_inventario"], PDO::PARAM_INT);
+		
 		$stmt->bindParam(":codigo", $datos["codigo"], PDO::PARAM_INT);
 		$stmt->bindParam(":nombre_producto", $datos["nombre_producto"], PDO::PARAM_STR);
-		$stmt->bindParam(":stock", $datos["stock"], PDO::PARAM_INT);
+		// $stmt->bindParam(":stock", $datos["stock"], PDO::PARAM_INT);
 		$stmt->bindParam(":precio_venta", $datos["precio_venta"], PDO::PARAM_STR);
-		$stmt->bindParam(":precio_compra", $datos["precio_compra"], PDO::PARAM_STR);
+		// $stmt->bindParam(":precio_compra", $datos["precio_compra"], PDO::PARAM_STR);
 		// $stmt->bindParam(":proveedor", $datos["proveedor"], PDO::PARAM_STR);
 		$stmt->bindParam(":producto_minimo", $datos["producto_minimo"], PDO::PARAM_INT);
 		$stmt->bindParam(":producto_maximo", $datos["producto_maximo"], PDO::PARAM_INT);
 		$stmt->bindParam(":foto", $datos["foto"], PDO::PARAM_STR);
+		$stmt->bindParam(":id_inventario", $datos["id_inventario"], PDO::PARAM_INT);
 		if($stmt->execute()){
 			return true;
 		}else{
@@ -352,6 +353,71 @@ class ModeloInventario
 			
 		} 	
 	}
+
+	/*=============================================
+		ACTUALIZAR PRODUCTOS (tambien contraseña por preguntas)
+		=============================================*/
+		static public function mdlActualizarProductos($tabla, $item1, $valor1, $item2, $valor2, $item3, $valor3, $item4, $valor4){
+	
+			if($item4 != null) {
+	
+				$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET $item1 = :$item1, $item2 = :$item2, $item3 = :$item3 WHERE $item4 = :$item4");
+		
+				$stmt->bindParam(":".$item1, $valor1, PDO::PARAM_STR);
+				$stmt->bindParam(":".$item2, $valor2, PDO::PARAM_STR);
+				$stmt->bindParam(":".$item3, $valor3, PDO::PARAM_STR);
+				$stmt->bindParam(":".$item4, $valor4, PDO::PARAM_STR);
+	
+				if($stmt->execute()){
+			
+						return true;	
+			
+					}else{
+			
+						return false;
+					
+					}
+	
+			} else if($item3 != null && $item4 == null) {
+	
+				$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET $item1 = :$item1, $item2 = :$item2 WHERE $item3 = :$item3");
+		
+				$stmt->bindParam(":".$item1, $valor1, PDO::PARAM_STR);
+				$stmt->bindParam(":".$item2, $valor2, PDO::PARAM_STR);
+				$stmt->bindParam(":".$item3, $valor3, PDO::PARAM_STR);
+				if($stmt->execute()){
+			
+						return true;	
+			
+					}else{
+			
+						return false;
+					
+					}
+	
+			} else {
+				
+				$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET $item1 = :$item1 WHERE $item2 = :$item2");
+		
+				$stmt->bindParam(":".$item1, $valor1, PDO::PARAM_STR);
+				$stmt->bindParam(":".$item2, $valor2, PDO::PARAM_STR);
+				if($stmt->execute()){
+		
+					return true;	
+		
+				}else{
+		
+					return false;
+				
+				}
+			}
+	
+	
+			$stmt->close();
+			
+			$stmt = null;
+		}
+
 }
 
 

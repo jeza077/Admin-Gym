@@ -66,8 +66,10 @@
                               <td scope="row">'.($key+1).'</td>
                               <td>'.$value["codigo"].'</td>
                               <td>'.$value["nombre_producto"].'</td>
-                              <td>'.$value["tipo_producto"].'</td>                                                                           
-                              <td>'.$value["stock"].'</td>
+                              <td>'.$value["tipo_producto"].'</td>';   
+                              $stocktotal = $value["stock"] + $value["devolucion"];
+                              echo'  
+                              <td>'.$stocktotal.'</td>
                                 
                           
                             
