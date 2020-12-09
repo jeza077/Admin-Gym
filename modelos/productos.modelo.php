@@ -10,7 +10,7 @@ class ModeloProductos{
 			
 			$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
 			$stmt -> execute();
-			return $stmt -> fetchAll();
+			return $stmt -> fetch();
 
 		} else {
 
