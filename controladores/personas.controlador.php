@@ -21,11 +21,10 @@ class ControladorPersonas{
 
         // echo "<pre>";
         // var_dump($_POST);
-        // // return;
-
-        // var_dump($_FILES);
         // echo "</pre>";
-   
+        // var_dump($_FILES);
+
+        // return;   
         // return;
 
         if(isset($_POST["nuevoNombre"])){
@@ -244,13 +243,23 @@ class ControladorPersonas{
 
                             if ($_POST['tipoCliente'] == "Gimnasio"){
 
+                                if($_POST["nuevoPrecioDescuento"] == 0){
+                                    $id_descuento = null;
+                                    $pago_descuento = 0;
+                                    // return 'si, cero';
+                                } else {
+                                    $id_descuento = $_POST["nuevaPromocion"];
+                                    $pago_descuento = $_POST["nuevoPrecioDescuento"];
+                                    // return 'no, no es cero';
+                                }
+
                                 $datos = array("id_persona" => $idPersona,
                                 "tipo_cliente" => $_POST["tipoCliente"],
                                 "id_inscripcion" => $_POST["nuevaInscripcion"],
                                 "id_matricula" => $_POST["nuevaMatricula"],
-                                "id_descuento" => $_POST["nuevaPromocion"],
+                                "id_descuento" => $id_descuento,
                                 "pago_matricula" => $_POST["nuevoPrecioMatricula"],
-                                "pago_descuento" => $_POST["nuevoPrecioPromocion"],
+                                "pago_descuento" => $pago_descuento,
                                 "pago_inscripcion" => $_POST["nuevoPrecioInscripcion"],
                                 "pago_total" => $_POST["nuevoTotalCliente"]);
                             } else {
@@ -646,14 +655,25 @@ class ControladorPersonas{
                         // return;
             
                         if ($_POST['editarTipoClienteVenta'] == "Gimnasio"){
+
+                            if($_POST["editarPrecioDescuento"] == 0){
+                                $id_descuento = null;
+                                $pago_descuento = 0;
+                                // return 'si, cero';
+                            } else {
+                                $id_descuento = $_POST["editarPromocionClienteVenta"];
+                                $pago_descuento = $_POST["editarPrecioDescuento"];
+                                // return 'no, no es cero';
+                            }
+
             
                             $datos = array("id_persona" => $_POST["idEditarClienteVenta"],
                             "tipo_cliente" => $_POST["editarTipoClienteVenta"],
                             "id_inscripcion" => $_POST["inscripcionClienteVenta"],
                             "id_matricula" => $_POST["tipoMatriculaClienteVenta"],
-                            "id_descuento" => $_POST["editarPromocionClienteVenta"],
+                            "id_descuento" => $id_descuento,
                             "pago_matricula" => $_POST["precioMatriculaClienteVentas"],
-                            "pago_descuento" => $_POST["valorDescuentoClienteVenta"],
+                            "pago_descuento" => $pago_descuento,
                             "pago_inscripcion" => $_POST["precioInscripcionClienteVenta"],
                             "pago_total" => $_POST["totalPagarClienteVenta"]);
                         } else {
@@ -671,7 +691,7 @@ class ControladorPersonas{
                         if($crearClienteVenta == true){
                             echo '<script>
                                     Swal.fire({
-                                        title: "Cliente tipo ventas editado correctamente!",
+                                        title: "Cliente editado correctamente!",
                                         icon: "success",
                                         heightAuto: false,
                                         allowOutsideClick: false

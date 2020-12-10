@@ -15,6 +15,16 @@
 // });
 // verificarDocumento($('.tipoDocumentoCliente'))
 
+// redireccion('.SwalBtnNuevoCliente', 'clientes');
+function redireccion(selector, ruta) {
+    
+    $(document).on('click', selector, function () {
+        window.location = ruta;
+    });
+}
+    
+
+
 //VALIDACIONES AGREGAR CLIENTE
 validarDoc($('.idCliente'))
 validarEmail($('.emailCliente'))
@@ -56,19 +66,60 @@ $('.numeroDocumentoClienteVentas').keydown(impedirEspacios);
 // AGREGAR CLIENTE 
 // MUESTRA LOS DATOS DE PAGO DEL CLIENTE, AL ELEGIR TIPO CLIENTE GIMNASIO
 $('#datosClientes').hide();
+$('#btnNuevoClienteVentas').hide();
+
 $(document).on('change', '.tipoCliente', function () {
     var valor = $(this).val();
     // console.log(valor)
     if (valor == "Gimnasio") {
         // SumaTotal()
+        $('#btnNuevoClienteVentas').hide();
        
         $('#datosClientes').show();
         // sumar();
     } else {
+        $('#btnNuevoClienteVentas').show();
+        $('#btnConfirmarPago').hide();
         $('#datosClientes').hide();
     }
    
 });
+
+
+// ALERTA PARA CONFIRMAR PAGO ANTES DE GUARDAR CLIENTE
+$('#btnNuevoClienteGym').hide();
+
+$(document).on('click', '#btnConfirmarPago', function (e) {
+    e.preventDefault();
+    // console.log('click')
+    Swal.fire({
+        icon: 'info',
+        title: '¿Se realizo el pago correctamente?',
+        html: '<button type="submit" role="button" class="SwalBtnGuardarCliente btn btn-success customSwalBtn">' + 'Si, guardar' + '</button>' +
+            '<button type="button" role="button" class="SwalBtnCancelarCliente btn btn-danger customSwalBtn">' + 'No, salir' + '</button>',
+        width: 500,
+        allowOutsideClick: false,
+        showCancelButton: false,
+        showConfirmButton: false
+    });
+});
+
+$(document).on('click', '.SwalBtnGuardarCliente', function () {
+    // $('#btnNuevoCliente').show();
+    // $('#btnConfirmarPago').hide();
+
+    var btnGuardar = $('#btnNuevoCliente');
+    btnGuardar.click(); 
+    // window.location = ruta;
+});
+
+$(document).on('click', '.SwalBtnCancelarCliente', function () {
+    // window.location = ruta;
+    Swal.close();
+});
+
+
+
 // EDITAR CLIENTE VENTA
 // AL ELEJIR TIPO CLIENTE GIMNASIO MUESTRA LOS DATOS A AGREGAR DE PAGOS CLIENTE
 $('#datosClienteVenta').hide();

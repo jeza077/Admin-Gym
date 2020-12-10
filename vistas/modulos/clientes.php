@@ -280,7 +280,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">%</span>  
                               </div>
-                            <input type="text" class="form-control text-right nuevoPrecioPromocion totalDescuento" name="nuevoPrecioPromocion" value="" readonly>
+                            <input type="text" class="form-control text-right nuevoPrecioPromocion totalDescuento" name="" value="" readonly>
                             <input type="hidden" id="nuevoPrecioDescuento" name="nuevoPrecioDescuento">  
                          </div>
                       </div>
@@ -335,7 +335,9 @@
                   </div>
                 </div>
                 <div class="form-group mt-4 float-right">
-                  <button type="" class="btn btn-primary">Guardar</button>
+                  <button type="" class="btn btn-primary" id="btnConfirmarPago">Guardar</button>
+                  <button type="" class="btn btn-primary" id="btnNuevoClienteGym">Guardar</button>
+                  <button type="" class="btn btn-primary" id="btnNuevoClienteVentas">Guardar</button>
                   <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
                 </div>
             
@@ -628,8 +630,8 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">$</span>  
                               </div>
-                            <input type="text" class="form-control text-right valorDescuentoClienteVenta totalDescuento" value="" name="valorDescuentoClienteVenta" readonly>
-                            <!-- <input type="hidden" id="editarPrecioDescuento" name="editarPrecioDescuento">   -->
+                            <input type="text" class="form-control text-right valorDescuentoClienteVenta totalDescuento" value="" name="" readonly>
+                            <input type="hidden" id="editarPrecioDescuento" name="editarPrecioDescuento">  
                          </div>
                       </div>
                     </div>

@@ -4,11 +4,7 @@ date_default_timezone_set("America/Tegucigalpa");
 class ControladorClientes{
 
 	static public function ctrCrearCliente($datos){
-		// echo "<pre>";
-		// var_dump($datos);
-		// echo "</pre>";
-		// return;
-
+		// return $datos;
 
         if(isset($datos['id_persona'])){
 
@@ -24,26 +20,8 @@ class ControladorClientes{
 			// return $pago_descuento;
 
 			$tabla = "tbl_clientes";
-			
-			if ($datos['tipo_cliente'] == "Gimnasio"){
-				if ($datos['id_descuento'] == 0) {
-					
-					$datos = array("id_persona" => $datos['id_persona'],
-								"tipo_cliente" => $datos["tipo_cliente"],		
-								"id_matricula" =>  $datos["id_matricula"],
-								"id_descuento" =>  null);
-				} else {
-					$datos = array("id_persona" => $datos['id_persona'],
-								"tipo_cliente" => $datos["tipo_cliente"],		
-								"id_matricula" =>  $datos["id_matricula"],
-								"id_descuento" =>  $datos["id_descuento"]);
-				}
-			} else {
-				$datos = array("id_persona" => $datos['id_persona'],
-			                  "tipo_cliente" => $datos["tipo_cliente"]);
-			}
 
-							
+			// return $datos;	
 			
 
             $respuestaCrearCliente = ModeloClientes::mdlCrearCliente($tabla, $datos);
@@ -135,22 +113,12 @@ class ControladorClientes{
 						
 						$tabla3 = "tbl_pagos_cliente";
 						
-						if ($datos['pago_descuento'] == 0) {
-							
-							$datos = array("id_cliente_inscripcion" => $idPagoCliente,
-											"pago_matricula" => $pago_matricula,
-											"pago_descuento" => 0,
-											"pago_inscripcion" => $pago_inscripcion,
-											"pago_total" => $pago_total);
-						} else {
-
-							$datos = array("id_cliente_inscripcion" => $idPagoCliente,
-											"pago_matricula" => $pago_matricula,
-											"pago_descuento" => $pago_descuento,
-											"pago_inscripcion" => $pago_inscripcion,
-											"pago_total" => $pago_total);
-						}
-						
+						$datos = array("id_cliente_inscripcion" => $idPagoCliente,
+										"pago_matricula" => $pago_matricula,
+										"pago_descuento" => $pago_descuento,
+										"pago_inscripcion" => $pago_inscripcion,
+										"pago_total" => $pago_total);
+											
 		
 						$respuestaPago = ModeloClientes::mdlCrearPago($tabla3, $datos);
 						// echo "<pre>";
