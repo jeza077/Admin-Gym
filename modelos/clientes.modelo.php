@@ -773,35 +773,57 @@ class ModeloClientes{
 	static public function mdlRangoHistorialPagosCliente($tabla, $rango){
 			
 		if($rango == null){
+			$stmt = Conexion::conectar()->prepare("SELECT p.*, c.*, d.tipo_documento, m.tipo_matricula, pd.tipo_descuento, i.*, ci.*, pc.* FROM tbl_personas as p\n"
 
-			$stmt = Conexion::conectar()->prepare("SELECT p.*, c.*, d.tipo_documento, m.tipo_matricula, pd.tipo_descuento, i.tipo_inscripcion, pc.* FROM tbl_personas as p\n"
-			. "LEFT JOIN $tabla as c ON p.id_personas = c.id_persona\n"
-			. "LEFT JOIN tbl_documento as d ON p.id_documento = d.id_documento\n"
-			. "LEFT JOIN tbl_matricula as m ON c.id_matricula = m.id_matricula\n"
-			. "LEFT JOIN tbl_pagos_cliente as pc ON c.id_cliente = pc.id_cliente\n"
-			. "LEFT JOIN tbl_inscripcion as i ON pc.id_inscripcion = i.id_inscripcion\n"
-			. "LEFT JOIN tbl_descuento as pd ON pc.id_descuento = pd.id_descuento\n"
-			. "WHERE tipo_cliente = 'Gimnasio'"); 
+			. "	LEFT JOIN tbl_clientes as c ON p.id_personas = c.id_persona\n"
+		
+			. "	LEFT JOIN tbl_documento as d ON p.id_documento = d.id_documento\n"
+		
+			. "	LEFT JOIN tbl_matricula as m ON c.id_matricula = m.id_matricula\n"
+		
+			. "	LEFT JOIN tbl_descuento as pd ON c.id_descuento = pd.id_descuento\n"
+		
+			. "	LEFT JOIN tbl_cliente_inscripcion as ci ON c.id_cliente = ci.id_cliente\n"
+		
+			. "	LEFT JOIN tbl_inscripcion as i ON ci.id_inscripcion = i.id_inscripcion\n"
+		
+			. "	LEFT JOIN tbl_pagos_cliente as pc ON ci.id_cliente_inscripcion = pc.id_cliente_inscripcion\n"
+		
+			. "	WHERE tipo_cliente = 'Gimnasio'\n"
+		
+			. "ORDER BY ci.id_cliente_inscripcion DESC");
+	
 			$stmt -> execute();
 			return $stmt -> fetchAll();
 
 		} else {
+			$stmt = Conexion::conectar()->prepare("SELECT p.*, c.*, d.tipo_documento, m.tipo_matricula, pd.tipo_descuento, i.*, ci.*, pc.* FROM tbl_personas as p\n"
 
-			$stmt = Conexion::conectar()->prepare("SELECT p.*, c.*, d.tipo_documento, m.tipo_matricula, pd.tipo_descuento, i.tipo_inscripcion, pc.* FROM tbl_personas as p\n"
-			. "LEFT JOIN $tabla as c ON p.id_personas = c.id_persona\n"
-			. "LEFT JOIN tbl_documento as d ON p.id_documento = d.id_documento\n"
-			. "LEFT JOIN tbl_matricula as m ON c.id_matricula = m.id_matricula\n"
-			. "LEFT JOIN tbl_pagos_cliente as pc ON c.id_cliente = pc.id_cliente\n"
-			. "LEFT JOIN tbl_inscripcion as i ON pc.id_inscripcion = i.id_inscripcion\n"
-			. "LEFT JOIN tbl_descuento as pd ON pc.id_descuento = pd.id_descuento\n"
-			. "WHERE num_documento LIKE '%$rango%' OR nombre LIKE '%$rango%' OR tipo_inscripcion LIKE '%$rango%' OR fecha_pago LIKE '%$rango%' OR fecha_ultimo_pago LIKE '%$rango%' OR fecha_vencimiento LIKE '%$rango%'"); 
+			. "	LEFT JOIN tbl_clientes as c ON p.id_personas = c.id_persona\n"
+		
+			. "	LEFT JOIN tbl_documento as d ON p.id_documento = d.id_documento\n"
+		
+			. "	LEFT JOIN tbl_matricula as m ON c.id_matricula = m.id_matricula\n"
+		
+			. "	LEFT JOIN tbl_descuento as pd ON c.id_descuento = pd.id_descuento\n"
+		
+			. "	LEFT JOIN tbl_cliente_inscripcion as ci ON c.id_cliente = ci.id_cliente\n"
+		
+			. "	LEFT JOIN tbl_inscripcion as i ON ci.id_inscripcion = i.id_inscripcion\n"
+		
+			. "	LEFT JOIN tbl_pagos_cliente as pc ON ci.id_cliente_inscripcion = pc.id_cliente_inscripcion\n"
+		
+			. "	WHERE tipo_cliente = 'Gimnasio' AND num_documento LIKE '%$rango%' OR nombre LIKE '%$rango%' OR apellidos LIKE '%$rango%' OR fecha_de_pago LIKE '%$rango%'\n"
+		
+			. "ORDER BY ci.id_cliente_inscripcion DESC");
 
 			$stmt->bindParam(":num_documento", $rango, PDO::PARAM_STR);
 			$stmt->bindParam(":nombre", $rango, PDO::PARAM_STR);
-			$stmt->bindParam(":tipo_inscripcion", $rango, PDO::PARAM_STR);
-			$stmt->bindParam(":fecha_pago", $rango, PDO::PARAM_STR);
-			$stmt->bindParam(":fecha_ultimo_pago", $rango, PDO::PARAM_STR);
-			$stmt->bindParam(":fecha_vencimiento", $rango, PDO::PARAM_STR);
+			$stmt->bindParam(":apellidos", $rango, PDO::PARAM_STR);
+			// $stmt->bindParam(":tipo_inscripcion", $rango, PDO::PARAM_STR);
+			// $stmt->bindParam(":fecha_pago", $rango, PDO::PARAM_STR);
+			// $stmt->bindParam(":fecha_ultimo_pago", $rango, PDO::PARAM_STR);
+			$stmt->bindParam(":fecha_de_pago", $rango, PDO::PARAM_STR);
 
             $stmt-> execute();
 			return $stmt ->fetchAll();

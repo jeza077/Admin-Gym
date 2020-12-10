@@ -57,7 +57,7 @@ class PDF extends TCPDF{
 
         $this->Ln(20); //Espacios
         $this->SetFont('helvetica', 'B', 14);
-        $this->Cell(260, 3, 'REPORTE INSCRIPCIONES CLIENTES HISTORICO', 0, 1, 'C');
+        $this->Cell(260, 3, 'REPORTE PAGOS CLIENTES HISTORICO', 0, 1, 'C');
         $this->Ln(3);
         $this->SetFont('helvetica', 'B', 11);
 
@@ -88,7 +88,7 @@ $pdf = new PDF('l', 'mm', 'A4', true, 'UTF-8', false);
 // set document information
 $pdf->SetCreator(PDF_CREATOR);
 $pdf->SetAuthor('Jesus Zuniga');
-$pdf->SetTitle('Reporte Inscripciones Clientes Historico');
+$pdf->SetTitle('Reporte Pagos Clientes Historico');
 $pdf->SetSubject('');
 $pdf->SetKeywords('');
 
@@ -140,11 +140,12 @@ $pdf->SetFillColor(225, 235, 255);
 $pdf->Cell(15, 5, 'No', 1, 0, 'C', 1);
 $pdf->Cell(45, 5, 'No. Documento', 1, 0, 'C', 1);
 $pdf->Cell(73, 5, 'Nombre', 1, 0, 'C', 1);
-$pdf->Cell(36, 5, 'Tipo Inscripcion', 1, 0, 'C', 1);
-// $pdf->Cell(45, 5, 'Valor Ultimo Pago', 1, 0, 'C', 1);
-$pdf->Cell(38, 5, 'Fecha Ult. Pago', 1, 0, 'C', 1);
-$pdf->Cell(36, 5, 'Fecha Prox. Pago', 1, 0, 'C', 1);
-$pdf->Cell(30, 5, 'Estado', 1, 0, 'C', 1);
+// $pdf->Cell(36, 5, 'Tipo Inscripcion', 1, 0, 'C', 1);
+$pdf->Cell(28, 5, 'P. Matric.', 1, 0, 'C', 1);
+$pdf->Cell(28, 5, 'Val. Descto.', 1, 0, 'C', 1);
+$pdf->Cell(28, 5, 'P. Inscrip.', 1, 0, 'C', 1);
+$pdf->Cell(28, 5, 'P. Total', 1, 0, 'C', 1);
+$pdf->Cell(30, 5, 'Fecha Pago', 1, 0, 'C', 1);
 
 if(isset($_GET["rango"])){
 
@@ -157,7 +158,7 @@ if(isset($_GET["rango"])){
 } 
 
 
-$clientes = ControladorClientes::ctrRangoClienteInscripcionDesactivado($rango);
+$clientes = ControladorClientes::ctrRangoHistorialPagosCliente($rango);
 
 
 // var_dump($clientes);
@@ -185,12 +186,12 @@ if(!$clientes){
             $pdf->Cell(15, 5, 'No', 1, 0, 'C', 1);
             $pdf->Cell(45, 5, 'No. Documento', 1, 0, 'C', 1);
             $pdf->Cell(73, 5, 'Nombre', 1, 0, 'C', 1);
-            $pdf->Cell(36, 5, 'Tipo Inscripcion', 1, 0, 'C', 1);
-            // $pdf->Cell(45, 5, 'Valor Ultimo Pägo', 1, 0, 'C', 1);
-            $pdf->Cell(38, 5, 'Fecha Ult. Pago', 1, 0, 'C', 1);
-            $pdf->Cell(36, 5, 'Fecha Prox. Pago', 1, 0, 'C', 1);
-            $pdf->Cell(30, 5, 'Estado', 1, 0, 'C', 1);
-
+            // $pdf->Cell(36, 5, 'Tipo Inscripcion', 1, 0, 'C', 1);
+            $pdf->Cell(28, 5, 'P. Matric.', 1, 0, 'C', 1);
+            $pdf->Cell(28, 5, 'Val. Descto.', 1, 0, 'C', 1);
+            $pdf->Cell(28, 5, 'P. Inscrip.', 1, 0, 'C', 1);
+            $pdf->Cell(28, 5, 'P. Total', 1, 0, 'C', 1);
+            $pdf->Cell(30, 5, 'Fecha Pago', 1, 0, 'C', 1);
         }
         // $pdf->Cell(15, 5, ''.$i.'', 1, 0, 'C');
     
@@ -199,25 +200,14 @@ if(!$clientes){
         // $pdf->SetFillColor(225, 235, 255);
         $pdf->Cell(15, 4, ''.($key+1).'', 0, 0, 'C');
         $pdf->Cell(45, 4, ''.$value['num_documento'].'', 0, 0, 'C');
-        $pdf->Cell(75, 4, ''.$value['nombre'].' '.$value['apellidos'].'', 0, 0, 'C');
-        $pdf->Cell(36, 4, ''.$value['tipo_inscripcion'].'', 0, 0, 'C');
-        // $pdf->Cell(45, 4, 'L.'.$value['pago_total'].'.00', 0, 0, 'C');
-        $pdf->Cell(36, 4, ''.$value['fecha_pago'].'', 0, 0, 'C');
-        $pdf->Cell(36, 4, ''.$value['fecha_proximo_pago'].'', 0, 0, 'C');
+        $pdf->Cell(73, 4, ''.$value['nombre'].' '.$value['apellidos'].'', 0, 0, 'C');
+        // $pdf->Cell(36, 4, ''.$value['tipo_inscripcion'].'', 0, 0, 'C');
+        $pdf->Cell(28, 4, 'L.'.$value['pago_matricula'].'.00', 0, 0, 'C');
+        $pdf->Cell(28, 4, 'L.'.$value['pago_descuento'].'.00', 0, 0, 'C');
+        $pdf->Cell(28, 4, 'L.'.$value['pago_inscripcion'].'.00', 0, 0, 'C');
+        $pdf->Cell(28, 4, 'L.'.$value['pago_total'].'.00', 0, 0, 'C');
+        $pdf->Cell(30, 4, ''.$value['fecha_de_pago'].'', 0, 0, 'C');
         
-        if($$value['estado'] == 0){
-
-            $pdf->Cell(30, 4, 'Cancelado', 0, 0, 'C');
-        } else {
-            $pdf->Cell(30, 4, 'Cancelado', 0, 0, 'C');
-
-        }
-    
-        // if($value["estado"] == 0){
-        //     $pdf->Cell(30, 4, 'Desactivado', 0, 0, 'C');
-        // } else {
-        //     $pdf->Cell(30, 4, 'Activado', 0, 0, 'C');
-        // }
         $i++;
     
     }

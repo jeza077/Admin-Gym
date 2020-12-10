@@ -90,8 +90,10 @@ $(document).on('change', '.tipoClienteVenta', function () {
 //         IMPRIMIR USUARIOS 
 // --------------------------------------*/ 
 exportarPdf('.btnExportarClientes', 'clientes');
-exportarPdf('.btnExportarHistorialPagosClientes', 'clientes-inscripciones-historico');
 exportarPdf('.btnExportarClientesInscripciones', 'clientes-inscripciones');
+exportarPdf('.btnExportarClientesInscripcionesHistorico', 'clientes-inscripciones-historico');
+exportarPdf('.btnExportarHistorialPagosClientes', 'clientes-pagos-historico');
+
 
 
 /*=============================================
