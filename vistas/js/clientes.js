@@ -63,8 +63,12 @@ $('.apellidoClienteVentas').keydown(sinCaracteres)
 $('.apellidoClienteVentas').keydown(permitirUnEspacio);
 $('.numeroDocumentoClienteVentas').keydown(impedirEspacios);
 
+
+
+//** ------------------------------------*/
 // AGREGAR CLIENTE 
 // MUESTRA LOS DATOS DE PAGO DEL CLIENTE, AL ELEGIR TIPO CLIENTE GIMNASIO
+// --------------------------------------*/
 $('#datosClientes').hide();
 $('#btnNuevoClienteVentas').hide();
 
@@ -86,7 +90,9 @@ $(document).on('change', '.tipoCliente', function () {
 });
 
 
+//** ------------------------------------*/
 // ALERTA PARA CONFIRMAR PAGO ANTES DE GUARDAR CLIENTE
+// --------------------------------------*/ 
 $('#btnNuevoClienteGym').hide();
 
 $(document).on('click', '#btnConfirmarPago', function (e) {
@@ -446,10 +452,24 @@ $(document).on('click', '.btnEditarPago', function (e) {
     Swal.fire({
         title: 'Actualizar Pago',
         html: '<p class="SwalParrafo">¿Deseás mantener el Tipo de Inscripcion actual?</p>' +
-            '<button type="button" role="button" tabindex="0" class="SwalBtnMantenerInscripcion btn btn-success customSwalBtn">' + 'Si, mantener' + '</button>' +
+            '<button type="button" role="button" tabindex="0" class="SwalBtnConfirmarPago btn btn-success customSwalBtn">' + 'Si, mantener' + '</button>' +
             '<button type="button" role="button" tabindex="0" class="SwalBtnCambiarInscripcion btn btn-primary customSwalBtn" data-toggle="modal" data-target="#modalEditarPagos">' + 'No, cambiar' + '</button>' +
             '<button type="button" role="button" tabindex="0" class="SwalBtnCancelar btn btn-secondary customSwalBtn">' + 'Cancelar' + '</button>',
         width: 600,
+        allowOutsideClick: false,
+        showCancelButton: false,
+        showConfirmButton: false
+    });
+});
+
+$(document).on('click', '.SwalBtnConfirmarPago', function (e) { 
+
+    Swal.fire({
+        icon: 'info',
+        title: '¿Se realizo el pago correctamente?',
+        html: '<button type="submit" role="button" class="SwalBtnMantenerInscripcion btn btn-success customSwalBtn">' + 'Si, guardar' + '</button>' +
+            '<button type="button" role="button" class="SwalBtnCancelar btn btn-danger customSwalBtn">' + 'No, salir' + '</button>',
+        width: 500,
         allowOutsideClick: false,
         showCancelButton: false,
         showConfirmButton: false
@@ -463,6 +483,8 @@ $(document).on('click', '.SwalBtnMantenerInscripcion', function (e) {
     e.preventDefault();
     // console.log(idClientePago);
     // console.log('click')
+
+    
     Swal.fire({
         title: 'Procesando...',
         allowOutsideClick: false
