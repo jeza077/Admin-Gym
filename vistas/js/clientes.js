@@ -235,70 +235,6 @@ mostrarDinamico($('.nuevaInscripcionClienteVenta'),'tbl_inscripcion', 'id_inscri
 /*=============================================
         SUMAR TOTAL CLIENTES
 =============================================*/
-
-// function SumaTotal(selector) {  
-
-//     selector.click(function (e) { 
-//         e.preventDefault();
-//         var precioMatricula = $('.nuevoPrecioMatricula');
-//         // console.log("matricula", precioMatricula)
-        
-//         // var precioMatricula = $('.nuevoPrecioMatricula');
-//         var precioDescuento = $('.nuevoPrecioPromocion');
-//         var precioInscripcion = $('.nuevoPrecioInscripcion');
-//         // console.log("Descuento", precioDescuento)
-//         // console.log("Inscripcion", precioInscripcion)
-//         // return;
-     
-//         var arrayMatricula = [];
-//         var arrayDescuento = [];
-//         var arrayInscripcion = [];
-     
-//         var arrayTotal =[];
-    
-//         for (var i = 0; i  < precioMatricula.length; i++) {
-//             arrayMatricula.push(Number($(precioMatricula[i]).val()));   
-//         }
-//         for (var i = 0; i  < precioDescuento.length; i++) {
-//             arrayDescuento.push(Number($(precioDescuento[i]).val()));   
-//         }
-//         for (var i = 0; i  < precioInscripcion.length; i++) {
-//             arrayInscripcion.push(Number($(precioInscripcion[i]).val()));   
-//         }
-        
-//         function sumaArrayTotal(total, numero) {
-//             return total + numero;
-//         }
-//         // console.log("matricula", arrayMatricula)
-//         // console.log("descuento",arrayDescuento)
-//         // console.log("inscripcion", arrayInscripcion)
-//         var matricula = arrayMatricula.reduce(sumaArrayTotal);
-//         var descuento = arrayDescuento.reduce(sumaArrayTotal);
-//         var matriculaTotal = matricula - descuento;
-//         var inscripcion = arrayInscripcion.reduce(sumaArrayTotal);
-        
-//         arrayTotal = matriculaTotal + inscripcion;
-//         $('#pagoMatricula').val(arrayMatricula);
-//         $('#nuevoPrecioDescuento').val(arrayDescuento);
-//         $('#pagoInscripcion').val(arrayInscripcion);
-//         $('#nuevoTotalCliente').val(arrayTotal);
-//         $('#totalPagar').val(arrayTotal);
-//         // if (selector.change("nuevaPromocion")) {
-//         //     $('.totalPagar').val(matriculaTotal);
-//         // } else if (selector.change("nuevaInscripcion")){
-
-//             // }
-            
-            
-        
-//         console.log("arrayDescuento", arrayDescuento)
-//     });
-
-
-// }
-// SumaTotal($('.verTotalPago'))
-// SumaTotal($('.verTotalPagoEditado'))
-// SumaTotal($('.nuevaMatricula'))
 $('.verTotalPago').click(function (e) { 
     e.preventDefault();
 
@@ -346,8 +282,9 @@ $('.verTotalPago').click(function (e) {
 
     }
 });
-// SUMA TOTAL PAGO CLIENTE VENTAS
 
+
+// SUMA TOTAL PAGO CLIENTE VENTAS
 $('.verTotalPagoCliente').click(function (e) { 
     e.preventDefault();
 
@@ -682,9 +619,11 @@ $(document).on('click', '.SwalBtnCancelarInscripcion', function () {
                 }).then((result)=>{
                     if(result.value){
                         Swal.fire({
-                            title: 'Agrega una nueva inscripción',
+                            title: '¿Desea agregar una nueva inscripción?',
                             icon: 'info',
-                            html: '<button type="button" role="button" tabindex="0" class="SwalBtnNuevaInscripcion btn btn-success customSwalBtn" data-toggle="modal" data-target="#modalNuevaInscripcion">' + 'Vamos' + '</button>',
+                            html: '<button type="button" role="button" tabindex="0" class="SwalBtnNuevaInscripcion btn btn-orange customSwalBtn" data-toggle="modal" data-target="#modalNuevaInscripcion">' + 'Si, vamos' + '</button>' +
+
+                            '<button type="button" role="button" tabindex="0" class="SwalBtnSalirNuevaInscripcion btn btn-danger customSwalBtn">' + 'No, salir' + '</button>',
                             // width: 600,
                             allowOutsideClick: false,
                             showCancelButton: false,
@@ -723,7 +662,11 @@ $(document).on('click', '.SwalBtnCancelarInscripcion', function () {
                             // idClienteInscripcion
                         });
 
-                        // window.location = "clientes-inscripciones";
+
+                        $(document).on('click', '.SwalBtnSalirNuevaInscripcion', function () {
+                            
+                            window.location = "clientes-inscripciones";
+                        });
                     }
                 });;
 
