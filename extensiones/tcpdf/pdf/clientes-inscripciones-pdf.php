@@ -141,8 +141,8 @@ $pdf->Cell(15, 5, 'No', 1, 0, 'C', 1);
 $pdf->Cell(75, 5, 'Nombre', 1, 0, 'C', 1);
 $pdf->Cell(35, 5, 'Tipo Inscripcion', 1, 0, 'C', 1);
 // $pdf->Cell(35, 5, 'Ultimo Pago', 1, 0, 'C', 1);
+$pdf->Cell(38, 5, 'Fecha Ult. Pago', 1, 0, 'C', 1);
 $pdf->Cell(38, 5, 'Fecha Prox. Pago', 1, 0, 'C', 1);
-$pdf->Cell(38, 5, 'Fecha Vencimiento', 1, 0, 'C', 1);
 $pdf->Cell(30, 5, 'Estado', 1, 0, 'C', 1);
 $pdf->Cell(25, 5, 'Deuda', 1, 0, 'C', 1);
 
@@ -186,8 +186,8 @@ if(!$clientes){
             $pdf->Cell(75, 5, 'Nombre', 1, 0, 'C', 1);
             $pdf->Cell(35, 5, 'Tipo Inscripcion', 1, 0, 'C', 1);
             // $pdf->Cell(35, 5, 'Ultimo Pägo', 1, 0, 'C', 1);
+            $pdf->Cell(38, 5, 'Fecha Ult. Pago', 1, 0, 'C', 1);
             $pdf->Cell(38, 5, 'Fecha Prox. Pago', 1, 0, 'C', 1);
-            $pdf->Cell(38, 5, 'Fecha Vencimiento', 1, 0, 'C', 1);
             $pdf->Cell(30, 5, 'Estado', 1, 0, 'C', 1);
             $pdf->Cell(25, 5, 'Deuda', 1, 0, 'C', 1);
 
@@ -201,8 +201,8 @@ if(!$clientes){
         $pdf->Cell(75, 4, ''.$value['nombre'].' '.$value['apellidos'].'', 0, 0, 'C');
         $pdf->Cell(35, 4, ''.$value['tipo_inscripcion'].'', 0, 0, 'C');
         // $pdf->Cell(35, 4, 'L.'.$value['pago_total'].'.00', 0, 0, 'C');   
+        $pdf->Cell(38, 4, ''.$value['fecha_pago'].'', 0, 0, 'C');
         $pdf->Cell(38, 4, ''.$value['fecha_proximo_pago'].'', 0, 0, 'C');
-        $pdf->Cell(38, 4, ''.$value['fecha_vencimiento'].'', 0, 0, 'C');
 
         if($value["estado"] == 1){
             $pdf->Cell(30, 4, 'Activado', 0, 0, 'C');

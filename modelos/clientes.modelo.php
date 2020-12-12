@@ -272,30 +272,60 @@ class ModeloClientes{
 	/*=============================================
 		MOSTRAR TODOS LOS PAGOS DE LOS CLIENTES
 	=============================================*/
-	static public function mdlMostrarPagosClientes(){
+	static public function mdlMostrarPagosClientes($item, $valor){
+
+		if($item != null){
+			$stmt = Conexion::conectar()->prepare("SELECT p.*, c.*, d.tipo_documento, m.tipo_matricula, pd.tipo_descuento, i.*, ci.*, pc.* FROM tbl_personas as p\n"
+
+			. "	LEFT JOIN tbl_clientes as c ON p.id_personas = c.id_persona\n"
 		
-		$stmt = Conexion::conectar()->prepare("SELECT p.*, c.*, d.tipo_documento, m.tipo_matricula, pd.tipo_descuento, i.*, ci.*, pc.* FROM tbl_personas as p\n"
+			. "	LEFT JOIN tbl_documento as d ON p.id_documento = d.id_documento\n"
+		
+			. "	LEFT JOIN tbl_matricula as m ON c.id_matricula = m.id_matricula\n"
+		
+			. "	LEFT JOIN tbl_descuento as pd ON c.id_descuento = pd.id_descuento\n"
+		
+			. "	LEFT JOIN tbl_cliente_inscripcion as ci ON c.id_cliente = ci.id_cliente\n"
+		
+			. "	LEFT JOIN tbl_inscripcion as i ON ci.id_inscripcion = i.id_inscripcion\n"
+		
+			. "	LEFT JOIN tbl_pagos_cliente as pc ON ci.id_cliente_inscripcion = pc.id_cliente_inscripcion\n"
+		
+			. "	WHERE tipo_cliente = 'Gimnasio' AND $item = :$item\n"
+		
+			. "ORDER BY ci.id_cliente_inscripcion DESC");
 
-		. "	LEFT JOIN tbl_clientes as c ON p.id_personas = c.id_persona\n"
-	
-		. "	LEFT JOIN tbl_documento as d ON p.id_documento = d.id_documento\n"
-	
-		. "	LEFT JOIN tbl_matricula as m ON c.id_matricula = m.id_matricula\n"
-	
-		. "	LEFT JOIN tbl_descuento as pd ON c.id_descuento = pd.id_descuento\n"
-	
-		. "	LEFT JOIN tbl_cliente_inscripcion as ci ON c.id_cliente = ci.id_cliente\n"
-	
-		. "	LEFT JOIN tbl_inscripcion as i ON ci.id_inscripcion = i.id_inscripcion\n"
-	
-		. "	LEFT JOIN tbl_pagos_cliente as pc ON ci.id_cliente_inscripcion = pc.id_cliente_inscripcion\n"
-	
-		. "	WHERE tipo_cliente = 'Gimnasio'\n"
-	
-		. "ORDER BY ci.id_cliente_inscripcion DESC");
+			$stmt->bindParam(":".$item, $valor, PDO::PARAM_STR);
 
-		$stmt -> execute();
-		return $stmt -> fetchAll();
+			$stmt -> execute();
+			return $stmt -> fetch();
+		
+		} else {
+
+			$stmt = Conexion::conectar()->prepare("SELECT p.*, c.*, d.tipo_documento, m.tipo_matricula, pd.tipo_descuento, i.*, ci.*, pc.* FROM tbl_personas as p\n"
+	
+			. "	LEFT JOIN tbl_clientes as c ON p.id_personas = c.id_persona\n"
+		
+			. "	LEFT JOIN tbl_documento as d ON p.id_documento = d.id_documento\n"
+		
+			. "	LEFT JOIN tbl_matricula as m ON c.id_matricula = m.id_matricula\n"
+		
+			. "	LEFT JOIN tbl_descuento as pd ON c.id_descuento = pd.id_descuento\n"
+		
+			. "	LEFT JOIN tbl_cliente_inscripcion as ci ON c.id_cliente = ci.id_cliente\n"
+		
+			. "	LEFT JOIN tbl_inscripcion as i ON ci.id_inscripcion = i.id_inscripcion\n"
+		
+			. "	LEFT JOIN tbl_pagos_cliente as pc ON ci.id_cliente_inscripcion = pc.id_cliente_inscripcion\n"
+		
+			. "	WHERE tipo_cliente = 'Gimnasio'\n"
+		
+			. "ORDER BY ci.id_cliente_inscripcion DESC");
+	
+			$stmt -> execute();
+			return $stmt -> fetchAll();
+			
+		}
 		
 		$stmt -> close();
 		$stmt = null;	

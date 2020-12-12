@@ -54,16 +54,17 @@
                   <th scope="col">Pago Inscripcion</th>
                   <th scope="col">Pago Total</th>
                   <th scope="col">Fecha de Pago</th>
+                  <th scope="col">Acciones</th>
                   <!-- <th scope="col">F. Proxim Pago</th>
                   <th scope="col">Deuda</th>
                   <th scope="col">Estado</th> -->
-                  <!-- <th scope="col">Acciones</th> -->
                 </tr>
               </thead>
               <tbody>
                 <?php 
-
-                  $clientes = ControladorClientes::ctrMostrarPagosClientes();
+                  $item = null;
+                  $valor = null;
+                  $clientes = ControladorClientes::ctrMostrarPagosClientes($item, $valor);
 
                 //   echo "<pre>";
                 //   var_dump($clientes);
@@ -81,7 +82,12 @@
                         <td>'.$value["pago_matricula"].'</td>
                         <td>'.$value["pago_inscripcion"].'</td>
                         <td>'.$value["pago_total"].'</td>
-                        <td>'.$value["fecha_de_pago"].'</td>';
+                        <td>'.$value["fecha_de_pago"].'</td>
+                        <td>
+                        <button class="btn btn-info btnReciboPagoCliente" idClientePago="'.$value["id_pagos_cliente"].'"><i class="fa fa-print" style="color:#fff"></i></button>
+                        </td>';
+
+                          
 
                                
                   }

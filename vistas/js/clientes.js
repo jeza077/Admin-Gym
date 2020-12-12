@@ -550,6 +550,7 @@ $(document).on('click', '.SwalBtnMantenerInscripcion', function (e) {
 });
 
 
+
 //***** ======================================
 // CALCULANDO TOTAL A PAGAR AL CAMBIAR INSCRIPCION 
 // ========================================= *//
@@ -852,3 +853,14 @@ $(document).on('click', '.btnEditarClienteVenta', function () {
         }
     });
 });
+
+/*=============================================
+IMPRIMIR PAGO EN PDF
+=============================================*/
+$(".tablas").on("click", ".btnReciboPagoCliente", function(){
+    // console.log('click')
+    var idClientePago = $(this).attr("idClientePago");
+  
+    window.open("extensiones/tcpdf/pdf/recibo-pago-cliente-pdf.php?codigo="+idClientePago, "_blank");
+
+})

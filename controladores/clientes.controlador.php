@@ -443,9 +443,9 @@ class ControladorClientes{
 	/*=============================================
 		MOSTRAR TODOS LOS PAGOS DE LOS CLIENTES
 	=============================================*/
-	static public function ctrMostrarPagosClientes(){
+	static public function ctrMostrarPagosClientes($item, $valor){
 
-		$respuesta = ModeloClientes::mdlMostrarPagosClientes();
+		$respuesta = ModeloClientes::mdlMostrarPagosClientes($item, $valor);
 		return $respuesta;
 	}
 	
