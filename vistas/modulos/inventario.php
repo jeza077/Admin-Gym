@@ -65,8 +65,17 @@
                               <td>'.$value["nombre_producto"].'</td>
                               <td>'.$value["tipo_producto"].'</td>';   
                               $stocktotal = $value["stock"] + $value["devolucion"];
-                              echo'  
-                              <td>'.$stocktotal.'</td>
+
+                              if($stocktotal <= $value['producto_minimo']){
+
+                                $stock = "<button class='btn btn-danger'>".$stocktotal."</button>";
+                      
+                              }else{
+                      
+                                $stock = "<button class='btn btn-success'>".$stocktotal."</button>";
+                      
+                              }
+                              echo'<td>'.$stock.'</td>
                                 
                           
                             
