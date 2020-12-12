@@ -92,14 +92,14 @@ $bloque1 = <<<EOF
 		
 		<tr>
 
-		<td style="width:50px"><img src="images/logo_gym.png"></td>
+		<td style="width:46px;"><img src="images/logo_gym.png"></td>
 
 		<td style="background-color:white; width:200px">
 			
-			<div style="font-size:12.5px; text-align:right; line-height:15px;">
+			<div style="font-size:13px; text-align:right; line-height:15px;">
 
 				<br>
-				$nombre
+				    $nombre
 				
 
 			</div>
@@ -127,7 +127,7 @@ $bloque2 = <<<EOF
 
 			<td style="background-color:white; width:370px">
 
-				<div style="font-size:9.5px; text-align:center; line-height:15px;">
+				<div style="font-size:8.5px; text-align:center; line-height:15px;">
 					
 					<br>
 					Teléfono: 2275-1354
@@ -247,22 +247,19 @@ $bloque6 = <<<EOF
 			<br>
 			 Valor de descuento
 			<br>
-			 Pago de inscripcion $clientes[tipo_inscripcion] 
+			 Pago de inscripcion
 
 		</td>
 
 		<td style="font-size:11.5px; background-color:white; width:120px; text-align:right">
 		
-			<strong> Total Pago:</strong>
+			<strong></strong>
 			<br>
 			  $clientes[pago_matricula] 
 			<br>
 			 $clientes[pago_descuento] 
 			<br>
 			 $clientes[pago_inscripcion] 
-			 <br>
-			 $clientes[pago_total] 
-
 
 		</td>
 
@@ -275,33 +272,32 @@ EOF;
 $pdf->writeHTML($bloque6, false, false, false, false, ''); 
 		
 
-// //--------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------
 
-// $bloque7 = <<<EOF
+$bloque7 = <<<EOF
 
-// <table style="font-size:10px; padding:5px 10px;">
+<table style="font-size:10px; padding:1px 10px;">
 
-// 	<tr>
+	<tr>
 		
-// 		<td style="font-size:11.5px; text-align:left; background-color:white; width:150px">
+		<td style="font-size:11.5px; text-align:left; background-color:white; width:310px">
+			<strong> Total:</strong>
+		</td>
 
-// 			<strong> Descripción: $respuestaCliente[nombre] $respuestaCliente[apellidos] </strong>
+		<td style="font-size:11.5px; background-color:white; border-top: 2.8px solid #343434; width:60px; text-align:right">
 
-// 		</td>
+			$clientes[pago_total] 
 
-// 		<td style="font-size:11.5px; background-color:white; width:220px; text-align:right">
-		
-// 			<strong> Total Pago: $fecha </strong>
 
-// 		</td>
+		</td>
 
-// 	</tr>
+	</tr>
 
-// </table>
+</table>
 
-// EOF;
+EOF;
 
-// $pdf->writeHTML($bloque7, false, false, false, false, ''); 
+$pdf->writeHTML($bloque7, false, false, false, false, ''); 
 		
 
 
