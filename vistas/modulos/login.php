@@ -175,11 +175,11 @@
           </div>
           <div class="form-group col-md-3">
             <label for="nombre">Nombre</label>
-            <input type="text" class="form-control nombre" name="nuevoNombre" placeholder="Ingrese Nombre" required>
+            <input type="text" class="form-control mayus nombre" name="nuevoNombre" placeholder="Ingrese Nombre" required>
           </div>
           <div class="form-group col-md-3">
             <label for="apellido">Apellido</label>
-            <input type="text" class="form-control apellidos" name="nuevoApellido" placeholder="Ingrese Apellidos" required>
+            <input type="text" class="form-control mayus apellidos" name="nuevoApellido" placeholder="Ingrese Apellidos" required>
           </div>
         </div>
 
@@ -212,7 +212,7 @@
         <div class="form-row">
           <div class="form-group col-md-7">
             <label for="inputAddress">Dirección</label>
-            <input type="text" class="form-control" id="inputAddress" name="nuevaDireccion" placeholder="Col. Alameda, calle #2..." required>
+            <input type="text" class="form-control mayus" id="inputAddress" name="nuevaDireccion" placeholder="Col. Alameda, calle #2..." required>
           </div>
           <div class="form-group col-md-3">
             <label>Fecha de nacimiento</label>

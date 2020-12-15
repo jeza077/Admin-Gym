@@ -145,7 +145,7 @@ class ControladorInventario
                         "nombre_producto" => $_POST["nuevoNombreProducto"],
                         // "stock" => $_POST["nuevoStock"],
                         "precio_venta" => $_POST["nuevoPrecio"],
-                        "precio_compra" => $_POST["nuevoPrecioCompra"],
+                        // "precio_compra" => $_POST["nuevoPrecioCompra"],
                         // "proveedor" => $_POST["nuevoProveedor"],                        
                         "producto_minimo" => $_POST["nuevoProductoMinimo"],
                         "producto_maximo" => $_POST["nuevoProductoMaximo"],
@@ -391,61 +391,66 @@ class ControladorInventario
                                     "id_proveedor" => $_POST["nuevoProveedor"],
                                     "cantidad" => $_POST["nuevoCantidad"],
                                     "precio" => $_POST["nuevoPrecio"]);
+                        
+                    // var_dump($datos);
+                    // return;
 
-                        $crearInventario = ModeloInventario::mdlCrearCompra($tabla, $datos);
+                    $crearInventario = ModeloInventario::mdlCrearCompra($tabla, $datos);
 
-                                if($crearInventario == true){
+                    if($crearInventario == true){
 
-                                    $tabla = "tbl_inventario";
-                                    $item = "id_inventario";
-                                    $valor = $_POST["nuevoProducto"];
-                                    $producto = ControladorUsuarios::ctrMostrar($tabla,$valor,$valor);
-                                    $stockActual = $producto["stock"];
-                                    $cantidadFinal = $stockActual + $_POST["nuevoCantidad"];
+                        $tabla = "tbl_inventario";
+                        $item = "id_inventario";
+                        $valor = $_POST["nuevoProducto"];
+                        $producto = ControladorUsuarios::ctrMostrar($tabla,$item,$valor);
+                        $stockActual = $producto["stock"];
+                        $cantidadFinal = $stockActual + $_POST["nuevoCantidad"];
 
-                                    $item1="stock";
-                                    $valor1=$cantidadFinal;
-                                    $item2="id_inventario";
-                                    $valor2=$_POST["nuevoProducto"];
-                                    $item3 = null;
-                                    $item4 = null;
-                                    $valor3 = null;
-                                    $valor4 = null;
-                                    $respuesta= ModeloInventario::mdlActualizarProductos($tabla, $item1, $valor1, $item2, $valor2, $item3, $valor3, $item4, $valor4);
-                                    if ($respuesta == true) {
-                                        // $descripcionEvento = "  Nuevo Producto";
-                                        // $accion = "Nuevo";
-                
-                                        // $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 4,$accion, $descripcionEvento);
-                    
+                        // var_dump($producto);
+                        // return;
+
+                        $item1="stock";
+                        $valor1=$cantidadFinal;
+                        $item2="id_inventario";
+                        $valor2=$_POST["nuevoProducto"];
+                        $item3 = null;
+                        $item4 = null;
+                        $valor3 = null;
+                        $valor4 = null;
+                        $respuesta= ModeloInventario::mdlActualizarProductos($tabla, $item1, $valor1, $item2, $valor2, $item3, $valor3, $item4, $valor4);
+                        if ($respuesta == true) {
+                            // $descripcionEvento = "  Nuevo Producto";
+                            // $accion = "Nuevo";
     
-                                        echo '<script>
-                                                Swal.fire({
-                                                    title: "Tus datos han sido guardados correctamente!",
-                                                    icon: "success",
-                                                    heightAuto: false,
-                                                    allowOutsideClick: false
-                                                }).then((result)=>{
-                                                    if(result.value){
-                                                        window.location = "'.$pantalla.'";
-                                                    }
-                                                });                       
-                                            </script>';
+                            // $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 4,$accion, $descripcionEvento);
+        
 
-                                    }
+                            echo '<script>
+                                    Swal.fire({
+                                        title: "Compra guardada correctamente!",
+                                        icon: "success",
+                                        heightAuto: false,
+                                        allowOutsideClick: false
+                                    }).then((result)=>{
+                                        if(result.value){
+                                            window.location = "'.$pantalla.'";
+                                        }
+                                    });                       
+                                </script>';
 
-                                }
-                                else {
-                                    echo '<script>
-                                            Swal.fire({
-                                                title: "No se pudo guardar tus datos. Intenta de nuevo!",
-                                                icon: "error",
-                                                heightAuto: false,
-                                                allowOutsideClick: false,
-                                                timer: 4000
-                                            });					
-                                        </script>';
-                                }     
+                        }
+
+                    } else {
+                        echo '<script>
+                                Swal.fire({
+                                    title: "No se pudo guardar la compra. Intenta de nuevo!",
+                                    icon: "error",
+                                    heightAuto: false,
+                                    allowOutsideClick: false,
+                                    timer: 4000
+                                });					
+                            </script>';
+                    }     
                 } 
             }
         }
