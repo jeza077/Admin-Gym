@@ -113,8 +113,8 @@ $(document).on('click', '#btnConfirmarPago', function (e) {
 $(document).on('click', '.SwalBtnGuardarCliente', function () {
     // $('#btnNuevoCliente').show();
     // $('#btnConfirmarPago').hide();
-
-    var btnGuardar = $('#btnNuevoCliente');
+    console.log('click')
+    var btnGuardar = $('#btnNuevoClienteGym');
     btnGuardar.click(); 
     // window.location = ruta;
 });
