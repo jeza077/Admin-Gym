@@ -10,14 +10,15 @@ class TablaProductosVentas{
 
 	public function mostrarTablaProductosVentas(){
 
-		$item = null;
-    	$valor = null;
+		// $item = null;
+    	// $valor = null;
 
 
-		// $item = 'id_tipo_producto';
-    	// $valor = 1;
+		$item = 'id_tipo_producto';
+		$valor = 1;
+		$all = true;
 
-          $productos = ControladorProductos::ctrMostrarProductos($item, $valor);	
+		$productos = ControladorProductos::ctrMostrarProductos($item, $valor, $all);	
         //   echo "<pre>";
         //   var_dump($productos);
         //   echo "</pre>";
@@ -46,18 +47,19 @@ class TablaProductosVentas{
 		  	/*=============================================
  	 		STOCK
   			=============================================*/ 
+			$stockTotal = $productos[$i]["stock"]  + $productos[$i]["devolucion"];
 
   			if($productos[$i]["stock"] <= 10){
 
-  				$stock = "<button class='btn btn-danger'>".$productos[$i]["stock"]."</button>";
+  				$stock = "<button class='btn btn-danger'>".$stockTotal."</button>";
 
   			}else if($productos[$i]["stock"] > 11 && $productos[$i]["stock"] <= 15){
 
-  				$stock = "<button class='btn btn-warning'>".$productos[$i]["stock"]."</button>";
+  				$stock = "<button class='btn btn-warning'>".$stockTotal."</button>";
 
   			}else{
 
-  				$stock = "<button class='btn btn-success'>".$productos[$i]["stock"]."</button>";
+  				$stock = "<button class='btn btn-success'>".$stockTotal."</button>";
 
   			}
 

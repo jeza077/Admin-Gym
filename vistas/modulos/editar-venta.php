@@ -110,8 +110,9 @@
                   foreach ($listaProducto as $key => $value) {
                     $item = "id_inventario";
                     $valor = $value["id"];
+                    $all = null;
 
-                    $respuesta = ControladorProductos::ctrMostrarProductos($item, $valor);
+                    $respuesta = ControladorProductos::ctrMostrarProductos($item, $valor, $all);
                     // var_dump($respuesta);
 
                     $stockAntiguo = $respuesta["stock"] + $value["cantidad"];
