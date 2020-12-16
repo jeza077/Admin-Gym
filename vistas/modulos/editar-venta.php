@@ -73,9 +73,9 @@
                     ======================================--> 
 
                     <label for="cliente">Cliente</label>
-                    <input type ="text" class="form-control" id="seleccionarCliente" name="seleccionarCliente" 
-                     value="<?php echo $venta["nombre"];  ?><?php echo $venta["apellidos"];  ?>" readonly>
-
+                    <input type ="text" class="form-control" value="<?php echo $venta["nombre"] . ' ' . $venta["apellidos"];  ?>" readonly>
+                     <input type ="hidden" id="seleccionarCliente" name="seleccionarCliente" 
+                     value="<?php echo $venta["id_cliente"]?>" readonly>
 
                     <!-- <select class="form-control select2-dropdown select2-search-dropdown"  required>
                         <option value="<?php echo $venta["id_cliente"];  ?>"><?php echo $venta["nombre"];  ?>  </option>
@@ -96,10 +96,8 @@
                     </select> -->
                   </div>    
 
-                  <!-- <div class="form-group col-md-3 mt-4">
-                    <span class="input-group-addon"><button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#modalAgregarCliente" data-dismiss="modal">Agregar cliente</button></span> 
-                  </div> -->
                 </div>
+
                 <!--=====================================
                 ENTRADA PARA AGREGAR PRODUCTO
                 ======================================--> 
@@ -148,9 +146,18 @@
                 <!-- IMPUESTO Y TOTAL-->
                 <div class="form-row">
                   <div class="form-group-float-right col-md-2" style="padding-left:0px">
+                    <?php
+                      $item="parametro";
+                      $valor="ADMIN_IMPUESTO";
+                      $parametro= ControladorUsuarios::ctrMostrarParametros($item, $valor);
+                      // var_dump($parametro);
+
+                    ?>
                     <label>Impuesto </label>
-                    <input type="number" class="form-control nuevoImpuestoVenta" name="nuevoImpuestoVenta"  id="nuevoImpuestoVenta" value="<?php echo $porcentajeImpuesto; ?>" required> 
-                    <!-- <span class="input-group-addon"><i class="fa fa-percent"></i></span> -->
+                    <input type="number" class="form-control nuevoImpuestoVenta" name="nuevoImpuestoVenta"  id="nuevoImpuestoVenta" value="<?php echo $parametro["valor"]; ?>" readonly required> 
+
+                    <input type="hidden" name="nuevoPrecioImpuesto" id="nuevoPrecioImpuesto" required> 
+
                    <!-- <input type="hidden" name="nuevoPrecioImpuesto" id="nuevoPrecioImpuesto" value="<?php echo $venta["impuesto"]; ?>" required>  -->
                   </div>
                     

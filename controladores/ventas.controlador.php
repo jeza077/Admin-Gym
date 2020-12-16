@@ -781,6 +781,7 @@ class ControladorVentas {
 		  </body>
 		</html> 
 					';
+
 					// echo $correoDestinatario;
 					// echo $nombreDestinatario;
 					// return;
@@ -1297,9 +1298,9 @@ class ControladorVentas {
 			$valor2 = $valor;
 			$comprasCliente = ModeloClientes::mdlActualizarCliente($tabla2, $item1, $valor1, $item2, $valor2);
 
-	// 		/*=============================================
-	//   			ELIMINAR VENTA
-	//  		=============================================*/
+			/*=============================================
+			// 			ELIMINAR VENTA
+			//=============================================*/
 			$idVenta= $_GET["idVenta"];
 			// echo $idVenta;
 			// return;

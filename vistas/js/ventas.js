@@ -202,7 +202,8 @@ $(".formularioVenta").on("click", "button.quitarProducto", function(){
 
 	if($(".nuevoProducto").children().length == 0){
 
-		$("#nuevoImpuestoVenta").val(0);
+    // $("#nuevoImpuestoVenta").val(0);
+		$("#nuevoPrecioNeto").val(0);
 		$("#nuevoTotalVenta").val(0);
 		$("#totalVenta").val(0);
 		$("#nuevoTotalVenta").attr("total",0);
@@ -384,7 +385,7 @@ function listarProductos(){
 
   }
   
-  console.log("listaProductos",listaProductos);
+  // console.log("listaProductos",listaProductos);
 
 	$("#listaProductos").val(JSON.stringify(listaProductos)); 
 
