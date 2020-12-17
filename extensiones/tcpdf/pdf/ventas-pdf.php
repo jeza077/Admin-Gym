@@ -204,14 +204,14 @@ if(!$ventas){
 } else {
 
     $i = 1; //Contador
-    $max = 25; //Maximo de registros a mostrar en una pagina
+    $max = 12; //Maximo de registros a mostrar en una pagina
 
     foreach ($ventas as $key => $value) {
 
         if(($i%$max) == 0){
             $pdf->AddPage();
 
-            $pdf->Ln(40);
+            $pdf->Ln(45);
             
             $pdf->SetFont('times', '', 13);
             $pdf->SetFillColor(225, 235, 255);

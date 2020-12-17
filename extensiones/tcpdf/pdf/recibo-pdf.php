@@ -65,11 +65,11 @@ class imprimirFactura{
 
 		//TRAEMOS LA INFORMACIÓN DEL CLIENTE
 		$tabla = "tbl_clientes";
-		$itemCliente = "c.id_cliente";
+		$itemCliente = "id_cliente";
 		$valorCliente = $respuestaVenta["id_cliente"];
 
 
-		$respuestaCliente = ControladorClientes::ctrMostrarClientes($tabla, $itemCliente, $valorCliente);
+		$respuestaCliente = ControladorClientes::ctrMostrarClientesSinPago($tabla, $itemCliente, $valorCliente);
 		if(!empty($respuestaCliente) and !empty($respuestaVenta)){
 
 			
