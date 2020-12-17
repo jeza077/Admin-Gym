@@ -75,9 +75,9 @@ class ModeloClientes{
 			. "LEFT JOIN tbl_cliente_inscripcion as ci ON c.id_cliente = ci.id_cliente\n"
 			. "LEFT JOIN tbl_inscripcion as i ON ci.id_inscripcion = i.id_inscripcion\n"
 			. "LEFT JOIN tbl_pagos_cliente as pc ON ci.id_cliente_inscripcion = pc.id_cliente_inscripcion\n"
-			. "WHERE $item = :$valor"); 
+			. "WHERE $item = :$item"); 
 
-			$stmt -> bindParam(":$valor", $valor, PDO::PARAM_STR);
+			$stmt -> bindParam(":$item", $valor, PDO::PARAM_STR);
 			$stmt -> execute();
 			return $stmt -> fetch();
 

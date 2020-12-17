@@ -93,20 +93,14 @@
                           $item = null;
                           $valor = null;
                           $clientes = ControladorClientes::ctrMostrarClientesSinPago($tabla, $item, $valor);
-                          // echo "<pre>";
-                          //  var_dump($clientes);
-                          //  echo "</pre>";
-
-
-
 
                             foreach ($clientes as $key => $value)
                             {
-                              echo '<option value="'.$value["id_cliente"].'">' .$value["nombre"]. ' '.$value["apellidos"]. '</option>';
+                              echo '<option value="'.$value["id_personas"].'">' .$value["nombre"]. ' '.$value["apellidos"]. '</option>';
                             }
                         ?>       
                     </select>
-                    <input type="hidden" value="<?php echo $value["id_personas"]?>" name="idPersona">
+                    <!-- <input type="hidden" value="<?php echo $value["id_personas"]?>" name="idPersona"> -->
                   </div>    
                   <div class="form-group col-md-3 mt-4">
                     <span class="input-group-addon"><button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#modalAgregarCliente" data-dismiss="modal">Agregar cliente</button></span> 
