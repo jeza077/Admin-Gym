@@ -154,7 +154,7 @@ class ControladorVentas {
 					$correoDestinatario = $traerCliente['correo'];
 					$nombreDestinatario = $traerCliente['nombre'] .' '. $traerCliente['apellidos'];
 					$numeroFactura= $_POST["nuevaVenta"];
-					$impuesto= $_POST["nuevaPrecioImpuesto"];
+					$impuesto= $_POST["nuevoPrecioImpuesto"];
 					$neto= $_POST["nuevoPrecioNeto"];
 					$total= $_POST["totalVenta"];
 					$asunto = 'RECIBO DE PAGO, GIMNASIO LA ROCA.';
@@ -667,22 +667,7 @@ class ControladorVentas {
 													</td>
 												</tr>
 												</table>
-												<!-- Action -->
-												<table class="body-action" align="center" width="100%" cellpadding="0" cellspacing="0" role="presentation">
-												<tr>
-													<td align="center">
-													<!-- Border based button
-								https://litmus.com/blog/a-guide-to-bulletproof-buttons-in-email-design -->
-													<table width="100%" border="0" cellspacing="0" cellpadding="0" role="presentation">
-														<tr>
-														<td align="center">
-															<h2><a href="{{action_url}}" class="f-fallback button button--green" target="_blank">Recibo de Pago</a></h2>
-														</td>
-														</tr>
-													</table>
-													</td>
-												</tr>
-												</table>
+
 												<table class="purchase" width="100%" cellpadding="0" cellspacing="0">
 												<tr>
 													<td>
@@ -699,6 +684,9 @@ class ControladorVentas {
 														<th class="purchase_heading" align="left">
 															<p class="f-fallback">Producto</p>
 														</th>
+														<th class="purchase_heading">
+															<p class="f-fallback">Cantidad</p>
+														</th>
 														<th class="purchase_heading" align="right">
 															<p class="f-fallback">Costo</p>
 														</th>
@@ -710,7 +698,8 @@ class ControladorVentas {
 														foreach ($decodificar_productos as $productos ) {
 														$template= $template.'<tr>
 														<td width="100%" class="purchase_item"><span class="f-fallback">'.$productos->descripcion.'</span></td>
-														<td class="align-right" width="20%" class="purchase_item"><span class="f-fallback">L.'.$productos->total.'</span></td>
+														<td width="100%" class="purchase_item"><span class="f-fallback">'.$productos->cantidad.'</span></td>
+														<td width="100%" class="purchase_item"><span class="f-fallback">L.'.$productos->total.'</span></td>
 														</tr>';
 						
 														}
@@ -1315,7 +1304,9 @@ class ControladorVentas {
 			$item = "id_cliente";
 			$valor = $traerVenta["id_cliente"];
 
-			$traerCliente = ModeloClientes::mdlMostrarClientes($tabla1, $tabla2, $item, $valor);
+			$traerCliente = ModeloClientes::mdlMostrarClientesSinPago($tabla1, $tabla2, $item, $valor);
+			// var_dump($traerCliente);
+			// return;
 
 			$item1 = "compras";
 			$valor1 = $traerCliente["compras"] - array_sum($totalProductosComprados);
