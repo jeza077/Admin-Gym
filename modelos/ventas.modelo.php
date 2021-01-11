@@ -2,10 +2,10 @@
 
 require_once "conexion.php";
 
-class ModeloVentas
-{
-  /*=============================================
-		MOSTRAR ventas
+class ModeloVentas{
+	  
+	/*=============================================
+	MOSTRAR ventas
 	=============================================*/
     static public function mdlMostrarVentas($tabla, $item, $valor) {
         if ($item != null){
@@ -63,7 +63,7 @@ class ModeloVentas
 	}
 
 	/*=============================================
-			SUMA TOTAL VENTAS
+	SUMA TOTAL VENTAS
     =============================================*/
 	static public function mdlSumarTotalVentas($tabla){
 		
@@ -77,7 +77,7 @@ class ModeloVentas
 
 
 	/*=============================================
-			RANGO DE FECHAS
+	RANGO DE FECHAS
 	=============================================*/
 	static public function mdlRangoFechaVentas($tabla, $fechaInicial, $fechaFinal){
 	

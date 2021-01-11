@@ -134,7 +134,6 @@ class ControladorVentas {
 
 			if ($respuesta == true && $_POST['enviarFactura'] == 'on'){
 
-				
 				$descripcionEvento = "Nueva venta";
 				$accion = "Nueva";
                 $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 5,$accion, $descripcionEvento);
@@ -220,7 +219,7 @@ class ControladorVentas {
 							}
 							
 							td {
-							word-break: break-word;
+							word-break: inherit;
 							}
 							
 							.preheader {
@@ -643,7 +642,7 @@ class ControladorVentas {
 										<tr>
 											<td class="content-cell">
 											<div class="f-fallback">
-												<h1>Hola '.$nombreDestinatario.',</h1>
+												<h1>Hola '.$nombreDestinatario.'!</h1>
 												
 												<table class="attributes" width="100%" cellpadding="0" cellspacing="0" role="presentation">
 												<tr>
@@ -707,7 +706,7 @@ class ControladorVentas {
 						
 						
 													$template = $template.'
-													<tr><td><hr></td></tr>
+													<tr><hr></tr>
 														<tr>
 														<td width="20%" class="purchase_footer" valign="middle">
 															<p class="f-fallback purchase_total purchase_total--label">SubTotal</p>
@@ -801,13 +800,13 @@ class ControladorVentas {
 
 							Swal.fire({
 								icon: "success",
-								title: "La venta ha sido guardada correctamente",
+								title: "Venta guardada correctamente!",
 								showConfirmButton: true,
 								confirmButtonText: "Cerrar"
 								}).then((result) => {
 											if (result.value) {
 
-											window.location = "administrar-venta";
+											window.location = "administrar-ventas";
 
 											}
 										})
@@ -846,13 +845,13 @@ class ControladorVentas {
 					
 					Swal.fire({
 						icon: "success",
-						title: "La venta ha sido guardada correctamente",
+						title: "Venta guardada correctamente!",
 						showConfirmButton: true,
 						confirmButtonText: "Cerrar"
 					}).then((result) => {
 						if (result.value) {
 							
-							window.location = "administrar-venta";
+							window.location = "administrar-ventas";
 							
 						}
 					})
@@ -865,13 +864,13 @@ class ControladorVentas {
 
 				Swal.fire({
 					  icon: "error",
-					  title: "Error",
+					  title: "Opps, algo salio mal, intenta de nuevo!",
 					  showConfirmButton: true,
 					  confirmButtonText: "Cerrar"
 					  }).then((result) => {
 								if (result.value) {
 
-								window.location = "administrar-venta";
+								window.location = "administrar-ventas";
 
 								}
 							})
@@ -886,7 +885,7 @@ class ControladorVentas {
 	
 
 	/*=============================================
-			SUMA TOTAL VENTAS
+	SUMA TOTAL VENTAS
     =============================================*/
 	static public function ctrSumaTotalVentas(){
 
@@ -898,7 +897,7 @@ class ControladorVentas {
 	}
 
 	/*=============================================
-			RANGO DE FECHAS
+	RANGO DE FECHAS
     =============================================*/
 	static public function ctrRangoFechasVentas($fechaInicial, $fechaFinal){
 
@@ -911,7 +910,7 @@ class ControladorVentas {
 
 
 	/*=============================================
-			RANGO DINAMICO
+	RANGO DINAMICO
     =============================================*/
 	static public function ctrRango($rango){
 
@@ -923,8 +922,8 @@ class ControladorVentas {
 	}
 
 
-	  /*=============================================
-		====================EDITAR VENTA
+	/*=============================================
+	=========  EDITAR VENTA
     =============================================*/
     static public function ctrEditarVenta(){
     
@@ -973,9 +972,15 @@ class ControladorVentas {
 			
 			if($cambioProducto){
 
+				// echo $cambioProducto;
 				$productos =  json_decode($traerVenta["productos"], true);
-
+				// echo '<pre>';
+				// var_dump($productos);
+				// echo '</pre>';
+				// return;
+				
 				$totalProductosComprados = array();
+
 				foreach($productos as $key => $value) {
 					// echo '<pre>';
 					// var_dump($value);
@@ -985,17 +990,18 @@ class ControladorVentas {
 					array_push($totalProductosComprados, $value["cantidad"]);
 
 					$item = "id_inventario";
-					$valor = $value["id"];
-					
-					$tablaProductos = "tbl_inventario"; 
-					$traerProducto = ModeloProductos::mdlMostrarProductos($tablaProductos, $item, $valor);
+					$valor = $value["id"];					
+					$tablaProductos = "tbl_inventario";
+					$all = null;
+
+					$traerProducto = ModeloProductos::mdlMostrarProductos($tablaProductos, $item, $valor, $all);
 					// echo '<pre>';
 					// var_dump($traerProducto);
 					// echo '</pre>';
 					// return;
 
 					$item1A = "stock";
-					$valor1A = $value["cantidad"]+ $traerProducto["stock"];
+					$valor1A = $value["cantidad"] + $traerProducto["stock"];
 					$item2 = $item;
 					$valor2 = $valor;
 
@@ -1023,7 +1029,7 @@ class ControladorVentas {
 				$item = "id_cliente";
 				$valor = $_POST["seleccionarCliente"];
 
-				$traerCliente = ModeloClientes::mdlMostrarClientes($tabla1, $tabla2, $item, $valor);
+				$traerCliente = ModeloClientes::mdlMostrarClientesSinPago($tabla1, $tabla2, $item, $valor);
 
 				$item1 = "compras";
 				$valor1 = $traerCliente["compras"] - array_sum($totalProductosComprados);
@@ -1039,10 +1045,10 @@ class ControladorVentas {
 
 				
 
-			// 	/*=============================================
-	 		// 	ACTUALIZAR LAS COMPRAS DEL CLIENTE Y REDUCIR EL STOCK 
-	 		// 	Y AUMENTAR LAS VENTAS DE LOS PRODUCTOS
-	 		// 	=============================================*/
+			 	/*=============================================
+	 		 	ACTUALIZAR LAS COMPRAS DEL CLIENTE Y REDUCIR EL STOCK 
+	 			Y AUMENTAR LAS VENTAS DE LOS PRODUCTOS
+	 		 	=============================================*/
 
 				$listaProductos_2 = json_decode($listaProductos, true);
 				// var_dump($listaProductos);
@@ -1056,10 +1062,11 @@ class ControladorVentas {
 					array_push($totalProductosComprados_2, $value["cantidad"]);
 
 					$item_2 = "id_inventario";
-					$valor_2 = $value["id"];
-					
+					$valor_2 = $value["id"];					
 					$tablaProductos_2 = "tbl_inventario"; 
-					$traerProducto_2 = ModeloProductos::mdlMostrarProductos($tablaProductos_2, $item_2, $valor_2);
+					$all = null;
+
+					$traerProducto_2 = ModeloProductos::mdlMostrarProductos($tablaProductos_2, $item_2, $valor_2, $all);
 					// var_dump($traerProducto_2["venta"]);
 
 					$item1_2 = "venta";
@@ -1096,7 +1103,7 @@ class ControladorVentas {
 				$item_2 = "id_cliente";
 				$valor_2 = $_POST["seleccionarCliente"];
 
-				$traerCliente_2 = ModeloClientes::mdlMostrarClientes($tabla1_2, $tabla2_2, $item_2, $valor_2);
+				$traerCliente_2 = ModeloClientes::mdlMostrarClientesSinPago($tabla1_2, $tabla2_2, $item_2, $valor_2);
 				// var_dump($traerCliente); 
 				// return; 
 				// echo $valor;
@@ -1136,8 +1143,8 @@ class ControladorVentas {
 				// 	return;
 			
 			}
-             /*=============================================
-	 		GUARDAR CAMBIOS DE LA COMPRA
+			/*=============================================
+	 			GUARDAR CAMBIOS DE LA COMPRA
 	 		=============================================*/	
 
 			$datos = array("id_vendedor"=>$_POST["idVendedor"],
@@ -1162,10 +1169,7 @@ class ControladorVentas {
 				$descripcionEvento = "Actualizo una venta";
 				$accion = "Actualizo";
 
-				$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 5,$accion, $descripcionEvento);
-
-			  
-		   
+				$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 5,$accion, $descripcionEvento); 
 
 				echo'<script>
 
@@ -1173,13 +1177,13 @@ class ControladorVentas {
 
 				Swal.fire({
 					  icon: "success",
-					  title: "La venta ha sido editada correctamente",
+					  title: "Venta editada correctamente!",
 					  showConfirmButton: true,
 					  confirmButtonText: "Cerrar"
 					  }).then((result) => {
 								if (result.value) {
 
-								window.location = "administrar-venta";
+								window.location = "administrar-ventas";
 
 								}
 							})
@@ -1196,6 +1200,9 @@ class ControladorVentas {
 	=============================================*/
 
 	static public function ctrEliminarVenta(){
+		// var_dump($_GET);
+		// return;
+
 		if(isset($_GET["idVenta"])){
 			$tabla = "tbl_venta";
 			$item = "id_venta";
@@ -1277,10 +1284,10 @@ class ControladorVentas {
 				array_push($totalProductosComprados, $value["cantidad"]);
 
 				$item = "id_inventario";
-				$valor = $value["id"];
-				
-				$tablaProductos = "tbl_inventario"; 
-				$traerProducto = ModeloProductos::mdlMostrarProductos($tablaProductos, $item, $valor);
+				$valor = $value["id"];				
+				$tablaProductos = "tbl_inventario";
+				$all = null; 
+				$traerProducto = ModeloProductos::mdlMostrarProductos($tablaProductos, $item, $valor, $all);
 
 				$item1 = "devolucion";
 				// $item1 = "devolucion";
@@ -1333,14 +1340,14 @@ class ControladorVentas {
 
 				Swal.fire({
 					  icon: "success",
-					  title: "La venta ha sido borrada correctamente",
+					  title: "Venta borrada correctamente!",
 					  showConfirmButton: true,
 					  confirmButtonText: "Cerrar",
 					  closeOnConfirm: false
 					  }).then((result) => {
 								if (result.value) {
 
-								window.location = "administrar-venta";
+								window.location = "administrar-ventas";
 
 								}
 							})

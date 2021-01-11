@@ -20,6 +20,13 @@
 
             $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 5,$accion, $descripcionEvento);
 
+            // $tabla1 = "tbl_personas";
+            // $tabla2 = "tbl_clientes";
+            // $item = "id_cliente";
+            // $valor = 39;
+    
+            // $traerCliente = ModeloClientes::mdlMostrarClientesSinPago($tabla1, $tabla2, $item, $valor);
+            // var_dump($traerCliente);
           ?>
         
 
@@ -121,7 +128,7 @@
                             <div class="col-md-6">
                               <div class="input-group">
                                 <span class="input-group-prepend"><button type="button" class="btn btn-danger btn-md quitarProducto" idProducto="'.$value["id_inventario"].'"><i class="fa fa-times"></i></button></span>
-                                <input type="text" class="form-control nuevaDescripcionProducto" idProducto="'.$value["id_inventario"].'" name="agregarProducto" value="'.$value["descripcion"].'" readonly required>
+                                <input type="text" class="form-control nuevaDescripcionProducto" idProducto="'.$value["id"].'" name="agregarProducto" value="'.$value["descripcion"].'" readonly required>
                               </div>
                             </div>
     
@@ -188,12 +195,14 @@
                 BOTÓN PARA AGREGAR PRODUCTO
                 ======================================-->
               <div class="card-footer">
-                <button type="submit" class="btn btn-primary pull-right btnAgregarProducto">Guardar venta</button>
+                <a href="administrar-ventas" class="btn btn-outline-danger ml-2 float-right">Salir</a>
+                <button type="submit" class="btn btn-primary btnAgregarProducto float-right">Guardar cambios</button>
               </div>  
 
             </div>
           </form>
           <?php
+
            $editarVenta = new ControladorVentas();
            $editarVenta->ctrEditarVenta();
 
@@ -236,73 +245,5 @@
 
     
 </div>
-
-<!--===========================================
-       Modal cliente 
-=====================================-->
-
-<!-- <div class="modal fade" id="modalAgregarCliente" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-      <div class="modal-content">
-      
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Nuevo cliente</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-
-        <div class="modal-body">
-          <form role="form" method="post" class="formulario">
-            <ul class="nav nav-tabs" id="myTab" role="tablist">
-              <li class="nav-item" role="presentation">
-                <a class="nav-link active" id="datosPersona" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Datos personales</a>
-              </li>
-            </ul>
-            
-            <div class="tab-content" id="myTabContent">
-              <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="datoscliente">
-                <div class="container-fluid mt-4">
-                  <div class="form-row">
-                    <div class="form-group col-md-4">
-                      <label for="nombre">Nombre</label>
-                      <input type="text" class="form-control nombre" name="nuevoNombre" placeholder="Ingrese Nombre" required>
-                    </div>
-                    <div class="form-group col-md-4">
-                      <label for="apellido">Apellido</label>
-                      <input type="text" class="form-control apellidos" name="nuevoApellido" placeholder="Ingrese Apellidos" required>
-                    </div>
-                  </div>
-      
-                  <div class="form-row">
-                    <div class="form-group col-md-4">
-                      <label for="email">Email</label>
-                      <input type="email" class="form-control email" name="nuevoEmail" placeholder="Ingrese Email" required>
-                      <input type="hidden" name="tipoCliente" value="ventas">
-                    </div>
-
-                    <div class="form-group mt-8 float-right">
-                  
-                      <span class="input-group-addon"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarCliente" data-dismiss="modal">Guardar</button></span>
-                      <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
-                    </div>
-                          
-                  </div>     
-
-                </div>
-
-              </div>     
-
-            </div>
-
-          </form>     
-
-        </div>
-
-      </div> 
-
-    </div>
-    
-</div> -->
 
 
