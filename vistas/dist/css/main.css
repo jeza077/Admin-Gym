@@ -109,6 +109,10 @@ body.login-page .login-box.recu-password .card{
     font-weight: 300;
     font-size: 2rem;
 } */
+.input-group.mySelect {
+    flex-wrap: inherit;
+}
+
 
 
 /** COLORES **/
@@ -683,9 +687,15 @@ i.show-confir-pass{
 
 /***** SIDEBAR ******/
 .main-sidebar{
-    position: fixed!important;
+    /* position: fixed!important; */
     background-color: var(--darkFirst);
 }
+/* .os-theme-dark>.os-scrollbar, .os-theme-light>.os-scrollbar{
+    background: red!important;
+}
+.os-scrollbar{
+    background-color: red!important;
+} */
 .nav-link.active {
     background: var(--orangeThird)!important;
     color: #fff!important;
@@ -702,6 +712,11 @@ i.show-confir-pass{
     background: #d7dce4 !important;
     color: #fff;
 } */
+[class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link:hover{
+    background-color: var(--orangeFirst);
+}
+
+
 
 /** AGREGAR PERSONA */
 .card.agregar-persona{

@@ -90,38 +90,68 @@ class ControladorGlobales{
     }
 
     /*=============================================
-			FUNCION ALERTAS
+	****    FUNCION ALERTAS
     =============================================*/
-    static public function ctrAlertas($mensaje, $icono){
+    static public function ctrAlertas($titulo, $texto, $icono){
 
         $host= $_SERVER["HTTP_HOST"];
         $url= $_SERVER["REQUEST_URI"];
         $urlF = "http://" . $host . $url;
-        if($urlF == 'http://localhost/gym/dashboard'){
+        if($urlF == 'http://localhost/admin/dashboard'){
             echo '<script>			
                 function alertas() {
                          Swal.fire({
-                            title: "'.$mensaje.'",
+                            title: "'.$titulo.'",
+                            text: "'.$texto.'",
                             icon: "'.$icono.'",
-                            toast: true,
-                            position: "top",
                             showConfirmButton: true,
-                            confirmButtonText: "Cerrar",
-                            width: 600
+                            confirmButtonText: "Cerrar"
                         });
                     }
-                alertas();
-                
-            </script>';
+                    alertas();
+                    
+                    </script>';
+                    // width: 600
+                    // toast: true,
+                    // position: "top",
         }
   
     }
 
+
+    /*=============================================
+	****    FUNCION ALERTAS
+    =============================================*/
+    static public function ctrAlertaCliente($titulo, $texto, $icono){
+
+        $host= $_SERVER["HTTP_HOST"];
+        $url= $_SERVER["REQUEST_URI"];
+        $urlF = "http://" . $host . $url;
+        if($urlF == 'http://localhost/admin/dashboard'){
+            echo '<script>			
+                function alertas() {
+                         Swal.fire({
+                            title: "'.$titulo.'",
+                            text: "'.$texto.'",
+                            icon: "'.$icono.'",
+                            showConfirmButton: true,
+                            confirmButtonText: "Cerrar"
+                        });
+                    }
+                    alertas();
+                    
+                    </script>';
+                    // width: 600
+                    // toast: true,
+                    // position: "top",
+        }
+  
+    }
     /*=============================================
 			EDITAR PARAMETROS
     =============================================*/
     
-    public function ctrEditarParametro(){
+    static public function ctrEditarParametro(){
 
       if(isset($_POST["editarParametro"])){
 
@@ -185,556 +215,6 @@ class ControladorGlobales{
 
     }
 
-    /*=============================================
-      EDITAR ROL
-    =============================================*/
-    
-    public function ctrEditarRol(){
-
-      if(isset($_POST["editarRol"])){
-
-        $tabla = "tbl_roles";
-
-        $datos = array ("rol"=> $_POST["editarRol"],
-                        "descripcion"=>$_POST["editarDescripcionRol"],
-                        "id_rol"=>$_POST["editarIdRol"]);
-
-
-        $respuesta =  ModeloGlobales::mdlEditarRol($tabla,$datos);
-
-    
-        if($respuesta == true){
-            
-            $descripcionEvento = "Actualizo rol";
-            $accion = "Actualizo";
-            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
-
-          
-
-            echo'<script>
-    
-            Swal.fire({
-                 icon: "success",
-                  title: "El rol ha sido editado correctamente",
-                  showConfirmButton: true,
-                  confirmButtonText: "Cerrar",
-                  closeOnConfirm: false
-                  }).then((result) => {
-                            if (result.value) {
-    
-                            window.location = "rol";
-    
-                            }
-                        })
-    
-            </script>';
-    
-        }else{
-
-          echo'<script>
-    
-            Swal.fire({
-                  icon: "warning",
-                  title: "Error al editar rol",
-                  showConfirmButton: true,
-                  confirmButtonText: "Cerrar",
-                  closeOnConfirm: false
-                  }).then((result) => {
-                            if (result.value) {
-    
-                            window.location = "rol";
-    
-                            }
-                        })
-    
-            </script>';
-        }
-
-      }
-
-    }
-
-
-       /*=============================================
-      EDITAR INSCRIPCION
-    =============================================*/
-    
-    static public function ctrEditarInscripcion(){
-
-      if(isset($_POST["editarInscripcion"])){
-
-        $tabla = "tbl_inscripcion";
-
-        $datos = array ("tipo_inscripcion"=> $_POST["editarInscripcion"],
-                        "precio_inscripcion"=>$_POST["editarPrecioInscripcion"],
-                        "id_inscripcion"=>$_POST["editarIdInscripcion"]);
-
-
-        $respuesta =  ModeloGlobales::mdlEditarInscripcion($tabla,$datos);
-
-    
-        if($respuesta == true){
-            
-            $descripcionEvento = "Actualizo Inscripcion";
-            $accion = "Actualizo";
-            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
-
-          
-
-            echo'<script>
-    
-            Swal.fire({
-                 icon: "success",
-                  title: "La inscripcion ha sido editado correctamente",
-                  showConfirmButton: true,
-                  confirmButtonText: "Cerrar",
-                  closeOnConfirm: false
-                  }).then((result) => {
-                            if (result.value) {
-    
-                            window.location = "inscripcion";
-    
-                            }
-                        })
-    
-            </script>';
-    
-        }else{
-
-          echo'<script>
-    
-            Swal.fire({
-                  icon: "warning",
-                  title: "Error al editar inscripcion",
-                  showConfirmButton: true,
-                  confirmButtonText: "Cerrar",
-                  closeOnConfirm: false
-                  }).then((result) => {
-                            if (result.value) {
-    
-                            window.location = "inscripcion";
-    
-                            }
-                        })
-    
-            </script>';
-        }
-
-      }
-
-    }
-
-
-     /*=============================================
-      EDITAR MATRICULA
-    =============================================*/
-    
-    public function ctrEditarMatricula(){
-
-        if(isset($_POST["editarMatricula"])){
-  
-          $tabla = "tbl_matricula";
-  
-          $datos = array ("tipo_matricula"=> $_POST["editarMatricula"],
-                          "precio_matricula"=>$_POST["editarPrecioMatricula"],
-                          "id_matricula"=>$_POST["editarIdMatricula"]);
-  
-  
-          $respuesta =  ModeloGlobales::mdlEditarMatricula($tabla,$datos);
-  
-      
-          if($respuesta == true){
-              
-              $descripcionEvento = "Actualizo Matricula ";
-              $accion = "Actualizo";
-              $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
-  
-            
-  
-              echo'<script>
-      
-              Swal.fire({
-                   icon: "success",
-                    title: "La matricula ha sido editado correctamente",
-                    showConfirmButton: true,
-                    confirmButtonText: "Cerrar",
-                    closeOnConfirm: false
-                    }).then((result) => {
-                              if (result.value) {
-      
-                              window.location = "matricula";
-      
-                              }
-                          })
-      
-              </script>';
-      
-          }else{
-  
-            echo'<script>
-      
-              Swal.fire({
-                    icon: "warning",
-                    title: "Error al editar matricula",
-                    showConfirmButton: true,
-                    confirmButtonText: "Cerrar",
-                    closeOnConfirm: false
-                    }).then((result) => {
-                              if (result.value) {
-      
-                              window.location = "matricula";
-      
-                              }
-                          })
-      
-              </script>';
-          }
-  
-        }
-  
-      }
-
-      
-    /*=============================================
-      EDITAR DESCUENTO
-    =============================================*/
-    
-    public function ctrEditarDescuento(){
-
-      if(isset($_POST["editarDescuento"])){
-
-        $tabla = "tbl_descuento";
-
-        $datos = array ("tipo_descuento"=> $_POST["editarDescuento"],
-                        "valor_descuento"=>$_POST["editarValorDescuento"],
-                        "id_descuento"=>$_POST["editarIdDescuento"]);
-
-
-        $respuesta =  ModeloGlobales::mdlEditarDescuento($tabla,$datos);
-
-    
-        if($respuesta == true){
-            
-          
-          $descripcionEvento = "Actualizo Descuento";
-          $accion = "consulta";
-
-          $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
-
-       
-      
-          
-            echo'<script>
-    
-            Swal.fire({
-                 icon: "success",
-                  title: "El descuento ha sido editado correctamente",
-                  showConfirmButton: true,
-                  confirmButtonText: "Cerrar",
-                  closeOnConfirm: false
-                  }).then((result) => {
-                            if (result.value) {
-    
-                            window.location = "descuento";
-    
-                            }
-                        })
-    
-            </script>';
-    
-        }else{
-
-          echo'<script>
-    
-            Swal.fire({
-                  icon: "warning",
-                  title: "Error al editar descuento",
-                  showConfirmButton: true,
-                  confirmButtonText: "Cerrar",
-                  closeOnConfirm: false
-                  }).then((result) => {
-                            if (result.value) {
-    
-                            window.location = "descuento";
-    
-                            }
-                        })
-    
-            </script>';
-        }
-
-      }
-
-    }
-
-
-
-    	/*=============================================
-            BORRAR INSCRIPCION
-	=============================================*/
-  static public function ctrBorrarInscripcion(){
-    // var_dump($_GET);
-     //return;
-
-    if(isset($_GET['idEliminarInscripcion'])){
-        $tabla = 'tbl_inscripcion';
-        $datos = $_GET['idEliminarInscripcion'];
-
-
-        $respuesta = ModeloGlobales::mdlBorrarInscripcion($tabla, $datos);
-        
-        // var_dump($respuesta);
-        // return;
-        
-        if($respuesta == true){
-
-         
-          $descripcionEvento = "Elimino la Inscripcion";
-          $accion = "Elimino";
-
-          $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
-
-       
-      
-          
-          echo'<script>
-  
-          Swal.fire({
-               icon: "success",
-                title: "Se a eliminado correctamente",
-                showConfirmButton: true,
-                confirmButtonText: "Cerrar",
-                closeOnConfirm: false
-                }).then((result) => {
-                          if (result.value) {
-  
-                          window.location = "inscripcion";
-  
-                          }
-                      })
-  
-          </script>';
-  
-      }else{
-
-        echo'<script>
-  
-          Swal.fire({
-                icon: "warning",
-                title: "Error al borrar inscripcion",
-                showConfirmButton: true,
-                confirmButtonText: "Cerrar",
-                closeOnConfirm: false
-                }).then((result) => {
-                          if (result.value) {
-  
-                          window.location = "inscripcion";
-  
-                          }
-                      })
-  
-          </script>';
-      }
-    }
-  }
-
-  	/*=============================================
-            BORRAR MATRICULA
-	=============================================*/
-  static public function ctrBorrarMatricula(){
-    // var_dump($_GET);
-     //return;
-
-    if(isset($_GET['idEliminarMatricula'])){
-        $tabla = 'tbl_matricula';
-        $datos = $_GET['idEliminarMatricula'];
-
-
-        $respuesta = ModeloGlobales::mdlBorrarMatricula($tabla, $datos);
-        
-        // var_dump($respuesta);
-        // return;
-        
-        if($respuesta == true){
-
-          $descripcionEvento = "Elimino la Matricul";
-          $accion = "Elimino";
-
-          $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
-
-          
-          echo'<script>
-  
-          Swal.fire({
-               icon: "success",
-                title: "Se a eliminado correctamente",
-                showConfirmButton: true,
-                confirmButtonText: "Cerrar",
-                closeOnConfirm: false
-                }).then((result) => {
-                          if (result.value) {
-  
-                          window.location = "matricula";
-  
-                          }
-                      })
-  
-          </script>';
-  
-      }else{
-
-        echo'<script>
-  
-          Swal.fire({
-                icon: "warning",
-                title: "Error al borrar matricula",
-                showConfirmButton: true,
-                confirmButtonText: "Cerrar",
-                closeOnConfirm: false
-                }).then((result) => {
-                          if (result.value) {
-  
-                          window.location = "matricula";
-  
-                          }
-                      })
-  
-          </script>';
-      }
-    }
-  }
-
-  	/*=============================================
-            BORRAR Descuento
-	=============================================*/
-  static public function ctrBorrarDescuento(){
-    // var_dump($_GET);
-     //return;
-
-    if(isset($_GET['idEliminarDescuento'])){
-        $tabla = 'tbl_descuento';
-        $datos = $_GET['idEliminarDescuento'];
-
-
-        $respuesta = ModeloGlobales::mdlBorrarDescuento($tabla, $datos);
-        
-        // var_dump($respuesta);
-        // return;
-        
-        if($respuesta == true){
-
-          $descripcionEvento = "Elimino el Descuento";
-          $accion = "Elimino";
-
-          $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
-
-          
-          echo'<script>
-  
-          Swal.fire({
-               icon: "success",
-                title: "Se a eliminado correctamente",
-                showConfirmButton: true,
-                confirmButtonText: "Cerrar",
-                closeOnConfirm: false
-                }).then((result) => {
-                          if (result.value) {
-  
-                          window.location = "descuento";
-  
-                          }
-                      })
-  
-          </script>';
-  
-      }else{
-
-        echo'<script>
-  
-          Swal.fire({
-                icon: "warning",
-                title: "Error al borrar descuento",
-                showConfirmButton: true,
-                confirmButtonText: "Cerrar",
-                closeOnConfirm: false
-                }).then((result) => {
-                          if (result.value) {
-  
-                          window.location = "descuento";
-  
-                          }
-                      })
-  
-          </script>';
-      }
-    }
-  }
-
-  /*=============================================
-            BORRAR ROLES
-	=============================================*/
-  static public function ctrBorrarRoles(){
-    // var_dump($_GET);
-    // return;
-
-    if(isset($_GET['idEliminarRoles'])){
-        $tabla = 'tbl_roles';
-        $datos = $_GET['idEliminarRoles'];
-
-
-        $respuesta = ModeloGlobales::mdlBorrarRoles($tabla, $datos);
-        
-        // var_dump($respuesta);
-        // return;
-        
-        if($respuesta == true){
-
-          $descripcionEvento = "Elimino el Rol";
-          $accion = "Elimino";
-
-          $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
-
-          
-          echo'<script>
-  
-          Swal.fire({
-               icon: "success",
-                title: "Se a eliminado correctamente",
-                showConfirmButton: true,
-                confirmButtonText: "Cerrar",
-                closeOnConfirm: false
-                }).then((result) => {
-                          if (result.value) {
-  
-                          window.location = "rol";
-  
-                          }
-                      })
-  
-          </script>';
-  
-      }else{
-
-        echo'<script>
-  
-          Swal.fire({
-                icon: "warning",
-                title: "Error al borrar rol",
-                showConfirmButton: true,
-                confirmButtonText: "Cerrar",
-                closeOnConfirm: false
-                }).then((result) => {
-                          if (result.value) {
-  
-                          window.location = "rol";
-  
-                          }
-                      })
-  
-          </script>';
-      }
-    }
-  }
 
   /*=============================================
 			RANGO DINAMICO INSCRIPCION

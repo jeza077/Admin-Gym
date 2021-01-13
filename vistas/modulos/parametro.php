@@ -16,84 +16,77 @@
       </div><!-- /.container-fluid -->
   </section>  
 
-     <section class="content">
+  <section class="content">
 
-        <div class="card">
+    <div class="card">
 
-            <div class="card-body">
+      <div class="card-body">
 
-                <div class="row">
+        <!-- <div class="row"> -->
 
-                    <div class=" col-sm-12">
+        <!-- <div class=" col-sm-12"> -->
+      
+        <?php
+        $descripcionEvento = " Consulto la pantalla de Parametro";
+        $accion = "consulta";
+
+        $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
+
+        ?>
+
+        <!--========================================================
+            PARAMETROS
+        ==========================================================-->   
+
+        <table class="table table-striped table-bordered tablas text-center">
+            <thead>
+              <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Parametros</th>
+                  <th scope="col">Valor</th>
+                  <th scope="col">Editar</th>
+              
+              
+              </tr>
+            </thead>
+            <tbody>
+              <?php
+              // $tabla = "tbl_roles";
+              $item = null;
+              $valor = null;
+              
+              $parametros = ControladorUsuarios::ctrMostrarParametros($item, $valor);
+              //var_dump($parametros);
+
+              foreach ($parametros as $key => $value){
+                  echo '
+                  <tr>
+                  
+                  <td>'.($key + 1).'</td>
+                  <td>'.$value["parametro"].'</td>
+                  <td>'.$value["valor"].'</td>
+                  <td>
+                    <button class="btn btn-warning  btnEditarParametro" idParametro="'.$value["id_parametro"].'" data-toggle="modal" data-target="#modalParametros"><i class="fas fa-pencil-alt" style="color:#fff"></i></button>
+                  </td>
+                </tr>
+                ';
+              }
 
               
-                            <?php
-                            $descripcionEvento = " Consulto la pantalla de Parametro";
-                            $accion = "consulta";
+              
+              ?>                
+            </tbody>
+        </table>
 
-                            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
-                
-                            ?>
+        <!-- </div> -->
 
-                        <!--========================================================
-                                PARAMETROS
-                            ==========================================================-->   
-                            <div class="card-header">
-                           
-                                <table class="table table-striped table-bordered tablas text-center">
-                                    <thead>
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Parametros</th>
-                                        <th scope="col">Valor</th>
-                                        <th scope="col">Editar</th>
-                                    
-                                    
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <?php
-                                    // $tabla = "tbl_roles";
-                                    $item = null;
-                                    $valor = null;
-                                    
-                                    $parametros = ControladorUsuarios::ctrMostrarParametros($item, $valor);
-                                    //var_dump($parametros);
+        <!-- </div> -->
 
-                                    foreach ($parametros as $key => $value){
-                                        echo '
-                                        <tr>
-                                        
-                                        <td>'.($key + 1).'</td>
-                                        <td>'.$value["parametro"].'</td>
-                                        <td>'.$value["valor"].'</td>
-                                        <td>
-                                        <div class="btn-group">
-                                            <button class="btn btn-warning  btnEditarParametro" idParametro="'.$value["id_parametro"].'" ><i class="fas fa-pencil-alt" style="color:#fff" data-toggle="modal" data-target="#modalParametros"></i></button>
-                                    </tr>
-                                    ';
-                                    }
+      </div>
 
-                                    
-                                    
-                                    ?>
+    </div>
 
-                                                
-                                    </tbody>
-                                </table>
-
-                         
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
+  </section>
 
 </div>
 

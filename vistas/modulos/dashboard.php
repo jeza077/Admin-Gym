@@ -21,26 +21,26 @@
      <?php
 
         //** ALERTA POR FECHA DE VENCIMIENTO */
-        $tabla = "tbl_usuarios";
-        $item = "id_usuario";
-        $valor = $_SESSION["id_usuario"];
+        // $tabla = "tbl_usuarios";
+        // $item = "id_usuario";
+        // $valor = $_SESSION["id_usuario"];
 
-        $usuario = ControladorUsuarios::ctrMostrarUsuarios($tabla, $item, $valor);
+        // $usuario = ControladorUsuarios::ctrMostrarUsuarios($tabla, $item, $valor);
 
-        $fechaUsuario = $usuario['fecha_vencimiento'];
-        $fechaHoy = date('Y-m-d');
-        $date1 = new DateTime($fechaHoy);
-        $date2 = new DateTime($fechaUsuario);
-        $diff = $date1->diff($date2);
+        // $fechaUsuario = $usuario['fecha_vencimiento'];
+        // $fechaHoy = date('Y-m-d');
+        // $date1 = new DateTime($fechaHoy);
+        // $date2 = new DateTime($fechaUsuario);
+        // $diff = $date1->diff($date2);
 
-        if($diff->days <= 7){
+        // if($diff->days <= 7){
 
-          $mensaje = "Tu usuario vencera en $diff->days dias! Cambia tu contraseña para resetear la fecha de vencimiento.";
-          $icono = "info";
-        //   $modulo = "dashboard";
-          $alerta = ControladorGlobales::ctrAlertas($mensaje, $icono);
+        //   $mensaje = "Tu usuario vencera en $diff->days dias! Cambia tu contraseña para resetear la fecha de vencimiento.";
+        //   $icono = "info";
+        // //   $modulo = "dashboard";
+        //   $alerta = ControladorGlobales::ctrAlertas($mensaje, $icono);
           
-        }
+        // }
         
         //**Bitacora
         $descripcionEvento = " Consulto Inicio";

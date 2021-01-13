@@ -56,10 +56,12 @@
 
             <?php
                 // $tabla = "tbl_roles";
-                $item = null;
-                $valor = null;
+                $item1 = null;
+                $valor1 = null;
+                $item2 = null;
+                $valor2 = null;
                 
-                $permisosRol = ControladorMantenimientos::ctrMostrarPermisosRoles($item,$valor);
+                $permisosRol = ControladorMantenimientos::ctrMostrarPermisosRoles($item1, $valor1, $item2, $valor2);
                 // var_dump($permisosRol);
 
                 foreach ($permisosRol as $key => $value){
@@ -83,21 +85,21 @@
 
                         
                         }else if($value["consulta"] == 0){
-                            echo' <td><button class="btn btn-danger btn-md">No</button></td>';                           
+                            echo' <td><button class="btn btn-danger btn-md btnActivarPermisos" idPermiso="'.$value["id_permiso"].'" estadoPermiso="1" tipoPermiso="consulta">No</button></td>';                           
                         
                         } else {
  
-                            echo' <td><button class="btn btn-success btn-md">Si</button></td>';                    
+                            echo' <td><button class="btn btn-success btn-md btnActivarPermisos" idPermiso="'.$value["id_permiso"].'" estadoPermiso="0" tipoPermiso="consulta">Si</button></td>';                    
                         }
 
                         if($value["agregar"] == null){
                             echo' <td>**No tiene permiso aun**</td>';                           
                         
                         }else if($value["agregar"] == 0){
-                            echo' <td><button class="btn btn-danger btn-md">No</button></td>';                           
+                            echo' <td><button class="btn btn-danger btn-md btnActivarPermisos" idPermiso="'.$value["id_permiso"].'" estadoPermiso="1" tipoPermiso="agregar">No</button></td>';                           
                         
                         } else {
-                            echo' <td><button class="btn btn-success btn-md">Si</button></td>';
+                            echo' <td><button class="btn btn-success btn-md btnActivarPermisos" idPermiso="'.$value["id_permiso"].'" estadoPermiso="0" tipoPermiso="agregar">Si</button></td>';
 
                         }
 
@@ -105,10 +107,10 @@
                             echo' <td>**No tiene permiso aun**</td>';                           
                         
                         }else if($value["actualizar"] == 0){
-                            echo' <td><button class="btn btn-danger btn-md">No</button></td>';                           
+                            echo' <td><button class="btn btn-danger btn-md btnActivarPermisos" idPermiso="'.$value["id_permiso"].'" estadoPermiso="1" tipoPermiso="actualizar">No</button></td>';                           
                         
                         } else {
-                            echo' <td><button class="btn btn-success btn-md">Si</button></td>';
+                            echo' <td><button class="btn btn-success btn-md btnActivarPermisos" idPermiso="'.$value["id_permiso"].'" estadoPermiso="0" tipoPermiso="actualizar">Si</button></td>';
 
                         }
 
@@ -116,10 +118,10 @@
                             echo' <td>**No tiene permiso aun**</td>';                           
                         
                         }else if($value["eliminar"] == 0){
-                            echo' <td><button class="btn btn-danger btn-md">No</button></td>';                           
+                            echo' <td><button class="btn btn-danger btn-md btnActivarPermisos" idPermiso="'.$value["id_permiso"].'" estadoPermiso="1" tipoPermiso="eliminar">No</button></td>';                           
                         
                         } else {
-                            echo' <td><button class="btn btn-success btn-md">Si</button></td>';
+                            echo' <td><button class="btn btn-success btn-md btnActivarPermisos" idPermiso="'.$value["id_permiso"].'" estadoPermiso="0" tipoPermiso="eliminar">Si</button></td>';
                         }
                      
                 }
@@ -137,206 +139,5 @@
     </div>
 
   </section>
-
-</div>
-
-
-<!--=======================================================================
-                  MODAL AGREGAR ROL
-=========================================================================-->
-
-<div class="modal fade" id="modalNuevoRol" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  
-  <div class="modal-dialog " role="document">
-
-    <div class="modal-content">
-
-      <form role="form" method="post" autocomplete="off">
-
-        <!--=====================================
-        CABEZA DEL MODAL
-        ======================================-->
-
-        <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Nuevo rol</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-
-        <!--=====================================
-        CUERPO DEL MODAL
-        ======================================-->
-
-        <div class="modal-body">
-
-            <div class="form-group col-md-12">
-              <label for="Rol"> Rol</label>
-              <input type="text" class="form-control nombre mayus" name="nuevoRol" value="" required>
-            </div>
-
-            <div class="form-group col-md-12">
-              <label for="Descripcion">Descripcion</label>
-              <input type="textarea" class="form-control nombre mayus" name="nuevaDescripcionRol" value="" required>
-            </div>
-
-        </div>
-
-        <!--=====================================
-        PIE DEL MODAL
-        ======================================-->
-
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-primary btnGuardarRol">Guardar</button>
-          <button type="button" class="btn btn-orange" data-dismiss="modal">Salir</button>
-          
-        </div>
-
-        <?php
-
-          // $crearRol = new ControladorMantenimientos();
-          // $crearRol -> ctrRolesInsertar();
-
-        ?>
-
-
-
-
-      </form>
-
-    
-
-    </div>
-
-  </div>
-        
-
-</div>
-
-
-
-<!--==============================================================================
-                     MODAL PERMISOS ROL
-==============================================================-->
-
-<div class="modal fade" id="modalEditarPermisos" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  
-  <div class="modal-dialog modal-lg  " role="document">
-
-    <div class="modal-content">
-
-      <form role="form" method="post" autocomplete="off">
-
-        <!--=====================================
-        CABEZA DEL MODAL
-        ======================================-->
-
-        <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Editar permiso para pantallas</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-
-        <!--=====================================
-        CUERPO DEL MODAL
-        ======================================-->
-
-        <div class="modal-body">
-            
-          <table class="table table-striped table-bordered text-center">
-            
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Pantallas</th>
-                <th scope="col">Visualizar</th>
-                <th scope="col">Guardar</th>
-                <th scope="col">Actualizar</th>
-                <th scope="col">Eliminar</th>
-      
-              </tr>
-            </thead>
-            <tbody>  
-              <?php
-                $tabla = "tbl_objetos";
-                $item = null;
-                $valor = null;
-
-                $roles = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
-
-                // echo '<pre>';
-                // var_dump($roles);
-                // echo '</pre>';
-
-                // foreach ($roles as $key => $value) {
-                
-                //   echo'
-                //     <tr>
-                //         <td>'.($key + 1).'</td>';
-                //         if($value["objeto"] == 'Default'){
-                //         echo '
-                //         <td><option selected="selected" value="'.$value["id_objeto"].'">'.$value["objeto"].'</option></td>';
-                //         } else {
-                //         echo '
-                //         <td><option value="'.$value["id_objeto"].'">'.$value["objeto"].'</option></td>';
-                //         }
-                //         echo '
-                //         <td><div class="form-group">
-                //         <div class="custom-control custom-checkbox">
-                //           <input class="chkAutoriza" type="checkbox" id="chkAutoriza" value="option1">
-                //           <label for="customCheckbox1" ></label>
-                //         </div></td>
-                //         <td><div class="custom-control custom-checkbox">
-                //           <input class="chkAutoriza" type="checkbox" id="chkAutoriza" checked="">
-                //           <label for="customCheckbox2"></label>
-                //         </div></td>
-                //         <td><div class="custom-control custom-checkbox">
-                //           <input class="chkAutoriza" type="checkbox" id="chkAutoriza" checked="">
-                //           <label for="customCheckbox3"></label>
-                //         </div></td>
-                //         <td><div class="custom-control custom-checkbox">
-                //           <input class="chkAutoriza" type="checkbox" id="chkAutoriza" checked="">
-                //           <label for="customCheckbox4"></label>
-                //         </div></td>
-                //       </tr>';
-
-                // }   
-              ?>            
-                          
-            </tbody>
-            
-          </table>
-      
-        </div>
-
-        <!--=====================================
-        PIE DEL MODAL
-        ======================================-->
-
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-primary">Guardar</button>
-           <button type="button" class="btn btn-orange" data-dismiss="modal">Salir</button>
-        </div>
-
-        <?php
-
-          // $crearRol = new ControladorMantenimientos();
-          // $crearRol->ctrRolesInsertar();
-
-        ?>
-
-
-
-
-      </form>
-
-
-    
-
-    </div>
-
-  </div>
-        
 
 </div>

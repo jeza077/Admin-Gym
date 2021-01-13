@@ -2,10 +2,146 @@
 
 require_once "../controladores/mantenimiento.controlador.php";
 require_once "../modelos/mantenimiento.modelo.php";
+require_once "../controladores/usuarios.controlador.php";
+require_once "../modelos/usuarios.modelo.php";
+
+class AjaxMantenimiento{
+
+    /*========================================
+        MOSTRAR-EDITAR DOCUMENTO
+    ==========================================*/ 
+    public $idDocumento;
+
+    public function ajaxEditarDocumento(){
+
+        $item = "id_documento";
+
+        $valor = $this->idDocumento;
+
+        $respuesta = ControladorMantenimientos::ctrMostrarDocumento($item,$valor);
+
+        echo json_encode($respuesta);
+    
+    }
+    
+    
+    /*=============================================
+            ACTIVAR DOCUMENTO
+    ==============================================*/
+    public $idDocumentoActivar;
+    public $estadoDocumento;
+    
+    public function ajaxActivarDocumento(){ 
+
+        $tabla = "tbl_documento";
+
+        $item1 = "estado";
+        $valor1 = $this->estadoDocumento;
+
+        $item2 = "id_documento";
+        $valor2 = $this->idDocumentoActivar;
+
+        $item3 = null;
+        $valor3 = null;
+
+        $item4 = null;
+        $valor4 = null;
+
+        $respuesta = ModeloMantenimiento::mdlActualizarMantenimiento($tabla, $item1, $valor1, $item2, $valor2, $item3, $valor3, $item4, $valor4);
+        echo json_encode($respuesta);
+
+        // $respuesta = ModeloMantenimiento::mdlActualizarRol($tabla,$item1,$valor1,$item2,$valor2);
+        // echo json_encode($respuesta);
+
+
+    }    
+
+
+
+    /*========================================
+        GUARDAR PROVEEDOR
+    ==========================================*/ 
+    public $nombre;
+    public $correo;
+    public $telefono;
+
+    public function ajaxNuevoProveedor(){
+        // $nombreProv = $this->nombre;
+        // $correoProv = $this->correo;
+        // $telefonoProv = $this->telefono;
+        $datos = array(
+            'nombre' => $this->nombre,
+            'correo' => $this->correo,
+            'telefono' => $this->telefono
+        );
+
+        $respuesta = ControladorMantenimientos::ctrNuevoProveedor($datos);
+
+        echo json_encode($respuesta);
+    
+    }
+    
+    /*========================================
+        MOSTRAR-EDITAR PROVEEDOR
+    ==========================================*/ 
+    public $idProveedor;
+
+    public function ajaxMostrarProveedor(){
+
+        $tabla = "tbl_proveedores";
+        $item = "id_proveedor";
+        $valor = $this->idProveedor;
+
+        $respuesta = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
+
+        echo json_encode($respuesta);
+    
+    }
+
+}
+
+/*========================================
+    MOSTRAR-EDITAR DOCUMENTO
+==========================================*/ 
+if(isset($_POST["idDocumento"])){ 
+    $editar = new AjaxMantenimiento();
+    $editar->idDocumento = $_POST["idDocumento"];
+    $editar-> ajaxEditarDocumento();
+}  
+
+/*========================================
+        ACTIVAR DOCUMENTO
+==========================================*/ 
+if(isset($_POST["idDocumentoActivar"])){ 
+    $activarDocumento = new AjaxMantenimiento();
+    $activarDocumento->estadoDocumento = $_POST["estadoDocumento"];
+    $activarDocumento->idDocumentoActivar = $_POST["idDocumentoActivar"];
+    $activarDocumento->ajaxActivarDocumento();
+}  
+
+/*========================================
+        NUEVO PROVEEDOR
+==========================================*/ 
+if(isset($_POST["nombre"])){ 
+    $nuevoProveedor = new AjaxMantenimiento();
+    $nuevoProveedor->nombre = $_POST["nombre"];
+    $nuevoProveedor->correo = $_POST["correo"];
+    $nuevoProveedor->telefono = $_POST["telefono"];
+    $nuevoProveedor->ajaxNuevoProveedor();
+}  
+/*========================================
+    MOSTRAR-EDITAR PROVEEDOR
+==========================================*/ 
+if(isset($_POST["idProveedor"])){ 
+    $mostrarProveedor = new AjaxMantenimiento();
+    $mostrarProveedor->idProveedor = $_POST["idProveedor"];
+    $mostrarProveedor->ajaxMostrarProveedor();
+}  
+
+
+
 
 class AjaxRol{
-
-    
 
     /*=============================================
                 GUARDAR ROL
@@ -54,7 +190,7 @@ class AjaxRol{
 
 
     /*=============================================
-                   Activar Rol
+            ACTIVAR ROL
     ==============================================*/
     public $activarRol;
     public $activarid;
@@ -76,6 +212,36 @@ class AjaxRol{
 
     }    
 
+
+    /*=============================================
+            ACTIVAR PERMISOS ROL
+    ==============================================*/
+    public $idPermiso;
+    public $estadoPermiso;
+    public $tipoPermiso;
+
+    
+    public function ajaxActivarPermisos(){ 
+
+        $tabla = "tbl_permisos";
+
+        $item1 = $this->tipoPermiso;
+        $valor1 = $this->estadoPermiso;
+
+        $item2 = "id_permiso";
+        $valor2 = $this->idPermiso;
+        
+        $item3 = null;
+        $valor3 = null;
+
+        $item4 = null;
+        $valor4 = null;
+
+        $respuesta = ModeloMantenimiento::mdlActualizarMantenimiento($tabla, $item1, $valor1, $item2, $valor2, $item3, $valor3, $item4, $valor4);
+        echo json_encode($respuesta);
+
+
+    }    
 
 }    
 
@@ -108,9 +274,8 @@ if(isset($_POST["pantalla"])){
 
 
 /*========================================
-Activar Rol
+        ACTIVAR ROL
 ==========================================*/ 
-
 if(isset($_POST["activarRol"])){ 
     $activarRol = new ajaxRol();
     $activarRol->activarRol = $_POST["activarRol"];
@@ -119,12 +284,19 @@ if(isset($_POST["activarRol"])){
 }  
 
 
-
+/*=============================================
+        ACTIVAR PERMISOS ROL
+==============================================*/
+if(isset($_POST["idPermiso"])){ 
+    $activarPermisos = new ajaxRol();
+    $activarPermisos->idPermiso = $_POST["idPermiso"];
+    $activarPermisos->estadoPermiso = $_POST["estadoPermiso"];
+    $activarPermisos->tipoPermiso = $_POST["tipoPermiso"];
+    $activarPermisos->ajaxActivarPermisos();
+}  
 
 
 class AjaxInscripcion{
-
-
 
     /*=============================================
                    Activar INSCRIPCIONES
@@ -153,7 +325,7 @@ class AjaxInscripcion{
 }    
 
 /*========================================
-Activar INSCRIPCION
+        ACTIVAR INSCRIPCION
 ==========================================*/ 
 
 if(isset($_POST["activarInscripcion"])){ 
@@ -170,28 +342,30 @@ if(isset($_POST["activarInscripcion"])){
 
 class AjaxMatricula{
 
-
-
     /*=============================================
-                   Activar Matricula
+            ACTIVAR MATRICULA
     ==============================================*/
-    public $activarMatricula;
-    public $activarid;
+    public $idMatricula;
+    public $estadoMatricula;
     
     public function ajaxActivarMatricula(){ 
 
         $tabla = "tbl_matricula";
 
         $item1 = "estado";
-        $valor1 = $this->activarMatricula;
+        $valor1 = $this->estadoMatricula;
 
         $item2 = "id_matricula";
-        $valor2 = $this->activarid;
+        $valor2 = $this->idMatricula;
 
+        $item3 = null;
+        $valor3 = null;
 
-        $respuesta = ModeloMantenimiento::mdlActualizarMatricula($tabla,$item1,$valor1,$item2,$valor2);
+        $item4 = null;
+        $valor4 = null;
+
+        $respuesta = ModeloMantenimiento::mdlActualizarMantenimiento($tabla, $item1, $valor1, $item2, $valor2, $item3, $valor3, $item4, $valor4);
         echo json_encode($respuesta);
-
 
     }    
 
@@ -199,61 +373,63 @@ class AjaxMatricula{
 }    
 
 /*========================================
-Activar MATRICULA
+    ACTIVAR MATRICULA
 ==========================================*/ 
 
-if(isset($_POST["activarMatricula"])){ 
+if(isset($_POST["idMatricula"])){ 
 
-    $activarMatricula = new ajaxMatricula();
-    $activarMatricula->activarMatricula = $_POST["activarMatricula"];
-    $activarMatricula->activarid = $_POST["activarid"];
+    $activarMatricula = new AjaxMatricula();
+    $activarMatricula->idMatricula = $_POST["idMatricula"];
+    $activarMatricula->estadoMatricula = $_POST["estadoMatricula"];
     $activarMatricula->ajaxActivarMatricula();
-
-
 }  
 
 
 class AjaxDescuento{
 
-
-
     /*=============================================
-                   Activar DESCUENTO
+            ACTIVAR DESCUENTO
     ==============================================*/
-    public $activarDescuento;
-    public $activarid;
+    public $idDescuento;
+    public $estadoDescuento;
     
     public function ajaxActivarDescuento(){ 
 
-        $tabla = "tbl_Descuento";
+        $tabla = "tbl_descuento";
 
         $item1 = "estado";
-        $valor1 = $this->activarDescuento;
+        $valor1 = $this->estadoDescuento;
 
-        $item2 = "id_matricula";
-        $valor2 = $this->activarid;
+        $item2 = "id_descuento";
+        $valor2 = $this->idDescuento;
 
+        $item3 = null;
+        $valor3 = null;
 
-        $respuesta = ModeloMantenimiento::mdlActualizarDescuento($tabla,$item1,$valor1,$item2,$valor2);
+        $item4 = null;
+        $valor4 = null;
+
+        $respuesta = ModeloMantenimiento::mdlActualizarMantenimiento($tabla, $item1, $valor1, $item2, $valor2, $item3, $valor3, $item4, $valor4);
         echo json_encode($respuesta);
+
+
+        // $respuesta = ModeloMantenimiento::mdlActualizarDescuento($tabla,$item1,$valor1,$item2,$valor2);
+        // echo json_encode($respuesta);
 
 
     }    
 
-
 }    
 
 /*========================================
-Activar DESCUENTO
+    ACTIVAR DESCUENTO
 ==========================================*/ 
 
-if(isset($_POST["activarDescuento"])){ 
+if(isset($_POST["idDescuento"])){ 
 
-    $activarDescuento = new ajaxDescuento();
-    $activarDescuento->activarMatricula = $_POST["activarDescuento"];
-    $activarDescuento->activarid = $_POST["activarid"];
+    $activarDescuento = new AjaxDescuento();
+    $activarDescuento->idDescuento = $_POST["idDescuento"];
+    $activarDescuento->estadoDescuento = $_POST["estadoDescuento"];
     $activarDescuento->ajaxActivarDescuento();
-
-
 }  
 

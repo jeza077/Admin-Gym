@@ -4,13 +4,13 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Matricula</h1>
+            <h1>Documentos</h1>
           </div>
           <div class="col-sm-6">
-                <button class="btn btn-orange float-right"  data-toggle="modal" data-target="#modalNuevaMatricula">
-                  Nueva Matricula      
+                <button class="btn btn-orange float-right"  data-toggle="modal" data-target="#modalNuevoDocumento">
+                  Nuevo Documento      
                 </button>
-                <button class="btn btn-outline-danger btnExportarMatricula float-right mr-3 ">
+                <button class="btn btn-outline-danger btnExportarDocumento float-right mr-3 ">
                 Exportar PDF      
                </button>
           </div>
@@ -25,10 +25,10 @@
       <div class="card-body">
 
         <?php
-            $descripcionEvento = " Consulto la pantalla de Matricula";
-            $accion = "consulta";
+            // $descripcionEvento = " Consulto la pantalla de Documentos";
+            // $accion = "Consulta";
 
-            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
+            // $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
 
         ?>
 
@@ -40,13 +40,8 @@
             <thead>
               <tr>
                 <th scope="col">#</th>
-
-                <th scope="col">Tipo de matricula</th>
-
-                <th scope="col">Precio</th>
-
+                <th scope="col">Tipo Documento</th>
                 <th scope="col">Estado</th>
-
                 <th scope="col">Acciones</th>
 
               </tr>
@@ -54,33 +49,32 @@
             
             <tbody>  
                 <?php
-                  // $tabla = "tbl_matricula";
+                  $tabla = "tbl_documento";
                   $item = null;
                   $valor = null;
                   
-                  $matricula = ControladorMantenimientos::ctrMostrarMatricula($item,$valor);
-                  // var_dump($rol);
+                  $documentos = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
+                  // var_dump($documentos);
 
-                  foreach ($matricula as $key => $value){
+                  foreach ($documentos as $key => $value){
                     echo '
-                      <tr>
-                    
-                      <td>'.($key + 1).'</td>
-                      <td>'.$value["tipo_matricula"].'</td>
-                      <td>'.$value["precio_matricula"].'</td>';
-                      if($value['estado'] != 0){
-                        echo '<td><button class="btn btn-success btn-md btnActivarMatricula" idMatricula="'.$value["id_matricula"].'" estadoMatricula="0">Activado</button></td>';
-                      }else{
-                        echo '<td><button class="btn btn-danger btn-md btnActivarMatricula" idMatricula="'.$value["id_matricula"].'" estadoMatricula="1">Desactivado</button></td>';
-                      } 
-                      echo'
-                      <td>
-                      <button class="btn btn-warning btnEditarMatricula" editarIdMatricula="'.$value["id_matricula"].'" data-toggle="modal" data-target="#modalEditarMatricula" data-toggle="tooltip" data-placement="left" title="Editar"><i class="fas fa-pencil-alt" style="color:#fff"></i></button>
+                      <tr>  
+                          <td>'.($key + 1).'</td>
+                          <td>'.$value["tipo_documento"].'</td>';
+                          if($value['estado'] != 0){
+                            echo '<td><button class="btn btn-success btn-md btnActivarDocumento" idDocumento="'.$value["id_documento"].'" estadoDocumento="0">Activado</button></td>';
+                          }else{
+                            echo '<td><button class="btn btn-danger btn-md btnActivarDocumento" idDocumento="'.$value["id_documento"].'" estadoDocumento="1">Desactivado</button></td>';
+                          } 
+                          echo '
+                          <td>
+                              <button class="btn btn-warning btnEditarDocumento" idDocumento="'.$value["id_documento"].'" data-toggle="modal" data-target="#modalEditarDocumento" data-toggle="tooltip" data-placement="left" title="Editar"><i class="fas fa-pencil-alt" style="color:#fff"></i></button>
 
-                      <button class="btn btn-danger btnEliminarMatricula" ideliminarMatricula="'.$value["id_matricula"].'" data-toggle="tooltip" data-placement="left" title="Borrar"><i class="fas fa-trash-alt"></i></button></td>
-                  </tr>  '; 
+                              <button class="btn btn-danger btnEliminarDocumento" idEliminarDocumento="'.$value["id_documento"].'" data-toggle="tooltip" data-placement="left" title="Borrar"><i class="fas fa-trash-alt"></i></button></td>
+                          </td>
+                      </tr>  '; 
                   }       
-                ?>                
+                  ?>                
               
             </tbody>
         </table>       
@@ -98,9 +92,9 @@
 MODAL AGREGAR NUEVA MATRICULA
 ======================================-->
 
-<div class="modal fade" id="modalNuevaMatricula" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modalNuevoDocumento" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   
-  <div class="modal-dialog " role="document">
+  <div class="modal-dialog" role="document">
 
     <div class="modal-content">
 
@@ -111,7 +105,7 @@ MODAL AGREGAR NUEVA MATRICULA
         ======================================-->
 
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Nueva Matricula</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Nuevo Documento</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -123,14 +117,14 @@ MODAL AGREGAR NUEVA MATRICULA
 
         <div class="modal-body">
           <div class="form-group col-md-12">
-            <label for="Rol">Tipo Matricula</label>
-            <input type="text" class="form-control nombre mayus" name="nuevoMatricula" value="" placeholder="Ingresa Matricula" required>
+            <label for="Rol">Tipo Documento</label>
+            <input type="text" class="form-control nombre mayus" name="nuevoDocumento" value="" placeholder="Ingresa Documento" required>
           </div>
 
-          <div class="form-group col-md-12">
+          <!-- <div class="form-group col-md-12">
             <label for="Descripcion">Precio Matricula</label>
             <input type="textarea" class="form-control preciom" name="nuevoPrecio" value="" placeholder="Ingresa Precio Matricula" required>
-          </div>
+          </div> -->
         </div>
 
         <!--=====================================
@@ -144,8 +138,8 @@ MODAL AGREGAR NUEVA MATRICULA
 
         <?php
 
-          $crearMatricula = new ControladorMantenimientos();
-          $crearMatricula-> ctrMatriculaInsertar();
+          $crearDocumento = new ControladorMantenimientos();
+          $crearDocumento-> ctrDocumentoInsertar();
 
         ?>
 
@@ -168,7 +162,7 @@ MODAL AGREGAR NUEVA MATRICULA
 MODAL EDITAR MATRICULA
 ======================================-->
 
-<div class="modal fade" id="modalEditarMatricula" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modalEditarDocumento" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   
   <div class="modal-dialog " role="document">
 
@@ -181,7 +175,7 @@ MODAL EDITAR MATRICULA
         ======================================-->
 
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Editar Matricula</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Editar Documento</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -193,15 +187,15 @@ MODAL EDITAR MATRICULA
 
         <div class="modal-body">
           <div class="form-group col-md-12">
-            <label for="Rol">Tipo Matricula</label>
-            <input type="text" class="form-control nombre mayus" id="editarMatricula" name="editarMatricula" value="" required>
+            <label for="Rol">Tipo Documento</label>
+            <input type="text" class="form-control nombre mayus" id="editarDocumento" name="editarDocumento" value="" required>
           </div>
 
-          <div class="form-group col-md-12">
+          <!-- <div class="form-group col-md-12">
             <label for="Descripcion">Precio Matricula</label>
             <input type="textarea" class="form-control preciom" id="editarPrecioMatricula" name="editarPrecioMatricula" value="" required>
-          </div>
-          <input type="hidden" id="editarIdMatricula" name="editarIdMatricula">
+          </div> -->
+          <input type="hidden" id="editarIdDocumento" name="editarIdDocumento">
         </div>
 
         <!--=====================================
@@ -215,8 +209,8 @@ MODAL EDITAR MATRICULA
 
         <?php
 
-          $editarMatricula = new ControladorMantenimientos();
-          $editarMatricula->ctrEditarMatricula();
+          $editarDocumento = new ControladorMantenimientos();
+          $editarDocumento->ctrEditarDocumento();
 
         ?>
 
@@ -237,8 +231,8 @@ MODAL EDITAR MATRICULA
 
 <?php
 
- $borrarMatricula = new ControladorMantenimientos();
- $borrarMatricula->ctrBorrarMatricula();
+ $borrarDocumento = new ControladorMantenimientos();
+ $borrarDocumento->ctrBorrarDocumento();
 
 ?>
 

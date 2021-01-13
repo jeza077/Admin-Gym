@@ -14,6 +14,34 @@ $('#DataTables_Table_0_filter input[type=search]').addClass('ClaseBuscar');
 }
 
 /*=============================================
+****    FUNCION ALERTAS
+=============================================*/
+const alertaDinamica = (titulo, texto, icono) => {
+    var pathname = window.location.href;
+    // $host= $_SERVER["HTTP_HOST"];
+    // $url= $_SERVER["REQUEST_URI"];
+    // $urlF = "http://" . $host . $url;
+    if(pathname == 'http://localhost/admin/dashboard'){
+        Swal.fire({
+            title: titulo,
+            text: texto,
+            icon: icono,
+            showConfirmButton: true,
+            confirmButtonText: "Cerrar"
+        });
+    }
+
+}
+
+// alertaDinamica('hola', 'prueba', 'warning')
+
+// setTimeout(() => {
+    
+//     alertaDinamica('holaHola', 'prueba2', 'warning')
+// }, 3000);
+
+
+/*=============================================
     DATATABLES
 =============================================*/
 $(".tablas").DataTable({
@@ -46,7 +74,15 @@ $(".tablas").DataTable({
 		}
 
 	}
-  });
+});
+
+ //Initialize Select2 Elements
+ $('.select2').select2()
+
+ //Initialize Select2 Elements
+ $('.select2bs4').select2({
+   theme: 'bootstrap4'
+ })
 
 
 //*============================================
@@ -64,10 +100,10 @@ for (let i = 0; i < claseActivo.length; i++) {
         $(claseActivo[i]).addClass('active');     
         break;
     }
-    if(pathname == 'http://localhost/Admin-Gym/productos' || pathname == 'http://localhost/Admin-Gym/equipo'){
+    if(pathname == 'http://localhost/admin/productos' || pathname == 'http://localhost/admin/equipo'){
         $(stock).addClass('active');
     }
-    if(pathname == 'http://localhost/Admin-Gym/administrar-venta' || pathname == 'http://localhost/Admin-Gym/crear-venta' || pathname == 'http://localhost/Admin-Gym/reportes'){
+    if(pathname == 'http://localhost/admin/administrar-venta' || pathname == 'http://localhost/admin/crear-venta' || pathname == 'http://localhost/admin/reportes'){
         $(ventas).addClass('active');
     }
 }
@@ -221,7 +257,7 @@ function permitirUnEspacio(event) {
 //*==========================================
 //*		FUNCION PARA VALIDAR EMAIL	
 //*===========================================
-function validarEmail(selector) {
+function validarEmail(selector, alerta) {
 	selector.blur(function() {
 		var emailIngresado = selector.val();
 
@@ -241,23 +277,22 @@ function validarEmail(selector) {
 				// console.log(respuesta);
 	
 				if(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.([a-zA-Z]{2,4})+$/.test(emailIngresado) && respuesta){
-					// selector.after('<div class="alert alert-warning mt-2">Email ya existente, ingrese uno diferente.</div>');
-					// setTimeout(function () {
-					// 	$('.alert').remove();
-					// }, 3000)
-					Swal.fire({
-						title: "Email ya existente, ingrese uno diferente.",
-						icon: "error",
-						// background: "rgb(255 75 75 / 85%)",
-						toast: true,
-						position: "top",
-						showConfirmButton: false,
-						timer: 3000
-					});
+                
+                    alerta.append('<div class="alert alert-danger fade show mt-2" role="alert"><i class="icon fas fa-ban"></i>Email ya existente, ingrese uno diferente.</div>');
+                    
+					// Swal.fire({
+					// 	title: "Email ya existente, ingrese uno diferente.",
+					// 	icon: "error",
+					// 	// background: "rgb(255 75 75 / 85%)",
+					// 	toast: true,
+					// 	position: "top",
+					// 	showConfirmButton: false,
+					// 	timer: 3000
+					// });
 					
 					//E inmeditamente Limpiamos el input
 					// selector.val("");
-					// selector.focus();
+					selector.focus();
 				} else if(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.([a-zA-Z]{2,4})+$/.test(emailIngresado) && respuesta == false) {
 					selector.addClass('border-valid').removeClass('border-invalid');
 					// setTimeout(function () {
@@ -468,9 +503,10 @@ function sinCaracteres(event) {
 /*=============================================
     FUNCION VALIDAR DOCUMENTO
 =============================================*/
-function validarDoc(selector) {
+function validarDoc(selector, alerta) {
     selector.blur(function() {
         var documentoIngresado = selector.val();
+        $('.alert').remove();
         // console.log(documentoIngresado)
     
         var datos = new FormData();
@@ -489,20 +525,23 @@ function validarDoc(selector) {
                 // console.log(respuesta);
     
                 if(respuesta){
-                    Swal.fire({
-                        title: "Numero de documento ya existente, ingrese uno diferente.",
-                        icon: "error",
-                        toast: true,
-                        position: "top",
-                        showConfirmButton: false,
-                        timer: 3000
-                    });
+                    alerta.append('<div class="alert alert-danger fade show mt-2" role="alert"><i class="icon fas fa-ban"></i>Numero de documento ya existente, ingrese uno diferente.</div>');
+                    // Swal.fire({
+                    //     title: "Numero de documento ya existente, ingrese uno diferente.",
+                    //     icon: "error",
+                    //     toast: true,
+                    //     position: "top",
+                    //     showConfirmButton: false,
+                    //     timer: 3000
+                    // });
                     
                     
                     //E inmeditamente Limpiamos el input
                     // selector.val("");
                     selector.focus();
-                } 
+                } else {
+                    $('.alert').remove();
+                }
             }
         });
     })
@@ -518,6 +557,42 @@ $(document).on('keyup', '.mayus', function () {
     valor.val(valor.val().toUpperCase());
 });
 
+/** ------------------------------------*/
+//     FUNCION BORRAR DINAMICO
+// --------------------------------------*/ 
+function borrarDinamico(btnSelector, atributo, nombreGet, mensajeTitulo, mensajeTexto, ruta) {
+
+    $(document).on('click', btnSelector, function () {
+
+        var id = $(this).attr(atributo);
+
+        Swal.fire({
+            title: mensajeTitulo,
+            text: mensajeTexto,
+            icon: "info",
+            showCancelButton: true,
+            cancelButtonColor: "#DC3545",
+            heightAuto: false,
+            allowOutsideClick: false
+        }).then((result)=>{
+            if(result.value){
+                window.location = `index.php?ruta=${ruta}&${nombreGet}=${id}`;
+                
+            }
+        });
+    });
+
+}
+
+/** ------------------------------------*/
+//     FUNCION CANCELAR ALERTA
+// --------------------------------------*/ 
+function cancelarAlerta(btnCancelar) {
+    $(document).on('click', btnCancelar, function (e) { 
+        e.preventDefault();
+        Swal.close();
+    });
+}
 
 /*=============================================
     FUNCION VERIFCAR DOCUMENTO
@@ -562,8 +637,9 @@ $(document).on('keyup', '.mayus', function () {
 /*=============================================
     EJECUCION DE VALIDACIONES
 =============================================*/
-var identidad = $('.numeroDocumento');
-validarDoc(identidad);
+// var identidad = $('.numeroDocumento');
+// validarDoc(identidad);
+validarEmail($('.email'), $('.alertaEmail')); //Validar que no exista en DB, email de la persona ingresada
 $('.nombre').keydown(sinNumeros)
 $('.nombre').keydown(sinCaracteres)
 $('.apellidos').keydown(sinNumeros)
@@ -728,5 +804,39 @@ function exportarPdf(btnExportar, rutaArchivoPdf) {
     //       window.open("extensiones/tcpdf/pdf/bitacora-pdf.php?&fechaInicial="+fechaInicial+"&fechaFinal="+fechaFinal);
     //     }
     
+    });
+}
+
+
+//** FUNCION SELECT PARA PROVEEDORES
+function selectDinamico() {
+    
+    var tabla = 'tbl_proveeedores';
+    var datos = new FormData();
+    datos.append("tabla", tabla);
+    
+    $.ajax({ 
+        url:"ajax/inventario.ajax.php",
+        method: "POST",
+        data: datos,
+        cache: false,
+        contentType: false,
+        processData: false,
+        dataType: "json",
+        success: function(respuesta){
+            // console.log(respuesta)
+
+            if(respuesta) {
+                // $('#nuevoProveedor').addClass('select2');
+                $("#selectProveedor").prepend("<select class='form-control select2' id='nuevoProveedor' style='width: 100%;' name='nuevoProveedor'></select>");
+                
+                $("#nuevoProveedor").append("<option selected='selected'>Seleccionar...</option>");
+
+                for(var i in respuesta){
+                    // console.log(respuesta[i][1]);
+                    $("#nuevoProveedor").append("<option value="+respuesta[i]['id_proveedor']+">"+respuesta[i]['nombre']+"</option>");
+                }
+            }
+        }    
     });
 }

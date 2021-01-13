@@ -200,7 +200,7 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="administrar-venta" class="nav-link">
+                  <a href="administrar-ventas" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Administrar Venta</p>
                   </a>
@@ -220,6 +220,7 @@
               </ul>
             </li>
             <?php } ?>
+
             <?php if($_SESSION['permisos']['Mantenimiento']['consulta'] == 1){?>
             <li class="nav-item has-treeview">
               <a href="#" class="nav-link menu-lateral">
@@ -251,19 +252,31 @@
                 <li class="nav-item">
                   <a href="inscripcion" class="nav-link">
                     <i class="fas fa-wallet nav-icon"></i>
-                    <p>Inscripcion</p>
+                    <p>Inscripciones</p>
                   </a>
                 </li>
                 <li class="nav-item">
                   <a href="matricula" class="nav-link">
                     <i class="fas fa-money-bill-alt nav-icon"></i>
-                    <p>Matricula</p>
+                    <p>Matriculas</p>
                   </a>
                 </li>
                 <li class="nav-item">
                   <a href="descuento" class="nav-link">
                     <i class="fas fa-cash-register nav-icon"></i>
-                    <p>Descuento</p>
+                    <p>Descuentos</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="documentos" class="nav-link">
+                    <i class="fas fa-cash-register nav-icon"></i>
+                    <p>Documentos</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="proveedores" class="nav-link">
+                    <i class="fas fa-cash-register nav-icon"></i>
+                    <p>Proveedores</p>
                   </a>
                 </li>
               </ul>
@@ -285,9 +298,9 @@
 
             <?php } ?>
            
-            <?php if($_SESSION['permisos']['Respaldo y Restauracion']['consulta'] == 1){?>
+            <?php if($_SESSION['permisos']['Respaldo y Restauración']['consulta'] == 1){?>
             <li class="nav-item">
-              <a href="respaldoyrestauracion" class="nav-link menu-lateral">
+              <a href="respaldo-restauracion" class="nav-link menu-lateral">
                 <i class="nav-icon fas fa-download"></i>
                 <p>
                   Respaldo y Restauracion
