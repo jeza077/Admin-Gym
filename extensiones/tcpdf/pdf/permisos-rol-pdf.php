@@ -144,11 +144,12 @@ $pdf->Ln(45);
 $pdf->SetFont('times', '', 13);
 $pdf->SetFillColor(225, 235, 255);
 $pdf->Cell(20, 5, 'No', 1, 0, 'C', 1);
-$pdf->Cell(65, 5, 'Rol', 1, 0, 'C', 1);
-$pdf->Cell(45, 5, 'Consulta', 1, 0, 'C', 1);
-$pdf->Cell(45, 5, 'Agregar', 1, 0, 'C', 1);
-$pdf->Cell(45, 5, 'Actualizar', 1, 0, 'C', 1);
-$pdf->Cell(45, 5, 'Eliminar', 1, 0, 'C', 1);
+$pdf->Cell(55, 5, 'Rol', 1, 0, 'C', 1);
+$pdf->Cell(70, 5, 'Objeto', 1, 0, 'C', 1);
+$pdf->Cell(30, 5, 'Consulta', 1, 0, 'C', 1);
+$pdf->Cell(30, 5, 'Agregar', 1, 0, 'C', 1);
+$pdf->Cell(30, 5, 'Actualizar', 1, 0, 'C', 1);
+$pdf->Cell(30, 5, 'Eliminar', 1, 0, 'C', 1);
 
 //$tabla = "tbl_inscripcion";
 if(isset($_GET["rango"])){
@@ -193,42 +194,42 @@ else{
             $pdf->SetFont('times', '', 13);
             $pdf->SetFillColor(225, 235, 255);
             $pdf->Cell(20, 5, 'No', 1, 0, 'C', 1);
-            $pdf->Cell(65, 5, 'Rol', 1, 0, 'C', 1);
-            $pdf->Cell(45, 5, 'Consulta', 1, 0, 'C', 1);
-            $pdf->Cell(45, 5, 'Agregar', 1, 0, 'C', 1);
-            $pdf->Cell(45, 5, 'Actualizar', 1, 0, 'C', 1);
-            $pdf->Cell(45, 5, 'Eliminar', 1, 0, 'C', 1);
+            $pdf->Cell(55, 5, 'Rol', 1, 0, 'C', 1);
+            $pdf->Cell(70, 5, 'Objeto', 1, 0, 'C', 1);
+            $pdf->Cell(30, 5, 'Consulta', 1, 0, 'C', 1);
+            $pdf->Cell(30, 5, 'Agregar', 1, 0, 'C', 1);
+            $pdf->Cell(30, 5, 'Actualizar', 1, 0, 'C', 1);
+            $pdf->Cell(30, 5, 'Eliminar', 1, 0, 'C', 1);
         }
-        // $pdf->Cell(15, 5, ''.$i.'', 1, 0, 'C');
 
         $pdf->Ln(8);
         $pdf->SetFont('times', '', 12);
         // $pdf->SetFillColor(225, 235, 255);
         $pdf->Cell(20, 4, ''.($key+1).'', 0, 0, 'C');
-        $pdf->Cell(65, 4, ''.$value['rol'].' ', 0, 0, 'C');
-        // $pdf->Cell(40, 4, ''.$value['objeto'].'', 0, 0, 'C');
-        if($value["consultar"] == 0){
-            $pdf->Cell(45, 4, 'Desactivado', 0, 0, 'C');
+        $pdf->Cell(55, 4, ''.$value['rol'].' ', 0, 0, 'C');
+        $pdf->Cell(70, 4, ''.$value['objeto'].'', 0, 0, 'C');
+        if($value["consulta"] == 0){
+            $pdf->Cell(30, 4, 'Desactivado', 0, 0, 'C');
         } else {
-            $pdf->Cell(45, 4, 'Activado', 0, 0, 'C');
+            $pdf->Cell(30, 4, 'Activado', 0, 0, 'C');
         }
 
         if($value["agregar"] == 0){
-            $pdf->Cell(45, 4, 'Desactivado', 0, 0, 'C');
+            $pdf->Cell(30, 4, 'Desactivado', 0, 0, 'C');
         } else {
-            $pdf->Cell(45, 4, 'Activado', 0, 0, 'C');
+            $pdf->Cell(30, 4, 'Activado', 0, 0, 'C');
         }
 
         if($value["actualizar"] == 0){
-            $pdf->Cell(45, 4, 'Desactivado', 0, 0, 'C');
+            $pdf->Cell(30, 4, 'Desactivado', 0, 0, 'C');
         } else {
-            $pdf->Cell(45, 4, 'Activado', 0, 0, 'C');
+            $pdf->Cell(30, 4, 'Activado', 0, 0, 'C');
         }
 
         if($value["eliminar"] == 0){
-            $pdf->Cell(45, 4, 'Desactivado', 0, 0, 'C');
+            $pdf->Cell(30, 4, 'Desactivado', 0, 0, 'C');
         } else {
-            $pdf->Cell(45, 4, 'Activado', 0, 0, 'C');
+            $pdf->Cell(30, 4, 'Activado', 0, 0, 'C');
         }
         $i++;
 
