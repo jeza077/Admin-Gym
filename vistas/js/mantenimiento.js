@@ -1164,12 +1164,12 @@ exportarPdf('.btnExportarRol', 'rol');
 //** ------------------------------------*/
 //         IMPRIMIR PDF Parametros
 // --------------------------------------*/ 
-exportarPdf('.btnExportarParametro', 'parametross');
+exportarPdf('.btnExportarParametro', 'parametros');
 
 //** ------------------------------------*/
 //         IMPRIMIR PDF Parametros
 // --------------------------------------*/ 
-exportarPdf('.btnExportarAdministrar', 'administrarrol');
+exportarPdf('.btnExportarPermisosRol', 'permisos-rol');
 
 
 

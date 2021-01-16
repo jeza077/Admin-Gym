@@ -4,8 +4,8 @@ require_once "conexion.php";
 
 class ModeloGlobales{
     
-	  /*=============================================
-		  MOSTRAR PARAMETROS
+	/*=============================================
+	MOSTRAR PARAMETROS
     =============================================*/
     
     static public function mdlMostrarParametros($tabla, $item, $valor){
@@ -171,13 +171,14 @@ class ModeloGlobales{
 	
 		if($rango == null){
 
-			$stmt = Conexion::conectar() ->prepare("SELECT * FROM $tabla");
+			$stmt = Conexion::conectar() ->prepare("SELECT * FROM $tabla AS pr\n"
+			. " INNER JOIN tbl_roles AS r ON pr.id_rol = r.id_rol");
             $stmt-> execute();
 			return $stmt ->fetchAll();
 			
 		} else {
 
-			$stmt = Conexion::conectar() ->prepare("SELECT * FROM $tabla  where administrarrol LIKE '%$rango%'");
+			$stmt = Conexion::conectar() ->prepare("SELECT * FROM $tabla  where rol LIKE '%$rango%'");
 
             $stmt-> execute();
 			return $stmt ->fetchAll();

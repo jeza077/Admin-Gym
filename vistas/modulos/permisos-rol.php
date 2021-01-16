@@ -10,7 +10,7 @@
               <!-- <button class="btn btn-orange float-right"  data-toggle="modal" data-target="#modalNuevoRol">
                 Nuevo Rol        
               </button> -->
-              <button class="btn btn-danger btnExportarAdministrar float-right mr-3 ">
+              <button class="btn btn-danger btnExportarPermisosRol float-right mr-3 ">
                 Exportar PDF      
               </button>
           </div>

@@ -3,7 +3,7 @@
 class ControladorGlobales{
 
     /*=============================================
-			OBTENER SISTEMA OPERATIVO
+    OBTENER SISTEMA OPERATIVO
 	=============================================*/
 
     static public function ctrGetOS(){ 
@@ -48,7 +48,7 @@ class ControladorGlobales{
   
 
     /*=============================================
-			OBTENER NAVEGADOR
+    OBTENER NAVEGADOR
 	=============================================*/
 
     static public function ctrGetBrowser(){
@@ -79,7 +79,7 @@ class ControladorGlobales{
     }        
 
     /*=============================================
-			MOSTRAR PARAMETROS
+    MOSTRAR PARAMETROS
     =============================================*/
     
     static public function ctrMostrarParametros($item,$valor){
@@ -147,8 +147,10 @@ class ControladorGlobales{
         }
   
     }
+ 
+ 
     /*=============================================
-			EDITAR PARAMETROS
+    EDITAR PARAMETROS
     =============================================*/
     
     static public function ctrEditarParametro(){
@@ -216,8 +218,8 @@ class ControladorGlobales{
     }
 
 
-  /*=============================================
-			RANGO DINAMICO INSCRIPCION
+    /*=============================================
+    RANGO DINAMICO INSCRIPCION
     =============================================*/
 	static public function ctrRangoInscripcion($rango){
 
@@ -226,10 +228,10 @@ class ControladorGlobales{
 		$respuesta = ModeloGlobales::mdlRangoInscripcion($tabla, $rango);
 		
 		return $respuesta;
-  }
+    }
   
-  /*=============================================
-			RANGO DINAMICO MATRICULA
+    /*=============================================
+    RANGO DINAMICO MATRICULA
     =============================================*/
 	static public function ctrRangoMatricula($rango){
 
@@ -240,8 +242,8 @@ class ControladorGlobales{
 		return $respuesta;
 	}
 
-  /*=============================================
-			RANGO DINAMICO DESCUENTO
+    /*=============================================
+    RANGO DINAMICO DESCUENTO
     =============================================*/
 	static public function ctrRangoDescuento($rango){
 
@@ -250,10 +252,10 @@ class ControladorGlobales{
 		$respuesta = ModeloGlobales::mdlRangoDescuento($tabla, $rango);
 		
 		return $respuesta;
-  }
+    }
   
-  /*=============================================
-			RANGO DINAMICO ROL
+    /*=============================================
+    RANGO DINAMICO ROL
     =============================================*/
 	static public function ctrRangoRol($rango){
 
@@ -262,10 +264,10 @@ class ControladorGlobales{
 		$respuesta = ModeloGlobales::mdlRangoRol($tabla, $rango);
 		
 		return $respuesta;
-  }
+    }
   
-   /*=============================================
-			RANGO DINAMICO PARAMETRO
+    /*=============================================
+    RANGO DINAMICO PARAMETRO
     =============================================*/
 	static public function ctrRangoParametro($rango){
 
@@ -274,23 +276,19 @@ class ControladorGlobales{
 		$respuesta = ModeloGlobales::mdlRangoParametro($tabla, $rango);
 		
 		return $respuesta;
-  }
+    }
   
-  /*=============================================
-			RANGO DINAMICO ADMINISTRAR
+    /*=============================================
+    RANGO DINAMICO ADMINISTRAR
     =============================================*/
 	static public function ctrRangoAdministrar($rango){
 
-		$tabla = 'tbl_roles';
+		$tabla = 'tbl_permisos';
 		
 		$respuesta = ModeloGlobales::mdlRangoAdministrar($tabla, $rango);
 		
 		return $respuesta;
 	}
 
-
-
-
-  
 
 }
