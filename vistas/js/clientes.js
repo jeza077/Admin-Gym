@@ -26,7 +26,7 @@ function redireccion(selector, ruta) {
 
 
 //VALIDACIONES AGREGAR CLIENTE
-validarDoc($('.idCliente'))
+validarDoc($('.numeroDocumento'), $('.alertaDocumento'))
 validarEmail($('.emailCliente'))
 longitudString($('.nombreCliente'),30); 
 $('.nombreCliente').keydown(sinNumeros)
@@ -69,22 +69,22 @@ $('.numeroDocumentoClienteVentas').keydown(impedirEspacios);
 // AGREGAR CLIENTE 
 // MUESTRA LOS DATOS DE PAGO DEL CLIENTE, AL ELEGIR TIPO CLIENTE GIMNASIO
 // --------------------------------------*/
-$('#datosClientes').hide();
-$('#btnNuevoClienteVentas').hide();
+$('.datosClientes').hide();
+$('.btnNuevoClienteVentas').hide();
 
 $(document).on('change', '.tipoCliente', function () {
     var valor = $(this).val();
     // console.log(valor)
     if (valor == "Gimnasio") {
         // SumaTotal()
-        $('#btnNuevoClienteVentas').hide();
-       
-        $('#datosClientes').show();
+        $('.btnNuevoClienteVentas').hide();
+        $('.datosClientes').show();
+        $('.btnConfirmarPago').show();
         // sumar();
     } else {
-        $('#btnNuevoClienteVentas').show();
-        $('#btnConfirmarPago').hide();
-        $('#datosClientes').hide();
+        $('.btnNuevoClienteVentas').show();
+        $('.btnConfirmarPago').hide();
+        $('.datosClientes').hide();
     }
    
 });
@@ -93,9 +93,9 @@ $(document).on('change', '.tipoCliente', function () {
 //** ------------------------------------*/
 // ALERTA PARA CONFIRMAR PAGO ANTES DE GUARDAR CLIENTE
 // --------------------------------------*/ 
-$('#btnNuevoClienteGym').hide();
+$('.btnNuevoClienteGym').hide();
 
-$(document).on('click', '#btnConfirmarPago', function (e) {
+$(document).on('click', '.btnConfirmarPago', function (e) {
     e.preventDefault();
     // console.log('click')
     Swal.fire({
@@ -112,9 +112,10 @@ $(document).on('click', '#btnConfirmarPago', function (e) {
 
 $(document).on('click', '.SwalBtnGuardarCliente', function () {
     // $('#btnNuevoCliente').show();
-    // $('#btnConfirmarPago').hide();
-    console.log('click')
-    var btnGuardar = $('#btnNuevoClienteGym');
+    // $('.btnConfirmarPago').hide();
+    // console.log('click')
+    // return;
+    var btnGuardar = $('.btnNuevoClienteGym');
     btnGuardar.click(); 
     // window.location = ruta;
 });
@@ -143,8 +144,34 @@ $(document).on('change', '.tipoClienteVenta', function () {
    
 });
 
+
 //** ------------------------------------*/
-//         IMPRIMIR USUARIOS 
+//     ALERTA AL AGREGAR NUEVO USUARIO
+// --------------------------------------*/
+$(document).on('click', '#clienteNuevo', function (e) {
+    e.preventDefault();
+    // console.log('click')
+    Swal.fire({
+        icon: 'info',
+        title: '¿Crear cliente desde una persona ya registrada?',
+        html: '<button type="submit" role="button" class="SwalBtnGuardarClienteYaRegistrado btn btn-success customSwalBtn px-5" data-toggle="modal" data-target="#modalAgregarClienteYaRegistrado" data-dismiss="modal">' + 'Si' + '</button>' +
+            '<button type="button" role="button" class="SwalGuardarClienteNuevo btn btn-primary customSwalBtn" data-toggle="modal" data-target="#modalAgregarClienteNuevo" data-dismiss="modal">' + 'No, nuevo' + '</button>'+ 
+            '<button type="button" role="button" class="SwalBtnCancelar btn btn-danger customSwalBtn">' + 'Cancelar' + '</button>',
+        width: 550,
+        allowOutsideClick: false,
+        showCancelButton: false,
+        showConfirmButton: false
+    });
+});
+
+
+cancelarAlerta('.SwalBtnGuardarClienteYaRegistrado');
+cancelarAlerta('.SwalGuardarClienteNuevo');
+cancelarAlerta('.SwalBtnCancelar');
+
+
+//** ------------------------------------*/
+//        IMPRIMIR PDF CLIENTES 
 // --------------------------------------*/ 
 exportarPdf('.btnExportarClientes', 'clientes');
 exportarPdf('.btnExportarClientesInscripciones', 'clientes-inscripciones');
@@ -275,7 +302,14 @@ mostrarDinamico($('.nuevaInscripcion'),'tbl_inscripcion','id_inscripcion',$('.nu
 // MOSTRAR TABLA PROMOCIONES
 mostrarDinamico($('.nuevaPromocion'),'tbl_descuento', 'id_descuento',$('.nuevoPrecioPromocion'),'valor_descuento')
 
-// ALEX, DEJAME ESTA DE ABAJO QUE YO LA OCUPO NO LA COMENTES
+// MOSTRAR TABLA INSCRIPCION PARA CLIENTE YA REGISTRADO
+mostrarDinamico($('.nuevaMatriculaRegistrado'),'tbl_matricula','id_matricula',$('.nuevoPrecioMatriculaRegistrado'),'precio_matricula')
+
+mostrarDinamico($('.nuevaInscripcionRegistrado'),'tbl_inscripcion','id_inscripcion',$('.nuevoPrecioInscripcionRegistrado'),'precio_inscripcion')
+// MOSTRAR TABLA PROMOCIONES PARA CLIENTE YA REGISTRADO
+mostrarDinamico($('.nuevaPromocionRegistrado'),'tbl_descuento', 'id_descuento',$('.nuevoPrecioPromocionRegistrado'),'valor_descuento')
+
+
 // Inscripcion nuevas
 mostrarDinamico($('.actualizarInscripcion'),'tbl_inscripcion','id_inscripcion',$('.actualizarPagoInscripcion'),'precio_inscripcion')
 mostrarDinamico($('.nuevaTipoInscripcion2'),'tbl_inscripcion','id_inscripcion',$('.nuevaPagoInscripcion2'),'precio_inscripcion')
@@ -290,7 +324,7 @@ mostrarDinamico($('.nuevoDescuentoClienteVenta'),'tbl_descuento', 'id_descuento'
 mostrarDinamico($('.nuevaInscripcionClienteVenta'),'tbl_inscripcion', 'id_inscripcion',$('.precioInscripcionClienteVenta'),'precio_inscripcion') 
 
 /*=============================================
-        SUMAR TOTAL CLIENTES
+        SUMAR TOTAL CLIENTES NUEVOS
 =============================================*/
 $('.verTotalPago').click(function (e) { 
     e.preventDefault();
@@ -335,6 +369,55 @@ $('.verTotalPago').click(function (e) {
         // console.log('suma',suma)
     
         $('.totalPagar').val(suma);
+        
+
+    }
+});
+
+// SUMA TOTAL A PAGAR CLIENTES YA REGISTRADOS
+$('.verTotalPagoRegistrado').click(function (e) { 
+    e.preventDefault();
+
+    var totalMatricula = $('.totalMatriculaRegistrado').val();
+    var totalDescuento = $('.totalDescuentoRegistrado').val();
+    var totalInscripcion = $('.totalInscripcionRegistrado').val();
+
+    // console.log(totalMatricula)
+    // console.log(totalInscripcion)
+
+    if(!totalMatricula){
+        $('.nuevaMatriculaRegistrado').after('<div class="alert alert-danger fade show mt-2" role="alert">Por favor seleccione un tipo de matricula</div>');
+        $('.nuevaMatriculaRegistrado').focus();
+
+    } else if(!totalInscripcion) {
+        $('.nuevaInscripcionRegistrado').after('<div class="alert alert-danger fade show mt-2" role="alert">Por favor seleccione un tipo de inscripcion</div>');
+        $('.nuevaInscripcionRegistrado').focus();
+
+  
+
+    } else {
+        $('.alert').remove();
+        // console.log(totalDescuento)
+        // console.log(totalInscripcion)
+        // console.log(totalMatricula)
+        if(!totalDescuento){
+
+            var suma = (parseInt(totalMatricula) + parseInt(totalInscripcion));
+            var descuento = 0;
+            $('input[name=nuevoPrecioDescuentoRegistrado]').attr('value', descuento);
+            // $('input[name=editarPrecioDescuento]').attr('value', descuento);
+        } else {
+            var porcentaje = parseInt(totalDescuento) / 100;
+            var descuento = ((parseInt(totalMatricula) * porcentaje));
+            var suma = (parseInt(totalMatricula) - descuento) + parseInt(totalInscripcion);
+            $('input[name=nuevoPrecioDescuentoRegistrado]').attr('value', descuento);
+            // $('input[name=editarPrecioDescuento]').attr('value', descuento);
+            
+        }
+        // console.log('desc',descuento);
+        // console.log('suma',suma)
+    
+        $('.totalPagarRegistrado').val(suma);
         
 
     }
@@ -853,6 +936,8 @@ $(document).on('click', '.btnEditarClienteVenta', function () {
         }
     });
 });
+
+
 
 /*=============================================
 IMPRIMIR PAGO EN PDF

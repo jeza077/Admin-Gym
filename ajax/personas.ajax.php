@@ -15,8 +15,9 @@ class AjaxPersonas{
 
         $item = "num_documento";
         $valor = $this->verificarDocumento;
+        $all = null;
         
-        $respuesta = ControladorPersonas::ctrMostrarPersonas($item, $valor);
+        $respuesta = ControladorPersonas::ctrMostrarPersonas($item, $valor, $all);
 
         echo json_encode($respuesta);
     }

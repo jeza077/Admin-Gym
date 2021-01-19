@@ -43,16 +43,16 @@
 
           <div class="card-body">
           
-            <table class="table table-striped table-bordered tablas text-center">
+            <table class="table table-hover tablas text-center">
               <thead>
                 <tr>
                   <th scope="col">#</th>
                   <th scope="col">No. Documento</th>
                   <th scope="col">Nombre</th>
-                  <th scope="col">T. Inscripcion</th>
-                  <th scope="col">F. Inscripcion</th>
-                  <th scope="col">F. Ultimo Pago</th>
-                  <th scope="col">F. Proximo Pago</th>
+                  <th scope="col">T. Inscripción</th>
+                  <th scope="col">F. Inscripción</th>
+                  <th scope="col">F. Último Pago</th>
+                  <th scope="col">F. Próx. Pago</th>
                   <th scope="col">Deuda</th>
                   <th scope="col">Estado</th>
                   <th scope="col">Acciones</th>
@@ -110,7 +110,7 @@
                             echo '<td>L.'.$deuda.'</td>';
                           
                           } else {
-                            echo '<td data-toggle="tooltip" data-placement="left" title="No debe">L.0000.00</td>';
+                            echo '<td data-toggle="tooltip" data-placement="left" title="No debe">L.00.00</td>';
 
                           }
                       
@@ -123,9 +123,9 @@
 
                       echo
                           '<td>
-                            <button class="btn btn-success btnEditarPago" data-toggle="tooltip" data-placement="left" title="Pagar" idCliente="'.$value["id_cliente"].'"><i class="fas fa-dollar-sign p-1"></i></button>
+                            <button class="btn btn-outline-success btnEditarPago" data-toggle="tooltip" data-placement="left" title="Pagar" idCliente="'.$value["id_cliente"].'"><i class="fas fa-dollar-sign p-1"></i></button>
 
-                            <button class="btn btn-danger btnCancelarInscripcion" data-toggle="tooltip" data-placement="left" title="Cancelar Inscripcion" idClienteInscripcion="'.$value["id_cliente_inscripcion"].'" idClientePagoInscripcion="'.$value["id_cliente"].'"><i class="fas fa-strikethrough" style="color:#fff"></i></button>
+                            <button class="btn btn-outline-danger btnCancelarInscripcion" data-toggle="tooltip" data-placement="left" title="Cancelar Inscripcion" idClienteInscripcion="'.$value["id_cliente_inscripcion"].'" idClientePagoInscripcion="'.$value["id_cliente"].'"><i class="fas fa-strikethrough"></i></button>
                           </td>
                         </tr>
                     ';

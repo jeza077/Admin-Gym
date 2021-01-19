@@ -3,7 +3,7 @@
 class ModeloClientes{
     
     /*=============================================
-			CREAR CLIENTES	
+	CREAR CLIENTES	
 	=============================================*/
 	 
 	static public function mdlCrearCliente($tabla, $datos){
@@ -60,7 +60,7 @@ class ModeloClientes{
 	}
 
     /*=============================================
-		MOSTRAR CLIENTES
+	MOSTRAR CLIENTES
 	=============================================*/
 	
 	static public function mdlMostrarClientes($tabla1, $tabla2, $item, $valor){
@@ -108,7 +108,7 @@ class ModeloClientes{
 	
 
 	/*=============================================
-		MOSTRAR CLIENTES SIN PAGO
+	MOSTRAR CLIENTES SIN PAGO
 	=============================================*/
 	
 	static public function mdlMostrarClientesSinPago($tabla1, $tabla2, $item, $valor){
@@ -136,7 +136,7 @@ class ModeloClientes{
             // . "LEFT JOIN tbl_inscripcion as i ON c.id_inscripcion = i.id_inscripcion\n"
 			// . "LEFT JOIN tbl_descuento as pd ON c.id_descuento = pd.id_descuento\n"
 			// . "LEFT JOIN tbl_pagos_cliente as pc ON c.id_cliente = pc.id_cliente\n"
-		    . "WHERE p.tipo_persona = 'clientes'");
+		    . "WHERE p.tipo_persona = 'clientes' OR p.tipo_persona = 'ambos' ");
 			
 			$stmt -> execute();
 			return $stmt -> fetchAll();
@@ -151,7 +151,7 @@ class ModeloClientes{
 
 
 	/*=============================================
-		MOSTRAR CLIENTES INSCRIPCION (mdlMostrarClientesPagos)
+	MOSTRAR CLIENTES INSCRIPCION (mdlMostrarClientesPagos)
 	=============================================*/
 	
 	static public function mdlMostrarClientesInscripcionPagos($tabla1, $tabla2, $item1, $valor1, $item2, $valor2, $max){
@@ -176,7 +176,7 @@ class ModeloClientes{
 		
 			. " GROUP BY c.id_cliente"); 
 
-			$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+			// $stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
 			$stmt -> execute();
 			return $stmt -> fetchAll();
 
@@ -206,8 +206,8 @@ class ModeloClientes{
 	}
 
 
-	 /*=============================================
-		MOSTRAR PAGOS POR CLIENTE 
+	/*=============================================
+	MOSTRAR PAGOS POR CLIENTE 
 	=============================================*/
 	
 	static public function mdlMostrarPagoPorCliente($tabla1, $tabla2, $item, $valor){
@@ -270,7 +270,7 @@ class ModeloClientes{
 
 
 	/*=============================================
-		MOSTRAR TODOS LOS PAGOS DE LOS CLIENTES
+	MOSTRAR TODOS LOS PAGOS DE LOS CLIENTES
 	=============================================*/
 	static public function mdlMostrarPagosClientes($item, $valor){
 
@@ -368,7 +368,7 @@ class ModeloClientes{
 
 
 	/*=============================================
-			MOSTRAR (DINAMICO)
+	MOSTRAR (DINAMICO)
 	=============================================*/
 
 	static public function mdlMostrar($tabla, $item, $valor){
@@ -392,8 +392,9 @@ class ModeloClientes{
 		$stmt = null;
 		
 	} 
+
 	/*=============================================
-			EDITAR CLIENTE
+	EDITAR CLIENTE
 	=============================================*/
 	 
 	static public function mdlEditarCliente($tabla, $datos){
@@ -443,8 +444,9 @@ class ModeloClientes{
 
 		
 	}
+
 	/*=============================================
-				ELIMINAR CLIENTES
+	ELIMINAR CLIENTES
 	=============================================*/
 
 	static public function mdlEliminarCliente($tabla, $datos){
@@ -468,8 +470,9 @@ class ModeloClientes{
 		$stmt = null;
 
 	}
+
 	/*=============================================
-				REGISTRAR PAGO CLIENTE
+	REGISTRAR PAGO CLIENTE
 	=============================================*/
 	static public function mdlCrearPago($tabla3, $datos){
 
@@ -497,7 +500,7 @@ class ModeloClientes{
 	}
 
 	/*=============================================
-				REGISTRAR  CLIENTE INSCRIPCION
+	REGISTRAR  CLIENTE INSCRIPCION
 	=============================================*/
 	static public function mdlCrearClienteInscripcion($tabla, $datos){
 
@@ -526,7 +529,7 @@ class ModeloClientes{
 
 
 	/*=============================================
-			EDITAR PAGO CLIENTE
+	EDITAR PAGO CLIENTE
 	=============================================*/
 	static public function mdlEditarPago($tabla, $datos){
 
@@ -552,7 +555,6 @@ class ModeloClientes{
 	/*=============================================
 	ACTUALIZAR CLIENTE
 	=============================================*/
-
 	static public function mdlActualizarCliente($tabla1, $item1, $valor1, $item2, $valor2){
 
 		// return $item1;
@@ -582,7 +584,6 @@ class ModeloClientes{
 	/*=============================================
 	ACTUALIZAR CLIENTE VARIOS CAMPOS
 	=============================================*/
-
 	static public function mdlActualizarClienteVarios($tabla1, $item1, $valor1, $item2, $valor2, $item3, $valor3){
 
 		$stmt = Conexion::conectar()->prepare("UPDATE $tabla1 SET $item1 = :$item1, $item2 = :$item2 WHERE $item3 = :$item3");
@@ -693,9 +694,28 @@ class ModeloClientes{
 
 	}
 
+	/*=============================================
+	ALERTA DE FECHAS DE INSCRIPCIÓN A VENCER CLIENTES
+	=============================================*/
+	static public function mdlInscripcionVencimiento($item, $fechaHoy, $fechaFinal){
+
+		$stmt = Conexion::conectar()->prepare("SELECT p.*, c.*, d.tipo_documento, m.tipo_matricula, pd.tipo_descuento, i.*, ci.* FROM tbl_personas as p\n"
+		. "	LEFT JOIN tbl_clientes as c ON p.id_personas = c.id_persona\n"
+		. "	LEFT JOIN tbl_documento as d ON p.id_documento = d.id_documento\n"
+		. "	LEFT JOIN tbl_matricula as m ON c.id_matricula = m.id_matricula\n"
+		. "	LEFT JOIN tbl_descuento as pd ON c.id_descuento = pd.id_descuento\n"
+		. "	LEFT JOIN tbl_cliente_inscripcion as ci ON c.id_cliente = ci.id_cliente\n"
+		. "	LEFT JOIN tbl_inscripcion as i ON ci.id_inscripcion = i.id_inscripcion\n"
+		. "	WHERE c.tipo_cliente = 'Gimnasio' AND ci.estado = 1 AND (ci.$item BETWEEN '$fechaHoy' AND '$fechaFinal')\n"
+		. "	ORDER BY ci.id_cliente_inscripcion DESC");
+
+		// $stmt->bindParam(":".$item, $valor, PDO::PARAM_STR);
+		$stmt -> execute();
+		return $stmt -> fetchAll();
+	}
 
 	/*=============================================
-		RANGO INSCRIPCIONES ACTIVAS DE CLIENTES
+	RANGO INSCRIPCIONES ACTIVAS DE CLIENTES
 	=============================================*/
 	static public function mdlRangoClienteInscripcionActiva($tabla, $rango){
 	
@@ -798,7 +818,7 @@ class ModeloClientes{
 
 
 	/*=============================================
-		RANGO HISTORIAL PAGOS CLIENTES
+	RANGO HISTORIAL PAGOS CLIENTES
     =============================================*/
 	static public function mdlRangoHistorialPagosCliente($tabla, $rango){
 			
@@ -863,7 +883,7 @@ class ModeloClientes{
 
 
 	/*=============================================
-		RANGO CLIENTES TOTALES
+	RANGO CLIENTES TOTALES
     =============================================*/
 	static public function mdlRangoCliente($tabla, $rango){
 			

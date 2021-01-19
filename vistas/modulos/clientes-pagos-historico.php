@@ -43,21 +43,19 @@
 
           <div class="card-body">
           
-            <table class="table table-striped table-bordered tablas text-center">
+            <table class="table table-hover tablas text-center">
               <thead>
                 <tr>
                   <th scope="col">#</th>
                   <th scope="col">No. Documento</th>
                   <th scope="col">Nombre</th>
-                  <!-- <th scope="col">T. Inscripcion</th> -->
                   <th scope="col">Pago Matricula</th>
-                  <th scope="col">Pago Inscripcion</th>
+                  <th scope="col">Valor Descuento</th>
+                  <th scope="col">Pago Inscripción</th>
                   <th scope="col">Pago Total</th>
                   <th scope="col">Fecha de Pago</th>
                   <th scope="col">Acciones</th>
-                  <!-- <th scope="col">F. Proxim Pago</th>
-                  <th scope="col">Deuda</th>
-                  <th scope="col">Estado</th> -->
+
                 </tr>
               </thead>
               <tbody>
@@ -78,18 +76,26 @@
                         <tr>
                         <th scope="row">'.($key+1).'</th>
                         <td>'.$value["num_documento"].'</td>
-                        <td>'.$value["nombre"].' '.$value["apellidos"].'</td>
-                        <td>'.$value["pago_matricula"].'</td>
-                        <td>'.$value["pago_inscripcion"].'</td>
-                        <td>'.$value["pago_total"].'</td>
+                        <td>'.$value["nombre"].' '.$value["apellidos"].'</td>';
+                        if($value["pago_matricula"] == null){
+                          echo '<td>$.0</td>';
+                        } else {
+                          echo '<td>$.'.$value["pago_matricula"].'</td>';
+                        }
+                        
+                        if($value["pago_descuento"] == null){
+                          echo '<td>$.0</td>';
+                        } else {
+                          echo '<td>$.'.$value["pago_descuento"].'</td>';
+                        }
+                    
+                    echo '
+                        <td>$.'.$value["pago_inscripcion"].'</td>
+                        <td>$.'.$value["pago_total"].'</td>
                         <td>'.$value["fecha_de_pago"].'</td>
                         <td>
-                        <button class="btn btn-info btnReciboPagoCliente" idClientePago="'.$value["id_pagos_cliente"].'"><i class="fa fa-print" style="color:#fff"></i></button>
-                        </td>';
-
-                          
-
-                               
+                          <button class="btn btn-outline-info btnReciboPagoCliente" idClientePago="'.$value["id_pagos_cliente"].'" data-toggle="tooltip" data-placement="left" title="Imprimir recibo pago"><i class="fa fa-print"></i></button>
+                        </td>';                            
                   }
                 ?>
               </tbody>

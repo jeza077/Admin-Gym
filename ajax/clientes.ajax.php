@@ -166,22 +166,22 @@ class AjaxClientes{
     /*=============================================
     MOATRAR CLIENTE 
     =============================================*/
-    public $verificarDocumento;
+    // public $verificarDocumento;
 
-    public function ajaxVerificarDocumento(){
+    // public function ajaxVerificarDocumento(){
 
-        $tabla = "tbl_clientes";
-        $item = "num_documento";
-        $valor = $this->verificarDocumento;
+    //     $tabla = "tbl_clientes";
+    //     $item = "num_documento";
+    //     $valor = $this->verificarDocumento;
         
-        $respuesta = ControladorClientes::ctrMostrarClientes($tabla, $item, $valor);
-        // echo "<pre>";
-        // var_dump($respuesta);
-        // echo "</pre>";
-        // return;
+    //     $respuesta = ControladorClientes::ctrMostrarClientes($tabla, $item, $valor);
+    //     // echo "<pre>";
+    //     // var_dump($respuesta);
+    //     // echo "</pre>";
+    //     // return;
 
-        echo json_encode($respuesta);
-    }
+    //     echo json_encode($respuesta);
+    // }
 }
 
 /*=============================================

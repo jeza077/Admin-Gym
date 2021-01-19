@@ -2,20 +2,22 @@
 
 class ControladorPersonas{
     /*=============================================
-				MOSTRAR PERSONAS
+    MOSTRAR PERSONAS
 	=============================================*/
-	static public function ctrMostrarPersonas($item, $valor) {
+	static public function ctrMostrarPersonas($item, $valor, $all) {
 
 		$tabla = "tbl_personas";
-		$respuesta = ModeloPersonas::mdlMostrarPersona($tabla, $item, $valor);
+        $respuesta = ModeloPersonas::mdlMostrarPersonas($tabla, $item, $valor, $all);
+		// $respuesta = ModeloPersonas::mdlMostrarPersona($tabla, $item, $valor);    
 
 		return $respuesta;
 
     }
     
 
+
     /*=============================================
-				REGISTRAR PERSONAS
+    REGISTRAR PERSONAS
 	=============================================*/
     static public function ctrCrearPersona($tipoPersona, $pantalla){
 
@@ -55,10 +57,11 @@ class ControladorPersonas{
                             $totalId = array();
                             $tabla = "tbl_personas";
                             // $tabla2 = null;
-                            // $item = null;
-                            // $valor = null;
+                            $item = null;
+                            $valor = null;
+                            $all = null;
     
-                            $personaTotal = ModeloPersonas::mdlMostrarPersonas($tabla);
+                            $personaTotal = ModeloPersonas::mdlMostrarPersonas($tabla, $item, $valor, $all);
                             
                             foreach($personaTotal as $keyPersona => $valuePersona){
                             array_push($totalId, $valuePersona["id_personas"]);
@@ -145,10 +148,11 @@ class ControladorPersonas{
                         $totalId = array();
                         $tabla = "tbl_personas";
                         // $tabla2 = null;
-                        // $item = null;
-                        // $valor = null;
+                        $item = null;
+                        $valor = null;
+                        $all = null;
 
-                        $personaTotal = ModeloPersonas::mdlMostrarPersonas($tabla);
+                        $personaTotal = ModeloPersonas::mdlMostrarPersonas($tabla, $item, $valor, $all);
                         
                         foreach($personaTotal as $keyPersona => $valuePersona){
                         array_push($totalId, $valuePersona["id_personas"]);
@@ -174,7 +178,7 @@ class ControladorPersonas{
                             if($crearUsuario == true){
                                 echo '<script>
                                         Swal.fire({
-                                            title: "Usuario guardado correctamente!",
+                                            title: "Usuario creado correctamente!",
                                             icon: "success",
                                             heightAuto: false
                                         }).then((result)=>{
@@ -229,10 +233,11 @@ class ControladorPersonas{
                             $totalId = array();
                             $tabla = "tbl_personas";
                             // $tabla2 = "tbl_clientes";
-                            // $item = null;
-                            // $valor = null;
+                            $item = null;
+                            $valor = null;
+                            $all = null;
 
-                            $personaTotal = ModeloPersonas::mdlMostrarPersonas($tabla);
+                            $personaTotal = ModeloPersonas::mdlMostrarPersonas($tabla, $item, $valor, $all);
                             
                             foreach($personaTotal as $keyPersona => $valuePersona){
                             array_push($totalId, $valuePersona["id_personas"]);
@@ -279,7 +284,7 @@ class ControladorPersonas{
                             if($crearCliente == true){
                                 echo '<script>
                                         Swal.fire({
-                                            title: "Cliente guardado correctamente!",
+                                            title: "Cliente creado correctamente!",
                                             icon: "success",
                                             heightAuto: false,
                                             allowOutsideClick: false
@@ -312,7 +317,7 @@ class ControladorPersonas{
 
 
     /*=============================================
-				EDITAR PERSONAS
+    EDITAR PERSONAS
     =============================================*/ 
     static public function ctrEditarPersona($ajustes, $tipoPersona, $pantalla){
         // echo "<pre>";
@@ -607,7 +612,7 @@ class ControladorPersonas{
     }
 
     /*=============================================
-				EDITAR CLIENTE VENTAS
+    EDITAR CLIENTE VENTAS
     =============================================*/
     
     static public function ctrEditarClienteVentas($tipoCliente, $pantalla) {
@@ -721,7 +726,7 @@ class ControladorPersonas{
         }
     }
     /*=============================================
-            ACTUALIZAR PAGO CLIENTE
+    ACTUALIZAR PAGO CLIENTE
     =============================================*/
     static public function ctrActualizarPagoCliente($tipoPersona, $pantalla){
         // echo "<pre>";
@@ -776,7 +781,7 @@ class ControladorPersonas{
     }
     
 	/*=============================================
-            BORRAR PERSONAS (USUARIO/CLIENTE)
+    BORRAR PERSONAS (USUARIO/CLIENTE)
 	=============================================*/
     static public function ctrBorrarPersona($tipoPersona, $pantalla){
         // var_dump($_GET);
@@ -795,16 +800,16 @@ class ControladorPersonas{
             if($respuesta[1] == 1451){
       
                 echo '<script>
-                        Swal.fire({
-                            title: "No se pudo borrar el '.$tipoPersona.'!",
-                            icon: "error",
-                            heightAuto: false
-                        }).then((result)=>{
-                            if(result.value){
-                                window.location = "'.$pantalla.'";
-                            }
-                        });                                      
-                    </script>';
+                    Swal.fire({
+                        title: "No se pudo borrar el '.$tipoPersona.'!",
+                        icon: "error",
+                        heightAuto: false
+                    }).then((result)=>{
+                        if(result.value){
+                            window.location = "'.$pantalla.'";
+                        }
+                    });                                      
+                </script>';
 
             } else if($tipoPersona == 'usuario') {
                 $descripcionEvento = " Elimino un usuario.";

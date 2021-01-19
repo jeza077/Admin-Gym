@@ -9,7 +9,7 @@
             <h1>Administrar Clientes</h1>
           </div>
           <div class="col-sm-6">
-          <button class="btn btn-orange float-right"  data-toggle="modal" data-target="#modalAgregarCliente">
+          <button class="btn btn-orange float-right" id="clienteNuevo">
             Nuevo Cliente       
           </button>
           <button class="btn btn-danger btnExportarClientes float-right mr-3">
@@ -20,24 +20,24 @@
     </section>  
 
     <section class="content">
-    <?php 
-      $permisoAgregar = $_SESSION['permisos']['Clientes']['agregar'];
-      $permisoEliminar = $_SESSION['permisos']['Clientes']['eliminar'];
-      $permisoActualizar = $_SESSION['permisos']['Clientes']['actualizar'];
-      $permisoConsulta = $_SESSION['permisos']['Clientes']['consulta'];
+      <?php 
+        $permisoAgregar = $_SESSION['permisos']['Clientes']['agregar'];
+        $permisoEliminar = $_SESSION['permisos']['Clientes']['eliminar'];
+        $permisoActualizar = $_SESSION['permisos']['Clientes']['actualizar'];
+        $permisoConsulta = $_SESSION['permisos']['Clientes']['consulta'];
 
-      // var_dump($_SESSION['perm']);
+        // var_dump($_SESSION['perm']);
 
-      // foreach ($permisos_pantalla as $key => $value) {
-      //   echo $key;
-      // }
-      
-      $descripcionEvento = " Consulto la pantalla de cliente";
-      $accion = "consulta";
+        // foreach ($permisos_pantalla as $key => $value) {
+        //   echo $key;
+        // }
+        
+        $descripcionEvento = " Consulto la pantalla de cliente";
+        $accion = "consulta";
 
-      $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 3,$accion, $descripcionEvento);
+        $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 3,$accion, $descripcionEvento);
 
-    ?>
+      ?>
 
         <div class="card">
 
@@ -115,11 +115,13 @@
         </div>
     </section>
   </div>
+
+
   <!-- =======================================
            MODAL AGREGAR  CLIENTE
   ======================================----->
 
-  <div class="modal fade" id="modalAgregarCliente" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="modalAgregarClienteNuevo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
       
@@ -165,7 +167,7 @@
 
                     <div class="form-group col-md-3">
                       <label for="identidad">Numero de documento</label>
-                      <input type="text" class="form-control idCliente" name="nuevoNumeroDocumento" placeholder="Ingrese Identidad" required>
+                      <input type="text" class="form-control numeroDocumento" name="nuevoNumeroDocumento" placeholder="Ingrese Identidad" required>
                     </div>
                     <div class="form-group col-md-3">
                       <label for="nombre">Nombre</label>
@@ -176,6 +178,8 @@
                       <input type="text" class="form-control apellidos mayus" name="nuevoApellido" placeholder="Ingrese Apellidos" required>
                     </div>
                   </div>
+
+                  <div class="alertaDocumento"></div>
       
                   <div class="form-row">
                     <div class="form-group col-md-4">
@@ -191,6 +195,8 @@
                         <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy/mm/dd" data-mask  name="nuevaFechaNacimiento" placeholder="Ingrese Fecha de Nacimiento" required>
                     </div>
                   </div>
+                  
+                  <div class="alertaEmail"></div>
 
                   <div class="form-row">
                     <div class="form-group col-md-9">
@@ -223,7 +229,7 @@
                       </div>
                     </div>
                     
-                  <div id="datosClientes">
+                  <div class="datosClientes">
                     <div class="form-row">
                       <div class="form-group col-md-6">
                           <label>Tipo matricula</label>
@@ -281,7 +287,7 @@
                                 <span class="input-group-text">%</span>  
                               </div>
                             <input type="text" class="form-control text-right nuevoPrecioPromocion totalDescuento" name="" value="" readonly>
-                            <input type="hidden" id="nuevoPrecioDescuento" name="nuevoPrecioDescuento">  
+                            <input type="hidden" name="nuevoPrecioDescuento">  
                          </div>
                       </div>
                     </div>
@@ -335,9 +341,9 @@
                   </div>
                 </div>
                 <div class="form-group mt-4 float-right">
-                  <button type="" class="btn btn-primary" id="btnConfirmarPago">Guardar</button>
-                  <button type="" class="btn btn-primary" id="btnNuevoClienteGym">Guardar</button>
-                  <button type="" class="btn btn-primary" id="btnNuevoClienteVentas">Guardar</button>
+                  <button type="" class="btn btn-primary btnConfirmarPago">Guardar</button>
+                  <button type="" class="btn btn-primary btnNuevoClienteGym">Guardar</button>
+                  <button type="" class="btn btn-primary btnNuevoClienteVentas">Guardar</button>
                   <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
                 </div>
             
@@ -717,6 +723,187 @@
       </div>
     </div>
   </div>
+
+
+  <!-- =======================================
+           MODAL AGREGAR  CLIENTE
+  ======================================----->
+
+  <div class="modal fade" id="modalAgregarClienteYaRegistrado" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+      
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Nuevo cliente</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form role="form" method="post" class="formulario">            
+
+            <div class="container-fluid mt-4">
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label>Persona</label>
+                    <select class="form-control select2" style="width: 100%;" name="nuevoIdPersona">
+                      <option selected="selected">Seleccionar...</option>
+                        <?php 
+                          $item = 'tipo_persona';
+                          $valor = 'usuarios';
+                          $all = true;
+
+                          $personas = ControladorPersonas::ctrMostrarPersonas($item, $valor, $all);
+
+                          foreach ($personas as $key => $value) {
+                            echo '<option value="'.$value["id_personas"].'">'.$value["nombre"]. ' ' .$value["apellidos"].'</option>';
+                            
+                          }
+                        ?>
+                    </select>
+                  </div>
+
+                  <div class="form-group col-md-6">
+                    <label>Tipo Cliente</label>
+                    <select class="form-control select2 tipoCliente" name="tipoClienteRegistrado" style="width: 100%;" required>
+                      <option selected="selected">Seleccionar...</option>
+                      <option value="Gimnasio">Clientes del gimnasio</option>
+                      <option value="Ventas">Cliente de ventas</option>
+                    </select>
+                  </div>
+                </div>
+                
+              <div class="datosClientes">
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                      <label>Tipo matricula</label>
+                      <select class="form-control select2 nuevaMatriculaRegistrado" style="width: 100%;" name="nuevaMatriculaRegistrado">
+                      <option selected="selected">Seleccionar...</option>
+                        <?php 
+                            $tabla = "tbl_matricula";
+                            $item = null;
+                            $valor = null;
+
+                            $matriculasClienteVenta = ControladorClientes::ctrMostrar($tabla, $item, $valor);
+                          
+                            foreach ($matriculasClienteVenta as $key => $value) { ?>
+                              <option value="<?php echo $value['id_matricula']?>"><?php echo $value['tipo_matricula']?></option>        
+                            <?php 
+                            }                             
+                        ?>                           
+                      </select> 
+                  </div>
+                  <div class="form-group col-md-6">
+                      <label for="">Precio matricula</label>
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">$</span>  
+                          </div>
+                        <input type="text" class="form-control text-right nuevoPrecioMatriculaRegistrado totalMatriculaRegistrado" name="nuevoPrecioMatriculaRegistrado" value="" readonly>
+                        <!-- <input type="hidden" id="pagoMatricula" name="pagoMatricula">   -->
+                      </div>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label>Promociones</label>
+                    <select class="form-control select2 nuevaPromocionRegistrado" style="width: 100%;" name="nuevaPromocionRegistrado">
+                      <option selected="selected">Seleccionar...</option>
+                      
+                        <?php 
+                            $tabla = "tbl_descuento";
+                            $item = null;
+                            $valor = null;
+
+                            $descuentos = ControladorClientes::ctrMostrar($tabla, $item, $valor);
+
+                            foreach ($descuentos as $key => $value) { ?>
+                              <option value="<?php echo $value['id_descuento']?>"><?php echo $value['tipo_descuento']?></option>        
+                            <?php 
+                            }
+                        ?>
+                    </select> 
+                  </div>
+                  <div class="form-group col-md-6">
+                      <label for="">Precio promocion</label>
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">%</span>  
+                          </div>
+                        <input type="text" class="form-control text-right nuevoPrecioPromocionRegistrado totalDescuentoRegistrado" name="" value="" readonly>
+                        <input type="hidden" id="nuevoPrecioDescuento" name="nuevoPrecioDescuentoRegistrado">  
+                      </div>
+                  </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6"> 
+                      <label>Tipo inscripcion</label>
+                      <select class="form-control select2 nuevaInscripcionRegistrado" style="width: 100%;" name="nuevaInscripcionRegistrado">
+                          <option selected="selected">Seleccionar...</option>
+                          <?php 
+                              $tabla = "tbl_inscripcion";
+                              $item = null;
+                              $valor = null;
+                              
+
+                              $inscripciones = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
+
+                              foreach ($inscripciones as $key => $value) { ?>
+                                <option value="<?php echo $value['id_inscripcion']?>"><?php echo $value['tipo_inscripcion']?></option>        
+                              <?php 
+                            }
+                          ?>
+                      </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label for="">Precio inscripcion</label>
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">$</span>  
+                          </div>
+                        <input type="text" class="form-control text-right nuevoPrecioInscripcionRegistrado totalInscripcionRegistrado" name="nuevoPrecioInscripcionRegistrado" value="" readonly>    
+                        <!-- <input type="hidden" id="pagoInscripcion" name="pagoInscripcion">-->
+                      </div>
+                  </div>
+                </div>
+                
+                <div class="form-row">
+                  <button type="" class="btn btn-success btn-block col-md-6 mt-4 mb-3 verTotalPagoRegistrado"><i class="fas fa-dollar-sign"></i> Calcular</button>       
+
+                  <div class="form-group col-md-6">
+                    <label for="">Total a pagar:</label>
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                          <span class="input-group-text">$</span>  
+                      </div>
+                      <input type="text" class="form-control float-right text-right totalPagarRegistrado" name="nuevoTotalClienteRegistrado" value="" readonly>  
+                      </div>
+                  </div>
+
+                </div>
+
+              </div>
+            </div>
+
+            <div class="form-group mt-4 float-right">
+              <button type="" class="btn btn-primary btnConfirmarPago">Guardar</button>
+              <button type="" class="btn btn-primary btnNuevoClienteGym">Guardar</button>
+              <button type="" class="btn btn-primary btnNuevoClienteVentas">Guardar</button>
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
+            </div>
+        
+            <?php
+              $ingresarCliente = new ControladorClientes();
+              $ingresarCliente->ctrCrearClienteYaRegistrado();
+            ?>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
 <!-- =======================================
            ELIMINAR CLIENTE
   ======================================----->
