@@ -1,8 +1,8 @@
 <?php
 
 require_once "conexion.php";
-class ModeloInventario
-{
+
+class ModeloInventario{
 
 	
     /*=============================================
@@ -208,7 +208,7 @@ class ModeloInventario
     }
 		
 
-/*=============================================
+	/*=============================================
 				CREAR COMPRA
 	=============================================*/	 
 	static public function mdlCrearCompra($tabla, $datos){
@@ -302,6 +302,32 @@ class ModeloInventario
 			$stmt = null;
 		// }
 	}
+
+	/*=============================================
+            BORRAR EQUIPO
+	=============================================*/
+	static public function mdlBorrarEquipo($tabla, $item, $valor){
+
+		$stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE $item = :$item");
+
+		$stmt->bindParam(":".$item, $valor, PDO::PARAM_INT);
+
+		if($stmt->execute()){
+
+			return true;
+
+		} else {
+		
+			return $stmt->errorInfo();
+
+		}
+
+		$stmt->close();
+
+		$stmt = null;
+	}
+
+
 	/*=============================================
 			MOSTRAR SUMA INVENTARIO
 	=============================================*/

@@ -24,12 +24,6 @@
         $permisoEliminar = $_SESSION['permisos']['Usuarios']['eliminar'];
         $permisoActualizar = $_SESSION['permisos']['Usuarios']['actualizar'];
         $permisoConsulta = $_SESSION['permisos']['Usuarios']['consulta'];
-
-        // var_dump($_SESSION['perm']);
-
-        // foreach ($permisos_pantalla as $key => $value) {
-        //   echo $key;
-        // }
       ?>
 
       <div class="card">

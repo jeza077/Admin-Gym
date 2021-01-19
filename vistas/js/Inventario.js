@@ -16,7 +16,7 @@ $(document).on("click",".btnEditarInventario",function(){
         processData: false,
         dataType: "json",
         success: function(respuesta){
-            console.log("respuesta",respuesta)
+            // console.log("respuesta",respuesta)
 
 
             $("#editarCodigo").val(respuesta["codigo"]);
@@ -28,6 +28,15 @@ $(document).on("click",".btnEditarInventario",function(){
             // $("#editarProveedor").val(respuesta["proveedor"]);
             $("#editarProductoMinimo").val(respuesta["producto_minimo"]);
             $("#editarProductoMaximo").val(respuesta["producto_maximo"]);
+
+            if(respuesta["stock"] == null){
+
+                $("#editarStock").val(0);
+
+            } else {
+
+                $("#editarStock").val(respuesta["stock"]);
+            }
 
             if (respuesta["foto"] !=""){
                
@@ -44,8 +53,6 @@ $(document).on("click",".btnEditarInventario",function(){
 
 
 //** ----------------- EDITAR EQUIPO  --------------------------*/
-
-
 $(document).on("click",".btnEditarEquipo",function(){
     var idEquipo = $(this).attr("idInventario");
     // console.log("idEquipo", idEquipo)
@@ -62,57 +69,71 @@ $(document).on("click",".btnEditarEquipo",function(){
         processData: false,
         dataType: "json",
         success: function(respuesta){
-            console.log("respuesta",respuesta)
+            // console.log("respuesta",respuesta["foto"])
 
 
             $("#editarCodigoE").val(respuesta["codigo"]);
             $("#editarNombreEquipo").val(respuesta["nombre_producto"]);
             $("#editarTipoEquipo").val(respuesta["id_inventario"]);
-            $("#editarStockEquipo").val(respuesta["stock"]);
+            $("#imagenActualEquipo").val(respuesta["foto"]);
 
-            if (respuesta["foto"] !=""){
-               
-                $("#editarFotoEquipo").val(respuesta["foto"]); 
-                $("#previsualizar").attr("src", respuesta["foto"]);
-            }  
+            if(respuesta["stock"] == null){
+                // console.log('es nulo')
+                $("#editarStockEquipo").val(0);
+
+            } else {
+                // console.log('no es nulo')
+
+                $("#editarStockEquipo").val(respuesta["stock"]);
+            }
+
+            if(respuesta["foto"] != "" && respuesta["foto"] != null){
+
+                $('.previsualizar').attr('src', respuesta['foto']);
+
+            } else if(respuesta["foto"] != "" && respuesta["foto"] == null){
+
+                $('.previsualizar').attr('src', 'vistas/img/productos/default/product.png');
+
+            } else {
+
+                $('.previsualizar').attr('src', 'vistas/img/productos/default/product.png');
+
+            }
         }    
     });
 
 })
 
-//** ----------------- GENERAR CODIGO  --------------------------*/
 
+//** ----------------- BORRAR EQUIPO  --------------------------*/
+$(document).on('click', '.btnEliminarEquipo', function () {
+    var idEquipo = $(this).attr('idEquipo');
+    var fotoEquipo = $(this).attr('fotoEquipo');
+    var equipo = $(this).attr('equipo');
 
-$("#nuevoTipoProducto").change(function(){
-    var idCategoria = $(this).val();
-    var datos = new FormData();
-    datos.append("idCategoria", idCategoria);
-    console.log("idCategoria", idCategoria)
-    $.ajax({ 
-        url:"ajax/inventario.ajax.php",
-        method: "POST",
-        data: datos,
-        cache: false,
-        contentType: false,
-        processData: false,
-        dataType: "json",
-        success: function(respuesta){
-            console.log("respuesta",respuesta);
-            var nuevoCodigo = parseInt(respuesta["codigo"]) + 1;
-            console.log("nuevoCodigo",nuevoCodigo);
-
-            if(!respuesta && idCategoria == 1){
-                $(".nuevoCodigo").val(100)
-            } 
-            else if (!respuesta && idCategoria == 2){
-                $(".nuevoCodigo").val(700)
-            }
-            else {
-                $(".nuevoCodigo").val(nuevoCodigo)
-            }
+    Swal.fire({
+        title: "¿Estás seguro de borrar el equipo?",
+        text: "¡Si no lo estas, puedes cancelar la acción!",
+        icon: "info",
+        showCancelButton: true,
+        cancelButtonColor: "#DC3545",
+        heightAuto: false,
+        allowOutsideClick: false
+    }).then((result)=>{
+        if(result.value){
+            window.location = "index.php?ruta=equipo&idEquipo="+idEquipo+"&equipo="+equipo+"&fotoEquipo="+fotoEquipo;
         }
     });
-})
+});
+
+//** -----------------------------------------------------*/
+//MOSTRAR INFO EN SELECT DESDE LA BASE DE DATOS DINAMICAMENTE
+// -------------------------------------------------------*/ 
+$(document).on('click', '#nuevaCompra', function () {
+    // console.log('clickkk')
+    selectDinamico();    
+});
 
 
 //** ------------------------------------*/
@@ -133,45 +154,18 @@ $("#nuevoTipoProducto").change(function(){
 
 
 /*=============================================
-    Sin numeros
-=============================================*/
-function sinNumeros(event) {
-    var codigo = event.which || event.keyCode;
-    // console.log(codigo);
-    if(codigo >= 48 && codigo <= 57  || codigo >= 97  && codigo <= 105){
-        event.preventDefault();
-
-    } else {
-        $('.alert').remove();
-    }
-     
-}
-
-/*=============================================
-    Sin letras
-=============================================*/
-function sinLetras(event) {
-    var codigo = event.which || event.keyCode;
-    // console.log(codigo);
-
-    if(codigo >= 65 && codigo <= 90 || codigo == 192){
-        event.preventDefault();
-
-    } else {
-        $('.alert').remove();
-    }
-     
-}
-
-/*=============================================
     EJECUCION DE VALIDACIONES
 =============================================*/
-var identidad = $('.nombre_producto');
-validarDoc(identidad);
-$('.nombre_producto').keydown(sinNumeros)
-$('.editar_Nombre_Producto').keydown(sinNumeros)
-$('.precio').keydown(sinLetras)
-$('.editar_Precio').keydown(sinLetras)
+// var identidad = $('.nombre_producto');
+// validarDoc(identidad);
+// $('.nombre_producto').keydown(sinNumeros)
+// $('.editar_Nombre_Producto').keydown(sinNumeros)
+// $('.precio').keydown(sinLetras)
+// $('.editar_Precio').keydown(sinLetras)
+$('.sinLetras').keydown(sinLetras)
+$('.sinCaracteres').keydown(sinCaracteres)
+$('.sinNumeros').keydown(sinNumeros)
+
 
 
 
