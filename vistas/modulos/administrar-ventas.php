@@ -9,7 +9,7 @@
         </div>
         
         <div class="col-sm-6">
-          <a href="crear-venta" class="btn btn-orange float-right">
+          <a href="nueva-venta" class="btn btn-orange float-right">
               Nueva Venta     
           </a> 
           
@@ -33,13 +33,13 @@
   </section>  
   <section class="content">
 
-                      <?php
-                        $descripcionEvento = " Consulto la pantalla de Administracion de Ventas";
-                        $accion = "consulta";
+    <?php
+      $descripcionEvento = " Consulto la pantalla de Administracion de Ventas";
+      $accion = "consulta";
 
-                        $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 4,$accion, $descripcionEvento);
-    
-                      ?>
+      $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 4,$accion, $descripcionEvento);
+
+    ?>
                    
     <div class="card">
       <div class="card-body">
@@ -143,15 +143,11 @@
                         <td>'.$value["fecha"].'</td>
 
                         <td>
-                          <div class="btn-group">
-                                
-                              <button class="btn btn-info btnImprimirFactura" codigoVenta="'.$value["numero_factura"].'"><i class="fa fa-print" style="color:#fff"></i></button>  
+                          <button class="btn btn-info btnImprimirFactura" codigoVenta="'.$value["numero_factura"].'"><i class="fa fa-print" style="color:#fff"></i></button>  
 
-                              <button class="btn btn-warning btnEditarVenta" idVenta="'.$value["id_venta"].'"><i class="fas fa-pencil-alt" style="color:#fff"></i></button>   
+                          <button class="btn btn-warning btnEditarVenta" idVenta="'.$value["id_venta"].'"><i class="fas fa-pencil-alt" style="color:#fff"></i></button>   
 
-                              <button class="btn btn-danger btnEliminarVenta" idVenta="'.$value["id_venta"].'"><i class="fas fa-trash-alt"></i></button>
-
-                          </div>  
+                          <button class="btn btn-danger btnEliminarVenta" idVenta="'.$value["id_venta"].'"><i class="fas fa-trash-alt"></i></button>
                         </td>
 
                       </tr>';
