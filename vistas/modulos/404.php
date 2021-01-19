@@ -36,7 +36,7 @@
 
         <p>
         
-           Ingresa al menú lateral y allí podrás encontrar las páginas disponibles. También puedes regresar haciendo <a href="inicio">click aquí.</a>
+           Ingresa al menú lateral y allí podrás encontrar las páginas disponibles. También puedes regresar haciendo <a href="dashboard">click aquí.</a>
         
         </p>
 

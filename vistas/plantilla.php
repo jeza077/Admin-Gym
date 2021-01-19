@@ -27,8 +27,8 @@
   <!-- SweetAlert2 -->
   <!-- <link rel="stylesheet" href="vistas/plugins/sweetalert2/dist/sweetalert2.min.css"> -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-   <!-- Select2 -->
-   <link rel="stylesheet" href="vistas/plugins/select2/css/select2.min.css">
+  <!-- Select2 -->
+  <link rel="stylesheet" href="vistas/plugins/select2/css/select2.min.css">
   <link rel="stylesheet" href="vistas/plugins/select2/css/select2-bootstrap4.min.css">
   <!-- Css propio -->
   <link rel="stylesheet" href="vistas/dist/css/main.css">
@@ -88,70 +88,106 @@
 
       if(isset($_GET["ruta"])){
 
-        if($_SESSION['rol'] == 'Administrador'){
-          
-          if($_GET["ruta"] == "dashboard" ||
-            $_GET["ruta"] == "usuarios" ||
-            $_GET["ruta"] == "bitacora" ||
-            $_GET["ruta"] == "proveedores" ||
-            // $_GET["ruta"] == "ajustes-cuenta" ||
-            $_GET["ruta"] == "productos" ||
-            $_GET["ruta"] == "clientes" ||
-            $_GET["ruta"] == "administrar-ventas" ||
-            $_GET["ruta"] == "ventas" ||
-            $_GET["ruta"] == "mantenimiento" ||
-            $_GET["ruta"] == "rol" ||
-            $_GET["ruta"] == "parametro" ||
-            $_GET["ruta"] == "inscripcion" ||
-            $_GET["ruta"] == "matricula" ||
-            $_GET["ruta"] == "descuento" ||
-            $_GET["ruta"] == "respaldo-restauracion" ||
-            $_GET["ruta"] == "connet" ||
-            $_GET["ruta"] == "connet2" ||
-            $_GET["ruta"] == "backup" ||
-            $_GET["ruta"] == "restore2" ||
-            $_GET["ruta"] == "crear-venta" ||
-            $_GET["ruta"] == "editar-venta" ||
-            $_GET["ruta"] == "reportes" ||
-            $_GET["ruta"] == "permisos-rol" ||
-            $_GET["ruta"] == "inventario" ||
-            $_GET["ruta"] == "documentos" ||
-            $_GET["ruta"] == "compras" ||
-            $_GET["ruta"] == "equipo" ||
-            $_GET["ruta"] == "clientes-inscripciones" ||
-            $_GET["ruta"] == "perfil" ||
-            $_GET["ruta"] == "clientes-inscripciones-historico" ||
-            $_GET["ruta"] == "clientes-pagos-historico" ||
-            $_GET["ruta"] == "salir"){
+        $permisos = $_SESSION['permisos'];
 
-            include "modulos/".$_GET["ruta"].".php";
+        $val = false;
 
-            }else{
-
-              include "modulos/404.php";
-
-            }
-
-        } else {
-
-            if($_GET["ruta"] == "dashboard" ||
-            $_GET["ruta"] == "salir"){
-
-            include "modulos/".$_GET["ruta"].".php";
-
-            }else{
-
-              include "modulos/404.php";
-
-            }
-
+        foreach ($permisos as $value) {
+          $val = $val || ($_GET['ruta'] == $value['link']);
         }
+      
+          if($val  ||
+          $_GET["ruta"] == "salir"){
+            
+            include "modulos/".$_GET['ruta'].".php";
+            
+          }else{
+            
+            include "modulos/404.php";
+            
+          }
+        
+          // foreach ($permisos as $key => $value) {
+          //   if($_GET['ruta'] == $value['link']){
+             
+          //     include "modulos/".$_GET["ruta"].".php";
 
+          //   }else{
+
+          //     include "modulos/404.php";
+
+          //   }
+            
+          // }
+
+
+
+        /*
+          if($_SESSION['rol'] == 'Administrador'){
+            
+            if($_GET["ruta"] == "dashboard" ||
+              $_GET["ruta"] == "usuarios" ||
+              $_GET["ruta"] == "bitacora" ||
+              $_GET["ruta"] == "proveedores" ||
+              // $_GET["ruta"] == "ajustes-cuenta" ||
+              $_GET["ruta"] == "productos" ||
+              $_GET["ruta"] == "clientes" ||
+              $_GET["ruta"] == "administrar-ventas" ||
+              $_GET["ruta"] == "ventas" ||
+              $_GET["ruta"] == "mantenimiento" ||
+              $_GET["ruta"] == "rol" ||
+              $_GET["ruta"] == "parametro" ||
+              $_GET["ruta"] == "inscripcion" ||
+              $_GET["ruta"] == "matricula" ||
+              $_GET["ruta"] == "descuento" ||
+              $_GET["ruta"] == "respaldoyrestauracion" ||
+              $_GET["ruta"] == "connet" ||
+              $_GET["ruta"] == "connet2" ||
+              $_GET["ruta"] == "backup" ||
+              $_GET["ruta"] == "restore2" ||
+              $_GET["ruta"] == "nueva-venta" ||
+              $_GET["ruta"] == "editar-venta" ||
+              $_GET["ruta"] == "reportes" ||
+              $_GET["ruta"] == "permisos-rol" ||
+              $_GET["ruta"] == "inventario" ||
+              $_GET["ruta"] == "compras" ||
+              $_GET["ruta"] == "equipo" ||
+              $_GET["ruta"] == "clientes-inscripciones" ||
+              $_GET["ruta"] == "perfil" ||
+              $_GET["ruta"] == "clientes-inscripciones-historico" ||
+              $_GET["ruta"] == "clientes-pagos-historico" ||
+              $_GET["ruta"] == "documentos" ||
+              $_GET["ruta"] == "salir"){
+
+              include "modulos/".$_GET["ruta"].".php";
+
+            }else{
+
+              include "modulos/404.php";
+
+            }
+
+          } else {
+
+              if($_GET["ruta"] == "dashboard" ||
+              $_GET["ruta"] == "salir"){
+
+              include "modulos/".$_GET["ruta"].".php";
+
+              }else{
+
+                include "modulos/404.php";
+
+              }
+
+          }
+        */
       } else{
 
         include "modulos/dashboard.php";
 
       }
+      
 
       /*=============================================
           FOOTER
@@ -244,7 +280,6 @@
 <script src="vistas/js/mantenimiento.js"></script>
 <script src="vistas/js/respaldo.js"></script>
 <script src="vistas/js/inventario.js"></script>
-
 
 </body>
 </html>
