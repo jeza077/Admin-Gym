@@ -55,8 +55,10 @@ $('.tablaVentas').DataTable( {
 
 } );
 
-// //***************************************************************
-// // AGREGAR PRODUCTOS A LA VENTA DESDE TABLA DINAMICA
+//***************************************************************
+// AGREGAR PRODUCTOS A LA VENTA DESDE TABLA DINAMICA
+//***************************************************************
+
 $(".tablaVentas tbody").on("click", "button.agregarProducto", function(){
 
   var idProducto = $(this).attr("idProducto");
@@ -81,6 +83,7 @@ $(".tablaVentas tbody").on("click", "button.agregarProducto", function(){
       var descripcion = respuesta["nombre_producto"];
       var stock = respuesta["stock"];
       var precio = respuesta["precio_venta"];
+      // console.log(stock);
 
       /*=============================================
       EVITAR AGREGAR PRODUTO CUANDO EL STOCK ESTÁ EN CERO
@@ -240,6 +243,7 @@ $(".formularioVenta").on("change", "input.nuevaCantidadProducto", function(){
 	var precioFinal = $(this).val() * precio.attr("precioReal");
 	// console.log($(this).val())
   precio.val(precioFinal);
+  // console.log(precioFinal)
   
 
 
@@ -570,7 +574,7 @@ $(".tablas").on("click", ".btnEliminarVenta", function(){
       }).then(function(result){
         if (result.value) {
           
-          window.location = "index.php?ruta=administrar-venta&idVenta="+idVenta;
+          window.location = "index.php?ruta=administrar-ventas&idVenta="+idVenta;
         }
 
   })
