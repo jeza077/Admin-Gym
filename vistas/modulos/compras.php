@@ -9,8 +9,8 @@
             <h1>Compras</h1>
           </div>
           <div class="col-sm-6">
-          <button class="btn btn-orange float-right"  data-toggle="modal" data-target="#modalAgregarCompra">
-              Comprar Producto       
+          <button class="btn btn-orange float-right" id="nuevaCompra" data-toggle="modal" data-target="#modalAgregarCompra">
+              Nueva Compra       
           </button>
           <button class="btn btn-danger btnExportarCompras float-right mr-3">
               Exportar PDF          
@@ -22,69 +22,64 @@
 
  <!-- Main content -->
     <section class="content">
-    <?php 
-      $permisoAgregar = $_SESSION['permisos']['Usuarios']['agregar'];
-      $permisoEliminar = $_SESSION['permisos']['Usuarios']['eliminar'];
-      $permisoActualizar = $_SESSION['permisos']['Usuarios']['actualizar'];
-      $permisoConsulta = $_SESSION['permisos']['Usuarios']['consulta'];
+      <?php 
+        $permisoAgregar = $_SESSION['permisos']['Usuarios']['agregar'];
+        $permisoEliminar = $_SESSION['permisos']['Usuarios']['eliminar'];
+        $permisoActualizar = $_SESSION['permisos']['Usuarios']['actualizar'];
+        $permisoConsulta = $_SESSION['permisos']['Usuarios']['consulta'];
 
-      // var_dump($_SESSION['perm']);
+        // var_dump($_SESSION['perm']);
 
-      // foreach ($permisos_pantalla as $key => $value) {
-      //   echo $key;
-      // }
-     
-            $descripcionEvento = " Consulto la pantalla de Compras";
-            $accion = "consulta";
+        // foreach ($permisos_pantalla as $key => $value) {
+        //   echo $key;
+        // }
 
-            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 4,$accion, $descripcionEvento);
+        $descripcionEvento = " Consulto la pantalla de Compras";
+        $accion = "consulta";
 
-        
+        $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 4,$accion, $descripcionEvento);      
 
-    ?>
+      ?>
 
       <div class="card">
-
         <div class="card-body">
-            <!-- CUERPPO INVENTARIO -->
-                <table class="table table-striped table-bordered tablas text-center">
-                    <thead>
-                    <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Nombre producto</th>
-                    <th scope="col">Proveedor</th>
-                    <th scope="col">Cantidad</th>
-                    <th scope="col">Precio</th>
-                    <th scope="col">Fecha</th>
-                  
-                    </tr>
-                </thead>
-                <tbody>
+          <table class="table table-striped table-bordered tablas text-center">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Nombre producto</th>
+                  <th scope="col">Proveedor</th>
+                  <th scope="col">Cantidad</th>
+                  <th scope="col">Precio</th>
+                  <th scope="col">Fecha</th>  
+                </tr>
+              </thead>
+              <tbody>
                 <?php
-                    $tabla = "tbl_compras";
-                    $item = null;
-                    $valor = null;
-                    $compras=ControladorInventario::ctrMostrarCompras($tabla, $item, $valor);
-                    // echo"<pre>";
-                    // var_dump($compras);
-                    // echo"</pre>";
-                    foreach ($compras as $key => $value) {
-                      echo '
-                          <tr>
-                              <td scope="row">'.($key+1).'</td>
-                              <td>'.$value["nombre_producto"].'</td>
-                              <td>'.$value["nombre"].'</td>                                                                           
-                              <td>'.$value["cantidad"].'</td>
-                              <td>'.$value["precio"].'</td>  
-                              <td>'.$value["fecha"].'</td>    
-                            
-                          </tr>
-                      ';
-                      }
+                  $tabla = "tbl_compras";
+                  $item = null;
+                  $valor = null;
+                  $compras=ControladorInventario::ctrMostrarCompras($tabla, $item, $valor);
+                  // echo"<pre>";
+                  // var_dump($compras);
+                  // echo"</pre>";
+                  foreach ($compras as $key => $value) {
+                    echo '
+                        <tr>
+                            <td scope="row">'.($key+1).'</td>
+                            <td>'.$value["nombre_producto"].'</td>
+                            <td>'.$value["nombre"].'</td>                                                                           
+                            <td>'.$value["cantidad"].'</td>
+                            <td>'.$value["precio"].'</td>  
+                            <td>'.$value["fecha"].'</td>    
+                          
+                        </tr>
+                    ';
+                    }
                 ?>
-                </tbody>
-            </table>
-            <!-- -------------------------- -->
+              </tbody>
+          </table>
+        </div> 
       </div> 
 
 
@@ -101,88 +96,69 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-          <div class="modal-body">
-            <form role="form" method="post" class="formulario" enctype="multipart/form-data">
-              <!-- <ul class="nav nav-tabs" id="myTab" role="tablist">
-                <li class="nav-item" role="presentation">
-                  <a class="nav-link active" id="datosPersona" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Inventario</a>
-                </li>
-              </ul> -->
-              
-              <!-- <div class="tab-content" id="myTabContent">
-                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="datosPersona">
-                  <div class="container-fluid mt-4"> -->
+        <div class="modal-body">
+          <form role="form" method="post" class="formulario" enctype="multipart/form-data">
+            <div class="form-row">
+              <div class="form-group col-md-12">
+                <label for="">Producto<?php echo $i?></label>
+                <select class="form-control select2 "  id="nuevoProducto" style="width: 100%;" name="nuevoProducto">                           
+                    <option selected="selected">Seleccionar...</option>
+                    <?php 
+                        $tabla = "tbl_inventario";
+                        $item = null;
+                        $valor = null;
+                        $preguntas = ControladorInventario::ctrMostrarTipoProducto($tabla, $item, $valor);
+                        foreach ($preguntas as $key => $value) { ?>
+                            <option value="<?php echo $value['id_inventario']?>"><?php echo $value['nombre_producto']?></option>        
+                        <?php 
+                        }
+                    ?>
+                </select>
+              </div>
+            </div>
 
-                    <!-- <div class="form-row"> -->
-                      <div class="form-group col-md-12">
-                        <label for="">Producto<?php echo $i?></label>
-                        <select class="form-control select2 "  id="nuevoProducto" style="width: 100%;" name="nuevoProducto">                           
-                            <option selected="selected">Seleccionar...</option>
-                            <?php 
-                                $tabla = "tbl_inventario";
-                                $item = null;
-                                $valor = null;
-                                $preguntas = ControladorInventario::ctrMostrarTipoProducto($tabla, $item, $valor);
-                                foreach ($preguntas as $key => $value) { ?>
-                                    <option value="<?php echo $value['id_inventario']?>"><?php echo $value['nombre_producto']?></option>        
-                                <?php 
-                                }
-                            ?>
-                        </select>
-                      </div>
-                      <div class="form-group col-md-12">
-                        <label for="">Proveedor<?php echo $i?></label>
-                        <select class="form-control select2 "  id="nuevoProveedor" style="width: 100%;" name="nuevoProveedor">                           
-                            <option selected="selected">Seleccionar...</option>
-                            <?php 
-                                $tabla = "tbl_proveedores";
-                                $item = null;
-                                $valor = null;
-                                $preguntas = ControladorInventario::ctrMostrarProveedores($tabla, $item, $valor);
-                                foreach ($preguntas as $key => $value) { ?>
-                                    <option value="<?php echo $value['id_proveedor']?>"><?php echo $value['nombre']?></option>        
-                                <?php 
-                                }
-                            ?>
-                        </select>
-                      </div>
-                    <!-- </div> -->
-        
-                    <!-- <div class="form-row"> -->
-
-                      <div class="form-group col-md-12">
-                        <label for="stock">Cantidad</label>
-                        <input type="number" min="0" class="form-control stock" id="nuevoCantidad" name="nuevoCantidad" placeholder="Ingrese Cantidad" min="0" required class="fa fa-arrow-up"></i></span>
-                      </div>
-     
-                      <div class="form-group col-md-12">
-                        <label for="stock">Precio de Compra</label>
-                        <input type="number" class="form-control stock" min="0" id="nuevoPrecio" name="nuevoPrecio" placeholder="Ingrese Precio" min="0" required class="fa fa-arrow-up"></i></span>
-                      </div>
-                    <!-- </div> -->
-
-                    <div class="form-group mt-4 float-right">
-                      <button type="" class="btn btn-primary">Guardar</button>
-                      <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
-                      </div>
-                  
-
-                      <?php
-                      // $tipostock = 'productos';
-                      $pantalla = 'compras';
-                      $AgregarInventario = new ControladorInventario();
-                      $AgregarInventario->ctrCrearCompra($pantalla);
-                      ?>
-                    </div>
-                  <!-- </div>
-
+            <div class="form-row">
+              <div class="form-group col-md-12">
+                <label for="">Proveedor<?php echo $i?></label>
+                <div class="input-group mySelect" id="selectProveedor">
+                            
+                  <div class="input-group-append">
+                    <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#modalNuevoProveedorCompras"><i class="fas fa-user-plus"></i></button>
+                  </div>
                   
                 </div>
-                    
-              </div> -->
+                <!-- <button id="pruebaBtn">btnbtn</button> -->
+              </div>
+            </div>
 
-            </form>
-          </div>
+            <!-- <div class="form-row"> -->
+              <div class="form-group col-md-12">
+                <label for="stock">Cantidad</label>
+                <input type="number" min="0" class="form-control stock" id="nuevoCantidad" name="nuevoCantidad" placeholder="Ingrese Cantidad" min="0" required class="fa fa-arrow-up"></i></span>
+              </div>
+
+              <div class="form-group col-md-12">
+                <label for="stock">Precio de Compra</label>
+                <input type="number" class="form-control stock" min="0" id="nuevoPrecio" name="nuevoPrecio" placeholder="Ingrese Precio" min="0" required class="fa fa-arrow-up"></i></span>
+              </div>
+            <!-- </div> -->
+
+              <div class="form-group mt-4 float-right">
+                <button type="" class="btn btn-primary">Guardar</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
+              </div>
+          
+
+                <?php
+                // $tipostock = 'productos';
+                $pantalla = 'compras';
+                $AgregarInventario = new ControladorInventario();
+                $AgregarInventario->ctrCrearCompra($pantalla);
+                ?>
+            </div>
+            
+          </form>
+        </div>
       </div>
     </div>
   </div>
@@ -283,5 +259,62 @@
   </div>
 
 
+<!--=====================================
+MODAL AGREGAR NUEVA PROVEEDOR
+======================================-->
+<div class="modal fade" id="modalNuevoProveedorCompras" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  
+  <div class="modal-dialog" role="document">
 
-  </div>
+    <div class="modal-content">
+
+      <form role="form" method="post" autocomplete="off">
+
+        <!--=====================================
+        CABEZA DEL MODAL
+        ======================================-->
+
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Nuevo Proveedor</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+        <!--=====================================
+        CUERPO DEL MODAL
+        ======================================-->
+
+        <div class="modal-body">
+          <div class="form-group col-md-12">
+            <label for="nombre">Nombre</label>
+            <input type="text" class="form-control nombre mayus" name="nuevoNombre" value="" placeholder="Ingresa Nombre" required>
+          </div>
+
+          <div class="form-group col-md-12">
+            <label for="Descripcion">Correo</label>
+            <input type="email" class="form-control email" name="nuevoCorreo" value="" placeholder="Ingresa correo" required>
+          </div>
+
+          <div class="form-group col-md-12">
+            <label for="Descripcion">Teléfono</label>
+            <input type="text" class="form-control" data-inputmask='"mask": "(999) 9999-9999"' data-mask  name="nuevoTelefono" placeholder="Ingrese Teléfono" required>
+          </div>
+        </div>
+
+        <!--=====================================
+        PIE DEL MODAL
+        ======================================-->
+
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary btnGuardarProveedor">Guardar</button>
+          <button type="button" class="btn btn-orange salirModal" data-dismiss="modal">Salir</button>
+        </div>
+
+      </form> 
+
+    </div>
+
+  </div>        
+
+</div>
