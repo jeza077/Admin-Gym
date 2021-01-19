@@ -230,6 +230,8 @@
               <input type="email" class="form-control email" name="nuevoEmail" placeholder="Ingrese Email" required>
             </div>
 
+            <input type="hidden" name="tipoCliente" value="Ventas">
+
             <div class="form-group mt-4 float-right">        
               <button type="" class="btn btn-primary">Guardar</button>
               <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
