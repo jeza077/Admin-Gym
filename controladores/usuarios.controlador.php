@@ -8,7 +8,7 @@ use PHPMailer\PHPMailer\Exception;
 class ControladorUsuarios{
 
 	/*=============================================
-				MOSTRAR SOLO USUARIOS
+	MOSTRAR SOLO USUARIOS
 	=============================================*/
 
 	static public function ctrMostrarSoloUsuarios($tabla, $item, $valor){
@@ -21,7 +21,7 @@ class ControladorUsuarios{
 	}
 
 	/*=============================================
-				MOSTRAR USUARIOS
+	MOSTRAR USUARIOS
 	=============================================*/
 
 	static public function ctrMostrarUsuarios($tabla, $item, $valor){
@@ -34,7 +34,7 @@ class ControladorUsuarios{
 	}
 
 	/*=============================================
-				MOSTRAR (DINAMICO)
+	MOSTRAR (DINAMICO)
 	=============================================*/
 
 	static public function ctrMostrar($tabla, $item, $valor) {
@@ -48,7 +48,7 @@ class ControladorUsuarios{
 
 	
 	/*=============================================
-			MOSTRAR MODULOS POR ROL-USUARIO
+	MOSTRAR MODULOS POR ROL-USUARIO
 	=============================================*/
 
 	static public function ctrMostrarUsuarioModulo($item1, $item2, $valor1, $valor2){
@@ -59,7 +59,7 @@ class ControladorUsuarios{
 	}
 
 	/*=============================================
-			INGRESO DE USUARIO
+	INGRESO DE USUARIO
 	=============================================*/
 
 	static public function ctrIngresoUsuario(){
@@ -121,6 +121,7 @@ class ControladorUsuarios{
 					  $link_objeto = $modulo['link_objeto'];
 	
 					  $permisos = array(
+						'link' => $link_objeto,
 						'agregar' => $modulo['agregar'],
 						'eliminar' => $modulo['eliminar'],
 						'actualizar' => $modulo['actualizar'],
@@ -404,7 +405,7 @@ class ControladorUsuarios{
 	}
 
 	/*=============================================
-			REGISTRO DE USUARIOS
+	REGISTRO DE USUARIOS
 	=============================================*/
 	static public function ctrCrearUsuario($datos){
 
@@ -592,7 +593,227 @@ class ControladorUsuarios{
 
 
 	/*=============================================
-			EDITAR USUARIOS
+	REGISTRO DE USUARIOS YA REGISTRADO
+	=============================================*/
+	static public function ctrCrearUsuarioYaRegistrado(){
+
+		// var_dump($_POST);
+		// var_dump($_FILES);
+		// return;
+
+		if(isset($_POST["nuevoIdPersona"])){
+
+			if(preg_match('/^[A-Z]+$/', $_POST["nuevoUsuario"]) &&
+			   preg_match('/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%.])\S{8,16}$/', $_POST["nuevoPassword"])){
+
+				$contraSinEncriptar = $_POST["nuevoPassword"];
+
+				$item = 'id_personas';
+				$valor = $_POST["nuevoIdPersona"];
+				$all = null;
+
+				$personas = ControladorPersonas::ctrMostrarPersonas($item, $valor, $all);
+
+				$nombre = $personas["nombre"];
+				$emailUsuario = $personas["correo"];
+				
+				/*=============================================
+						VALIDAR IMAGEN
+				=============================================*/
+
+				$ruta = "";
+
+				if(isset($_FILES["nuevaFoto"]["tmp_name"])){
+
+					list($ancho, $alto) = getimagesize($_FILES["nuevaFoto"]["tmp_name"]);
+
+					$nuevoAncho = 500;
+					$nuevoAlto = 500;
+
+					/*==============================================================
+					CREAMOS EL DIRECTORIO DONDE VAMOS A GUARDAR LA FOTO DEL USUARIO
+					===============================================================*/
+
+					$directorio = "vistas/img/usuarios/".$_POST["nuevoUsuario"];
+
+					mkdir($directorio, 0755); 
+
+					/*=====================================================================
+					DE ACUERDO AL TIPO DE IMAGEN APLICAMOS LAS FUNCIONES POR DEFECTO DE PHP
+					======================================================================*/
+
+					if($_FILES["nuevaFoto"]["type"] == "image/jpeg"){
+
+						/*=============================================
+						GUARDAMOS LA IMAGEN EN EL DIRECTORIO
+						=============================================*/
+
+						$aleatorio = mt_rand(100,999);
+
+						$ruta = "vistas/img/usuarios/".$_POST["nuevoUsuario"]."/".$aleatorio.".jpg";
+
+						$origen = imagecreatefromjpeg($_FILES["nuevaFoto"]["tmp_name"]);
+
+						$destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+
+						imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+
+						imagejpeg($destino, $ruta);
+
+					}
+
+					if($_FILES["nuevaFoto"]["type"] == "image/png"){
+
+						/*=============================================
+						GUARDAMOS LA IMAGEN EN EL DIRECTORIO
+						=============================================*/
+
+						$aleatorio = mt_rand(100,999);
+
+						$ruta = "vistas/img/usuarios/".$_POST["nuevoUsuario"]."/".$aleatorio.".png";
+
+						$origen = imagecreatefrompng($_FILES["nuevaFoto"]["tmp_name"]);
+
+						$destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+
+						imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+
+						imagepng($destino, $ruta);
+
+					}
+
+				}
+					
+				//**================= ENCRIPTAMOS LA CONTRASEÑA ===================*/
+				$encriptar = crypt($_POST["nuevoPassword"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
+
+
+				//** =============== CREAMOS LA FECHA VENCIMIENTO DEL USUARIO =================*/
+				$item = 'parametro';
+				$valor = 'ADMIN_DIAS_VIGENCIA';
+				$parametros = ControladorUsuarios::ctrMostrarParametros($item, $valor);
+		
+				$vigenciaUsuario = $parametros['valor'];
+				
+				date_default_timezone_set("America/Tegucigalpa");
+				$fechaVencimiento = date("Y-m-d H:i:s", strtotime('+'.$vigenciaUsuario.' days'));
+
+				$tabla = "tbl_usuarios";
+				$datos = array("id_persona" => $_POST["nuevoIdPersona"],
+								"usuario" => $_POST["nuevoUsuario"],
+								"password" => $encriptar,
+								"rol" => $_POST["nuevoRol"],
+								"foto" => $ruta,
+								"fecha_vencimiento" => $fechaVencimiento);
+
+				// var_dump($datos);
+				// return;
+
+				$respuestaUsuario = ModeloUsuarios::mdlIngresarUsuarioEmpleado($tabla, $datos);
+
+				// return var_dump($respuestaUsuario);
+
+				if($respuestaUsuario == true){
+			
+					$tabla = "tbl_personas";
+
+					$item1 = "tipo_persona";
+					$valor1 = "ambos";
+			
+					$item2 = 'id_personas';
+					$valor2 = $_POST["nuevoIdPersona"];
+
+					$item3 = null;
+					$valor3 = null;
+
+					$item4 = null;
+					$valor4 = null;
+
+					$respuestaAct = ModeloUsuarios::mdlActualizarUsuario($tabla, $item1, $valor1, $item2, $valor2, $item3, $valor3, $item4, $valor4);
+
+					$email = $emailUsuario;
+					$nombreUsuario = $datos["usuario"];
+					$contraseña =  $contraSinEncriptar;
+					$asunto = 'Envio de Usuario y Contraseña';
+					$require = false;
+
+					$template = 'Hola '.$nombre.'! <br><br> Tu usuario es: '.$nombreUsuario.' <br> Tu contraseña es: '.$contraseña; 
+					
+					$respuestaCorreo = ControladorUsuarios::ctrGenerarCorreo($email, $nombreUsuario, $asunto, $template, $require);
+
+					if($respuestaCorreo = true){
+
+						$descripcionEvento = "Nuevo Usuario";
+						$accion = "Nuevo";
+						$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 2,$accion, $descripcionEvento);
+	
+						echo '<script>
+							Swal.fire({
+								title: "Usuario creado correctamente!",
+								icon: "success",
+								heightAuto: false,
+								allowOutsideClick: false
+							}).then((result)=>{
+								if(result.value){
+									window.location = "usuarios";
+								}
+							});                       
+						</script>';
+					
+						
+					} else {
+
+						echo '<script>
+							Swal.fire({
+								title: "Opps, algo salio mal, intenta de nuevo!",
+								icon: "error",
+								heightAuto: false,
+								allowOutsideClick: false
+							}).then((result)=>{
+								if(result.value){
+									window.location = "usuarios";
+								}
+							});                       
+						</script>';
+
+					}
+
+				} else {
+					
+					echo '<script>
+						Swal.fire({
+							title: "Opps, algo salio mal, intenta de nuevo!",
+							icon: "error",
+							heightAuto: false,
+							allowOutsideClick: false
+						}).then((result)=>{
+							if(result.value){
+								window.location = "usuarios";
+							}
+						});                       
+					</script>';
+
+				}
+
+			} else {
+
+				echo "<script>
+					Swal.fire({
+							icon: 'error',
+							title: '¡Llenar campos correctamente!',
+						})
+					</script>";
+
+			}
+
+						
+
+		} 
+
+	}
+
+	/*=============================================
+	EDITAR USUARIOS
 	=============================================*/
 	
 	static public function ctrEditarUsuario($datos){
@@ -796,7 +1017,7 @@ class ControladorUsuarios{
 	}
 
 	/*=============================================
-                MOSTRAR PREGUNTAS
+	MOSTRAR PREGUNTAS
 	=============================================*/	
 	static public function ctrMostrarPreguntas($item1, $valor1, $item2, $valor2, $item3, $valor3) {
 
@@ -1021,7 +1242,7 @@ class ControladorUsuarios{
 
 	
 	/*=============================================
-		ACTUALIZAR USUARIO
+	ACTUALIZAR USUARIO
 	=============================================*/	
 	static public function ctrActualizarUsuario($tabla, $item1, $valor1, $item2, $valor2, $item3, $valor3){
 		
@@ -1031,7 +1252,7 @@ class ControladorUsuarios{
 	}
 
 	/*=============================================
-		CAMBIAR CONTRASEÑA POR CODIGO-CORREO
+	CAMBIAR CONTRASEÑA POR CODIGO-CORREO
 	=============================================*/	
 	static public function ctrCambiarContraseñaPorCodigo(){
 
@@ -1156,7 +1377,7 @@ class ControladorUsuarios{
 
 
 	/*=============================================
-		ENVIAR CODIGO DE RECUPERAR CONTRASEÑA
+	ENVIAR CODIGO DE RECUPERAR CONTRASEÑA
 	=============================================*/	
     static public function ctrEnviarCodigo($id, $nombre, $correo){
 
@@ -1202,7 +1423,7 @@ class ControladorUsuarios{
 
 
 	/*=============================================
-		ENVIAR CORREO DE RECUPERAR CONTRASEÑA
+	ENVIAR CORREO DE RECUPERAR CONTRASEÑA
 	=============================================*/	
     static public function ctrEnviarCorreoRecuperacion($correoElectronico, $nombre, $codigo){
 		// $user_os        =   ControladorGlobales::ctrGetOS();
@@ -1323,7 +1544,7 @@ class ControladorUsuarios{
 	
 
 	/*=============================================
-			GENERAR CORREO
+	GENERAR CORREO
 	=============================================*/	
     static public function ctrGenerarCorreo($correoDestinatario, $nombreDestinatario, $asunto, $template, $require){
 
@@ -1726,7 +1947,7 @@ class ControladorUsuarios{
 
 
 	/*=============================================
-		CREAR CODIGO RANDOM PARA EL PASSWORD
+	CREAR CODIGO RANDOM PARA EL PASSWORD
 	=============================================*/	
     static public function ctrCreateRandomCode(){
 
@@ -1743,7 +1964,7 @@ class ControladorUsuarios{
 	
 	
     /*=============================================
-			MOSTRAR PARAMETROS
+	MOSTRAR PARAMETROS
     =============================================*/
     static public function ctrMostrarParametros($item, $valor){
         $tabla = 'tbl_parametros';
@@ -1754,7 +1975,7 @@ class ControladorUsuarios{
 	
 
 	/*=============================================
-		RANGO DINAMICO
+	RANGO DINAMICO
 	=============================================*/
 	static public function ctrRangoUsuarios($rango){
 
@@ -1768,7 +1989,7 @@ class ControladorUsuarios{
 
 
     /*=============================================
-			GENERAR CONTRASEÑAS ALEATORIAS
+	GENERAR CONTRASEÑAS ALEATORIAS
     =============================================*/
 	static public function password_seguro_random(){
  

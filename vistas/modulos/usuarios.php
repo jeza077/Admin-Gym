@@ -22,7 +22,7 @@
          
           <div class="col-sm-6">
           <?php if($permisoAgregar == 1){ ?>
-            <button class="btn btn-orange float-right"  data-toggle="modal" data-target="#modalAgregarUsuario">
+            <button class="btn btn-orange float-right" id="usuarioNuevo">
               Nuevo Usuario          
             </button>
           <?php } ?>
@@ -38,6 +38,7 @@
     <section class="content">
 
           <?php
+
             $descripcionEvento = " Consulto la pantalla de Usuario";
             $accion = "consulta";
 
@@ -140,9 +141,7 @@
   <!-- =======================================
            MODAL AGREGAR USUARIO
   ======================================----->
-
-
-  <div class="modal fade" id="modalAgregarUsuario" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="modalAgregarUsuarioNuevo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
          
@@ -200,6 +199,8 @@
                       <input type="text" class="form-control apellidos mayus" name="nuevoApellido" placeholder="Ingrese Apellidos" required>
                     </div>
                   </div>
+
+                  <div class="alertaDocumento"></div>
       
                   <div class="form-row">
                     <div class="form-group col-md-4">
@@ -216,6 +217,8 @@
                     </div>
                   </div>
 
+                  <div class="alertaEmail"></div>           
+                            
                   <div class="form-row">
                     <div class="form-group col-md-9">
                       <label for="inputAddress">Dirección</label>
@@ -265,22 +268,24 @@
                     </div>
 
                     <div class="form-group col-md-3">
-                      <label for="inputPassword4">Contraseña Generada</label>
-                      <input type="text" class="form-control passwordGenerado" id="inputPassword4" name="nuevoPassword">
+                      <label for="">Contraseña Generada</label>
+                      <input type="text" class="form-control passwordGenerado" name="nuevoPassword">
                     </div>
                     <div class="col-md-3">
                       <a href="javascript:void(0);"  class="btn btn-block btn-orange generarPassword" style="margin-top:2em">Generar contraseña</a>
                     </div>
                   </div>
 
+                  <div class="alertaUsuario"></div>
+
                   <div class="form-row">
                     <div class="form-group col-md-6">
-                      <label for="exampleInputFile">Foto</label>
+                      <label for="">Foto</label>
                       <div class="input-group">
                         <img class="img-thumbnail previsualizar mr-2" src="vistas/img/usuarios/default/default2.jpg" alt="imagen-del-usuario" width="100px">
                         <div class="custom-file">
-                          <input type="file" class="custom-file-input nuevaFoto" id="exampleInputFile" name="nuevaFoto">
-                          <label class="custom-file-label" for="exampleInputFile">Escoger foto</label>
+                          <input type="file" class="custom-file-input nuevaFoto" name="nuevaFoto">
+                          <label class="custom-file-label" for="">Escoger foto</label>
                         </div>
                       </div>
                           <p class="p-foto help-block ml-4">Peso máximo de la foto 2 MB</p>
@@ -335,7 +340,6 @@
   <!-- =======================================
            MODAL EDITAR USUARIO
   ======================================----->
-
   <div class="modal fade" id="modalEditarUsuario" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">      
@@ -363,7 +367,7 @@
                   <div class="form-row">
                     <div class="form-group col-md-3">
                       <label for="">Tipo de documento <?php echo $i?></label>
-                      <select class="form-control select2 tipoDocumento" name="editarTipoDocumento">
+                      <select class="form-control tipoDocumento" name="editarTipoDocumento">
                           <option value="" id="editarTipoDocumento"></option>
                           <?php 
                               $tabla = "tbl_documento";
@@ -417,7 +421,7 @@
                   
                     <div class="form-group col-md-3">
                       <label>Sexo</label>
-                      <select class="form-control select2" name="editarSexo" style="width: 100%;" required>
+                      <select class="form-control" name="editarSexo" style="width: 100%;" required>
                         <option value="" id="editarSexo"></option>
                         <option value="M">Masculino</option>
                         <option value="F">Femenino</option>
@@ -438,7 +442,7 @@
                     </div>
                     <div class="form-group col-md-3">
                       <label>Rol</label>
-                      <select class="form-control select2" style="width: 100%;" name="editarRol">
+                      <select class="form-control" style="width: 100%;" name="editarRol">
                         <option value="" id="editarRol"></option>
                           <?php 
                               $tabla = "tbl_roles";
@@ -517,6 +521,142 @@
                 ?>
               </div>
             </div>
+
+          </form>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- =========================================
+  MODAL AGREGAR USUARIO DE PERSONA YA REGISTRADA
+  ========================================== -->
+  <div class="modal fade" id="modalAgregarUsuarioYaRegistrado" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md" role="document">
+      <div class="modal-content">   
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Nuevo usuario</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          <form role="form" method="post" class="formulario" enctype="multipart/form-data">
+          
+            <div class="form-row">
+              <div class="form-group col-12">
+                <label>Persona</label>
+                <select class="form-control select2" style="width: 100%;" name="nuevoIdPersona">
+                  <option selected="selected">Seleccionar...</option>
+                    <?php 
+                      $item = 'tipo_persona';
+                      $valor = 'clientes';
+                      $all = true;
+
+                      $personas = ControladorPersonas::ctrMostrarPersonas($item, $valor, $all);
+
+                      foreach ($personas as $key => $value) {
+                        echo '<option value="'.$value["id_personas"].'">'.$value["nombre"]. ' ' .$value["apellidos"].'</option>';
+                        
+                      }
+                    ?>
+                </select>
+              </div>
+            </div>
+        
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="">Usuario</label>
+                <input type="text" class="form-control mayus nuevoUsuario" name="nuevoUsuario" placeholder="Ingrese Usuario">
+              </div>
+            
+              <div class="form-group col-md-6">
+                <label>Rol</label>
+                <select class="form-control select2" style="width: 100%;" name="nuevoRol">
+                  <!-- <option value="2">Default</option> -->
+                    <?php 
+                        $tabla = "tbl_roles";
+                        $item = null;
+                        $valor = null;
+
+                        $roles = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
+
+                        foreach ($roles as $key => $value) {
+                          if($value["rol"] == 'Default'){
+                            echo '<option selected="selected" value="'.$value["id_rol"].'">'.$value["rol"].'</option>';
+                          } else {
+                            echo '<option value="'.$value["id_rol"].'">'.$value["rol"].'</option>';
+                          }
+                        }
+                    ?>
+                </select>
+              </div>
+            </div>
+
+            <div class="alertaUsuario"></div>   
+
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="inputPassword4">Contraseña Generada</label>
+                <input type="text" class="form-control passwordGenerado" id="inputPassword4" name="nuevoPassword">
+              </div>
+              <div class="col-md-6">
+                <a href="javascript:void(0);"  class="btn btn-block btn-orange generarPassword" style="margin-top:2em">Generar contraseña</a>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group col-md-12">
+                <label for="exampleInputFile">Foto</label>
+                <div class="input-group">
+                  <img class="img-thumbnail previsualizar mr-2" src="vistas/img/usuarios/default/default2.jpg" alt="imagen-del-usuario" width="100px">
+                  <div class="custom-file">
+                    <input type="file" class="custom-file-input nuevaFoto" id="exampleInputFile" name="nuevaFoto">
+                    <label class="custom-file-label" for="exampleInputFile">Escoger foto</label>
+                  </div>
+                </div>
+                    <p class="p-foto help-block ml-4">Peso máximo de la foto 2 MB</p>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label>Estado</label>
+                <input type="text" class="form-control" value="Desactivado" style="color:red;" disabled>
+              </div>
+
+              <div class="form-group col-md-6">
+                <?php 
+                  $itemParam = 'parametro';
+                  $valorParam = 'ADMIN_DIAS_VIGENCIA';
+                  $parametros = ControladorUsuarios::ctrMostrarParametros($itemParam, $valorParam);
+              
+                  $vigenciaUsuario = $parametros['valor'];
+        
+                  date_default_timezone_set("America/Tegucigalpa");
+                  $fechaVencimiento = date("Y-m-d", strtotime('+'.$vigenciaUsuario.' days'));
+                ?>
+                <label>Fecha de vencimiento</label>
+                <input type="text" class="form-control" value="<?php echo $fechaVencimiento?>" disabled>
+              </div>
+            </div>
+        
+            <!-- <div class="modal-footer"> -->
+            <div class="form-group final mt-4 float-right">
+              <button type="" class="btn btn-primary">Guardar</button>
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
+            </div>
+          
+              <?php
+                $ingresarPersona = new ControladorUsuarios();
+                $ingresarPersona->ctrCrearUsuarioYaRegistrado();                
+              ?>
+            <!-- </div> -->
 
           </form>
 

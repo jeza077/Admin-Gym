@@ -1,6 +1,8 @@
 //** VERIFICAR QUE USUARIO NO SE REPITA */
-$('.nuevoUsuario').keyup(function (){
+$('.nuevoUsuario').blur(function (){
 
+    $('.alert').remove();
+    
     var usuarioIngresado = $(this).val();
 
     var datos = new FormData();
@@ -19,14 +21,14 @@ $('.nuevoUsuario').keyup(function (){
             // console.log(respuesta);
 
             if(respuesta){
-                $('.final').before('<div class="alert alert-danger fade show mt-2" role="alert">Usuario ya existente, ingrese uno diferente.</div>');
+                $('.alertaUsuario').append('<div class="alert alert-danger fade show mt-2" role="alert"><i class="icon fas fa-ban"></i>Usuario ya existente, ingrese uno diferente.</div>');
                 // setTimeout(function () {
                     // $('.alert').remove();
                 // }, 3000)
                 
                 //E inmeditamente Limpiamos el input
                 // $('.nuevoUsuario').val("");
-                // $('.nuevoUsuario').focus();
+                $('.nuevoUsuario').focus();
             } else {
                 $('.alert').remove();
             }
@@ -405,3 +407,28 @@ $('.salirFoto').click(function (e) {
     $('#datos-generales .user').show();
     toggleCambiarFoto();
 });
+
+
+//** ------------------------------------*/
+//     ALERTA AL AGREGAR NUEVO USUARIO
+// --------------------------------------*/
+$(document).on('click', '#usuarioNuevo', function (e) {
+    e.preventDefault();
+    // console.log('click')
+    Swal.fire({
+        icon: 'info',
+        title: '¿Crear usuario desde una persona ya registrada?',
+        html: '<button type="submit" role="button" class="SwalBtnGuardarUsuarioYaRegistrado btn btn-success customSwalBtn px-5" data-toggle="modal" data-target="#modalAgregarUsuarioYaRegistrado" data-dismiss="modal">' + 'Si' + '</button>' +
+            '<button type="button" role="button" class="SwalGuardarUsuarioNuevo btn btn-primary customSwalBtn" data-toggle="modal" data-target="#modalAgregarUsuarioNuevo" data-dismiss="modal">' + 'No, nuevo' + '</button>'+ 
+            '<button type="button" role="button" class="SwalBtnCancelar btn btn-danger customSwalBtn">' + 'Cancelar' + '</button>',
+        width: 550,
+        allowOutsideClick: false,
+        showCancelButton: false,
+        showConfirmButton: false
+    });
+});
+
+
+cancelarAlerta('.SwalBtnGuardarUsuarioYaRegistrado');
+cancelarAlerta('.SwalGuardarUsuarioNuevo');
+cancelarAlerta('.SwalBtnCancelar');

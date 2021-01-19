@@ -33,7 +33,7 @@
 
                                 <div class="form-group">
                                     <label for="">Pregunta <?php echo $i?></label>
-                                    <select class="form-control select2" name="nuevaPregunta[]">
+                                    <select class="form-control" name="nuevaPregunta[]">
                                         <option selected="selected">Seleccionar...</option>
                                         <?php 
                                             $tabla = "tbl_preguntas";

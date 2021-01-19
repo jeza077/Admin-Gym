@@ -34,7 +34,7 @@ class ModeloUsuarios{
 	}
 
 	/*=============================================
-		MOSTRAR USUARIOS
+	MOSTRAR USUARIOS
 	=============================================*/
 	
 	static public function mdlMostrarUsuarios($tabla1, $tabla2, $item, $valor){
@@ -70,7 +70,7 @@ class ModeloUsuarios{
 	}
 
 	/*=============================================
-		MOSTRAR USUARIOS-ROLES-MODULO
+	MOSTRAR USUARIOS-ROLES-MODULO
 	=============================================*/
 	
 	static public function mdlMostrarUsuarioModulo($item1, $item2, $valor1, $valor2){
@@ -102,7 +102,7 @@ class ModeloUsuarios{
 	}
 
 	/*=============================================
-			MOSTRAR (DINAMICO)
+	MOSTRAR (DINAMICO)
 	=============================================*/
 
 	static public function mdlMostrar($tabla, $item, $valor){
@@ -129,7 +129,7 @@ class ModeloUsuarios{
 
 
 	/*=============================================
-			INGRESAR USUARIOS EMPLEADOS	
+	INGRESAR USUARIOS EMPLEADOS	
 	=============================================*/
 	 
 	static public function mdlIngresarUsuarioEmpleado($tabla, $datos){
@@ -213,7 +213,7 @@ class ModeloUsuarios{
 
 
 	/*=============================================
-				EDITAR USUARIOS	
+	EDITAR USUARIOS	
 	=============================================*/	 
 	static public function mdlEditarUsuario($tabla, $datos){
 
@@ -309,7 +309,7 @@ class ModeloUsuarios{
 
 	
 	/*=============================================
-		CAMBIAR CONTRASEÑA POR CODIGO-CORREO
+	CAMBIAR CONTRASEÑA POR CODIGO-CORREO
 	=============================================*/
 
 	static public function mdlActualizarUsuarioPorCodigo($tabla, $item1, $valor1, $item2, $valor2, $item3, $valor3, $item4, $valor4){
@@ -338,7 +338,7 @@ class ModeloUsuarios{
 	}
 
 	/*=============================================
-                MOSTRAR PREGUNTAS
+	MOSTRAR PREGUNTAS
 	=============================================*/	
 
 	static public function mdlMostrarPreguntas($item1, $valor1, $item2, $valor2, $item3, $valor3){
@@ -437,7 +437,7 @@ class ModeloUsuarios{
 
 	    
 	/*=============================================
-		MOSTRAR PARAMETROS
+	MOSTRAR PARAMETROS
     =============================================*/
     
     static public function mdlMostrarParametros($tabla, $item, $valor){
@@ -457,7 +457,7 @@ class ModeloUsuarios{
 	}
 	
 	/*============================================
-		INSERTAR BITACORA
+	INSERTAR BITACORA
 	==============================================*/
 	static public function mdlInsertarBitacora($tabla, $fecha, $usuario, $objeto, $accion, $descripcion){
 
@@ -478,7 +478,7 @@ class ModeloUsuarios{
 	}
 		
 	/*=============================================
-		MOSTRAR BITACORA
+	MOSTRAR BITACORA
 	=============================================*/
 		
 	static public function mdlMostrarBitacora($tabla1, $item, $valor){
@@ -534,7 +534,7 @@ class ModeloUsuarios{
 
 
 	/*=============================================
-			RANGO DINAMICO
+	RANGO DINAMICO
 	=============================================*/
 	static public function mdlRango($tabla, $rango){
 	
