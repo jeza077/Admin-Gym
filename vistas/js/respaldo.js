@@ -19,21 +19,21 @@ $( document ).ready(function() {
       var totx=0;
       var v = 0;
     
-    var form_data = new FormData();
-    form_data.append("servidor",$('#servidor').val());
-    form_data.append("usuario",$('#usuario').val());
-    form_data.append("contrasenia",$('#contrasenia').val());
-    form_data.append("nombrebd",$('#nombrebd').val());
-    $.ajax({
-      url: 'vistas/modulos/backup.php',
-      dataType: 'json',
-      cache: false,
-      contentType: false,
-      processData: false,
-      data: form_data,                         
-      method: 'POST',
-      success: function(data){
-    
+      var form_data = new FormData();
+      form_data.append("servidor",$('#servidor').val());
+      form_data.append("usuario",$('#usuario').val());
+      form_data.append("contrasenia",$('#contrasenia').val());
+      form_data.append("nombrebd",$('#nombrebd').val());
+      $.ajax({
+        url: 'vistas/modulos/backup.php',
+        dataType: 'json',
+        cache: false,
+        contentType: false,
+        processData: false,
+        data: form_data,                         
+        method: 'POST',
+        success: function(data){
+      
      
                     //var datar = data[0];
                     //console.log(datar[0].res);
@@ -60,7 +60,7 @@ $( document ).ready(function() {
                     
                 }
             });
-        }
+    }
     
     
     
@@ -76,21 +76,21 @@ $( document ).ready(function() {
       sweetAlert("Atención", "Hay campos en blanco o no pasa todas la validaciones, por favor revise indicadores", "warning");("Atención", "Vuelva a intentar", "error");
       return;
     }  */
-    var form_data = new FormData();
-    form_data.append("servidor",$('#servidor2').val());
-    form_data.append("usuario",$('#usuario2').val());
-    form_data.append("contrasenia",$('#contrasenia2').val());
-    form_data.append("nombrebd",$('#nombrebd2').val());
-    form_data.append("restorePoint",$('#restorePoint').val());
-    $.ajax({
-      url: 'vistas/modulos/restore2.php',
-      dataType: 'json',
-      cache: false,
-      contentType: false,
-      processData: false,
-      data: form_data,                         
-      type: 'post',
-      success: function(data){
+      var form_data = new FormData();
+      form_data.append("servidor",$('#servidor2').val());
+      form_data.append("usuario",$('#usuario2').val());
+      form_data.append("contrasenia",$('#contrasenia2').val());
+      form_data.append("nombrebd",$('#nombrebd2').val());
+      form_data.append("restorePoint",$('#restorePoint').val());
+      $.ajax({
+        url: 'vistas/modulos/restore2.php',
+        dataType: 'json',
+        cache: false,
+        contentType: false,
+        processData: false,
+        data: form_data,                         
+        type: 'post',
+        success: function(data){
                     //var datar = data[0];
                     //console.log(datar[0].res);
                     if(data==1){
@@ -132,9 +132,9 @@ $( document ).ready(function() {
                      // location.replace('vistas/modulos/prueba_restore.php');
                     } 
                     
-                }
-            });
         }
+      });
+    }
     
     
     
