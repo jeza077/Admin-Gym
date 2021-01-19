@@ -43,7 +43,7 @@
 
           <div class="card-body">
           
-            <table class="table table-hover tablas text-center">
+            <table class="table table-bordered table-striped tablas text-center">
               <thead>
                 <tr>
                   <th scope="col">#</th>
@@ -123,9 +123,9 @@
 
                       echo
                           '<td>
-                            <button class="btn btn-outline-success btnEditarPago" data-toggle="tooltip" data-placement="left" title="Pagar" idCliente="'.$value["id_cliente"].'"><i class="fas fa-dollar-sign p-1"></i></button>
+                            <button class="btn btn-success btnEditarPago" data-toggle="tooltip" data-placement="left" title="Pagar" idCliente="'.$value["id_cliente"].'"><i class="fas fa-dollar-sign p-1"></i></button>
 
-                            <button class="btn btn-outline-danger btnCancelarInscripcion" data-toggle="tooltip" data-placement="left" title="Cancelar Inscripcion" idClienteInscripcion="'.$value["id_cliente_inscripcion"].'" idClientePagoInscripcion="'.$value["id_cliente"].'"><i class="fas fa-strikethrough"></i></button>
+                            <button class="btn btn-danger btnCancelarInscripcion" data-toggle="tooltip" data-placement="left" title="Cancelar Inscripcion" idClienteInscripcion="'.$value["id_cliente_inscripcion"].'" idClientePagoInscripcion="'.$value["id_cliente"].'"><i class="fas fa-strikethrough"></i></button>
                           </td>
                         </tr>
                     ';

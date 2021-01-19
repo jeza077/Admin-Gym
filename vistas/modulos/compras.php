@@ -123,7 +123,7 @@
                 <div class="input-group mySelect" id="selectProveedor">
                             
                   <div class="input-group-append">
-                    <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#modalNuevoProveedorCompras"><i class="fas fa-user-plus"></i></button>
+                    <button class="btn btn-orange" type="button" data-toggle="modal" data-target="#modalNuevoProveedorCompras"><i class="fas fa-user-plus"></i></button>
                   </div>
                   
                 </div>

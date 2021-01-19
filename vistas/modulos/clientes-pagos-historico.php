@@ -43,7 +43,7 @@
 
           <div class="card-body">
           
-            <table class="table table-hover tablas text-center">
+            <table class="table table-bordered table-striped tablas text-center">
               <thead>
                 <tr>
                   <th scope="col">#</th>
@@ -94,7 +94,7 @@
                         <td>$.'.$value["pago_total"].'</td>
                         <td>'.$value["fecha_de_pago"].'</td>
                         <td>
-                          <button class="btn btn-outline-info btnReciboPagoCliente" idClientePago="'.$value["id_pagos_cliente"].'" data-toggle="tooltip" data-placement="left" title="Imprimir recibo pago"><i class="fa fa-print"></i></button>
+                          <button class="btn btn-info btnReciboPagoCliente" idClientePago="'.$value["id_pagos_cliente"].'" data-toggle="tooltip" data-placement="left" title="Imprimir recibo pago"><i class="fa fa-print"></i></button>
                         </td>';                            
                   }
                 ?>

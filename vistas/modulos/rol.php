@@ -10,7 +10,7 @@
               <button class="btn btn-orange float-right"  data-toggle="modal" data-target="#modalNuevoRol">
                 Nuevo Rol        
               </button>
-              <button class="btn btn-outline-danger btnExportarRol float-right mr-3 ">
+              <button class="btn btn-danger btnExportarRol float-right mr-3 ">
                 Exportar PDF      
               </button>
           </div>
@@ -36,7 +36,7 @@
                       ROL
             ==========================================================-->   
 
-        <table class="table table-hocer tablas text-center">
+        <table class="table table-bordered table-striped tablas text-center">
 
           <thead>
                           

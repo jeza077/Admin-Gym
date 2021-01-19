@@ -90,7 +90,7 @@
                     <!-- <input type="hidden" value="<?php echo $value["id_personas"]?>" name="idPersona"> -->
                   </div>    
                   <div class="form-group col-md-3 mt-4">
-                    <span class="input-group-addon"><button type="button" class="btn btn-outline-primary btn-xs p-2" data-toggle="modal" data-target="#modalAgregarCliente" data-dismiss="modal">Agregar cliente</button></span> 
+                    <span class="input-group-addon"><button type="button" class="btn btn-outline-orange btn-xs p-2 px-3 mt-2" data-toggle="modal" data-target="#modalAgregarCliente" data-dismiss="modal">Agregar cliente</button></span> 
                   </div>
                 </div>
                 <!--=====================================
@@ -100,7 +100,7 @@
 
                 </div>
                 <!-- IMPUESTO Y TOTAL-->
-                <div class="form-row float-right mt-2">
+                <div class="form-row mt-2">
                   <div class="form-group float-right col-md-2" style="padding-left:0px">
                     <?php
                     $item="parametro";
@@ -135,7 +135,7 @@
 
                 <div class="form-check float-right">
                     <input type="checkbox" class="form-check-input" id="exampleCheck1" name="enviarFactura">
-                    <label class="form-check-label" for="exampleCheck1">RECIBO DE PAGO</label>
+                    <label class="form-check-label" for="exampleCheck1">ENVIAR RECIBO DE PAGO</label>
                 </div>
 
               </div>
@@ -171,18 +171,6 @@
                     <th scope="col">Acciones</th> 
                   </tr>
                 </thead>
-                <?php
-                // $item = "tipo_producto";
-                // $valor = "Productos";
-                // $tabla = "tbl_inventario";
-            
-                //       $productos = ControladorInventario::ctrMostrarInventario($tabla, $item, $valor);	
-                //       echo "<pre>";
-                //       var_dump($productos[1]["stock"]);
-                //       echo "</pre>";
-                //       return;
-
-                ?>
             </table>
           </div>
         </div>

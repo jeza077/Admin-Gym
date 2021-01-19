@@ -35,7 +35,7 @@
       <div class="card">
 
         <div class="card-body">
-          <table class="table table-hover tablas text-center">
+          <table class="table table-bordered table-striped tablas text-center">
             <thead>
                 <tr>
                 <th scope="col">#</th>
@@ -72,7 +72,7 @@
                           <td>'.$value["stock"].'</td>';
                       echo '     
                           <td>
-                          <button class="btn btn-outline-warning btnEditarEquipo" idInventario="'.$value["id_inventario"].'" data-toggle="modal" data-target="#modalEditarBodega" data-toggle="tooltip" data-placement="left" title="Editar"><i class="fas fa-pencil-alt"></i></button>
+                          <button class="btn btn-warning btnEditarEquipo" idInventario="'.$value["id_inventario"].'" data-toggle="modal" data-target="#modalEditarBodega" data-toggle="tooltip" data-placement="left" title="Editar"><i class="fas fa-pencil-alt" style="color:white"></i></button>
                           
                           </td>
                           </tr>

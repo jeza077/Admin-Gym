@@ -10,7 +10,7 @@
               <button class="btn btn-orange float-right"  data-toggle="modal" data-target="#modalNuevoDescuento">
               Nuevo Descuento     
               </button>
-              <button class="btn btn-outline-danger btnExportarDescuento float-right mr-3 ">
+              <button class="btn btn-danger btnExportarDescuento float-right mr-3 ">
                 Exportar PDF      
               </button>
 
@@ -43,7 +43,7 @@
 
             ?>
 
-            <table class="table table-hover tablas text-center">                
+            <table class="table table-bordered table-striped tablas text-center">                
               <thead>
                 <tr>
                     <th scope="col">#</th>
@@ -125,19 +125,15 @@ MODAL NUEVO DESCUENTO
         ======================================-->
 
         <div class="modal-body">
-          <div class="card-body">
-            <div class="form-group col-md-12">
-              <label for="Rol">Tipo Descuento</label>
-              <input type="text" class="form-control nombre mayus" name="nuevoDescuento" value="" placeholder="Ingresa Descuento" required>
-            </div>
-
-            <div class="form-group col-md-12">
-              <label for="Descripcion">Porcentaje Descuento</label>
-              <input type="textarea" class="form-control preciom" name="nuevoValor" value="" placeholder="Ingresa Porcentaje Descuento" required>
-            </div>
-
+          <div class="form-group col-md-12">
+            <label for="Rol">Tipo Descuento</label>
+            <input type="text" class="form-control nombre mayus" name="nuevoDescuento" value="" placeholder="Ingresa Descuento" required>
           </div>
 
+          <div class="form-group col-md-12">
+            <label for="Descripcion">Porcentaje Descuento</label>
+            <input type="textarea" class="form-control preciom" name="nuevoValor" value="" placeholder="Ingresa Porcentaje Descuento" required>
+          </div>
         </div>
 
         <!--=====================================
@@ -172,7 +168,7 @@ MODAL NUEVO DESCUENTO
 
 
 <!--=====================================
-MODAL NUEVO DESCUENTO
+MODAL EDITAR DESCUENTO
 ======================================-->
 
 <div class="modal fade" id="modalEditarDescuento" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

@@ -40,8 +40,11 @@ class TablaProductosVentas{
  	 		TRAEMOS LA IMAGEN
   			=============================================*/ 
 
-              // $imagen = "<img src='".$productos[$i]["imagen"]."' width='40px'>";
-		  	$imagen = "<img src='vistas/img/usuarios/default/anonymous.png' width='40px'>";
+			if($productos[$i]["foto"] != ""){
+				$imagen = "<img src='".$productos[$i]["foto"]."' width='40px'>";
+			} else {
+				$imagen = "<img src='vistas/img/productos/default/product.png' width='40px'>";
+			}
               
 
 		  	/*=============================================
