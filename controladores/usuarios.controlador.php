@@ -1426,6 +1426,7 @@ class ControladorUsuarios{
 	ENVIAR CORREO DE RECUPERAR CONTRASEÑA
 	=============================================*/	
     static public function ctrEnviarCorreoRecuperacion($correoElectronico, $nombre, $codigo){
+
 		// $user_os        =   ControladorGlobales::ctrGetOS();
 		// $user_browser   =   ControladorGlobales::ctrGetBrowser();
 
@@ -1443,9 +1444,11 @@ class ControladorUsuarios{
 		
 		// $parametros = ControladorGlobales::ctrMostrarParametros();
 
-		// $item = null;
-		// $valor = null;
-		// $parametros = ControladorUsuarios::ctrMostrarParametros($item, $valor);
+		$item = 'parametro';
+		$valor = 'ADMIN_RUTA_URL';
+		$parametros = ControladorUsuarios::ctrMostrarParametros($item, $valor);
+
+		$ruta = $parametros['valor'];
 
 		// $correoEmpresa = $parametros[1]['valor'];
 		// $passwordEmpresa = $parametros[0]['valor'];
@@ -1453,8 +1456,8 @@ class ControladorUsuarios{
 
         $template = file_get_contents('../extensiones/plantillas/template.php');
         $template = str_replace("{{name}}", $nombre, $template);
-        $template = str_replace("{{action_url_1}}", 'localhost/Admin-Gym/index.php?ruta=recuperar-password&codigo='.$codigo, $template);
-        $template = str_replace("{{action_url_2}}", '<b>localhost/Admin-Gym/index.php?ruta=recuperar-password&codigo='.$codigo.'</b>', $template);
+        $template = str_replace("{{action_url_1}}", $ruta.'index.php?ruta=recuperar-password&codigo='.$codigo, $template);
+        $template = str_replace("{{action_url_2}}", '<b>'.$ruta.'index.php?ruta=recuperar-password&codigo='.$codigo.'</b>', $template);
         $template = str_replace("{{year}}", date('Y'), $template);
         // $template = str_replace("{{operating_system}}", $user_os, $template);
 		// $template = str_replace("{{browser_name}}", $user_browser, $template);
@@ -1560,8 +1563,6 @@ class ControladorUsuarios{
 			require 'extensiones/PHPMailer/PHPMailer/src/PHPMailer.php';
 			require 'extensiones/PHPMailer/PHPMailer/src/SMTP.php';
 		}
-
-		
 
 		
 		$item = null;

@@ -67,14 +67,14 @@ width: 100% !important; height: 100%; margin: 0; line-height: 1.4; background-co
                           </td>
                         </tr>
                       </table>
-                      <p style="box-sizing: border-box; color: #74787E; font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 1.5em; margin-top: 0;" align="left"> Por razones de seguridad, esta solicitud se recibió de un dispositivo {{operating_system}} usando {{browser_name}}. Si no solicitó restablecer la contraseña, ignore este correo electrónico o póngase en contacto con el servicio de asistencia si tiene alguna pregunta. </p>
-                      <p style="box-sizing: border-box; color: #74787E; font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 1.5em; margin-top: 0;" align="left">Gracias,
+
+                      <p style="box-sizing: border-box; color: #74787E; font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 1.5em; margin-top: 0;" align="left">Gracias!
                         <br />Equipo del Gimnasio La Roca</p>
                       
                       <table class="body-sub" style="border-top-color: #EDEFF2; border-top-style: solid; border-top-width: 1px; box-sizing: border-box; font-family: Arial, Helvetica, sans-serif; margin-top: 25px; padding-top: 25px;">
                         <tr>
                           <td style="box-sizing: border-box; font-family: Arial, Helvetica, sans-serif; word-break: break-word;">
-                            <p class="sub" style="box-sizing: border-box; color: #74787E; font-family: Arial, Helvetica, sans-serif; font-size: 12px; line-height: 1.5em; margin-top: 0;" align="left">Si tiene problemas con el botón de arriba, copie y pegue la siguiente URL en su navegador web.</p>
+                            <p class="sub" style="box-sizing: border-box; color: #74787E; font-family: Arial, Helvetica, sans-serif; font-size: 12px; line-height: 1.5em; margin-top: 0;" align="left">Si tiene problema con el botón de arriba, copie y pegue la siguiente URL en su navegador web.</p>
                             <p class="sub" style="box-sizing: border-box; color: #74787E; font-family: Arial, Helvetica, sans-serif; font-size: 12px; line-height: 1.5em; margin-top: 0;" align="left">{{action_url_2}}</p>
                           </td>
                         </tr>
