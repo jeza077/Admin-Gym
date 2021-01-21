@@ -16,6 +16,10 @@
 // verificarDocumento($('.tipoDocumentoCliente'))
 
 // redireccion('.SwalBtnNuevoCliente', 'clientes');
+
+lenguageDataTable('.tablaClientes', 'ajax/datatable-clientes.ajax.php');
+
+
 function redireccion(selector, ruta) {
     
     $(document).on('click', selector, function () {
@@ -853,7 +857,7 @@ $(document).on('click', '.SwalBtnCancelarInscripcion', function () {
 /*=============================================
         ELIMINAR CLIENTE
 =============================================*/
-$('.btnEliminarCliente').click(function () { 
+$(document).on('click', '.btnEliminarCliente', function () { 
 
     var idCliente = $(this).attr("idPersona");
     

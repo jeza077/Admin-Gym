@@ -32,7 +32,7 @@
      
         <div class="card-body">
 
-          <table class="table table-bordered table-striped  tablaBitacora text-center">
+          <table class="table table-bordered table-striped tablaBitacora text-center">
             <thead>
               <tr>
                 <th width="15px">#</th>

@@ -43,7 +43,7 @@
 
             <div class="card-body">
             
-              <table class="table table-striped table-bordered tablas text-center">
+              <table class="table table-striped table-bordered tablaClientes text-center">
                 <thead>
                   <tr>
                     <th scope="col">#</th>
@@ -56,60 +56,7 @@
                     <th scope="col">Acciones</th>
                   </tr>
                 </thead>
-                <tbody>
-                <?php 
-                  $tabla = "tbl_clientes";
-                  $item = null;
-                  $valor = null;
-                  $clientes = ControladorClientes::ctrMostrarClientesSinPago($tabla, $item, $valor);
-
-                  // echo "<pre>";
-                  // var_dump($clientes);
-                  // echo "</pre>";
-                  // return;
-
-                  // $tabla = "tbl_clientes";
-                  // $item = null;
-                  // $valor = null;
-                  // $respuestaPagos = ControladorClientes::ctrMostrarPagos($tabla, $item, $valor);
-
-          
-
-                  // echo "<pre>";
-                  // var_dump($respuesta);
-                  // echo "</pre>";
-                  // return;
-                  
-                  foreach ($clientes as $key => $value) {
-                    echo '
-                          <tr>
-                          <th scope="row">'.($key+1).'</th>
-                          <td>'.$value["num_documento"].'</td>
-                          <td>'.$value["nombre"].' '.$value["apellidos"].'</td>
-                          <td>'.$value["tipo_cliente"].'</td>
-                          <td>'.$value["correo"].'</td>
-                          <td>'.$value["telefono"].'</td>
-                          <td>'.$value["fecha_creacion"].'</td>';
-
-                      // echo '<td></td>';
-
-                          if($value['tipo_cliente'] == "Gimnasio"){
-                            echo '<td><button class="btn btn-warning btnEditarClienteGimnasio" tipoClienteGimnasio="'.$value['tipo_cliente'].'" id="btnEditarClienteGimnasio" data-toggle="modal" data-target="#modalEditarClienteGimnasio" idEditarClienteGimnasio="'.$value["id_personas"].'"><i class="fas fa-pencil-alt" style="color:#fff"></i></button>
-                            <button class="btn btn-danger btnEliminarCliente" idPersona="'.$value["id_personas"].'"><i class="fas fa-trash-alt"></i></button>';
-                          } else {
-                            echo '<td><button class="btn btn-warning btnEditarClienteVenta" tipoClienteVenta="'.$value['tipo_cliente'].'" id="btnEditarClienteVenta" data-toggle="modal" data-target="#modalEditarClienteVenta" idEditarClienteVenta="'.$value["id_personas"].'"><i class="fas fa-pencil-alt" style="color:#fff"></i></button>
-                            <button class="btn btn-danger btnEliminarCliente" idPersona="'.$value["id_personas"].'"><i class="fas fa-trash-alt"></i></button>';
-                          }
-                          '<td>
-                            
-                           
-                          
-                        </tr>
-                    ';
-                   
-                  }
-                ?>
-                </tbody>
+              
               </table>
             </div>
         </div>
