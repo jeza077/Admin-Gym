@@ -17,7 +17,7 @@
 
 // redireccion('.SwalBtnNuevoCliente', 'clientes');
 
-lenguageDataTable('.tablaClientes', 'ajax/datatable-clientes.ajax.php');
+lenguageDataTable('.tablaClientesInscripciones', 'ajax/datatable-clientes-inscripciones.ajax.php');
 
 
 function redireccion(selector, ruta) {

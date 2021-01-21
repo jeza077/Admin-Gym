@@ -43,7 +43,7 @@
 
           <div class="card-body">
           
-            <table class="table table-bordered table-striped tablas text-center">
+            <table class="table table-bordered table-striped tablaClientesInscripciones text-center">
               <thead>
                 <tr>
                   <th scope="col">#</th>
@@ -58,89 +58,15 @@
                   <th scope="col">Acciones</th>
                 </tr>
               </thead>
-              <tbody>
-                <?php 
-
-                  $tabla = "tbl_clientes";
-                  $item1 = 'tipo_cliente';
-                  $valor1 = 'Gimnasio';
-                  $item2 = 'estado';
-                  $valor2 = 1;
-                  $max = null;
-                  $clientes = ControladorClientes::ctrMostrarClientesInscripcionPagos($tabla, $item1, $valor1, $item2, $valor2, $max);
-
-                  // echo "<pre>";
-                  // var_dump($clientes);
-                  // echo "</pre>";
-                  // return;
-
-                  
-                  foreach ($clientes as $key => $value) {
-
-                    echo '
-                        <tr>
-                        <th scope="row">'.($key+1).'</th>
-                        <td>'.$value["num_documento"].'</td>
-                        <td>'.$value["nombre"].' '.$value["apellidos"].'</td>
-                        <td>'.$value["tipo_inscripcion"].'</td>
-                        <td>'.$value["fecha_inscripcion"].'</td>
-                        <td>'.$value["fecha_pago"].'</td>';
-
-                  
-                        $fecha_actual = strtotime(date("Y-m-d"));
-                        $fecha_entrada = strtotime($value['fecha_proximo_pago']);
-
-                        if($fecha_actual < $fecha_entrada){  
-                            echo '<td class="badge badge-success mt-2" data-toggle="tooltip" data-placement="left" title="Inscrito">'.$value["fecha_proximo_pago"].'</td>';
-                            
-                        } else {
-                            echo '<td class="badge badge-danger mt-2" data-toggle="tooltip" data-placement="left" title="Inscripcion vencida">'.$value["fecha_proximo_pago"].'</td>';
-                        }
-
-                          if($fecha_actual > $fecha_entrada){
-                          
-                            $diasInscripcion = $value['cantidad_dias'];
-                            $segundos = $fecha_entrada - $fecha_actual;
-                            $dias = $segundos / 86400;
-                            $diasFinal = ceil($dias / $diasInscripcion);
-                            // echo $diasFinal;
-
-                            $deuda = abs($value['precio_inscripcion'] * $diasFinal);
-      
-                            echo '<td>L.'.$deuda.'</td>';
-                          
-                          } else {
-                            echo '<td data-toggle="tooltip" data-placement="left" title="No debe">L.00.00</td>';
-
-                          }
-                      
-                          if($value['estado'] != 0){
-                            echo '<td><span class="badge badge-success p-3">A</span></td>';
-                          } else {
-                            echo '<td><span class="badge badge-danger p-3">D</span></td>';
-                          }
-                    
-
-                      echo
-                          '<td>
-                            <button class="btn btn-success btnEditarPago" data-toggle="tooltip" data-placement="left" title="Pagar" idCliente="'.$value["id_cliente"].'"><i class="fas fa-dollar-sign p-1"></i></button>
-
-                            <button class="btn btn-danger btnCancelarInscripcion" data-toggle="tooltip" data-placement="left" title="Cancelar Inscripcion" idClienteInscripcion="'.$value["id_cliente_inscripcion"].'" idClientePagoInscripcion="'.$value["id_cliente"].'"><i class="fas fa-strikethrough"></i></button>
-                          </td>
-                        </tr>
-                    ';
-                    
-                  }
-                ?>
-              </tbody>
+             
             </table>
           </div>
       </div>
     </section>
   </div>
 
- <!-- =======================================
-           MODAL ACTUALIZAR PAGO CLIENTE
+  <!-- =======================================
+  MODAL ACTUALIZAR PAGO CLIENTE
   ======================================----->
 
   <div class="modal fade" id="modalEditarPagos" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -393,7 +319,7 @@
 
 
 
- <!-- =======================================
+  <!-- =======================================
   MODAL NUEVA INSCRIPCION LUEGO DE CANCELAR
   ======================================----->
   <div class="modal fade" id="modalNuevaInscripcion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -490,8 +416,8 @@
   </div> 
 
 
-   <!-- =======================================
-      MODAL NUEVA INSCRIPCION 
+  <!-- =======================================
+  MODAL NUEVA INSCRIPCION 
   ======================================----->
   <div class="modal fade" id="modalNuevaInsc" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-md" role="document">
