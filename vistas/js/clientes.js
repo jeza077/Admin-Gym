@@ -20,6 +20,8 @@
 lenguageDataTable('.tablaClientes', 'ajax/datatable-clientes.ajax.php');
 lenguageDataTable('.tablaClientesInscripciones', 'ajax/datatable-clientes-inscripciones.ajax.php');
 lenguageDataTable('.tablaClientesInscripcionesHistorico', 'ajax/datatable-clientes-inscripciones-historico.ajax.php');
+lenguageDataTable('.tablaClientesPagosHistorico', 'ajax/datatable-clientes-pagos-historico.ajax.php');
+
 
 
 
@@ -949,7 +951,7 @@ $(document).on('click', '.btnEditarClienteVenta', function () {
 /*=============================================
 IMPRIMIR PAGO EN PDF
 =============================================*/
-$(".tablas").on("click", ".btnReciboPagoCliente", function(){
+$(".tablaClientesPagosHistorico").on("click", ".btnReciboPagoCliente", function(){
     // console.log('click')
     var idClientePago = $(this).attr("idClientePago");
   

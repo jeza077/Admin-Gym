@@ -43,7 +43,7 @@
 
           <div class="card-body">
           
-            <table class="table table-bordered table-striped tablas text-center">
+            <table class="table table-bordered table-striped tablaClientesPagosHistorico text-center">
               <thead>
                 <tr>
                   <th scope="col">#</th>
@@ -58,47 +58,7 @@
 
                 </tr>
               </thead>
-              <tbody>
-                <?php 
-                  $item = null;
-                  $valor = null;
-                  $clientes = ControladorClientes::ctrMostrarPagosClientes($item, $valor);
 
-                //   echo "<pre>";
-                //   var_dump($clientes);
-                //   echo "</pre>";
-                  // return;
-
-
-                  foreach ($clientes as $key => $value) {
-
-                    echo '
-                        <tr>
-                        <th scope="row">'.($key+1).'</th>
-                        <td>'.$value["num_documento"].'</td>
-                        <td>'.$value["nombre"].' '.$value["apellidos"].'</td>';
-                        if($value["pago_matricula"] == null){
-                          echo '<td>$.0</td>';
-                        } else {
-                          echo '<td>$.'.$value["pago_matricula"].'</td>';
-                        }
-                        
-                        if($value["pago_descuento"] == null){
-                          echo '<td>$.0</td>';
-                        } else {
-                          echo '<td>$.'.$value["pago_descuento"].'</td>';
-                        }
-                    
-                    echo '
-                        <td>$.'.$value["pago_inscripcion"].'</td>
-                        <td>$.'.$value["pago_total"].'</td>
-                        <td>'.$value["fecha_de_pago"].'</td>
-                        <td>
-                          <button class="btn btn-info btnReciboPagoCliente" idClientePago="'.$value["id_pagos_cliente"].'" data-toggle="tooltip" data-placement="left" title="Imprimir recibo pago"><i class="fa fa-print"></i></button>
-                        </td>';                            
-                  }
-                ?>
-              </tbody>
             </table>
           </div>
       </div>
