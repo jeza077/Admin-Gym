@@ -28,7 +28,7 @@
         $permisoActualizar = $_SESSION['permisos']['Usuarios']['actualizar'];
         $permisoConsulta = $_SESSION['permisos']['Usuarios']['consulta'];
 
-        // var_dump($_SESSION['perm']);
+        // var_dump($_SESSION['permisos']['Usuarios']['agregar']);
 
         // foreach ($permisos_pantalla as $key => $value) {
         //   echo $key;
@@ -43,7 +43,7 @@
 
       <div class="card">
         <div class="card-body">
-          <table class="table table-striped table-bordered tablas text-center">
+          <table class="table table-striped table-bordered tablaCompras text-center">
               <thead>
                 <tr>
                   <th scope="col">#</th>
@@ -54,38 +54,15 @@
                   <th scope="col">Fecha</th>  
                 </tr>
               </thead>
-              <tbody>
-                <?php
-                  $tabla = "tbl_compras";
-                  $item = null;
-                  $valor = null;
-                  $compras=ControladorInventario::ctrMostrarCompras($tabla, $item, $valor);
-                  // echo"<pre>";
-                  // var_dump($compras);
-                  // echo"</pre>";
-                  foreach ($compras as $key => $value) {
-                    echo '
-                        <tr>
-                            <td scope="row">'.($key+1).'</td>
-                            <td>'.$value["nombre_producto"].'</td>
-                            <td>'.$value["nombre"].'</td>                                                                           
-                            <td>'.$value["cantidad"].'</td>
-                            <td>'.$value["precio"].'</td>  
-                            <td>'.$value["fecha"].'</td>    
-                          
-                        </tr>
-                    ';
-                    }
-                ?>
-              </tbody>
+           
           </table>
         </div> 
       </div> 
 
 
 
-<!-- =======================================
-           MODAL AGREGAR COMPRA
+  <!-- =======================================
+  MODAL AGREGAR COMPRA
   ======================================----->
   <div class="modal fade" id="modalAgregarCompra" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-md" role="document">
@@ -164,8 +141,8 @@
   </div>
 
 
- <!-- =======================================
-           MODAL EDITAR
+  <!-- =======================================
+  MODAL EDITAR
   ======================================----->
 
   <div class="modal fade" id="modalEditarProducto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -259,62 +236,62 @@
   </div>
 
 
-<!--=====================================
-MODAL AGREGAR NUEVA PROVEEDOR
-======================================-->
-<div class="modal fade" id="modalNuevoProveedorCompras" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  
-  <div class="modal-dialog" role="document">
+  <!--=====================================
+  MODAL AGREGAR NUEVA PROVEEDOR
+  ======================================-->
+  <div class="modal fade" id="modalNuevoProveedorCompras" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    
+    <div class="modal-dialog" role="document">
 
-    <div class="modal-content">
+      <div class="modal-content">
 
-      <form role="form" method="post" autocomplete="off">
+        <form role="form" method="post" autocomplete="off">
 
-        <!--=====================================
-        CABEZA DEL MODAL
-        ======================================-->
+          <!--=====================================
+          CABEZA DEL MODAL
+          ======================================-->
 
-        <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Nuevo Proveedor</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-
-        <!--=====================================
-        CUERPO DEL MODAL
-        ======================================-->
-
-        <div class="modal-body">
-          <div class="form-group col-md-12">
-            <label for="nombre">Nombre</label>
-            <input type="text" class="form-control nombre mayus" name="nuevoNombre" value="" placeholder="Ingresa Nombre" required>
+          <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Nuevo Proveedor</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
           </div>
 
-          <div class="form-group col-md-12">
-            <label for="Descripcion">Correo</label>
-            <input type="email" class="form-control email" name="nuevoCorreo" value="" placeholder="Ingresa correo" required>
+          <!--=====================================
+          CUERPO DEL MODAL
+          ======================================-->
+
+          <div class="modal-body">
+            <div class="form-group col-md-12">
+              <label for="nombre">Nombre</label>
+              <input type="text" class="form-control nombre mayus" name="nuevoNombre" value="" placeholder="Ingresa Nombre" required>
+            </div>
+
+            <div class="form-group col-md-12">
+              <label for="Descripcion">Correo</label>
+              <input type="email" class="form-control email" name="nuevoCorreo" value="" placeholder="Ingresa correo" required>
+            </div>
+
+            <div class="form-group col-md-12">
+              <label for="Descripcion">Teléfono</label>
+              <input type="text" class="form-control" data-inputmask='"mask": "(999) 9999-9999"' data-mask  name="nuevoTelefono" placeholder="Ingrese Teléfono" required>
+            </div>
           </div>
 
-          <div class="form-group col-md-12">
-            <label for="Descripcion">Teléfono</label>
-            <input type="text" class="form-control" data-inputmask='"mask": "(999) 9999-9999"' data-mask  name="nuevoTelefono" placeholder="Ingrese Teléfono" required>
+          <!--=====================================
+          PIE DEL MODAL
+          ======================================-->
+
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary btnGuardarProveedor">Guardar</button>
+            <button type="button" class="btn btn-orange salirModal" data-dismiss="modal">Salir</button>
           </div>
-        </div>
 
-        <!--=====================================
-        PIE DEL MODAL
-        ======================================-->
+        </form> 
 
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-primary btnGuardarProveedor">Guardar</button>
-          <button type="button" class="btn btn-orange salirModal" data-dismiss="modal">Salir</button>
-        </div>
+      </div>
 
-      </form> 
+    </div>        
 
-    </div>
-
-  </div>        
-
-</div>
+  </div>

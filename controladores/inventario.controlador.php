@@ -3,7 +3,7 @@
 class ControladorInventario{
 
     /*=============================================
-            MOSTRAR INVENTARIO
+    MOSTRAR INVENTARIO
     =============================================*/
 
     static public function ctrMostrarInventario($tabla, $item, $valor,$order){
@@ -14,7 +14,7 @@ class ControladorInventario{
     }
 
     /*=============================================
-            MOSTRAR COMPRAS
+    MOSTRAR COMPRAS
     =============================================*/
     static public function ctrMostrarCompras($tabla, $item, $valor){
             $tabla1 = $tabla;
@@ -23,7 +23,7 @@ class ControladorInventario{
     }
 
     /*=============================================
-            MOSTRAR TIPOS DE PRODUCTOS
+    MOSTRAR TIPOS DE PRODUCTOS
     =============================================*/
     static public function ctrMostrarTipoProducto($tabla, $item, $valor){
             $respuesta = ModeloInventario::mdlMostrarTipoProducto($tabla, $item, $valor);
@@ -31,7 +31,7 @@ class ControladorInventario{
     }
 
     /*=============================================
-            MOSTRAR PRODUCTOS
+    MOSTRAR PRODUCTOS
     =============================================*/
     static public function ctrMostrarProducto($tabla, $item, $valor){
             $respuesta = ModeloInventario::mdlMostrarProducto($tabla, $item, $valor);
@@ -39,7 +39,7 @@ class ControladorInventario{
     }
 
     /*=============================================
-            MOSTRAR PROVEEDORES
+    MOSTRAR PROVEEDORES
     =============================================*/
     static public function ctrMostrarProveedores($tabla, $item, $valor){
             $respuesta = ModeloInventario::mdlMostrarProveedores($tabla, $item, $valor);
@@ -50,7 +50,7 @@ class ControladorInventario{
 
 
     /*=============================================
-            CREAR PRODUCTOS
+    CREAR PRODUCTOS
     =============================================*/
 
     static public function ctrCrearStock($tipostock, $pantalla){
@@ -203,7 +203,7 @@ class ControladorInventario{
 
 
     /*=============================================
-            CREAR BODEGA-EQUIPO
+    CREAR BODEGA-EQUIPO
     =============================================*/
 
     static public function ctrCrearBodega($tipostock, $pantalla){
@@ -356,7 +356,7 @@ class ControladorInventario{
 
 
     /*=============================================
-            CREAR COMPRA
+    CREAR COMPRA
     =============================================*/
 
     static public function ctrCrearCompra($pantalla){
@@ -447,7 +447,7 @@ class ControladorInventario{
 
 
     /*=============================================
-        TOTAL DE PRODUCTOS
+    TOTAL DE PRODUCTOS
     =============================================*/
     static public function ctrMostrarTotalInventario($tabla, $item, $valor,$order) {
         $tabla1 = $tabla;
@@ -458,7 +458,7 @@ class ControladorInventario{
 
 
     /*=============================================
-            EDITAR PRODUCTOS
+    EDITAR PRODUCTOS
     =============================================*/
 
     static public function ctrEditarStock($tipostock, $pantalla){
@@ -616,7 +616,7 @@ class ControladorInventario{
 
 
     /*=============================================
-            EDITAR BODEGA-EQUIPO   
+    EDITAR BODEGA-EQUIPO   
     =============================================*/
 
     static public function ctrEditarEquipo($tipostock, $pantalla){
@@ -777,7 +777,7 @@ class ControladorInventario{
 
 
 	/*=============================================
-            BORRAR PERSONAS (USUARIO/CLIENTE)
+    BORRAR PERSONAS (USUARIO/CLIENTE)
 	=============================================*/
     static public function ctrBorrarEquipo(){
         // var_dump($_GET);
@@ -836,7 +836,7 @@ class ControladorInventario{
 
 
     /*=============================================
-			SUMA TOTAL VENTAS
+    SUMA TOTAL VENTAS
     =============================================*/
 	static public function ctrMostrarSumaVentas(){
 
@@ -848,8 +848,8 @@ class ControladorInventario{
 	}
    
     
- /*=============================================
-			RANGO DINAMICO
+    /*=============================================
+    RANGO DINAMICO
     =============================================*/
 	static public function ctrRangoC($rango){
 		$tabla = 'tbl_inventario';
@@ -858,13 +858,17 @@ class ControladorInventario{
     }
     
     /*=============================================
-			RANGO DINAMICO
+    RANGO DINAMICO
     =============================================*/
 	static public function ctrRangoCompras($rango){
 		$tabla = 'tbl_compras';
 		$respuesta = ModeloInventario::mdlRangoCompras($tabla, $rango);	
 		return $respuesta;
-	}
+    }
+    
+    // static public function ctrPermisosSesion(){
+    //     return $_SESSION['permisos'];
+    // }
 
 }
 

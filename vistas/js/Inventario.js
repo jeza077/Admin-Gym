@@ -1,4 +1,14 @@
 
+// Datatable Compras
+// $.ajax({
+//     url: "ajax/datatable-compras.ajax.php",
+//     success: function (response) {  
+//         console.log(response)
+//     }
+// });
+lenguageDataTable('.tablaCompras', 'ajax/datatable-compras.ajax.php');
+
+
 //** ----------------- EDITAR INVENTARIO  --------------------------*/
 $(document).on("click",".btnEditarInventario",function(){
     var idInventario = $(this).attr("idInventario");
