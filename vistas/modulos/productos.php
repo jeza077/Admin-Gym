@@ -111,8 +111,8 @@
   </div>
   <!-- /.content-wrapper -->
 
-<!-- =======================================
-           MODAL AGREGAR INVENTARIO
+  <!-- =======================================
+  MODAL AGREGAR PRODUCTOS
   ======================================----->
 <div class="modal fade" id="modalAgregarInventario" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-md" role="document">
@@ -183,7 +183,7 @@
               <div class="form-group col-md-12">
                   <label for="exampleInputFile">Foto</label>
                   <div class="input-group">
-                    <img class="img-thumbnail previsualizar mr-2" src="vistas/img/usuarios/default/anonymous.png" alt="imagen-del-usuario" width="100px">
+                    <img class="img-thumbnail previsualizar mr-2" src="vistas/img/productos/default/product.png" alt="imagen-del-usuario" width="100px">
                     <div class="custom-file">
                       <input type="file" class="custom-file-input nuevaFotoProducto" id="nuevaFotoProducto" name="nuevaFotoProducto">
                       <label class="custom-file-label" for="nuevaFotoProducto">Escoger foto</label>
@@ -266,7 +266,7 @@
                 <div class="form-group col-md-12">
                     <label for="exampleInputFile">Foto</label>
                     <div class="input-group">
-                    <img class="img-thumbnail previsualizar mr-2" src="vistas/img/usuarios/default/anonymous.png" alt="imagen-del-usuario" width="100px">
+                    <img class="img-thumbnail previsualizarFotoProducto mr-2" alt="imagen-del-producto" width="100px">
                     <input type="hidden" name="imagenActual" id=imagenActual>
                     <div class="custom-file">
                         <input type="file" class="custom-file-input nuevaFotoProducto" name="editarFotoProducto">

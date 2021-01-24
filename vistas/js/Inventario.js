@@ -16,7 +16,7 @@ $(document).on("click",".btnEditarInventario",function(){
         processData: false,
         dataType: "json",
         success: function(respuesta){
-            // console.log("respuesta",respuesta)
+            // console.log(respuesta)
 
 
             $("#editarCodigo").val(respuesta["codigo"]);
@@ -41,7 +41,12 @@ $(document).on("click",".btnEditarInventario",function(){
             if (respuesta["foto"] !=""){
                
                 $("#editarFotoProducto").val(respuesta["foto"]); 
-                $("#previsualizar").attr("src", respuesta["foto"]);
+                $(".previsualizarFotoProducto").attr("src", respuesta["foto"]);
+                
+            } else {
+                
+                $(".previsualizarFotoProducto").attr("src", "vistas/img/productos/default/product.png");
+
             }
              
             
