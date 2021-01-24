@@ -1,13 +1,14 @@
 
 // Datatable Compras
 // $.ajax({
-//     url: "ajax/datatable-compras.ajax.php",
+//     url: "ajax/datatable-productos.ajax.php",
 //     success: function (response) {  
 //         console.log(response)
 //     }
 // });
 lenguageDataTable('.tablaCompras', 'ajax/datatable-compras.ajax.php');
 lenguageDataTable('.tablaInventario', 'ajax/datatable-inventario.ajax.php');
+lenguageDataTable('.tablaProductos', 'ajax/datatable-productos.ajax.php');
 
 
 //** ----------------- EDITAR INVENTARIO  --------------------------*/

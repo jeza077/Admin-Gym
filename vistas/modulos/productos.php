@@ -46,59 +46,20 @@
 
         <div class="card-body">
             <!-- CUERPPO INVENTARIO -->
-          <table class="table table-striped table-bordered tablas text-center">
+          <table class="table table-striped table-bordered tablaProductos text-center">
             <thead>
               <tr>
               <th scope="col">#</th>
               <th scope="col">Codigo</th>
               <th scope="col">Foto</th>
-              <!-- <th scope="col">Tipo inventario</th> -->
               <th scope="col">Nombre</th>
-              <!-- <th scope="col">Stock</th> -->
               <th scope="col">Precio venta</th>
-              <!-- <th scope="col">Precio compra</th> -->
               <th scope="col">Producto min.</th>
               <th scope="col">Producto max.</th>
               <th scope="col">Acciones</th>
               </tr>
             </thead>
-            <tbody>
-              <?php
-                $tabla = "tbl_inventario";
-                $item = "tipo_producto";
-                $valor = "Productos";
-                $order = null;
-                $inventarios=ControladorInventario::ctrMostrarInventario($tabla, $item, $valor,$order);
-                // echo"<pre>";
-                // var_dump($inventarios);
-                // echo"</pre>";
-                foreach ($inventarios as $key => $value) {
-                  echo '
-                    <tr>
-                      <td scope="row">'.($key+1).'</td>
-                      <td>'.$value["codigo"].'</td>';
-
-                          if($value["foto"] != ""){
-                            echo '<td><img src="'.$value["foto"].'" class="img-thumbnail" width="40px"></td>';
-                          } else {
-                            echo '<td><img src="vistas/img/productos/default/product.png" class="img-thumbnail" width="40px"></td>';
-                          }
-                            echo '<td>'.$value["nombre_producto"].'</td>
-  
-                      
-                      
-                      <td>'.$value["precio_venta"].'</td>                    
-                      <td>'.$value["producto_minimo"].'</td>
-                      <td>'.$value["producto_maximo"].'</td>     
-                      <td>
-                      <button class="btn btn-warning btnEditarInventario" idInventario="'.$value["id_inventario"].'" data-toggle="modal" data-target="#modalEditarProducto"><i class="fas fa-pencil-alt" style="color:#fff"></i></button>
-                      </td>
-                      </tr>
-                      ';
-                      // <button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
-                }
-              ?>
-            </tbody>
+           
           </table>
             <!-- -------------------------- -->
         </div> 
