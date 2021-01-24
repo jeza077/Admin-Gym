@@ -7,6 +7,7 @@
 //     }
 // });
 lenguageDataTable('.tablaCompras', 'ajax/datatable-compras.ajax.php');
+lenguageDataTable('.tablaInventario', 'ajax/datatable-inventario.ajax.php');
 
 
 //** ----------------- EDITAR INVENTARIO  --------------------------*/
