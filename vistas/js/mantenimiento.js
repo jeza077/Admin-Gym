@@ -3,6 +3,7 @@
 =============================================*/
 
 lenguageDataTable('.tablaBitacora', 'ajax/datatable-bitacora.ajax.php');
+lenguageDataTable('.tablaPermisosRol', 'ajax/datatable-permisos-rol.ajax.php');
 
 
 
