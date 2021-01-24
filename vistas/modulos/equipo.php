@@ -95,7 +95,7 @@
 
 
   <!-- =======================================
-           MODAL AGREGAR INVENTARIO
+  MODAL AGREGAR INVENTARIO
   ======================================----->
 <div class="modal fade" id="modalAgregarInventario" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-md" role="document">
@@ -181,8 +181,8 @@
   </div>
 </div>
 
-<!-- =======================================
-           MODAL EDITAR
+  <!-- =======================================
+  MODAL EDITAR
   ======================================----->
 
 <div class="modal fade" id="modalEditarBodega" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

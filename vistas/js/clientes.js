@@ -899,7 +899,7 @@ $(document).on('click', '.btnEditarClienteVenta', function () {
         dataType: "json",
         success: function(respuesta) {
 
-            // console.log("respuesta", respuesta);
+            console.log("respuesta", respuesta);
             
             $('#idEditarClienteVenta').val(respuesta["id_persona"])
 
