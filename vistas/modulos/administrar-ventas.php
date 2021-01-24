@@ -44,7 +44,7 @@
     <div class="card">
       <div class="card-body">
 
-        <table class="table table-striped table-bordered tablas text-center">
+        <table class="table table-striped table-bordered tablaVentas text-center">
 
           <thead>
 
@@ -52,7 +52,6 @@
               <th scope="col">#</th>
               <th scope="col">Codigo factura</th>
               <th scope="col">Cliente</th>
-              <!-- <th scope="col">Vendedor</th> -->
               <th scope="col" width="15px">Productos</th>
               <th scope="col">Total Neto</th>
               <th scope="col">Fecha</th>

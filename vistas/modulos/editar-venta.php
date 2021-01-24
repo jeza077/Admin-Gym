@@ -212,7 +212,7 @@
            <!--TABLA DE PRODUCTOS  -->
         <div class="card col-md-7">
           <div class="card-body">
-              <table class="table table-striped table-bordered tablaVentas text-center">
+              <table class="table table-striped table-bordered tablaProductosVenta text-center">
                 <thead>
                   <tr>
                     <th scope="col">#</th>
@@ -223,18 +223,7 @@
                     <th scope="col">Acciones</th> 
                   </tr>
                 </thead>
-                <?php
-                // $item = "tipo_producto";
-                // $valor = "Productos";
-                // $tabla = "tbl_inventario";
-            
-                //       $productos = ControladorInventario::ctrMostrarInventario($tabla, $item, $valor);	
-                //       echo "<pre>";
-                //       var_dump($productos[1]["stock"]);
-                //       echo "</pre>";
-                //       return;
-
-                ?>
+                
             </table>
           </div>
         </div>

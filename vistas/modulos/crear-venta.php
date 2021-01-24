@@ -160,7 +160,7 @@
            <!--TABLA DE PRODUCTOS  -->
         <div class="card col-md-7">
           <div class="card-body">
-              <table class="table table-striped table-bordered tablaVentas text-center">
+              <table class="table table-striped table-bordered tablaProductosVenta text-center">
                 <thead>
                   <tr>
                     <th scope="col">#</th>
