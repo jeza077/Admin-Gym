@@ -81,10 +81,43 @@ $(document).on('change', '.tipoCliente', function () {
         $('.datosClientes').show();
         $('.btnConfirmarPago').show();
         // sumar();
-    } else {
+    } else if(valor == 'Ventas'){
+        
         $('.btnNuevoClienteVentas').show();
         $('.btnConfirmarPago').hide();
         $('.datosClientes').hide();
+        
+    } else {
+        
+        $('.btnNuevoClienteVentas').hide();
+        $('.datosClientes').hide();
+        $('.btnConfirmarPago').show();
+        
+    }
+   
+});
+
+$(document).on('change', '.tipoClienteRegistrado', function () {
+    var valor = $(this).val();
+    // console.log(valor)
+    if (valor == "Gimnasio") {
+        // SumaTotal()
+        $('.btnNuevoClienteVentas').hide();
+        $('.datosClientes').show();
+        $('.btnConfirmarPago').show();
+        // sumar();
+    } else if(valor == 'Ventas'){
+        
+        $('.btnNuevoClienteVentas').show();
+        $('.btnConfirmarPago').hide();
+        $('.datosClientes').hide();
+        
+    } else {
+        
+        $('.btnNuevoClienteVentas').hide();
+        $('.datosClientes').hide();
+        $('.btnConfirmarPago').show();
+        
     }
    
 });
@@ -97,17 +130,87 @@ $('.btnNuevoClienteGym').hide();
 
 $(document).on('click', '.btnConfirmarPago', function (e) {
     e.preventDefault();
-    // console.log('click')
-    Swal.fire({
-        icon: 'info',
-        title: '¿Se realizo el pago correctamente?',
-        html: '<button type="submit" role="button" class="SwalBtnGuardarCliente btn btn-success customSwalBtn">' + 'Si, guardar' + '</button>' +
-            '<button type="button" role="button" class="SwalBtnCancelarCliente btn btn-danger customSwalBtn">' + 'No, salir' + '</button>',
-        width: 500,
-        allowOutsideClick: false,
-        showCancelButton: false,
-        showConfirmButton: false
-    });
+    var valorPersona = $('.nuevoIdPersona').val();
+    var valorCliente = "";
+
+    var clienteNuevo = $('.clientePersonaNueva').val();
+
+    console.log(clienteNuevo)
+    console.log('cliente: ', valorCliente)
+
+    if(clienteNuevo !== 'clientePersonaNueva'){
+
+        valorCliente  = $('.tipoClienteRegistrado').val();
+
+        if(valorPersona == 'Seleccionar...' || valorPersona == ""){
+        
+            var padre = $('.nuevoIdPersona').next();
+            // console.log(padre)
+            setTimeout(() => {
+                
+                $('.alert').remove();
+                
+            }, 3000);
+            // $('.alertaPersona').append('<div class="alert alert-danger fade show mt-2" role="alert">Por favor elija una persona</div>');
+            padre.after('<div class="alert alert-danger fade show mt-2" role="alert">Por favor elija una persona</div>')
+        
+        } else if(valorCliente == 'Seleccionar...' || valorCliente == "") {
+            
+            var padreCliente = $('.tipoCliente').next();
+            // console.log(padre)
+            setTimeout(() => {
+                
+                $('.alert').remove();
+                
+            }, 3000);
+            // $('.alertaPersona').append('<div class="alert alert-danger fade show mt-2" role="alert">Por favor elija una persona</div>');
+            padreCliente.after('<div class="alert alert-danger fade show mt-2" role="alert">Por favor elija un tipo de cliente</div>')
+        
+        } else {
+            $('.alert').remove();
+            Swal.fire({
+            icon: 'info',
+                title: '¿Se realizo el pago correctamente?',
+                html: '<button type="submit" role="button" class="SwalBtnGuardarCliente btn btn-success customSwalBtn">' + 'Si, guardar' + '</button>' +
+                    '<button type="button" role="button" class="SwalBtnCancelarCliente btn btn-danger customSwalBtn">' + 'No, salir' + '</button>',
+                width: 500,
+                allowOutsideClick: false,
+                showCancelButton: false,
+                showConfirmButton: false
+            });
+        }
+    
+    } else {
+
+        valorCliente  = $('.tipoCliente').val();
+        
+        if(valorCliente == 'Seleccionar...' || valorCliente == "") {
+            
+            var padreCliente = $('.tipoCliente').next();
+            // console.log(padre)
+            setTimeout(() => {
+                
+                $('.alert').remove();
+                
+            }, 3000);
+            // $('.alertaPersona').append('<div class="alert alert-danger fade show mt-2" role="alert">Por favor elija una persona</div>');
+            padreCliente.after('<div class="alert alert-danger fade show mt-2" role="alert">Por favor elija un tipo de cliente</div>')
+        
+        } else {
+            $('.alert').remove();
+            Swal.fire({
+            icon: 'info',
+                title: '¿Se realizo el pago correctamente?',
+                html: '<button type="submit" role="button" class="SwalBtnGuardarCliente btn btn-success customSwalBtn">' + 'Si, guardar' + '</button>' +
+                    '<button type="button" role="button" class="SwalBtnCancelarCliente btn btn-danger customSwalBtn">' + 'No, salir' + '</button>',
+                width: 500,
+                allowOutsideClick: false,
+                showCancelButton: false,
+                showConfirmButton: false
+            });
+        }
+    }
+
 });
 
 $(document).on('click', '.SwalBtnGuardarCliente', function () {
@@ -164,6 +267,20 @@ $(document).on('click', '#clienteNuevo', function (e) {
     });
 });
 
+$(document).on('click', '.SwalBtnGuardarClienteYaRegistrado', function () {
+    $('#clientePersonaNueva').remove();
+    $('#clientePersonaRegistrada').remove();
+    // $('.verTotalPago').after('<input type="hidden" class="clientePersonaNueva" id="clientePersonaNueva" value="clientePersonaNueva">');
+    $('.verTotalPagoRegistrado').after('<input type="hidden" class="clientePersonaNueva" id="clientePersonaRegistrada" value="clientePersonaRegistrada">');
+    $().remove();
+});
+
+$(document).on('click', '.SwalGuardarClienteNuevo', function () {
+    $('#clientePersonaNueva').remove();
+    $('#clientePersonaRegistrada').remove();
+    $('.verTotalPago').after('<input type="hidden" class="clientePersonaNueva" id="clientePersonaNueva" value="clientePersonaNueva">');
+    // $('.verTotalPagoRegistrado').after('<input type="hidden" class="clientePersonaNueva" id="clientePersonaRegistrada" value="clientePersonaRegistrada">');
+});
 
 cancelarAlerta('.SwalBtnGuardarClienteYaRegistrado');
 cancelarAlerta('.SwalGuardarClienteNuevo');
@@ -375,14 +492,15 @@ $('.verTotalPago').click(function (e) {
 });
 
 // SUMA TOTAL A PAGAR CLIENTES YA REGISTRADOS
-$('.verTotalPagoRegistrado').click(function (e) { 
+$(document).on('click', '.verTotalPagoRegistrado', function (e) { 
     e.preventDefault();
 
+    var valorPersona = $('.nuevoIdPersona').val();
     var totalMatricula = $('.totalMatriculaRegistrado').val();
     var totalDescuento = $('.totalDescuentoRegistrado').val();
     var totalInscripcion = $('.totalInscripcionRegistrado').val();
 
-    // console.log(totalMatricula)
+    // console.log(valorPersona)
     // console.log(totalInscripcion)
 
     if(!totalMatricula){

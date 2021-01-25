@@ -219,7 +219,7 @@
               <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="datosCLiente">
                 <div class="container-fluid mt-4">
                     <div class="form-row">
-                      <div class="form-group col-md-3">
+                      <div class="form-group col-md-6">
                         <label>Tipo Cliente</label>
                         <select class="form-control select2 tipoCliente" name="tipoCliente" style="width: 100%;" required>
                           <option selected="selected">Seleccionar...</option>
@@ -337,11 +337,11 @@
                       </div>
 
                     </div>
-
                   </div>
                 </div>
                 <div class="form-group mt-4 float-right">
                   <button type="" class="btn btn-primary btnConfirmarPago">Guardar</button>
+                  <!-- <button type="" class="btn btn-primary btnConfirmarPagoNuevo">Guardar</button> -->
                   <button type="" class="btn btn-primary btnNuevoClienteGym">Guardar</button>
                   <button type="" class="btn btn-primary btnNuevoClienteVentas">Guardar</button>
                   <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
@@ -747,7 +747,7 @@
                 <div class="form-row">
                   <div class="form-group col-md-6">
                     <label>Persona</label>
-                    <select class="form-control select2" style="width: 100%;" name="nuevoIdPersona">
+                    <select class="form-control select2 nuevoIdPersona" style="width: 100%;" name="nuevoIdPersona">
                       <option selected="selected">Seleccionar...</option>
                         <?php 
                           $item = 'tipo_persona';
@@ -764,9 +764,10 @@
                     </select>
                   </div>
 
+
                   <div class="form-group col-md-6">
                     <label>Tipo Cliente</label>
-                    <select class="form-control select2 tipoCliente" name="tipoClienteRegistrado" style="width: 100%;" required>
+                    <select class="form-control select2 tipoClienteRegistrado" name="tipoClienteRegistrado" style="width: 100%;" required>
                       <option selected="selected">Seleccionar...</option>
                       <option value="Gimnasio">Clientes del gimnasio</option>
                       <option value="Ventas">Cliente de ventas</option>
