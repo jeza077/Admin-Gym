@@ -393,7 +393,7 @@
 
 
 
- <!-- =======================================
+  <!-- =======================================
   MODAL NUEVA INSCRIPCION LUEGO DE CANCELAR
   ======================================----->
   <div class="modal fade" id="modalNuevaInscripcion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -490,8 +490,8 @@
   </div> 
 
 
-   <!-- =======================================
-      MODAL NUEVA INSCRIPCION 
+  <!-- =======================================
+  MODAL NUEVA INSCRIPCION 
   ======================================----->
   <div class="modal fade" id="modalNuevaInsc" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-md" role="document">
@@ -508,7 +508,7 @@
 
                   <div class="form-group col-md-12">
                     <label for="">Cliente</label>
-                    <select class="form-control select2" style="width: 100%;" name="nuevoClienteSinInscripcion">
+                    <select class="form-control select2" id="nuevoClienteSinInscripcion" style="width: 100%;" name="nuevoClienteSinInscripcion">
                         <option selected="selected">Seleccionar...</option>
                         <?php 
 
@@ -574,8 +574,9 @@
               </div>
               <!-- <div class="form-row"> -->
                 <div class="form-group mt-4">
-                  <button type="" class="btn btn-primary float-right mr-2">Guardar</button>
                   <button type="button" class="btn btn-danger float-right mr-2" data-dismiss="modal">Salir</button>
+                  <button type="" class="btn btn-primary float-right mr-2" id="btnConfirmarDatosInscripcion">Guardar</button>
+                  <!-- <button type="" class="btn btn-primary float-right mr-2" id="btnGuardarInscripcion">Guardar</button> -->
                 </div> 
               <!-- </div>   -->
 

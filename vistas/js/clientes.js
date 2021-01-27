@@ -135,8 +135,8 @@ $(document).on('click', '.btnConfirmarPago', function (e) {
 
     var clienteNuevo = $('.clientePersonaNueva').val();
 
-    console.log(clienteNuevo)
-    console.log('cliente: ', valorCliente)
+    // console.log(clienteNuevo)
+    // console.log('cliente: ', valorCliente)
 
     if(clienteNuevo !== 'clientePersonaNueva'){
 
@@ -795,7 +795,7 @@ calcularPagoNuevaInscripcion('.verTotalActualizarPago', '.nuevaPagoInscripcion2'
 $(document).on('click', '.SwalBtnCambiarInscripcion', function (e) { 
     e.preventDefault();
     // console.log('click')
-    console.log(idClientePago);
+    // console.log(idClientePago);
     var datos = new FormData();
     datos.append("idClientePago", idClientePago);
 
@@ -831,6 +831,50 @@ $(document).on('click', '.SwalBtnCancelar', function (e) {
     Swal.close();
 });
 
+$(document).on('click', '#btnConfirmarDatosInscripcion', function (e) {
+    e.preventDefault();
+
+    let valorSelectCliente = $('#nuevoClienteSinInscripcion').val();
+    let valorSelectInscripcion = $('.nuevaTipoInscripcion2').val();
+    let valorTotalPago = $('.nuevoTotalPago').val();
+
+    // console.log(valorTotalPago);
+    
+    $('.alert').remove();
+
+    if(valorSelectCliente == "" || valorSelectCliente == "Seleccionar..."){
+        let padre = $('#nuevoClienteSinInscripcion').next();
+        // console.log('no puede vacio')   
+        
+        setTimeout(() => {
+            padre.after('<div class="alert alert-danger fade show mt-2" role="alert">Por favor elija un cliente</div>');
+        }, 200);
+        
+    } else if(valorSelectInscripcion == "" || valorSelectInscripcion == "Seleccionar...") {
+
+        let padre = $('.nuevaTipoInscripcion2').next();
+        
+        setTimeout(() => {
+            padre.after('<div class="alert alert-danger fade show mt-2" role="alert">Por favor elija un tipo de inscripción</div>');
+        }, 200);
+        
+    } else if(valorTotalPago == "") {
+        
+        let padre = $('.nuevoTotalPago').parent().parent().parent();
+        // console.log(padre);
+        
+        setTimeout(() => {
+            padre.after('<div class="alert alert-danger fade show" role="alert">No hay total a pagar</div>');
+        }, 200);
+        
+    } else {
+        let padre = $('#btnConfirmarDatosInscripcion').parent();
+        // console.log(padre);
+        padre.append('<button type="" class="btn btn-primary float-right mr-2" id="btnGuardarInscripcion">Guardar</button>')
+        $('#btnGuardarInscripcion').hide();
+        $('#btnGuardarInscripcion').click();
+    }
+});
 
 
 
