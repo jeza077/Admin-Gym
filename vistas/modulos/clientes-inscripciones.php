@@ -158,7 +158,7 @@
                 <!-- <div class="form-row"> -->
                   <div class="form-group col-md-12"> 
                     <label>Tipo inscripcion</label>
-                    <select class="form-control select2 actualizarInscripcion" style="width: 100%;" name="actualizarTipoInscripcion">
+                    <select class="form-control actualizarInscripcion" style="width: 100%;" name="actualizarTipoInscripcion">
                         <option value="" id="actualizarInscripcion"></option>
                         <?php 
                             $tabla = "tbl_inscripcion";
@@ -370,7 +370,8 @@
                 
               </div>
               <div class="form-group mt-4 float-right">
-                <button type="" class="btn btn-primary">Actualiazar pago</button>
+                <!-- <button type="" class="btn btn-primary">Actualiazar pago</button> -->
+                <button type="" class="btn btn-primary" ID="btnConfirmarCambioInscripcion">Actualizar pago</button>
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
               </div> 
               <?php

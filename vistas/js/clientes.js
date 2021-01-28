@@ -831,6 +831,10 @@ $(document).on('click', '.SwalBtnCancelar', function (e) {
     Swal.close();
 });
 
+
+//***** ======================================
+//    NUEVA INSCRIPCION CLIENTE
+// ========================================= *//
 $(document).on('click', '#btnConfirmarDatosInscripcion', function (e) {
     e.preventDefault();
 
@@ -873,6 +877,47 @@ $(document).on('click', '#btnConfirmarDatosInscripcion', function (e) {
         padre.append('<button type="" class="btn btn-primary float-right mr-2" id="btnGuardarInscripcion">Guardar</button>')
         $('#btnGuardarInscripcion').hide();
         $('#btnGuardarInscripcion').click();
+    }
+});
+
+
+//***** ======================================
+//  ACTUALIZAR INSCRIPCION CLIENTE AL PAGAR
+// ========================================= *//
+$(document).on('click', '#btnConfirmarCambioInscripcion', function (e) {
+    e.preventDefault();
+
+    let valorSelectInscripcion = $('.actualizarInscripcion').val();
+    let valorTotalPago = $('.totalActualizarPago').val();
+
+    // console.log(valorSelectInscripcion);
+    // console.log(valorTotalPago);
+    
+    $('.alert').remove();
+
+    if(valorSelectInscripcion == "" || valorSelectInscripcion == "Seleccionar..."){
+        let padre = $('.actualizarInscripcion').next();
+        // console.log('no puede vacio')   
+        
+        setTimeout(() => {
+            padre.after('<div class="alert alert-danger fade show mt-2" role="alert">Por favor elija un tipo de inscripción.</div>');
+        }, 200);
+        
+    } else if(valorTotalPago == "") {
+        
+        let padre = $('.totalActualizarPago').parent().parent().parent();
+        // console.log(padre);
+        
+        setTimeout(() => {
+            padre.after('<div class="alert alert-danger fade show" role="alert">No hay total a pagar.</div>');
+        }, 200);
+        
+    } else {
+        let padre = $('#btnConfirmarCambioInscripcion').parent();
+        // console.log(padre);
+        padre.append('<button type="" class="btn btn-primary float-right mr-2" id="btnGuardarNuevaInscripcion">Guardar</button>')
+        $('#btnGuardarNuevaInscripcion').hide();
+        $('#btnGuardarNuevaInscripcion').click();
     }
 });
 

@@ -50,14 +50,30 @@ class imprimirReciboPagoCliente{
 
 		$item = "id_pagos_cliente";
 		$valor = $this->codigo;
-
+		
 		$clientes = ControladorClientes::ctrMostrarPagosClientes($item, $valor);
-
 		// var_dump($clientes);
 
-		if(!empty($clientes)){
+		if($clientes['pago_matricula'] == null){
+			$pago_matricula = 0;
+		} else {
+			$pago_matricula = $clientes['pago_matricula'];
+		}
+		
+		if($clientes['pago_descuento'] == null){
+			$pago_descuento = 0;
+		} else {
+			$pago_descuento = $clientes['pago_descuento'];
+		}
 
-			
+		if($clientes['pago_inscripcion'] == null){
+			$pago_inscripcion = 0;
+		} else {
+			$pago_inscripcion = $clientes['pago_inscripcion'];
+		}
+
+
+		if(!empty($clientes)){			
 			
 		## 07/12/2020
 
@@ -255,11 +271,11 @@ $bloque6 = <<<EOF
 		
 			<strong></strong>
 			<br>
-			  $clientes[pago_matricula] 
+			  $pago_matricula
 			<br>
-			 $clientes[pago_descuento] 
+			 $pago_descuento
 			<br>
-			 $clientes[pago_inscripcion] 
+			 $pago_inscripcion 
 
 		</td>
 
