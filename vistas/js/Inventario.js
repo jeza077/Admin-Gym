@@ -141,22 +141,6 @@ $(document).on('click', '#nuevaCompra', function () {
 });
 
 
-//** ------------------------------------*/
-//         IMPRIMIR PRODUCTO
-// // --------------------------------------*/ 
-// $(document).on('click', '.btnExportarProductos', function () {
-//     window.open("extensiones/tcpdf/pdf/productos-pdf.php", "_blank");
-// });
-
-
-// //** ------------------------------------*/
-// //         IMPRIMIR PRODUCTO
-// // --------------------------------------*/ 
-// $(document).on('click', '.btnExportarEquipo', function () {
-//     window.open("extensiones/tcpdf/pdf/productos-pdf.php", "_blank");
-// });
-
-
 
 /*=============================================
     EJECUCION DE VALIDACIONES
@@ -167,9 +151,7 @@ $(document).on('click', '#nuevaCompra', function () {
 // $('.editar_Nombre_Producto').keydown(sinNumeros)
 // $('.precio').keydown(sinLetras)
 // $('.editar_Precio').keydown(sinLetras)
-$('.sinLetras').keydown(sinLetras)
-$('.sinCaracteres').keydown(sinCaracteres)
-$('.sinNumeros').keydown(sinNumeros)
+
 
 
 
@@ -181,19 +163,19 @@ exportarPdf('.btnExportarInventario', 'inventario');
 exportarPdf('.btnExportarCompras', 'compras');
 
 
-function exportarPdf(btnExportar, rutaArchivoPdf) {
+// function exportarPdf(btnExportar, rutaArchivoPdf) {
     
-    $(document).on('click', btnExportar, function (e) {
-        // console.log("click");
-        // return;
-        // console.log(valorBuscar);
-        if(!valorBuscar){
-            window.open("extensiones/tcpdf/pdf/"+rutaArchivoPdf+"-pdf.php");
-        } else {
-            var rango = valorBuscar;
-            window.open("extensiones/tcpdf/pdf/"+rutaArchivoPdf+"-pdf.php?&rango="+rango);
-        }
+//     $(document).on('click', btnExportar, function (e) {
+//         // console.log("click");
+//         // return;
+//         // console.log(valorBuscar);
+//         if(!valorBuscar){
+//             window.open("extensiones/tcpdf/pdf/"+rutaArchivoPdf+"-pdf.php");
+//         } else {
+//             var rango = valorBuscar;
+//             window.open("extensiones/tcpdf/pdf/"+rutaArchivoPdf+"-pdf.php?&rango="+rango);
+//         }
 
     
-    });
-}
+//     });
+// }

@@ -28,7 +28,7 @@ function redireccion(selector, ruta) {
 //VALIDACIONES AGREGAR CLIENTE
 validarDoc($('.numeroDocumento'), $('.alertaDocumento'))
 validarEmail($('.emailCliente'))
-longitudString($('.nombreCliente'),30); 
+longitudString($('.nombreCliente'),45); 
 $('.nombreCliente').keydown(sinNumeros)
 $('.nombreCliente').keydown(sinCaracteres)
 $('.nombreCliente').keydown(permitirUnEspacio);
@@ -36,12 +36,12 @@ $('.numeroDocumentoCliente').keydown(impedirEspacios);
 $('.apellidoCliente').keydown(sinCaracteres)
 $('.apellidoCliente').keydown(sinNumeros)
 $('.apellidoCliente').keydown(permitirUnEspacio);
-longitudString($('.apellidoCliente'),30); 
+longitudString($('.apellidoCliente'),45); 
 
 // VALIDACIONES EDITAR CLIENTE GIMNASIO
 validarEmail($('.editarEmail'))
-longitudString($('.editarNombre'),30); 
-longitudString($('.editarApellido'),30); 
+longitudString($('.editarNombre'),45); 
+longitudString($('.editarApellido'),45); 
 validarDoc($('.editarNumeroDocumento'));
 $('.editarNombre').keydown(sinNumeros)
 $('.editarNombre').keydown(sinCaracteres)
@@ -52,8 +52,8 @@ $('.editarApellido').keydown(permitirUnEspacio);
 $('.editarNumeroDocumento').keydown(impedirEspacios);
 // VALIDACIONES EDITAR CLIENTE VENTA
 validarEmail($('.editarEmailVentas'))
-longitudString($('.nombreClienteVentas'),30);
-longitudString($('.apellidoClienteVentas'),30); 
+longitudString($('.nombreClienteVentas'),45);
+longitudString($('.apellidoClienteVentas'),45); 
 validarDoc($('.numeroDocumentoClienteVentas'));
 $('.nombreClienteVentas').keydown(sinNumeros)
 $('.nombreClienteVentas').keydown(sinCaracteres)

@@ -1,6 +1,6 @@
 <?php
   
-  class ControladorMantenimientos {
+class ControladorMantenimientos {
     /*===========================================================
     BITACORA
     =============================================================*/
@@ -769,16 +769,20 @@
     =============================================*/
     
     static public function ctrEditarRol(){
-
+      // var_dump($_POST);
+      // return;
+      
       if(isset($_POST["editarRol"])){
-
+        
         $tabla = "tbl_roles";
-
+        
         $datos = array ("rol"=> $_POST["editarRol"],
-                        "descripcion"=>$_POST["editarDescripcionRol"],
-                        "id_rol"=>$_POST["editarIdRol"]);
-
-
+        "descripcion"=>$_POST["editarDescripcionRol"],
+        "id_rol"=>$_POST["editarIdRol"]);
+        
+        // var_dump($datos);
+        // return;
+        
         $respuesta =  ModeloMantenimiento::mdlEditarRol($tabla,$datos);
 
     
@@ -794,7 +798,7 @@
     
             Swal.fire({
                  icon: "success",
-                  title: "El rol ha sido editado correctamente",
+                  title: "Rol editado correctamente!",
                   showConfirmButton: true,
                   confirmButtonText: "Cerrar",
                   closeOnConfirm: false
@@ -813,7 +817,7 @@
           echo'<script>
     
             Swal.fire({
-                  icon: "warning",
+                  icon: "error",
                   title: "Error al editar rol",
                   showConfirmButton: true,
                   confirmButtonText: "Cerrar",
@@ -901,7 +905,7 @@
 
       }
 
-  }
+    }
 
 
     /*=============================================

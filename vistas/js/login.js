@@ -29,7 +29,7 @@ function toggleRegistrar(){
 
 //** VALIDACIONES */
 $('.usuario').keydown(impedirEspacios); //Impedir espacios en Input de Usuario del Login.
-longitudString($('.usuario'),50); //Longitud maxima Input Usuario Login.
+longitudString($('.usuario'),45); //Longitud maxima Input Usuario Login.
 
 
 

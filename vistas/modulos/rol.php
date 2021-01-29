@@ -275,11 +275,11 @@ MODAL EDITAR ROL
 
             <div class= "form-group col-md-12">
               <label for="rol">Rol</label>
-              <input type="text" class="form-control  nombre mayus" id="editarRol" name="editarRol" value="" requiered>
+              <input type="text" class="form-control  nombre mayus" id="editarRol" name="editarRol" requiered>
             </div>
             <div class= "form-group col-md-12">
               <label for="Descripcion">Descripción</label>
-              <input type="text" class="form-control nombre mayus" id="editarDescripcionRol" name="editarDescripcionRol" value="" requiered>
+              <input type="text" class="form-control nombre mayus" id="editarDescripcionRol" name="editarDescripcionRol" requiered>
             </div>
             <input type="hidden" id="editarIdRol" name="editarIdRol">
             
