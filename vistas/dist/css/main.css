@@ -594,7 +594,7 @@ i.show-confir-pass{
     left: 100%;
 }
 .login-box.active.quest.changePassword{
-    margin: 6.5% 35%;
+    /* margin: 6.5% 35%; */
     height: 500px;
 }
 .login-box.active.quest.changePassword.contenedor-rp{

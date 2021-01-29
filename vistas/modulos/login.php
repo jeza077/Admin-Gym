@@ -81,9 +81,9 @@
               // for ($i=1; $i <=3 ; $i++) { ?>
               <div class="form-group col-md-12">
                 <label for="inputPassword4">Pregunta <?php echo $i?></label>
-                <select class="form-control select2" id="preguntaSeleccionada">
+                <select class="form-control" id="preguntaSeleccionada">
                 <option value="" selected="selected">Seleccionar...</option>
-                <?php 
+                    <?php 
                         $tabla = "tbl_preguntas";
                         $item = null;
                         $valor = null;
@@ -153,7 +153,7 @@
         <div class="form-row">
           <div class="form-group col-md-3">
                 <label for="">Tipo de documento <?php echo $i?></label>
-            <select class="form-control select2 tipoDocumento" name="nuevoTipoDocumento">
+            <select class="form-control tipoDocumento" name="nuevoTipoDocumento">
                 <option selected="selected">Seleccionar...</option>
                 <?php 
                     $tabla = "tbl_documento";
@@ -220,7 +220,7 @@
           </div>
           <div class="form-group col-md-2">
             <label>Sexo</label>
-            <select class="form-control select2" name="nuevoSexo" style="width: 100%;" required>
+            <select class="form-control" name="nuevoSexo" style="width: 100%;" required>
               <option selected="selected">Seleccionar...</option>
               <option value="M">M</option>
               <option value="F">F</option>
