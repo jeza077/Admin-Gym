@@ -55,7 +55,7 @@ class PDF extends TCPDF{
         $this->SetTextColor(0,0,0);
         $this->SetFont('helvetica', '', 9);
         // $this->Cell(180, 3, 'Gimnasio La roca', 0, 1, 'C');
-        $this->Cell(260, 7, 'Direccion: '.$direccion.'', 0, 1, 'C');
+        $this->Cell(260, 7, 'Dirección: '.$direccion.'', 0, 1, 'C');
         // $this->Cell(260, 3, 'Calle xxxxxxxxxx.....', 0, 1, 'C');
         $this->Cell(260, 3, 'Correo: '.$correo.'', 0, 1, 'C');
 
@@ -152,42 +152,16 @@ $pdf->Cell(40, 5, 'Neto', 1, 0, 'C', 1);
 $pdf->Cell(40, 5, 'Total', 1, 0, 'C', 1);
 
 
-// if(isset($_GET["fechaInicial"])){
-
-
-//     $fechaInicial = $_GET["fechaInicial"];
-//     $fechaFinal = $_GET["fechaFinal"];
-//     $ventas = ControladorVentas::ctrRangoFechasVentas($fechaInicial, $fechaFinal);
-
-// //     // echo $fechaInicial;
-//     // echo $fechaFinal;
-// } else {
-
-//     $fechaInicial = null;
-//     $fechaFinal = null;
-//     $ventas = ControladorVentas::ctrRangoFechasVentas($fechaInicial, $fechaFinal);
-
-// } 
 
 if(isset($_GET["rango"])){
 
-
     $rango = $_GET["rango"];
-    // $fechaFinal = $_GET["fechaFinal"];
-    // $ventas = ControladorVentas::ctrRango($rango);
 
-    // echo $rango;
-    // echo $fechaFinal;
 } else {
 
     $rango = null;
-    // $fechaFinal = null;
-    // $ventas = ControladorVentas::ctrRango($rango);
 
 } 
-// echo $fechaInicial;
-// echo $fechaFinal;
-// return;
 
 $ventas = ControladorVentas::ctrRango($rango);
 
@@ -205,8 +179,12 @@ if(!$ventas){
 
     $i = 1; //Contador
     $max = 12; //Maximo de registros a mostrar en una pagina
-
+    
     foreach ($ventas as $key => $value) {
+        // $decod = json_decode($value['productos']);
+        // foreach ($decod as $key => $val) {
+        //     $productos = $val->descripcion;
+        // }
 
         if(($i%$max) == 0){
             $pdf->AddPage();
@@ -231,19 +209,20 @@ if(!$ventas){
         $pdf->Cell(15, 4, ''.($key+1).'', 0, 0, 'C');
         $pdf->Cell(30, 4, ''.$value['numero_factura'].'', 0, 0, 'C');
         $pdf->Cell(50, 4, ''.$value['nombre'].' '.$value['apellidos'].'' , 0, 0, 'C');
-        $pdf->Cell(40, 4, 'Productos', 0, 0, 'C');
+        // $pdf->Cell(40, 4, 'Productos', 0, 0, 'C');
         
-        // $decod = json_decode($value['productos']);
-        // //   $contador = count($val->descripcion);
-        // //   echo ($val->descripcion);
+        $decod = json_decode($value['productos']);
+        //   $contador = count($val->descripcion);
+        //   echo ($val->descripcion);
         //   if($key = 0){
-        //         // echo 'mas de uno';
-        //         $decod = json_decode($value['productos']);
-        //         $pdf->Cell(40, 4, 'productos'. .'', 0, 0, 'C');
-        //         foreach ($decod as $key => $val) {
-        //         // echo  $val->descripcion.',';
-        //         }
-        //     }
+                // echo 'mas de uno';
+                
+                $decod = json_decode($value['productos']);
+                foreach ($decod as $key => $val) {
+                    $pdf->MultiCell(40, 4, ''.$val->descripcion, 1,'J', 0, 0, '', '', true, 0, true, 40);
+                }
+
+            // }
                
 
             //  echo  $val->descripcion.',';
@@ -260,6 +239,7 @@ if(!$ventas){
         $pdf->Cell(40, 4, ''.$value['impuesto'].'', 0, 0, 'C');
         $pdf->Cell(40, 4, ''.$value['neto'].'', 0, 0, 'C');
         $pdf->Cell(40, 4, ''.$value['total'].'', 0, 0, 'C');
+        // $pdf->Ln();
         $i++;
 
     }

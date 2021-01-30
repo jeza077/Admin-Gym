@@ -41,7 +41,7 @@
                   <!--=====================================
                    ENTRADA DEL CÓDIGO
                   ======================================-->  
-                  <label for="cod_factura">Numero de Recibo</label>
+                  <label for="cod_factura">Número de Recibo</label>
                     <?php
                       $item= null;
                       $valor= null;

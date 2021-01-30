@@ -91,7 +91,7 @@ class imprimirFactura{
 		$pdf = new TCPDF('p', 'mm', 'A4', true, 'UTF-8', false);
 		$pdf->SetCreator(PDF_CREATOR);
 		$pdf->SetAuthor('Poleth Solorzano');
-		$pdf->SetTitle('Recibo de Ventas');
+		$pdf->SetTitle('Recibo de Venta');
 		$pdf->SetSubject('');
 		$pdf->SetKeywords('');
 

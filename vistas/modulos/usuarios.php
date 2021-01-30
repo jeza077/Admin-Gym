@@ -58,7 +58,7 @@
 
           <div class="card-body">
           
-            <table class="table table-striped tablas text-center">
+            <table class="table table-striped table-bordered tablas text-center">
               <thead>
                 <tr>
                   <th scope="col">#</th>
