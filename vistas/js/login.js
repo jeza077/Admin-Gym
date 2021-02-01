@@ -534,8 +534,7 @@ $(".verificarCorreo").on('click', function(event){
                                     icon: "info",
                                     heightAuto: false,
                                     showConfirmButton: true,
-                                    confirmButtonText: "Cerrar",
-                                    allowOutsideClick: false
+                                    confirmButtonText: "Cerrar"
                                 }).then((result)=>{
                 
                                     if(result.value){

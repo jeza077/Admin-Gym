@@ -1588,7 +1588,7 @@ class ControladorUsuarios{
 				'allow_self_signed' => true
 				)
 			);
-			$mail->SMTPDebug = 0;
+			$mail->SMTPDebug = 2;
             $mail->isSMTP();
             $mail->Host = $host;  //gmail SMTP server
             $mail->SMTPAuth = true;
