@@ -1,10 +1,41 @@
 /*=============================================
 // TABLA BITACORA DINAMICA
-=============================================*/
-
+=============================================*/ 
 lenguageDataTable('.tablaBitacora', 'ajax/datatable-bitacora.ajax.php');
 lenguageDataTable('.tablaPermisosRol', 'ajax/datatable-permisos-rol.ajax.php');
+// $('.tablaBitacora').DataTable( {
+//     "ajax": "ajax/datatable-bitacora.ajax.php",
+//     "deferRender": true,
+//     "retrieve": true,
+//     "processing": true,
+//     "language": {
 
+//       "sProcessing":     "Procesando...",
+//       "sLengthMenu":     "Mostrar _MENU_ registros",
+//       "sZeroRecords":    "No se encontraron resultados",
+//       "sEmptyTable":     "Ningún dato disponible en esta tabla",
+//       "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_",
+//       "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0",
+//       "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+//       "sInfoPostFix":    "",
+//       "sSearch":         "Buscar:",
+//       "sUrl":            "",
+//       "sInfoThousands":  ",",
+//       "sLoadingRecords": "Cargando...",
+//       "oPaginate": {
+//       "sFirst":    "Primero",
+//       "sLast":     "Último",
+//       "sNext":     "Siguiente",
+//       "sPrevious": "Anterior"
+//       },
+//       "oAria": {
+//         "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+//         "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+//       }
+
+//   }
+
+// });
 
 
 /*=====================================
@@ -216,7 +247,7 @@ function redireccionDinamica(selector, pantalla) {
     });
 }
 redireccionDinamica('.btnGuardarCambios', 'rol');
-redireccionDinamica('.btnGuardarCambiosEditar', 'rol');
+// redireccionDinamica('.btnGuardarCambiosEditar', 'rol');
 
 
 /* ========================================
@@ -317,40 +348,46 @@ $(document).on("click", ".btnEditarRol", function(){
         processData:false,
         dataType: "json",
         success:function(respuesta){ 
+            // console.log(respuesta);
 
-            $('#editarRol').val(respuesta['rol']);
-            $('#editarDescripcionRol').val(respuesta['descripcion']);
+            // $('#editarRol').val(respuesta['rol']);
+            // $('#editarDescripcionRol').val(respuesta['descripcion']);
+            // $('#editarIdRol').val(respuesta['id_rol']);
+            $('#editarRol').attr('value', respuesta['rol']);
+            $('#editarDescripcionRol').attr('value', respuesta['descripcion']);
             $('#editarIdRol').val(respuesta['id_rol']);
 
 
             if(respuesta){
     
-                $('input[name=editarRol]').attr('enable',true);
-                $('input[name=editarDescripcionRol]').attr('enable',true);
+                // $('input[name=editarRol]').attr('enable',true);
+                // $('input[name=editarDescripcionRol]').attr('enable',true);
                 
                 //$('#modalFooterRol').hide();
                 $('.pantalla-permisos').show();
                 $('#modalFooterPermisosEditar').show();
-
+                
                 $(document).on('click', '#btnGuardarPermisosEditar', function (e) {
                     e.preventDefault();
+                    $('.alert').remove();
 
-                    if(!$('input[name=nuevoEditarConsulta]').is(':checked') && !$('input[name=nuevoEditarAgregar]').is(':checked') && !$('input[name=nuevoEditarActualizar]').is(':checked') && !$('input[name=nuevoEditarEliminar]').is(':checked')){
+                    var padreNotificacion = $('#btnGuardarPermisosEditar').parent();
+                    // console.log(padreNotificacion)
+                    
+                    if($('#nuevaPantallaEditar').val() == 'Seleccione...' || $('#nuevaPantallaEditar').val() == "") {
+    
+                        padreNotificacion.after('<div class="form-group alert alert-danger alert-dismissible" role="alert" style="margin:70px 0 0 0"><i class="icon fas fa-ban"></i>Por favor, elige una pantalla!</div>');
+                        setTimeout(function () {
+                            $('.alert').remove();
+                        }, 4000)
+                                            
+                    } else if(!$('input[name=nuevoEditarConsulta]').is(':checked') && !$('input[name=nuevoEditarAgregar]').is(':checked') && !$('input[name=nuevoEditarActualizar]').is(':checked') && !$('input[name=nuevoEditarEliminar]').is(':checked')){
                         
-                        $('#modalFooterPermisosEditar').before('<div class="alert alert-danger alert-dismissible ml-3 mr-3 mt-4" role="alert"><i class="icon fas fa-ban"></i>Por favor, elige al menos un permiso!</div>');
+                        padreNotificacion.after('<div class="alert alert-danger alert-dismissible" role="alert" style="margin:70px 0 0 0"><i class="icon fas fa-ban"></i>Por favor, elige al menos un permiso!</div>');
                         setTimeout(function () {
                             $('.alert').remove();
                         }, 4000)
                     
-                    
-                    } else if($('#nuevaPantallaEditar').val() == 'Seleccione...' || $('#nuevaPantallaEditar').val() == "") {
-
-                        $('#modalFooterPermisosEditar').before('<div class="alert alert-danger alert-dismissible ml-3 mr-3 mt-4" role="alert"><i class="icon fas fa-ban"></i>Por favor, elige una pantalla!</div>');
-                        setTimeout(function () {
-                            $('.alert').remove();
-                        }, 4000)
-                    
-
                     } else {
 
                         // console.log(datosPermisos);
@@ -410,26 +447,26 @@ $(document).on("click", ".btnEditarRol", function(){
                             contentType:false,
                             processData:false,
                             success:function(respuesta){ 
-                                console.log(respuesta)
+                                // console.log(respuesta)
 
                                 $('input[type=checkbox]').prop('checked',false);   
                                 $('#nuevaPantallaEditar').val('Seleccione...');                                       
                                 if(respuesta == 'true'){
-                                    $('#modalFooterPermisosEditar').before('<div class="alert alert-success alert-dismissible ml-3 mr-3" role="alert"><i class="icon fas fa-check"></i>Los permisos se agregaron correctamente.</div>');
+                                    padreNotificacion.after('<div class="alert alert-success alert-dismissible" role="alert"  style="margin:70px 0 0 0"><i class="icon fas fa-check"></i>Los permisos se agregaron correctamente.</div>');
                                     setTimeout(function () {
                                         $('.alert').remove();
                                     }, 4000)
 
                                     
                                 } else if(respuesta == '"existe"'){
-                                    console.log('agregue otra')
-                                    $('#modalFooterPermisosEditar').before('<div class="alert alert-danger alert-dismissible ml-3 mr-3" role="alert"><i class="icon fas fa-ban"></i>La pantalla elegida ya ha sido asociada anteriormente a este rol.</div>');
+                                    // console.log('agregue otra')
+                                    padreNotificacion.after('<div class="alert alert-danger alert-dismissible" role="alert" style="margin:70px 0 0 0"><i class="icon fas fa-ban"></i>La pantalla elegida ya ha sido asociada anteriormente a este rol.</div>');
                                     setTimeout(function () {
                                         $('.alert').remove();
                                     }, 4000)
                                 } else {
                                     // $('input[type=checkbox]').prop('checked',false);
-                                    $('#modalFooterPermisosEditar').before('<div class="alert alert-danger alert-dismissible ml-3 mr-3" role="alert"><i class="icon fas fa-ban"></i>Opps, algo salio mal. Intenta de nuevo!</div>');
+                                    padreNotificacion.after('<div class="alert alert-danger alert-dismissible" role="alert" style="margin:70px 0 0 0"><i class="icon fas fa-ban"></i>Opps, algo salio mal. Intenta de nuevo!</div>');
                                     setTimeout(function () {
                                         $('.alert').remove();
                                     }, 4000)
@@ -654,126 +691,6 @@ $(document).on("click", ".btnEditarProveedor", function(){
 
 });
 
-
-/** ------------------------------------*/
-//         BORRAR INSCRIPCION
-// --------------------------------------*/ 
-/*
-$(document).on('click', '.btnEliminarInscripcion', function () {
-    var idEliminarInscripcion = $(this).attr('idEliminarInscripcion');
-
-    Swal.fire({
-        title: "¿Estas seguro de borrar la inscripción?",
-        text: "¡Si no lo estas, puedes cancelar la acción!",
-        icon: "info",
-        showCancelButton: true,
-        cancelButtonColor: "#DC3545",
-        heightAuto: false,
-        allowOutsideClick: false
-    }).then((result)=>{
-        if(result.value){
-            window.location = `index.php?ruta=inscripcion&idEliminarInscripcion=${idEliminarInscripcion}`;
-            
-        }
-    });
-});
-*/
-
-/** ------------------------------------*/
-//         BORRAR MATRICULA
-// --------------------------------------*/ 
-/*
-$(document).on('click', '.btnEliminarMatricula', function () {
-    var ideliminarMatricula = $(this).attr('ideliminarMatricula');
-
-    Swal.fire({
-        title: "¿Estás seguro de borrar la matricula?",
-        text: "¡Si no lo estas, puedes cancelar la acción!",
-        icon: "info",
-        showCancelButton: true,
-        cancelButtonColor: "#DC3545",
-        heightAuto: false,
-        allowOutsideClick: false
-    }).then((result)=>{
-        if(result.value){
-            window.location = `index.php?ruta=matricula&idEliminarMatricula=${ideliminarMatricula}`;
-            
-        }
-    });
-});
-*/
-
-/** ------------------------------------*/
-//         BORRAR DESCUENTO
-// --------------------------------------*/ 
-/*
-$(document).on('click', '.btnEliminarDescuento', function () {
-    var ideliminarDescuento = $(this).attr('ideliminarDescuento');
-
-    Swal.fire({
-        title: "¿Estás seguro de borrar el descuento?",
-        text: "¡Si no lo estas, puedes cancelar la acción!",
-        icon: "info",
-        showCancelButton: true,
-        cancelButtonColor: "#DC3545",
-        heightAuto: false,
-        allowOutsideClick: false
-    }).then((result)=>{
-        if(result.value){
-            window.location = `index.php?ruta=descuento&idEliminarDescuento=${ideliminarDescuento}`;
-            
-        }
-    });
-});
-*/
-
-/** ------------------------------------*/
-//         BORRAR ROlES
-// --------------------------------------*/ 
-/*
-$(document).on('click', '.btnEliminarRoles', function () {
-    var ideliminarRoles = $(this).attr('ideliminarRoles');
-
-    Swal.fire({
-        title: "¿Estas seguro de borrar el rol?",
-        text: "¡Si no lo estas, puedes cancelar la accion!",
-        icon: "info",
-        showCancelButton: true,
-        cancelButtonColor: "#DC3545",
-        heightAuto: false,
-        allowOutsideClick: false
-    }).then((result)=>{
-        if(result.value){
-            window.location = `index.php?ruta=rol&idEliminarRoles=${ideliminarRoles}`;
-            
-        }
-    });
-});
-*/
-
-/** ------------------------------------*/
-//         BORRAR DOCUMENTO
-// --------------------------------------*/ 
-/*
-$(document).on('click', '.btnEliminarDocumento', function () {
-    var idEliminarDocumento = $(this).attr('idEliminarDocumento');
-
-    Swal.fire({
-        title: "¿Estás seguro de querer borrar el documento?",
-        text: "¡Si no lo estas, puedes cancelar la acción!",
-        icon: "info",
-        showCancelButton: true,
-        cancelButtonColor: "#DC3545",
-        heightAuto: false,
-        allowOutsideClick: false
-    }).then((result)=>{
-        if(result.value){
-            window.location = `index.php?ruta=documentos&idEliminarDocumento=${idEliminarDocumento}`;
-            
-        }
-    });
-});
-*/
 
 
 

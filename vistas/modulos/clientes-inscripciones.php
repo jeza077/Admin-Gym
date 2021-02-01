@@ -84,7 +84,7 @@
                 <!-- <div class="form-row"> -->
                   <div class="form-group col-md-12"> 
                     <label>Tipo inscripcion</label>
-                    <select class="form-control select2 actualizarInscripcion" style="width: 100%;" name="actualizarTipoInscripcion">
+                    <select class="form-control actualizarInscripcion" style="width: 100%;" name="actualizarTipoInscripcion">
                         <option value="" id="actualizarInscripcion"></option>
                         <?php 
                             $tabla = "tbl_inscripcion";
@@ -296,7 +296,8 @@
                 
               </div>
               <div class="form-group mt-4 float-right">
-                <button type="" class="btn btn-primary">Actualiazar pago</button>
+                <!-- <button type="" class="btn btn-primary">Actualiazar pago</button> -->
+                <button type="" class="btn btn-primary" ID="btnConfirmarCambioInscripcion">Actualizar pago</button>
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
               </div> 
               <?php
@@ -434,7 +435,7 @@
 
                   <div class="form-group col-md-12">
                     <label for="">Cliente</label>
-                    <select class="form-control select2" style="width: 100%;" name="nuevoClienteSinInscripcion">
+                    <select class="form-control select2" id="nuevoClienteSinInscripcion" style="width: 100%;" name="nuevoClienteSinInscripcion">
                         <option selected="selected">Seleccionar...</option>
                         <?php 
 
@@ -500,8 +501,9 @@
               </div>
               <!-- <div class="form-row"> -->
                 <div class="form-group mt-4">
-                  <button type="" class="btn btn-primary float-right mr-2">Guardar</button>
                   <button type="button" class="btn btn-danger float-right mr-2" data-dismiss="modal">Salir</button>
+                  <button type="" class="btn btn-primary float-right mr-2" id="btnConfirmarDatosInscripcion">Guardar</button>
+                  <!-- <button type="" class="btn btn-primary float-right mr-2" id="btnGuardarInscripcion">Guardar</button> -->
                 </div> 
               <!-- </div>   -->
 

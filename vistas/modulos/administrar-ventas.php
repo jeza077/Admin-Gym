@@ -50,7 +50,7 @@
 
             <tr>
               <th scope="col">#</th>
-              <th scope="col">Codigo factura</th>
+              <th scope="col">Código factura</th>
               <th scope="col">Cliente</th>
               <th scope="col" width="15px">Productos</th>
               <th scope="col">Total Neto</th>

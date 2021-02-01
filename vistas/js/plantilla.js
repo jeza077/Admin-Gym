@@ -568,18 +568,7 @@ function validarDoc(selector, alerta) {
     
                 if(respuesta){
                     alerta.append('<div class="alert alert-danger fade show mt-2" role="alert"><i class="icon fas fa-ban"></i>Numero de documento ya existente, ingrese uno diferente.</div>');
-                    // Swal.fire({
-                    //     title: "Numero de documento ya existente, ingrese uno diferente.",
-                    //     icon: "error",
-                    //     toast: true,
-                    //     position: "top",
-                    //     showConfirmButton: false,
-                    //     timer: 3000
-                    // });
-                    
-                    
-                    //E inmeditamente Limpiamos el input
-                    // selector.val("");
+
                     selector.focus();
                 } else {
                     $('.alert').remove();
@@ -679,8 +668,10 @@ function cancelarAlerta(btnCancelar) {
 /*=============================================
     EJECUCION DE VALIDACIONES
 =============================================*/
-// var identidad = $('.numeroDocumento');
-// validarDoc(identidad);
+$('.sinLetras').keydown(sinLetras)
+$('.sinCaracteres').keydown(sinCaracteres)
+$('.sinNumeros').keydown(sinNumeros)
+
 validarEmail($('.email'), $('.alertaEmail')); //Validar que no exista en DB, email de la persona ingresada
 $('.nombre').keydown(sinNumeros)
 $('.nombre').keydown(sinCaracteres)
@@ -688,6 +679,7 @@ $('.apellidos').keydown(sinNumeros)
 $('.apellidos').keydown(sinCaracteres)
 $('.nuevoUsuario').keydown(sinNumeros)
 $('.nuevoUsuario').keydown(sinCaracteres)
+longitudString($('.nuevoUsuario'),45); //Longitud maxima de Usuario.
     
 //** VALIDACIONES GLOBALES */
 longitudString($('input[type=password]'),16); //Longitud maxima Input tipo Password Global.
@@ -738,7 +730,8 @@ function crearGrafico(contenedor, nombre, cantidad, tipoChart, colores){
 
 $('#daterange-btn-bitacora').on('click', function () {  
     $('.daterangepicker').addClass('reporteBitacora');
-  })
+});
+
 datarangeDinamico($('#daterange-btn-bitacora'), $('#daterange-btn-bitacora span'), 'capturarRangoBitacora', 'bitacora');
 
 /*=============================================

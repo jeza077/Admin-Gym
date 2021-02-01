@@ -4,7 +4,7 @@ require_once "conexion.php";
 class ModeloMantenimiento{
 
     /*============================================
-		INSERTAR ROLES
+    INSERTAR ROLES
 	==============================================*/
 	static public function mdlInsertarRoles($tabla, $datos){
 
@@ -28,7 +28,7 @@ class ModeloMantenimiento{
 
 
     /*=============================================
-		MOSTRAR ROlES
+    MOSTRAR ROlES
 	=============================================*/
 		
 	static public function mdlMostrarRoles($tabla1, $item, $valor){
@@ -58,7 +58,7 @@ class ModeloMantenimiento{
     }
 
     /*=============================================
-		MOSTRAR PERMISOS ROlES
+    MOSTRAR PERMISOS ROlES
 	=============================================*/
 		
 	static public function mdlMostraPermisosrRoles($item1, $valor1, $item2, $valor2){
@@ -96,7 +96,7 @@ class ModeloMantenimiento{
 
 
     /*============================================
-		GUARDAR PERMISOS DE ROLES
+    GUARDAR PERMISOS DE ROLES
 	==============================================*/
 	static public function mdlInsertarPermisosRoles($tabla, $id, $pant, $consulta, $agregar, $actualizar, $eliminar){
 
@@ -124,7 +124,7 @@ class ModeloMantenimiento{
 
 
     /*====================================================
-       Actualizar Rol
+    Actualizar Rol
     ======================================================*/
 
     static public function mdlActualizarRol($tabla,$item1,$valor1,$item2,$valor2){
@@ -150,8 +150,8 @@ class ModeloMantenimiento{
 
 
 
-     /*============================================
-		INSERTAR INSCRIPCION
+    /*============================================
+    INSERTAR INSCRIPCION
 	==============================================*/
 	static public function mdlInsertarInscripcion($tabla, $datos){
 
@@ -174,8 +174,8 @@ class ModeloMantenimiento{
 		$stmt = null;
     }
 
-     /*=============================================
-		MOSTRAR INSCRIPCION
+    /*=============================================
+    MOSTRAR INSCRIPCION
 	=============================================*/
 		
 	static public function mdlMostrarInscripcion($tabla1, $item, $valor){
@@ -207,7 +207,7 @@ class ModeloMantenimiento{
 
 
     /*====================================================
-       Actualizar INSCRIPCION
+    Actualizar INSCRIPCION
     ======================================================*/
 
     static public function mdlActualizarInscripcion($tabla,$item1,$valor1,$item2,$valor2){
@@ -235,7 +235,7 @@ class ModeloMantenimiento{
 
 
     /*============================================
-		INSERTAR MATRICULA
+    INSERTAR MATRICULA
 	==============================================*/
 	static public function mdlInsertarMatricula($tabla, $datos){
 
@@ -257,8 +257,8 @@ class ModeloMantenimiento{
 		$stmt = null;
     }
 
-     /*=============================================
-		MOSTRAR MATRICULA
+    /*=============================================
+    MOSTRAR MATRICULA
 	=============================================*/
 		
 	static public function mdlMostrarMatricula($tabla1, $item, $valor){
@@ -289,7 +289,7 @@ class ModeloMantenimiento{
 
     
     /*=============================================
-		MOSTRAR MATRICULA
+    MOSTRAR MATRICULA
 	=============================================*/
 		
 	static public function mdlMostrarDocumento($tabla, $item, $valor){
@@ -320,7 +320,7 @@ class ModeloMantenimiento{
 
 
     /*====================================================
-       Actualizar MATRICULA
+    Actualizar MATRICULA
     ======================================================*/
 
     static public function mdlActualizarMatricula($tabla,$item1,$valor1,$item2,$valor2){
@@ -346,8 +346,8 @@ class ModeloMantenimiento{
 
 
 
-     /*============================================
-		DESCUENTO INSERTAR
+    /*============================================
+    DESCUENTO INSERTAR
 	==============================================*/
 	static public function mdlInsertarDescuento($tabla, $datos){
 
@@ -369,8 +369,8 @@ class ModeloMantenimiento{
 		$stmt = null;
     }
 
-     /*=============================================
-		MOSTRAR DESCUENTO
+    /*=============================================
+    MOSTRAR DESCUENTO
 	=============================================*/
 		
 	static public function mdlMostrarDescuento($tabla1, $item, $valor){
@@ -401,7 +401,7 @@ class ModeloMantenimiento{
 
 
     /*============================================
-		NUEVO PROVEEDOR
+    NUEVO PROVEEDOR
 	==============================================*/
 	static public function mdlNuevoProveedor($tabla, $datos){
 
@@ -424,39 +424,9 @@ class ModeloMantenimiento{
     }
 
 
-     /*=============================================
-		MOSTRAR PROVEEDOR
-	=============================================*/
-		
-	// static public function mdlMostrarProveedores($tabla1, $item, $valor){
-	
-    //     if($item != null){
-
-    //         $stmt = Conexion::conectar()->prepare("SELECT * from $tabla1 where $item = :$item");		
-    //         $stmt->bindParam(":".$item, $valor, PDO::PARAM_STR);
-    //         $stmt->execute();
-    //         return $stmt -> fetch();
-
-    //     } else {
-
-    //         $stmt = Conexion::conectar()->prepare("SELECT * from $tabla1");		
-            
-    //         $stmt->execute();
-
-    //         return $stmt -> fetchAll();
-
-    //     }
-
-    //     $stmt -> close();
-    //     $stmt = null;	
-
-
-
-    // }
-
 
     /*=============================================
-          EDITAR ROLES
+    EDITAR ROLES
     =============================================*/
     
     static public function mdlEditarRol($tabla,$datos){
@@ -482,7 +452,7 @@ class ModeloMantenimiento{
     }
 
     /*=============================================
-          EDITAR MATRICULA
+    EDITAR MATRICULA
     =============================================*/
     
     static public function mdlEditarMatricula($tabla,$datos){
@@ -509,7 +479,7 @@ class ModeloMantenimiento{
 
 
     /*=============================================
-          EDITAR INSCRIPCION
+    EDITAR INSCRIPCION
     =============================================*/
     
     static public function mdlEditarInscripcion($tabla,$datos){
@@ -536,7 +506,7 @@ class ModeloMantenimiento{
     }
 
     /*=============================================
-          EDITAR DESCUENTO
+    EDITAR DESCUENTO
     =============================================*/
     
     static public function mdlEditarDescuento($tabla,$datos){
@@ -563,7 +533,7 @@ class ModeloMantenimiento{
 
 
     /*=============================================
-          EDITAR PROVEEDOR
+    EDITAR PROVEEDOR
     =============================================*/
     
     static public function mdlEditarProveedor($tabla,$datos){
@@ -591,7 +561,7 @@ class ModeloMantenimiento{
 
 
     /*============================================
-            AGREGAR NUEVO DOCUMENTO
+    AGREGAR NUEVO DOCUMENTO
 	==============================================*/
 	static public function mdlDocumentoInsertar($tabla, $datos){
 
@@ -615,7 +585,7 @@ class ModeloMantenimiento{
 
 
     /*=============================================
-          EDITAR DOCUMENTO
+    EDITAR DOCUMENTO
     =============================================*/
     
     static public function mdlEditarDocumento($tabla,$datos){
@@ -642,7 +612,7 @@ class ModeloMantenimiento{
 
 
     /*=============================================
-            BORRAR ROLES
+    BORRAR ROLES
 	=============================================*/
 	static public function mdlBorrarRoles($tabla, $datos){
 
@@ -667,7 +637,7 @@ class ModeloMantenimiento{
     
 
     /*=============================================
-            BORRAR MATRICULA
+    BORRAR MATRICULA
 	=============================================*/
 	static public function mdlBorrarMatricula($tabla, $datos){
 
@@ -692,7 +662,7 @@ class ModeloMantenimiento{
 
 
     /*=============================================
-            BORRAR INSCRIPCION
+    BORRAR INSCRIPCION
 	=============================================*/
 	static public function mdlBorrarInscripcion($tabla, $datos){
 
@@ -717,7 +687,7 @@ class ModeloMantenimiento{
     
 
     /*=============================================
-            BORRAR DESCUENTO
+    BORRAR DESCUENTO
 	=============================================*/
 	static public function mdlBorrarDescuento($tabla, $datos){
 
@@ -742,7 +712,7 @@ class ModeloMantenimiento{
     
 
     /*=============================================
-            BORRAR DOCUMENTO
+    BORRAR DOCUMENTO
 	=============================================*/
 	static public function mdlBorrarDocumento($tabla, $datos){
 

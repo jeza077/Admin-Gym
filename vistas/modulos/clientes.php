@@ -65,7 +65,7 @@
 
 
   <!-- =======================================
-           MODAL AGREGAR  CLIENTE
+  MODAL AGREGAR  CLIENTE
   ======================================----->
 
   <div class="modal fade" id="modalAgregarClienteNuevo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -95,7 +95,7 @@
                   <div class="form-row">
                     <div class="form-group col-md-3">
                       <label for="">Tipo de documento <?php echo $i?></label>
-                      <select class="form-control select2 tipoDocumentoCliente" name="nuevoTipoDocumento">
+                      <select class="form-control select2 tipoDocumentoCliente" name="nuevoTipoDocumento" style="width: 100%;">
                           <option selected="selected">Seleccionar...</option>
                           <?php 
                               $tabla = "tbl_documento";
@@ -166,7 +166,7 @@
               <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="datosCLiente">
                 <div class="container-fluid mt-4">
                     <div class="form-row">
-                      <div class="form-group col-md-3">
+                      <div class="form-group col-md-6">
                         <label>Tipo Cliente</label>
                         <select class="form-control select2 tipoCliente" name="tipoCliente" style="width: 100%;" required>
                           <option selected="selected">Seleccionar...</option>
@@ -284,11 +284,11 @@
                       </div>
 
                     </div>
-
                   </div>
                 </div>
                 <div class="form-group mt-4 float-right">
                   <button type="" class="btn btn-primary btnConfirmarPago">Guardar</button>
+                  <!-- <button type="" class="btn btn-primary btnConfirmarPagoNuevo">Guardar</button> -->
                   <button type="" class="btn btn-primary btnNuevoClienteGym">Guardar</button>
                   <button type="" class="btn btn-primary btnNuevoClienteVentas">Guardar</button>
                   <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
@@ -309,7 +309,7 @@
   </div>
 
   <!-- =======================================
-           MODAL EDITAR CLIENTE GIMNASIO
+  MODAL EDITAR CLIENTE GIMNASIO
   ======================================----->
 
   <div class="modal fade" id="modalEditarClienteGimnasio" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -328,7 +328,7 @@
                   <div class="form-row">
                     <div class="form-group col-md-3">
                       <label for="">Tipo de documento <?php echo $i?></label>
-                      <select class="form-control select2" name="editarTipoDocumento">
+                      <select class="form-control" name="editarTipoDocumento" style="width: 100%;">
                           <option value="" id="editarTipoDocumento"></option>
                           <?php 
                               $tabla = "tbl_documento";
@@ -383,7 +383,7 @@
                   
                     <div class="form-group col-md-3">
                       <label>Sexo</label>
-                      <select class="form-control select2" name="editarSexo" style="width: 100%;" required>
+                      <select class="form-control" name="editarSexo" style="width: 100%;" required>
                         <option value="" id="editarSexo"></option>
                         <option value="M">Masculino</option>
                         <option value="F">Femenino</option>
@@ -414,8 +414,8 @@
     </div>
   </div>
 
-   <!-- =======================================
-           MODAL EDITAR CLIENTE VENTA
+  <!-- =======================================
+  MODAL EDITAR CLIENTE VENTA
   ======================================----->
 
   <div class="modal fade" id="modalEditarClienteVenta" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -428,11 +428,12 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
+
         <div class="modal-body">
           <form role="form" method="post" class="formulario">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
               <li class="nav-item" role="presentation">
-                <a class="nav-link active" id="datosEditarPersonaVenta" data-toggle="tab" href="#editarPersona" role="tab" aria-controls="home" aria-selected="true">Datos personales</a>
+                <a class="nav-link active" id="datosEditarPersonaVenta" data-toggle="tab" href="#editarPersonaVenta" role="tab" aria-controls="home" aria-selected="true">Datos personales</a>
               </li>
               <li class="nav-item" role="presentation">
                 <a class="nav-link" id="datosEditarClienteVenta" data-toggle="tab" href="#editarClienteVenta" role="tab" aria-controls="profile" aria-selected="false">Datos Cliente</a>
@@ -445,7 +446,7 @@
                   <div class="form-row">
                     <div class="form-group col-md-3">
                       <label for="">Tipo de documento <?php echo $i?></label>
-                      <select class="form-control select2" name="tipoDocumentoClienteVentas">
+                      <select class="form-control" name="tipoDocumentoClienteVentas" style="width: 100%;">
                           <option value="" id="tipoDocumentoClienteVentas"></option>
                           <?php 
                               $tabla = "tbl_documento";
@@ -499,7 +500,7 @@
                   
                     <div class="form-group col-md-3">
                       <label>Sexo</label>
-                      <select class="form-control select2" name="editarSexoClienteVentas" style="width: 100%;" required>
+                      <select class="form-control" name="editarSexoClienteVentas" style="width: 100%;" required>
                         <option value="" id="editarSexoClienteVentas"></option>
                         <option value="M">Masculino</option>
                         <option value="F">Femenino</option>
@@ -514,7 +515,7 @@
                   <div class="form-row">
                     <div class="form-group col-md-3">
                       <label>Tipo Cliente</label>
-                      <select class="form-control select2 tipoClienteVenta" name="editarTipoClienteVenta" style="width: 100%;" required>
+                      <select class="form-control tipoClienteVenta" name="editarTipoClienteVenta" style="width: 100%;" required>
                         <option value="tipoCl" id="editarTipoClienteVenta"></option>
                         <!-- <option selected="selected">Seleccionar...</option> -->
                         <option value="Gimnasio">Clientes del gimnasio</option>
@@ -526,7 +527,7 @@
                     <div class="form-row">
                       <div class="form-group col-md-6">
                           <label>Tipo matricula</label>
-                          <select class="form-control select2 nuevaMatriculaClienteVenta" style="width: 100%;" name="tipoMatriculaClienteVenta">
+                          <select class="form-control nuevaMatriculaClienteVenta" style="width: 100%;" name="tipoMatriculaClienteVenta">
                             <option value="" id="tipoMatriculaClienteVenta" ></option>
                             <option selected="selected">Seleccionar...</option>
                             <?php 
@@ -559,7 +560,7 @@
                     <div class="form-row">
                       <div class="form-group col-md-6">
                         <label>Promociones</label>
-                        <select class="form-control select2 nuevoDescuentoClienteVenta" style="width: 100%;" name="editarPromocionClienteVenta">
+                        <select class="form-control nuevoDescuentoClienteVenta" style="width: 100%;" name="editarPromocionClienteVenta">
                             <option value="" id="editarPromocionClienteVenta"></option> 
                             <option selected="selected">Seleccionar...</option>
                           
@@ -591,7 +592,7 @@
                     <div class="form-row">
                         <div class="form-group col-md-6"> 
                           <label>Tipo inscripcion</label>
-                          <select class="form-control select2 nuevaInscripcionClienteVenta" style="width: 100%;" name="inscripcionClienteVenta">
+                          <select class="form-control nuevaInscripcionClienteVenta" style="width: 100%;" name="inscripcionClienteVenta">
                               <option value="" id="inscripcionClienteVenta"></option>
                               <option selected="selected">Seleccionar...</option>
                               <?php 
@@ -673,7 +674,7 @@
 
 
   <!-- =======================================
-           MODAL AGREGAR  CLIENTE
+  MODAL AGREGAR  CLIENTE YA REGISTRADO
   ======================================----->
 
   <div class="modal fade" id="modalAgregarClienteYaRegistrado" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -693,7 +694,7 @@
                 <div class="form-row">
                   <div class="form-group col-md-6">
                     <label>Persona</label>
-                    <select class="form-control select2" style="width: 100%;" name="nuevoIdPersona">
+                    <select class="form-control select2 nuevoIdPersona" style="width: 100%;" name="nuevoIdPersona">
                       <option selected="selected">Seleccionar...</option>
                         <?php 
                           $item = 'tipo_persona';
@@ -710,9 +711,10 @@
                     </select>
                   </div>
 
+
                   <div class="form-group col-md-6">
                     <label>Tipo Cliente</label>
-                    <select class="form-control select2 tipoCliente" name="tipoClienteRegistrado" style="width: 100%;" required>
+                    <select class="form-control select2 tipoClienteRegistrado" name="tipoClienteRegistrado" style="width: 100%;" required>
                       <option selected="selected">Seleccionar...</option>
                       <option value="Gimnasio">Clientes del gimnasio</option>
                       <option value="Ventas">Cliente de ventas</option>
@@ -851,8 +853,8 @@
   </div>
 
 
-<!-- =======================================
-           ELIMINAR CLIENTE
+  <!-- =======================================
+  ELIMINAR CLIENTE
   ======================================----->
   <?php
     $tipoPersona = 'cliente';

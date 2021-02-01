@@ -44,6 +44,13 @@
 
             $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 2,$accion, $descripcionEvento);
 
+            // $tabla = "tbl_roles";
+            // $item = "estado";
+            // $valor = 1;
+
+            // $roles = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
+
+            // var_dump($roles);
           ?>
         
 
@@ -51,7 +58,7 @@
 
           <div class="card-body">
           
-            <table class="table table-striped tablas text-center">
+            <table class="table table-striped table-bordered tablas text-center">
               <thead>
                 <tr>
                   <th scope="col">#</th>
@@ -257,7 +264,7 @@
                               $roles = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
 
                               foreach ($roles as $key => $value) {
-                                if($value["rol"] == 'Default'){
+                                if($value["rol"] == 'DEFAULT'){
                                   echo '<option selected="selected" value="'.$value["id_rol"].'">'.$value["rol"].'</option>';
                                 } else {
                                   echo '<option value="'.$value["id_rol"].'">'.$value["rol"].'</option>';
@@ -452,7 +459,7 @@
                               $roles = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
 
                               foreach ($roles as $key => $value) {
-                                if($value["rol"] == 'Default'){
+                                if($value["rol"] == 'DEFAULT'){
                                   echo '<option value="'.$value["id_rol"].'">'.$value["rol"].'</option>';
                                 } else {
                                   echo '<option value="'.$value["id_rol"].'">'.$value["rol"].'</option>';
@@ -587,7 +594,7 @@
                         $roles = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
 
                         foreach ($roles as $key => $value) {
-                          if($value["rol"] == 'Default'){
+                          if($value["rol"] == 'DEFAULT'){
                             echo '<option selected="selected" value="'.$value["id_rol"].'">'.$value["rol"].'</option>';
                           } else {
                             echo '<option value="'.$value["id_rol"].'">'.$value["rol"].'</option>';
