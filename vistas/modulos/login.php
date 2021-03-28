@@ -183,12 +183,15 @@
           </div>
         </div>
 
+        <div class="row alertaDocumento">
+        
+        </div>
   
         <div class="form-row">
 
           <div class="form-group col-md-3">
             <label for="">Usuario</label>
-            <input type="text" class="form-control mayus personas" name="nuevoUsuario" placeholder="Ingrese Usuario" required>
+            <input type="text" class="form-control nuevoUsuario mayus personas" name="nuevoUsuario" placeholder="Ingrese Usuario" required>
           </div>
           <div class="form-group col-md-3">
             <label for="">Contraseña</label>
@@ -204,10 +207,10 @@
             <input type="text" class="form-control" data-inputmask='"mask": "(999) 9999-9999"' data-mask  name="nuevoTelefono" placeholder="Ingrese Telefono" required>
           </div>
         </div>
-        <!-- <div class="form-group">
-          <label for="inputAddress">Dirección</label>
-          <input type="text" class="form-control" id="inputAddress" name="nuevaDireccion" placeholder="Col. Alameda, calle #2..." required>
-        </div> -->
+
+        <div class="row alertaUsuario">
+
+        </div>
 
         <div class="form-row">
           <div class="form-group col-md-7">

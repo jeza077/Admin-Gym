@@ -569,9 +569,12 @@ function validarDoc(selector, alerta) {
                 if(respuesta){
                     alerta.append('<div class="alert alert-danger fade show mt-2" role="alert"><i class="icon fas fa-ban"></i>Numero de documento ya existente, ingrese uno diferente.</div>');
 
+                    selector.css('border', '1px solid red');
                     selector.focus();
                 } else {
                     $('.alert').remove();
+                    selector.css('border', '1px solid green');
+
                 }
             }
         });

@@ -22,15 +22,15 @@ $('.nuevoUsuario').blur(function (){
 
             if(respuesta){
                 $('.alertaUsuario').append('<div class="alert alert-danger fade show mt-2" role="alert"><i class="icon fas fa-ban"></i>Usuario ya existente, ingrese uno diferente.</div>');
-                // setTimeout(function () {
-                    // $('.alert').remove();
-                // }, 3000)
+                setTimeout(function () {
+                    $('.alert').remove();
+                }, 3000)
                 
-                //E inmeditamente Limpiamos el input
-                // $('.nuevoUsuario').val("");
+                $('.nuevoUsuario').css('border', '1px solid red');
                 $('.nuevoUsuario').focus();
             } else {
                 $('.alert').remove();
+                $('.nuevoUsuario').css('border', '1px solid green');
             }
         }
 

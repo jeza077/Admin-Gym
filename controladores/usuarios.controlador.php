@@ -522,40 +522,37 @@ class ControladorUsuarios{
 
 						if($respuestaEmpleado == true){
 
+							$email = $emailUsuario;
+							$nombreUsuario = $datos["usuario"];
+							$contraseña =  $contraSinEncriptar;
+							$asunto = 'Envio de Usuario y Contraseña';
+							$require = false;
+
 							if($tipoPersona == 'default'){
 
+								// return true;
+								$template = 'Hola '.$nombre.'! <br><br> Tu usuario es: '.$nombreUsuario.' <br> Tu contraseña es: '.$contraseña.'<br><br><br> El administrador pronto te dará permisos para entrar al sistema. <br><br> Saludos!'; 
+
+							} else {
+
+
+								$template = 'Hola '.$nombre.'! <br><br> Tu usuario es: '.$nombreUsuario.' <br> Tu contraseña es: '.$contraseña; 
+								
+							}
+							
+							$respuestaCorreo = ControladorUsuarios::ctrGenerarCorreo($email, $nombreUsuario, $asunto, $template, $require);
+
+							if($respuestaCorreo = true){
+							
+								$descripcionEvento = "Nuevo Usuario";
+								$accion = "Nuevo";
+								$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 2,$accion, $descripcionEvento);
+			
 								return true;
 
 							} else {
 
-								$email = $emailUsuario;
-								$nombreUsuario = $datos["usuario"];
-								$contraseña =  $contraSinEncriptar;
-								$asunto = 'Envio de Usuario y Contraseña';
-								$require = false;
-
-								$template = 'Hola '.$nombre.'! <br><br> Tu usuario es: '.$nombreUsuario.' <br> Tu contraseña es: '.$contraseña; 
-								
-								$respuestaCorreo = ControladorUsuarios::ctrGenerarCorreo($email, $nombreUsuario, $asunto, $template, $require);
-
-								if($respuestaCorreo = true){
-
-								
-									$descripcionEvento = "Nuevo Usuario";
-									$accion = "Nuevo";
-			                        $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 2,$accion, $descripcionEvento);
-				
-								 
-							   
-									
-
-									return true;
-
-								} else {
-
-									return false;
-								}
-
+								return false;
 							}
 
 						} else {
@@ -1588,7 +1585,7 @@ class ControladorUsuarios{
 				'allow_self_signed' => true
 				)
 			);
-			$mail->SMTPDebug = 2;
+			$mail->SMTPDebug = 0;
             $mail->isSMTP();
             $mail->Host = $host;  //gmail SMTP server
             $mail->SMTPAuth = true;
