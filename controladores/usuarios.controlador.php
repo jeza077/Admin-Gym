@@ -82,7 +82,7 @@ class ControladorUsuarios{
 			} else {
 
 				if(preg_match('/^[A-Z]+$/', $_POST["ingUsuario"]) &&
-				preg_match('/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%.])\S{8,16}$/', $_POST["ingPassword"])){
+				preg_match('/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%*-,_+?¡¿=&.])\S{8,16}$/', $_POST["ingPassword"])){
 
 					$encriptar = crypt($_POST["ingPassword"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
 					
@@ -414,7 +414,7 @@ class ControladorUsuarios{
 		if(isset($datos["usuario"])){
 
 			if(preg_match('/^[A-Z]+$/', $datos["usuario"]) &&
-			   preg_match('/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%.])\S{8,16}$/', $datos["password"])){
+			   preg_match('/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%*-,_+?¡¿=&.])\S{8,16}$/', $datos["password"])){
 
 				$emailUsuario = $datos["email"];
 				// $contraSinEncriptar = ControladorUsuarios::password_seguro_random();
@@ -601,7 +601,7 @@ class ControladorUsuarios{
 		if(isset($_POST["nuevoIdPersona"])){
 
 			if(preg_match('/^[A-Z]+$/', $_POST["nuevoUsuario"]) &&
-			   preg_match('/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%.])\S{8,16}$/', $_POST["nuevoPassword"])){
+			   preg_match('/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%*-,_+?¡¿=&.])\S{8,16}$/', $_POST["nuevoPassword"])){
 
 				$contraSinEncriptar = $_POST["nuevoPassword"];
 
@@ -905,7 +905,7 @@ class ControladorUsuarios{
 					}
 					
 					if($datos['password_nueva'] != ""){
-						if(preg_match('/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%.])\S{8,16}$/', $datos["password_nueva"])){
+						if(preg_match('/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%*-,_+?¡¿=&.])\S{8,16}$/', $datos["password_nueva"])){
 
 							//**================= ENCRIPTAMOS LA CONTRASEÑA ===================*/
 							$encriptar = crypt($datos["password_nueva"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
@@ -1037,7 +1037,7 @@ class ControladorUsuarios{
 			
 			// if($_POST["nuevaPregunta"][0] !== 'Seleccionar...' && $_POST["nuevaPregunta"][1] !== 'Seleccionar...' && $_POST["nuevaPregunta"][2] !== 'Seleccionar...'){
 
-				if(preg_match('/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%.])\S{8,16}$/', $_POST["editarPassword"]) && preg_grep('/^(?=.*[A-ZñÑáéíóúÁÉÍÓÚ])\S{1,50}$/', $_POST["respuestaPregunta"])){
+				if(preg_match('/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%*-,_+?¡¿=&.])\S{8,16}$/', $_POST["editarPassword"]) && preg_grep('/^(?=.*[A-ZñÑáéíóúÁÉÍÓÚ])\S{1,50}$/', $_POST["respuestaPregunta"])){
 					// echo '<br><div class="alert alert-danger">bien.</div>';
 					// return;		
 
@@ -1180,7 +1180,7 @@ class ControladorUsuarios{
 			
 		if(isset($post)){
 			
-			if(preg_match('/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%.])\S{8,16}$/', $post)){
+			if(preg_match('/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%*-,_+?¡¿=&.])\S{8,16}$/', $post)){
 				
 				$encriptar = crypt($post, '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
 
@@ -1269,7 +1269,7 @@ class ControladorUsuarios{
 		
 		if(isset($_POST['editarPassword'])){
 			
-			if(preg_match('/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%.])\S{8,16}$/', $_POST['editarPassword'])){
+			if(preg_match('/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%*-,_+?¡¿=&.])\S{8,16}$/', $_POST['editarPassword'])){
 				
 				$encriptar = crypt($_POST['editarPassword'], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
 			
@@ -1637,7 +1637,7 @@ class ControladorUsuarios{
 
 			if($respuestaContraseña['password'] == $encriptar){
 
-				if(preg_match('/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%.])\S{8,16}$/', $_POST['editarPassword'])){
+				if(preg_match('/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%*-,_+?¡¿=&.])\S{8,16}$/', $_POST['editarPassword'])){
 					
 					$encriptar = crypt($_POST['editarPassword'], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
 							

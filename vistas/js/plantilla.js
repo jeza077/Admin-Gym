@@ -369,7 +369,7 @@ var letra = /[A-z]/;
 var mayus = /[A-Z]/;
 var minus = /[a-z]/;
 var num = /\d/;
-var caracEspe = /[!@#$&*?.,]/;
+var caracEspe = /[!@#$%*-,_+?¡¿=&.]/;
 var long = /^.{8,16}$/;
 
 function requisitosPassword(posicion){  
