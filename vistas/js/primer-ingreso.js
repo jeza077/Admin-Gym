@@ -122,14 +122,21 @@ $('#btnPreguntaDos').click(function (e) {
 
                     togglePassPrimeraVez();
                     // Contraseña nueva primer ingreso
+                    $("#passwordPrimerIngreso").append("<label class='mt-2'>Contraseña anterior</label>");
+                    $("#passwordPrimerIngreso").append("<input type='password' class='form-control' placeholder='Ingrese contraseña anterior' id='passwordAnterior' name='passwordAnterior' required>");
+
                     $("#passwordPrimerIngreso").append("<label class='mt-2'>Nueva contraseña</label>");
                     $("#passwordPrimerIngreso").append("<input type='password' class='form-control password nueva-password' placeholder='Ingrese nueva contraseña' name='editarPassword' required>");
+                    
                     $("#passwordPrimerIngreso").append("<label class='mt-2'>Confirmar contraseña</label>");
                     $("#passwordPrimerIngreso").append("<input type='password' class='form-control password confirmar-password' placeholder='Confirmar contraseña'>");
 
                     $("#guardarPassPrimerIngreso").append("<button type='submit' class='btn btn-orange btn-block btn-flat' id='cambiarPasPrimerIngreso'>Cambiar Contraseña</button>");
 
                     requisitosPassword("center-start");
+
+
+
                     $('#cambiarPasPrimerIngreso').attr('disabled', true);
                     $(".nueva-password").on('change', function(){
                         cambiarPass = $(this).val();
@@ -144,12 +151,53 @@ $('#btnPreguntaDos').click(function (e) {
 
                         confirmarContraseña(cambiarPass, confirPass, btnCambiarPass);
                     })
+
+                    $(document).on('blur', '#passwordAnterior', function () { 
+
+                        $('.alert').remove();
+                        
+                        let passAnterior = $(this).val();
+                    
+                        let datos = new FormData();
+                        datos.append("passAnterior", passAnterior);
+                    
+                        $.ajax({
+                    
+                            url:"ajax/usuarios.ajax.php",
+                            method: "POST",
+                            data: datos,
+                            cache: false,
+                            contentType: false,
+                            processData: false,  
+                            dataType: "json",
+                            success: function(respuesta) {
+                                // console.log(respuesta);
+                    
+                                if(respuesta == false){
+                                    $('#passwordAnterior').css('border', '1px solid red');
+                                    $('#passwordAnterior').after('<div class="alert alert-danger alert-dismissible" role="alert" style="margin:5px 0 0 0"><i class="icon fas fa-ban"></i>La contraseña no coincide con la anterior. Intente de nuevo!</div>');
+                                        setTimeout(function () {
+                                            $('.alert').remove();
+                                        }, 4000)
+                                    $('#passwordAnterior').focus();
+                                    $('#cambiarPasPrimerIngreso').attr('disabled', true);
+                                    
+                                } else {
+                                    $('#passwordAnterior').css('border', '1px solid green');
+                                    $('.alert').remove();
+                                }
+                            }
+                        });
+                    
+                    });
                 }
             });
         });
 
     }
 });
+
+
 
 
 

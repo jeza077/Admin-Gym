@@ -63,6 +63,27 @@ class AjaxUsuarios{
 
         echo json_encode($respuesta);
     }
+    
+    /*=============================================
+    REVISAR QUE LA CONTRASEÑA SEA IGUAL A LA ANTERIOR
+    =============================================*/
+    
+    public $passAnterior;
+
+    public function ajaxPassAnterior(){
+        
+        $tabla = "tbl_usuarios";
+        $item = "password";
+        $valor = $this->passAnterior;
+        
+        $encriptar = crypt($valor, '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
+
+        $respuesta = ControladorUsuarios::ctrMostrarUsuarios($tabla, $item, $encriptar);
+
+        echo json_encode($respuesta);
+    }
+
+
     /*=============================================
             REVISAR CORREO
     =============================================*/
@@ -226,6 +247,15 @@ if(isset($_POST["validarUsuario"])){
     $valUsuario = new AjaxUsuarios();
     $valUsuario->validarUsuario = $_POST["validarUsuario"];
     $valUsuario->ajaxValidarUsuario();
+}
+
+/*=============================================
+REVISAR QUE LA CONTRASEÑA SEA IGUAL A LA ANTERIOR
+=============================================*/
+if(isset($_POST["passAnterior"])){
+    $valUsuario = new AjaxUsuarios();
+    $valUsuario->passAnterior = $_POST["passAnterior"];
+    $valUsuario->ajaxPassAnterior();
 }
 
 /*=============================================

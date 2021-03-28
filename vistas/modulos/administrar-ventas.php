@@ -39,6 +39,7 @@
 
       $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 4,$accion, $descripcionEvento);
 
+      // var_dump($_SESSION['permisos']);
     ?>
                    
     <div class="card">

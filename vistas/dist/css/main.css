@@ -275,18 +275,19 @@ body.primer-ingreso .card .contenedor2 a.salir{
     left: 100%;
     transition: 0.5s;
     width: 520px;
+    margin: 0 2rem;
 }
 .contenedor-primer-ingreso.password-primer-ingreso .passwords i.show-nueva-pass.primero{
     cursor: pointer;
     position: absolute;
-    top: 117px;
+    top: 195px;
     right: 17px;
     z-index: 1000;
 }
 .contenedor-primer-ingreso.password-primer-ingreso .passwords i.show-confir-pass.segundo{
     cursor: pointer;
     position: absolute;
-    top: 195px;
+    top: 271px;
     right: 17px;
     z-index: 1000;
 }
@@ -594,7 +595,7 @@ i.show-confir-pass{
     left: 100%;
 }
 .login-box.active.quest.changePassword{
-    /* margin: 6.5% 35%; */
+    /* margin: 6|.5% 35%; */
     height: 500px;
 }
 .login-box.active.quest.changePassword.contenedor-rp{

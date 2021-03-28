@@ -97,6 +97,7 @@
         }
       
           if($val  ||
+          $_GET["ruta"] == "perfil" ||
           $_GET["ruta"] == "salir"){
             
             include "modulos/".$_GET['ruta'].".php";
