@@ -1057,7 +1057,7 @@ class ControladorUsuarios{
 						// echo '<br><div class="alert alert-danger">Contraseña igual a la anterior, intente de nuevo.</div>';
 						echo '<script>			
 							Swal.fire({
-								title: "Contraseña no puede ser igual a la anterior. Por favor, intente de nuevo.",
+								title: "La contraseña no puede ser igual a la anterior. Por favor, intente de nuevo.",
 								icon: "error",
 								toast: true,
 								position: "top",
@@ -1277,12 +1277,11 @@ class ControladorUsuarios{
 
 					echo '<script>
 							Swal.fire({
-								title: "Contraseña ingresada no cumple con los requisitos, intente de nuevo.",
+								title: "La contraseña no puede ser igual a la anterior. Por favor, intente de nuevo.",
 								icon: "error",
-								toast: true,
-								position: "top",
+								heightAuto: false,
 								showConfirmButton: false,
-								timer: 3000,
+								timer: 4000,
 							});					
 						</script>';
 
@@ -1292,10 +1291,9 @@ class ControladorUsuarios{
 							Swal.fire({
 								title: "Contraseña ingresada no puede ser igual a usuario, intente de nuevo.",
 								icon: "error",
-								toast: true,
-								position: "top",
+								heightAuto: false,
 								showConfirmButton: false,
-								timer: 3000,
+								timer: 4000,
 							});					
 						</script>';
 

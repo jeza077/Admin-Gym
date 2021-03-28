@@ -269,9 +269,10 @@ $(".verificarCorreoPreguntas").on('click', function(event){
 
                                                                 Swal.fire({
                                                                     icon: "error",
-                                                                    title: "La contraseña no cumple con los requisitos. Intenta de nuevo!",
+                                                                    title: "La contraseña no puede ser igual a la anterior. Por favor, intente de nuevo.",
                                                                     showConfirmButton: true,
                                                                     confirmButtonText: "Cerrar",
+                                									heightAuto: false,
                                                                     closeOnConfirm: false
                                                                 })
                                                             }
