@@ -220,7 +220,7 @@
                     </div>
                     <div class="form-group col-md-4">
                       <label>Fecha de nacimiento</label>
-                        <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy/mm/dd" data-mask  name="nuevaFechaNacimiento" placeholder="Ingrese Fecha de Nacimiento" required>
+                        <input type="text" class="form-control fecha" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy/mm/dd" data-mask  name="nuevaFechaNacimiento" placeholder="Ingrese Fecha de Nacimiento" required>
                     </div>
                   </div>
 
@@ -416,7 +416,7 @@
                     </div>
                     <div class="form-group col-md-4">
                       <label>Fecha de nacimiento</label>
-                        <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy/mm/dd" data-mask  name="editarFechaNacimiento" value="" required>
+                        <input type="text" class="form-control fechaEditar" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy/mm/dd" data-mask  name="editarFechaNacimiento" value="" required>
                     </div>
                   </div>
 

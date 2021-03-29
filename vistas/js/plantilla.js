@@ -668,6 +668,87 @@ function cancelarAlerta(btnCancelar) {
 //     });
 // }
 
+
+// VALIDAR FECHAS QUE NO PASE EL AÑO MAS DEL INDICADO
+$(document).on('blur', '.fecha', function () { 
+    // e.preventDefault();
+    
+    let fecha = $('.fecha').val();
+    // console.log(fecha);
+    
+    esFecha(fecha, $('.fecha'));
+});
+$(document).on('blur', '.fechaEditar', function () { 
+    // e.preventDefault();
+    
+    let fecha = $('.fechaEditar').val();
+    // console.log(fecha);
+    
+    esFecha(fecha, $('.fechaEditar'));
+});
+function esFecha(fecha,selector){
+    $('.alert').remove();
+
+    if( (trim(fecha) == "") || (trim(fecha).length != 10) )
+        return false;
+        var anio = parseInt(fecha.substr(0,4), 10);
+        var mes  = parseInt(fecha.substr(5,2), 10);
+        var dia  = parseInt(fecha.substr(8,2), 10);
+        // console.log(anio);
+        // console.log(mes);
+        // console.log(dia);
+
+        let padre = selector.closest('.form-row');
+        // console.log(padre);
+
+        let anioActual = (new Date).getFullYear();
+        let anioAnterior = anioActual - 15
+        // console.log(anioAnterior);0
+
+
+        // Año
+        if( isNaN(anio) || (anio < 1950) || anio > anioAnterior) {
+
+            // console.log('no se aceptan menor a 1950')
+            padre.before('<div class="alert alert-danger fade show mt-2" role="alert"><i class="icon fas fa-ban"></i>Ingrese un año valido. Entre 1950 y ' + anioAnterior + '</div>');
+            setTimeout(function () {
+                $('.alert').remove();
+            }, 3000)
+            
+            // $('.fecha').css('border', '1px solid red');
+            selector.focus();
+            // return false;
+        } else {
+            $('.alert').remove();
+        }
+        // Mes
+        if( isNaN(mes) || (mes < 1) || (mes > 12) )
+            return false;
+        // Día
+        if( isNaN(dia) || (dia < 1) || (dia > 31) )
+            return false;
+        else
+    {
+        if( (dia == 31) && ((mes == 4 ) || (mes == 6) || (mes == 9) || (mes == 11)) )
+            return false;
+        var diaMax = 31;
+        if( (anio % 4 == 0) && (anio % 100 != 0) || (anio % 400 == 0) )
+            diaMax = 29;
+        else
+            diaMax = 28;
+        if( dia > diaMax )
+            return false;
+    }
+        return true;
+}
+// Elimina espacios al principio y fin de la fecha
+function trim(fecha){
+    fecha += "";
+    fecha = fecha.replace(/^\s+/, '');
+    return fecha.replace(/\s+$/, '');
+}
+
+
 /*=============================================
     EJECUCION DE VALIDACIONES
 =============================================*/
