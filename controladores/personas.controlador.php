@@ -31,7 +31,7 @@ class ControladorPersonas{
 
         if(isset($_POST["nuevoNombre"])){
 
-            if(preg_match('/^[a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevoNombre"]) && 
+            if(preg_match('/^[A-ZñÑÁÉÍÓÚ ]+$/', $_POST["nuevoNombre"]) && 
                preg_match('/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.([a-zA-Z]{2,4})+$/', $_POST["nuevoEmail"])){
 
                 $tabla = "tbl_personas";
@@ -143,6 +143,9 @@ class ControladorPersonas{
 
                     $respuestaPersona = ModeloPersonas::mdlCrearPersona($tabla, $datos);
                     
+                    // var_dump($respuestaPersona);
+                    // return;
+
                     if($respuestaPersona == true){
                         
                         $totalId = array();
@@ -173,7 +176,9 @@ class ControladorPersonas{
                                         "email" => $_POST["nuevoEmail"]);
 
                             $crearUsuario = ControladorUsuarios::ctrCrearUsuario($datos);
-
+                            
+                            // var_dump($crearUsuario);
+                            // return;
 
                             if($crearUsuario == true){
                                 echo '<script>
@@ -187,21 +192,40 @@ class ControladorPersonas{
                                             }
                                         });                                      
                                     </script>';
+
                             } else {
-                                echo '<script>
-                                        Swal.fire({
-                                            title: "Error al guardar.",
-                                            icon: "error",
-                                            heightAuto: false
-                                        }).then((result)=>{
-                                            if(result.value){
-                                                window.location = "'.$pantalla.'";
-                                            }
-                                        });                                      
-                                    </script>';
+
+                                $tabla = 'tbl_personas';
+                                $borrarPersona = ModeloPersonas::mdlBorrarPersona($tabla, $idPersona);
+
+                                if($borrarPersona == true) {
+
+                                    echo '<script>
+                                            Swal.fire({
+                                                title: "Llenar los campos correctamente e intente de nuevo!",
+                                                icon: "error",
+                                                heightAuto: false
+                                            }).then((result)=>{
+                                                if(result.value){
+                                                    window.location = "'.$pantalla.'";
+                                                }
+                                            });                                      
+                                        </script>';
+
+                                } 
                             }
 
+                    } else {
+                        echo '<script>
+                                Swal.fire({
+                                    title: "Llene los campos correctamente.",
+                                    icon: "error",									
+                                    heightAuto: false,
+                                    showConfirmButton: true,
+                                });					
+                            </script>';
                     }
+
 
                 } else {
                     // echo "<pre>";

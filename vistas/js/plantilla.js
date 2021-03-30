@@ -301,6 +301,8 @@ function permitirUnEspacio(event) {
 //*===========================================
 function validarEmail(selector, alerta) {
 	selector.blur(function() {
+        $('.alert').remove();
+
 		var emailIngresado = selector.val();
 
 		var datos = new FormData();
