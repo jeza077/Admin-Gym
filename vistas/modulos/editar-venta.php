@@ -122,7 +122,7 @@
                     $respuesta = ControladorProductos::ctrMostrarProductos($item, $valor, $all);
                     // var_dump($respuesta);
 
-                    $stockAntiguo = $respuesta["stock"] + $value["cantidad"];
+                    $stockAntiguo = ($respuesta["stock"]) + $value["cantidad"];
                     
                     echo '<div class="row" style="padding:5px 6px">
                             <div class="col-md-6">
@@ -217,9 +217,9 @@
                   <tr>
                     <th scope="col">#</th>
                     <th scope="col">Imagen</th>
-                    <!-- <th scope="col">Código</th> -->
                     <th scope="col">Descripción</th>
                     <th scope="col">Stock</th>
+                    <th scope="col">Precio</th>
                     <th scope="col">Acciones</th> 
                   </tr>
                 </thead>
