@@ -4,6 +4,92 @@ require_once "conexion.php";
 
 class ModeloUsuarios{
 
+	static public function mdlMostrarUser($tabla1,$usuario){
+
+		$stmt = Conexion::conectar()->prepare("SELECT id_usuario FROM $tabla1 where usuario='$usuario'");
+		$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+		$stmt -> execute();
+
+		return $stmt -> fetch();
+
+		$stmt -> close();
+		$stmt = null;
+	
+	} 
+
+
+	/*=============================================
+		INGRESAR HISTORIAL PASS
+	=============================================*/
+	 
+	static public function mdlHistorialPassword($tabla,$id_usuario, $password){
+
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(id_usuario, pass) 
+			VALUES ('$id_usuario','$password')");
+
+		// return $stmt->execute();
+		if($stmt->execute()){
+
+			return true;	
+
+		}else{
+
+			return false;
+		
+		}
+
+		$stmt->close();
+		
+		$stmt = null;
+
+	}
+
+
+	//MOSTRAR LAS PASSWORD DE HISTORIAL DE PASSWORD
+	static public function mdlMostrarHistorialPassword($tabla,$item,$id_usuario){
+
+		$stmt = Conexion::conectar()->prepare("SELECT $item FROM $tabla where id_usuario=$id_usuario");
+		$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+		$stmt -> execute();
+
+		return $stmt -> fetchAll();
+
+		$stmt -> close();
+		$stmt = null;
+	
+	} 
+
+	//MOSTRAR LAS PFECHAS DE LOS PASSWORD
+	static public function mdlFechasHistorialPassword($tabla,$id_usuario){
+
+		$stmt = Conexion::conectar()->prepare("SELECT id_pass,fecha_creacion FROM tbl_historial_pass where id_usuario=$id_usuario");
+		$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+		$stmt -> execute();
+
+		return $stmt -> fetchAll();
+
+		$stmt -> close();
+		$stmt = null;
+	
+	} 
+
+	//ELIMINAR ELPASSWORD CUANDO SE EXCEDE EL NUMERO MAXIMO DE REGISTROS '10'
+	static public function mdlEliminarHistorialPassword($tabla,$item,$fecha_antigua){
+
+	
+
+		$stmt = Conexion::conectar()->prepare("DELETE  FROM $tabla where $item='$fecha_antigua'");
+		$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+		$stmt -> execute();
+
+		return $stmt -> fetch();
+
+		$stmt -> close();
+		$stmt = null;
+	
+	} 
+
+
 	static public function mdlMostrarSoloUsuarios($tabla1, $tabla2, $item, $valor){
 
 		if($item != null){

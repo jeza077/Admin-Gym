@@ -1635,7 +1635,53 @@ class ControladorUsuarios{
 			// echo '</pre>';
 			// return;
 
-			if($respuestaContraseña['password'] == $encriptar){
+			//AQUI INICIA LA PARTE DE HISTORISLDE PASSWORD--------------------------------------------------
+			$tabla='tbl_historial_pass';
+			$item= 'pass';
+			$valor=$_POST['editarPassword'];
+			$id_usuario=$respuestaContraseña['id_usuario'];
+
+			$respuestamostrar = ModeloUsuarios::mdlMostrarHistorialPassword($tabla,$item,$id_usuario);
+
+			$mostrarpass1= $respuestamostrar[0]['pass'];
+			$mostrarpass2= $respuestamostrar[1]['pass'];
+			$mostrarpass3= $respuestamostrar[2]['pass'];
+			$mostrarpass4= $respuestamostrar[3]['pass'];
+			$mostrarpass5= $respuestamostrar[4]['pass'];
+
+			//echo "</br>";
+			
+			//-------------------------------MOSTRAR LAS FECHAS DE LOS PASSWORD
+			$tabla='tbl_historial_pass';
+			$item= 'fecha_creacion';
+			$id_usuario=$respuestaContraseña['id_usuario'];
+
+			$respuestafechas = ModeloUsuarios::mdlFechasHistorialPassword($tabla,$id_usuario);        
+			$fecha1= $respuestafechas[0]['fecha_creacion'];
+			$fecha2= $respuestafechas[1]['fecha_creacion'];
+			$fecha3= $respuestafechas[2]['fecha_creacion'];
+			$fecha4= $respuestafechas[3]['fecha_creacion'];
+			$fecha5= $respuestafechas[4]['fecha_creacion'];
+			
+			$longitud = count($respuestamostrar); // Devuelve 2, pero nosotros queremos 6
+			$longitudRecursiva = count($respuestamostrar, COUNT_RECURSIVE); // Devuelve 6
+			//echo 'elnumero de elementos del arreglo es:--> '.$longitud;
+			//echo "<br>";
+
+			$encriptar_pass_ingresado = crypt($_POST['editarPassword'], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');			 
+
+			if ($encriptar_pass_ingresado==$mostrarpass1 || $encriptar_pass_ingresado==$mostrarpass2 || $encriptar_pass_ingresado==$mostrarpass3 || $encriptar_pass_ingresado==$mostrarpass4 || $encriptar_pass_ingresado==$mostrarpass5) {
+				echo '<script>			
+				Swal.fire({
+					title: "Este password ha sido utilizado recientemente",
+					icon: "error",
+					showConfirmButton: true,
+					timer: 3000,
+					});
+				</script>';
+				//---------------------------------------------------------------------------------------------
+
+			}else if($respuestaContraseña['password'] == $encriptar){
 
 				if(preg_match('/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%*-,_+?¡¿=&.])\S{8,16}$/', $_POST['editarPassword'])){
 					
@@ -1704,7 +1750,53 @@ class ControladorUsuarios{
 
 						// var_dump($respuesta);
 						// return;
-						if($respuesta == true){
+						if($respuesta == true ){
+
+							//HISTORIAL PARA EL PASSWORD ELIMINACION E INSERCION//------------------
+
+							//ELIMINAR EL PASSWORD MAS ANTIGUO ANTES DE INGRESAR UNO NUEVO
+
+							if($longitudRecursiva>5){
+
+								if ($fecha1<$fecha2 and $fecha1<$fecha3 and $fecha1<$fecha4 
+				                	and $fecha1<$fecha5) {
+
+				                	$passwordmenor=$fecha1;
+
+				                }else if ($fecha2<$fecha1 and $fech2<$fecha3 and $fecha2<$fecha4 
+				                	and $fecha2<$fecha5) {
+				                	
+				                	$passwordmenor=$fecha2;
+
+				                }else if ($fecha3<$fecha1 and $fech3<$fecha2 and $fecha3<$fecha4 
+				                	and $fecha3<$fecha5) {
+				                	
+				                	$passwordmenor=$fecha3;
+
+				                }else if ($fecha4<$fecha1 and $fech4<$fecha2 and $fecha4<$fecha3 
+				                	and $fecha4<$fecha5) {
+				                	
+				                	$passwordmenor=$fecha4;
+				                }else{
+				                	$passwordmenor=$fecha5;
+				            	}
+
+								$tabla='tbl_historial_pass';
+								$item= 'fecha_creacion';
+								$fecha_antigua=$passwordmenor;
+								$id_usuario=$respuestaContraseña['id_usuario'];
+								
+									
+								$respuestamostrar = ModeloUsuarios::mdlEliminarHistorialPassword($tabla,$item,$fecha_antigua);
+							}
+
+							//INSERTAR UN PASSWORD NUEVO
+				            $tabla="tbl_historial_pass";
+							$id_usuario=$respuestaContraseña['id_usuario'];
+
+							$password = crypt($_POST['editarPassword'], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
+
+							$respuestapass = ModeloUsuarios::mdlHistorialPassword($tabla,$id_usuario, $password);
 
 							echo '<script>
                                     Swal.fire({
