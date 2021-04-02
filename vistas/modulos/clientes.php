@@ -836,7 +836,7 @@
 
             <div class="form-group mt-4 float-right">
               <button type="" class="btn btn-primary btnConfirmarPago">Guardar</button>
-              <button type="" class="btn btn-primary btnNuevoClienteGym">Guardar</button>
+              <button type="" class="btn btn-primary btnNuevoClienteGymRegistrado">Guardar</button>
               <button type="" class="btn btn-primary btnNuevoClienteVentas">Guardar</button>
               <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
             </div>
