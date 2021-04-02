@@ -96,6 +96,22 @@ class ControladorPersonas{
 
                             if($crearUsuario == true){
 
+                                $tabla1 = "tbl_personas";
+                                $tabla2 = "tbl_usuarios";
+                                
+                                $item = "usuario";
+                                $valor = $datos["usuario"];
+
+                                $respuesta = ModeloUsuarios::mdlMostrarUsuarios($tabla1, $tabla2, $item, $valor);
+                                
+                                $descripcionEvento = "Se envio correo con usuario y contraseña a ".$datos['usuario']."";
+                                $accion = "Auto-registro";
+                                $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($respuesta['id_usuario'], 30, $accion, $descripcionEvento);
+
+                                $descripcionEvento = "".$datos['nombre']." se auto-registro";
+                                $accion = "Auto-registro";
+                                $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($respuesta['id_usuario'], 30, $accion, $descripcionEvento);						
+                                
                                 echo '<script>
                                         Swal.fire({
                                             title: "Tus datos han sido guardados correctamente!",

@@ -184,6 +184,10 @@ class ControladorUsuarios{
 								$_SESSION["apellidos"] = $respuesta["apellidos"];
 								$_SESSION["primerIngreso"] = $respuesta["primera_vez"];
 			
+								$descripcionEvento = "".$_SESSION['usuario']." ingreso al sistema por primera vez";
+								$accion = "Ingreso";
+								$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION['id_usuario'], 31, $accion, $descripcionEvento);						
+
 								echo '<script>
 								Swal.fire({
 									title: "Bienvenid@ '.$_SESSION['nombre'] . " " . $_SESSION["apellidos"] . '",
@@ -554,7 +558,7 @@ class ControladorUsuarios{
 							$respuestaCorreo = ControladorUsuarios::ctrGenerarCorreo($email, $nombreUsuario, $asunto, $template, $require);
 
 							if($respuestaCorreo = true){
-							
+								
 								$descripcionEvento = "Nuevo Usuario";
 								$accion = "Nuevo";
 								$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 2,$accion, $descripcionEvento);
