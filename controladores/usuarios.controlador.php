@@ -162,7 +162,7 @@ class ControladorUsuarios{
 						if($respuesta["usuario"] == $_POST["ingUsuario"] && $respuesta["password"] == $encriptar){
 							
 								#AUTO-REGISTRO
-							if($respuesta["estado"] == 0 && $respuesta["primera_vez"] == 1 && $respuesta["rol"] == "Default" || $respuesta["estado"] == 1 && $respuesta["primera_vez"] == 1 && $respuesta["rol"] == "Default"){
+							if($respuesta["estado"] == 0 && $respuesta["primera_vez"] == 1 && $respuesta["rol"] == "DEFAULT" || $respuesta["estado"] == 1 && $respuesta["primera_vez"] == 1 && $respuesta["rol"] == "DEFAULT"){
 
 								echo '<script>			
 										Swal.fire({

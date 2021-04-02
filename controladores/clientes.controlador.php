@@ -180,6 +180,7 @@ class ControladorClientes{
 				"tipo_cliente" => $_POST["tipoClienteRegistrado"],
 				"id_matricula" => $_POST["nuevaMatriculaRegistrado"],
 				"id_descuento" => $id_descuento);
+
 			} else {
 				$datos = array("id_persona" => $_POST["nuevoIdPersona"],
 				"tipo_cliente" => $_POST["tipoClienteRegistrado"]);
@@ -188,7 +189,8 @@ class ControladorClientes{
 			$tabla = "tbl_clientes";
 
             $respuestaCrearCliente = ModeloClientes::mdlCrearCliente($tabla, $datos);
-			// return $respuestaCrearCliente;
+			// var_dump($respuestaCrearCliente);
+			// return;
 
             if($respuestaCrearCliente == true){
 
@@ -313,18 +315,28 @@ class ControladorClientes{
 					}
 
 				} else {
+					$tabla1 = "tbl_personas";
+				
+					$item1 = "tipo_persona";
+					$valor1 = "ambos";
+		
+					$item2 = "id_personas";
+					$valor2 = $_POST["nuevoIdPersona"];
+			
+					$respuesta = ModeloClientes::mdlActualizarCliente($tabla1, $item1, $valor1, $item2, $valor2);
+
 					echo '<script>
-						Swal.fire({
-							title: "Opps, algo salio mal, intenta de nuevo!",
-							icon: "error",
-							heightAuto: false,
-							allowOutsideClick: false
-						}).then((result)=>{
-							if(result.value){
-								window.location = "clientes";
-							}
-						});                       
-					</script>';
+							Swal.fire({
+								title: "Cliente creado correctamente!",
+								icon: "success",
+								heightAuto: false,
+								allowOutsideClick: false
+							}).then((result)=>{
+								if(result.value){
+									window.location = "clientes";
+								}
+							});                       
+						</script>';
 				}
 
 

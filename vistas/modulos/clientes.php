@@ -703,9 +703,12 @@
 
                           $personas = ControladorPersonas::ctrMostrarPersonas($item, $valor, $all);
 
+                          
                           foreach ($personas as $key => $value) {
-                            echo '<option value="'.$value["id_personas"].'">'.$value["nombre"]. ' ' .$value["apellidos"].'</option>';
-                            
+                              if($value['nombre'] !== 'SUPER' && $value['apellidos'] !== 'ADMIN'){
+                                echo '<option value="'.$value["id_personas"].'">'.$value["nombre"]. ' ' .$value["apellidos"].'</option>';
+                              } 
+
                           }
                         ?>
                     </select>
