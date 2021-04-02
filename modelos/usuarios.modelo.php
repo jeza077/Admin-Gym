@@ -6,7 +6,7 @@ class ModeloUsuarios{
 
 	static public function mdlMostrarUser($tabla1,$usuario){
 
-		$stmt = Conexion::conectar()->prepare("SELECT id_usuario FROM $tabla1 where usuario='$usuario'");
+		$stmt = Conexion::conectar()->prepare("SELECT id_usuario FROM $tabla1 where id_persona='$usuario'");
 		$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
 		$stmt -> execute();
 

@@ -711,6 +711,23 @@ class ControladorUsuarios{
 				// return var_dump($respuestaUsuario);
 
 				if($respuestaUsuario == true){
+					
+
+					//PARA ESTA PARTE SOLO SE NECESITA EL INSERT A LA TABLA tbl_historial_pass
+					$tabla1 = "tbl_usuarios";
+					$usuario=$_POST["nuevoIdPersona"];
+
+					$respuestaContraseñas = ModeloUsuarios::mdlMostrarUser($tabla1,$usuario);
+
+					//INSERTAR UN PASSWORD NUEVO
+					$tabla="tbl_historial_pass";
+					$id_usuario=$respuestaContraseñas['id_usuario'];
+					//$id_usuario=$_POST['nuevoUsuario'];
+
+					$password = crypt($_POST['editarPassword'], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
+
+					$respuestapass = ModeloUsuarios::mdlHistorialPassword($tabla,$id_usuario, $password);
+					//////////////////////////////////////////////////////////////////////////////////
 			
 					$tabla = "tbl_personas";
 
