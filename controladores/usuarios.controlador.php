@@ -522,6 +522,22 @@ class ControladorUsuarios{
 
 						if($respuestaEmpleado == true){
 
+							//INSERTAR EL NUEVO PASSWORD EN LA TABLA tbl_historial_pass PERO CON NOMBRE DE USUARIO NO ID
+							$tabla1 = "tbl_usuarios";
+							$usuario=$datos["id_persona"];
+
+							$respuestaContraseñas = ModeloUsuarios::mdlMostrarUser($tabla1,$usuario);
+
+							//INSERTAR UN PASSWORD NUEVO
+				            $tabla="tbl_historial_pass";
+							$id_usuario=$respuestaContraseñas['id_usuario'];
+							//$id_usuario=$datos['usuario'];
+
+							$password = crypt($datos["password"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
+
+							$respuestapass = ModeloUsuarios::mdlHistorialPassword($tabla,$id_usuario, $password);
+							//////////////////////////////////////////////////////////////////////////////////
+
 							$email = $emailUsuario;
 							$nombreUsuario = $datos["usuario"];
 							$contraseña =  $contraSinEncriptar;
