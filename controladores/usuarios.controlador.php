@@ -1787,7 +1787,7 @@ class ControladorUsuarios{
 
 							//ELIMINAR EL PASSWORD MAS ANTIGUO ANTES DE INGRESAR UNO NUEVO
 
-							if($longitudRecursiva>5){
+							if($longitudRecursiva>10){
 
 								if ($fecha1<$fecha2 and $fecha1<$fecha3 and $fecha1<$fecha4 
 				                	and $fecha1<$fecha5 and $fecha1<$fecha6 and $fecha1<$fecha7 
@@ -1842,7 +1842,7 @@ class ControladorUsuarios{
 									and $fecha9<$fecha7 and $fecha9<$fecha8 and $fecha9<$fecha10){
 
 				                	$passwordmenor=$fecha9;
-								else{
+								}else{
 									$passwordmenor=$fecha10;
 								}
 
