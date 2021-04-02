@@ -1111,6 +1111,10 @@ class ControladorUsuarios{
 						$respuestaContraseña = ModeloUsuarios::mdlActualizarUsuario($tabla2, $item1, $valor1, $item2, $valor2, $item3, $valor3, $item4, $valor4);
 
 						if($respuestaContraseña == true) {
+
+							$descripcionEvento = "".$usuario." cambio su contraseña por primera vez";
+							$accion = "Primer ingreso";
+							$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($id, 31, $accion, $descripcionEvento);						
 							$tabla = "tbl_preguntas_usuarios";
 							
 							$datos = array("idUsuario" => $id,
@@ -1121,6 +1125,10 @@ class ControladorUsuarios{
 							$respuestaPreguntas = ModeloUsuarios::mdlIngresarPreguntaUsuario($tabla, $datos);
 				
 							if($respuestaPreguntas == true){
+
+								$descripcionEvento = "".$usuario." agrego sus preguntas de seguridad por primera vez";
+								$accion = "Primer ingreso";
+								$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($id, 31, $accion, $descripcionEvento);	
 
 								$tabla = "tbl_usuarios";
 
@@ -1139,6 +1147,7 @@ class ControladorUsuarios{
 								$respuestaEstadoPrimeraVez = ModeloUsuarios::mdlActualizarUsuario($tabla, $item1, $valor1, $item2, $valor2, $item3, $valor3, $item4, $valor4);
 
 								if($respuestaEstadoPrimeraVez == true) {
+
 									echo '<script>
 										Swal.fire({
 											title: "Contraseña y preguntas guardadas correctamente.",
