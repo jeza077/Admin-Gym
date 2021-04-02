@@ -465,11 +465,11 @@ class ModeloUsuarios{
 
 		if($stmt->execute()){
 
-			return "ok";
+			return true;
 
 		}else{
 
-			return "error";
+			return $stmt->errorInfo();
 		
 		}
 

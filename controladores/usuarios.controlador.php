@@ -161,7 +161,7 @@ class ControladorUsuarios{
 
 						if($respuesta["usuario"] == $_POST["ingUsuario"] && $respuesta["password"] == $encriptar){
 							
-							
+								#AUTO-REGISTRO
 							if($respuesta["estado"] == 0 && $respuesta["primera_vez"] == 1 && $respuesta["rol"] == "Default" || $respuesta["estado"] == 1 && $respuesta["primera_vez"] == 1 && $respuesta["rol"] == "Default"){
 
 								echo '<script>			
@@ -173,6 +173,7 @@ class ControladorUsuarios{
 										});
 									</script>';
 									
+								#PRIMERA VEZ
 							} else if($respuesta["estado"] == 0 && $respuesta["primera_vez"] == 1 || $respuesta["estado"] == 1 && $respuesta["primera_vez"] == 1) {
 
 								$_SESSION["iniciarSesion"] = "ok";
@@ -197,7 +198,7 @@ class ControladorUsuarios{
 								</script>';
 
 														
-
+								#SI ESTA ACTIVO Y NO ES PRIMER INGRESO
 							} else if($respuesta["estado"] == 1 && $respuesta["primera_vez"] == 0 && $fechaHoy < $fechaVencimiento || $respuesta["estado"] == 1 && $respuesta["primera_vez"] == 0 && $fechaHoy > $fechaVencimiento && $_POST['ingUsuario'] == 'SUPERADMIN') {
 
 								$_SESSION["iniciarSesion"] = "ok";
@@ -262,6 +263,7 @@ class ControladorUsuarios{
 
 								}
 
+								#SI ESTA VENCIDO SU USUARIO Y NO ES SUPERADMIN
 							} else if($respuesta["estado"] == 1 && $fechaHoy > $fechaVencimiento && $_POST['ingUsuario'] != 'SUPERADMIN'){
 								
 								echo '<script>			
@@ -274,6 +276,7 @@ class ControladorUsuarios{
 									</script>';
 								session_destroy();
 
+								#USUARIO DESACTIVADO
 							} else {
 
 								echo '<script>			
@@ -306,7 +309,7 @@ class ControladorUsuarios{
 								// echo $intentosRestantes;
 								// session_destroy();
 
-								if($_SESSION['contadorLogin'] > $intentos) {
+								if($_SESSION['contadorLogin'] >= $intentos) {
 									$tabla1 = "tbl_personas";
 									$tabla2 = "tbl_usuarios";
 									
@@ -314,6 +317,11 @@ class ControladorUsuarios{
 									$valor = $_POST["ingUsuario"];
 
 									$respuesta = ModeloUsuarios::mdlMostrarUsuarios($tabla1, $tabla2, $item, $valor);
+
+									$idUser = $respuesta['id_usuario'];
+									$user = $respuesta['usuario'];
+									// var_dump($respuesta);
+									// return;
 
 									if($respuesta["usuario"] == $_POST["ingUsuario"]){
 										$tabla = "tbl_usuarios";
@@ -333,6 +341,13 @@ class ControladorUsuarios{
 
 										if($respuestaEstado == true){
 											
+											$descripcionEvento = "".$user." intento ingresar al sistema y fue bloqueado por intentos invalidos";
+											$accion = "Ingreso";
+											$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($idUser, 30, $accion, $descripcionEvento);
+
+											// var_dump($bitacoraConsulta);
+											// return;
+
 											echo '<script>			
 													Swal.fire({
 														title: "¡Lo sentimos! Su usuario ha sido bloqueado, comuniquese con el Administrador.",

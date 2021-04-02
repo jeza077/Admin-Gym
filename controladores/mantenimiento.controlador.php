@@ -4,20 +4,19 @@ class ControladorMantenimientos {
     /*===========================================================
     BITACORA
     =============================================================*/
-    static public function ctrBitacoraInsertar($usuario, $objeto,$accion,$descripcion){
+    static public function ctrBitacoraInsertar($usuario, $objeto, $accion, $descripcion){
 
-     $tabla = "tbl_bitacora";
-     date_default_timezone_set('America/Tegucigalpa');
+      $tabla = "tbl_bitacora";
+      date_default_timezone_set('America/Tegucigalpa');
 
       $fecha = date('Y-m-d');
-     $hora = date('H:i:s'); 
-
+      $hora = date('H:i:s'); 
    
-     $fechaActual = $fecha.' '.$hora;
-   
+      $fechaActual = $fecha.' '.$hora;
 
+      $respuesta = ModeloUsuarios::mdlInsertarBitacora($tabla, $fechaActual, $usuario, $objeto, $accion, $descripcion);
 
-     $respuesta = ModeloUsuarios::mdlInsertarBitacora($tabla, $fechaActual, $usuario, $objeto, $accion, $descripcion);
+      return $respuesta;
     }
 
   	/*=============================================
