@@ -239,13 +239,9 @@ class ControladorUsuarios{
 
 								if($ultimoLogin == true){
 
-									// $descripcionEvento = " Ingreso a Login";
-									// $accion = "Ingreso";
-						 
-									// $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
-
-									// return var_dump($bitacoraConsulta);
-									
+									$descripcionEvento = "".$_SESSION['usuario']." ingreso al sistema";
+									$accion = "Ingreso";
+									$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION['id_usuario'], 1, $accion, $descripcionEvento);						
 
 									echo '<script>
 										Swal.fire({

@@ -253,9 +253,9 @@
  <!--Bitacora cod.-->
 
     <?php
-      $descripcionEvento = " Ingreso a Login";
-      $accion = "Ingreso";
-      $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 1,$accion, $descripcionEvento);
+      // $descripcionEvento = " Ingreso a Login";
+      // $accion = "Ingreso";
+      // $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 1,$accion, $descripcionEvento);
     ?>
 <!-- /.login-box -->
 
