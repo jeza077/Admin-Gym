@@ -138,7 +138,7 @@
                           }
                         echo '</td>'; 
                         
-                        echo '<td>$ '.number_format($value["total"],2).'</td>
+                        echo '<td>L. '.number_format($value["total"],2).'</td>
 
                         <td>'.$value["fecha"].'</td>
 

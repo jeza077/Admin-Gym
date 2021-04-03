@@ -145,6 +145,7 @@
                 BOTÓN PARA AGREGAR PRODUCTO
                 ======================================-->
               <div class="card-footer">
+                <a href="administrar-ventas" class="btn btn-outline-danger ml-2 float-right">Salir</a>
                 <button type="submit" class="btn btn-primary float-right btnAgregarProducto">Guardar venta</button>
               </div>  
 
