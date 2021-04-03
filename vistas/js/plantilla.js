@@ -837,7 +837,6 @@ $(document).on('blur', '.ClaseBuscar', function () {
 //** ------------------------------------*/
 //         IMPRIMIR PDF BITACORA
 // --------------------------------------*/ 
-
 exportarPdf('.btnExportarBitacora', 'bitacora');
 
 function exportarPdf(btnExportar, rutaArchivoPdf) {
@@ -929,7 +928,9 @@ function exportarPdf(btnExportar, rutaArchivoPdf) {
 }
 
 
-//** FUNCION SELECT PARA PROVEEDORES
+//** ------------------------------------*/
+//    FUNCION SELECT PARA PROVEEDORES
+// --------------------------------------*/ 
 function selectDinamico() {
     
     var tabla = 'tbl_proveeedores';
@@ -961,3 +962,37 @@ function selectDinamico() {
         }    
     });
 }
+
+
+//** ------------------------------------*/
+//   FUNCION PARA CERRAR MODAL
+// --------------------------------------*/ 
+function cerrarModal() {
+    
+    $(document).on('click', '.modalClose', function (e) {
+        e.preventDefault();
+
+        Swal.fire({
+            icon: "info",
+            title: "¿Está seguro de salir del modal? Perdera la información que haya ingresado.",
+            text: "Si no esta seguro puede cancelar la acción.",
+            // heightAuto: false,
+            allowOutsideClick: false,
+            showCancelButton: true,
+            showConfirmButton: true,
+            showCancelButton: true,
+            showConfirmButton: true,
+            confirmButtonText: "Si, cerrar",
+            cancelButtonText: "Cancelar",
+            cancelButtonColor: "#dc3545"
+        }).then((result)=>{
+            if(result.value){
+                $('.cerrar').remove('attr', 'data-dismiss');
+                $('.cerrar').attr('data-dismiss', 'modal').click();
+            }
+        });     
+    });
+
+}
+
+cerrarModal();
