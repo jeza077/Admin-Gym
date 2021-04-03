@@ -73,8 +73,9 @@ class ControladorPersonas{
                             $tabla = "tbl_roles";
                             $item = "rol";
                             $valor = "Default";
+                            $all = null;
 
-                            $roles  = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
+                            $roles  = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all);
                             // var_dump($roles);
 
                             $idRol = $roles["id_rol"];

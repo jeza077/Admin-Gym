@@ -106,10 +106,11 @@
                         <option selected="selected">Seleccionar...</option>
                         <?php 
                             $tabla = "tbl_documento";
-                            $item = null;
-                            $valor = null;
+                            $item = 'estado';
+                            $valor = 1;
+                            $all = true;
 
-                            $preguntas = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
+                            $preguntas = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all);
 
                             foreach ($preguntas as $key => $value) { ?>
                                 <option value="<?php echo $value['id_documento']?>"><?php echo $value['tipo_documento']?></option>        
@@ -186,10 +187,11 @@
                   <!-- <option value="2">Default</option> -->
                     <?php 
                         $tabla = "tbl_roles";
-                        $item = null;
-                        $valor = null;
+                        $item = 'estado';
+                        $valor = 1;
+                        $all = true;
 
-                        $roles = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
+                        $roles = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all);
 
                         foreach ($roles as $key => $value) {
                           if($value["rol"] == 'Default'){

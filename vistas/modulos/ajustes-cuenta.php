@@ -19,12 +19,13 @@ require_once "../../modelos/usuarios.modelo.php";
                             <option value="" id="editarTipoDocumento"></option>
                             <?php 
                                 $tabla = "tbl_documento";
-                                $item = null;
-                                $valor = null;
+                                $item = 'estado';
+                                $valor = 1;
+                                $all = true;
+  
+                                $documento = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all);
 
-                                $preguntas = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
-
-                                foreach ($preguntas as $key => $value) { ?>
+                                foreach ($documento as $key => $value) { ?>
                                     <option value="<?php echo $value['id_documento']?>"><?php echo $value['tipo_documento']?></option>        
                                 <?php 
                                 }

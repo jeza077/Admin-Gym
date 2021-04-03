@@ -391,7 +391,9 @@ class ControladorInventario{
                     $tabla = "tbl_inventario";
                     $item = "id_inventario";
                     $valor = $_POST["nuevoProducto"];
-                    $producto = ControladorUsuarios::ctrMostrar($tabla,$item,$valor);
+                    $all = null;
+
+                    $producto = ControladorUsuarios::ctrMostrar($tabla,$item,$valor, $all);
                     $stockActual = $producto["stock"];
                     $cantidadFinal = $stockActual + $_POST["nuevoCantidad"];
 

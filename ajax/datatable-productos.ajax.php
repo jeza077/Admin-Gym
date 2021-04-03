@@ -42,7 +42,7 @@ class TablaProductos{
 			      "'.$productos[$i]["codigo"].'",
 			      "'.$foto.'",
                   "'.$productos[$i]["nombre_producto"].'",
-                  "'.$productos[$i]["precio_venta"].'",
+                  "L. '.number_format($productos[$i]["precio_venta"], 2).'",
                   "'.$productos[$i]["producto_minimo"].'",
                   "'.$productos[$i]["producto_maximo"].'",
 			      "'.$boton.'"

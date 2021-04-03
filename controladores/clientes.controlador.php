@@ -58,8 +58,9 @@ class ControladorClientes{
 					$tabla = "tbl_inscripcion";
 					$item = "id_inscripcion";
 					$valor = $idInscripcion;
+					$all = null;
 
-					$inscripcion = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
+					$inscripcion = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all);
 
 					$cantidadDias = $inscripcion['cantidad_dias'];
 
@@ -221,8 +222,9 @@ class ControladorClientes{
 					$tabla = "tbl_inscripcion";
 					$item = "id_inscripcion";
 					$valor = $idInscripcion;
+					$all = null;
 
-					$inscripcion = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
+					$inscripcion = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all);
 
 					$cantidadDias = $inscripcion['cantidad_dias'];
 
@@ -384,8 +386,9 @@ class ControladorClientes{
 			$tabla = "tbl_clientes";
 			$item = "id_persona";
 			$valor = $idDelCliente;
+			$all = null;
 
-			$clientesCompras = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
+			$clientesCompras = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all);
 			// echo "<pre>";
 			// var_dump($clientesCompras['compras']);
 			// echo "</pre>";
@@ -457,8 +460,9 @@ class ControladorClientes{
 				$tabla = "tbl_inscripcion";
 				$item = "id_inscripcion";
 				$valor = $idDeInscripcion;
+				$all = null;
 
-				$inscripcion = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
+				$inscripcion = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all);
 
 				$cantidadDias = $inscripcion['cantidad_dias'];
 
@@ -763,8 +767,9 @@ class ControladorClientes{
 			$tabla = "tbl_inscripcion";
 			$item = "id_inscripcion";
 			$valor = $idInscripcion;
+			$all = null;
 			
-			$inscripciones = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);  
+			$inscripciones = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all);  
 
 			// var_dump($inscripciones);
 			// return;
@@ -890,8 +895,9 @@ class ControladorClientes{
 			$tabla = "tbl_inscripcion";
 			$item = "id_inscripcion";
 			$valor = $idInscripcion;
-			
-			$inscripciones = ControladorUsuarios::ctrMostrar($tabla, $item, $valor); 
+			$all = null;
+
+			$inscripciones = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all); 
 
 			if($inscripciones){
 
@@ -900,8 +906,9 @@ class ControladorClientes{
 				$tabla = "tbl_cliente_inscripcion";
 				$item = "id_cliente";
 				$valor = $_POST['nuevoClienteInscripcion'];
+				$all = null;
 				
-				$clienteInscripcion = ControladorUsuarios::ctrMostrar($tabla, $item, $valor); 
+				$clienteInscripcion = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all); 
 
 				
 				$idClienteInscripcion = $clienteInscripcion['id_cliente_inscripcion'];
@@ -1072,8 +1079,9 @@ class ControladorClientes{
 			$tabla = "tbl_inscripcion";
 			$item = "id_inscripcion";
 			$valor = $idInscripcion;
+			$all = null;
 			
-			$inscripciones = ControladorUsuarios::ctrMostrar($tabla, $item, $valor); 
+			$inscripciones = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all); 
 
 			if($inscripciones){
 
@@ -1085,8 +1093,9 @@ class ControladorClientes{
 				$tabla = "tbl_cliente_inscripcion";
 				$item = "id_cliente_inscripcion";
 				$valor = $_POST['nuevoClienteSinInscripcion'];
+				$all = null;
 				
-				$clienteInscripcion = ControladorUsuarios::ctrMostrar($tabla, $item, $valor); 
+				$clienteInscripcion = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all); 
 
 				// var_dump($clienteInscripcion);
 				// return;

@@ -85,10 +85,11 @@
                 <option value="" selected="selected">Seleccionar...</option>
                     <?php 
                         $tabla = "tbl_preguntas";
-                        $item = null;
-                        $valor = null;
+                        $item = 'estado';
+                        $valor = 1;
+                        $all = true;
 
-                        $preguntas = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
+                        $preguntas = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all);
 
                         foreach ($preguntas as $key => $value) { ?>
                           <option value="<?php echo $value['id_preguntas']?>"><?php echo $value['pregunta']?></option>        
@@ -157,12 +158,13 @@
                 <option selected="selected">Seleccionar...</option>
                 <?php 
                     $tabla = "tbl_documento";
-                    $item = null;
-                    $valor = null;
+                    $item = 'estado';
+                    $valor = 1;
+                    $all = true;
 
-                    $preguntas = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
+                    $documento = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all);
 
-                    foreach ($preguntas as $key => $value) { ?>
+                    foreach ($documento as $key => $value) { ?>
                         <option value="<?php echo $value['id_documento']?>"><?php echo $value['tipo_documento']?></option>        
                     <?php 
                     }

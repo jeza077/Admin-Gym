@@ -37,10 +37,10 @@ class ControladorUsuarios{
 	MOSTRAR (DINAMICO)
 	=============================================*/
 
-	static public function ctrMostrar($tabla, $item, $valor) {
+	static public function ctrMostrar($tabla, $item, $valor, $all) {
 
 		$tabla1 = $tabla;
-		$respuesta = ModeloUsuarios::mdlMostrar($tabla1, $item, $valor);
+		$respuesta = ModeloUsuarios::mdlMostrar($tabla1, $item, $valor, $all);
 
 		return $respuesta;
 

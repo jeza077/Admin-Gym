@@ -88,11 +88,11 @@
                         <option value="" id="actualizarInscripcion"></option>
                         <?php 
                             $tabla = "tbl_inscripcion";
-                            $item = null;
-                            $valor = null;
-                            
+                            $item = 'estado';
+                            $valor = 1;
+                            $all = true;
 
-                            $inscripciones = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);           
+                            $inscripciones = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all);           
  
                             foreach ($inscripciones as $key => $value) { ?>
                               <option value="<?php echo $value['id_inscripcion']?>"><?php echo $value['tipo_inscripcion']?></option>        
@@ -350,11 +350,11 @@
                         <option selected="selected">Seleccionar...</option>
                         <?php 
                             $tabla = "tbl_inscripcion";
-                            $item = null;
-                            $valor = null;
-                            
+                            $item = 'estado';
+                            $valor = 1;
+                            $all = true;
 
-                            $inscripciones = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);           
+                            $inscripciones = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all);           
  
                             foreach ($inscripciones as $key => $value) { ?>
                               <option value="<?php echo $value['id_inscripcion']?>"><?php echo $value['tipo_inscripcion']?></option>        
@@ -458,11 +458,11 @@
                         <option selected="selected">Seleccionar...</option>
                         <?php 
                             $tabla = "tbl_inscripcion";
-                            $item = null;
-                            $valor = null;
-                            
+                            $item = 'estado';
+                            $valor = 1;
+                            $all = true;
 
-                            $inscripciones = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);           
+                            $inscripciones = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all);           
  
                             foreach ($inscripciones as $key => $value) { ?>
                               <option value="<?php echo $value['id_inscripcion']?>"><?php echo $value['tipo_inscripcion']?></option>        

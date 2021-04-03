@@ -53,8 +53,9 @@
                   $tabla = "tbl_proveedores";
                   $item = null;
                   $valor = null;
-                  
-                  $proveedores = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
+                  $all = null;
+
+                  $proveedores = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all);
                   // var_dump($proveedores);
 
                   foreach ($proveedores as $key => $value){

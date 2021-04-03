@@ -91,8 +91,9 @@ class AjaxMantenimiento{
         $tabla = "tbl_proveedores";
         $item = "id_proveedor";
         $valor = $this->idProveedor;
+        $all = null;
 
-        $respuesta = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
+        $respuesta = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all);
 
         echo json_encode($respuesta);
     

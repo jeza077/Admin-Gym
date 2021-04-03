@@ -37,10 +37,11 @@
                                         <option selected="selected">Seleccionar...</option>
                                         <?php 
                                             $tabla = "tbl_preguntas";
-                                            $item = null;
-                                            $valor = null;
-
-                                            $preguntas = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
+                                            $item = 'estado';
+                                            $valor = 1;
+                                            $all = true;
+              
+                                            $preguntas = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all);
 
                                             foreach ($preguntas as $key => $value) { ?>
                                                 <option value="<?php echo $value['id_preguntas']?>"><?php echo $value['pregunta']?></option>        

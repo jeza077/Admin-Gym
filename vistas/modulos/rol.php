@@ -154,8 +154,9 @@ MODAL AGREGAR ROL
                           $tabla = "tbl_objetos";
                           $item = null;
                           $valor = null;
+                          $all = null;
 
-                          $roles = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
+                          $roles = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all);
 
                           foreach ($roles as $key => $value) {
                             echo '<option value="'.$value["id_objeto"].'">'.$value["objeto"].'</option>';
@@ -298,8 +299,9 @@ MODAL EDITAR ROL
                                 $tabla = "tbl_objetos";
                                 $item = null;
                                 $valor = null;
-      
-                                $roles = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
+                                $all = null;
+
+                                $roles = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all);
       
                                 foreach ($roles as $key => $value) {
                                   echo '<option value="'.$value["id_objeto"].'">'.$value["objeto"].'</option>';

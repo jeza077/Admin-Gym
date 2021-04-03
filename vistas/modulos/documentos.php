@@ -33,7 +33,7 @@
         ?>
 
         <!--========================================================
-                    MATRICULA
+                    DOCUMENTOS
         ==========================================================-->  
         <table class="table table-bordered table-striped tablas text-center">
             
@@ -52,8 +52,9 @@
                   $tabla = "tbl_documento";
                   $item = null;
                   $valor = null;
+                  $all = null;
                   
-                  $documentos = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
+                  $documentos = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all);
                   // var_dump($documentos);
 
                   foreach ($documentos as $key => $value){

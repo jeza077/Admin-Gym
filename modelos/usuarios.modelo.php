@@ -105,9 +105,16 @@ class ModeloUsuarios{
 	MOSTRAR (DINAMICO)
 	=============================================*/
 
-	static public function mdlMostrar($tabla, $item, $valor){
+	static public function mdlMostrar($tabla, $item, $valor, $all){
 
-		if($item != null){
+		if($item != null && $all != null){
+
+			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item");
+			$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+			$stmt -> execute();
+			return $stmt -> fetchAll();
+
+		} else if($item != null && $all == null){
 
 			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item");
 			$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
