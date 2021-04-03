@@ -1639,14 +1639,33 @@ class ControladorUsuarios{
 		//echo 'elnumero de elementos del arreglo es:--> '.$longitud;
 		//echo "<br>";
 
+				 
+
+	 	
+
 		
 		if(isset($_POST['editarPassword'])){
 			
 			if(preg_match('/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%*-,_+?¡¿=&.])\S{8,16}$/', $_POST['editarPassword'])){
 				
 				$encriptar = crypt($_POST['editarPassword'], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
+				$encriptar_pass_ingresado = crypt($_POST['editarPassword'], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');	
 			
-				if($passwordAnterior === $encriptar){
+				if ($encriptar_pass_ingresado==$mostrarpass1 || $encriptar_pass_ingresado==$mostrarpass2 ||
+					$encriptar_pass_ingresado==$mostrarpass3 || $encriptar_pass_ingresado==$mostrarpass4 || 
+					$encriptar_pass_ingresado==$mostrarpass5 ||$encriptar_pass_ingresado==$mostrarpass6 || 
+					$encriptar_pass_ingresado==$mostrarpass7 || $encriptar_pass_ingresado==$mostrarpass8 || 
+					$encriptar_pass_ingresado==$mostrarpass9 || $encriptar_pass_ingresado==$mostrarpass10) {
+						echo '<script>			
+								Swal.fire({
+								title: "Este password ha sido utilizado recientemente",
+								icon: "error",
+								showConfirmButton: true,
+								timer: 3000,
+								});
+							</script>';
+
+				} else if($passwordAnterior === $encriptar){
 
 					echo '<script>
 							Swal.fire({
