@@ -4,6 +4,19 @@ require_once "conexion.php";
 
 class ModeloUsuarios{
 
+	static public function mdlEliminarPasswordRepetido($tabla,$item){
+
+		$stmt = Conexion::conectar()->prepare("DELETE  FROM $tabla where $item=0");
+		$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+		$stmt -> execute();
+
+		return $stmt -> fetch();
+
+		$stmt -> close();
+		$stmt = null;
+	
+	} 
+
 	static public function mdlMostrarUser($tabla1,$usuario){
 
 		$stmt = Conexion::conectar()->prepare("SELECT id_usuario FROM $tabla1 where id_persona='$usuario'");

@@ -1597,6 +1597,48 @@ class ControladorUsuarios{
 		$idUsuario = $respuesta['id_usuario'];
 		$usuario = $respuesta['usuario'];
 		$passwordAnterior = $respuesta['contraseña'];
+
+		//AQUI INICIA LA PARTE DE HISTORISLDE PASSWORD--------------------------------------------------
+		$tabla='tbl_historial_pass';
+		$item= 'pass';
+		$valor=$_POST['editarPassword'];
+		$id_usuario=$idUsuario;
+
+		$respuestamostrar = ModeloUsuarios::mdlMostrarHistorialPassword($tabla,$item,$id_usuario);
+
+		$mostrarpass1= $respuestamostrar[0]['pass'];
+		$mostrarpass2= $respuestamostrar[1]['pass'];
+		$mostrarpass3= $respuestamostrar[2]['pass'];
+		$mostrarpass4= $respuestamostrar[3]['pass'];
+		$mostrarpass5= $respuestamostrar[4]['pass'];
+		$mostrarpass6= $respuestamostrar[5]['pass'];
+		$mostrarpass7= $respuestamostrar[6]['pass'];
+		$mostrarpass8= $respuestamostrar[7]['pass'];
+		$mostrarpass9= $respuestamostrar[8]['pass'];
+		$mostrarpass10= $respuestamostrar[9]['pass'];
+
+		//-------------------------------MOSTRAR LAS FECHAS DE LOS PASSWORD
+		$tabla='tbl_historial_pass';
+		$item= 'fecha_creacion';
+		$id_usuario=$idUsuario;
+
+		$respuestafechas = ModeloUsuarios::mdlFechasHistorialPassword($tabla,$id_usuario);        
+		$fecha1= $respuestafechas[0]['fecha_creacion'];
+		$fecha2= $respuestafechas[1]['fecha_creacion'];
+		$fecha3= $respuestafechas[2]['fecha_creacion'];
+		$fecha4= $respuestafechas[3]['fecha_creacion'];
+		$fecha5= $respuestafechas[4]['fecha_creacion'];
+		$fecha6= $respuestafechas[5]['fecha_creacion'];
+		$fecha7= $respuestafechas[6]['fecha_creacion'];
+		$fecha8= $respuestafechas[7]['fecha_creacion'];
+		$fecha9= $respuestafechas[8]['fecha_creacion'];
+		$fecha10= $respuestafechas[9]['fecha_creacion'];
+		
+		$longitud = count($respuestamostrar); // Devuelve 2, pero nosotros queremos 6
+		$longitudRecursiva = count($respuestamostrar, COUNT_RECURSIVE); // Devuelve 6
+		//echo 'elnumero de elementos del arreglo es:--> '.$longitud;
+		//echo "<br>";
+
 		
 		if(isset($_POST['editarPassword'])){
 			
@@ -1657,7 +1699,91 @@ class ControladorUsuarios{
 					$respuesta = ModeloUsuarios::mdlActualizarUsuarioPorCodigo($tabla, $item1, $valor1, $item2, $valor2, $item3, $valor3, $item4, $valor4);
 	
 					if($respuesta == true){
-		
+
+						//HISTORIAL PARA EL PASSWORD ELIMINACION E INSERCION//------------------
+
+						//ELIMINAR EL PASSWORD MAS ANTIGUO ANTES DE INGRESAR UNO NUEVO
+									if($longitudRecursiva>10){
+
+										if ($fecha1<$fecha2 and $fecha1<$fecha3 and $fecha1<$fecha4 
+											and $fecha1<$fecha5 and $fecha1<$fecha6 and $fecha1<$fecha7 
+											and $fecha1<$fecha8 and $fecha1<$fecha9 and $fecha1<$fecha10) {
+
+											$passwordmenor=$fecha1;
+
+										}else if ($fecha2<$fecha1 and $fecha2<$fecha3 and $fecha2<$fecha4 
+											and $fecha2<$fecha5 and $fecha2<$fecha6 and $fecha2<$fecha7 
+											and $fecha2<$fecha8 and $fecha2<$fecha9 and $fecha2<$fecha10) {
+											
+											$passwordmenor=$fecha2;
+
+										}else if ($fecha3<$fecha1 and $fecha3<$fecha2 and $fecha3<$fecha4 
+											and $fecha3<$fecha5 and $fecha3<$fecha6 and $fecha3<$fecha7 
+											and $fecha3<$fecha8 and $fecha3<$fecha9 and $fecha3<$fecha10) {
+											
+											$passwordmenor=$fecha3;
+
+										}else if ($fecha4<$fecha1 and $fecha4<$fecha2 and $fecha4<$fecha3 
+											and $fecha4<$fecha5 and $fecha4<$fecha6 and $fecha4<$fecha7 
+											and $fecha4<$fecha8 and $fecha4<$fecha9 and $fecha4<$fecha10) {
+											
+											$passwordmenor=$fecha4;
+
+										}else if ($fecha5<$fecha1 and $fecha5<$fecha2 and $fecha5<$fecha3 
+											and $fecha5<$fecha4 and $fecha5<$fecha6 and $fecha5<$fecha7 
+											and $fecha5<$fecha8 and $fecha5<$fecha9 and $fecha5<$fecha10){
+
+											$passwordmenor=$fecha5;
+
+										}else if ($fecha6<$fecha1 and $fecha6<$fecha2 and $fecha6<$fecha3 
+											and $fecha6<$fecha4 and $fecha6<$fecha5 and $fecha6<$fecha7 
+											and $fecha6<$fecha8 and $fecha6<$fecha9 and $fecha6<$fecha10){
+
+											$passwordmenor=$fecha6;
+										
+										}else if ($fecha7<$fecha1 and $fecha7<$fecha2 and $fecha7<$fecha3 
+											and $fecha7<$fecha4 and $fecha7<$fecha5 and $fecha7<$fecha6 
+											and $fecha7<$fecha8 and $fecha7<$fecha9 and $fecha7<$fecha10){
+
+											$passwordmenor=$fecha7;
+										
+										}else if ($fecha8<$fecha1 and $fecha8<$fecha2 and $fecha8<$fecha3 
+											and $fecha8<$fecha4 and $fecha8<$fecha5 and $fecha8<$fecha6 
+											and $fecha8<$fecha7 and $fecha8<$fecha9 and $fecha8<$fecha10){
+
+											$passwordmenor=$fecha8;
+
+										}else if ($fecha9<$fecha1 and $fecha9<$fecha2 and $fecha9<$fecha3 
+											and $fecha9<$fecha4 and $fecha9<$fecha5 and $fecha9<$fecha6 
+											and $fecha9<$fecha7 and $fecha9<$fecha8 and $fecha9<$fecha10){
+
+											$passwordmenor=$fecha9;
+										}else{
+											$passwordmenor=$fecha10;
+										}
+
+
+										$tabla='tbl_historial_pass';
+										$item= 'fecha_creacion';
+										$fecha_antigua=$passwordmenor;
+										//$id_usuario=$idUsuario;
+						            
+						            	$respuestamostrar = ModeloUsuarios::mdlEliminarHistorialPassword($tabla,$item,$fecha_antigua);
+									}
+
+						//INSERTAR UN PASSWORD NUEVO
+
+						$tabla="tbl_historial_pass";
+						$id_usuario=$idUsuario;
+						$password = crypt($_POST['editarPassword'], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
+
+						$respuestapass = ModeloUsuarios::mdlHistorialPassword($tabla,$id_usuario, $password);
+						
+						//ELIMINAR EL ID QUE SE ESTA INGRESANDO EN "0"
+						$tabla="tbl_historial_pass";
+						$item="id_usuario";
+						$eliminarPassRepetido = ModeloUsuarios::mdlEliminarPasswordRepetido($tabla,$item);
+
 						echo '<script>
 								Swal.fire({
 									title: "Contraseña cambiada correctamente.",
