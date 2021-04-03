@@ -191,3 +191,109 @@ exportarPdf('.btnExportarCompras', 'compras');
     
 //     });
 // }
+
+//** ------------------------------------*/
+//    FUNCION PRODUCTO MINIMO
+// --------------------------------------*/ 
+function minimo() {
+
+    $(document).on('blur', '#nuevoProductoMinimo', function () {
+        
+        $('.alert').remove();
+
+        let valProdMinimo = parseInt($(this).val());
+        let prodMinimo = "ADMIN_PROD_MINIMO";
+        // console.log(typeof(valProdMinimo))
+
+        let datos = new FormData();
+        datos.append("parametroProducto", prodMinimo);
+
+        let padre = $('#nuevoProductoMinimo').closest('.form-row');
+        
+        $.ajax({
+    
+            url:"ajax/parametro.ajax.php",
+            method: "POST",
+            data: datos,
+            cache: false,
+            contentType: false,
+            processData: false,  
+            dataType: "json",
+            success: function(respuesta) {
+                // console.log(typeof(respuesta['valor']));
+                
+                if(valProdMinimo < parseInt(respuesta['valor'])){
+                    // console.log('mayor el valor del parametro');
+
+                    padre.before('<div class="alert alert-danger fade show mt-2" role="alert"><i class="icon fas fa-ban"></i>Producto minimo supera al establecido. El producto minimo aceptado es ' + parseInt(respuesta['valor']) + '</div>');
+                    setTimeout(function () {
+                        $('.alert').remove();
+                    }, 5000)
+
+                    $('#nuevoProductoMinimo').focus();
+                    $('#nuevoProductoMinimo').val(parseInt(respuesta['valor']));
+                   
+                } else {
+                    // console.log('menor el valor del parametro');
+                    $('.alert').remove();
+                }
+            }
+    
+        });
+    });
+
+}
+minimo();
+
+//** ------------------------------------*/
+//    FUNCION PRODUCTO MAXIMO
+// --------------------------------------*/ 
+function maximo(selector) {
+
+    $(document).on('blur', selector, function () {
+        
+        $('.alert').remove();
+
+        let valProdMinimo = parseInt($(this).val());
+        let prodMinimo = "ADMIN_PROD_MAXIMO";
+        // console.log(typeof(valProdMinimo))
+
+        let datos = new FormData();
+        datos.append("parametroProducto", prodMinimo);
+
+        let padre = $(selector).closest('.form-row');
+        
+        $.ajax({
+    
+            url:"ajax/parametro.ajax.php",
+            method: "POST",
+            data: datos,
+            cache: false,
+            contentType: false,
+            processData: false,  
+            dataType: "json",
+            success: function(respuesta) {
+                // console.log(typeof(respuesta['valor']));
+                
+                if(valProdMinimo > parseInt(respuesta['valor'])){
+                    // console.log('mayor el valor del parametro');
+
+                    padre.before('<div class="alert alert-danger fade show mt-2" role="alert"><i class="icon fas fa-ban"></i>Producto maximo supera al establecido. El producto maximo aceptado es ' + parseInt(respuesta['valor']) + '</div>');
+                    setTimeout(function () {
+                        $('.alert').remove();
+                    }, 5000)
+
+                    $(selector).focus();
+                    $(selector).val(parseInt(respuesta['valor']));
+                   
+                } else {
+                    // console.log('menor el valor del parametro');
+                    $('.alert').remove();
+                }
+            }
+    
+        });
+    });
+
+}
+maximo('#nuevoProductoMaximo');
