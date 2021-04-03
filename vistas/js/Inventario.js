@@ -243,7 +243,7 @@ function minimo() {
     });
 
 }
-minimo();
+// minimo();
 
 //** ------------------------------------*/
 //    FUNCION PRODUCTO MAXIMO
@@ -296,4 +296,54 @@ function maximo(selector) {
     });
 
 }
-maximo('#nuevoProductoMaximo');
+// maximo('#nuevoProductoMaximo');
+
+
+//** ------------------------------------*/
+// VALIDAR PROD MINIMO Y MAXIMO NO SEAN IGUALES O MAYORES O MENORES SEGUN SU USO
+// --------------------------------------*/ 
+$(document).on('blur', '#nuevoProductoMinimo', function () {
+        
+    $('.alert').remove();
+
+    let valProdMinimo = parseInt($(this).val());
+    let valProdMaximo = parseInt($('#nuevoProductoMaximo').val());
+
+    let padre = $(this).closest('.form-row');
+
+    if(valProdMinimo >= valProdMaximo){
+        
+        padre.before('<div class="alert alert-danger fade show mt-2" role="alert"><i class="icon fas fa-ban"></i>El producto minimo no puede ser mayor o igual al producto maximo.</div>');
+        setTimeout(function () {
+            $('.alert').remove();
+        }, 3000)
+
+        $('#nuevoProductoMinimo').focus();       
+
+    }
+    
+});
+
+$(document).on('blur', '#nuevoProductoMaximo', function () {
+        
+    $('.alert').remove();
+
+    let valProdMaximo = parseInt($(this).val());
+    let valProdMinimo = parseInt($('#nuevoProductoMinimo').val());
+    // console.log(valProdMaximo)
+    // console.log(valProdMinimo)
+
+    let padre = $(this).closest('.form-row');
+
+    if(valProdMaximo <= valProdMinimo){
+        
+        padre.before('<div class="alert alert-danger fade show mt-2" role="alert"><i class="icon fas fa-ban"></i>El producto maximo no puede ser menor o igual al producto minimo.</div>');
+        setTimeout(function () {
+            $('.alert').remove();
+        }, 3000)
+
+        $('#nuevoProductoMaximo').focus();       
+
+    }
+    
+});
