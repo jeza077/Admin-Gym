@@ -82,7 +82,7 @@
 
                     echo '
                           <tr>
-                          <td scope="row">'.($key).'</td>
+                          <td scope="row">'.($key+1).'</td>
                           <td>'.$value["nombre"] .' '.$value["apellidos"].'</td>
                           <td>'.$value["usuario"].'</td>';
   

@@ -22,7 +22,7 @@ class ModeloUsuarios{
 
 			$stmt = Conexion::conectar()->prepare("SELECT p.*, u.*, r.rol FROM $tabla1 AS p\n"
 					. " INNER JOIN $tabla2 AS u ON p.id_personas = u.id_persona\n"
-					. " INNER JOIN tbl_roles AS r ON u.id_rol = r.id_rol");
+					. " INNER JOIN tbl_roles AS r ON u.id_rol = r.id_rol ORDER BY u.id_usuario DESC");
 			$stmt -> execute();
 			return $stmt -> fetchAll();
 
