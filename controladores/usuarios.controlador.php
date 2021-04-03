@@ -1372,7 +1372,14 @@ class ControladorUsuarios{
 					return false;
 					
 				} else {
-					
+
+					//INSERTAR UN PASSWORD NUEVO
+					$tabla="tbl_historial_pass";
+					$id_usuario=$respuestaContraseñas["id_usuario"];
+					$password = crypt($respuestaContraseñas['password'], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
+					$respuestapass = ModeloUsuarios::mdlHistorialPassword($tabla,$id_usuario, $password);
+
+				
 					//** =============== CREAMOS LA FECHA VENCIMIENTO DEL USUARIO =================*/
 					$itemParam = 'parametro';
 					$valorParam = 'ADMIN_DIAS_VIGENCIA';
@@ -1397,10 +1404,10 @@ class ControladorUsuarios{
 	
 					$respuesta = ModeloUsuarios::mdlActualizarUsuario($tabla2, $item1, $valor1, $item2, $valor2, $item3, $valor3, $item4, $valor4);
 					return $respuesta;
-				
+					
 				}
 				
-			
+				
 			} else {
 
 				$respuesta = false;
