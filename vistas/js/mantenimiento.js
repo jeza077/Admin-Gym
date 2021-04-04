@@ -1064,6 +1064,50 @@ $(document).on("click", ".btnActivarDocumento", function(){
 
 })
 
+/*=====================================
+ACTIVAR PREGUNTA
+========================================*/
+$(document).on("click", ".btnActivarPregunta", function(){
+
+    var idPregunta = $(this).attr("idPregunta");
+    var estadoPregunta = $(this).attr("estadoPregunta");
+    // console.log(idPregunta)
+    var datos = new FormData();
+    datos.append("idPreguntaActivar", idPregunta);
+    datos.append("estadoPregunta",estadoPregunta);
+
+    $.ajax({
+        
+      url:"ajax/mantenimiento.ajax.php",
+      method:"POST",
+      data: datos,
+      cache: false,
+      contentType:false,
+      processData:false,
+      success:function(respuesta){ 
+        //   console.log(respuesta)
+     } 
+
+    }) 
+
+    if(estadoPregunta == 0){
+        $(this).removeClass('btn-success');
+        $(this).addClass('btn-danger');
+        $(this).html('Desactivado');
+        $(this).attr('estadoPregunta',1);
+
+    }else{
+
+
+        $(this).addClass('btn-success');
+        $(this).removeClass('btn-danger');
+        $(this).html('Activado');
+        $(this).attr('estadoPregunta',0);
+
+    }
+
+})
+
 
 
 
