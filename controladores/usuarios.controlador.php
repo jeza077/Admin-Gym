@@ -855,7 +855,7 @@ class ControladorUsuarios{
 		if(isset($datos["usuario"])){
 			
 
-			if(preg_match('/^[A-Z]+$/', $datos["usuario"])){
+			if(preg_match('/^[A-Z]+$/', $datos["usuario"]) && preg_match('/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%.])\S{8,16}$/', $datos["password_nueva"])){
 
 				$emailUsuario = $datos["email"];
 				$contraSinEncriptar = $datos["password_nueva"];
@@ -877,12 +877,16 @@ class ControladorUsuarios{
 				
 				$respuestamostrar = ModeloUsuarios::mdlMostrarHistorialPassword($tabla,$item,$id_usuario);
 
-
 				$mostrarpass1= $respuestamostrar[0]['pass'];
 				$mostrarpass2= $respuestamostrar[1]['pass'];
 				$mostrarpass3= $respuestamostrar[2]['pass'];
 				$mostrarpass4= $respuestamostrar[3]['pass'];
 				$mostrarpass5= $respuestamostrar[4]['pass'];
+				$mostrarpass6= $respuestamostrar[5]['pass'];
+				$mostrarpass7= $respuestamostrar[6]['pass'];
+				$mostrarpass8= $respuestamostrar[7]['pass'];
+				$mostrarpass9= $respuestamostrar[8]['pass'];
+				$mostrarpass10= $respuestamostrar[9]['pass'];
 
 				 //echo "</br>";
 				
