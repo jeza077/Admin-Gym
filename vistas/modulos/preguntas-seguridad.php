@@ -228,8 +228,8 @@ MODAL EDITAR PREGUNTA
 
 <?php
 
- $borrarDocumento = new ControladorMantenimientos();
- $borrarDocumento->ctrBorrarDocumento();
+ $borrarPregunta = new ControladorMantenimientos();
+ $borrarPregunta->ctrBorrarPregunta();
 
 ?>
 

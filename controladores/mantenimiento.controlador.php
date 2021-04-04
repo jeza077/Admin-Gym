@@ -1835,6 +1835,89 @@ class ControladorMantenimientos {
     }
 
     /*=============================================
+    BORRAR PREGUNTA
+    =============================================*/
+    static public function ctrBorrarPregunta(){
+      // var_dump($_GET['idEliminarpregunta']);
+      // return;
+
+      if(isset($_GET['idEliminarPregunta'])){
+
+          $tabla = 'tbl_preguntas';
+          $item = 'id_preguntas';
+          $valor = $_GET['idEliminarPregunta'];
+
+          $respuesta = ModeloMantenimiento::mdlBorrarDinamico($tabla, $item, $valor);
+
+          // var_dump($respuesta);
+          // return;
+
+          if($respuesta[1] == 1451){
+
+            // $descripcionEvento = "Elimino el Rol";
+            // $accion = "Elimino";
+
+            // $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
+
+            echo '<script>
+                Swal.fire({
+                    title: "¡No se pudo borrar la pregunta!",
+                    text: "No se puede borrar ya que esta asociado con otros datos",
+                    icon: "error",
+                    heightAuto: false
+                }).then((result)=>{
+                    if(result.value){
+                        window.location = "preguntas-seguridad";
+                    }
+                });                                      
+            </script>';
+            
+            
+          }else if($respuesta[1] == 1054) {
+
+            echo'<script>
+
+            Swal.fire({
+            icon: "error",
+            title: "Opps, algo salio mal, intenta de nuevo!",
+            showConfirmButton: true,
+            confirmButtonText: "Cerrar",
+            closeOnConfirm: false
+            }).then((result) => {
+              if (result.value) {
+
+                window.location = "preguntas-seguridad";
+                
+              }
+            })
+            
+            </script>';
+            
+          } else {
+            
+            echo'<script>
+
+            Swal.fire({
+                  icon: "success",
+                  title: "Pregunta eliminada exitosamente!",
+                  showConfirmButton: true,
+                  confirmButtonText: "Cerrar",
+                  closeOnConfirm: false
+                  }).then((result) => {
+                      if (result.value) {
+
+                      window.location = "preguntas-seguridad";
+
+                      }
+                  })
+
+            </script>';
+          } 
+          
+      }
+    }
+
+    /*=============================================
     BORRAR PROVEEDOR
     =============================================*/
     static public function ctrBorrarProveedor(){

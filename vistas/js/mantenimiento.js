@@ -769,6 +769,15 @@ texto = "¡Si no lo estas, puedes cancelar la acción!";
 ruta = 'documentos';
 borrarDinamico(boton, atributo, get, titulo, texto, ruta);
 
+/*** Borrar Pregunta ***/
+boton = '.btnEliminarPregunta';
+atributo = 'idEliminarPregunta';
+get = 'idEliminarPregunta';
+titulo = "¿Estás seguro de querer borrar la pregunta?";
+texto = "¡Si no lo estas, puedes cancelar la acción!";
+ruta = 'preguntas-seguridad';
+borrarDinamico(boton, atributo, get, titulo, texto, ruta);
+
 /*** Borrar Proveedores ***/
 boton = '.btnEliminarProveedor';
 atributo = 'idEliminarProveedor';
