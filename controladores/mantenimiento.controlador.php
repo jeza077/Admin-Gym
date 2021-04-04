@@ -1261,7 +1261,7 @@ class ControladorMantenimientos {
             echo '<script>
                 Swal.fire({
                     title: "¡No se pudo borrar el rol!",
-                    text: "Abóquese con el administrador",
+                    text: "No se puede borrar ya que esta asociado con otros datos",
                     icon: "error",
                     heightAuto: false
                 }).then((result)=>{
@@ -1343,7 +1343,7 @@ class ControladorMantenimientos {
             echo '<script>
                 Swal.fire({
                     title: "¡No se pudo borrar la matricula!",
-                    text: "Abóquese con el administrador",
+                    text: "No se puede borrar ya que esta asociado con otros datos",
                     icon: "error",
                     heightAuto: false
                 }).then((result)=>{
@@ -1424,7 +1424,7 @@ class ControladorMantenimientos {
             echo '<script>
                 Swal.fire({
                     title: "¡No se pudo borrar la inscripción!",
-                    text: "Abóquese con el administrador",
+                    text: "No se puede borrar ya que esta asociado con otros datos",
                     icon: "error",
                     heightAuto: false
                 }).then((result)=>{
@@ -1505,7 +1505,7 @@ class ControladorMantenimientos {
             echo '<script>
                 Swal.fire({
                     title: "¡No se pudo borrar el descuento!",
-                    text: "Abóquese con el administrador",
+                    text: "No se puede borrar ya que esta asociado con otros datos",
                     icon: "error",
                     heightAuto: false
                 }).then((result)=>{
@@ -1587,7 +1587,7 @@ class ControladorMantenimientos {
             echo '<script>
                 Swal.fire({
                     title: "¡No se pudo borrar el documento!",
-                    text: "Abóquese con el administrador",
+                    text: "No se puede borrar ya que esta asociado con otros datos",
                     icon: "error",
                     heightAuto: false
                 }).then((result)=>{
@@ -1670,7 +1670,7 @@ class ControladorMantenimientos {
             echo '<script>
                 Swal.fire({
                     title: "¡No se pudo borrar el proveedor!",
-                    text: "Abóquese con el administrador",
+                    text: "No se puede borrar ya que esta asociado con otros datos",
                     icon: "error",
                     heightAuto: false
                 }).then((result)=>{

@@ -56,6 +56,19 @@
                     <th scope="col">Acciones</th>
                   </tr>
                 </thead>
+
+                <?php 
+                
+                // $tabla = "tbl_clientes";
+                // $item = null;
+                // $valor = null;
+                // $clientes = ControladorClientes::ctrMostrarClientesSinPago($tabla, $item, $valor);
+        
+                //   echo "<pre>";
+                //   var_dump($clientes);
+                //   echo "</pre>";
+                  // return;
+                ?>
               
               </table>
             </div>

@@ -843,6 +843,7 @@ class ControladorPersonas{
                 echo '<script>
                     Swal.fire({
                         title: "No se pudo borrar el '.$tipoPersona.'!",
+                        text: "No se puede borrar ya que esta asociado con otros datos",
                         icon: "error",
                         heightAuto: false
                     }).then((result)=>{
