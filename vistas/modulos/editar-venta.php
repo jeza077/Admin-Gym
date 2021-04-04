@@ -52,29 +52,31 @@
                     
                 ?>
               <div class="card-body"> 
-                <div class="form-group"  class="formularioVenta"> 
 
-                   
-                 <!--=====================================
-                  ENTRADA VENDEDOR/USUARIO
-                 ======================================-->  
-                    <label for="usuario">Usuario</label>
-                    <input type="text" class="form-control" id="nuevoVendedor" value="<?php echo $vendedor["usuario"];  ?>" readonly>
-                    <input type="hidden" name="idVendedor" value="<?php echo $vendedor["id_usuario"]; ?>">
-                </div>       
+                <div class="form-row">                
+                  <div class="form-group col-md-8"  class="formularioVenta">                    
+                  <!--=====================================
+                    ENTRADA VENDEDOR/USUARIO
+                  ======================================-->  
+                      <label for="usuario">Usuario</label>
+                      <input type="text" class="form-control" id="nuevoVendedor" value="<?php echo $vendedor["usuario"];  ?>" readonly>
+                      <input type="hidden" name="idVendedor" value="<?php echo $vendedor["id_usuario"]; ?>">
+                  </div>       
+
+                    <!--=====================================
+                    ENTRADA DEL CÓDIGO
+                    ======================================-->  
+                  <div class="form-group col-md-4">     
+                    <label for="cod_factura">Codigo de Factura</label>  
+                    <input type="text" class="form-control" id="nuevaVenta" 
+                      name="editarVenta" value="<?php echo $venta["numero_factura"]; ?>" readonly>
+                  </div>
+                </div>
               
                 
-                  <!--=====================================
-                   ENTRADA DEL CÓDIGO y editar venta
-                  ======================================-->  
-                <div class="form-group">     
-                  <label for="cod_factura">Codigo de Factura</label>  
-                  <input type="text" class="form-control" id="nuevaVenta" 
-                    name="editarVenta" value="<?php echo $venta["numero_factura"]; ?>" readonly>
-                </div>
 
                 <div class="form-row">
-                  <div class="form-group col-md-9">
+                  <div class="form-group col-md-12">
                     <!--=====================================
                     ENTRADA DEL CLIENTE
                     ======================================--> 
