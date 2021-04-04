@@ -23,6 +23,25 @@ class AjaxMantenimiento{
         echo json_encode($respuesta);
     
     }
+
+    
+    /*========================================
+        MOSTRAR-EDITAR PREGUNTA
+    ==========================================*/ 
+    public $idPregunta;
+
+    public function ajaxEditarPregunta(){
+
+        $tabla = "tbl_preguntas";
+        $item = "id_preguntas";
+        $valor = $this->idPregunta;
+        $all = null;
+
+        $respuesta = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all);
+
+        echo json_encode($respuesta);
+    
+    }
     
     
     /*=============================================
@@ -108,6 +127,15 @@ if(isset($_POST["idDocumento"])){
     $editar = new AjaxMantenimiento();
     $editar->idDocumento = $_POST["idDocumento"];
     $editar-> ajaxEditarDocumento();
+}  
+
+/*========================================
+    MOSTRAR-EDITAR PREGUNTA
+==========================================*/ 
+if(isset($_POST["idPregunta"])){ 
+    $editarPregunta = new AjaxMantenimiento();
+    $editarPregunta->idPregunta = $_POST["idPregunta"];
+    $editarPregunta-> ajaxEditarPregunta();
 }  
 
 /*========================================

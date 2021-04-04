@@ -611,6 +611,53 @@ class ModeloMantenimiento{
     }
 
 
+    /*============================================
+    AGREGAR NUEVA PREGUNTA
+	==============================================*/
+	static public function mdlPreguntaSeguridadInsertar($tabla, $datos){
+
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(pregunta) VALUES (:pregunta)");
+       
+        $stmt->bindParam(":pregunta", $datos["pregunta"], PDO::PARAM_STR);
+
+		if($stmt->execute()){
+			return true;
+
+		}else{
+			return false;
+		
+		}
+
+		$stmt->close();
+		$stmt = null;
+    }
+
+    /*=============================================
+    EDITAR PREGUNTA
+    =============================================*/
+    
+    static public function mdlEditarPregunta($tabla,$datos){
+        
+        $stmt = Conexion::conectar()->prepare("UPDATE $tabla SET pregunta = :pregunta WHERE id_preguntas = :id_preguntas");
+
+        $stmt -> bindParam(":pregunta", $datos["pregunta"], PDO::PARAM_STR);
+        $stmt -> bindParam(":id_preguntas", $datos["id_pregunta"], PDO::PARAM_INT);
+
+        if($stmt->execute()){
+
+            return true;
+
+        }else{
+
+            return false;
+        
+        }
+
+        $stmt->close();
+        $stmt = null;
+    }
+
+
     /*=============================================
     BORRAR ROLES
 	=============================================*/

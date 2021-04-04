@@ -658,6 +658,36 @@ $(document).on("click", ".btnEditarDocumento", function(){
 });
 
 /*===================================
+//    EDITAR PREGUNTA
+====================================*/
+$(document).on("click", ".btnEditarPregunta", function(){
+    
+    var idPregunta = $(this).attr("idPregunta");
+    // console.log(idPregunta)
+    var datos = new FormData();
+    datos.append("idPregunta", idPregunta);
+
+    $.ajax({
+
+        url:"ajax/mantenimiento.ajax.php",
+        method:"POST",
+        data: datos,
+        cache: false,
+        contentType:false,
+        processData:false,
+        dataType: "json",
+        success:function(respuesta){ 
+            // console.log(respuesta)
+
+            $('#editarPregunta').val(respuesta['pregunta']);
+            $('#editarIdPregunta').val(respuesta['id_preguntas']);
+         
+        } 
+
+    });
+});
+
+/*===================================
     EDITAR PROVEEDOR
 ====================================*/
 $(document).on("click", ".btnEditarProveedor", function(){

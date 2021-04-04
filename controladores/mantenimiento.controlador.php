@@ -632,7 +632,7 @@ class ControladorMantenimientos {
       // return;
       if(isset($_POST["nuevoDocumento"])){
 
-        if(preg_match('/^[A-ZñÑáéíóúÁÉÍÓÚ]+$/', $_POST["nuevoDocumento"])){
+        if(preg_match('/^[A-ZñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevoDocumento"])){
 
           $tabla = "tbl_documento";
 
@@ -703,6 +703,101 @@ class ControladorMantenimientos {
                 if(result.value){
 
                   window.location = "documentos";
+
+                }
+
+              });
+
+
+            </script>';
+
+        }
+      }
+
+    }
+
+
+    /*=============================================
+    AGREGAR NUEVA PREGUNTA DE SEGURIDAD
+    =============================================*/
+    
+    static public function ctrPreguntaSeguridadInsertar(){
+
+      // var_dump($_POST);
+      // return;
+      if(isset($_POST["nuevaPregunta"])){
+
+        if(preg_match('/^[A-ZÑÁÉÍÓÚ¿? ]+$/', $_POST["nuevaPregunta"])){
+
+          $tabla = "tbl_preguntas";
+
+          $datos = array ("pregunta" => $_POST["nuevaPregunta"]);
+
+
+          $respuesta =  ModeloMantenimiento::mdlPreguntaSeguridadInsertar($tabla,$datos);
+
+    
+          if($respuesta == true){
+              
+              // $descripcionEvento = "Actualizo rol";
+              // $accion = "Actualizo";
+              // $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
+
+              echo'<script>
+      
+              Swal.fire({
+                  icon: "success",
+                    title: "Pregunta creada exitosamente!",
+                    showConfirmButton: true,
+                    confirmButtonText: "Cerrar",
+                    closeOnConfirm: false
+                    }).then((result) => {
+                        if (result.value) {
+
+                        window.location = "preguntas-seguridad";
+
+                        }
+                    })
+      
+              </script>';
+      
+          }else{
+
+            echo'<script>
+      
+              Swal.fire({
+                    icon: "error",
+                    title: "Opps, ocurrio un problema. Intente de nuevo.",
+                    showConfirmButton: true,
+                    confirmButtonText: "Cerrar",
+                    closeOnConfirm: false
+                    }).then((result) => {
+                              if (result.value) {
+      
+                              window.location = "preguntas-seguridad";
+      
+                              }
+                          })
+      
+              </script>';
+          }
+
+        } else {
+          echo '<script>
+  
+              Swal.fire({
+
+                icon: "error",
+                title: "¡El campo no puede ir vacío, escrito en minusculas o llevar caracteres especiales con excepción de los signos de interrogacion!",
+                showConfirmButton: true,
+                confirmButtonText: "Cerrar",
+                closeOnConfirm: false
+
+              }).then((result)=>{
+
+                if(result.value){
+
+                  window.location = "preguntas-seguridad";
 
                 }
 
@@ -1047,7 +1142,7 @@ class ControladorMantenimientos {
 
 
     /*=============================================
-    EDITAR ROL
+    EDITAR DOCUMENTO
     =============================================*/
     
     static public function ctrEditarDocumento(){
@@ -1144,7 +1239,104 @@ class ControladorMantenimientos {
     }
 
     /*=============================================
-    EDITAR ROL
+    EDITAR PREGUNTA
+    =============================================*/
+    
+    static public function ctrEditarPregunta(){
+      // var_dump($_POST);
+      // return;
+
+      if(isset($_POST["editarIdPregunta"])){
+
+        if(preg_match('/^[A-ZÑÁÉÍÓÚ¿? ]+$/', $_POST["editarPregunta"])){
+
+          $tabla = "tbl_preguntas";
+
+          $datos = array ("pregunta"=> $_POST["editarPregunta"],
+                          "id_pregunta"=>$_POST["editarIdPregunta"]);
+
+
+          $respuesta =  ModeloMantenimiento::mdlEditarPregunta($tabla,$datos);
+
+      
+          if($respuesta == true){
+              
+              // $descripcionEvento = "Actualizo rol";
+              // $accion = "Actualizo";
+              // $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);            
+
+              echo'<script>
+      
+              Swal.fire({
+                    icon: "success",
+                    title: "Pregunta editada correctamente",
+                    showConfirmButton: true,
+                    confirmButtonText: "Cerrar",
+                    closeOnConfirm: false
+                    }).then((result) => {
+                              if (result.value) {
+      
+                              window.location = "preguntas-seguridad";
+      
+                              }
+                          })
+      
+              </script>';
+      
+          }else{
+
+            echo'<script>
+      
+              Swal.fire({
+                    icon: "error",
+                    title: "Opps, algo salio mal, intenta de nuevo!",
+                    showConfirmButton: true,
+                    confirmButtonText: "Cerrar",
+                    closeOnConfirm: false
+                    }).then((result) => {
+                              if (result.value) {
+      
+                              window.location = "preguntas-seguridad";
+      
+                              }
+                          })
+      
+              </script>';
+          }
+        
+        } else {
+          echo '<script>
+  
+            Swal.fire({
+  
+              icon: "error",
+              title: "¡El campo no puede ir vacío, escrito en minusculas o llevar caracteres especiales con excepción de los signos de interrogacion!",
+              showConfirmButton: true,
+              confirmButtonText: "Cerrar",
+              closeOnConfirm: false
+  
+            }).then((result)=>{
+  
+              if(result.value){
+  
+                window.location = "preguntas-seguridad";
+  
+              }
+  
+            });
+  
+  
+          </script>';
+  
+
+        }
+
+      }
+
+    }
+
+    /*=============================================
+    EDITAR PROVEEDOR
     =============================================*/
     
     static public function ctrEditarProveedor(){

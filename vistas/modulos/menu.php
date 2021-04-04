@@ -279,6 +279,12 @@
                     <p>Proveedores</p>
                   </a>
                 </li>
+                <li class="nav-item">
+                  <a href="preguntas-seguridad" class="nav-link">
+                    <i class="fas fa-cash-register nav-icon"></i>
+                    <p>Preguntas de seguridad</p>
+                  </a>
+                </li>
               </ul>
               
             </li>
