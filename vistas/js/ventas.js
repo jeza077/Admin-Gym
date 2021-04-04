@@ -188,8 +188,7 @@ $(".formularioVenta").on("click", "button.quitarProducto", function(){
 		$("#nuevoTotalVenta").attr("total",0);
 
 
-  }
-   else{
+  } else{
 
 		// SUMAR TOTAL DE PRECIOS
 
