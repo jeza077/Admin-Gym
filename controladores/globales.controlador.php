@@ -1,4 +1,4 @@
-<?php
+    <?php
 
 class ControladorGlobales{
 
@@ -83,10 +83,10 @@ class ControladorGlobales{
     =============================================*/
     
     static public function ctrMostrarParametros($item,$valor){
-      $tabla = 'tbl_parametros';
-		  $respuesta = ModeloGlobales::mdlMostrarParametros($tabla, $item, $valor);
+        $tabla = 'tbl_parametros';
+        $respuesta = ModeloGlobales::mdlMostrarParametros($tabla, $item, $valor);
 
-		  return $respuesta;
+        return $respuesta;
     }
 
     /*=============================================

@@ -10,7 +10,7 @@
                 <button class="btn btn-orange float-right"  data-toggle="modal" data-target="#modalNuevaPregunta">
                   Nueva pregunta      
                 </button>
-                <button class="btn btn-danger btnExportarPregunta float-right mr-3 ">
+                <button class="btn btn-danger btnExportarPreguntas float-right mr-3 ">
                 Exportar PDF      
                </button>
           </div>
@@ -115,7 +115,7 @@ MODAL AGREGAR NUEVA PREGUNTA
         <div class="modal-body">
           <div class="form-group col-md-12">
             <label for="">Pregunta</label>
-            <input type="text" class="form-control mayus" name="nuevaPregunta" value="" placeholder="Ingresa Pregunta" required>
+            <input type="text" class="form-control mayus" name="nuevaPregunta" value="" placeholder="Ingrese Pregunta" required>
           </div>
 
           <!-- <div class="form-group col-md-12">

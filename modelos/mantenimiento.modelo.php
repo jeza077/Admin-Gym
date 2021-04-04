@@ -905,8 +905,38 @@ class ModeloMantenimiento{
 	}
 
 
+    /*=============================================
+			RANGO PREGUNTAS
+	=============================================*/
+	static public function mdlRangoPreguntas($tabla, $rango){
+        
+        if($rango == null){
+            
+            $stmt = Conexion::conectar() ->prepare("SELECT * FROM $tabla\n"
+			. "ORDER BY id_preguntas DESC");
+            $stmt-> execute();
+			return $stmt ->fetchAll();
+			
+		} else {
+        
+			$stmt = Conexion::conectar() ->prepare("SELECT * FROM $tabla\n"
+			. "WHERE pregunta LIKE '%$rango%'");
+            // OR fecha LIKE '%$rango%' OR objeto LIKE '%$rango%' OR accion LIKE '%$rango%'
+			$stmt->bindParam(":pregunta", $rango, PDO::PARAM_STR);
+			// $stmt->bindParam(":fecha", $rango, PDO::PARAM_STR);
+            // $stmt->bindParam(":objeto", $rango, PDO::PARAM_STR);
+			// $stmt->bindParam(":accion", $rango, PDO::PARAM_STR);
+        
 
-     /*====================================================
+            $stmt-> execute();
+			return $stmt ->fetchAll();
+			
+		} 	
+	}
+
+
+
+    /*====================================================
        Actualizar DESCUENTO
     ======================================================*/
 

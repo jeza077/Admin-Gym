@@ -2028,6 +2028,20 @@ class ControladorMantenimientos {
 
     }
 
+    /*=============================================
+    RANGO DE PREGUNTAS
+    =============================================*/
+
+    static public function ctrRangoPreguntas($rango) {
+
+      $tabla = "tbl_preguntas";
+      
+      $respuesta = ModeloMantenimiento::mdlRangoPreguntas($tabla, $rango);
+
+      return $respuesta;
+
+    }
+
 
 
 

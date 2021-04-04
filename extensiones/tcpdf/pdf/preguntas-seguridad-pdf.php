@@ -2,8 +2,8 @@
 // require_once "../../controladores/usuarios.controlador.php";
 require_once('../../../controladores/usuarios.controlador.php');
 require_once "../../../modelos/usuarios.modelo.php";
-require_once('../../../controladores/globales.controlador.php');
-require_once "../../../modelos/globales.modelo.php";
+require_once('../../../controladores/mantenimiento.controlador.php');
+require_once "../../../modelos/mantenimiento.modelo.php";
 
 require_once('../examples/tcpdf_include.php');
 
@@ -60,7 +60,7 @@ class PDF extends TCPDF{
 
         $this->Ln(20); //Espacios
         $this->SetFont('helvetica', 'B', 14);
-        $this->Cell(180, 3, 'REPORTE DE ROL', 0, 1, 'C');
+        $this->Cell(180, 3, 'REPORTE DE PREGUNTAS DE SEGUIDAD', 0, 1, 'C');
         $this->Ln(3);
         $this->SetFont('helvetica', 'B', 11);
         $año = date('Y-m-d');
@@ -94,7 +94,7 @@ $pdf = new PDF('p', 'mm', 'A4', true, 'UTF-8', false);
 // set document information
 $pdf->SetCreator(PDF_CREATOR);
 $pdf->SetAuthor('Jesus Zuniga');
-$pdf->SetTitle('Reporte de Rol');
+$pdf->SetTitle('Reporte de Preguntas de seguidad');
 $pdf->SetSubject('');
 $pdf->SetKeywords('');
 
@@ -143,9 +143,8 @@ $pdf->Ln(55);
 
 $pdf->SetFont('times', '', 13);
 $pdf->SetFillColor(225, 235, 255);
-$pdf->Cell(15, 5, 'No', 1, 0, 'C', 1);
-$pdf->Cell(70, 5, 'Rol', 1, 0, 'C', 1);
-$pdf->Cell(60, 5, 'Descripcion', 1, 0, 'C', 1);
+$pdf->Cell(20, 5, 'No', 1, 0, 'C', 1);
+$pdf->Cell(120, 5, 'Pregunta de seguridad', 1, 0, 'C', 1);
 $pdf->Cell(40, 5, 'Estado', 1, 0, 'C', 1);
 
 //$tabla = "tbl_inscripcion";
@@ -166,10 +165,10 @@ if(isset($_GET["rango"])){
 
 } 
 
-$roles = ControladorGlobales::ctrRangoRol($rango);
-//var_dump($roles);
+$preguntas = ControladorMantenimientos::ctrRangoPreguntas($rango);
+//var_dump($preguntas);
 
-if(!$roles){  
+if(!$preguntas){  
 
     $pdf->Ln(15);
     $pdf->SetFont('times', '', 12);
@@ -181,7 +180,7 @@ else{
     $i = 1; //Contador
 $max = 10; //Maximo de registros a mostrar en una pagina
 
-foreach ($roles as $key => $value) {
+foreach ($preguntas as $key => $value) {
 
     if(($i%$max) == 0){
         $pdf->AddPage();
@@ -190,9 +189,8 @@ foreach ($roles as $key => $value) {
         
         $pdf->SetFont('times', '', 13);
         $pdf->SetFillColor(225, 235, 255);
-        $pdf->Cell(15, 5, 'No', 1, 0, 'C', 1);
-        $pdf->Cell(70, 5, 'Rol', 1, 0, 'C', 1);
-        $pdf->Cell(60, 5, 'Descripcion', 1, 0, 'C', 1);
+        $pdf->Cell(20, 5, 'No', 1, 0, 'C', 1);
+        $pdf->Cell(120, 5, 'Pregunta de seguridad', 1, 0, 'C', 1);
         $pdf->Cell(40, 5, 'Estado', 1, 0, 'C', 1);
     }
     // $pdf->Cell(15, 5, ''.$i.'', 1, 0, 'C');
@@ -200,9 +198,8 @@ foreach ($roles as $key => $value) {
     $pdf->Ln(8);
     $pdf->SetFont('times', '', 12);
     // $pdf->SetFillColor(225, 235, 255);
-    $pdf->Cell(15, 4, ''.($key+1).'', 0, 0, 'C');
-    $pdf->Cell(70, 4, ''.$value['rol'].' ', 0, 0, 'C');
-    $pdf->Cell(60, 4, ''.$value['descripcion'].'', 0, 0, 'C');
+    $pdf->Cell(20, 4, ''.($key+1).'', 0, 0, 'C');
+    $pdf->Cell(120, 4, ''.$value['pregunta'].' ', 0, 0, 'C');
     if($value["estado"] == 0){
         $pdf->Cell(40, 4, 'Desactivado', 0, 0, 'C');
     } else {
@@ -220,6 +217,6 @@ foreach ($roles as $key => $value) {
 
 
 // Close and output PDF document
-$pdf->Output('Reporteroles.pdf', 'I');
+$pdf->Output('reporte-preguntas-seguridad.pdf', 'I');
 
 ?>

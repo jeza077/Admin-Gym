@@ -1132,12 +1132,17 @@ exportarPdf('.btnExportarDescuento', 'descuento');
 exportarPdf('.btnExportarRol', 'rol');
 
 //** ------------------------------------*/
+//         IMPRIMIR PDF PREGUNTAS
+// --------------------------------------*/ 
+exportarPdf('.btnExportarPreguntas', 'preguntas-seguridad');
+
+//** ------------------------------------*/
 //         IMPRIMIR PDF Parametros
 // --------------------------------------*/ 
 exportarPdf('.btnExportarParametro', 'parametros');
 
 //** ------------------------------------*/
-//         IMPRIMIR PDF Parametros
+//       IMPRIMIR PDF PERMISOS-ROL
 // --------------------------------------*/ 
 exportarPdf('.btnExportarPermisosRol', 'permisos-rol');
 
