@@ -123,30 +123,38 @@
                   </p>
                 </a>
                 <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="clientes" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Administrar Clientes</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="clientes-inscripciones" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Clientes Inscripciones</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="clientes-inscripciones-historico" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Clientes Inscripciones Historico</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="clientes-pagos-historico" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Clientes Pagos Historico</p>
-                    </a>
-                  </li>
+                  <?php if($_SESSION['permisos']['Administrar Clientes']['consulta'] == 1){?>
+                    <li class="nav-item">
+                      <a href="clientes" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Administrar Clientes</p>
+                      </a>
+                    </li>
+                  <?php }?>
+                  <?php if($_SESSION['permisos']['Clientes Inscripciones']['consulta'] == 1){?>
+                    <li class="nav-item">
+                      <a href="clientes-inscripciones" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Clientes Inscripciones</p>
+                      </a>
+                    </li>
+                  <?php }?>
+                  <?php if($_SESSION['permisos']['Clientes Inscripciones Historico']['consulta'] == 1){?>
+                    <li class="nav-item">
+                      <a href="clientes-inscripciones-historico" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Clientes Inscripciones Historico</p>
+                      </a>
+                    </li>
+                  <?php }?>
+                  <?php if($_SESSION['permisos']['Clientes Pagos Historico']['consulta'] == 1){?>
+                    <li class="nav-item">
+                      <a href="clientes-pagos-historico" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Clientes Pagos Historico</p>
+                      </a>
+                    </li>
+                  <?php }?>
                 </ul>
               </li>
             <?php }?>
@@ -161,30 +169,38 @@
                 </p>
               </a>
               <ul class="nav nav-treeview">
-              <li class="nav-item">
-                  <a href="compras" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Compras</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="inventario" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Inventario</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="productos" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Productos</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="equipo" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Equipo</p>
-                  </a>
-                </li>
+                <?php if($_SESSION['permisos']['Compras']['consulta'] == 1){?>
+                  <li class="nav-item">
+                    <a href="compras" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Compras</p>
+                    </a>
+                  </li>
+                <?php }?>
+                <?php if($_SESSION['permisos']['Inventario']['consulta'] == 1){?>
+                  <li class="nav-item">
+                    <a href="inventario" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Inventario</p>
+                    </a>
+                  </li>
+                <?php }?>
+                <?php if($_SESSION['permisos']['Productos']['consulta'] == 1){?>
+                  <li class="nav-item">
+                    <a href="productos" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Productos</p>
+                    </a>
+                  </li>
+                <?php }?>
+                <?php if($_SESSION['permisos']['Equipo']['consulta'] == 1){?>
+                  <li class="nav-item">
+                    <a href="equipo" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Equipo</p>
+                    </a>
+                  </li>
+                <?php }?>
               </ul>
             </li>
 
@@ -199,24 +215,30 @@
                 </p>
               </a>
               <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="administrar-ventas" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Administrar Venta</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="crear-venta" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Nueva Venta</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="reportes" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Reporte de Ventas</p>
-                  </a>
-                </li>
+                <?php if($_SESSION['permisos']['Administrar Ventas']['consulta'] == 1){?>
+                  <li class="nav-item">
+                    <a href="administrar-ventas" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Administrar Venta</p>
+                    </a>
+                  </li>
+                <?php }?>
+                <?php if($_SESSION['permisos']['Nueva Venta']['consulta'] == 1){?>
+                  <li class="nav-item">
+                    <a href="crear-venta" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Nueva Venta</p>
+                    </a>
+                  </li>
+                <?php }?>
+                <?php if($_SESSION['permisos']['Reporte de Ventas']['consulta'] == 1){?>
+                  <li class="nav-item">
+                    <a href="reportes" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Reporte de Ventas</p>
+                    </a>
+                  </li>
+                <?php }?>
               </ul>
             </li>
             <?php } ?>
@@ -231,60 +253,78 @@
                 </p>
               </a>
               <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="rol" class="nav-link">
-                    <i class="fas fa-th-list nav-icon"></i>
-                    <p>Roles</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="permisos-rol" class="nav-link">
-                    <i class="fas fa-circle nav-icon"></i>
-                    <p>Permisos Rol</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="parametro" class="nav-link">
-                    <i class="fab fa-product-hunt nav-icon"></i>
-                    <p>Parametros</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="inscripcion" class="nav-link">
-                    <i class="fas fa-wallet nav-icon"></i>
-                    <p>Inscripciones</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="matricula" class="nav-link">
-                    <i class="fas fa-money-bill-alt nav-icon"></i>
-                    <p>Matriculas</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="descuento" class="nav-link">
-                    <i class="fas fa-cash-register nav-icon"></i>
-                    <p>Descuentos</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="documentos" class="nav-link">
-                    <i class="fas fa-cash-register nav-icon"></i>
-                    <p>Documentos</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="proveedores" class="nav-link">
-                    <i class="fas fa-cash-register nav-icon"></i>
-                    <p>Proveedores</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="preguntas-seguridad" class="nav-link">
-                    <i class="fas fa-cash-register nav-icon"></i>
-                    <p>Preguntas de seguridad</p>
-                  </a>
-                </li>
+                <?php if($_SESSION['permisos']['Roles']['consulta'] == 1){?>
+                  <li class="nav-item">
+                    <a href="rol" class="nav-link">
+                      <i class="fas fa-th-list nav-icon"></i>
+                      <p>Roles</p>
+                    </a>
+                  </li>
+                <?php }?>
+                <?php if($_SESSION['permisos']['Administracion de Permisos']['consulta'] == 1){?>
+                  <li class="nav-item">
+                    <a href="permisos-rol" class="nav-link">
+                      <i class="fas fa-circle nav-icon"></i>
+                      <p>Permisos Rol</p>
+                    </a>
+                  </li>
+                <?php }?>
+                <?php if($_SESSION['permisos']['Parametros']['consulta'] == 1){?>
+                  <li class="nav-item">
+                    <a href="parametro" class="nav-link">
+                      <i class="fab fa-product-hunt nav-icon"></i>
+                      <p>Parametros</p>
+                    </a>
+                  </li>
+                <?php }?>
+                <?php if($_SESSION['permisos']['Inscripciones']['consulta'] == 1){?>
+                  <li class="nav-item">
+                    <a href="inscripcion" class="nav-link">
+                      <i class="fas fa-wallet nav-icon"></i>
+                      <p>Inscripciones</p>
+                    </a>
+                  </li>
+                <?php }?>
+                <?php if($_SESSION['permisos']['Matricula']['consulta'] == 1){?>
+                  <li class="nav-item">
+                    <a href="matricula" class="nav-link">
+                      <i class="fas fa-money-bill-alt nav-icon"></i>
+                      <p>Matriculas</p>
+                    </a>
+                  </li>
+                <?php }?>
+                <?php if($_SESSION['permisos']['Descuentos']['consulta'] == 1){?>
+                  <li class="nav-item">
+                    <a href="descuento" class="nav-link">
+                      <i class="fas fa-cash-register nav-icon"></i>
+                      <p>Descuentos</p>
+                    </a>
+                  </li>
+                <?php }?>
+                <?php if($_SESSION['permisos']['Documentos']['consulta'] == 1){?>
+                  <li class="nav-item">
+                    <a href="documentos" class="nav-link">
+                      <i class="fas fa-cash-register nav-icon"></i>
+                      <p>Documentos</p>
+                    </a>
+                  </li>
+                <?php }?>
+                <?php if($_SESSION['permisos']['Proveedores']['consulta'] == 1){?>
+                  <li class="nav-item">
+                    <a href="proveedores" class="nav-link">
+                      <i class="fas fa-cash-register nav-icon"></i>
+                      <p>Proveedores</p>
+                    </a>
+                  </li>
+                <?php }?>
+                <?php if($_SESSION['permisos']['Preguntas de seguridad']['consulta'] == 1){?>
+                  <li class="nav-item">
+                    <a href="preguntas-seguridad" class="nav-link">
+                      <i class="fas fa-cash-register nav-icon"></i>
+                      <p>Preguntas de seguridad</p>
+                    </a>
+                  </li>
+                <?php }?>
               </ul>
               
             </li>

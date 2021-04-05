@@ -8,10 +8,19 @@
     // echo "<pre>";
     // var_dump($_SESSION['permisos']);
     // echo "</pre>";
-
-?>
+    
+    ?>
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
+    <?php
+    echo "<pre>";
+    var_dump($_SESSION['permisos']);
+    // foreach ($_SESSION['permisos'] as $key => $value) {
+    //   var_dump($value['agregar']);
+    // }
+    
+    echo "</pre>";
+   ?>
 
     <section class="content-header">
       <div class="container-fluid">
