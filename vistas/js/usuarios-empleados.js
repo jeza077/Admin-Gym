@@ -128,6 +128,40 @@ $(document).on('click', '.btnEditarUsuario', function () {
     });
 
 });
+//** ------------------------------------*/
+//   VER DATOS DE USUARIO A DETALLES
+// --------------------------------------*/ 
+$(document).on('click', '.btnVerUsuario', function () {
+    // e.preventDefault();
+    let idPersonaUsuario = $(this).attr('idUsuario');
+    // console.log(idPersonaUsuario);
+
+    let datos = new FormData();
+    datos.append('idPersonaUsuario', idPersonaUsuario);
+
+    $.ajax({
+
+        url:"ajax/usuarios.ajax.php",
+        method: "POST",
+        data: datos,
+        cache: false,
+        contentType: false,
+        processData: false,  
+        dataType: "json",
+        success: function(respuesta) {
+            console.log(respuesta);
+
+            $('#detalleCorreoUsuario').val(respuesta['correo']);
+            $('#detalleTelefonoUsuario').val(respuesta['telefono']);
+            $('#detalleDireccionUsuario').val(respuesta['direccion']);
+            $('#detalleSexoUsuario').val(respuesta['sexo']);
+            $('#detalleFechaNacUsuario').val(respuesta['fecha_nacimiento']);
+            
+        }
+
+    });
+
+});
 
 
 

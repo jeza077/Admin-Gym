@@ -13,13 +13,13 @@
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <?php
-    echo "<pre>";
-    var_dump($_SESSION['permisos']);
+    // echo "<pre>";
+    // var_dump($_SESSION['permisos']);
     // foreach ($_SESSION['permisos'] as $key => $value) {
     //   var_dump($value['agregar']);
     // }
     
-    echo "</pre>";
+    // echo "</pre>";
    ?>
 
     <section class="content-header">
@@ -63,6 +63,7 @@
               <thead>
                 <tr>
                   <th scope="col">#</th>
+                  <th scope="col">No. Documento</th>
                   <th scope="col">Nombre</th>
                   <th scope="col">Usuario</th>
                   <th scope="col">Foto</th>
@@ -92,6 +93,7 @@
                     echo '
                           <tr>
                           <td scope="row">'.($key+1).'</td>
+                          <td>'.$value["num_documento"].'</td>
                           <td>'.$value["nombre"] .' '.$value["apellidos"].'</td>
                           <td>'.$value["usuario"].'</td>';
   
@@ -123,6 +125,7 @@
                     ';
                     } else {
                       echo '<td>
+                              <button class="btn btn-info btnVerUsuario" idUsuario="'.$value["id_personas"].'" data-toggle="modal" data-target="#modalVerUsuario"><i class="fas fa-eye" style="color:#fff"></i></button>
                               <button class="btn btn-warning btnEditarUsuario" idUsuario="'.$value["id_personas"].'" data-toggle="modal" data-target="#modalEditarUsuario"><i class="fas fa-pencil-alt" style="color:#fff"></i></button>
                               <button class="btn btn-danger btnEliminarUsuario" idPersona="'.$value["id_personas"].'" fotoUsuario="'.$value["foto"].'" usuario="'.$value["usuario"].'"><i class="fas fa-trash-alt"></i></button>
                             </td>
@@ -549,6 +552,77 @@
   </div>
 
 
+  <!-- =======================================
+      MODAL DATOS DE USUARIO A DETALLE
+  ======================================----->
+  <div class="modal fade" id="modalVerUsuario" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md" role="document">
+      <div class="modal-content">      
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Datos usuario</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          
+        <form role="form" method="post" class="formulario" enctype="multipart/form-data">
+          
+          <div class="form-row">
+            <div class="form-group col-md-12">
+              <label>Correo</label>
+              <input type="text" class="form-control" value="" id=detalleCorreoUsuario disabled>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-md-12">
+              <label>Telefono</label>
+              <input type="text" class="form-control" value="" id=detalleTelefonoUsuario disabled>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-md-12">
+              <label>Dirección</label>
+              <input type="text" class="form-control" value="" id=detalleDireccionUsuario disabled>
+            </div>
+          </div>
+
+          <!-- <div class="form-row">
+            <div class="form-group col-md-12">
+              <label>Sexo</label>
+              <input type="text" class="form-control" value="" id=detalleSexoUsuario disabled>
+            </div>
+          </div> -->
+          
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label>Fecha nacimiento</label>
+              <input type="text" class="form-control" value="" id=detalleFechaNacUsuario disabled>
+            </div>
+            <div class="form-group col-md-6">
+              <label>Sexo</label>
+              <input type="text" class="form-control" value="" id=detalleSexoUsuario disabled>
+            </div>
+          </div>
+      
+          <!-- <div class="modal-footer"> -->
+          <div class="form-group final mt-4 float-right">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
+          </div>
+      
+        </form>
+
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
 
   <!-- =========================================
   MODAL AGREGAR USUARIO DE PERSONA YA REGISTRADA
@@ -565,6 +639,7 @@
         </div>
 
         <div class="modal-body">
+
           <form role="form" method="post" class="formulario" enctype="multipart/form-data">
           
             <div class="form-row">
