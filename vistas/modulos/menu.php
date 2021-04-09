@@ -325,6 +325,14 @@
                     </a>
                   </li>
                 <?php }?>
+                <?php if($_SESSION['permisos']['Objetos']['consulta'] == 1){?>
+                  <li class="nav-item">
+                    <a href="objetos" class="nav-link">
+                      <i class="fas fa-cash-register nav-icon"></i>
+                      <p>Objetos</p>
+                    </a>
+                  </li>
+                <?php }?>
               </ul>
               
             </li>
