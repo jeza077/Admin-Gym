@@ -63,7 +63,7 @@ class TablaClientesInscripcionesHistorico{
 
                     $deuda = abs($clientes[$i]['precio_inscripcion'] * $diasFinal);
 
-                    $deudaFinal = "<div>L.$deuda</div>";
+                    $deudaFinal = "<div>L. ".number_format($deuda, 2)."</div>";
 
                     // $deudaFinal = 'L.'.$deuda.'';
                   
