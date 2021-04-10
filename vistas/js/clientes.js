@@ -323,7 +323,6 @@ exportarPdf('.btnExportarHistorialPagosClientes', 'clientes-pagos-historico');
 /*=============================================
         EDITAR CLIENTE GIMNASIO
 =============================================*/
-
 $(document).on('click', '.btnEditarClienteGimnasio', function () { 
     
     var idEditarCliente = $(this).attr("idEditarClienteGimnasio");
@@ -387,6 +386,42 @@ $(document).on('click', '.btnEditarClienteGimnasio', function () {
         }
     });
 });
+/*=============================================
+        VER DATOS CLIENTE GIMNASIO
+=============================================*/
+$(document).on('click', '.btnVerClienteGimnasio', function () { 
+    
+    var idEditarCliente = $(this).attr("idEditarClienteGimnasio");
+    var tipoCliente = $(this).attr("tipoClienteGimnasio");
+    // console.log(idEditarCliente)
+    var datos = new FormData();
+    datos.append("idEditarCliente", idEditarCliente);
+    datos.append("tipoCliente", tipoCliente)
+    // console.log(tipoClienteGimnasio)
+
+    $.ajax({
+    
+        url:"ajax/clientes.ajax.php",
+        method: "POST",
+        data: datos,
+        cache: false,
+        contentType: false,
+        processData: false,  
+        dataType: "json",
+        success: function(respuesta) {
+
+            // console.log("respuesta", respuesta);
+            
+            $('#detalleDireccionClienteGym').val(respuesta["direccion"]);
+            $('#detalleFechaNacClienteGym').val(respuesta["fecha_nacimiento"]);
+            $('#detalleSexoClienteGym').val(respuesta["sexo"]);
+            
+        }
+    });
+});
+
+
+
 
 /*============================================================
     MOSTRAR PRECIOS DE MATRICULA, DESCUENTO Y INSCRIPCION
@@ -1166,6 +1201,60 @@ $(document).on('click', '.btnEditarClienteVenta', function () {
         }
     });
 });
+
+
+/*=============================================
+    VER DATOS A DETALLE CLIENTE VENTA
+=============================================*/
+$(document).on('click', '.btnVerClienteVenta', function () { 
+    
+    $('.alert').remove();
+
+    var idEditarClienteVenta = $(this).attr("idEditarClienteVenta");
+    var tipoClienteDeVenta = $(this).attr("tipoClienteVenta");
+    // console.log(tipoClienteVenta)
+    var datos = new FormData();
+    datos.append("idEditarClienteVenta", idEditarClienteVenta);
+    datos.append("tipoClienteDeVenta", tipoClienteDeVenta);
+    // console.log(idEditarClienteVenta)
+
+    $.ajax({
+    
+        url:"ajax/clientes.ajax.php",
+        method: "POST",
+        data: datos,
+        cache: false,
+        contentType: false,
+        processData: false,  
+        dataType: "json",
+        success: function(respuesta) {
+
+            console.log("respuesta", respuesta);
+            
+            if(respuesta['direccion'] == null || respuesta['fecha_nacimiento'] == null || respuesta['sexo'] == null || respuesta['num_documento'] == null){
+                
+                // $('.alertaClienteVenta').append('<div class="alert alert-warning fade show mt-2" role="alert" style="padding:.75rem 0.5rem"><i class="icon fas fa-exclamation-triangle"></i>Faltan campos que añadir. Hagalo desde aquí. <button class="añadirDatosCliVenta btn btn-md btn-outline-orange" data-toggle="modal" data-target="#modalEditarClienteVenta">Añadir</button></div>');
+                $('.alertaClienteVenta').append('<div class="alert alert-warning fade show mt-2" role="alert" style="padding:.75rem 0.5rem"><i class="icon fas fa-exclamation-triangle"></i>Faltan campos que añadir. Hagalo desde Editar cliente.</div>');
+                // setTimeout(function () {
+                //     $('.alert').remove();
+                // }, 3000)
+
+                $('#detalleDireccionClienteVenta').val(respuesta["direccion"]);
+                $('#detalleFechaNacClienteVenta').val(respuesta["fecha_nacimiento"]);
+                $('#detalleSexoClienteVenta').val(respuesta["sexo"]);
+                // console.log('es nulo')
+            } else {
+                // console.log('no es nulo')
+                $('#detalleDireccionClienteVenta').val(respuesta["direccion"]);
+                $('#detalleFechaNacClienteVenta').val(respuesta["fecha_nacimiento"]);
+                $('#detalleSexoClienteVenta').val(respuesta["sexo"]);
+            }
+
+            
+        }
+    });
+});
+
 
 
 

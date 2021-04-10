@@ -52,7 +52,7 @@
                     <th scope="col">Tipo Cliente</th>
                     <th scope="col">Correo</th>
                     <th scope="col">Telefono</th>
-                    <th scope="col">Fecha Creacion</th>
+                    <!-- <th scope="col">Fecha Creacion</th> -->
                     <th scope="col">Acciones</th>
                   </tr>
                 </thead>
@@ -422,6 +422,64 @@
                 ?>
          
           </form>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- =======================================
+    MODAL DATOS DE CLIENTE VENTAS A DETALLE
+  ======================================----->
+  <div class="modal fade" id="modalVerClienteVenta" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md" role="document">
+      <div class="modal-content">      
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Datos cliente</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          
+        <form role="form" method="post" class="formulario" enctype="multipart/form-data">
+
+          <div class="alertaClienteVenta"></div>
+
+          <div class="form-row">
+            <div class="form-group col-md-12">
+              <label>Dirección</label>
+              <input type="text" class="form-control" value="" id=detalleDireccionClienteVenta disabled>
+            </div>
+          </div>
+
+          <!-- <div class="form-row">
+            <div class="form-group col-md-12">
+              <label>Sexo</label>
+              <input type="text" class="form-control" value="" id=detalleSexoClienteVenta disabled>
+            </div>
+          </div> -->
+          
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label>Fecha nacimiento</label>
+              <input type="text" class="form-control" value="" id=detalleFechaNacClienteVenta disabled>
+            </div>
+            <div class="form-group col-md-6">
+              <label>Sexo</label>
+              <input type="text" class="form-control" value="" id=detalleSexoClienteVenta disabled>
+            </div>
+          </div>
+      
+          <!-- <div class="modal-footer"> -->
+          <div class="form-group final mt-4 float-right">
+            <button type="button" class="btn btn-danger" id="salirCliVenta" data-dismiss="modal">Salir</button>
+          </div>
+      
+        </form>
+
 
         </div>
 
@@ -871,6 +929,64 @@
       </div>
     </div>
   </div>
+
+  <!-- =======================================
+      MODAL DATOS DE CLIENTE GYM A DETALLE
+  ======================================----->
+  <div class="modal fade" id="modalVerClienteGym" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md" role="document">
+      <div class="modal-content">      
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Datos cliente</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          
+        <form role="form" method="post" class="formulario" enctype="multipart/form-data">
+
+          <div class="form-row">
+            <div class="form-group col-md-12">
+              <label>Dirección</label>
+              <input type="text" class="form-control" value="" id=detalleDireccionClienteGym disabled>
+            </div>
+          </div>
+
+          <!-- <div class="form-row">
+            <div class="form-group col-md-12">
+              <label>Sexo</label>
+              <input type="text" class="form-control" value="" id=detalleSexoClienteGym disabled>
+            </div>
+          </div> -->
+          
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label>Fecha nacimiento</label>
+              <input type="text" class="form-control" value="" id=detalleFechaNacClienteGym disabled>
+            </div>
+            <div class="form-group col-md-6">
+              <label>Sexo</label>
+              <input type="text" class="form-control" value="" id=detalleSexoClienteGym disabled>
+            </div>
+          </div>
+      
+          <!-- <div class="modal-footer"> -->
+          <div class="form-group final mt-4 float-right">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
+          </div>
+      
+        </form>
+
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
 
 
   <!-- =======================================

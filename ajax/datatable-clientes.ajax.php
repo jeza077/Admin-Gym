@@ -43,12 +43,12 @@ class TablaClientes{
                 if($clientes[$i]['tipo_cliente'] == "Gimnasio"){
                     // $botones = 'Gym';
                     
-                    $botones = "<button class='btn btn-warning btnEditarClienteGimnasio' tipoClienteGimnasio='".$clientes[$i]["tipo_cliente"]."' id='btnEditarClienteGimnasio' data-toggle='modal' data-target='#modalEditarClienteGimnasio' idEditarClienteGimnasio='".$clientes[$i]["id_personas"]."'><i class='fas fa-pencil-alt' style='color:#fff'></i></button> <button class='btn btn-danger btnEliminarCliente' idPersona='".$clientes[$i]["id_personas"]."'><i class='fas fa-trash-alt'></i></button>";
+                    $botones = "<button class='btn btn-info btnVerClienteGimnasio' tipoClienteGimnasio='".$clientes[$i]["tipo_cliente"]."' idEditarClienteGimnasio='".$clientes[$i]["id_personas"]."' data-toggle='modal' data-target='#modalVerClienteGym' data-toggle='tooltip' data-placement='left' title='Ver más'><i class='fas fa-eye' style='color:#fff'></i></button> <button class='btn btn-warning btnEditarClienteGimnasio' tipoClienteGimnasio='".$clientes[$i]["tipo_cliente"]."' id='btnEditarClienteGimnasio' data-toggle='modal' data-target='#modalEditarClienteGimnasio' idEditarClienteGimnasio='".$clientes[$i]["id_personas"]."'><i class='fas fa-pencil-alt' style='color:#fff'></i></button> <button class='btn btn-danger btnEliminarCliente' idPersona='".$clientes[$i]["id_personas"]."'><i class='fas fa-trash-alt'></i></button>";
 
                 } else {
                     // $botones = 'Ventas';
 
-                    $botones = "<button class='btn btn-warning btnEditarClienteVenta' tipoClienteVenta='".$clientes[$i]["tipo_cliente"]."' id='btnEditarClienteVenta' data-toggle='modal' data-target='#modalEditarClienteVenta' idEditarClienteVenta='".$clientes[$i]["id_personas"]."'><i class='fas fa-pencil-alt' style='color:#fff'></i></button> <button class='btn btn-danger btnEliminarCliente' idPersona='".$clientes[$i]["id_personas"]."'><i class='fas fa-trash-alt'></i></button>";
+                    $botones = "<button class='btn btn-info btnVerClienteVenta' tipoClienteVenta='".$clientes[$i]["tipo_cliente"]."' idEditarClienteVenta='".$clientes[$i]["id_personas"]."' data-toggle='modal' data-target='#modalVerClienteVenta' data-toggle='tooltip' data-placement='left' title='Ver más'><i class='fas fa-eye' style='color:#fff'></i></button> <button class='btn btn-warning btnEditarClienteVenta' tipoClienteVenta='".$clientes[$i]["tipo_cliente"]."' id='btnEditarClienteVenta' data-toggle='modal' data-target='#modalEditarClienteVenta' idEditarClienteVenta='".$clientes[$i]["id_personas"]."'><i class='fas fa-pencil-alt' style='color:#fff'></i></button> <button class='btn btn-danger btnEliminarCliente' idPersona='".$clientes[$i]["id_personas"]."'><i class='fas fa-trash-alt'></i></button>";
                 }
 
                 $datosJson .='[
@@ -58,11 +58,11 @@ class TablaClientes{
                     "'.$clientes[$i]["tipo_cliente"].'",
                     "'.$clientes[$i]["correo"].'",
                     "'.$clientes[$i]["telefono"].'",
-                    "'.$clientes[$i]["fecha_creacion"].'",
                     "'.$botones.'"
-                    ],';
-
+                ],';
+                
             }
+            // "'.$clientes[$i]["fecha_creacion"].'",
 
 		  $datosJson = substr($datosJson, 0, -1);
 

@@ -125,9 +125,11 @@
                     ';
                     } else {
                       echo '<td>
-                              <button class="btn btn-info btnVerUsuario" idUsuario="'.$value["id_personas"].'" data-toggle="modal" data-target="#modalVerUsuario"><i class="fas fa-eye" style="color:#fff"></i></button>
-                              <button class="btn btn-warning btnEditarUsuario" idUsuario="'.$value["id_personas"].'" data-toggle="modal" data-target="#modalEditarUsuario"><i class="fas fa-pencil-alt" style="color:#fff"></i></button>
-                              <button class="btn btn-danger btnEliminarUsuario" idPersona="'.$value["id_personas"].'" fotoUsuario="'.$value["foto"].'" usuario="'.$value["usuario"].'"><i class="fas fa-trash-alt"></i></button>
+                              <button class="btn btn-info btnVerUsuario" idUsuario="'.$value["id_personas"].'" data-toggle="modal" data-target="#modalVerUsuario" data-toggle="tooltip" data-placement="left" title="Ver más"><i class="fas fa-eye" style="color:#fff"></i></button>
+
+                              <button class="btn btn-warning btnEditarUsuario" idUsuario="'.$value["id_personas"].'" data-toggle="modal" data-target="#modalEditarUsuario" data-toggle="tooltip" data-placement="left" title="Editar"><i class="fas fa-pencil-alt" style="color:#fff"></i></button>
+
+                              <button class="btn btn-danger btnEliminarUsuario" idPersona="'.$value["id_personas"].'" fotoUsuario="'.$value["foto"].'" usuario="'.$value["usuario"].'" data-toggle="tooltip" data-placement="left" title="Eliminiar"><i class="fas fa-trash-alt"></i></button>
                             </td>
                           </tr>
                     ';
