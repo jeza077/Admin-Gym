@@ -51,11 +51,13 @@
 
             <tr>
               <th scope="col">#</th>
-              <th scope="col">Código factura</th>
+              <th scope="col">Cod. factura</th>
               <th scope="col">Cliente</th>
               <th scope="col" width="15px">Productos</th>
+              <th scope="col">Impuesto</th>
+              <th scope="col">Sub total</th>
               <th scope="col">Total Neto</th>
-              <th scope="col">Fecha</th>
+              <th scope="col">Fecha compra</th>
               <th scope="col">Acciones</th>
             </tr>
 
@@ -85,9 +87,9 @@
               // $decod = json_decode($respuesta[0]['productos']);
               // foreach ($respuesta as $key => $value) {
               //   $decodif = json_decode($value['productos']);
-              //   // echo "<pre>";
-              //   // var_dump(($decodif));
-              //   // echo "</pre>";
+              //   echo "<pre>";
+              //   var_dump(($decodif));
+              //   echo "</pre>";
 
               //   foreach ($decodif as $key => $val) {
               //     echo "<pre>";
@@ -129,7 +131,7 @@
                               // echo 'mas de uno';
                                echo  $val->descripcion.',';
                             } else {
-                              echo  $val->descripcion.', ';
+                              echo  $val->descripcion.'('.$val->cantidad.'), ';
                               // echo 'solo uno';
 
                               // echo  $val->descripcion;
@@ -138,7 +140,11 @@
                           }
                         echo '</td>'; 
                         
-                        echo '<td>L. '.number_format($value["total"],2).'</td>
+                        echo '<td>L. '.number_format($value["impuesto"],2).'</td>
+
+                        <td>L. '.number_format($value["neto"],2).'</td>
+                        
+                        <td>L. '.number_format($value["total"],2).'</td>
 
                         <td>'.$value["fecha"].'</td>
 
