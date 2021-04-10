@@ -186,7 +186,7 @@ $(".verificarCorreoPreguntas").on('click', function(event){
                                         });
 
                                     } else {
-                                        console.log('bien');
+                                        // console.log('bien');
                                         togglePassword();
                                         
                                         $("#tituloNuevaPass").remove();
@@ -242,7 +242,7 @@ $(".verificarCorreoPreguntas").on('click', function(event){
                                                         processData: false,  
                                                         dataType: "json",
                                                         success: function(respuesta) {
-                                                            // console.log(respuesta);
+                                                            console.log(respuesta);
                                                             if(respuesta == true){
                                                                 Swal.fire({
                                                                     icon: "success",

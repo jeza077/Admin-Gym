@@ -1378,9 +1378,10 @@ class ControladorUsuarios{
 		$tabla1 = "tbl_personas";
 		$tabla2 = "tbl_usuarios";
 
-		//$tabla='tbl_historial_pass';
+		// return $post;
+		$tabla='tbl_historial_pass';
 		//$item= 'pass';
-		//$id_usuario=$valor;     
+		$id_usuario=$valor;     
 			
 		if(isset($post)){
 			
@@ -1393,8 +1394,15 @@ class ControladorUsuarios{
 				// return $respuestaContraseñas;
 
 
-				/*
-				$respuestamostrar = ModeloUsuarios::mdlMostrarHistorialPassword($tabla,$item,$id_usuario);
+				$itemNuevo = '*';
+				$respuestamostrar = ModeloUsuarios::mdlMostrarHistorialPassword($tabla,$itemNuevo,$id_usuario);
+
+				// return $respuestamostrar;
+				// if($respuestamostrar[] == 10){
+					
+				// } else {
+					
+				// }
 
 				
 			    $mostrarpass1= $respuestamostrar[0]['pass'];
@@ -1430,7 +1438,7 @@ class ControladorUsuarios{
 			     $longitudRecursiva = count($respuestamostrar, COUNT_RECURSIVE); // Devuelve 6
 			    //echo 'elnumero de elementos del arreglo es:--> '.$longitud;
 			    //echo "<br>";
-				*/
+				
 
 				if($respuestaContraseñas['password'] == $encriptar){
 
@@ -1442,7 +1450,7 @@ class ControladorUsuarios{
 					
 				} else {
 
-					/*
+					
 					if ($longitudRecursiva>10) {
 						if ($fecha1<$fecha2 and $fecha1<$fecha3 and $fecha1<$fecha4 
 							and $fecha1<$fecha5 and $fecha1<$fecha6 and $fecha1<$fecha7 
@@ -1503,16 +1511,16 @@ class ControladorUsuarios{
 
 
 					
-						echo $passwordmenor;
+						// echo $passwordmenor;
 
 						$tabla='tbl_historial_pass';
 						$item= 'fecha_creacion';
 						$fecha_antigua=$passwordmenor;
 						//$id_usuario=$respuestaContraseñas['id_usuario'];
 					
-						$respuestaEliminar = ModeloUsuarios::mdlEliminarHistorialPassword($tabla,$item,           $fecha_antigua);
+						$respuestaEliminar = ModeloUsuarios::mdlEliminarHistorialPassword($tabla, $item, $fecha_antigua);
 					}
-					*/
+					
 					//INSERTAR UN PASSWORD NUEVO
 					$tabla="tbl_historial_pass";
 					$id_usuario=$respuestaContraseñas["id_usuario"];
@@ -1550,7 +1558,7 @@ class ControladorUsuarios{
 				
 			} else {
 
-				$respuesta = false;
+				$respuesta = 'false';
 				return $respuesta;
 
 			}

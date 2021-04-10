@@ -69,6 +69,15 @@ class ModeloUsuarios{
 
 		$stmt -> close();
 		$stmt = null;
+
+		// $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla where $item = :$item");
+		// $stmt -> bindParam(":".$item, $id_usuario, PDO::PARAM_STR);
+		// $stmt -> execute();
+
+		// return $stmt -> fetchAll();
+
+		// $stmt -> close();
+		// $stmt = null;
 	
 	} 
 
@@ -362,7 +371,7 @@ class ModeloUsuarios{
 		
 				}else{
 		
-					return false;
+					return $stmt->errorInfo();
 				
 				}
 
@@ -379,7 +388,7 @@ class ModeloUsuarios{
 		
 				}else{
 		
-					return false;
+					return $stmt->errorInfo();
 				
 				}
 
@@ -395,7 +404,7 @@ class ModeloUsuarios{
 	
 			}else{
 	
-				return false;
+				return $stmt->errorInfo();
 			
 			}
 		}
