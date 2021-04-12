@@ -127,6 +127,11 @@ class ControladorClientes{
 						// echo "</pre>";
 						// return;
 						if ($respuestaPago ==true) {
+							
+							$descripcionEvento = "".$_SESSION['usuario']." creó un nuevo cliente del gimnasio";
+							$accion = "Nuevo";
+							$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION['id_usuario'], 3, $accion, $descripcionEvento);
+
 							return true;
 						}
 					
@@ -136,6 +141,9 @@ class ControladorClientes{
 					}
 
 				} else {
+					$descripcionEvento = "".$_SESSION['usuario']." creó un nuevo cliente de ventas";
+					$accion = "Nuevo";
+					$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION['id_usuario'], 3, $accion, $descripcionEvento);
 					return true;
 				}
 
