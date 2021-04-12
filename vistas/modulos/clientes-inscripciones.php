@@ -26,17 +26,18 @@
         $permisoActualizar = $_SESSION['permisos']['Clientes']['actualizar'];
         $permisoConsulta = $_SESSION['permisos']['Clientes']['consulta'];
 
+        $descripcionEvento = "".$_SESSION['usuario']." Consultó la pantalla de clientes inscripciones";
+        $accion = "Consulta";
+
+        $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 5,$accion, $descripcionEvento);
+
         // var_dump($_SESSION['perm']);
 
         // foreach ($permisos_pantalla as $key => $value) {
         //   echo $key;
         // }
         
-        $descripcionEvento = " Consulto la pantalla de cliente";
-        $accion = "consulta";
-
-        $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 3,$accion, $descripcionEvento);
-
+        
       ?>
 
       <div class="card">
