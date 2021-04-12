@@ -28,6 +28,12 @@
         $permisoActualizar = $_SESSION['permisos']['Usuarios']['actualizar'];
         $permisoConsulta = $_SESSION['permisos']['Usuarios']['consulta'];
 
+        $descripcionEvento = "".$_SESSION['usuario']." Consultó la pantalla de equipo";
+        $accion = "Consulta";
+
+        $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 12,$accion, $descripcionEvento);
+
+
       ?>
 
 
