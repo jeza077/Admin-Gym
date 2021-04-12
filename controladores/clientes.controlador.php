@@ -852,7 +852,7 @@ class ControladorClientes{
 					$mostrarNombreCliente= ControladorPersonas::ctrMostrarPersonas($item, $valor, $all);
 				
 
-					$descripcionEvento = "".$_SESSION['usuario']." Cambió el pago de inscripcion al usuario ".$mostrarNombreCliente['nombre']."";
+					$descripcionEvento = "".$_SESSION['usuario']." Cambió el pago de inscripción al usuario ".$mostrarNombreCliente['nombre']."";
 					$accion = "Actualizar";
 					$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION['id_usuario'], 21, $accion, $descripcionEvento);
 
@@ -1209,6 +1209,9 @@ class ControladorClientes{
 				
 		
 					if($respuestaPago == true){
+						$descripcionEvento = "".$_SESSION['usuario']." Creó una nueva inscripción ";
+						$accion = "Nuevo";
+						$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION['id_usuario'], 21, $accion, $descripcionEvento);
 						echo "<script>
 								Swal.fire({
 									title: 'Inscripcion agregada exitosamente!',
