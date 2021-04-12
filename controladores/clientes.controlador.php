@@ -843,6 +843,20 @@ class ControladorClientes{
 				$respuestaPagoCliente = ModeloClientes::mdlActualizarInscripcionPagoCliente($tabla, $datos, $fecha);
 	
 				if($respuestaPagoCliente == true){
+
+					//$tabla = "tbl_personas";
+					$item = "id_personas";
+					$valor = $respuesta['id_personas'];
+					$all = null;
+
+					$mostrarNombreCliente= ControladorPersonas::ctrMostrarPersonas($item, $valor, $all);
+				
+
+					$descripcionEvento = "".$_SESSION['usuario']." Cambió el pago de inscripcion al usuario ".$mostrarNombreCliente['nombre']."";
+					$accion = "Actualizar";
+					$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION['id_usuario'], 21, $accion, $descripcionEvento);
+
+
 					echo "<script>
 							Swal.fire({
 								title: 'El cambio y pago de inscripcion, se realizo exitosamente!',
