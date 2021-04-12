@@ -147,9 +147,11 @@ $pdf->Cell(15, 5, 'No', 1, 0, 'C', 1);
 $pdf->Cell(30, 5, 'Cod. Factura', 1, 0, 'C', 1);
 $pdf->Cell(50, 5, 'Cliente', 1, 0, 'C', 1);
 $pdf->Cell(40, 5, 'Productos', 1, 0, 'C', 1);
-$pdf->Cell(40, 5, 'Impuesto', 1, 0, 'C', 1);
-$pdf->Cell(40, 5, 'Neto', 1, 0, 'C', 1);
-$pdf->Cell(40, 5, 'Total', 1, 0, 'C', 1);
+$pdf->Cell(32, 5, 'Impuesto', 1, 0, 'C', 1);
+$pdf->Cell(32, 5, 'Neto', 1, 0, 'C', 1);
+$pdf->Cell(32, 5, 'Total', 1, 0, 'C', 1);
+$pdf->Cell(38, 5, 'F. compra', 1, 0, 'C', 1);
+
 
 
 
@@ -197,9 +199,11 @@ if(!$ventas){
             $pdf->Cell(30, 5, 'Cod. Factura', 1, 0, 'C', 1);
             $pdf->Cell(50, 5, 'Cliente', 1, 0, 'C', 1);
             $pdf->Cell(40, 5, 'Productos', 1, 0, 'C', 1);
-            $pdf->Cell(40, 5, 'Impuesto', 1, 0, 'C', 1);
-            $pdf->Cell(40, 5, 'Neto', 1, 0, 'C', 1);
-            $pdf->Cell(40, 5, 'Total', 1, 0, 'C', 1);
+            $pdf->Cell(32, 5, 'Impuesto', 1, 0, 'C', 1);
+            $pdf->Cell(32, 5, 'Neto', 1, 0, 'C', 1);
+            $pdf->Cell(32, 5, 'Total', 1, 0, 'C', 1);
+            $pdf->Cell(38, 5, 'F. compra', 1, 0, 'C', 1);
+
         }
         // $pdf->Cell(15, 5, ''.$i.'', 1, 0, 'C');
 
@@ -211,34 +215,18 @@ if(!$ventas){
         $pdf->Cell(50, 4, ''.$value['nombre'].' '.$value['apellidos'].'' , 0, 0, 'C');
         // $pdf->Cell(40, 4, 'Productos', 0, 0, 'C');
         
-        $decod = json_decode($value['productos']);
-        //   $contador = count($val->descripcion);
-        //   echo ($val->descripcion);
-        //   if($key = 0){
-                // echo 'mas de uno';
+        // $decod = json_decode($value['productos']);
                 
-                $decod = json_decode($value['productos']);
-                foreach ($decod as $key => $val) {
-                    $pdf->MultiCell(40, 4, ''.$val->descripcion, 1,'J', 0, 0, '', '', true, 0, true, 40);
-                }
+        $decod = json_decode($value['productos']);
+        foreach ($decod as $key => $val) {
+            $pdf->MultiCell(40, 4, ''.$val->descripcion.'('.$val->cantidad.')', 1,'J', 0, 0, '', '', true, 0, true, 40);
+        }
 
-            // }
-               
 
-            //  echo  $val->descripcion.',';
-        //   } 
-        //   else {
-            // echo  $val->descripcion.', ';
-            // echo 'solo uno';
-            // $pdf->Cell(55, 4, ''.$val->descripcion.'', 0, 0, 'C');
-            // echo  $val->descripcion;
-
-        //   }
-        // }
-
-        $pdf->Cell(40, 4, ''.$value['impuesto'].'', 0, 0, 'C');
-        $pdf->Cell(40, 4, ''.$value['neto'].'', 0, 0, 'C');
-        $pdf->Cell(40, 4, ''.$value['total'].'', 0, 0, 'C');
+        $pdf->Cell(32, 4, 'L. '.number_format($value['impuesto'],2).'', 0, 0, 'C');
+        $pdf->Cell(32, 4, 'L. '.number_format($value['neto'],2).'', 0, 0, 'C');
+        $pdf->Cell(32, 4, 'L. '.number_format($value['total'],2).'', 0, 0, 'C');
+        $pdf->Cell(38, 4, ''.$value['fecha'].'', 0, 0, 'C');
         // $pdf->Ln();
         $i++;
 

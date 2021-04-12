@@ -157,7 +157,7 @@ class ModeloVentas{
 			$stmt = Conexion::conectar() ->prepare("SELECT * FROM $tabla AS v\n"
 			. "INNER JOIN tbl_clientes AS c ON v.id_cliente = c.id_cliente\n"
 			. "INNER JOIN tbl_personas AS p ON c.id_persona = p.id_personas\n"
-			. "WHERE nombre LIKE '%$rango%' OR fecha LIKE '%$rango%' OR numero_factura LIKE '%$rango%'");
+			. "WHERE nombre LIKE '%$rango%' OR apellidos LIKE '%$rango%' OR fecha LIKE '%$rango%' OR numero_factura LIKE '%$rango%' OR impuesto LIKE '%$rango%' OR neto LIKE '%$rango%' OR total LIKE '%$rango%'");
 			$stmt->bindParam(":nombre", $rango, PDO::PARAM_STR);
 			$stmt->bindParam(":fecha", $rango, PDO::PARAM_STR);
 			$stmt->bindParam(":numero_factura", $rango, PDO::PARAM_STR);

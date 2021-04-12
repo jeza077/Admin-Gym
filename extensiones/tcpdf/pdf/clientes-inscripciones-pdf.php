@@ -140,10 +140,10 @@ $pdf->SetFillColor(225, 235, 255);
 $pdf->Cell(15, 5, 'No', 1, 0, 'C', 1);
 $pdf->Cell(75, 5, 'Nombre', 1, 0, 'C', 1);
 $pdf->Cell(35, 5, 'Tipo Inscripcion', 1, 0, 'C', 1);
-// $pdf->Cell(35, 5, 'Ultimo Pago', 1, 0, 'C', 1);
-$pdf->Cell(38, 5, 'Fecha Ult. Pago', 1, 0, 'C', 1);
-$pdf->Cell(38, 5, 'Fecha Prox. Pago', 1, 0, 'C', 1);
-$pdf->Cell(30, 5, 'Estado', 1, 0, 'C', 1);
+$pdf->Cell(35, 5, 'F. Inscripción', 1, 0, 'C', 1);
+$pdf->Cell(32, 5, 'F. Ult. Pago', 1, 0, 'C', 1);
+$pdf->Cell(32, 5, 'F. Prox. Pago', 1, 0, 'C', 1);
+$pdf->Cell(25, 5, 'Estado', 1, 0, 'C', 1);
 $pdf->Cell(25, 5, 'Deuda', 1, 0, 'C', 1);
 
 
@@ -185,10 +185,10 @@ if(!$clientes){
             $pdf->Cell(15, 5, 'No', 1, 0, 'C', 1);
             $pdf->Cell(75, 5, 'Nombre', 1, 0, 'C', 1);
             $pdf->Cell(35, 5, 'Tipo Inscripcion', 1, 0, 'C', 1);
-            // $pdf->Cell(35, 5, 'Ultimo Pägo', 1, 0, 'C', 1);
-            $pdf->Cell(38, 5, 'Fecha Ult. Pago', 1, 0, 'C', 1);
-            $pdf->Cell(38, 5, 'Fecha Prox. Pago', 1, 0, 'C', 1);
-            $pdf->Cell(30, 5, 'Estado', 1, 0, 'C', 1);
+            $pdf->Cell(35, 5, 'F. Inscripción', 1, 0, 'C', 1);
+            $pdf->Cell(32, 5, 'F. Ult. Pago', 1, 0, 'C', 1);
+            $pdf->Cell(32, 5, 'F. Prox. Pago', 1, 0, 'C', 1);
+            $pdf->Cell(25, 5, 'Estado', 1, 0, 'C', 1);
             $pdf->Cell(25, 5, 'Deuda', 1, 0, 'C', 1);
 
         }
@@ -200,14 +200,14 @@ if(!$clientes){
         $pdf->Cell(15, 4, ''.($key+1).'', 0, 0, 'C');
         $pdf->Cell(75, 4, ''.$value['nombre'].' '.$value['apellidos'].'', 0, 0, 'C');
         $pdf->Cell(35, 4, ''.$value['tipo_inscripcion'].'', 0, 0, 'C');
-        // $pdf->Cell(35, 4, 'L.'.$value['pago_total'].'.00', 0, 0, 'C');   
-        $pdf->Cell(38, 4, ''.$value['fecha_pago'].'', 0, 0, 'C');
-        $pdf->Cell(38, 4, ''.$value['fecha_proximo_pago'].'', 0, 0, 'C');
+        $pdf->Cell(35, 4, ''.$value['fecha_inscripcion'].'', 0, 0, 'C');   
+        $pdf->Cell(32, 4, ''.$value['fecha_pago'].'', 0, 0, 'C');
+        $pdf->Cell(32, 4, ''.$value['fecha_proximo_pago'].'', 0, 0, 'C');
 
         if($value["estado"] == 1){
-            $pdf->Cell(30, 4, 'Activado', 0, 0, 'C');
+            $pdf->Cell(25, 4, 'Activado', 0, 0, 'C');
         } else {
-            $pdf->Cell(30, 4, 'Activado', 0, 0, 'C');
+            $pdf->Cell(25, 4, 'Activado', 0, 0, 'C');
         }
         
         $fecha_actual = strtotime(date("Y-m-d"));
@@ -223,7 +223,7 @@ if(!$clientes){
 
             $deuda = abs($value['precio_inscripcion'] * $diasFinal);
             // echo '<td>L.'.$deuda.'</td>';
-            $pdf->Cell(25, 4, 'L.'.$deuda.'', 0, 0, 'C');
+            $pdf->Cell(25, 4, 'L.'.number_format($deuda,2).'', 0, 0, 'C');
 
           
         } else {
