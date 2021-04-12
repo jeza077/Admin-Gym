@@ -410,11 +410,11 @@ class ControladorInventario{
                     $valor4 = null;
                     $respuesta= ModeloInventario::mdlActualizarProductos($tabla, $item1, $valor1, $item2, $valor2, $item3, $valor3, $item4, $valor4);
                     if ($respuesta == true) {
-                        // $descripcionEvento = "  Nuevo Producto";
-                        // $accion = "Nuevo";
+                        
+                        $descripcionEvento = $descripcionEvento = "".$_SESSION['usuario']." Realizó una nueva compra ";
+                        $accion = "Nuevo";
 
-                        // $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 4,$accion, $descripcionEvento);
-    
+                        $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 9,$accion, $descripcionEvento);
 
                         echo '<script>
                                 Swal.fire({
