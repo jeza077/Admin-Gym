@@ -586,6 +586,11 @@ class ControladorPersonas{
                     // return;        
     
                     if($respuestaDeEditarPersona == true){
+
+                        $descripcionEvento = "".$_SESSION['usuario']." actualizó un cliente de gimnasio llamado ".$_POST["editarNombre"]."";
+					    $accion = "Actualizar";
+					    $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION['id_usuario'], 3, $accion, $descripcionEvento);
+					    
                         
                         echo '<script>
                                 Swal.fire({

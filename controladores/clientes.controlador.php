@@ -127,7 +127,6 @@ class ControladorClientes{
 						// echo "</pre>";
 						// return;
 						if ($respuestaPago ==true) {
-							
 							$descripcionEvento = "".$_SESSION['usuario']." creó un nuevo cliente del gimnasio";
 							$accion = "Nuevo";
 							$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION['id_usuario'], 3, $accion, $descripcionEvento);
@@ -433,7 +432,18 @@ class ControladorClientes{
 			// echo "</pre>";
 			// return $respuestaEditarCliente;			
 
-            if($respuestaEditarCliente = true){			
+            if($respuestaEditarCliente = true){	
+
+				$tabla="tbl_personas";
+				$item="id_personas";
+				$valor=$datos['id_persona'];
+
+				$mostrarNombreCliente= ModeloClientes::mdlMostrarPersonas($tabla,$item,$valor);
+				
+				$descripcionEvento = "".$_SESSION['usuario']." actualizó un nuevo cliente de ventas".$mostrarNombreCliente['nombre']."";
+				$accion = "Actualizar";
+				$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION['id_usuario'], 3, $accion, $descripcionEvento);
+				
 
 				// GUARDAR EN LA TABLA CLIENTE INSCRIPCION
 
@@ -546,13 +556,11 @@ class ControladorClientes{
 					// echo "</pre>";
 					// return;
 					if ($respuestaPago == true) {
+						
 						return true;
 					}
 				
-					$descripcionEvento = "Nuevo cliente";
-					$accion = "Nuevo";
-					$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 3,$accion, $descripcionEvento);
-
+					
 
 				}	
 
