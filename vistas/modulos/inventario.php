@@ -24,6 +24,13 @@
         $permisoEliminar = $_SESSION['permisos']['Usuarios']['eliminar'];
         $permisoActualizar = $_SESSION['permisos']['Usuarios']['actualizar'];
         $permisoConsulta = $_SESSION['permisos']['Usuarios']['consulta'];
+
+        $descripcionEvento = "".$_SESSION['usuario']." Consultó la pantalla de inventario";
+        $accion = "Consulta";
+
+        $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 10,$accion, $descripcionEvento);
+
+
       ?>
 
       <div class="card">
