@@ -434,13 +434,16 @@ class ControladorClientes{
 
             if($respuestaEditarCliente = true){	
 
-				$tabla="tbl_personas";
-				$item="id_personas";
-				$valor=$datos['id_persona'];
-
-				$mostrarNombreCliente= ModeloClientes::mdlMostrarPersonas($tabla,$item,$valor);
 				
-				$descripcionEvento = "".$_SESSION['usuario']." actualizó un nuevo cliente de ventas".$mostrarNombreCliente['nombre']."";
+
+				//$tabla = "tbl_personas";
+				$item = "id_personas";
+				$valor = $datos['id_persona'];
+				$all = null;
+
+				$mostrarNombreCliente= ControladorPersonas::ctrMostrarPersonas($item, $valor, $all);
+				
+				$descripcionEvento = "".$_SESSION['usuario']." Actualizó el cliente de ventas llamado ".$mostrarNombreCliente['nombre']."";
 				$accion = "Actualizar";
 				$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION['id_usuario'], 3, $accion, $descripcionEvento);
 				
