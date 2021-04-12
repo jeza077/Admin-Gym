@@ -32,8 +32,8 @@
         //   echo $key;
         // }
         
-        $descripcionEvento = " Consulto la pantalla de cliente";
-        $accion = "consulta";
+        $descripcionEvento ="".$_SESSION['usuario']. " Consultó la pantalla de clientes";
+        $accion = "Consulta";
 
         $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 3,$accion, $descripcionEvento);
 
