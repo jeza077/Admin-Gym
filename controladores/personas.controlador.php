@@ -859,8 +859,8 @@ class ControladorPersonas{
                 </script>';
 
             } else if($tipoPersona == 'usuario') {
-                $descripcionEvento = " Elimino un usuario.";
-                $accion = "Elimino";
+                $descripcionEvento = "".$_SESSION["usuario"]." Eliminó el usuario ".$_GET['usuario']."";
+                $accion = "Eliminar";
     
                 $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 2,$accion, $descripcionEvento);
     

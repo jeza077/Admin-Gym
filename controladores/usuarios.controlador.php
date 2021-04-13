@@ -559,7 +559,7 @@ class ControladorUsuarios{
 
 							if($respuestaCorreo = true){
 								
-								$descripcionEvento = "Nuevo Usuario";
+								$descripcionEvento = "".$_SESSION["usuario"]." Creó un nuevo usuario llamado ".$nombreUsuario."";
 								$accion = "Nuevo";
 								$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 2,$accion, $descripcionEvento);
 			
@@ -957,8 +957,8 @@ class ControladorUsuarios{
 					if($respuestaEmpleado == true){
 
 					
-						$descripcionEvento = " Actualizo registro en la pantalla de usuario";
-						$accion = "Actualizo";
+						$descripcionEvento = "".$_SESSION["usuario"]." Actualizó el registro del usuario ".$datos["usuario"]."";
+						$accion = "Actualizar";
 			
 						$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 2,$accion, $descripcionEvento);
 			
