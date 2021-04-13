@@ -18,6 +18,14 @@
       </div><!-- /.container-fluid -->
   </section>  
 
+  <?php
+            $descripcionEvento = "".$_SESSION["usuario"]." Consultó la pantalla de proveedores";
+            $accion = "Consulta";
+
+            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 25,$accion, $descripcionEvento);
+
+          ?>
+
   <section class="content">
 
     <div class="card">

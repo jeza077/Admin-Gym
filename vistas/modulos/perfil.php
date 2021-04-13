@@ -13,10 +13,10 @@
     <!--Bitacora cod.-->
 
       <?php
-          $descripcionEvento = "Consulta a Perfil";
+          $descripcionEvento = "".$_SESSION["usuario"]." Consultó el perfil";
           $accion = "Consulta";
 
-          $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 7,$accion, $descripcionEvento);
+          $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 28,$accion, $descripcionEvento);
       ?>
 
     <!-- Main content -->

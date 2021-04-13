@@ -26,10 +26,10 @@
 
                 
                 <?php
-                    $descripcionEvento = " Consulto la pantalla deInscripcion";
-                    $accion = "consulta";
+                    $descripcionEvento = "".$_SESSION["usuario"]." Consultó la pantalla de inscripción";
+                    $accion = "Consulta";
 
-                    $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
+                    $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 21,$accion, $descripcionEvento);
        
                 ?>
 
