@@ -1,10 +1,18 @@
 <?php
+
+require_once("../../../controladores/mantenimiento.controlador.php");
 require_once("../../../controladores/usuarios.controlador.php");
 require_once "../../../modelos/usuarios.modelo.php";
 require_once('../../../controladores/inventario.controlador.php');
 require_once "../../../modelos/inventario.modelo.php";
 require_once('../examples/tcpdf_include.php');
 
+session_start();
+
+$descripcionEvento = "".$_SESSION['usuario']." Generó reporte pdf de compras";
+$accion = "Generar";
+$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION['id_usuario'], 9, $accion,
+$descripcionEvento);
 
 class PDF extends TCPDF{
     
