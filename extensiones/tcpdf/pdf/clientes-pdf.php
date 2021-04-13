@@ -1,4 +1,5 @@
 <?php
+require_once("../../../controladores/mantenimiento.controlador.php");
 require_once("../../../controladores/usuarios.controlador.php");
 require_once "../../../modelos/usuarios.modelo.php";
 require_once('../../../controladores/clientes.controlador.php');
@@ -6,6 +7,12 @@ require_once "../../../modelos/clientes.modelo.php";
 require_once('../examples/tcpdf_include.php');
 date_default_timezone_set("America/Tegucigalpa");
 
+session_start();
+
+$descripcionEvento = "".$_SESSION['usuario']." Generó reporte pdf de administrar clientes";
+$accion = "Generar";
+$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION['id_usuario'], 3, $accion,
+$descripcionEvento);
 
 class PDF extends TCPDF{
     
