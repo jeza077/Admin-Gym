@@ -250,7 +250,7 @@ class ControladorMantenimientos {
 
 
     /*======================================================
-    Inscripciones Insertar
+    INSCRIPCIONES INSERTAR
     =============================================================================================*/
     static public function ctrInscripcionInsertar(){
 
@@ -328,6 +328,99 @@ class ControladorMantenimientos {
               if(result.value){
   
                 window.location = "inscripcion";
+  
+              }
+  
+            });
+  
+  
+          </script>';
+  
+        }
+  
+  
+      }
+  
+    }
+    /*======================================================
+    OBJETO INSERTAR
+    =============================================================================================*/
+    static public function ctrObjetoInsertar(){
+
+      if(isset($_POST["nuevoObjeto"])){
+
+        if(preg_match('/^[A-ZÑÁÉÍÓÚ ]+$/', $_POST["nuevoObjeto"]) && 
+           preg_match('/^[A-Za-zñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevoLink"])&& 
+           preg_match('/^[A-Za-zñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevoIcono"])){
+         
+          
+          $tabla = "tbl_objetos";          
+  
+          $datos = array("objeto" => $_POST["nuevoObjeto"], 
+                          "link" => $_POST["nuevoLink"],
+                          "icono" => $_POST["nuevoIcono"]);
+
+            // echo "<pre>";
+            // var_dump($_POST);
+            // echo "</pre>";
+            // return;
+  
+          $respuesta = ModeloMantenimiento::mdlObjetoInsertar($tabla, $datos);
+          
+          // var_dump($respuesta);
+          if($respuesta == true){
+  
+           
+            // $descripcionEvento = "Nueva Inscripcion del Gimnasio";
+            // $accion = "Nuevo";
+            // $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
+
+         
+       
+            echo '<script>
+  
+            Swal.fire({
+  
+              icon: "success",
+              title: "Objeto creado exitosamente!",
+              showConfirmButton: true,
+              confirmButtonText: "Cerrar",
+              closeOnConfirm: false
+  
+            }).then((result)=>{
+  
+              if(result.value){
+  
+                window.location = "objetos";
+  
+              }
+  
+            });
+  
+  
+            </script>';
+  
+  
+          }
+  
+  
+        }else{
+  
+          echo '<script>
+  
+            Swal.fire({
+  
+              icon: "error",
+              title: "¡Los datos no pueden ir vacíos!",
+              showConfirmButton: true,
+              confirmButtonText: "Cerrar",
+              closeOnConfirm: false
+  
+            }).then((result)=>{
+  
+              if(result.value){
+  
+                window.location = "objetos";
   
               }
   

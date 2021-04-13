@@ -174,6 +174,30 @@ class ModeloMantenimiento{
 		$stmt = null;
     }
 
+    /*============================================
+    INSERTAR OBJETO
+	==============================================*/
+	static public function mdlObjetoInsertar($tabla, $datos){
+
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(objeto, link_objeto, icono) VALUES (:objeto, :link_objeto, :icono)");
+       
+        $stmt->bindParam(":objeto", $datos["objeto"], PDO::PARAM_STR);
+        $stmt->bindParam(":link_objeto", $datos["link"], PDO::PARAM_STR);
+        $stmt->bindParam(":icono", $datos["icono"], PDO::PARAM_STR);
+        
+
+		if($stmt->execute()){
+			return true;
+
+		}else{
+			return false;
+		
+		}
+
+		$stmt->close();
+		$stmt = null;
+    }
+
     /*=============================================
     MOSTRAR INSCRIPCION
 	=============================================*/

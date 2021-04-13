@@ -219,6 +219,7 @@ if(!$ventas){
                 
         $decod = json_decode($value['productos']);
         foreach ($decod as $key => $val) {
+            $pdf->Ln();
             $pdf->MultiCell(40, 4, ''.$val->descripcion.'('.$val->cantidad.')', 1,'J', 0, 0, '', '', true, 0, true, 40);
         }
 

@@ -36,16 +36,16 @@
             <thead>
               <tr>
                 <th scope="col">#</th>
-                <th scope="col">Pregunta</th>
-                <th scope="col">Estado</th>
-                <th scope="col">Acciones</th>
+                <th scope="col">Objeto</th>
+                <th scope="col">Link</th>
+                <th scope="col">Icono</th>
 
               </tr>
             </thead>
             
             <tbody>  
                 <?php
-                  $tabla = "tbl_preguntas";
+                  $tabla = "tbl_objetos";
                   $item = null;
                   $valor = null;
                   $all = null;
@@ -57,18 +57,10 @@
                     echo '
                       <tr>  
                           <td>'.($key + 1).'</td>
-                          <td>'.$value["pregunta"].'</td>';
-                          if($value['estado'] != 0){
-                            echo '<td><button class="btn btn-success btn-md btnActivarPregunta" idPregunta="'.$value["id_preguntas"].'" estadoPregunta="0">Activado</button></td>';
-                          }else{
-                            echo '<td><button class="btn btn-danger btn-md btnActivarPregunta" idPregunta="'.$value["id_preguntas"].'" estadoPregunta="1">Desactivado</button></td>';
-                          } 
-                          echo '
-                          <td>
-                              <button class="btn btn-warning btnEditarPregunta" idPregunta="'.$value["id_preguntas"].'" data-toggle="modal" data-target="#modalEditarPregunta" data-toggle="tooltip" data-placement="left" title="Editar"><i class="fas fa-pencil-alt" style="color:#fff"></i></button>
-
-                              <button class="btn btn-danger btnEliminarPregunta" idEliminarPregunta="'.$value["id_preguntas"].'" data-toggle="tooltip" data-placement="left" title="Borrar"><i class="fas fa-trash-alt"></i></button></td>
-                          </td>
+                          <td>'.$value["objeto"].'</td>
+                          <td>'.$value["link_objeto"].'</td>
+                          <td>'.$value["icono"].'</td>
+                          
                       </tr>  '; 
                   }       
                   ?>                
@@ -86,10 +78,10 @@
 
 
 <!--=====================================
-MODAL AGREGAR NUEVA PREGUNTA
+MODAL AGREGAR NUEVO OBJETO
 ======================================-->
 
-<div class="modal fade" id="modalNuevaPregunta" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modalNuevoObjeto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   
   <div class="modal-dialog" role="document">
 
@@ -102,9 +94,9 @@ MODAL AGREGAR NUEVA PREGUNTA
         ======================================-->
 
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Nueva Pregunta</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Nuevo Objeto</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
+            <span aria-hidden="true">&times;</span>
             </button>
         </div>
 
@@ -113,15 +105,20 @@ MODAL AGREGAR NUEVA PREGUNTA
         ======================================-->
 
         <div class="modal-body">
-          <div class="form-group col-md-12">
-            <label for="">Pregunta</label>
-            <input type="text" class="form-control mayus" name="nuevaPregunta" value="" placeholder="Ingrese Pregunta" required>
-          </div>
+            <div class="form-group col-md-12">
+                <label for="Rol">Objeto</label>
+                <input type="text" class="form-control mayus" name="nuevoObjeto" value="" placeholder="Ingrese Objeto" required>
+            </div>
 
-          <!-- <div class="form-group col-md-12">
-            <label for="Descripcion">Precio Matricula</label>
-            <input type="textarea" class="form-control preciom" name="nuevoPrecio" value="" placeholder="Ingresa Precio Matricula" required>
-          </div> -->
+            <div class="form-group col-md-12">
+                <label for="Descripcion">Link</label>
+                <input type="text" class="form-control" name="nuevoLink" value="" placeholder="Ingrese Link" required>
+            </div>
+
+            <div class="form-group col-md-12">
+                <label for="Descripcion">Icono</label>
+                <input type="text" class="form-control" name="nuevoIcono" value="" placeholder="Ingrese Icono" required>
+            </div>
         </div>
 
         <!--=====================================
@@ -129,22 +126,17 @@ MODAL AGREGAR NUEVA PREGUNTA
         ======================================-->
 
         <div class="modal-footer">
-          <button type="submit" class="btn btn-primary">Guardar</button>
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
         </div>
 
         <?php
 
-          $crearPregunta = new ControladorMantenimientos();
-          $crearPregunta-> ctrPreguntaSeguridadInsertar();
+        $crearObjeto = new ControladorMantenimientos();
+        $crearObjeto -> ctrObjetoInsertar();
 
         ?>
-
-
-
-
       </form>
-
     
 
     </div>
@@ -154,82 +146,4 @@ MODAL AGREGAR NUEVA PREGUNTA
 
 </div>
 
-
-<!--=====================================
-MODAL EDITAR PREGUNTA
-======================================-->
-
-<div class="modal fade" id="modalEditarPregunta" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  
-  <div class="modal-dialog " role="document">
-
-    <div class="modal-content">
-
-      <form role="form" method="post" autocomplete="off">
-
-        <!--=====================================
-        CABEZA DEL MODAL
-        ======================================-->
-
-        <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Editar Pregunta</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-
-        <!--=====================================
-        CUERPO DEL MODAL
-        ======================================-->
-
-        <div class="modal-body">
-          <div class="form-group col-md-12">
-            <label for="Rol">Pregunta</label>
-            <input type="text" class="form-control mayus" id="editarPregunta" name="editarPregunta" value="" required>
-          </div>
-
-          <!-- <div class="form-group col-md-12">
-            <label for="Descripcion">Precio Matricula</label>
-            <input type="textarea" class="form-control preciom" id="editarPrecioMatricula" name="editarPrecioMatricula" value="" required>
-          </div> -->
-          <input type="hidden" id="editarIdPregunta" name="editarIdPregunta">
-        </div>
-
-        <!--=====================================
-        PIE DEL MODAL
-        ======================================-->
-
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-primary">Guardar Cambios</button>
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
-        </div>
-
-        <?php
-
-          $editarPregunta = new ControladorMantenimientos();
-          $editarPregunta->ctrEditarPregunta();
-
-        ?>
-
-
-
-
-      </form>
-
-    
-
-    </div>
-
-  </div>
-        
-
-</div>
-
-
-<?php
-
- $borrarPregunta = new ControladorMantenimientos();
- $borrarPregunta->ctrBorrarPregunta();
-
-?>
 
