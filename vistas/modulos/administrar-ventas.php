@@ -5,12 +5,12 @@
       <div class="row mb-0">
       
         <div class="col-sm-6">
-          <h1>Administrar Venta </h1>
+          <h1>Administrar venta </h1>
         </div>
         
         <div class="col-sm-6">
           <a href="crear-venta" class="btn btn-orange float-right">
-              Nueva Venta     
+              Nueva venta     
           </a> 
           
           <button class="btn btn-danger btnExportarVentas float-right mr-3">
@@ -34,7 +34,7 @@
   <section class="content">
 
     <?php
-      $descripcionEvento = " Consulto la pantalla de Administracion de Ventas";
+      $descripcionEvento = " Consultó la pantalla de Administración de ventas";
       $accion = "consulta";
 
       $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 4,$accion, $descripcionEvento);
@@ -50,13 +50,13 @@
           <thead>
 
             <tr>
-              <th scope="col">#</th>
-              <th scope="col">Cod. factura</th>
+              <th scope="col">N.°</th>
+              <th scope="col">Código factura</th>
               <th scope="col">Cliente</th>
               <th scope="col" width="15px">Productos</th>
               <th scope="col">Impuesto</th>
-              <th scope="col">Sub total</th>
-              <th scope="col">Total Neto</th>
+              <th scope="col">Subtotal</th>
+              <th scope="col">Total neto</th>
               <th scope="col">Fecha compra</th>
               <th scope="col">Acciones</th>
             </tr>

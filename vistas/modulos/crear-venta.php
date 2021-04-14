@@ -15,7 +15,7 @@
       ======================================-->
     <section class="content"> 
       <?php
-        $descripcionEvento = " Consulto la pantalla de crear ventas";
+        $descripcionEvento = " Consultó la pantalla de crear ventas";
         $accion = "consulta";
 
         $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 5,$accion, $descripcionEvento);
@@ -42,7 +42,7 @@
                     <!--=====================================
                     ENTRADA DEL CÓDIGO
                     ======================================-->  
-                    <label for="cod_factura">Número de Recibo</label>
+                    <label for="cod_factura">Número de recibo</label>
                       <?php
                         $item= null;
                         $valor= null;
@@ -122,7 +122,7 @@
 
 
                   <div class="form-group float-right col-md-3" style="padding-left:0px">
-                    <label for="total_producto"> Sub Total </label>
+                    <label for="total_producto"> Subtotal </label>
                     <input type="number" min="1" class="form-control input-lg" id="nuevoPrecioNeto" name="nuevoPrecioNeto" total="" placeholder="0.00" readonly required>
                     <input type="hidden" name="nuevoPrecioNeto" id="precioNeto" required> 
 
@@ -168,7 +168,7 @@
               <table class="table table-striped table-bordered tablaProductosVenta text-center">
                 <thead>
                   <tr>
-                    <th scope="col">#</th>
+                    <th scope="col">N.°</th>
                     <th scope="col">Imagen</th>
                     <th scope="col">Descripción</th>
                     <th scope="col">Stock</th>
@@ -207,20 +207,20 @@
               
             <div class="form-group col-md-12">
               <label for="nombre">Nombre</label>
-              <input type="text" class="form-control nombre mayus" name="nuevoNombre" placeholder="Ingrese Nombre" required>
+              <input type="text" class="form-control nombre mayus" name="nuevoNombre" placeholder="Ingrese nombre" required>
             </div>
             <div class="form-group col-md-12">
               <label for="apellido">Apellido</label>
-              <input type="text" class="form-control apellidos mayus" name="nuevoApellido" placeholder="Ingrese Apellidos" required>
+              <input type="text" class="form-control apellidos mayus" name="nuevoApellido" placeholder="Ingrese apellidos" required>
             </div>
             <div class="form-group col-md-12">
             <label>Teléfono</label>
-              <input type="text" class="form-control" data-inputmask='"mask": "(999) 9999-9999"' data-mask  name="nuevoTelefono" placeholder="Ingrese Tel." required>
+              <input type="text" class="form-control" data-inputmask='"mask": "(999) 9999-9999"' data-mask  name="nuevoTelefono" placeholder="Ingrese teléfono" required>
             </div>
 
             <div class="form-group col-md-12">
-              <label for="email">Email</label>
-              <input type="email" class="form-control email" name="nuevoEmail" placeholder="Ingrese Email" required>
+              <label for="email">Correo</label>
+              <input type="email" class="form-control email" name="nuevoEmail" placeholder="Ingrese correo" required>
             </div>
 
             <input type="hidden" name="tipoCliente" value="Ventas">
