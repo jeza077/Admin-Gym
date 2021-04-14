@@ -113,7 +113,7 @@ $( document ).ready(function() {
                     }else {
     
                       Swal.fire({
-                        title: "Algo salio mal, intenta de nuevo!",
+                        title: "Algo salió mal, intente de nuevo!",
                         icon: "error",
                         // background: "rgb(255 75 75 / 85%)",
                         showConfirmButton: true

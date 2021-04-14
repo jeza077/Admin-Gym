@@ -712,7 +712,7 @@ function esFecha(fecha,selector){
         if( isNaN(anio) || (anio < 1950) || anio > anioAnterior) {
 
             // console.log('no se aceptan menor a 1950')
-            padre.before('<div class="alert alert-danger fade show mt-2" role="alert"><i class="icon fas fa-ban"></i>Ingrese un año valido. Entre 1950 y ' + anioAnterior + '</div>');
+            padre.before('<div class="alert alert-danger fade show mt-2" role="alert"><i class="icon fas fa-ban"></i>Ingrese un año válido. Entre 1950 y ' + anioAnterior + '</div>');
             setTimeout(function () {
                 $('.alert').remove();
             }, 3000)
@@ -974,8 +974,8 @@ function cerrarModal() {
 
         Swal.fire({
             icon: "info",
-            title: "¿Está seguro de salir del modal? Perdera la información que haya ingresado.",
-            text: "Si no esta seguro puede cancelar la acción.",
+            title: "¿Está seguro de salir del modal? Perderá la información que haya ingresado.",
+            text: "Si no está seguro, puede cancelar la acción.",
             // heightAuto: false,
             allowOutsideClick: false,
             showCancelButton: true,

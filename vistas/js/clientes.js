@@ -1094,7 +1094,7 @@ $(document).on('click', '.SwalBtnCancelarInscripcion', function () {
 
             } else {
                 Swal.fire({
-                    title: 'Oops, algo salio mal. Intenta de nuevo!',
+                    title: '¡Algo salió mal, intente de nuevo!',
                     icon: 'error',
                     // width: 600,
                     allowOutsideClick: false,

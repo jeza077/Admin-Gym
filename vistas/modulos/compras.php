@@ -34,7 +34,7 @@
         //   echo $key;
         // }
 
-        $descripcionEvento = " Consulto la pantalla de Compras";
+        $descripcionEvento = " Consultó la pantalla de compras";
         $accion = "consulta";
 
         $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 4,$accion, $descripcionEvento);      
@@ -265,17 +265,17 @@
           <div class="modal-body">
             <div class="form-group col-md-12">
               <label for="nombre">Nombre</label>
-              <input type="text" class="form-control nombre mayus" name="nuevoNombre" value="" placeholder="Ingresa Nombre" required>
+              <input type="text" class="form-control nombre mayus" name="nuevoNombre" value="" placeholder="Ingrese nombre" required>
             </div>
 
             <div class="form-group col-md-12">
               <label for="Descripcion">Correo</label>
-              <input type="email" class="form-control email" name="nuevoCorreo" value="" placeholder="Ingresa correo" required>
+              <input type="email" class="form-control email" name="nuevoCorreo" value="" placeholder="Ingrese correo" required>
             </div>
 
             <div class="form-group col-md-12">
               <label for="Descripcion">Teléfono</label>
-              <input type="text" class="form-control" data-inputmask='"mask": "(999) 9999-9999"' data-mask  name="nuevoTelefono" placeholder="Ingrese Teléfono" required>
+              <input type="text" class="form-control" data-inputmask='"mask": "(999) 9999-9999"' data-mask  name="nuevoTelefono" placeholder="Ingrese teléfono" required>
             </div>
           </div>
 

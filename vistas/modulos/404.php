@@ -30,13 +30,13 @@
 
           <i class="fa fa-warning text-primary"></i> 
 
-          Ooops! Página no encontrada.
+          ¡Página no encontrada!
 
         </h3>
 
         <p>
         
-           Ingresa al menú lateral y allí podrás encontrar las páginas disponibles. También puedes regresar haciendo <a href="dashboard">click aquí.</a>
+           Ingresa al menú lateral y ahí podrás encontrar las páginas disponibles. También puedes regresar haciendo <a href="dashboard">click aquí.</a>
         
         </p>
 

@@ -329,7 +329,7 @@ $pdf->writeHTML($bloque7, false, false, false, false, '');
 
 		}else{
 
-			echo "no hay datos, algo salio mal";
+			echo "No hay datos, algo salió mal";
 		}
 
 	}

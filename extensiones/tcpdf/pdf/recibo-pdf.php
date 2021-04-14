@@ -281,7 +281,7 @@ EOF;
 
 		}else{
 
-			echo "no hay datos, algo salio mal";
+			echo "No hay datos, algo salió mal";
 		}
 
 	}

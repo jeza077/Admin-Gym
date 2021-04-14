@@ -27,7 +27,7 @@
 
                 <!-- <div class="card-body"> -->
                 <!--?php
-                   $descripcionEvento = " Consulto la pantalla de mantenimiento";
+                   $descripcionEvento = " Consultó la pantalla de mantenimiento";
                    $accion = "consulta";
 
                    $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
@@ -53,7 +53,7 @@
 
                       <li class="nav-item" role="presentation">
 
-                      <a class="nav-link" id="datosmatricula" data-toggle="tab" href="#fourt" role="tab" aria-controls="fourt" aria-selected="false">Matriculas</a>
+                      <a class="nav-link" id="datosmatricula" data-toggle="tab" href="#fourt" role="tab" aria-controls="fourt" aria-selected="false">Matrículas</a>
 
                     </li>
 
@@ -61,7 +61,7 @@
 
                     <li class="nav-item" role="presentation">
 
-                      <a class="nav-link" id="datosParam" data-toggle="tab" href="#thirty" role="tab" aria-controls="thirty" aria-selected="false">Parametros</a>
+                      <a class="nav-link" id="datosParam" data-toggle="tab" href="#thirty" role="tab" aria-controls="thirty" aria-selected="false">Parámetros</a>
 
                     </li>
 
@@ -95,11 +95,11 @@
                                 
                           <tr>
                                   
-                            <th scope="col">#</th>
+                            <th scope="col">N.°</th>
                                   
                             <th scope="col">Rol</th>
                                   
-                            <th scope="col">Descripcion</th>
+                            <th scope="col">Descripción</th>
                                   
                             <th scope="col">Estado</th>
 
@@ -176,7 +176,7 @@
                         <thead>
                           <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Tipo de inscripcion</th>
+                            <th scope="col">Tipo de inscripción</th>
                             <th scope="col">Precio</th>
                             <th scope="col">Estado</th>
       
@@ -236,8 +236,8 @@
                         
                         <thead>
                           <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Tipo de matricula</th>
+                            <th scope="col">N.°</th>
+                            <th scope="col">Tipo de matrícula</th>
                             <th scope="col">Precio</th>
                             <th scope="col">Estado</th>
                           </tr>
@@ -295,7 +295,7 @@
                         
                         <thead>
                           <tr>
-                            <th scope="col">#</th>
+                            <th scope="col">N.°</th>
                             <th scope="col">Tipo descuento</th>
                             <th scope="col">Precio</th>
                             <th scope="col">Estado</th>
@@ -353,8 +353,8 @@
                           <table class="table table-striped table-bordered tablas text-center">
                             <thead>
                               <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Parametros</th>
+                                <th scope="col">N.°</th>
+                                <th scope="col">Parámetros</th>
                                 <th scope="col">Valor</th>
                                 <th scope="col">Editar</th>
                               
@@ -449,7 +449,7 @@ MODAL AGREGAR ROL
             </div>
 
             <div class="form-group col-md-12">
-              <label for="Descripcion">Descripcion</label>
+              <label for="Descripcion">Descripción</label>
               <input type="textarea" class="form-control nombre mayus" name="nuevaDescripcion" value="" required>
             </div>
 
@@ -523,7 +523,7 @@ MODAL AGREGAR ROL
                         
                         <thead>
                           <tr>
-                            <th scope="col">#</th>
+                            <th scope="col">N.°</th>
                             <th scope="col">Pantallas</th>
                             <th scope="col">Visualizar</th>
                             <th scope="col">Guardar</th>
@@ -694,7 +694,7 @@ MODAL Modificar ROL
 
 
 <!--=======================================================
-MODIFIRCAR PARAMETROS
+MODIFICAR PARAMETROS
 =========================================================-->
 <div class="modal fade" id="modalParametros" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   
@@ -709,7 +709,7 @@ MODIFIRCAR PARAMETROS
         ======================================-->
 
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Editar Parametro</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Editar parámetro</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -723,7 +723,7 @@ MODIFIRCAR PARAMETROS
 
            <div class="card-body">
               <div class= "form-group col-md-12">
-               <label for="parametro">Parametro</label>
+               <label for="parametro">Parámetro</label>
                <input type="text" class="form-control nombre mayus" id="editarParametro" name="editarParametro" value="" readonly >
               </div>
           
@@ -790,7 +790,7 @@ MODAL AGREGAR NUEVA INSCRIPCION
         ======================================-->
 
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Nueva Inscripcion</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Nueva inscripción</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -803,7 +803,7 @@ MODAL AGREGAR NUEVA INSCRIPCION
         <div class="modal-body">
           <div class="card-body">
             <div class="form-group col-md-12">
-              <label for="Rol">Inscripcion</label>
+              <label for="Rol">Inscripción</label>
               <input type="text" class="form-control nombre mayus" name="nuevoInscripcion" value="" required>
             </div>
 
@@ -864,7 +864,7 @@ MODAL AGREGAR NUEVA MATRICULA
         ======================================-->
 
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Nueva Matricula</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Nueva matrícula</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -877,7 +877,7 @@ MODAL AGREGAR NUEVA MATRICULA
         <div class="modal-body">
           <div class="card-body">
             <div class="form-group col-md-12">
-              <label for="Rol">Matricula</label>
+              <label for="Rol">Matrícula</label>
               <input type="text" class="form-control nombre mayus" name="nuevoMatricula" value="" required>
             </div>
 
@@ -939,7 +939,7 @@ MODAL NUEVO DESCUENTO
         ======================================-->
 
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Nuevo Descuento</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Nuevo descuento</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>

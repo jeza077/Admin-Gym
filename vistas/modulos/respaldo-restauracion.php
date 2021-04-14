@@ -43,7 +43,7 @@
 
                       <a class="nav-link active" id="datosRespaldo" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Respaldo</a>
                       <?php
-                        $descripcionEvento = " Consulto la pantalla de Respaldo";
+                        $descripcionEvento = " Consultó la pantalla de respaldo";
                         $accion = "consulta";
 
                         $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 7,$accion, $descripcionEvento);
@@ -60,7 +60,7 @@
 
                       <a class="nav-link" id="datosRestauracion" data-toggle="tab" href="#second" role="tab" aria-controls="second" aria-selected="false">Restauración</a>
                       <?php
-                        $descripcionEvento = " Consulto la pantalla de Restauracion";
+                        $descripcionEvento = " Consultó la pantalla de restauración";
                         $accion = "consulta";
 
                         $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 7,$accion, $descripcionEvento);
@@ -110,7 +110,7 @@
                                   <div class="input-group-prepend">
                                       <span class="input-group-text"><i class="fas fa-unlock"></i></span>
                                   </div>
-                                      <input type="text-center" class="form-control" id="contrasenia" name="contrasenia" placeholder="db password" readonly>
+                                      <input type="text-center" class="form-control" id="contrasenia" name="contrasenia" placeholder="password" readonly>
                                 </div>
                             </div>
                             <div class="form-group ">

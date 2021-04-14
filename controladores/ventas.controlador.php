@@ -864,7 +864,7 @@ class ControladorVentas {
 
 				Swal.fire({
 					  icon: "error",
-					  title: "Opps, algo salio mal, intenta de nuevo!",
+					  title: "¡Algo salió mal, intenta de nuevo!",
 					  showConfirmButton: true,
 					  confirmButtonText: "Cerrar"
 					  }).then((result) => {

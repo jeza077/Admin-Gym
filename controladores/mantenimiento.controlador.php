@@ -508,7 +508,7 @@ class ControladorMantenimientos {
             echo'<script>
                 Swal.fire({
                       icon: "error",
-                      title: "Opps, algo salio mal, intenta de nuevo!",
+                      title: "¡Algo salió mal. Intenta de nuevo!",
                       showConfirmButton: true,
                       confirmButtonText: "Cerrar",
                       closeOnConfirm: false
@@ -649,7 +649,7 @@ class ControladorMantenimientos {
     
             Swal.fire({
                   icon: "error",
-                  title: "Opps, algo salio mal, intenta de nuevo!",
+                  title: "¡Algo salió mal. Intenta de nuevo!",
                   showConfirmButton: true,
                   confirmButtonText: "Cerrar",
                   closeOnConfirm: false
@@ -1075,7 +1075,7 @@ class ControladorMantenimientos {
     
             Swal.fire({
                   icon: "error",
-                  title: "Opps, algo salio mal, intenta de nuevo!",
+                  title: "¡Algo salió mal. Intenta de nuevo!",
                   showConfirmButton: true,
                   confirmButtonText: "Cerrar",
                   closeOnConfirm: false
@@ -1146,7 +1146,7 @@ class ControladorMantenimientos {
     
             Swal.fire({
                   icon: "error",
-                  title: "Opps, algo salio mal, intenta de nuevo!",
+                  title: "¡Algo salió mal. Intenta de nuevo!",
                   showConfirmButton: true,
                   confirmButtonText: "Cerrar",
                   closeOnConfirm: false
@@ -1214,7 +1214,7 @@ class ControladorMantenimientos {
     
             Swal.fire({
                   icon: "error",
-                  title: "Opps, algo salio mal, intenta de nuevo!",
+                  title: "¡Algo salió mal. Intenta de nuevo!",
                   showConfirmButton: true,
                   confirmButtonText: "Cerrar",
                   closeOnConfirm: false
@@ -1285,7 +1285,7 @@ class ControladorMantenimientos {
       
               Swal.fire({
                     icon: "error",
-                    title: "Opps, algo salio mal, intenta de nuevo!",
+                    title: "¡Algo salió mal. Intenta de nuevo!",
                     showConfirmButton: true,
                     confirmButtonText: "Cerrar",
                     closeOnConfirm: false
@@ -1382,7 +1382,7 @@ class ControladorMantenimientos {
       
               Swal.fire({
                     icon: "error",
-                    title: "Opps, algo salio mal, intenta de nuevo!",
+                    title: "¡Algo salió mal, intenta de nuevo!",
                     showConfirmButton: true,
                     confirmButtonText: "Cerrar",
                     closeOnConfirm: false
@@ -1479,7 +1479,7 @@ class ControladorMantenimientos {
       
               Swal.fire({
                     icon: "error",
-                    title: "Opps, algo salio mal, intenta de nuevo!",
+                    title: "¡Algo salió mal, intenta de nuevo!",
                     showConfirmButton: true,
                     confirmButtonText: "Cerrar",
                     closeOnConfirm: false
@@ -1563,7 +1563,7 @@ class ControladorMantenimientos {
 
             Swal.fire({
             icon: "error",
-            title: "Opps, algo salio mal, intenta de nuevo!",
+            title: "¡Algo salió mal, intenta de nuevo!",
             showConfirmButton: true,
             confirmButtonText: "Cerrar",
             closeOnConfirm: false
@@ -1645,7 +1645,7 @@ class ControladorMantenimientos {
 
             Swal.fire({
             icon: "error",
-            title: "Opps, algo salio mal, intenta de nuevo!",
+            title: "¡Algo salió mal, intenta de nuevo!",
             showConfirmButton: true,
             confirmButtonText: "Cerrar",
             closeOnConfirm: false
@@ -1726,7 +1726,7 @@ class ControladorMantenimientos {
 
             Swal.fire({
             icon: "error",
-            title: "Opps, algo salio mal, intenta de nuevo!",
+            title: "¡Algo salió mal, intenta de nuevo!",
             showConfirmButton: true,
             confirmButtonText: "Cerrar",
             closeOnConfirm: false
@@ -1807,7 +1807,7 @@ class ControladorMantenimientos {
 
             Swal.fire({
             icon: "error",
-            title: "Opps, algo salio mal, intenta de nuevo!",
+            title: "¡Algo salió mal, intenta de nuevo!",
             showConfirmButton: true,
             confirmButtonText: "Cerrar",
             closeOnConfirm: false
@@ -1889,7 +1889,7 @@ class ControladorMantenimientos {
 
             Swal.fire({
             icon: "error",
-            title: "Opps, algo salio mal, intenta de nuevo!",
+            title: "¡Algo salió mal, intenta de nuevo!",
             showConfirmButton: true,
             confirmButtonText: "Cerrar",
             closeOnConfirm: false
@@ -1972,7 +1972,7 @@ class ControladorMantenimientos {
 
             Swal.fire({
             icon: "error",
-            title: "Opps, algo salio mal, intenta de nuevo!",
+            title: "¡Algo salió mal, intenta de nuevo!",
             showConfirmButton: true,
             confirmButtonText: "Cerrar",
             closeOnConfirm: false
@@ -2055,7 +2055,7 @@ class ControladorMantenimientos {
 
             Swal.fire({
             icon: "error",
-            title: "Opps, algo salio mal, intenta de nuevo!",
+            title: "¡Algo salió mal, intenta de nuevo!",
             showConfirmButton: true,
             confirmButtonText: "Cerrar",
             closeOnConfirm: false

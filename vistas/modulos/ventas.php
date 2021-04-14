@@ -10,7 +10,7 @@
           </div>
           <div class="col-sm-6">
           <button class="btn btn-orange float-right"  data-toggle="modal" data-target="#modalAgregarUsuario">
-            Agregar Usuario          
+            Agregar usuario          
           </button>
 
           </div>
@@ -32,7 +32,7 @@
       //   echo $key;
       // }
       
-      $descripcionEvento = " Consulto la pantalla de Venta";
+      $descripcionEvento = " Consultó la pantalla de venta";
       $accion = "consulta";
 
       $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 5,$accion, $descripcionEvento);
@@ -179,7 +179,7 @@
             <div class="form-row">
               <div class="form-group col-md-3">
                 <label for="">Usuario</label>
-                <input type="text" class="form-control nuevoUsuario" onKeyUp="this.value=this.value.toUpperCase();" name="nuevoUsuario" placeholder="Ingrese Usuario">
+                <input type="text" class="form-control nuevoUsuario" onKeyUp="this.value=this.value.toUpperCase();" name="nuevoUsuario" placeholder="Ingrese usuario">
               </div>
               <div class="form-group col-md-3">
                 <label>Rol</label>
@@ -213,16 +213,16 @@
 
             <div class="form-row">
             <div class="form-group col-md-6">
-                <label for="exampleInputFile">Foto</label>
+                <label for="exampleInputFile">Imagen</label>
                 <div class="input-group">
                 <img class="img-thumbnail previsualizar mr-2" src="vistas/img/usuarios/default/anonymous.png" alt="imagen-del-usuario" width="100px">
                   <div class="custom-file">
                     <input type="file" class="custom-file-input nuevaFoto" id="exampleInputFile" name="nuevaFoto">
-                    <label class="custom-file-label" for="exampleInputFile">Escoger foto</label>
+                    <label class="custom-file-label" for="exampleInputFile">Escoger imagen</label>
                   </div>
 
                 </div>
-                    <p class="p-foto help-block ml-4">Peso máximo de la foto 2 MB</p>
+                    <p class="p-foto help-block ml-4">Peso máximo de la imagen 2 MB</p>
               </div>
             </div>
             

@@ -34,7 +34,7 @@
         //   echo $key;
         // }
         
-        $descripcionEvento = " Consulto la pantalla de Productos";
+        $descripcionEvento = " Consultó la pantalla de productos";
         $accion = "consulta";
 
         $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 4,$accion, $descripcionEvento);
@@ -54,8 +54,8 @@
               <th scope="col">Imagen</th>
               <th scope="col">Nombre</th>
               <th scope="col">Precio venta</th>
-              <th scope="col">Producto mínimo.</th>
-              <th scope="col">Producto máximo.</th>
+              <th scope="col">Producto mínimo</th>
+              <th scope="col">Producto máximo</th>
               <th scope="col">Acciones</th>
               </tr>
             </thead>

@@ -21,7 +21,7 @@
       include 'inicio/alertas.php';
 
         //**Bitacora
-        $descripcionEvento = " Consulto Inicio";
+        $descripcionEvento = " Consultó inicio";
         $accion = "consulta";
 
         $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 1,$accion, $descripcionEvento);

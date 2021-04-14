@@ -15,7 +15,7 @@
       ======================================-->
     <section class="content">  
           <?php
-            $descripcionEvento = " Consulto la pantalla de Editar Venta";
+            $descripcionEvento = "Consultó la pantalla de editar venta";
             $accion = "consulta";
 
             $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 5,$accion, $descripcionEvento);

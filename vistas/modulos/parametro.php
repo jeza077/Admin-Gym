@@ -27,7 +27,7 @@
         <!-- <div class=" col-sm-12"> -->
       
         <?php
-        $descripcionEvento = " Consultó la pantalla de Parámetro";
+        $descripcionEvento = " Consultó la pantalla de parámetro";
         $accion = "consulta";
 
         $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
