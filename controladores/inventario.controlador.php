@@ -567,7 +567,7 @@ class ControladorInventario{
                     
                     $descripcionEvento = "".$_SESSION["usuario"]." Actualizó un producto del stock";
                     $accion = "Actualizar";
-                    $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 4,$accion, $descripcionEvento);
+                    $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 11,$accion, $descripcionEvento);
                 
                     $datos = array("nombre_producto" => $_POST["editarNombreProducto"],
                     "codigo" => $_POST["editarCodigo"],
