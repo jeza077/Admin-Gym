@@ -60,11 +60,12 @@ class ControladorMantenimientos {
           // return $respuesta;
           // var_dump($respuesta);
           if($respuesta == true){
-         
-            // $descripcionEvento = "Nuevo rol";
-            // $accion = "Nuevo";
-            // $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
 
+            $descripcionEvento = "".$_SESSION["usuario"]." Registró un nuevo rol";
+				    $accion = "Nuevo";
+            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 18,$accion, $descripcionEvento);
+
+         
             $totalId = array();
             $item = null;
             $valor = null;
@@ -78,6 +79,8 @@ class ControladorMantenimientos {
             $idRol = end($totalId);
             // echo $idRol;
             $id = intval($idRol);
+
+            
 
             return $id;
 
@@ -238,7 +241,9 @@ class ControladorMantenimientos {
           // return $datos;
           $tabla = 'tbl_permisos';
           $respuesta = ModeloMantenimiento::mdlInsertarPermisosRoles($tabla, $idRol, $pant, $consulta, $agregar, $actualizar, $eliminar);
-    
+          
+          
+
           return $respuesta;
         }
 
@@ -278,9 +283,9 @@ class ControladorMantenimientos {
           if($respuesta == true){
   
            
-            $descripcionEvento = "Nueva Inscripcion del Gimnasio";
+            $descripcionEvento = "".$_SESSION["usuario"]." Agregó una nueva inscripción del gimnasio";
             $accion = "Nuevo";
-            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
+            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 21,$accion, $descripcionEvento);
 
          
        
@@ -383,10 +388,10 @@ class ControladorMantenimientos {
           // var_dump($respuesta);
           if($respuesta == true){
             
-            $descripcionEvento = "Nueva Matricula del Gimnasio";
+            $descripcionEvento = "".$_SESSION["usuario"]." Agregó una nueva matricula del gimnasio";
             $accion = "Nuevo";
 
-            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);  
+            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 22,$accion, $descripcionEvento);  
   
             echo '<script>
   
@@ -522,10 +527,10 @@ class ControladorMantenimientos {
           // var_dump($respuesta);
           if($respuesta == true){
             
-            $descripcionEvento = "Nuevo Descuento del Gimnasio";
+            $descripcionEvento = "".$_SESSION["usuario"]." Agregó un nuevo descuento del gimnasio";
             $accion = "Nuevo";
 
-            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
+            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 23,$accion, $descripcionEvento);
   
             echo '<script>
 
@@ -644,9 +649,9 @@ class ControladorMantenimientos {
     
           if($respuesta == true){
               
-              // $descripcionEvento = "Actualizo rol";
-              // $accion = "Actualizo";
-              // $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
+            $descripcionEvento = "".$_SESSION["usuario"]." Agregó un nuevo documento ";
+            $accion = "Nuevo";
+            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 24,$accion, $descripcionEvento);
 
               echo'<script>
       
@@ -836,10 +841,11 @@ class ControladorMantenimientos {
     
           if($respuesta == true){
               
-              // $descripcionEvento = "Actualizo rol";
-              // $accion = "Actualizo";
-              // $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
-
+            $descripcionEvento = "".$_SESSION["usuario"]." Agregó un nuevo proveedor ";
+            $accion = "Nuevo";
+        
+            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 25,$accion, $descripcionEvento);
+        
               return true;
       
           }else{
@@ -882,9 +888,9 @@ class ControladorMantenimientos {
     
         if($respuesta == true){
             
-            $descripcionEvento = "Actualizo rol";
-            $accion = "Actualizo";
-            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
+            $descripcionEvento = "".$_SESSION["usuario"]." Actualizó un rol";
+            $accion = "Actualizar";
+            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 18,$accion, $descripcionEvento);
 
           
 
@@ -952,9 +958,9 @@ class ControladorMantenimientos {
     
         if($respuesta == true){
             
-            $descripcionEvento = "Actualizo Matricula ";
-            $accion = "Actualizo";
-            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
+            $descripcionEvento = "".$_SESSION["usuario"]." Actualizó una matricula ";
+            $accion = "Actualizar";
+            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 22,$accion, $descripcionEvento);
 
           
 
@@ -1023,9 +1029,9 @@ class ControladorMantenimientos {
     
         if($respuesta == true){
             
-            $descripcionEvento = "Actualizo Inscripcion";
-            $accion = "Actualizo";
-            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
+            $descripcionEvento = "".$_SESSION["usuario"]." Actualizó una inscripción";
+            $accion = "Actualizar";
+            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 21,$accion, $descripcionEvento);
 
           
 
@@ -1092,10 +1098,10 @@ class ControladorMantenimientos {
 
         if($respuesta == true){
              
-          $descripcionEvento = "Actualizo Descuento";
-          $accion = "consulta";
+          $descripcionEvento = "".$_SESSION["usuario"]." Actualizó un descuento";
+          $accion = "Actualizar";
 
-          $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
+          $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 23,$accion, $descripcionEvento);
           
           echo'<script>
     
@@ -1164,10 +1170,11 @@ class ControladorMantenimientos {
       
           if($respuesta == true){
               
-              // $descripcionEvento = "Actualizo rol";
-              // $accion = "Actualizo";
-              // $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);            
-
+            $descripcionEvento = "".$_SESSION["usuario"]." Actualizó el documento ".$_POST["editarDocumento"]."";
+            $accion = "Actualizar";
+        
+            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 24,$accion, $descripcionEvento);
+        
               echo'<script>
       
               Swal.fire({
@@ -1358,10 +1365,11 @@ class ControladorMantenimientos {
       
           if($respuesta == true){
               
-              // $descripcionEvento = "Actualizo rol";
-              // $accion = "Actualizo";
-              // $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);          
-
+            $descripcionEvento = "".$_SESSION["usuario"]." Actualizó un proveedor ";
+            $accion = "Actualizar";
+        
+            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 25,$accion, $descripcionEvento);
+        
               echo'<script>
       
               Swal.fire({
@@ -1567,6 +1575,11 @@ class ControladorMantenimientos {
             </script>';
             
           } else {
+
+            $descripcionEvento = "".$_SESSION["usuario"]." Eliminó una matricula ";
+            $accion = "Eliminar";
+            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 22,$accion, $descripcionEvento);
+
             
             echo'<script>
 
@@ -1648,6 +1661,11 @@ class ControladorMantenimientos {
             </script>';
             
           } else {
+
+            $descripcionEvento = "".$_SESSION["usuario"]." Eliminó una inscripción del gimnasio";
+            $accion = "Eliminar";
+            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 21,$accion, $descripcionEvento);
+
             
             echo'<script>
 
@@ -1729,6 +1747,10 @@ class ControladorMantenimientos {
             </script>';
             
           } else {
+
+            $descripcionEvento = "".$_SESSION["usuario"]." Eliminó un descuento ";
+            $accion = "Eliminar";
+            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 23,$accion, $descripcionEvento);
             
             echo'<script>
 
@@ -1811,6 +1833,12 @@ class ControladorMantenimientos {
             </script>';
             
           } else {
+
+            $descripcionEvento = "".$_SESSION["usuario"]." Eliminó el documento ".$_POST["editarDocumento"]."";
+            $accion = "Eliminar";
+        
+            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 24,$accion, $descripcionEvento);
+        
             
             echo'<script>
 
@@ -1977,6 +2005,12 @@ class ControladorMantenimientos {
             </script>';
             
           } else {
+
+            $descripcionEvento = "".$_SESSION["usuario"]." Eliminó un proveedor ";
+            $accion = "Eliminar";
+        
+            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 25,$accion, $descripcionEvento);
+        
             
             echo'<script>
 

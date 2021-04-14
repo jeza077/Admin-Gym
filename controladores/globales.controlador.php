@@ -167,9 +167,9 @@ class ControladorGlobales{
     
         if($respuesta == true){
             
-            $descripcionEvento = "Actualizo parametro";
-            $accion = "Actualizo";
-            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
+            $descripcionEvento = "".$_SESSION["usuario"]." Actualizó un parametro";
+            $accion = "Actualizar";
+            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 20,$accion, $descripcionEvento);
 
           
        
