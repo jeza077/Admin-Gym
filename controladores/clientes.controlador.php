@@ -1209,9 +1209,9 @@ class ControladorClientes{
 				
 		
 					if($respuestaPago == true){
-						$descripcionEvento = "".$_SESSION['usuario']." Creó una nueva inscripción ";
+						$descripcionEvento = "".$_SESSION['usuario']." Agregó una nueva inscripción ";
 						$accion = "Nuevo";
-						$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION['id_usuario'], 21, $accion, $descripcionEvento);
+						$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION['id_usuario'], 5, $accion, $descripcionEvento);
 						echo "<script>
 								Swal.fire({
 									title: 'Inscripcion agregada exitosamente!',
