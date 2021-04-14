@@ -154,7 +154,7 @@ class ControladorInventario{
 
                     if($crearInventario == true){
                         
-                        $descripcionEvento = "".$_SESSION["usuario"]." Agregó un nuevo producto";
+                        $descripcionEvento = "".$_SESSION["usuario"]." Agregó un nuevo producto llamado ".$_POST["nuevoNombreProducto"]."";
                         $accion = "Nuevo";
 
                         $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"],11,$accion, $descripcionEvento);
@@ -307,7 +307,7 @@ class ControladorInventario{
 
                     if($crearInventario == true){
                         
-                        $descripcionEvento = "".$_SESSION["usuario"]." Agregó un nuevo equipo";
+                        $descripcionEvento = "".$_SESSION["usuario"]." Agregó un nuevo equipo llamado ".$_POST["nuevoNombreProducto"]."";
                         $accion = "Nuevo";
 
                         $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 12,$accion, $descripcionEvento);
@@ -411,7 +411,7 @@ class ControladorInventario{
                     $respuesta= ModeloInventario::mdlActualizarProductos($tabla, $item1, $valor1, $item2, $valor2, $item3, $valor3, $item4, $valor4);
                     if ($respuesta == true) {
                         
-                        $descripcionEvento = $descripcionEvento = "".$_SESSION['usuario']." Realizó una nueva compra ";
+                        $descripcionEvento = $descripcionEvento = "".$_SESSION['usuario']." Agregó una nueva compra ";
                         $accion = "Nuevo";
 
                         $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 9,$accion, $descripcionEvento);
@@ -565,7 +565,7 @@ class ControladorInventario{
 
                 if($tipostock == 'Productos'){
                     
-                    $descripcionEvento = "".$_SESSION["usuario"]." Actualizó un producto del stock";
+                    $descripcionEvento = "".$_SESSION["usuario"]." Actualizó un producto del stock llamado ".$_POST["editarNombreProducto"]."";
                     $accion = "Actualizar";
                     $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 11,$accion, $descripcionEvento);
                 
@@ -719,7 +719,7 @@ class ControladorInventario{
 
                 if($tipostock == 'Equipo'){
                     
-                    $descripcionEvento = "".$_SESSION["usuario"]." Actualizó un equipo del stock";
+                    $descripcionEvento = "".$_SESSION["usuario"]." Actualizó un equipo del stock llamado ".$_POST["editarNombreEquipo"]."";
                     $accion = "Actualizar";
                     $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 12,$accion, $descripcionEvento);
                 
