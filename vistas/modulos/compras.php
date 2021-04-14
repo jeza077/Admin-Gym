@@ -10,7 +10,7 @@
           </div>
           <div class="col-sm-6">
           <button class="btn btn-orange float-right" id="nuevaCompra" data-toggle="modal" data-target="#modalAgregarCompra">
-              Nueva Compra       
+              Nueva compra       
           </button>
           <button class="btn btn-danger btnExportarCompras float-right mr-3">
               Exportar PDF          
@@ -46,7 +46,7 @@
           <table class="table table-striped table-bordered tablaCompras text-center">
               <thead>
                 <tr>
-                  <th scope="col">#</th>
+                  <th scope="col">N.°</th>
                   <th scope="col">Nombre producto</th>
                   <th scope="col">Proveedor</th>
                   <th scope="col">Cantidad</th>
@@ -68,7 +68,7 @@
     <div class="modal-dialog modal-md" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Nueva Compra</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Nueva compra</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -111,12 +111,12 @@
             <!-- <div class="form-row"> -->
               <div class="form-group col-md-12">
                 <label for="stock">Cantidad</label>
-                <input type="number" min="0" class="form-control stock" id="nuevoCantidad" name="nuevoCantidad" placeholder="Ingrese Cantidad" min="0" required class="fa fa-arrow-up"></i></span>
+                <input type="number" min="0" class="form-control stock" id="nuevoCantidad" name="nuevoCantidad" placeholder="Ingrese cantidad" min="0" required class="fa fa-arrow-up"></i></span>
               </div>
 
               <div class="form-group col-md-12">
-                <label for="stock">Precio de Compra</label>
-                <input type="number" class="form-control stock" min="0" id="nuevoPrecio" name="nuevoPrecio" placeholder="Ingrese Precio" min="0" required class="fa fa-arrow-up"></i></span>
+                <label for="stock">Precio de compra</label>
+                <input type="number" class="form-control stock" min="0" id="nuevoPrecio" name="nuevoPrecio" placeholder="Ingrese precio" min="0" required class="fa fa-arrow-up"></i></span>
               </div>
             <!-- </div> -->
 
@@ -161,13 +161,13 @@
                   <div class="form-row">
                     
                     <div class="form-group col-md-3">
-                      <label for="nombreproducto">Codigo</label>
+                      <label for="nombreproducto">Código</label>
                       <input type="text" value="" class="form-control" readonly id="editarCodigo" name="editarCodigo"  required>
                       <input type="hidden" name="editarTipoProducto" id="editarTipoProducto">
                     </div>
                     
                     <div class="form-group col-md-3">
-                      <label for="nombreproducto">Nombre Producto</label>
+                      <label for="nombreproducto">Nombre producto</label>
                       <html>
                       <input type="text" value="" class="form-control mayus editar_Nombre_Producto"  name="editarNombreProducto" id="editarNombreProducto" required>
                     </div>
@@ -184,7 +184,7 @@
       
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                        <label for="precio">Precio Venta</label>
+                        <label for="precio">Precio venta</label>
                         <input type="text" value="" class="form-control editar_Precio" name="editarPrecio" id="editarPrecio" required>
                         </div>
                         <div class="form-group col-md-4">
@@ -192,11 +192,11 @@
                         <input type="text" value="" class="form-control editar_Precio" name="editarPrecioCompra" id="editarPrecioCompra" required>
                         </div>
                         <div class="form-group col-md-4">
-                          <label for="productominimo">Producto Minimo</label>
+                          <label for="productominimo">Producto mínimo</label>
                           <input type="number" value="" class="form-control" name="editarProductoMinimo" id="editarProductoMinimo" min="0" required class="fa fa-arrow-up"></i></span>
                         </div>
                         <div class="form-group col-md-4">
-                          <label for="productomaximo">Producto Maximo</label>
+                          <label for="productomaximo">Producto máximo</label>
                           <input type="number" value="" class="form-control" name="editarProductoMaximo" id="editarProductoMaximo" min="0" required class="fa fa-arrow-up"></i></span>
                         </div>
                     </div>
@@ -204,16 +204,16 @@
                     <div class="form-row">
 
                         <div class="form-group col-md-5">
-                            <label for="exampleInputFile">Foto</label>
+                            <label for="exampleInputFile">Imagen</label>
                             <div class="input-group">
                             <img class="img-thumbnail previsualizar mr-2" src="vistas/img/usuarios/default/anonymous.png" alt="imagen-del-usuario" width="100px">
                             <input type="hidden" name="imagenActual" id=imagenActual>
                             <div class="custom-file">
                                 <input type="file" class="custom-file-input nuevaFotoProducto" id="exampleInputFile" name="editarFotoProducto">
-                                <label class="custom-file-label" for="exampleInputFile">Escoger foto</label>
+                                <label class="custom-file-label" for="exampleInputFile">Escoger imagen</label>
                             </div>
                             </div>
-                                <p class="p-foto help-block ml-4">Peso máximo de la foto 2 MB</p>
+                                <p class="p-foto help-block ml-4">Peso máximo de la imagen 2 MB</p>
                         </div>
                     </div>
 
@@ -252,7 +252,7 @@
           ======================================-->
 
           <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Nuevo Proveedor</h5>
+              <h5 class="modal-title" id="exampleModalLabel">Nuevo proveedor</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>

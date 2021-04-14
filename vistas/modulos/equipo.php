@@ -10,7 +10,7 @@
           </div>
           <div class="col-sm-6">
           <button class="btn btn-orange float-right"  data-toggle="modal" data-target="#modalAgregarInventario">
-            Nuevo Equipo         
+            Nuevo equipo         
           </button>
           <!-- <button class="btn btn-danger btnExportarEquipo float-right mr-3">
               Exportar PDF          
@@ -38,9 +38,9 @@
           <table class="table table-bordered table-striped tablas text-center">
             <thead>
                 <tr>
-                <th scope="col">#</th>
-                <th scope="col">Codigo</th>
-                <th scope="col">Foto</th>
+                <th scope="col">N.°</th>
+                <th scope="col">Código</th>
+                <th scope="col">Imagen</th>
                 <th scope="col">Tipo producto</th>
                 <th scope="col">Nombre</th>
                 <th scope="col">Stock</th>
@@ -101,7 +101,7 @@
   <div class="modal-dialog modal-md" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Nuevo Equipo</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Nuevo equipo</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -111,7 +111,7 @@
 
           <div class="form-row">
             <div class="form-group col-md-12">
-              <label for="nombreproducto">Codigo</label>
+              <label for="nombreproducto">Código</label>
                 <?php
                   $tabla = "tbl_inventario";
                   $item = "tipo_producto";
@@ -138,9 +138,9 @@
           </div> 
 
           <div class="form-group col-md-12">
-            <label for="nombreproducto">Nombre Producto</label>
+            <label for="nombreproducto">Nombre producto</label>
             <html>
-            <input type="text" class="form-control mayus sinNumeros sinCaracteres" name="nuevoNombreProducto" placeholder="Ingrese Producto" required>
+            <input type="text" class="form-control mayus sinNumeros sinCaracteres" name="nuevoNombreProducto" placeholder="Ingrese producto" required>
           </div>
           <div class="form-group col-md-12">
             <label for="stock">Cantidad en stock</label>
@@ -149,15 +149,15 @@
 
           <div class="form-row">
             <div class="form-group col-md-12">
-                <label for="exampleInputFile">Foto</label>
+                <label for="exampleInputFile">Imagen</label>
                 <div class="input-group">
                   <img class="img-thumbnail previsualizar mr-2" src="vistas/img/productos/default/product.png" alt="imagen-del-usuario" width="100px">
                   <div class="custom-file">
                     <input type="file" class="custom-file-input nuevaFoto" name="nuevaFotoBodega">
-                    <label class="custom-file-label">Escoger foto</label>
+                    <label class="custom-file-label">Escoger imagen</label>
                   </div>
                 </div>
-                    <p class="p-foto help-block ml-4">Peso máximo de la foto 2 MB</p>
+                    <p class="p-foto help-block ml-4">Peso máximo de la imagen 2 MB</p>
               </div>
           </div>
 
@@ -198,12 +198,12 @@
         <form role="form" method="post" class="formulario" enctype="multipart/form-data">
           
           <div class="form-group col-12">
-            <label for="nombreEquipo">Codigo</label>
+            <label for="nombreEquipo">Código</label>
             <input type="text" value="" class="form-control" readonly id="editarCodigoE" name="editarCodigoE"  required>
             <input type="hidden" name="editarTipoEquipo" id="editarTipoEquipo">
           </div>
           <div class="form-group col-12">
-            <label for="nombreEquipo">Nombre Equipo</label>
+            <label for="nombreEquipo">Nombre equipo</label>
             <html>
             <input type="text" value="" class="form-control sinCaracteres sinNumeros mayus" name="editarNombreEquipo" id="editarNombreEquipo" required>
           </div>
@@ -213,16 +213,16 @@
           </div>
 
           <div class="form-group col-12">
-              <label for="exampleInputFile">Foto</label>
+              <label for="exampleInputFile">Imagen</label>
               <div class="input-group">
               <img class="img-thumbnail previsualizar mr-2" src="" alt="imagen-del-producto" width="100px">
               <input type="hidden" name="imagenActual" id="imagenActualEquipo" value="">
               <div class="custom-file">
                   <input type="file" class="custom-file-input nuevaFoto" name="editarFotoEquipo">
-                  <label class="custom-file-label">Escoger foto</label>
+                  <label class="custom-file-label">Escoger imagen</label>
               </div>
               </div>
-                  <p class="p-foto help-block ml-4">Peso máximo de la foto 2 MB</p>
+                  <p class="p-foto help-block ml-4">Peso máximo de la imagen 2 MB</p>
           </div>
 
           <div class="form-group mt-4 float-right">
