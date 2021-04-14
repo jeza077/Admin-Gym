@@ -34,7 +34,7 @@
   <section class="content">
 
     <?php
-      $descripcionEvento = " Consultó la pantalla de administracion de ventas";
+      $descripcionEvento = "".$_SESSION["usuario"]." Consultó la pantalla de administrar ventas";
       $accion = "Consulta";
 
       $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 14,$accion, $descripcionEvento);

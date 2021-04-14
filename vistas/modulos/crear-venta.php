@@ -10,11 +10,12 @@
         </div>
       </div><!-- /.container-fluid -->
     </section>  
+   
       <!--=====================================
                  FORMULARIO 
       ======================================-->
     <section class="content"> 
-      <?php
+    <?php
         $descripcionEvento = "".$_SESSION["usuario"]." Consultó la pantalla de crear ventas";
         $accion = "Consulta";
 

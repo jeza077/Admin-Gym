@@ -134,8 +134,8 @@ class ControladorVentas {
 
 			if ($respuesta == true && $_POST['enviarFactura'] == 'on'){
 
-				$descripcionEvento = "Nueva venta";
-				$accion = "Nueva";
+				$descripcionEvento = "".$_SESSION["usuario"]."Registró una nueva venta";
+				$accion = "Nuevo";
                 $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 5,$accion, $descripcionEvento);
 
 				// if($_POST['idPersona'] != ""){
@@ -838,6 +838,10 @@ class ControladorVentas {
 				// }
 				
 			} else if ($respuesta == true && !$_POST['enviarFactura']){
+				$descripcionEvento = "".$_SESSION["usuario"]." Registró una nueva venta";
+				$accion = "Nuevo";
+                $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 15,$accion, $descripcionEvento);
+
 					
 					echo'<script>
 					
