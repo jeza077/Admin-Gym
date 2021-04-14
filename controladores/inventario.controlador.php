@@ -157,7 +157,7 @@ class ControladorInventario{
                         $descripcionEvento = "".$_SESSION["usuario"]." Agregó un nuevo producto";
                         $accion = "Nuevo";
 
-                        $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 4,$accion, $descripcionEvento);
+                        $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"],11,$accion, $descripcionEvento);
 
                         echo '<script>
                                 Swal.fire({
