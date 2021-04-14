@@ -589,7 +589,7 @@ class ControladorPersonas{
 
                         $descripcionEvento = "".$_SESSION['usuario']." Actualizó el cliente de gimnasio llamado ".$_POST["editarNombre"]."";
 					    $accion = "Actualizar";
-					    $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION['id_usuario'], 3, $accion, $descripcionEvento);
+					    $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION['id_usuario'], 4, $accion, $descripcionEvento);
 					    
                         
                         echo '<script>

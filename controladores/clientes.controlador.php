@@ -127,9 +127,9 @@ class ControladorClientes{
 						// echo "</pre>";
 						// return;
 						if ($respuestaPago ==true) {
-							$descripcionEvento = "".$_SESSION['usuario']." creó un nuevo cliente del gimnasio";
+							$descripcionEvento = "".$_SESSION['usuario']." creó el nuevo cliente del gimnasio llamado ".$_POST['nuevoNombre']."";
 							$accion = "Nuevo";
-							$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION['id_usuario'], 3, $accion, $descripcionEvento);
+							$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION['id_usuario'], 4, $accion, $descripcionEvento);
 
 							return true;
 						}
@@ -140,9 +140,9 @@ class ControladorClientes{
 					}
 
 				} else {
-					$descripcionEvento = "".$_SESSION['usuario']." creó un nuevo cliente de ventas";
+					$descripcionEvento = "".$_SESSION['usuario']." creó el nuevo cliente de ventas llamado ".$_POST['nuevoNombre']."";
 					$accion = "Nuevo";
-					$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION['id_usuario'], 3, $accion, $descripcionEvento);
+					$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION['id_usuario'], 4, $accion, $descripcionEvento);
 					return true;
 				}
 
@@ -445,7 +445,7 @@ class ControladorClientes{
 				
 				$descripcionEvento = "".$_SESSION['usuario']." Actualizó el cliente de ventas llamado ".$mostrarNombreCliente['nombre']."";
 				$accion = "Actualizar";
-				$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION['id_usuario'], 3, $accion, $descripcionEvento);
+				$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION['id_usuario'], 4, $accion, $descripcionEvento);
 				
 
 				// GUARDAR EN LA TABLA CLIENTE INSCRIPCION
