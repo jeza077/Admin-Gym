@@ -154,7 +154,7 @@ class ControladorInventario{
 
                     if($crearInventario == true){
                         
-                        $descripcionEvento = " Nuevo Producto";
+                        $descripcionEvento = "".$_SESSION["usuario"]." Agregó un nuevo producto";
                         $accion = "Nuevo";
 
                         $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 4,$accion, $descripcionEvento);
@@ -307,10 +307,10 @@ class ControladorInventario{
 
                     if($crearInventario == true){
                         
-                        // $descripcionEvento = "  Nuevo Producto";
-                        // $accion = "Nuevo";
+                        $descripcionEvento = "".$_SESSION["usuario"]." Agregó un nuevo equipo";
+                        $accion = "Nuevo";
 
-                        // $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 4,$accion, $descripcionEvento);
+                        $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 12,$accion, $descripcionEvento);
 
                         echo '<script>
                                 Swal.fire({
@@ -565,8 +565,8 @@ class ControladorInventario{
 
                 if($tipostock == 'Productos'){
                     
-                    $descripcionEvento = "Actualizo un Producto del Stock";
-                    $accion = "Actualizo";
+                    $descripcionEvento = "".$_SESSION["usuario"]." Actualizó un producto del stock";
+                    $accion = "Actualizar";
                     $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 4,$accion, $descripcionEvento);
                 
                     $datos = array("nombre_producto" => $_POST["editarNombreProducto"],
@@ -719,9 +719,9 @@ class ControladorInventario{
 
                 if($tipostock == 'Equipo'){
                     
-                    $descripcionEvento = "Actualizo un Equipo del Stock";
-                    $accion = "Actualizo";
-                    $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 2,$accion, $descripcionEvento);
+                    $descripcionEvento = "".$_SESSION["usuario"]." Actualizó un equipo del stock";
+                    $accion = "Actualizar";
+                    $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 12,$accion, $descripcionEvento);
                 
                     $datos = array("nombre_producto" => $_POST["editarNombreEquipo"],
                     "codigo" => $_POST["editarCodigoE"],
