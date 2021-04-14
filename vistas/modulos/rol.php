@@ -8,7 +8,7 @@
           </div>
           <div class="col-sm-6">
               <button class="btn btn-orange float-right"  data-toggle="modal" data-target="#modalNuevoRol">
-                Nuevo Rol        
+                Nuevo rol        
               </button>
               <button class="btn btn-danger btnExportarRol float-right mr-3 ">
                 Exportar PDF      
@@ -25,7 +25,7 @@
       <div class="card-body">
 
         <?php
-            $descripcionEvento = " Consulto la pantalla de Rol";
+            $descripcionEvento = " Consultó la pantalla de Rol";
             $accion = "consulta";
 
             $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
@@ -41,9 +41,9 @@
           <thead>
                           
             <tr>                    
-                <th scope="col">#</th>   
+                <th scope="col">N.°</th>   
                 <th scope="col">Rol</th> 
-                <th scope="col">Descripcion</th>  
+                <th scope="col">Descripción</th>  
                 <th scope="col">Estado</th>
                 <th scope="col">Acciones</th>
             </tr>
@@ -122,7 +122,7 @@ MODAL AGREGAR ROL
         ======================================-->
 
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Nuevo Rol</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Nuevo rol</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -137,12 +137,12 @@ MODAL AGREGAR ROL
             <div class="form-group row">
               <label for="Rol" class="col-sm-4">Rol</label>
             
-              <input type="text" class="form-control col-sm-8 nombre mayus" name="nuevoRol" value="" placeholder="Ingresa el rol" required>
+              <input type="text" class="form-control col-sm-8 nombre mayus" name="nuevoRol" value="" placeholder="Ingrese el rol" required>
             </div>
 
             <div class="form-group row">
-              <label for="Descripcion" class="col-sm-4">Descripcion</label>            
-              <input type="textarea" class="form-control col-sm-8 nombre mayus" name="nuevaDescripcionRol" value="" placeholder="Ingresa la descripción" required>
+              <label for="Descripcion" class="col-sm-4">Descripción</label>            
+              <input type="textarea" class="form-control col-sm-8 nombre mayus" name="nuevaDescripcionRol" value="" placeholder="Ingrese la descripción" required>
             </div>
 
             <div class="pantalla-permisos" id="datos-permisos">
@@ -218,7 +218,7 @@ MODAL AGREGAR ROL
           
         </div>
         <div class="modal-footer mt-4" id="modalFooterPermisos">
-          <button type="submit" class="btn btn-primary btnGuardarCambios">Guardar Cambios
+          <button type="submit" class="btn btn-primary btnGuardarCambios">Guardar cambios
           </button>
           <button type="button" class="btn btn-orange" data-dismiss="modal">Salir</button>
           
@@ -262,7 +262,7 @@ MODAL EDITAR ROL
         ======================================-->
 
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Editar  rol</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Editar rol</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -286,7 +286,7 @@ MODAL EDITAR ROL
             
             <div class="ml-2">
               <a class="btn btn-primary" data-toggle="collapse" href="#permisosRolCollapse" role="button" aria-expanded="false" aria-controls="permisosRolCollapse">
-               + Agregar Permisos
+               + Agregar permisos
               </a>
               <div class="collapse mt-3" id="permisosRolCollapse">
                 <div class="card card-body">
@@ -361,7 +361,7 @@ MODAL EDITAR ROL
         ======================================-->
      
         <div class="modal-footer" id="modalFooterPermisosEditar">
-          <button type="submit" class="btn btn-primary btnGuardarCambiosEditar">Guardar Cambios
+          <button type="submit" class="btn btn-primary btnGuardarCambiosEditar">Guardar cambios
           </button>
           <button type="button" class="btn btn-orange" data-dismiss="modal">Salir</button>
           

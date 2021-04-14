@@ -8,7 +8,7 @@
           </div>
           <div class="col-sm-6">
                 <button class="btn btn-orange float-right"  data-toggle="modal" data-target="#modalNuevoDocumento">
-                  Nuevo Documento      
+                  Nuevo documento      
                 </button>
                 <button class="btn btn-danger btnExportarDocumento float-right mr-3 ">
                 Exportar PDF      
@@ -39,8 +39,8 @@
             
             <thead>
               <tr>
-                <th scope="col">#</th>
-                <th scope="col">Tipo Documento</th>
+                <th scope="col">N.°</th>
+                <th scope="col">Tipo documento</th>
                 <th scope="col">Estado</th>
                 <th scope="col">Acciones</th>
 
@@ -106,7 +106,7 @@ MODAL AGREGAR NUEVA MATRICULA
         ======================================-->
 
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Nuevo Documento</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Nuevo documento</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -118,8 +118,8 @@ MODAL AGREGAR NUEVA MATRICULA
 
         <div class="modal-body">
           <div class="form-group col-md-12">
-            <label for="Rol">Tipo Documento</label>
-            <input type="text" class="form-control nombre mayus" name="nuevoDocumento" value="" placeholder="Ingresa Documento" required>
+            <label for="Rol">Tipo documento</label>
+            <input type="text" class="form-control nombre mayus" name="nuevoDocumento" value="" placeholder="Ingrese documento" required>
           </div>
 
           <!-- <div class="form-group col-md-12">
@@ -176,7 +176,7 @@ MODAL EDITAR MATRICULA
         ======================================-->
 
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Editar Documento</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Editar documento</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -188,7 +188,7 @@ MODAL EDITAR MATRICULA
 
         <div class="modal-body">
           <div class="form-group col-md-12">
-            <label for="Rol">Tipo Documento</label>
+            <label for="Rol">Tipo documento</label>
             <input type="text" class="form-control nombre mayus" id="editarDocumento" name="editarDocumento" value="" required>
           </div>
 
@@ -204,7 +204,7 @@ MODAL EDITAR MATRICULA
         ======================================-->
 
         <div class="modal-footer">
-          <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+          <button type="submit" class="btn btn-primary">Guardar cambios</button>
           <button type="button" class="btn btn-orange" data-dismiss="modal">Salir</button>
         </div>
 

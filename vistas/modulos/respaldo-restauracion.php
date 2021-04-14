@@ -27,7 +27,7 @@
 
                 <!-- <div class="card-body"> -->
                 <?php
-                $descripcionEvento = " Consulto la pantalla de Respaldo y Restauracion";
+                $descripcionEvento = " Consultó la pantalla de respaldo y restauración";
                 $accion = "consulta";
 
                 $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 7,$accion, $descripcionEvento);
@@ -58,7 +58,7 @@
 
                     <li class="nav-item" role="presentation">
 
-                      <a class="nav-link" id="datosRestauracion" data-toggle="tab" href="#second" role="tab" aria-controls="second" aria-selected="false">Restauracion</a>
+                      <a class="nav-link" id="datosRestauracion" data-toggle="tab" href="#second" role="tab" aria-controls="second" aria-selected="false">Restauración</a>
                       <?php
                         $descripcionEvento = " Consulto la pantalla de Restauracion";
                         $accion = "consulta";
@@ -164,7 +164,7 @@
                                   <div class="input-group-prepend">
                                       <span class="input-group-text"><i class="fas fa-unlock"></i></span>
                                   </div>
-                                      <input type="text-center" class="form-control" id="contrasenia2" name="contrasenia2" placeholder="db password" readonly>
+                                      <input type="text-center" class="form-control" id="contrasenia2" name="contrasenia2" placeholder="db contraseña" readonly>
                                 </div>
                             </div>
 
@@ -179,7 +179,7 @@
                             </div>
 
                             <div class="form-group ">
-                                    <label>Seleccion de la restauracion </label>
+                                    <label>Seleccion de la restauración </label>
                                   <div class="input-group col-md-6">   
                                     <span class="input-group-text"><i class="fas fa-database"></i></span>
                                      <select class="form-control input-lg" name="restorePoint" id="restorePoint" required>

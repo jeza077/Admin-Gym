@@ -4,11 +4,11 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Matricula</h1>
+            <h1>Matrícula</h1>
           </div>
           <div class="col-sm-6">
                 <button class="btn btn-orange float-right"  data-toggle="modal" data-target="#modalNuevaMatricula">
-                  Nueva Matricula      
+                  Nueva matrícula      
                 </button>
                 <button class="btn btn-danger btnExportarMatricula float-right mr-3 ">
                 Exportar PDF      
@@ -39,9 +39,9 @@
             
             <thead>
               <tr>
-                <th scope="col">#</th>
+                <th scope="col">N.°</th>
 
-                <th scope="col">Tipo de matricula</th>
+                <th scope="col">Tipo de matrícula</th>
 
                 <th scope="col">Precio</th>
 
@@ -111,7 +111,7 @@ MODAL AGREGAR NUEVA MATRICULA
         ======================================-->
 
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Nueva Matricula</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Nueva matrícula</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -123,13 +123,13 @@ MODAL AGREGAR NUEVA MATRICULA
 
         <div class="modal-body">
           <div class="form-group col-md-12">
-            <label for="Rol">Tipo Matricula</label>
-            <input type="text" class="form-control nombre mayus" name="nuevoMatricula" value="" placeholder="Ingresa Matricula" required>
+            <label for="Rol">Tipo matrícula</label>
+            <input type="text" class="form-control nombre mayus" name="nuevoMatricula" value="" placeholder="Ingrese la matrícula" required>
           </div>
 
           <div class="form-group col-md-12">
-            <label for="Descripcion">Precio Matricula</label>
-            <input type="textarea" class="form-control preciom" name="nuevoPrecio" value="" placeholder="Ingresa Precio Matricula" required>
+            <label for="Descripcion">Precio</label>
+            <input type="textarea" class="form-control preciom" name="nuevoPrecio" value="" placeholder="Ingrese el precio" required>
           </div>
         </div>
 
@@ -181,7 +181,7 @@ MODAL EDITAR MATRICULA
         ======================================-->
 
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Editar Matricula</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Editar matrícula</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -193,12 +193,12 @@ MODAL EDITAR MATRICULA
 
         <div class="modal-body">
           <div class="form-group col-md-12">
-            <label for="Rol">Tipo Matricula</label>
+            <label for="Rol">Tipo matrícula</label>
             <input type="text" class="form-control nombre mayus" id="editarMatricula" name="editarMatricula" value="" required>
           </div>
 
           <div class="form-group col-md-12">
-            <label for="Descripcion">Precio Matricula</label>
+            <label for="Descripcion">Precio</label>
             <input type="textarea" class="form-control preciom" id="editarPrecioMatricula" name="editarPrecioMatricula" value="" required>
           </div>
           <input type="hidden" id="editarIdMatricula" name="editarIdMatricula">
@@ -209,7 +209,7 @@ MODAL EDITAR MATRICULA
         ======================================-->
 
         <div class="modal-footer">
-          <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+          <button type="submit" class="btn btn-primary">Guardar cambios</button>
           <button type="button" class="btn btn-orange" data-dismiss="modal">Salir</button>
         </div>
 

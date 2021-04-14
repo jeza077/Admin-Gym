@@ -4,7 +4,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Administracion de Permisos</h1>
+            <h1>Administración de permisos</h1>
           </div>
           <div class="col-sm-6">
               <!-- <button class="btn btn-orange float-right"  data-toggle="modal" data-target="#modalNuevoRol">
@@ -25,7 +25,7 @@
       <div class="card-body">
 
         <?php
-            $descripcionEvento = " Consulto la pantalla de mantenimiento";
+            $descripcionEvento = " Consultó la pantalla de mantenimiento";
             $accion = "consulta";
 
             $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
@@ -41,7 +41,7 @@
           <thead>
                           
             <tr>                    
-                <th scope="col">#</th>   
+                <th scope="col">N.°</th>   
                 <th scope="col">Rol</th> 
                 <th scope="col">Pantalla</th> 
                 <th scope="col">Consulta</th>  

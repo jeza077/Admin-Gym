@@ -4,7 +4,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Parametros</h1>
+            <h1>Parámetros</h1>
           </div>
           <div class="col-sm-6">
               <button class="btn btn-danger btnExportarParametro float-right mr-3 ">
@@ -27,7 +27,7 @@
         <!-- <div class=" col-sm-12"> -->
       
         <?php
-        $descripcionEvento = " Consulto la pantalla de Parametro";
+        $descripcionEvento = " Consultó la pantalla de Parámetro";
         $accion = "consulta";
 
         $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
@@ -41,8 +41,8 @@
         <table class="table table-striped table-bordered tablas text-center">
             <thead>
               <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Parametros</th>
+                  <th scope="col">N.°</th>
+                  <th scope="col">Parámetros</th>
                   <th scope="col">Valor</th>
                   <th scope="col">Editar</th>
               
@@ -108,7 +108,7 @@ MODIFIRCAR PARAMETROS
         ======================================-->
 
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Editar Parametro</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Editar parámetro</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -122,7 +122,7 @@ MODIFIRCAR PARAMETROS
 
            <div class="card-body">
               <div class= "form-group col-md-12">
-               <label for="parametro">Parametro</label>
+               <label for="parametro">Parámetro</label>
                <input type="text" class="form-control nombre mayus" id="editarParametro" name="editarParametro" value="" readonly >
               </div>
           
@@ -130,7 +130,7 @@ MODIFIRCAR PARAMETROS
 
               <div class= "form-group col-md-12">
                <label for="Valor">Valor</label>
-               <input type="text" class="form-control " id="editarValorParametro" name="editarValorParametro" placeholder="Escriba el nuevo valor del parametro"requiered>
+               <input type="text" class="form-control " id="editarValorParametro" name="editarValorParametro" placeholder="Escriba el nuevo valor del parámetro"requiered>
               </div>
 
               <input type="hidden" id="editarIdParametro" name="editarIdParametro">

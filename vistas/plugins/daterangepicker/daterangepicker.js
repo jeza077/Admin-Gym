@@ -75,7 +75,7 @@
             applyLabel: 'Aplicar',
             cancelLabel: 'Cancelar',
             weekLabel: 'W',
-            customRangeLabel: 'sonalizado',
+            customRangeLabel: 'Personalizado',
             daysOfWeek: moment.weekdaysMin(),
             monthNames: moment.monthsShort(),
             firstDay: moment.localeData().firstDayOfWeek()

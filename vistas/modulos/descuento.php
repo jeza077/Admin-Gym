@@ -8,7 +8,7 @@
           </div>
           <div class="col-sm-6">
               <button class="btn btn-orange float-right"  data-toggle="modal" data-target="#modalNuevoDescuento">
-              Nuevo Descuento     
+              Nuevo descuento     
               </button>
               <button class="btn btn-danger btnExportarDescuento float-right mr-3 ">
                 Exportar PDF      
@@ -22,7 +22,7 @@
   </section>  
 
          <?php
-            $descripcionEvento = " Consulto la pantalla de Descuento";
+            $descripcionEvento = " Consultó la pantalla de descuentos";
             $accion = "consulta";
 
             $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
@@ -46,8 +46,8 @@
             <table class="table table-bordered table-striped tablas text-center">                
               <thead>
                 <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Tipo descuento</th>
+                    <th scope="col">N.°</th>
+                    <th scope="col">Tipo de descuento</th>
                     <th scope="col">Porcentaje</th>
                     <th scope="col">Estado</th>
                     <th scope="col">Acciones</th>
@@ -114,7 +114,7 @@ MODAL NUEVO DESCUENTO
         ======================================-->
 
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Nuevo Descuento</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Nuevo descuento</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -126,13 +126,13 @@ MODAL NUEVO DESCUENTO
 
         <div class="modal-body">
           <div class="form-group col-md-12">
-            <label for="Rol">Tipo Descuento</label>
-            <input type="text" class="form-control nombre mayus" name="nuevoDescuento" value="" placeholder="Ingresa Descuento" required>
+            <label for="Rol">Tipo descuento</label>
+            <input type="text" class="form-control nombre mayus" name="nuevoDescuento" value="" placeholder="Ingrese el descuento" required>
           </div>
 
           <div class="form-group col-md-12">
-            <label for="Descripcion">Porcentaje Descuento</label>
-            <input type="textarea" class="form-control preciom" name="nuevoValor" value="" placeholder="Ingresa Porcentaje Descuento" required>
+            <label for="Descripcion">Porcentaje descuento</label>
+            <input type="textarea" class="form-control preciom" name="nuevoValor" value="" placeholder="Ingrese el porcentaje" required>
           </div>
         </div>
 
@@ -184,7 +184,7 @@ MODAL EDITAR DESCUENTO
         ======================================-->
 
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Editar Descuento</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Editar descuento</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -197,12 +197,12 @@ MODAL EDITAR DESCUENTO
         <div class="modal-body">
 
             <div class="form-group col-md-12">
-              <label for="Rol">Tipo Descuento</label>
+              <label for="Rol">Tipo descuento</label>
               <input type="text" class="form-control nombre mayus" id="editarDescuento" name="editarDescuento" value="" required>
             </div>
 
             <div class="form-group col-md-12">
-              <label for="Descripcion">Porcentaje Descuento</label>
+              <label for="Descripcion">Porcentaje descuento</label>
               <input type="textarea" class="form-control preciom" id="editarValorDescuento" name="editarValorDescuento" value="" required>
             </div>
             <input type="hidden" id="editarIdDescuento" name="editarIdDescuento">

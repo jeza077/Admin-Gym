@@ -8,7 +8,7 @@
           </div>
           <div class="col-sm-6">
                 <button class="btn btn-orange float-right" data-toggle="modal" data-target="#modalNuevoProveedor">
-                  Nuevo Proveedor      
+                  Nuevo proveedor      
                 </button>
                 <button class="btn btn-danger btnExportarProveedores float-right mr-3 ">
                 Exportar PDF      
@@ -39,7 +39,7 @@
             
             <thead>
               <tr>
-                <th scope="col">#</th>
+                <th scope="col">N.°</th>
                 <th scope="col">Nombre</th>
                 <th scope="col">Correo</th>
                 <th scope="col">Teléfono</th>
@@ -102,7 +102,7 @@ MODAL AGREGAR NUEVO PROVEEDOR
         ======================================-->
 
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Nuevo Proveedor</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Nuevo proveedor</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -115,17 +115,17 @@ MODAL AGREGAR NUEVO PROVEEDOR
         <div class="modal-body">
           <div class="form-group col-md-12">
             <label for="nombre">Nombre</label>
-            <input type="text" class="form-control nombre mayus" name="nuevoNombre" value="" placeholder="Ingresa Nombre" required>
+            <input type="text" class="form-control nombre mayus" name="nuevoNombre" value="" placeholder="Ingrese nombre" required>
           </div>
 
           <div class="form-group col-md-12">
             <label for="Descripcion">Correo</label>
-            <input type="email" class="form-control email" name="nuevoCorreo" value="" placeholder="Ingresa correo" required>
+            <input type="email" class="form-control email" name="nuevoCorreo" value="" placeholder="Ingrese el correo" required>
           </div>
 
           <div class="form-group col-md-12">
             <label for="Descripcion">Teléfono</label>
-            <input type="text" class="form-control" data-inputmask='"mask": "(999) 9999-9999"' data-mask  name="nuevoTelefono" placeholder="Ingrese Teléfono" required>
+            <input type="text" class="form-control" data-inputmask='"mask": "(999) 9999-9999"' data-mask  name="nuevoTelefono" placeholder="Ingrese el teléfono" required>
           </div>
         </div>
 
@@ -164,7 +164,7 @@ MODAL EDITAR PROVEEDOR
         ======================================-->
 
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Editar Proveedor</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Editar proveedor</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -197,7 +197,7 @@ MODAL EDITAR PROVEEDOR
         ======================================-->
 
         <div class="modal-footer">
-          <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+          <button type="submit" class="btn btn-primary">Guardar cambios</button>
           <button type="button" class="btn btn-orange" data-dismiss="modal">Salir</button>
         </div>
 

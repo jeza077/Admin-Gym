@@ -35,7 +35,7 @@
             
             <thead>
               <tr>
-                <th scope="col">#</th>
+                <th scope="col">N.°</th>
                 <th scope="col">Objeto</th>
                 <th scope="col">Link</th>
                 <th scope="col">Icono</th>
@@ -94,7 +94,7 @@ MODAL AGREGAR NUEVO OBJETO
         ======================================-->
 
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Nuevo Objeto</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Nuevo objeto</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>
@@ -107,17 +107,17 @@ MODAL AGREGAR NUEVO OBJETO
         <div class="modal-body">
             <div class="form-group col-md-12">
                 <label for="Rol">Objeto</label>
-                <input type="text" class="form-control mayus" name="nuevoObjeto" value="" placeholder="Ingrese Objeto" required>
+                <input type="text" class="form-control mayus" name="nuevoObjeto" value="" placeholder="Ingrese objeto" required>
             </div>
 
             <div class="form-group col-md-12">
                 <label for="Descripcion">Link</label>
-                <input type="text" class="form-control" name="nuevoLink" value="" placeholder="Ingrese Link" required>
+                <input type="text" class="form-control" name="nuevoLink" value="" placeholder="Ingrese el link" required>
             </div>
 
             <div class="form-group col-md-12">
                 <label for="Descripcion">Icono</label>
-                <input type="text" class="form-control" name="nuevoIcono" value="" placeholder="Ingrese Icono" required>
+                <input type="text" class="form-control" name="nuevoIcono" value="" placeholder="Ingrese el icono" required>
             </div>
         </div>
 

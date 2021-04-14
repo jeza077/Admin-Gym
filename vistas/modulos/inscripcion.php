@@ -8,7 +8,7 @@
                 </div>
                 <div class="col-sm-6">                       
                     <button class="btn btn-orange float-right"  data-toggle="modal" data-target="#modalNuevainscripcion">
-                        Nueva Inscripcion    
+                        Nueva inscripción    
                     </button>
                     <button class="btn btn-danger btnExportarInscripcion float-right mr-3 ">
                     Exportar PDF          
@@ -26,7 +26,7 @@
 
                 
                 <?php
-                    $descripcionEvento = " Consulto la pantalla deInscripcion";
+                    $descripcionEvento = " Consultó la pantalla de inscripción";
                     $accion = "consulta";
 
                     $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
@@ -37,13 +37,13 @@
                     
                     <thead>
                         <tr>
-                            <th scope="col">#</th>
+                            <th scope="col">N.°</th>
 
                             <th scope="col">Tipo de inscripción</th>
 
                             <th scope="col">Precio</th>
 
-                            <th scope="col">Dias</th>
+                            <th scope="col">Días</th>
 
                             <th scope="col">Estado</th>
 
@@ -116,7 +116,7 @@ MODAL AGREGAR NUEVA INSCRIPCION
                 ======================================-->
 
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Nueva Inscripcion</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Nueva inscripción</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
@@ -128,18 +128,18 @@ MODAL AGREGAR NUEVA INSCRIPCION
 
                 <div class="modal-body">
                     <div class="form-group col-md-12">
-                        <label for="Rol">Tipo Inscripcion</label>
-                        <input type="text" class="form-control nombre mayus" name="nuevoInscripcion" value="" placeholder="Ingresa Inscripción" required>
+                        <label for="Rol">Tipo inscripción</label>
+                        <input type="text" class="form-control nombre mayus" name="nuevoInscripcion" value="" placeholder="Ingrese inscripción" required>
                     </div>
 
                     <div class="form-group col-md-12">
-                        <label for="Descripcion">Cantidad Dias Inscripción</label>
-                        <input type="text" class="form-control preciom " name="nuevoDias" value="" placeholder="Ingresa Cantidad Dias" required>
+                        <label for="Descripcion">Cantidad de días</label>
+                        <input type="text" class="form-control preciom " name="nuevoDias" value="" placeholder="Ingrese la cantidad de días" required>
                     </div>
 
                     <div class="form-group col-md-12">
-                        <label for="Descripcion">Precio Inscripción</label>
-                        <input type="text" class="form-control preciom " name="nuevoPrecio" value="" placeholder="Ingresa Precio" required>
+                        <label for="Descripcion">Precio</label>
+                        <input type="text" class="form-control preciom " name="nuevoPrecio" value="" placeholder="Ingrese precio" required>
                     </div>
                 </div>
 
@@ -185,7 +185,7 @@ MODAL EDITAR INSCRIPCION
                 ======================================-->
 
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Editar Inscripcion</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Editar inscripción</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -198,17 +198,17 @@ MODAL EDITAR INSCRIPCION
                 <div class="modal-body">
                     <div class="card-body">
                         <div class="form-group col-md-12">
-                            <label for="Rol">Tipo Inscripción</label>
+                            <label for="Rol">Tipo inscripción</label>
                             <input type="text" class="form-control nombre mayus" id="editarInscripcion" name="editarInscripcion" value="" required>
                         </div>
 
                         <div class="form-group col-md-12">
-                            <label for="Descripcion">Cantidad Dias Inscripción</label>
+                            <label for="Descripcion">Cantidad de días</label>
                             <input type="text" class="form-control preciom" id="editarDiasInscripcion" name="editarDiasInscripcion" value="" required>
                         </div>
 
                         <div class="form-group col-md-12">
-                            <label for="Descripcion">Precio Inscripción</label>
+                            <label for="Descripcion">Precio</label>
                             <input type="textarea" class="form-control preciom" id="editarPrecioInscripcion" name="editarPrecioInscripcion" value="" required>
                         </div>
 
