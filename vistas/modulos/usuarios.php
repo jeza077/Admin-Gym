@@ -207,15 +207,15 @@
 
                     <div class="form-group col-md-3">
                       <label for="identidad">Numero de documento</label>
-                      <input type="text" class="form-control numeroDocumento" name="nuevoNumeroDocumento" placeholder="Ingrese Identidad" required>
+                      <input type="text" class="form-control numeroDocumento longitudString[45]" name="nuevoNumeroDocumento" placeholder="Ingrese Identidad" required>
                     </div>
                     <div class="form-group col-md-3">
                       <label for="nombre">Nombre</label>
-                      <input type="text" class="form-control nombre mayus" name="nuevoNombre" placeholder="Ingrese Nombre" required>
+                      <input type="text" class="form-control nombre mayus sinCaracteres sinNumeros" name="nuevoNombre" placeholder="Ingrese Nombre" required>
                     </div>
                     <div class="form-group col-md-3">
                       <label for="apellido">Apellido</label>
-                      <input type="text" class="form-control apellidos mayus" name="nuevoApellido" placeholder="Ingrese Apellidos" required>
+                      <input type="text" class="form-control apellidos mayus sinCaracteres sinNumeros" name="nuevoApellido" placeholder="Ingrese Apellidos" required>
                     </div>
                   </div>
 
@@ -241,7 +241,7 @@
                   <div class="form-row">
                     <div class="form-group col-md-9">
                       <label for="inputAddress">Dirección</label>
-                      <input type="text" class="form-control mayus" id="inputAddress" name="nuevaDireccion" placeholder="Col. Alameda, calle #2..." required>
+                      <input type="text" class="form-control mayus permitirUnEspacio" id="inputAddress" name="nuevaDireccion" placeholder="Col. Alameda, calle #2..." required>
                     </div>
                   
                     <div class="form-group col-md-3">
@@ -262,7 +262,7 @@
                   <div class="form-row">
                     <div class="form-group col-md-3">
                       <label for="">Usuario</label>
-                      <input type="text" class="form-control mayus nuevoUsuario" name="nuevoUsuario" placeholder="Ingrese Usuario" autocomplete="off">
+                      <input type="text" class="form-control mayus nuevoUsuario sinCaracteres sinNumeros" name="nuevoUsuario" placeholder="Ingrese Usuario" autocomplete="off">
                     </div>
                     <div class="form-group col-md-3">
                       <label>Rol</label>
@@ -438,7 +438,7 @@
                   <div class="form-row">
                     <div class="form-group col-md-9">
                       <label for="direccion">Dirección</label>
-                      <input type="text" class="form-control mayus" id="direccion" name="editarDireccion" value="" required>
+                      <input type="text" class="form-control mayus permitirUnEspacio" id="direccion" name="editarDireccion" value="" required>
                     </div>
                   
                     <div class="form-group col-md-3">

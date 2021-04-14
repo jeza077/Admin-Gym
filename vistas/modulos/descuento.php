@@ -132,7 +132,7 @@ MODAL NUEVO DESCUENTO
 
           <div class="form-group col-md-12">
             <label for="Descripcion">Porcentaje Descuento</label>
-            <input type="textarea" class="form-control preciom" name="nuevoValor" value="" placeholder="Ingresa Porcentaje Descuento" required>
+            <input type="textarea" class="form-control preciom sinCaracteres" name="nuevoValor" value="" placeholder="Ingresa Porcentaje Descuento" required>
           </div>
         </div>
 
@@ -203,7 +203,7 @@ MODAL EDITAR DESCUENTO
 
             <div class="form-group col-md-12">
               <label for="Descripcion">Porcentaje Descuento</label>
-              <input type="textarea" class="form-control preciom" id="editarValorDescuento" name="editarValorDescuento" value="" required>
+              <input type="textarea" class="form-control preciom sinCaracteres" id="editarValorDescuento" name="editarValorDescuento" value="" required>
             </div>
             <input type="hidden" id="editarIdDescuento" name="editarIdDescuento">
         </div>
