@@ -149,6 +149,24 @@ class AjaxMantenimiento{
     
     }
 
+    /*========================================
+        MOSTRAR PARAMETRO (DINAMICO)
+    ==========================================*/ 
+    public $parametro;
+
+    public function ajaxMostrarParametro(){
+
+        $tabla = "tbl_parametros";
+        $item = "parametro";
+        $valor = $this->parametro;
+        $all = null;
+
+        $respuesta = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all);
+
+        echo json_encode($respuesta);
+    
+    }
+
 }
 
 /*========================================
@@ -206,6 +224,15 @@ if(isset($_POST["idProveedor"])){
     $mostrarProveedor = new AjaxMantenimiento();
     $mostrarProveedor->idProveedor = $_POST["idProveedor"];
     $mostrarProveedor->ajaxMostrarProveedor();
+}  
+
+/*========================================
+    MOSTRAR PARAMETROS (DINAMICO)
+==========================================*/ 
+if(isset($_POST["parametro"])){ 
+    $mostrarParametro = new AjaxMantenimiento();
+    $mostrarParametro->parametro = $_POST["parametro"];
+    $mostrarParametro->ajaxMostrarParametro();
 }  
 
 
