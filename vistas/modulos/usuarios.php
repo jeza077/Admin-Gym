@@ -262,7 +262,7 @@
                   <div class="form-row">
                     <div class="form-group col-md-3">
                       <label for="">Usuario</label>
-                      <input type="text" class="form-control mayus nuevoUsuario" name="nuevoUsuario" placeholder="Ingrese Usuario">
+                      <input type="text" class="form-control mayus nuevoUsuario" name="nuevoUsuario" placeholder="Ingrese Usuario" autocomplete="off">
                     </div>
                     <div class="form-group col-md-3">
                       <label>Rol</label>
@@ -289,7 +289,7 @@
 
                     <div class="form-group col-md-3">
                       <label for="">Contraseña Generada</label>
-                      <input type="text" class="form-control passwordGenerado" name="nuevoPassword">
+                      <input type="text" class="form-control passwordGenerado" name="nuevoPassword" autocomplete="off" spellcheck="false">
                     </div>
                     <div class="col-md-3">
                       <a href="javascript:void(0);"  class="btn btn-block btn-orange generarPassword" style="margin-top:2em">Generar contraseña</a>
@@ -460,7 +460,7 @@
                   <div class="form-row">
                     <div class="form-group col-md-3">
                       <label for="">Usuario</label>
-                      <input type="text" class="form-control nuevoUsuario" name="editarUsuario" value="" readonly>
+                      <input type="text" class="form-control nuevoUsuario" name="editarUsuario" value="" readonly autocomplete="off">
                     </div>
                     <div class="form-group col-md-3">
                       <label>Rol</label>
@@ -487,7 +487,7 @@
 
                     <div class="form-group col-md-3">
                       <label for="inputPass">Contraseña Generada</label>
-                      <input type="text" class="form-control passwordGenerado" id="inputPass" name="editarPassword">
+                      <input type="text" class="form-control passwordGenerado" id="inputPass" name="editarPassword" autocomplete="off" spellcheck="false">
                       <input type="hidden" class="form-control" id="passwordActual" name="passwordActual">
                     </div>
                     <div class="col-md-3">
@@ -668,7 +668,7 @@
             <div class="form-row">
               <div class="form-group col-md-6">
                 <label for="">Usuario</label>
-                <input type="text" class="form-control mayus nuevoUsuario" name="nuevoUsuario" placeholder="Ingrese Usuario">
+                <input type="text" class="form-control mayus nuevoUsuario" name="nuevoUsuario" placeholder="Ingrese Usuario" autocomplete="off">
               </div>
             
               <div class="form-group col-md-6">
@@ -700,7 +700,7 @@
             <div class="form-row">
               <div class="form-group col-md-6">
                 <label for="inputPassword4">Contraseña Generada</label>
-                <input type="text" class="form-control passwordGenerado" id="inputPassword4" name="nuevoPassword">
+                <input type="text" class="form-control passwordGenerado" id="inputPassword4" name="nuevoPassword" autocomplete="off" spellcheck="false">
               </div>
               <div class="col-md-6">
                 <a href="javascript:void(0);"  class="btn btn-block btn-orange generarPassword" style="margin-top:2em">Generar contraseña</a>

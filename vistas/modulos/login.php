@@ -9,12 +9,12 @@
     <div class="card-body login-card-body iniciarSesion">
       <p class="login-box-msg">Inicio de Sesión</p>
 
-      <form method="post">
+      <form method="post" autocomplete="off">
         <div class="form-group mb-3">
-          <input type="text" class="form-control mayus usuario" name="ingUsuario" placeholder="Usuario" required>
+          <input type="text" class="form-control mayus usuario" name="ingUsuario" placeholder="Usuario" required autocomplete="off" spellcheck="false">
         </div>
         <div class="form-group mb-3">
-          <input type="password" class="form-control password" name="ingPassword" placeholder="Contraseña" required> 
+          <input type="password" class="form-control password" name="ingPassword" placeholder="Contraseña" required autocomplete="off" spellcheck="false"> 
           <i class="far fa-eye show-pass" action="hide"></i>
         </div>
         <div class="row mb-2">
@@ -193,11 +193,11 @@
 
           <div class="form-group col-md-3">
             <label for="">Usuario</label>
-            <input type="text" class="form-control nuevoUsuario mayus personas" name="nuevoUsuario" placeholder="Ingrese Usuario" required>
+            <input type="text" class="form-control nuevoUsuario mayus personas" name="nuevoUsuario" placeholder="Ingrese Usuario" required autocomplete="off">
           </div>
           <div class="form-group col-md-3">
             <label for="">Contraseña</label>
-            <input type="password" class="form-control password autoreg" name="nuevoPassword" placeholder="Ingrese Contraseña" required>
+            <input type="password" class="form-control password autoreg" name="nuevoPassword" placeholder="Ingrese Contraseña" required autocomplete="off">
             <i class="far fa-eye show-pass-registro" action="hide"></i>
           </div>
           <div class="form-group col-md-3">

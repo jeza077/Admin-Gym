@@ -58,7 +58,9 @@ box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.5);
     margin: 32px 0;
 }
 
-
+.custom-file-input ~ .custom-file-label::after {
+    content: "Escoger imagen"!important;
+}
 
 .login-page {
     /* background: rgb(255, 158, 30); */
