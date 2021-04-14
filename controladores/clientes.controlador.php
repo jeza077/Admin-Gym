@@ -743,6 +743,11 @@ class ControladorClientes{
 			$respuesta = ModeloClientes::mdlActualizarPagoCliente($tabla, $datos, $fecha);
 
 			if($respuesta == true){
+				/*
+				$descripcionEvento = "".$_SESSION['usuario']." Realizó el pago de inscripción al cliente manteniendo su inscripción ".$mostrarNombreCliente['nombre']."";
+				$accion = "Actualizar";
+				$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION['id_usuario'], 5, $accion, $descripcionEvento);
+				*/
 
 				$tabla = 'tbl_pagos_cliente';
 				$datos = array('id_cliente_inscripcion' => $idClienteInscripcion,
@@ -852,9 +857,9 @@ class ControladorClientes{
 					$mostrarNombreCliente= ControladorPersonas::ctrMostrarPersonas($item, $valor, $all);
 				
 
-					$descripcionEvento = "".$_SESSION['usuario']." Cambió el pago de inscripción al usuario ".$mostrarNombreCliente['nombre']."";
+					$descripcionEvento = "".$_SESSION['usuario']." Cambió el pago de inscripción al cliente ".$mostrarNombreCliente['nombre']."";
 					$accion = "Actualizar";
-					$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION['id_usuario'], 21, $accion, $descripcionEvento);
+					$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION['id_usuario'], 5, $accion, $descripcionEvento);
 
 
 					echo "<script>
@@ -1027,6 +1032,12 @@ class ControladorClientes{
 				
 		
 					if($respuestaPago == true){
+
+						$descripcionEvento = "".$_SESSION['usuario']." Registró la inscripción ";
+						$accion = "Nuevo";
+						$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION['id_usuario'], 5, $accion, $descripcionEvento);
+
+
 						echo "<script>
 								Swal.fire({
 									title: 'Inscripcion agregada exitosamente!',
