@@ -6,7 +6,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Clientes Inscripciones Historico</h1>
+            <h1>Clientes inscripciones histórico</h1>
           </div>
           <div class="col-sm-6">
           <!-- <button class="btn btn-orange float-right"  data-toggle="modal" data-target="#modalAgregarCliente">
@@ -46,13 +46,13 @@
             <table class="table table-striped table-bordered tablaClientesInscripcionesHistorico text-center">
               <thead>
                 <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">No. Documento</th>
+                  <th scope="col">N.°</th>
+                  <th scope="col">Número de documento</th>
                   <th scope="col">Nombre</th>
-                  <th scope="col">T. Inscripcion</th>
-                  <th scope="col">F. Inscripcion</th>
-                  <th scope="col">F. Ultimo Pago</th>
-                  <th scope="col">F. Proxim Pago</th>
+                  <th scope="col">T. Inscripción</th>
+                  <th scope="col">F. Inscripción</th>
+                  <th scope="col">F. Último pago</th>
+                  <th scope="col">F. Próximo pago</th>
                   <th scope="col">Deuda</th>
                   <th scope="col">Estado</th>
                   <!-- <th scope="col">Acciones</th> -->

@@ -6,11 +6,11 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Administrar Clientes</h1>
+            <h1>Administrar clientes</h1>
           </div>
           <div class="col-sm-6">
           <button class="btn btn-orange float-right" id="clienteNuevo">
-            Nuevo Cliente       
+            Nuevo cliente       
           </button>
           <button class="btn btn-danger btnExportarClientes float-right mr-3">
               Exportar PDF          
@@ -46,12 +46,12 @@
               <table class="table table-striped table-bordered tablaClientes text-center">
                 <thead>
                   <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">No. Documento</th>
+                    <th scope="col">N.</th>
+                    <th scope="col">Número de documento</th>
                     <th scope="col">Nombre</th>
-                    <th scope="col">Tipo Cliente</th>
+                    <th scope="col">Tipo cliente</th>
                     <th scope="col">Correo</th>
-                    <th scope="col">Telefono</th>
+                    <th scope="col">Teléfono</th>
                     <!-- <th scope="col">Fecha Creacion</th> -->
                     <th scope="col">Acciones</th>
                   </tr>
@@ -98,7 +98,7 @@
                 <a class="nav-link active" id="datosPersona" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Datos personales</a>
               </li>
               <li class="nav-item" role="presentation">
-                <a class="nav-link" id="datosCliente" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Datos Cliente</a>
+                <a class="nav-link" id="datosCliente" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Datos cliente</a>
               </li>
             </ul>
             
@@ -127,16 +127,16 @@
                     </div>
 
                     <div class="form-group col-md-3">
-                      <label for="identidad">Numero de documento</label>
-                      <input type="text" class="form-control numeroDocumento" name="nuevoNumeroDocumento" placeholder="Ingrese Identidad" required>
+                      <label for="identidad">Número de documento</label>
+                      <input type="text" class="form-control numeroDocumento" name="nuevoNumeroDocumento" placeholder="Ingrese identidad" required>
                     </div>
                     <div class="form-group col-md-3">
-                      <label for="nombre">Nombre</label>
-                      <input type="text" class="form-control nombre mayus" name="nuevoNombre" placeholder="Ingrese Nombre" required>
+                      <label for="nombre">Nombres</label>
+                      <input type="text" class="form-control nombre mayus" name="nuevoNombre" placeholder="Ingrese nombres" required>
                     </div>
                     <div class="form-group col-md-3">
-                      <label for="apellido">Apellido</label>
-                      <input type="text" class="form-control apellidos mayus" name="nuevoApellido" placeholder="Ingrese Apellidos" required>
+                      <label for="apellido">Apellidos</label>
+                      <input type="text" class="form-control apellidos mayus" name="nuevoApellido" placeholder="Ingrese apellidos" required>
                     </div>
                   </div>
 
@@ -144,16 +144,16 @@
       
                   <div class="form-row">
                     <div class="form-group col-md-4">
-                      <label for="email">Email</label>
-                      <input type="email" class="form-control email" name="nuevoEmail" placeholder="Ingrese Email" required>
+                      <label for="email">Correo</label>
+                      <input type="email" class="form-control email" name="nuevoEmail" placeholder="Ingrese su correo" required>
                     </div>
                     <div class="form-group col-md-4">
                       <label>Teléfono</label>
-                      <input type="text" class="form-control" data-inputmask='"mask": "(504) 9999-9999"' data-mask  name="nuevoTelefono" placeholder="Ingrese Telefono" required>
+                      <input type="text" class="form-control" data-inputmask='"mask": "(504) 9999-9999"' data-mask  name="nuevoTelefono" placeholder="Ingrese teléfono" required>
                     </div>
                     <div class="form-group col-md-4">
                       <label>Fecha de nacimiento</label>
-                        <input type="text" class="form-control fecha" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy-mm-dd" data-mask  name="nuevaFechaNacimiento" placeholder="Ingrese Fecha de Nacimiento" required>
+                        <input type="text" class="form-control fecha" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy-mm-dd" data-mask  name="nuevaFechaNacimiento" placeholder="Ingrese fecha de nacimiento" required>
                     </div>
                   </div>
                   
@@ -181,10 +181,10 @@
                 <div class="container-fluid mt-4">
                     <div class="form-row">
                       <div class="form-group col-md-6">
-                        <label>Tipo Cliente</label>
+                        <label>Tipo cliente</label>
                         <select class="form-control select2 tipoCliente" name="tipoCliente" style="width: 100%;" required>
                           <option selected="selected">Seleccionar...</option>
-                          <option value="Gimnasio">Clientes del gimnasio</option>
+                          <option value="Gimnasio">Cliente del gimnasio</option>
                           <option value="Ventas">Cliente de ventas</option>
                         </select>
                       </div>
@@ -193,7 +193,7 @@
                   <div class="datosClientes">
                     <div class="form-row">
                       <div class="form-group col-md-6">
-                          <label>Tipo matricula</label>
+                          <label>Tipo matrícula</label>
                           <select class="form-control select2 nuevaMatricula" style="width: 100%;" name="nuevaMatricula">
                           <option selected="selected">Seleccionar...</option>
                             <?php 
@@ -211,7 +211,7 @@
                           </select> 
                       </div>
                       <div class="form-group col-md-6">
-                         <label for="">Precio matricula</label>
+                         <label for="">Precio matrícula</label>
                          <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">$</span>  
@@ -242,7 +242,7 @@
                         </select> 
                       </div>
                       <div class="form-group col-md-6">
-                         <label for="">Precio promocion</label>
+                         <label for="">Precio promoción</label>
                          <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">%</span>  
@@ -254,7 +254,7 @@
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6"> 
-                          <label>Tipo inscripcion</label>
+                          <label>Tipo inscripción</label>
                           <select class="form-control select2 nuevaInscripcion" style="width: 100%;" name="nuevaInscripcion">
                               <option selected="selected">Seleccionar...</option>
                               <?php 
@@ -273,7 +273,7 @@
                           </select>
                         </div>
                         <div class="form-group col-md-6">
-                         <label for="">Precio inscripcion</label>
+                         <label for="">Precio inscripción</label>
                          <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">$</span>  
@@ -331,7 +331,7 @@
       <div class="modal-content">
       
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Editar Cliente Gimnasio</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Editar cliente gimnasio</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -361,7 +361,7 @@
                     </div>
 
                     <div class="form-group col-md-3">
-                      <label for="identidad">Numero de documento</label>
+                      <label for="identidad">Número de documento</label>
                       <input type="text" class="form-control editarNumeroDocumento" name="editarNumeroDocumento" required>
                     </div>
                     <div class="form-group col-md-3">
@@ -377,7 +377,7 @@
       
                   <div class="form-row">
                     <div class="form-group col-md-4">
-                      <label for="email">Email</label>
+                      <label for="email">Correo</label>
                       <input type="email" class="form-control editarEmail" name="editarEmail" required>
                     </div>
                     <div class="form-group col-md-4">
@@ -410,7 +410,7 @@
                 <div class="form-group mt-4 float-right">
                  <input type="hidden" id="idEditarCliente" name="idEditarCliente">
                 <!-- <input type="hidden" id="editarTipoCliente" name="editarTipoCliente"> -->
-                  <button type="" class="btn btn-primary">Guardar Cambios</button>
+                  <button type="" class="btn btn-primary">Guardar cambios</button>
                   <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
                 </div>
                 <?php
@@ -496,7 +496,7 @@
       <div class="modal-content">
       
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Editar Cliente Ventas</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Editar cliente ventas</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -509,7 +509,7 @@
                 <a class="nav-link active" id="datosEditarPersonaVenta" data-toggle="tab" href="#editarPersonaVenta" role="tab" aria-controls="home" aria-selected="true">Datos personales</a>
               </li>
               <li class="nav-item" role="presentation">
-                <a class="nav-link" id="datosEditarClienteVenta" data-toggle="tab" href="#editarClienteVenta" role="tab" aria-controls="profile" aria-selected="false">Datos Cliente</a>
+                <a class="nav-link" id="datosEditarClienteVenta" data-toggle="tab" href="#editarClienteVenta" role="tab" aria-controls="profile" aria-selected="false">Datos cliente</a>
               </li>
             </ul>
             
@@ -538,7 +538,7 @@
                     </div>
 
                     <div class="form-group col-md-3">
-                      <label for="identidad">Numero de documento</label>
+                      <label for="identidad">Número de documento</label>
                       <input type="text" class="form-control numeroDocumentoClienteVentas" name="numeroDocumentoClienteVentas" required>
                     </div>
                     <div class="form-group col-md-3">
@@ -553,7 +553,7 @@
       
                   <div class="form-row">
                     <div class="form-group col-md-4">
-                      <label for="email">Email</label>
+                      <label for="email">Correo</label>
                       <input type="email" class="form-control editarEmailVentas" name= "editarEmailVentas" required>
                     </div>
                     <div class="form-group col-md-4">
@@ -588,11 +588,11 @@
                 <div class="container-fluid mt-4">
                   <div class="form-row">
                     <div class="form-group col-md-3">
-                      <label>Tipo Cliente</label>
+                      <label>Tipo cliente</label>
                       <select class="form-control tipoClienteVenta" name="editarTipoClienteVenta" style="width: 100%;" required>
                         <option value="tipoCl" id="editarTipoClienteVenta"></option>
                         <!-- <option selected="selected">Seleccionar...</option> -->
-                        <option value="Gimnasio">Clientes del gimnasio</option>
+                        <option value="Gimnasio">Cliente del gimnasio</option>
                         <option value="Ventas">Cliente de ventas</option>
                       </select>
                     </div>
@@ -600,7 +600,7 @@
                   <div id="datosClienteVenta">
                     <div class="form-row">
                       <div class="form-group col-md-6">
-                          <label>Tipo matricula</label>
+                          <label>Tipo matrícula</label>
                           <select class="form-control nuevaMatriculaClienteVenta" style="width: 100%;" name="tipoMatriculaClienteVenta">
                             <option value="" id="tipoMatriculaClienteVenta" ></option>
                             <option selected="selected">Seleccionar...</option>
@@ -621,7 +621,7 @@
                           </select> 
                       </div>
                       <div class="form-group col-md-6">
-                         <label for="">Precio matricula</label>
+                         <label for="">Precio matrícula</label>
                          <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">$</span>  
@@ -653,7 +653,7 @@
                         </select> 
                       </div>
                       <div class="form-group col-md-6">
-                         <label for="">Precio promocion</label>
+                         <label for="">Precio promoción</label>
                          <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">$</span>  
@@ -665,7 +665,7 @@
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6"> 
-                          <label>Tipo inscripcion</label>
+                          <label>Tipo inscripción</label>
                           <select class="form-control nuevaInscripcionClienteVenta" style="width: 100%;" name="inscripcionClienteVenta">
                               <option value="" id="inscripcionClienteVenta"></option>
                               <option selected="selected">Seleccionar...</option>
@@ -685,7 +685,7 @@
                           </select>
                         </div>
                         <div class="form-group col-md-6">
-                         <label for="">Precio inscripcion</label>
+                         <label for="">Precio inscripción</label>
                          <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">$</span>  
@@ -726,7 +726,7 @@
 
                 <div class="form-group mt-4 float-right">
                   <input type="hidden" id="idEditarClienteVenta" name="idEditarClienteVenta">
-                  <button type="" class="btn btn-primary">Guardar Cambios</button>
+                  <button type="" class="btn btn-primary">Guardar cambios</button>
                   <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
                 </div>
                 <?php
@@ -794,7 +794,7 @@
                     <label>Tipo Cliente</label>
                     <select class="form-control select2 tipoClienteRegistrado" name="tipoClienteRegistrado" style="width: 100%;" required>
                       <option selected="selected">Seleccionar...</option>
-                      <option value="Gimnasio">Clientes del gimnasio</option>
+                      <option value="Gimnasio">Cliente del gimnasio</option>
                       <option value="Ventas">Cliente de ventas</option>
                     </select>
                   </div>
@@ -803,7 +803,7 @@
               <div class="datosClientes">
                 <div class="form-row">
                   <div class="form-group col-md-6">
-                      <label>Tipo matricula</label>
+                      <label>Tipo matrícula</label>
                       <select class="form-control select2 nuevaMatriculaRegistrado" style="width: 100%;" name="nuevaMatriculaRegistrado">
                       <option selected="selected">Seleccionar...</option>
                         <?php 
@@ -821,7 +821,7 @@
                       </select> 
                   </div>
                   <div class="form-group col-md-6">
-                      <label for="">Precio matricula</label>
+                      <label for="">Precio matrícula</label>
                       <div class="input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text">$</span>  
@@ -852,7 +852,7 @@
                     </select> 
                   </div>
                   <div class="form-group col-md-6">
-                      <label for="">Precio promocion</label>
+                      <label for="">Precio promoción</label>
                       <div class="input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text">%</span>  
@@ -864,7 +864,7 @@
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6"> 
-                      <label>Tipo inscripcion</label>
+                      <label>Tipo inscripción</label>
                       <select class="form-control select2 nuevaInscripcionRegistrado" style="width: 100%;" name="nuevaInscripcionRegistrado">
                           <option selected="selected">Seleccionar...</option>
                           <?php 
@@ -883,7 +883,7 @@
                       </select>
                     </div>
                     <div class="form-group col-md-6">
-                      <label for="">Precio inscripcion</label>
+                      <label for="">Precio inscripción</label>
                       <div class="input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text">$</span>  

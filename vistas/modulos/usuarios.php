@@ -206,7 +206,7 @@
                     </div>
 
                     <div class="form-group col-md-3">
-                      <label for="identidad">Numero de documento</label>
+                      <label for="identidad">Número de documento</label>
                       <input type="text" class="form-control numeroDocumento" name="nuevoNumeroDocumento" placeholder="Ingrese Identidad" required>
                     </div>
                     <div class="form-group col-md-3">
@@ -288,7 +288,7 @@
                     </div>
 
                     <div class="form-group col-md-3">
-                      <label for="">Contraseña Generada</label>
+                      <label for="">Contraseña generada</label>
                       <input type="text" class="form-control passwordGenerado" name="nuevoPassword">
                     </div>
                     <div class="col-md-3">
@@ -486,7 +486,7 @@
                     </div>
 
                     <div class="form-group col-md-3">
-                      <label for="inputPass">Contraseña Generada</label>
+                      <label for="inputPass">Contraseña generada</label>
                       <input type="text" class="form-control passwordGenerado" id="inputPass" name="editarPassword">
                       <input type="hidden" class="form-control" id="passwordActual" name="passwordActual">
                     </div>

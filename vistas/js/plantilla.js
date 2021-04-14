@@ -346,7 +346,7 @@ function validarEmail(selector, alerta) {
 					selector.removeClass('border-valid border-invalid');
 				} else {
 					selector.addClass('border-invalid').removeClass('border-valid');
-					selector.after('<div class="alert alert-warning mt-2">Correo invalido, intente de nuevo.</div>');
+					selector.after('<div class="alert alert-warning mt-2">Correo inválido, intente de nuevo.</div>');
 					setTimeout(function () {
 						$('.alert').remove();
 					}, 3000)
