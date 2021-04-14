@@ -283,7 +283,7 @@ class ControladorMantenimientos {
           if($respuesta == true){
   
            
-            $descripcionEvento = "".$_SESSION["usuario"]." Agregó una nueva inscripción del gimnasio";
+            $descripcionEvento = "".$_SESSION["usuario"]." Agregó una nueva inscripción del gimnasio llamada ".$_POST["nuevoInscripcion"]."";
             $accion = "Nuevo";
             $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 21,$accion, $descripcionEvento);
 
@@ -388,7 +388,7 @@ class ControladorMantenimientos {
           // var_dump($respuesta);
           if($respuesta == true){
             
-            $descripcionEvento = "".$_SESSION["usuario"]." Agregó una nueva matricula del gimnasio";
+            $descripcionEvento = "".$_SESSION["usuario"]." Agregó una nueva matricula del gimnasio llamada ".$_POST["nuevoMatricula"]."";
             $accion = "Nuevo";
 
             $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 22,$accion, $descripcionEvento);  
@@ -527,7 +527,7 @@ class ControladorMantenimientos {
           // var_dump($respuesta);
           if($respuesta == true){
             
-            $descripcionEvento = "".$_SESSION["usuario"]." Agregó un nuevo descuento del gimnasio";
+            $descripcionEvento = "".$_SESSION["usuario"]." Agregó un nuevo descuento del gimnasio llamado ".$_POST["nuevoDescuento"]."";
             $accion = "Nuevo";
 
             $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 23,$accion, $descripcionEvento);
@@ -649,7 +649,7 @@ class ControladorMantenimientos {
     
           if($respuesta == true){
               
-            $descripcionEvento = "".$_SESSION["usuario"]." Agregó un nuevo documento ";
+            $descripcionEvento = "".$_SESSION["usuario"]." Agregó un nuevo documento llamado ".$_POST["nuevoDocumento"]."";
             $accion = "Nuevo";
             $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 24,$accion, $descripcionEvento);
 
@@ -888,7 +888,7 @@ class ControladorMantenimientos {
     
         if($respuesta == true){
             
-            $descripcionEvento = "".$_SESSION["usuario"]." Actualizó un rol";
+            $descripcionEvento = "".$_SESSION["usuario"]." Actualizó el rol ".$_POST["editarRol"]."";
             $accion = "Actualizar";
             $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 18,$accion, $descripcionEvento);
 
@@ -958,7 +958,7 @@ class ControladorMantenimientos {
     
         if($respuesta == true){
             
-            $descripcionEvento = "".$_SESSION["usuario"]." Actualizó una matricula ";
+            $descripcionEvento = "".$_SESSION["usuario"]." Actualizó el tipo de matricula ".$_POST["editarMatricula"]."";
             $accion = "Actualizar";
             $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 22,$accion, $descripcionEvento);
 
@@ -1029,7 +1029,7 @@ class ControladorMantenimientos {
     
         if($respuesta == true){
             
-            $descripcionEvento = "".$_SESSION["usuario"]." Actualizó una inscripción";
+            $descripcionEvento = "".$_SESSION["usuario"]." Actualizó la inscripción ".$_POST["editarInscripcion"]."";
             $accion = "Actualizar";
             $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 21,$accion, $descripcionEvento);
 
@@ -1098,7 +1098,7 @@ class ControladorMantenimientos {
 
         if($respuesta == true){
              
-          $descripcionEvento = "".$_SESSION["usuario"]." Actualizó un descuento";
+          $descripcionEvento = "".$_SESSION["usuario"]." Actualizó el descuento ". $_POST["editarDescuento"]."";
           $accion = "Actualizar";
 
           $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 23,$accion, $descripcionEvento);
@@ -1662,7 +1662,7 @@ class ControladorMantenimientos {
             
           } else {
 
-            $descripcionEvento = "".$_SESSION["usuario"]." Eliminó una inscripción del gimnasio";
+            $descripcionEvento = "".$_SESSION["usuario"]." Eliminó una inscripción del gimnasio ";
             $accion = "Eliminar";
             $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 21,$accion, $descripcionEvento);
 
