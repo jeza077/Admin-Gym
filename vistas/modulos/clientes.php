@@ -1,4 +1,16 @@
+    <?php
+    
+      $permisoAgregar = $_SESSION['permisos']['Administrar Clientes']['agregar'];
+      $permisoEliminar = $_SESSION['permisos']['Administrar Clientes']['eliminar'];
+      $permisoActualizar = $_SESSION['permisos']['Administrar Clientes']['actualizar'];
+      $permisoConsulta = $_SESSION['permisos']['Administrar Clientes']['consulta'];
+    // echo "<pre>";
+    // var_dump($_SESSION['permisos']);
+    // echo "</pre>";
+    // echo $permisoActualizar;
 
+    ?>
+    
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -9,9 +21,13 @@
             <h1>Administrar Clientes</h1>
           </div>
           <div class="col-sm-6">
-          <button class="btn btn-orange float-right" id="clienteNuevo">
-            Nuevo Cliente       
-          </button>
+
+          <?php if($permisoAgregar == 1){ ?>
+            <button class="btn btn-orange float-right" id="clienteNuevo">
+              Nuevo Cliente       
+            </button>
+          <?php } ?>
+          
           <button class="btn btn-danger btnExportarClientes float-right mr-3">
               Exportar PDF          
           </button>
@@ -21,16 +37,6 @@
 
     <section class="content">
       <?php 
-        $permisoAgregar = $_SESSION['permisos']['Clientes']['agregar'];
-        $permisoEliminar = $_SESSION['permisos']['Clientes']['eliminar'];
-        $permisoActualizar = $_SESSION['permisos']['Clientes']['actualizar'];
-        $permisoConsulta = $_SESSION['permisos']['Clientes']['consulta'];
-
-        // var_dump($_SESSION['perm']);
-
-        // foreach ($permisos_pantalla as $key => $value) {
-        //   echo $key;
-        // }
         
         $descripcionEvento = " Consulto la pantalla de cliente";
         $accion = "consulta";
@@ -52,8 +58,10 @@
                     <th scope="col">Tipo Cliente</th>
                     <th scope="col">Correo</th>
                     <th scope="col">Telefono</th>
-                    <!-- <th scope="col">Fecha Creacion</th> -->
-                    <th scope="col">Acciones</th>
+                    
+                    <?php if($permisoActualizar == 1 && $permisoEliminar == 1 && $permisoConsulta == 1 || $permisoActualizar == 1 && $permisoEliminar == 0  && $permisoConsulta == 1 || $permisoActualizar == 0 && $permisoEliminar == 1  && $permisoConsulta == 1 || $permisoActualizar == 0 && $permisoEliminar == 0  && $permisoConsulta == 1 ){ ?>         
+                      <th scope="col">Acciones</th>
+                    <?php } ?>
                   </tr>
                 </thead>
 
