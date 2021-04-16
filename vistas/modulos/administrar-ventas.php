@@ -45,7 +45,7 @@
     <div class="card">
       <div class="card-body">
 
-        <table class="table table-striped table-bordered tablas text-center">
+        <table class="table table-striped table-bordered tablaVentas text-center">
 
           <thead>
 
@@ -79,7 +79,7 @@
       
               $respuesta = ControladorVentas::ctrRangoFechasVentas($fechaInicial, $fechaFinal);
               // echo "<pre>";
-              // var_dump($respuesta);
+              // var_dump($respuesta[0]['productos']);
               // echo "</pre>";
 
               // $decod = json_decode($respuesta[0]['productos']);
@@ -138,7 +138,7 @@
                           }
                         echo '</td>'; 
                         
-                        echo '<td>L. '.number_format($value["total"],2).'</td>
+                        echo '<td>$ '.number_format($value["total"],2).'</td>
 
                         <td>'.$value["fecha"].'</td>
 
