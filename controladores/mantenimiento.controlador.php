@@ -881,7 +881,7 @@ class ControladorMantenimientos {
               Swal.fire({
 
                 icon: "error",
-                title: "¡El campo no puede ir vacío, escrito en minusculas o llevar caracteres especiales con excepción de los signos de interrogacion!",
+                title: "¡El campo no puede ir vacío, escrito en minúsculas o llevar caracteres especiales con excepción de los signos de interrogación!",
                 showConfirmButton: true,
                 confirmButtonText: "Cerrar",
                 closeOnConfirm: false
@@ -1403,7 +1403,7 @@ class ControladorMantenimientos {
             Swal.fire({
   
               icon: "error",
-              title: "¡El campo no puede ir vacío, escrito en minusculas o llevar caracteres especiales con excepción de los signos de interrogacion!",
+              title: "¡El campo no puede ir vacío, escrito en minúsculas o llevar caracteres especiales con excepción de los signos de interrogación!",
               showConfirmButton: true,
               confirmButtonText: "Cerrar",
               closeOnConfirm: false
@@ -1500,7 +1500,7 @@ class ControladorMantenimientos {
             Swal.fire({
   
               icon: "error",
-              title: "¡Los campos no pueden ir vacíos, escrito en minusculas o llevar caracteres especiales!",
+              title: "¡Los campos no pueden ir vacíos, escrito en minúsculas o llevar caracteres especiales!",
               showConfirmButton: true,
               confirmButtonText: "Cerrar",
               closeOnConfirm: false

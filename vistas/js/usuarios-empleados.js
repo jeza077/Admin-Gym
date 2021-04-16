@@ -215,8 +215,8 @@ $(document).on('click', '.btnEliminarUsuario', function () {
     var usuario = $(this).attr('usuario');
 
     Swal.fire({
-        title: "¿Estas seguro de borrar el usuario?",
-        text: "¡Si no lo estas, puedes cancelar la accion!",
+        title: "¿Está seguro de borrar el usuario?",
+        text: "¡Si no lo está, puede cancelar la acción!",
         icon: "info",
         showCancelButton: true,
         cancelButtonColor: "#DC3545",

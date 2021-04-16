@@ -1130,7 +1130,7 @@ $(document).on('click', '.btnEliminarCliente', function () {
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
         cancelButtonText: 'Cancelar',
-        confirmButtonText: 'Si, borrar cliente!'
+        confirmButtonText: 'Sí, borrar cliente'
       }).then(function(result){
         if (result.value) {
           

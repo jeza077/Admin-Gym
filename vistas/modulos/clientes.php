@@ -464,7 +464,7 @@
           
           <div class="form-row">
             <div class="form-group col-md-6">
-              <label>Fecha nacimiento</label>
+              <label>Fecha de nacimiento</label>
               <input type="text" class="form-control" value="" id=detalleFechaNacClienteVenta disabled>
             </div>
             <div class="form-group col-md-6">
@@ -791,7 +791,7 @@
 
 
                   <div class="form-group col-md-6">
-                    <label>Tipo Cliente</label>
+                    <label>Tipo cliente</label>
                     <select class="form-control select2 tipoClienteRegistrado" name="tipoClienteRegistrado" style="width: 100%;" required>
                       <option selected="selected">Seleccionar...</option>
                       <option value="Gimnasio">Cliente del gimnasio</option>
@@ -963,7 +963,7 @@
           
           <div class="form-row">
             <div class="form-group col-md-6">
-              <label>Fecha nacimiento</label>
+              <label>Fecha de nacimiento</label>
               <input type="text" class="form-control" value="" id=detalleFechaNacClienteGym disabled>
             </div>
             <div class="form-group col-md-6">

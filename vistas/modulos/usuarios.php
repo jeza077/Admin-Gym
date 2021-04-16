@@ -601,7 +601,7 @@
           
           <div class="form-row">
             <div class="form-group col-md-6">
-              <label>Fecha nacimiento</label>
+              <label>Fecha de nacimiento</label>
               <input type="text" class="form-control" value="" id=detalleFechaNacUsuario disabled>
             </div>
             <div class="form-group col-md-6">

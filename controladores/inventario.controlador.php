@@ -766,7 +766,7 @@ class ControladorInventario{
             } else {
                 echo '<script>
                     Swal.fire({
-                        title: "Por favor llene los campos correctamente. Intente de nuevo!",
+                        title: "¡Por favor llene los campos correctamente, intente de nuevo!",
                         icon: "error",
                         heightAuto: false,
                         allowOutsideClick: false,

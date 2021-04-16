@@ -307,7 +307,7 @@ $(document).on('click', '.btnGuardarProveedor', function (e) {
             } else if(respuesta == '"Mal"'){
 
                 Swal.fire({
-                    title: "¡Campos no pueden ir vacíos, escrito en minúsculas o llevar caracteres especiales. Intenta de nuevo!",
+                    title: "¡Campos no pueden ir vacíos, escrito en minúsculas o llevar caracteres especiales, intente de nuevo!",
                     icon: "error",
                     heightAuto: false,
                     allowOutsideClick: false
