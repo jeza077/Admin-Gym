@@ -120,22 +120,22 @@
               <div class="form-group col-md-12">
                 <label for="nombreproducto">Nombre Producto</label>
                 <html>
-                <input type="text" class="form-control mayus sinCaracteres sinNumeros" id="nuevoNombreProducto" name="nuevoNombreProducto" placeholder="Ingrese Producto" required>
+                <input type="text" class="form-control mayus sinCaracteres sinNumeros longitudNombre" id="nuevoNombreProducto" name="nuevoNombreProducto" placeholder="Ingrese Producto" required>
               </div>
             </div>
 
             <div class="form-row">
               <div class="form-group col-md-4">
                 <label for="precio">Precio de venta</label>
-                <input type="text" class="form-control sinLetras sinCaracteres" id="nuevoPrecio" name="nuevoPrecio" placeholder="Ingrese Precio"  required>
+                <input type="text" class="form-control sinLetras sinCaracteres longitudEntero" id="nuevoPrecio" name="nuevoPrecio" placeholder="Ingrese Precio"  required>
               </div>
               <div class="form-group col-md-4">
                 <label for="productominimo">Producto Minimo</label>
-                <input type="number" class="form-control sinLetras sinCaracteres" id="nuevoProductoMinimo" name="nuevoProductoMinimo" placeholder="Cantidad Minima" min="0" required class="fa fa-arrow-up"></i></span>
+                <input type="number" class="form-control sinLetras sinCaracteres longitudEntero" id="nuevoProductoMinimo" name="nuevoProductoMinimo" placeholder="Cantidad Minima" min="0" required class="fa fa-arrow-up"></i></span>
               </div>
               <div class="form-group col-md-4">
                 <label for="productomaximo">Producto Maximo</label>
-                <input type="number" class="form-control sinLetras sinCaracteres" id="nuevoProductoMaximo" name="nuevoProductoMaximo" placeholder="Cantidad Maximo" min="0" required class="fa fa-arrow-up"></i></span>
+                <input type="number" class="form-control sinLetras sinCaracteres longitudEntero" id="nuevoProductoMaximo" name="nuevoProductoMaximo" placeholder="Cantidad Maximo" min="0" required class="fa fa-arrow-up"></i></span>
               </div>
             </div>
 
@@ -198,7 +198,7 @@
             <div class="form-group col-md-4">
               <label for="nombreproducto">Nombre Producto</label>
               <html>
-              <input type="text" value="" class="form-control mayus sinCaracteres sinNumeros"  name="editarNombreProducto" id="editarNombreProducto" required>
+              <input type="text" value="" class="form-control mayus sinCaracteres sinNumeros longitudNombre"  name="editarNombreProducto" id="editarNombreProducto" required>
             </div>
             
             <div class="form-group col-md-4">
@@ -210,15 +210,15 @@
               <div class="form-row">
                 <div class="form-group col-md-4">
                   <label for="precio">Precio Venta</label>
-                  <input type="text" value="" class="form-control sinLetras sinCaracteres" name="editarPrecio" id="editarPrecio" required>
+                  <input type="text" value="" class="form-control sinLetras sinCaracteres longitudEntero" name="editarPrecio" id="editarPrecio" required>
                 </div>
                 <div class="form-group col-md-4">
                   <label for="productominimo">Producto Minimo</label>
-                  <input type="number" value="" class="form-control sinCaracteres sinLetras" name="editarProductoMinimo" id="editarProductoMinimo" min="0" required class="fa fa-arrow-up"></i></span>
+                  <input type="number" value="" class="form-control sinCaracteres sinLetras longitudEntero" name="editarProductoMinimo" id="editarProductoMinimo" min="0" required class="fa fa-arrow-up"></i></span>
                 </div>
                 <div class="form-group col-md-4">
                   <label for="productomaximo">Producto Maximo</label>
-                  <input type="number" value="" class="form-control sinCaracteres sinLetras" name="editarProductoMaximo" id="editarProductoMaximo" min="0" required class="fa fa-arrow-up"></i></span>
+                  <input type="number" value="" class="form-control sinCaracteres sinLetras longitudEntero" name="editarProductoMaximo" id="editarProductoMaximo" min="0" required class="fa fa-arrow-up"></i></span>
                 </div>
               </div>
 

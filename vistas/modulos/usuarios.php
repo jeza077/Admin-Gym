@@ -207,7 +207,7 @@
 
                     <div class="form-group col-md-3">
                       <label for="identidad">Numero de documento</label>
-                      <input type="text" class="form-control numeroDocumento longitudString[45]" name="nuevoNumeroDocumento" placeholder="Ingrese Identidad" required>
+                      <input type="text" class="form-control numeroDocumento longitudDocumento" name="nuevoNumeroDocumento" placeholder="Ingrese Identidad" required>
                     </div>
                     <div class="form-group col-md-3">
                       <label for="nombre">Nombre</label>
@@ -224,7 +224,7 @@
                   <div class="form-row">
                     <div class="form-group col-md-4">
                       <label for="inputEmail4">Email</label>
-                      <input type="email" class="form-control email" id="inputEmail4" name="nuevoEmail" placeholder="Ingrese Email" required>
+                      <input type="email" class="form-control email longitudCorreo" id="inputEmail4" name="nuevoEmail" placeholder="Ingrese Email" required>
                     </div>
                     <div class="form-group col-md-4">
                       <label>Teléfono</label>
@@ -241,7 +241,7 @@
                   <div class="form-row">
                     <div class="form-group col-md-9">
                       <label for="inputAddress">Dirección</label>
-                      <input type="text" class="form-control mayus nuevaDireccion" id="inputAddress" name="nuevaDireccion" placeholder="Col. Alameda, calle #2..." required>
+                      <input type="text" class="form-control mayus nuevaDireccion longitudDireccion" id="inputAddress" name="nuevaDireccion" placeholder="Col. Alameda, calle #2..." required>
                     </div>
                   
                     <div class="form-group col-md-3">
@@ -289,7 +289,7 @@
 
                     <div class="form-group col-md-3">
                       <label for="">Contraseña Generada</label>
-                      <input type="text" class="form-control passwordGenerado" name="nuevoPassword" autocomplete="off" spellcheck="false">
+                      <input type="password" class="form-control passwordGenerado" name="nuevoPassword" autocomplete="off" spellcheck="false">
                     </div>
                     <div class="col-md-3">
                       <a href="javascript:void(0);"  class="btn btn-block btn-orange generarPassword" style="margin-top:2em">Generar contraseña</a>
@@ -408,7 +408,7 @@
 
                     <div class="form-group col-md-3">
                       <label for="identidad">Numero de documento</label>
-                      <input type="text" class="form-control numeroDocumento" name="editarNumeroDocumento" value="" required>
+                      <input type="text" class="form-control numeroDocumento longitudDocumento" name="editarNumeroDocumento" value="" required>
                     </div>
                     <div class="form-group col-md-3">
                       <label for="nombre">Nombre</label>
@@ -438,7 +438,7 @@
                   <div class="form-row">
                     <div class="form-group col-md-9">
                       <label for="direccion">Dirección</label>
-                      <input type="text" class="form-control mayus permitirUnEspacio" id="direccion" name="editarDireccion" value="" required>
+                      <input type="text" class="form-control mayus permitirUnEspacio longitudDireccion" id="direccion" name="editarDireccion" value="" required>
                     </div>
                   
                     <div class="form-group col-md-3">
@@ -487,7 +487,7 @@
 
                     <div class="form-group col-md-3">
                       <label for="inputPass">Contraseña Generada</label>
-                      <input type="text" class="form-control passwordGenerado" id="inputPass" name="editarPassword" autocomplete="off" spellcheck="false">
+                      <input type="password" class="form-control passwordGenerado" id="inputPass" name="editarPassword" autocomplete="off" spellcheck="false">
                       <input type="hidden" class="form-control" id="passwordActual" name="passwordActual">
                     </div>
                     <div class="col-md-3">

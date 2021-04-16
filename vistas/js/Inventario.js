@@ -1,4 +1,3 @@
-
 // Datatable Compras
 // $.ajax({
 //     url: "ajax/datatable-productos.ajax.php",

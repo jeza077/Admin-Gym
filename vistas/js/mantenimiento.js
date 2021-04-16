@@ -1,4 +1,3 @@
-longitudString($('#editarValorParametro'),45); 
 /*=============================================
 // TABLA BITACORA DINAMICA
 =============================================*/ 

@@ -128,15 +128,15 @@
 
                     <div class="form-group col-md-3">
                       <label for="identidad">Numero de documento</label>
-                      <input type="text" class="form-control numeroDocumento" name="nuevoNumeroDocumento" placeholder="Ingrese Identidad" required>
+                      <input type="text" class="form-control numeroDocumento longitudDocumento" name="nuevoNumeroDocumento" placeholder="Ingrese Identidad" required>
                     </div>
                     <div class="form-group col-md-3">
                       <label for="nombre">Nombre</label>
-                      <input type="text" class="form-control nombre mayus " name="nuevoNombre" placeholder="Ingrese Nombre" required>
+                      <input type="text" class="form-control nombre mayus longitudNombre" name="nuevoNombre" placeholder="Ingrese Nombre" required>
                     </div>
                     <div class="form-group col-md-3">
                       <label for="apellido">Apellido</label>
-                      <input type="text" class="form-control apellidos mayus" name="nuevoApellido" placeholder="Ingrese Apellidos" required>
+                      <input type="text" class="form-control apellidos mayus longitudNombre" name="nuevoApellido" placeholder="Ingrese Apellidos" required>
                     </div>
                   </div>
 
@@ -162,7 +162,7 @@
                   <div class="form-row">
                     <div class="form-group col-md-9">
                       <label for="">Dirección</label>
-                      <input type="text" class="form-control mayus nuevaDireccion" name="nuevaDireccion" placeholder="Col. Alameda, calle #2..." required>
+                      <input type="text" class="form-control mayus nuevaDireccion longitudDireccion" name="nuevaDireccion" placeholder="Col. Alameda, calle #2..." required>
                     </div>
                   
                     <div class="form-group col-md-3">
@@ -362,16 +362,16 @@
 
                     <div class="form-group col-md-3">
                       <label for="identidad">Numero de documento</label>
-                      <input type="text" class="form-control editarNumeroDocumento" name="editarNumeroDocumento" required>
+                      <input type="text" class="form-control editarNumeroDocumento longitudNombre" name="editarNumeroDocumento" required>
                     </div>
                     <div class="form-group col-md-3">
                       <label for="nombre">Nombre</label>
-                      <input type="text" class="form-control editarNombre mayus" name="editarNombre" required>
+                      <input type="text" class="form-control editarNombre mayus longitudNombre" name="editarNombre" required>
                       <input type="hidden" id="EditarTipoClienteGimnasio" name="EditarTipoClienteGimnasio">
                     </div>
                     <div class="form-group col-md-3">
                       <label for="apellido">Apellido</label>
-                      <input type="text" class="form-control editarApellido mayus" name="editarApellido" required>
+                      <input type="text" class="form-control editarApellido mayus longitudNombre" name="editarApellido" required>
                     </div>
                   </div>
       
@@ -393,7 +393,7 @@
                   <div class="form-row">
                     <div class="form-group col-md-9">
                       <label for="">Dirección</label>
-                      <input type="text" class="form-control editarDireccion mayus" name="editarDireccion" required>
+                      <input type="text" class="form-control editarDireccion mayus longitudDireccion" name="editarDireccion" required>
                     </div>
                   
                     <div class="form-group col-md-3">
@@ -539,15 +539,15 @@
 
                     <div class="form-group col-md-3">
                       <label for="identidad">Numero de documento</label>
-                      <input type="text" class="form-control numeroDocumentoClienteVentas" name="numeroDocumentoClienteVentas" required>
+                      <input type="text" class="form-control numeroDocumentoClienteVentas longitudNombre" name="numeroDocumentoClienteVentas" required>
                     </div>
                     <div class="form-group col-md-3">
                       <label for="nombre">Nombre</label>
-                      <input type="text" class="form-control nombreClienteVentas mayus" name="nombreClienteVentas" required>
+                      <input type="text" class="form-control nombreClienteVentas mayus longitudNombre" name="nombreClienteVentas" required>
                     </div>
                     <div class="form-group col-md-3">
                       <label for="apellido">Apellido</label>
-                      <input type="text" class="form-control apellidoClienteVentas mayus" name="apellidoClienteVentas" required>
+                      <input type="text" class="form-control apellidoClienteVentas mayus longitudNombre" name="apellidoClienteVentas" required>
                     </div>
                   </div>
       
@@ -569,7 +569,7 @@
                   <div class="form-row">
                     <div class="form-group col-md-9">
                       <label for="">Dirección</label>
-                      <input type="text" class="form-control direccionClienteVentas mayus" name="direccionClienteVentas" required>
+                      <input type="text" class="form-control direccionClienteVentas mayus longitudDireccion" name="direccionClienteVentas" required>
                     </div>
                   
                     <div class="form-group col-md-3">
