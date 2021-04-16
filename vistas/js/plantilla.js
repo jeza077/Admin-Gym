@@ -771,6 +771,7 @@ longitudString($('.cantidadInt'),11);
 longitudString($('input[type=password]'),16); //Longitud maxima Input tipo Password Global.
 longitudString($('input[type=email]'),100);  //Longitud maxima Input email globa.
 longitudString($('.longitudDireccion'),100);
+longitudString($('.longitudValorParam'),100);
 longitudString($('.longitudNombre'),45);
 longitudString($('.longitudDocumento'),45);
 longitudString($('.longitudEntero'),11);
