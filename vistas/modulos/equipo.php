@@ -140,7 +140,7 @@
           <div class="form-group col-md-12">
             <label for="nombreproducto">Nombre Producto</label>
             <html>
-            <input type="text" class="form-control mayus sinNumeros sinCaracteres permitirUnEspacio longitudNombre" name="nuevoNombreProducto" placeholder="Ingrese Producto" required>
+            <input type="text" class="form-control mayus sinNumeros sinCaracteres soloUnEspacio longitudNombre" name="nuevoNombreProducto" placeholder="Ingrese Producto" required>
           </div>
           <div class="form-group col-md-12">
             <label for="stock">Cantidad en stock</label>
@@ -205,7 +205,7 @@
           <div class="form-group col-12">
             <label for="nombreEquipo">Nombre Equipo</label>
             <html>
-            <input type="text" value="" class="form-control sinCaracteres sinNumeros mayus longitudNombre" name="editarNombreEquipo" id="editarNombreEquipo" required>
+            <input type="text" value="" class="form-control sinCaracteres sinNumeros mayus longitudNombre soloUnEspacio" name="editarNombreEquipo" id="editarNombreEquipo" required>
           </div>
           <div class="form-group col-12">
             <label for="stock">Cantidad en stock</label>

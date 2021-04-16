@@ -207,7 +207,7 @@
 
                     <div class="form-group col-md-3">
                       <label for="identidad">Numero de documento</label>
-                      <input type="text" class="form-control numeroDocumento longitudDocumento" name="nuevoNumeroDocumento" placeholder="Ingrese Identidad" required>
+                      <input type="text" class="form-control numeroDocumento longitudDocumento sinEspacioDoc" name="nuevoNumeroDocumento" placeholder="Ingrese Identidad" required>
                     </div>
                     <div class="form-group col-md-3">
                       <label for="nombre">Nombre</label>
@@ -408,7 +408,7 @@
 
                     <div class="form-group col-md-3">
                       <label for="identidad">Numero de documento</label>
-                      <input type="text" class="form-control numeroDocumento longitudDocumento" name="editarNumeroDocumento" value="" required>
+                      <input type="text" class="form-control numeroDocumento longitudDocumento sinEspacioDoc" name="editarNumeroDocumento" value="" required>
                     </div>
                     <div class="form-group col-md-3">
                       <label for="nombre">Nombre</label>
@@ -438,7 +438,7 @@
                   <div class="form-row">
                     <div class="form-group col-md-9">
                       <label for="direccion">Dirección</label>
-                      <input type="text" class="form-control mayus permitirUnEspacio longitudDireccion" id="direccion" name="editarDireccion" value="" required>
+                      <input type="text" class="form-control mayus permitirUnEspacio longitudDireccion soloUnEspacio" id="direccion" name="editarDireccion" value="" required>
                     </div>
                   
                     <div class="form-group col-md-3">

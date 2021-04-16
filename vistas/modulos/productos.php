@@ -120,14 +120,14 @@
               <div class="form-group col-md-12">
                 <label for="nombreproducto">Nombre Producto</label>
                 <html>
-                <input type="text" class="form-control mayus sinCaracteres sinNumeros longitudNombre" id="nuevoNombreProducto" name="nuevoNombreProducto" placeholder="Ingrese Producto" required>
+                <input type="text" class="form-control mayus sinCaracteres sinNumeros longitudNombre soloUnEspacio" id="nuevoNombreProducto" name="nuevoNombreProducto" placeholder="Ingrese Producto" required>
               </div>
             </div>
 
             <div class="form-row">
               <div class="form-group col-md-4">
                 <label for="precio">Precio de venta</label>
-                <input type="text" class="form-control sinLetras sinCaracteres longitudEntero" id="nuevoPrecio" name="nuevoPrecio" placeholder="Ingrese Precio"  required>
+                <input type="text" class="form-control sinLetras sinCaracteres longitudEntero sinEspacioDoc" id="nuevoPrecio" name="nuevoPrecio" placeholder="Ingrese Precio"  required>
               </div>
               <div class="form-group col-md-4">
                 <label for="productominimo">Producto Minimo</label>
@@ -198,7 +198,7 @@
             <div class="form-group col-md-4">
               <label for="nombreproducto">Nombre Producto</label>
               <html>
-              <input type="text" value="" class="form-control mayus sinCaracteres sinNumeros longitudNombre"  name="editarNombreProducto" id="editarNombreProducto" required>
+              <input type="text" value="" class="form-control mayus sinCaracteres sinNumeros longitudNombre soloUnEspacio"  name="editarNombreProducto" id="editarNombreProducto" required>
             </div>
             
             <div class="form-group col-md-4">
@@ -210,7 +210,7 @@
               <div class="form-row">
                 <div class="form-group col-md-4">
                   <label for="precio">Precio Venta</label>
-                  <input type="text" value="" class="form-control sinLetras sinCaracteres longitudEntero" name="editarPrecio" id="editarPrecio" required>
+                  <input type="text" value="" class="form-control sinLetras sinCaracteres longitudEntero sinEspacioDoc" name="editarPrecio" id="editarPrecio" required>
                 </div>
                 <div class="form-group col-md-4">
                   <label for="productominimo">Producto Minimo</label>

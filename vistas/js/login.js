@@ -1,3 +1,4 @@
+$('.unEspacio').keydown(permitirUnEspacio);
 //** FUNCION PARA PASAR A VERIFICAR EL EMAIL */
 function toggleForm(){
     var container = document.querySelector('.login-box');

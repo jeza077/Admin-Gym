@@ -130,7 +130,7 @@ MODIFIRCAR PARAMETROS
 
               <div class= "form-group col-md-12">
                <label for="Valor">Valor</label>
-               <input type="text" class="form-control longitudValorParam" id="editarValorParametro" name="editarValorParametro" placeholder="Escriba el nuevo valor del parametro"requiered>
+               <input type="text" class="form-control longitudValorParam sinEspacioDoc" id="editarValorParametro" name="editarValorParametro" placeholder="Escriba el nuevo valor del parametro"requiered>
               </div>
 
               <input type="hidden" id="editarIdParametro" name="editarIdParametro">

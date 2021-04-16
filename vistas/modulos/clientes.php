@@ -128,7 +128,7 @@
 
                     <div class="form-group col-md-3">
                       <label for="identidad">Numero de documento</label>
-                      <input type="text" class="form-control numeroDocumento longitudDocumento" name="nuevoNumeroDocumento" placeholder="Ingrese Identidad" required>
+                      <input type="text" class="form-control numeroDocumento longitudDocumento sinEspacioDoc" name="nuevoNumeroDocumento" placeholder="Ingrese Identidad" required>
                     </div>
                     <div class="form-group col-md-3">
                       <label for="nombre">Nombre</label>
@@ -162,7 +162,7 @@
                   <div class="form-row">
                     <div class="form-group col-md-9">
                       <label for="">Dirección</label>
-                      <input type="text" class="form-control mayus nuevaDireccion longitudDireccion" name="nuevaDireccion" placeholder="Col. Alameda, calle #2..." required>
+                      <input type="text" class="form-control mayus nuevaDireccion longitudDireccion soloUnEspacio" name="nuevaDireccion" placeholder="Col. Alameda, calle #2..." required>
                     </div>
                   
                     <div class="form-group col-md-3">
@@ -393,7 +393,7 @@
                   <div class="form-row">
                     <div class="form-group col-md-9">
                       <label for="">Dirección</label>
-                      <input type="text" class="form-control editarDireccion mayus longitudDireccion" name="editarDireccion" required>
+                      <input type="text" class="form-control editarDireccion mayus longitudDireccion soloUnEspacio" name="editarDireccion" required>
                     </div>
                   
                     <div class="form-group col-md-3">
@@ -569,7 +569,7 @@
                   <div class="form-row">
                     <div class="form-group col-md-9">
                       <label for="">Dirección</label>
-                      <input type="text" class="form-control direccionClienteVentas mayus longitudDireccion" name="direccionClienteVentas" required>
+                      <input type="text" class="form-control direccionClienteVentas mayus longitudDireccion soloUnEspacio" name="direccionClienteVentas" required>
                     </div>
                   
                     <div class="form-group col-md-3">
