@@ -1170,11 +1170,10 @@ class ControladorVentas {
 
 			if($respuesta == true ){
 				
-				$descripcionEvento = "Actualizo una venta";
-				$accion = "Actualizo";
+				$descripcionEvento = "".$_SESSION["usuario"]." Actualizó una venta";
+				$accion = "Actualizar";
 
-				$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 5,$accion, $descripcionEvento); 
-
+				$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 14,$accion, $descripcionEvento); 
 				echo'<script>
 
 				localStorage.removeItem("rango");
@@ -1339,6 +1338,11 @@ class ControladorVentas {
 		
 
 			if($respuesta == true){
+
+				$descripcionEvento = "".$_SESSION["usuario"]." Eliminó una venta";
+				$accion = "Eliminar";
+
+				$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 14,$accion, $descripcionEvento); 
 
 				echo'<script>
 

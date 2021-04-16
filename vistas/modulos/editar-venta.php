@@ -15,10 +15,10 @@
       ======================================-->
     <section class="content">  
           <?php
-            $descripcionEvento = " Consulto la pantalla de Editar Venta";
-            $accion = "consulta";
+            $descripcionEvento = " Consultó la pantalla de editar venta";
+            $accion = "Consulta";
 
-            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 5,$accion, $descripcionEvento);
+            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 14,$accion, $descripcionEvento);
 
             // $tabla1 = "tbl_personas";
             // $tabla2 = "tbl_clientes";
