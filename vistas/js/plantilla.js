@@ -750,7 +750,6 @@ function trim(fecha){
     return fecha.replace(/\s+$/, '');
 }
 
-
 /*=============================================
     EJECUCION DE VALIDACIONES
 =============================================*/

@@ -241,7 +241,7 @@
                   <div class="form-row">
                     <div class="form-group col-md-9">
                       <label for="inputAddress">Dirección</label>
-                      <input type="text" class="form-control mayus permitirUnEspacio" id="inputAddress" name="nuevaDireccion" placeholder="Col. Alameda, calle #2..." required>
+                      <input type="text" class="form-control mayus nuevaDireccion" id="inputAddress" name="nuevaDireccion" placeholder="Col. Alameda, calle #2..." required>
                     </div>
                   
                     <div class="form-group col-md-3">

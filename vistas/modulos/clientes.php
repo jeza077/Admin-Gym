@@ -162,7 +162,7 @@
                   <div class="form-row">
                     <div class="form-group col-md-9">
                       <label for="">Dirección</label>
-                      <input type="text" class="form-control mayus" name="nuevaDireccion" placeholder="Col. Alameda, calle #2..." required>
+                      <input type="text" class="form-control mayus nuevaDireccion" name="nuevaDireccion" placeholder="Col. Alameda, calle #2..." required>
                     </div>
                   
                     <div class="form-group col-md-3">

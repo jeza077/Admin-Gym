@@ -1,3 +1,4 @@
+
 //** VERIFICAR QUE USUARIO NO SE REPITA */
 $('.nuevoUsuario').blur(function (){
 
