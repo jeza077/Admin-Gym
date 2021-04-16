@@ -800,8 +800,8 @@ class ControladorPersonas{
 
         if($respuestaEditarPagoCliente == true){
 
-            $descripcionEvento = "Actualizo Pago Cliente";
-            $accion = "Actualizo";
+            $descripcionEvento = "Actualizó pago cliente";
+            $accion = "Actualizó";
   
             $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 3,$accion, $descripcionEvento);
   

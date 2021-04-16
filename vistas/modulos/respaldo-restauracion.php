@@ -28,7 +28,7 @@
                 <!-- <div class="card-body"> -->
                 <?php
                 $descripcionEvento = " Consultó la pantalla de respaldo y restauración";
-                $accion = "consulta";
+                $accion = "Consulta";
 
                 $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 7,$accion, $descripcionEvento);
 
@@ -44,7 +44,7 @@
                       <a class="nav-link active" id="datosRespaldo" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Respaldo</a>
                       <?php
                         $descripcionEvento = " Consultó la pantalla de respaldo";
-                        $accion = "consulta";
+                        $accion = "Consulta";
 
                         $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 7,$accion, $descripcionEvento);
     
@@ -61,7 +61,7 @@
                       <a class="nav-link" id="datosRestauracion" data-toggle="tab" href="#second" role="tab" aria-controls="second" aria-selected="false">Restauración</a>
                       <?php
                         $descripcionEvento = " Consultó la pantalla de restauración";
-                        $accion = "consulta";
+                        $accion = "Consulta";
 
                         $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 7,$accion, $descripcionEvento);
     
@@ -110,7 +110,7 @@
                                   <div class="input-group-prepend">
                                       <span class="input-group-text"><i class="fas fa-unlock"></i></span>
                                   </div>
-                                      <input type="text-center" class="form-control" id="contrasenia" name="contrasenia" placeholder="password" readonly>
+                                      <input type="text-center" class="form-control" id="contrasenia" name="contrasenia" placeholder="contraseña" readonly>
                                 </div>
                             </div>
                             <div class="form-group ">
@@ -135,7 +135,7 @@
                      <!--========================================================
                            RESTAURAR
                     ==========================================================-->  
-                    <div class="tab-pane fade" id="second" role="tabpanel" aria-labelledby="Inscripciones  y   Matricula">
+                    <div class="tab-pane fade" id="second" role="tabpanel" aria-labelledby="Inscripciones  y   matrícula">
 
                     <br>
                             <div class="form-group ">
@@ -179,13 +179,13 @@
                             </div>
 
                             <div class="form-group ">
-                                    <label>Seleccion de la restauración </label>
+                                    <label>Selección de la restauración </label>
                                   <div class="input-group col-md-6">   
                                     <span class="input-group-text"><i class="fas fa-database"></i></span>
                                      <select class="form-control input-lg" name="restorePoint" id="restorePoint" required>
 
                                   
-                                  <option value="" disabled="" selected="">Selecciona un punto de restauración</option>
+                                  <option value="" disabled="" selected="">Seleccione un punto de restauración</option>
 
 
                                 <?php

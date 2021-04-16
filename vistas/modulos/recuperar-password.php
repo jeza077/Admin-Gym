@@ -14,7 +14,7 @@ $password->ctrRevisarCodigoFecha();
 <!--Bitacora cod.-->
 
 <?php
-	         $accion = "Ingreso";
+	         $accion = "Ingresó";
 		       $descripcionEvento = " Ingresó a recuperar contraseña ";
   
 	         $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 1,$accion, $descripcionEvento);

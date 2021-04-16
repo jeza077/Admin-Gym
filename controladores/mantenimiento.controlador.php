@@ -737,15 +737,15 @@ class ControladorMantenimientos {
     
           if($respuesta == true){
               
-              // $descripcionEvento = "Actualizo rol";
-              // $accion = "Actualizo";
+              // $descripcionEvento = "Actualizó rol";
+              // $accion = "Actualizó";
               // $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
 
               echo'<script>
       
               Swal.fire({
                   icon: "success",
-                    title: "Documento creado exitosamente!",
+                    title: "¡Documento creado exitosamente!",
                     showConfirmButton: true,
                     confirmButtonText: "Cerrar",
                     closeOnConfirm: false
@@ -786,7 +786,7 @@ class ControladorMantenimientos {
               Swal.fire({
 
                 icon: "error",
-                title: "¡No puede ir vacío, escrito en minusculas o llevar caracteres especiales!",
+                title: "¡No puede ir vacío, escrito en minúsculas o llevar caracteres especiales!",
                 showConfirmButton: true,
                 confirmButtonText: "Cerrar",
                 closeOnConfirm: false
@@ -832,15 +832,15 @@ class ControladorMantenimientos {
     
           if($respuesta == true){
               
-              // $descripcionEvento = "Actualizo rol";
-              // $accion = "Actualizo";
+              // $descripcionEvento = "Actualizó rol";
+              // $accion = "Actualizó";
               // $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
 
               echo'<script>
       
               Swal.fire({
                   icon: "success",
-                    title: "Pregunta creada exitosamente!",
+                    title: "¡Pregunta creada exitosamente!",
                     showConfirmButton: true,
                     confirmButtonText: "Cerrar",
                     closeOnConfirm: false
@@ -929,8 +929,8 @@ class ControladorMantenimientos {
     
           if($respuesta == true){
               
-              // $descripcionEvento = "Actualizo rol";
-              // $accion = "Actualizo";
+              // $descripcionEvento = "Actualizó rol";
+              // $accion = "Actualizó";
               // $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
 
               return true;
@@ -975,8 +975,8 @@ class ControladorMantenimientos {
     
         if($respuesta == true){
             
-            $descripcionEvento = "Actualizo rol";
-            $accion = "Actualizo";
+            $descripcionEvento = "Actualizó rol";
+            $accion = "Actualizó";
             $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
 
           
@@ -985,7 +985,7 @@ class ControladorMantenimientos {
     
             Swal.fire({
                  icon: "success",
-                  title: "Rol editado correctamente!",
+                  title: "¡Rol editado correctamente!",
                   showConfirmButton: true,
                   confirmButtonText: "Cerrar",
                   closeOnConfirm: false
@@ -1045,8 +1045,8 @@ class ControladorMantenimientos {
     
         if($respuesta == true){
             
-            $descripcionEvento = "Actualizo Matricula ";
-            $accion = "Actualizo";
+            $descripcionEvento = "Actualizó matrícula ";
+            $accion = "Actualizó";
             $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
 
           
@@ -1055,7 +1055,7 @@ class ControladorMantenimientos {
     
             Swal.fire({
                  icon: "success",
-                  title: "Matricula editada correctamente",
+                  title: "Matrícula editada correctamente",
                   showConfirmButton: true,
                   confirmButtonText: "Cerrar",
                   closeOnConfirm: false
@@ -1075,7 +1075,7 @@ class ControladorMantenimientos {
     
             Swal.fire({
                   icon: "error",
-                  title: "¡Algo salió mal. Intenta de nuevo!",
+                  title: "¡Algo salió mal, intente de nuevo!",
                   showConfirmButton: true,
                   confirmButtonText: "Cerrar",
                   closeOnConfirm: false
@@ -1116,8 +1116,8 @@ class ControladorMantenimientos {
     
         if($respuesta == true){
             
-            $descripcionEvento = "Actualizo Inscripcion";
-            $accion = "Actualizo";
+            $descripcionEvento = "Actualizó inscripción";
+            $accion = "Actualizó";
             $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
 
           
@@ -1146,7 +1146,7 @@ class ControladorMantenimientos {
     
             Swal.fire({
                   icon: "error",
-                  title: "¡Algo salió mal. Intenta de nuevo!",
+                  title: "¡Algo salió mal, intente de nuevo!",
                   showConfirmButton: true,
                   confirmButtonText: "Cerrar",
                   closeOnConfirm: false
@@ -1185,8 +1185,8 @@ class ControladorMantenimientos {
 
         if($respuesta == true){
              
-          $descripcionEvento = "Actualizo Descuento";
-          $accion = "consulta";
+          $descripcionEvento = "Actualizó descuento";
+          $accion = "Consulta";
 
           $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
           
@@ -1214,7 +1214,7 @@ class ControladorMantenimientos {
     
             Swal.fire({
                   icon: "error",
-                  title: "¡Algo salió mal. Intenta de nuevo!",
+                  title: "¡Algo salió mal, intente de nuevo!",
                   showConfirmButton: true,
                   confirmButtonText: "Cerrar",
                   closeOnConfirm: false
@@ -1257,8 +1257,8 @@ class ControladorMantenimientos {
       
           if($respuesta == true){
               
-              // $descripcionEvento = "Actualizo rol";
-              // $accion = "Actualizo";
+              // $descripcionEvento = "Actualizó rol";
+              // $accion = "Actualizó";
               // $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);            
 
               echo'<script>
@@ -1285,7 +1285,7 @@ class ControladorMantenimientos {
       
               Swal.fire({
                     icon: "error",
-                    title: "¡Algo salió mal. Intenta de nuevo!",
+                    title: "¡Algo salió mal, intente de nuevo!",
                     showConfirmButton: true,
                     confirmButtonText: "Cerrar",
                     closeOnConfirm: false
@@ -1306,7 +1306,7 @@ class ControladorMantenimientos {
             Swal.fire({
   
               icon: "error",
-              title: "¡No puede ir vacío, escrito en minusculas o llevar caracteres especiales!",
+              title: "¡No puede ir vacío, escrito en minúsculas o llevar caracteres especiales!",
               showConfirmButton: true,
               confirmButtonText: "Cerrar",
               closeOnConfirm: false
@@ -1354,8 +1354,8 @@ class ControladorMantenimientos {
       
           if($respuesta == true){
               
-              // $descripcionEvento = "Actualizo rol";
-              // $accion = "Actualizo";
+              // $descripcionEvento = "Actualizó rol";
+              // $accion = "Actualizó";
               // $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);            
 
               echo'<script>
@@ -1382,7 +1382,7 @@ class ControladorMantenimientos {
       
               Swal.fire({
                     icon: "error",
-                    title: "¡Algo salió mal, intenta de nuevo!",
+                    title: "¡Algo salió mal, intente de nuevo!",
                     showConfirmButton: true,
                     confirmButtonText: "Cerrar",
                     closeOnConfirm: false
@@ -1451,8 +1451,8 @@ class ControladorMantenimientos {
       
           if($respuesta == true){
               
-              // $descripcionEvento = "Actualizo rol";
-              // $accion = "Actualizo";
+              // $descripcionEvento = "Actualizó rol";
+              // $accion = "Actualizó";
               // $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);          
 
               echo'<script>
@@ -1479,7 +1479,7 @@ class ControladorMantenimientos {
       
               Swal.fire({
                     icon: "error",
-                    title: "¡Algo salió mal, intenta de nuevo!",
+                    title: "¡Algo salió mal, intente de nuevo!",
                     showConfirmButton: true,
                     confirmButtonText: "Cerrar",
                     closeOnConfirm: false
@@ -1538,15 +1538,15 @@ class ControladorMantenimientos {
 
           if($respuesta[1] == 1451){
 
-            // $descripcionEvento = "Elimino el Rol";
-            // $accion = "Elimino";
+            // $descripcionEvento = "Eliminó el rol";
+            // $accion = "Eliminó";
 
             // $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
 
             echo '<script>
                 Swal.fire({
                     title: "¡No se pudo borrar el rol!",
-                    text: "No se puede borrar ya que esta asociado con otros datos",
+                    text: "No se puede borrar ya que está asociado con otros datos",
                     icon: "error",
                     heightAuto: false
                 }).then((result)=>{
@@ -1563,7 +1563,7 @@ class ControladorMantenimientos {
 
             Swal.fire({
             icon: "error",
-            title: "¡Algo salió mal, intenta de nuevo!",
+            title: "¡Algo salió mal, intente de nuevo!",
             showConfirmButton: true,
             confirmButtonText: "Cerrar",
             closeOnConfirm: false
@@ -1583,7 +1583,7 @@ class ControladorMantenimientos {
 
             Swal.fire({
                   icon: "success",
-                  title: "Rol eliminado exitosamente!",
+                  title: "¡Rol eliminado exitosamente!",
                   showConfirmButton: true,
                   confirmButtonText: "Cerrar",
                   closeOnConfirm: false
@@ -1627,8 +1627,8 @@ class ControladorMantenimientos {
 
             echo '<script>
                 Swal.fire({
-                    title: "¡No se pudo borrar la matricula!",
-                    text: "No se puede borrar ya que esta asociado con otros datos",
+                    title: "¡No se pudo borrar la matrícula!",
+                    text: "No se puede borrar ya que está asociado con otros datos",
                     icon: "error",
                     heightAuto: false
                 }).then((result)=>{
@@ -1645,7 +1645,7 @@ class ControladorMantenimientos {
 
             Swal.fire({
             icon: "error",
-            title: "¡Algo salió mal, intenta de nuevo!",
+            title: "¡Algo salió mal, intente de nuevo!",
             showConfirmButton: true,
             confirmButtonText: "Cerrar",
             closeOnConfirm: false
@@ -1665,7 +1665,7 @@ class ControladorMantenimientos {
 
             Swal.fire({
                   icon: "success",
-                  title: "Matricula eliminada exitosamente!",
+                  title: "Matrícula eliminada exitosamente!",
                   showConfirmButton: true,
                   confirmButtonText: "Cerrar",
                   closeOnConfirm: false
@@ -1709,7 +1709,7 @@ class ControladorMantenimientos {
             echo '<script>
                 Swal.fire({
                     title: "¡No se pudo borrar la inscripción!",
-                    text: "No se puede borrar ya que esta asociado con otros datos",
+                    text: "No se puede borrar ya que está asociado con otros datos",
                     icon: "error",
                     heightAuto: false
                 }).then((result)=>{
@@ -1726,7 +1726,7 @@ class ControladorMantenimientos {
 
             Swal.fire({
             icon: "error",
-            title: "¡Algo salió mal, intenta de nuevo!",
+            title: "¡Algo salió mal, intente de nuevo!",
             showConfirmButton: true,
             confirmButtonText: "Cerrar",
             closeOnConfirm: false
@@ -1746,7 +1746,7 @@ class ControladorMantenimientos {
 
             Swal.fire({
                   icon: "success",
-                  title: "Inscripción eliminada exitosamente!",
+                  title: "¡Inscripción eliminada exitosamente!",
                   showConfirmButton: true,
                   confirmButtonText: "Cerrar",
                   closeOnConfirm: false
@@ -1790,7 +1790,7 @@ class ControladorMantenimientos {
             echo '<script>
                 Swal.fire({
                     title: "¡No se pudo borrar el descuento!",
-                    text: "No se puede borrar ya que esta asociado con otros datos",
+                    text: "No se puede borrar ya que está asociado con otros datos",
                     icon: "error",
                     heightAuto: false
                 }).then((result)=>{
@@ -1807,7 +1807,7 @@ class ControladorMantenimientos {
 
             Swal.fire({
             icon: "error",
-            title: "¡Algo salió mal, intenta de nuevo!",
+            title: "¡Algo salió mal, intente de nuevo!",
             showConfirmButton: true,
             confirmButtonText: "Cerrar",
             closeOnConfirm: false
@@ -1827,7 +1827,7 @@ class ControladorMantenimientos {
 
             Swal.fire({
                   icon: "success",
-                  title: "Descuento eliminado exitosamente!",
+                  title: "¡Descuento eliminado exitosamente!",
                   showConfirmButton: true,
                   confirmButtonText: "Cerrar",
                   closeOnConfirm: false
@@ -1872,7 +1872,7 @@ class ControladorMantenimientos {
             echo '<script>
                 Swal.fire({
                     title: "¡No se pudo borrar el documento!",
-                    text: "No se puede borrar ya que esta asociado con otros datos",
+                    text: "No se puede borrar ya que está asociado con otros datos",
                     icon: "error",
                     heightAuto: false
                 }).then((result)=>{
@@ -1889,7 +1889,7 @@ class ControladorMantenimientos {
 
             Swal.fire({
             icon: "error",
-            title: "¡Algo salió mal, intenta de nuevo!",
+            title: "¡Algo salió mal, intente de nuevo!",
             showConfirmButton: true,
             confirmButtonText: "Cerrar",
             closeOnConfirm: false
@@ -1909,7 +1909,7 @@ class ControladorMantenimientos {
 
             Swal.fire({
                   icon: "success",
-                  title: "Documento eliminado exitosamente!",
+                  title: "¡Documento eliminado exitosamente!",
                   showConfirmButton: true,
                   confirmButtonText: "Cerrar",
                   closeOnConfirm: false
@@ -1955,7 +1955,7 @@ class ControladorMantenimientos {
             echo '<script>
                 Swal.fire({
                     title: "¡No se pudo borrar la pregunta!",
-                    text: "No se puede borrar ya que esta asociado con otros datos",
+                    text: "No se puede borrar ya que está asociado con otros datos",
                     icon: "error",
                     heightAuto: false
                 }).then((result)=>{
@@ -1972,7 +1972,7 @@ class ControladorMantenimientos {
 
             Swal.fire({
             icon: "error",
-            title: "¡Algo salió mal, intenta de nuevo!",
+            title: "¡Algo salió mal, intente de nuevo!",
             showConfirmButton: true,
             confirmButtonText: "Cerrar",
             closeOnConfirm: false
@@ -1992,7 +1992,7 @@ class ControladorMantenimientos {
 
             Swal.fire({
                   icon: "success",
-                  title: "Pregunta eliminada exitosamente!",
+                  title: "¡Pregunta eliminada exitosamente!",
                   showConfirmButton: true,
                   confirmButtonText: "Cerrar",
                   closeOnConfirm: false
@@ -2038,7 +2038,7 @@ class ControladorMantenimientos {
             echo '<script>
                 Swal.fire({
                     title: "¡No se pudo borrar el proveedor!",
-                    text: "No se puede borrar ya que esta asociado con otros datos",
+                    text: "No se puede borrar ya que está asociado con otros datos",
                     icon: "error",
                     heightAuto: false
                 }).then((result)=>{
@@ -2055,7 +2055,7 @@ class ControladorMantenimientos {
 
             Swal.fire({
             icon: "error",
-            title: "¡Algo salió mal, intenta de nuevo!",
+            title: "¡Algo salió mal, intente de nuevo!",
             showConfirmButton: true,
             confirmButtonText: "Cerrar",
             closeOnConfirm: false
@@ -2075,7 +2075,7 @@ class ControladorMantenimientos {
 
             Swal.fire({
                   icon: "success",
-                  title: "Proveedor eliminado exitosamente!",
+                  title: "¡Proveedor eliminado exitosamente!",
                   showConfirmButton: true,
                   confirmButtonText: "Cerrar",
                   closeOnConfirm: false

@@ -565,8 +565,8 @@ class ControladorInventario{
 
                 if($tipostock == 'Productos'){
                     
-                    $descripcionEvento = "Actualizo un Producto del Stock";
-                    $accion = "Actualizo";
+                    $descripcionEvento = "Actualizó un Producto del Stock";
+                    $accion = "Actualizó";
                     $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 4,$accion, $descripcionEvento);
                 
                     $datos = array("nombre_producto" => $_POST["editarNombreProducto"],
@@ -588,7 +588,7 @@ class ControladorInventario{
                             
                         echo '<script>
                                 Swal.fire({
-                                    title: "Producto editado correctamente!",
+                                    title: "¡Producto editado correctamente!",
                                     icon: "success",
                                     heightAuto: false,
                                     allowOutsideClick: false
@@ -602,7 +602,7 @@ class ControladorInventario{
                     else {
                         echo '<script>
                                 Swal.fire({
-                                    title: "No se pudo guardar tus datos. Intenta de nuevo!",
+                                    title: "¡No se pudo guardar tus datos, intente de nuevo!",
                                     icon: "error",
                                     heightAuto: false,
                                     allowOutsideClick: false,
@@ -719,8 +719,8 @@ class ControladorInventario{
 
                 if($tipostock == 'Equipo'){
                     
-                    $descripcionEvento = "Actualizo un Equipo del Stock";
-                    $accion = "Actualizo";
+                    $descripcionEvento = "Actualizó un equipo del Stock";
+                    $accion = "Actualizó";
                     $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 2,$accion, $descripcionEvento);
                 
                     $datos = array("nombre_producto" => $_POST["editarNombreEquipo"],
@@ -739,7 +739,7 @@ class ControladorInventario{
                             
                         echo '<script>
                                 Swal.fire({
-                                    title: "Equipo editado correctamente!",
+                                    title: "¡Equipo editado correctamente!",
                                     icon: "success",
                                     heightAuto: false,
                                     allowOutsideClick: false
@@ -752,7 +752,7 @@ class ControladorInventario{
                     } else {
                         echo '<script>
                                 Swal.fire({
-                                    title: "¡Algo salió mal. Intenta de nuevo!",
+                                    title: "¡Algo salió mal, intente de nuevo!",
                                     icon: "error",
                                     heightAuto: false,
                                     allowOutsideClick: false,
@@ -823,7 +823,7 @@ class ControladorInventario{
                   
                 echo '<script>
                         Swal.fire({
-                            title: "¡Algo salió mal. Intenta de nuevo!",
+                            title: "¡Algo salió mal, intente de nuevo!",
                             icon: "error",
                             heightAuto: false
                         }).then((result)=>{

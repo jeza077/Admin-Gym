@@ -184,8 +184,8 @@ class ControladorUsuarios{
 								$_SESSION["apellidos"] = $respuesta["apellidos"];
 								$_SESSION["primerIngreso"] = $respuesta["primera_vez"];
 			
-								$descripcionEvento = "".$_SESSION['usuario']." ingreso al sistema por primera vez";
-								$accion = "Ingreso";
+								$descripcionEvento = "".$_SESSION['usuario']." ingresó al sistema por primera vez";
+								$accion = "Ingresó";
 								$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION['id_usuario'], 31, $accion, $descripcionEvento);						
 
 								echo '<script>
@@ -243,8 +243,8 @@ class ControladorUsuarios{
 
 								if($ultimoLogin == true){
 
-									$descripcionEvento = "".$_SESSION['usuario']." ingreso al sistema";
-									$accion = "Ingreso";
+									$descripcionEvento = "".$_SESSION['usuario']." ingresó al sistema";
+									$accion = "Ingresó";
 									$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION['id_usuario'], 1, $accion, $descripcionEvento);						
 
 									echo '<script>
@@ -342,7 +342,7 @@ class ControladorUsuarios{
 										if($respuestaEstado == true){
 											
 											$descripcionEvento = "".$user." intentó ingresar al sistema y fue bloqueado por intentos inválidos";
-											$accion = "Ingreso";
+											$accion = "Ingresó";
 											$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($idUser, 30, $accion, $descripcionEvento);
 
 											// var_dump($bitacoraConsulta);
@@ -559,7 +559,7 @@ class ControladorUsuarios{
 
 							if($respuestaCorreo = true){
 								
-								$descripcionEvento = "Nuevo Usuario";
+								$descripcionEvento = "Nuevo usuario";
 								$accion = "Nuevo";
 								$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 2,$accion, $descripcionEvento);
 			
@@ -746,7 +746,7 @@ class ControladorUsuarios{
 					$email = $emailUsuario;
 					$nombreUsuario = $datos["usuario"];
 					$contraseña =  $contraSinEncriptar;
-					$asunto = 'Envio de Usuario y Contraseña';
+					$asunto = 'Envío de usuario y contraseña';
 					$require = false;
 
 					$template = 'Hola '.$nombre.'! <br><br> Tu usuario es: '.$nombreUsuario.' <br> Tu contraseña es: '.$contraseña; 
@@ -958,7 +958,7 @@ class ControladorUsuarios{
 
 					
 						$descripcionEvento = " Actualizó registro en la pantalla de usuario";
-						$accion = "Actualizo";
+						$accion = "Actualizó";
 			
 						$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 2,$accion, $descripcionEvento);
 			
@@ -971,7 +971,7 @@ class ControladorUsuarios{
 							$nombreUsuario = $datos["usuario"];
 							$email = $emailUsuario;
 							$contraseña =  $contraSinEncriptar;
-							$asunto = 'Envío de Contraseña Nueva';
+							$asunto = 'Envío de contraseña nueva';
 							$require = false;
 
 							$template = 'Hola '.$nombreUsuario.'! <br><br> Tu contraseña es: '.$contraseña; 
@@ -1112,7 +1112,7 @@ class ControladorUsuarios{
 
 						if($respuestaContraseña == true) {
 
-							$descripcionEvento = "".$usuario." cambio su contraseña por primera vez";
+							$descripcionEvento = "".$usuario." cambió su contraseña por primera vez";
 							$accion = "Primer ingreso";
 							$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($id, 31, $accion, $descripcionEvento);						
 							$tabla = "tbl_preguntas_usuarios";
@@ -1127,7 +1127,7 @@ class ControladorUsuarios{
 							if($respuestaPreguntas == true){
 
 								$descripcionEvento = "".$usuario." agregó sus preguntas de seguridad por primera vez";
-								$accion = "Primer ingreso";
+								$accion = "Primer ingresó";
 								$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($id, 31, $accion, $descripcionEvento);	
 
 								$tabla = "tbl_usuarios";
@@ -1458,7 +1458,7 @@ class ControladorUsuarios{
 
 		$correoDestinatario = $correoElectronico;
 		$nombreDestinatario = $nombre;
-		$asunto = 'Recuperación de Contraseña';
+		$asunto = 'Recuperación de contraseña';
 		$require = true;
 		
 		// $parametros = ControladorGlobales::ctrMostrarParametros();
@@ -1512,7 +1512,7 @@ class ControladorUsuarios{
 			if($respuesta == false){
 				echo '<script>
 						Swal.fire({
-							title: "El código de recuperación de contraseña no es valido. Por favor intenta de nuevo.",
+							title: "El código de recuperación de contraseña no es válido. Por favor intenta de nuevo.",
 							icon: "error",
 							heightAuto: false,
 							showConfirmButton: true,
@@ -1537,7 +1537,7 @@ class ControladorUsuarios{
 				if($fechaAhora > $respuesta['fecha_recuperacion']) {
 					echo '<script>
 							Swal.fire({
-								title: "El código de recuperación de contraseña ha expirado. Por favor intenta de nuevo.",
+								title: "El código de recuperación de contraseña ha expirado. Por favor intente de nuevo.",
 								icon: "error",
 								heightAuto: false,
 								showConfirmButton: true,
@@ -1732,7 +1732,7 @@ class ControladorUsuarios{
 
 							echo '<script>
                                     Swal.fire({
-                                        title: "Contraseña cambiada correctamente!",
+                                        title: "¡La contraseña se cambió correctamente!",
                                         icon: "success",
                                         heightAuto: false
                                     }).then((result)=>{
@@ -1936,7 +1936,7 @@ class ControladorUsuarios{
 				if($respuesta == true){
 					echo '<script>
 						Swal.fire({
-							title: "Tu foto se cambio exitosamente!",
+							title: "¡Su foto se cambió exitosamente!",
 							icon: "success",
 							heightAuto: false
 						}).then((result)=>{

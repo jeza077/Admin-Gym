@@ -26,7 +26,7 @@
 
         <?php
             $descripcionEvento = " Consultó la pantalla de rol";
-            $accion = "consulta";
+            $accion = "Consulta";
 
             $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
 

@@ -95,7 +95,7 @@ $( document ).ready(function() {
                     //console.log(datar[0].res);
                     if(data==1){
                       Swal.fire({
-                        title: "Restauracion exitosa!",
+                        title: "¡Restauración exitosa!",
                         icon: "success",
                         // background: "rgb(255 75 75 / 85%)",
                         showConfirmButton: true

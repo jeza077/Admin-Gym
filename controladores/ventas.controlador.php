@@ -1166,8 +1166,8 @@ class ControladorVentas {
 
 			if($respuesta == true ){
 				
-				$descripcionEvento = "Actualizo una venta";
-				$accion = "Actualizo";
+				$descripcionEvento = "Actualizó una venta";
+				$accion = "Actualizó";
 
 				$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 5,$accion, $descripcionEvento); 
 

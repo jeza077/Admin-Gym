@@ -167,8 +167,8 @@ class ControladorGlobales{
     
         if($respuesta == true){
             
-            $descripcionEvento = "Actualizo parametro";
-            $accion = "Actualizo";
+            $descripcionEvento = "Actualizó parametro";
+            $accion = "Actualizó";
             $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
 
           
@@ -178,7 +178,7 @@ class ControladorGlobales{
     
             Swal.fire({
                   icon: "success",
-                  title: "El parametro ha sido editado correctamente",
+                  title: "El parámetro ha sido editado correctamente",
                   showConfirmButton: true,
                   confirmButtonText: "Cerrar",
                   closeOnConfirm: false
@@ -198,7 +198,7 @@ class ControladorGlobales{
     
             Swal.fire({
                   icon: "error",
-                  title: "Error al editar parametro",
+                  title: "Error al editar parámetro",
                   showConfirmButton: true,
                   confirmButtonText: "Cerrar",
                   closeOnConfirm: false
