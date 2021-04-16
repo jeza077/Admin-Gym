@@ -16,7 +16,7 @@
     if($diff->days <= 7){
 
         $titulo = "Tu usuario vencera en $diff->days dias!";
-        $texto = "Cambia tu contraseña para resetear la fecha de vencimiento.";
+        $texto = "Cambie su contraseña para resetear la fecha de vencimiento.";
         $icono = "warning";
         //$modulo = "dashboard";
         // $alerta = ControladorGlobales::ctrAlertas($titulo, $texto, $icono);

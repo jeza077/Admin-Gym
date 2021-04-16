@@ -34,12 +34,12 @@ require_once "../../modelos/usuarios.modelo.php";
                     </div>
 
                     <div class="form-group col-md-3">
-                        <label for="identidad">Numero de documento</label>
-                        <input type="text" class="form-control numeroDocumento" name="editarNumeroDocumento" value="" placeholder="Ingrese Identidad">
+                        <label for="identidad">Número de documento</label>
+                        <input type="text" class="form-control numeroDocumento" name="editarNumeroDocumento" value="" placeholder="Ingrese identidad">
                     </div>
                     <div class="form-group col-md-3">
-                        <label for="nombre">Nombre</label>
-                        <input type="text" class="form-control nombre mayus" name="editarNombre" value="" placeholder="Ingrese Nombre">
+                        <label for="nombre">Nombres</label>
+                        <input type="text" class="form-control nombre mayus" name="editarNombre" value="" placeholder="Ingrese nombres">
                     </div>
                     <div class="form-group col-md-3">
                         <label for="apellido">Apellidos</label>
@@ -49,16 +49,16 @@ require_once "../../modelos/usuarios.modelo.php";
     
                 <div class="form-row">
                     <div class="form-group col-md-4">
-                        <label for="inputEmail4">Email</label>
-                        <input type="email" class="form-control email" id="inputEmail4" name="editarEmail" value="" placeholder="Ingrese Email">
+                        <label for="inputEmail4">Correo</label>
+                        <input type="email" class="form-control email" id="inputEmail4" name="editarEmail" value="" placeholder="Ingrese su correo">
                     </div>
                     <div class="form-group col-md-4">
                         <label>Teléfono</label>
-                        <input type="text" class="form-control" data-inputmask='"mask": "(999) 9999-9999"' data-mask  name="editarTelefono" value="" placeholder="Ingrese Telefono">
+                        <input type="text" class="form-control" data-inputmask='"mask": "(999) 9999-9999"' data-mask  name="editarTelefono" value="" placeholder="Ingrese teléfono">
                     </div>
                     <div class="form-group col-md-4">
                         <label>Fecha de nacimiento</label>
-                        <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy/mm/dd" data-mask  name="editarFechaNacimiento" value="" placeholder="Ingrese Fecha de Nacimiento">
+                        <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy/mm/dd" data-mask  name="editarFechaNacimiento" value="" placeholder="Ingrese fecha de nacimiento">
                     </div>
                 </div>
 

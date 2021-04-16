@@ -69,7 +69,7 @@ class ControladorUsuarios{
 			if($_POST["ingUsuario"] === "" && $_POST["ingPassword"] === ""){
 				echo '<script>			
 					Swal.fire({
-						title: "No dejar los campos vacios.",
+						title: "No dejar los campos vacíos.",
 						icon: "error",
 						toast: true,
 						position: "top-end",
@@ -268,7 +268,7 @@ class ControladorUsuarios{
 								
 								echo '<script>			
 										Swal.fire({
-											title: "Su usuario ha vencido, comuniquese con el administrador.",
+											title: "Su usuario ha vencido, comuníquese con el administrador.",
 											icon: "error",
 											heightAuto: false,
 											allowOutsideClick: false
@@ -281,7 +281,7 @@ class ControladorUsuarios{
 
 								echo '<script>			
 										Swal.fire({
-											title: "Usuario desactivado, comuniquese con el administrador.",
+											title: "Usuario desactivado, comuníquese con el administrador.",
 											icon: "error",
 											heightAuto: false,
 											allowOutsideClick: false
@@ -341,7 +341,7 @@ class ControladorUsuarios{
 
 										if($respuestaEstado == true){
 											
-											$descripcionEvento = "".$user." intento ingresar al sistema y fue bloqueado por intentos invalidos";
+											$descripcionEvento = "".$user." intentó ingresar al sistema y fue bloqueado por intentos inválidos";
 											$accion = "Ingreso";
 											$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($idUser, 30, $accion, $descripcionEvento);
 
@@ -350,7 +350,7 @@ class ControladorUsuarios{
 
 											echo '<script>			
 													Swal.fire({
-														title: "¡Lo sentimos! Su usuario ha sido bloqueado, comuniquese con el Administrador.",
+														title: "¡Lo sentimos! Su usuario ha sido bloqueado, comuníquese con el Administrador.",
 														icon: "error",
 														heightAuto: false,
 														allowOutsideClick: false
@@ -369,7 +369,7 @@ class ControladorUsuarios{
 								} else {
 									echo '<script>			
 											Swal.fire({
-												title: "¡Usuario y contraseña invalidos. Intento '. $_SESSION['contadorLogin'].' le queda '. ($intentos - $_SESSION['contadorLogin']).' intentos.",
+												title: "¡Usuario y contraseña inválidos. Intento '. $_SESSION['contadorLogin'].' le queda '. ($intentos - $_SESSION['contadorLogin']).' intentos.",
 												icon: "error",
 												toast: true,
 												position: "top",
@@ -382,7 +382,7 @@ class ControladorUsuarios{
 							} else {
 								echo '<script>			
 										Swal.fire({
-											title: "¡Usuario y contraseña invalidos!",
+											title: "¡Usuario y contraseña inválidos!",
 											icon: "error",
 											toast: true,
 											position: "top-end",
@@ -398,7 +398,7 @@ class ControladorUsuarios{
 					
 					echo '<script>			
 						Swal.fire({
-							title: "Usuario/contraseña incorrectos! Intente de nuevo.",
+							title: "¡Usuario/contraseña incorrectos! Intente de nuevo.",
 							icon: "error",
 							toast: true,
 							position: "top-end",
@@ -540,13 +540,13 @@ class ControladorUsuarios{
 							$email = $emailUsuario;
 							$nombreUsuario = $datos["usuario"];
 							$contraseña =  $contraSinEncriptar;
-							$asunto = 'Envio de Usuario y Contraseña';
+							$asunto = 'Envío de usuario y contraseña';
 							$require = false;
 
 							if($tipoPersona == 'default'){
 
 								// return true;
-								$template = 'Hola '.$nombre.'! <br><br> Tu usuario es: '.$nombreUsuario.' <br> Tu contraseña es: '.$contraseña.'<br><br><br> El administrador pronto te dará permisos para entrar al sistema. <br><br> Saludos!'; 
+								$template = 'Hola '.$nombre.'! <br><br> Tu usuario es: '.$nombreUsuario.' <br> Tu contraseña es: '.$contraseña.'<br><br><br> El administrador pronto le dará permisos para entrar al sistema. <br><br> Saludos!'; 
 
 							} else {
 
@@ -581,7 +581,7 @@ class ControladorUsuarios{
 					echo "<script>
 						Swal.fire({
 								icon: 'error',
-								title: '¡Llenar campos correctamente!',
+								title: '¡Llenar los campos correctamente!',
 							})
 						</script>";
 
@@ -594,7 +594,7 @@ class ControladorUsuarios{
 				echo "<script>
 						Swal.fire({
 							icon: 'error',
-							title: '¡Llenar campos correctamente!',
+							title: '¡Llenar los campos correctamente!',
 						})
 					</script>";
 
@@ -761,7 +761,7 @@ class ControladorUsuarios{
 	
 						echo '<script>
 							Swal.fire({
-								title: "Usuario creado correctamente!",
+								title: "¡Usuario creado correctamente!",
 								icon: "success",
 								heightAuto: false,
 								allowOutsideClick: false
@@ -777,7 +777,7 @@ class ControladorUsuarios{
 
 						echo '<script>
 							Swal.fire({
-								title: "Opps, algo salio mal, intenta de nuevo!",
+								title: "¡Algo salió mal, intente de nuevo!",
 								icon: "error",
 								heightAuto: false,
 								allowOutsideClick: false
@@ -794,7 +794,7 @@ class ControladorUsuarios{
 					
 					echo '<script>
 						Swal.fire({
-							title: "Opps, algo salio mal, intenta de nuevo!",
+							title: "¡Algo salió mal, intente de nuevo!",
 							icon: "error",
 							heightAuto: false,
 							allowOutsideClick: false
@@ -812,7 +812,7 @@ class ControladorUsuarios{
 				echo "<script>
 					Swal.fire({
 							icon: 'error',
-							title: '¡Llenar campos correctamente!',
+							title: '¡Llenar los campos correctamente!',
 						})
 					</script>";
 
@@ -957,7 +957,7 @@ class ControladorUsuarios{
 					if($respuestaEmpleado == true){
 
 					
-						$descripcionEvento = " Actualizo registro en la pantalla de usuario";
+						$descripcionEvento = " Actualizó registro en la pantalla de usuario";
 						$accion = "Actualizo";
 			
 						$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 2,$accion, $descripcionEvento);
@@ -971,7 +971,7 @@ class ControladorUsuarios{
 							$nombreUsuario = $datos["usuario"];
 							$email = $emailUsuario;
 							$contraseña =  $contraSinEncriptar;
-							$asunto = 'Envio de Contraseña Nueva';
+							$asunto = 'Envío de Contraseña Nueva';
 							$require = false;
 
 							$template = 'Hola '.$nombreUsuario.'! <br><br> Tu contraseña es: '.$contraseña; 
@@ -1003,7 +1003,7 @@ class ControladorUsuarios{
 				echo "<script>
 					Swal.fire({
 							icon: 'error',
-							title: '¡Llenar campos correctamente!',
+							title: '¡Llenar los campos correctamente!',
 						})
 					</script>";
 
@@ -1014,7 +1014,7 @@ class ControladorUsuarios{
 				echo "<script>
 						Swal.fire({
 							icon: 'error',
-							title: '¡Llenar campos correctamente!',
+							title: '¡Llenar los campos correctamente!',
 						})
 					</script>";
 
@@ -1126,7 +1126,7 @@ class ControladorUsuarios{
 				
 							if($respuestaPreguntas == true){
 
-								$descripcionEvento = "".$usuario." agrego sus preguntas de seguridad por primera vez";
+								$descripcionEvento = "".$usuario." agregó sus preguntas de seguridad por primera vez";
 								$accion = "Primer ingreso";
 								$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($id, 31, $accion, $descripcionEvento);	
 
@@ -1168,7 +1168,7 @@ class ControladorUsuarios{
 				} else {
 					echo '<script>			
 							Swal.fire({
-								title: "Por favor, llena los campos corectamente. Intente de nuevo.",
+								title: "Por favor, llene los campos corectamente. Intente de nuevo.",
 								icon: "error",
 								toast: true,
 								position: "top",
@@ -1353,7 +1353,7 @@ class ControladorUsuarios{
 		
 						echo '<script>
 								Swal.fire({
-									title: "Contraseña cambiada correctamente.",
+									title: "La contraseña se cambió correctamente.",
 									icon: "success",
 									heightAuto: false,
 									showConfirmButton: true,

@@ -1234,7 +1234,7 @@ $(document).on('click', '.btnVerClienteVenta', function () {
             if(respuesta['direccion'] == null || respuesta['fecha_nacimiento'] == null || respuesta['sexo'] == null || respuesta['num_documento'] == null){
                 
                 // $('.alertaClienteVenta').append('<div class="alert alert-warning fade show mt-2" role="alert" style="padding:.75rem 0.5rem"><i class="icon fas fa-exclamation-triangle"></i>Faltan campos que añadir. Hagalo desde aquí. <button class="añadirDatosCliVenta btn btn-md btn-outline-orange" data-toggle="modal" data-target="#modalEditarClienteVenta">Añadir</button></div>');
-                $('.alertaClienteVenta').append('<div class="alert alert-warning fade show mt-2" role="alert" style="padding:.75rem 0.5rem"><i class="icon fas fa-exclamation-triangle"></i>Faltan campos que añadir. Hagalo desde Editar cliente.</div>');
+                $('.alertaClienteVenta').append('<div class="alert alert-warning fade show mt-2" role="alert" style="padding:.75rem 0.5rem"><i class="icon fas fa-exclamation-triangle"></i>Faltan campos que añadir. Hágalo desde Editar cliente.</div>');
                 // setTimeout(function () {
                 //     $('.alert').remove();
                 // }, 3000)

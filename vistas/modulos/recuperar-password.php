@@ -21,7 +21,7 @@ $password->ctrRevisarCodigoFecha();
            ?>
     <!-- CONTENEDOR CAMBIAR CONTRASEÑA -->
     <div class="card-body login-card-body">
-      <p class="login-box-msg">Cambia tu contraseña</p>
+      <p class="login-box-msg">Cambie su contraseña</p>
       <form method="post" id="cambiarPassword">
       <div class="form-row">
         <div class="form-group col-md-12 passwords">

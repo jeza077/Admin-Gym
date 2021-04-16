@@ -42,7 +42,7 @@ $(".verificarCorreoPreguntas").on('click', function(event){
     var emailIngresado = $('#verificarEmail').val();
     
     if(emailIngresado === ""){
-        $("#verificarEmail").after('<div class="alert alert-warning mt-2"><i class="icon fas fa-exclamation-triangle"></i>Por favor, ingresar correo!</div>');
+        $("#verificarEmail").after('<div class="alert alert-warning mt-2"><i class="icon fas fa-exclamation-triangle"></i>¡Por favor, ingresar correo!</div>');
         setTimeout(function () {
             $('.alert').remove();
         }, 2000)
@@ -73,7 +73,7 @@ $(".verificarCorreoPreguntas").on('click', function(event){
                 if(!respuesta) {//Si la Respuesta = FALSE entonces...
                     
                     //Mandamos una alerta diciendo que no existe correo asociado a ningun usuario.
-                    $("#verificarEmail").after('<div class="alert alert-danger mt-2"><i class="icon fas fa-ban"></i>Correo inexistente, intenta de nuevo!</div>');
+                    $("#verificarEmail").after('<div class="alert alert-danger mt-2"><i class="icon fas fa-ban"></i>¡Correo inexistente, intente de nuevo!</div>');
                     setTimeout(function () {
                         $('.alert').remove();
                     }, 2000)
@@ -91,8 +91,8 @@ $(".verificarCorreoPreguntas").on('click', function(event){
                     $("#tituloPregunta").remove();
                     $(".respuestaPregunta").remove();
                     
-                    $(".questionsBx").prepend("<p class='login-box-msg' id='tituloPregunta'>Hola <b>" + usuario + "</b>, contesta la siguiente pregunta de seguridad para poder cambiar la contraseña.</p>");
-                    $("#preguntaSeguridad").append("<input type='text' class='form-control mayus respuestaPregunta' placeholder='Agrega la respuesta' required>");
+                    $(".questionsBx").prepend("<p class='login-box-msg' id='tituloPregunta'>Hola <b>" + usuario + "</b>, conteste la siguiente pregunta de seguridad, para poder cambiar la contraseña.</p>");
+                    $("#preguntaSeguridad").append("<input type='text' class='form-control mayus respuestaPregunta' placeholder='Agregue la respuesta' required>");
                     
                     $('.respuestaPregunta').keydown(permitirUnEspacio);
 
@@ -108,14 +108,14 @@ $(".verificarCorreoPreguntas").on('click', function(event){
 
                         if(valorPregunta == "" || valorPregunta == "Seleccionar..."){
 
-                            padrePregunta.after('<div class="alert alert-danger alert-dismissible" role="alert"><i class="icon fas fa-ban"></i>Por favor, selecciona una pregunta.</div>');
+                            padrePregunta.after('<div class="alert alert-danger alert-dismissible" role="alert"><i class="icon fas fa-ban"></i>Por favor, seleccione una pregunta.</div>');
                             setTimeout(function () {
                                 $('.alert').remove();
                             }, 4000)
                             
                         } else if(respuestaPregunta == ""){
                             // console.log('llenar');
-                            padreRespuesta.after('<div class="alert alert-danger alert-dismissible" role="alert" style="margin: 8px 0 0 2px"><i class="icon fas fa-ban"></i>Por favor, ingresa una respuesta.</div>');
+                            padreRespuesta.after('<div class="alert alert-danger alert-dismissible" role="alert" style="margin: 8px 0 0 2px"><i class="icon fas fa-ban"></i>Por favor, ingrese una respuesta.</div>');
                             setTimeout(function () {
                                 $('.alert').remove();
                             }, 4000)
@@ -201,7 +201,7 @@ $(".verificarCorreoPreguntas").on('click', function(event){
                                         $("#passwords").append("<label class='mt-2' id='tituloConfirmarPass'>Confirmar contraseña</label>");
                                         $("#passwords").append("<input type='password' class='form-control password confirmar-password' placeholder='Confirmar contraseña'>");
 
-                                        $("#btnCambiarPass").append("<button type='submit' class='btn btn-orange btn-block btn-flat' id='cambiarContraseña'>Cambiar Contraseña</button>")
+                                        $("#btnCambiarPass").append("<button type='submit' class='btn btn-orange btn-block btn-flat' id='cambiarContraseña'>Cambiar contraseña</button>")
 
                                         $("#linkLogin").append("<p class='link mt-3 ml-2'>Regresar al <a href='javascript:void(0);' onclick='toggleForm(); toggleQuestions(); togglePassword();'>Login</a></p>")
 
@@ -246,7 +246,7 @@ $(".verificarCorreoPreguntas").on('click', function(event){
                                                             if(respuesta == true){
                                                                 Swal.fire({
                                                                     icon: "success",
-                                                                    title: "¡Contraseña cambiada correctamente!",
+                                                                    title: "¡Se cambió la contraseña correctamente!",
                                                                     showConfirmButton: true,
                                                                     confirmButtonText: "Cerrar",
                                                                     allowOutsideClick: false,
@@ -463,7 +463,7 @@ $(".verificarCorreo").on('click', function(event){
     var emailIngresado = $('#verificarEmail').val();
     
     if(emailIngresado === ""){
-        $("#verificarEmail").after('<div class="alert alert-warning mt-2"><i class="icon fas fa-exclamation-triangle"></i>Por favor, ingresar correo!</div>');
+        $("#verificarEmail").after('<div class="alert alert-warning mt-2"><i class="icon fas fa-exclamation-triangle"></i>¡Por favor, ingresar correo!</div>');
         setTimeout(function () {
             $('.alert').remove();
         }, 2000)
@@ -486,7 +486,7 @@ $(".verificarCorreo").on('click', function(event){
 
                 if(!respuesta) {//Si la Respuesta = FALSE entonces...
                     //Mandamos una alerta diciendo que ya existe el usuario.
-                    $("#verificarEmail").after('<div class="alert alert-danger mt-2"><i class="icon fas fa-ban"></i>Correo inexistente, intenta de nuevo!</div>');
+                    $("#verificarEmail").after('<div class="alert alert-danger mt-2"><i class="icon fas fa-ban"></i>¡Correo inexistente, intente de nuevo!</div>');
                     setTimeout(function () {
                         $('.alert').remove();
                     }, 2000);
@@ -531,7 +531,7 @@ $(".verificarCorreo").on('click', function(event){
 
                             if(respuesta == true){                                             
                                 Swal.fire({
-                                    title: "Le enviamos un correo para recuperar su contraseña. Por favor revise.",
+                                    title: "Le enviamos un correo para recuperar su contraseña, por favor revise.",
                                     icon: "info",
                                     heightAuto: false,
                                     showConfirmButton: true,
