@@ -607,6 +607,29 @@ class ModeloMantenimiento{
 		$stmt = null;
     }
 
+    /*============================================
+    AGREGAR BACKUP
+	==============================================*/
+	static public function mdlBackupInsertar($tabla, $datos){
+
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(nombre_backup, creado_por) VALUES (:nombre_backup, :creado_por)");
+       
+        $stmt->bindParam(":nombre_backup", $datos["nombre_backup"], PDO::PARAM_STR);
+        $stmt->bindParam(":creado_por", $datos["creado_por"], PDO::PARAM_INT);
+        /*$stmt->bindParam(":estado", $datos["estado"], PDO::PARAM_INT);*/
+
+		if($stmt->execute()){
+			return true;
+
+		}else{
+			return $stmt->errorInfo();
+		
+		}
+
+		$stmt->close();
+		$stmt = null;
+    }
+
 
     /*=============================================
     EDITAR DOCUMENTO

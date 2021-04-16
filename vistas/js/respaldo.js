@@ -24,6 +24,7 @@ $( document ).ready(function() {
       form_data.append("usuario",$('#usuario').val());
       form_data.append("contrasenia",$('#contrasenia').val());
       form_data.append("nombrebd",$('#nombrebd').val());
+
       $.ajax({
         url: 'vistas/modulos/backup.php',
         dataType: 'json',
@@ -33,33 +34,62 @@ $( document ).ready(function() {
         data: form_data,                         
         method: 'POST',
         success: function(data){
-      
-     
-                    //var datar = data[0];
-                    //console.log(datar[0].res);
-                    if(data==1){
-    
-                      Swal.fire({
-                        title: "Respaldo realizado con éxito.",
-                        icon: "success",
-                        showConfirmButton: true
-                        
-                      });
-    
-    
-                    }else {
-    
-                      Swal.fire({
-                        title: "Error al realizar el respaldo.",
-                        icon: "error",
-                        showConfirmButton: true
-                        
-                      });
-    
-                    } 
+  
+            //var datar = data[0];
+            // console.log(data);
+            // return;
+            if(data==1){
+
+              var datos = new FormData();
+              // datos.append('nombreBackup', idUsuario);
+              datos.append("nombreBackup",$('#nombrebd').val());
+              // datos.append('activarUsuario', estadoUsuario);
+
+              $.ajax({
+
+                  url:"ajax/mantenimiento.ajax.php",
+                  method: "POST",
+                  data: datos,
+                  cache: false,
+                  contentType: false,
+                  processData: false,
+                  success: function(respuesta) {
+                    console.log(respuesta);
                     
-                }
-            });
+                    if(respuesta){
+                      Swal.fire({
+                        title: "Respaldo realizado exitosamente.",
+                        icon: "success",
+                        showConfirmButton: true,
+                        heightAuto: false,
+      									allowOutsideClick: false
+                      }).then((result)=>{
+                          if(result.value){
+                              window.location = "respaldo-restauracion";
+                          }
+                      });  
+                        
+
+                    }
+                  }
+
+              });
+
+
+
+            }else {
+
+              Swal.fire({
+                title: "Error al realizar el respaldo. Intente de nuevo.",
+                icon: "error",
+                showConfirmButton: true
+                
+              });
+
+            } 
+            
+        }
+      });
     }
     
     

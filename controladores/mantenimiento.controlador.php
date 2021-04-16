@@ -344,7 +344,7 @@ class ControladorMantenimientos {
     }
     /*======================================================
     OBJETO INSERTAR
-    =============================================================================================*/
+    =======================================================*/
     static public function ctrObjetoInsertar(){
 
       if(isset($_POST["nuevoObjeto"])){
@@ -430,6 +430,80 @@ class ControladorMantenimientos {
           </script>';
   
         }
+  
+  
+      }
+  
+    }
+
+
+    /*======================================================
+    BACKUP INSERTAR
+    =======================================================*/
+    static public function ctrBackupInsertar($nombreBackup){
+
+      if(isset($nombreBackup)){
+
+        // if(preg_match('/^[A-ZÑÁÉÍÓÚ ]+$/', $nombreBackup)){
+         
+          
+          $tabla = "tbl_backup";          
+  
+          session_start();
+          $datos = array("nombre_backup" => $nombreBackup, 
+                          "creado_por" => $_SESSION["id_usuario"]);
+          
+          // $datos = $nombreBackup;
+
+            // echo "<pre>";
+            // var_dump($_POST);
+            // echo "</pre>";
+            // return;
+  
+          $respuesta = ModeloMantenimiento::mdlBackupInsertar($tabla, $datos);
+          
+          // var_dump($respuesta);
+          if($respuesta == true){
+  
+           return true;
+            // $descripcionEvento = "Nueva Inscripcion del Gimnasio";
+            // $accion = "Nuevo";
+            // $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
+
+         
+       
+            // echo '<script>
+  
+            // Swal.fire({
+  
+            //   icon: "success",
+            //   title: "Objeto creado exitosamente!",
+            //   showConfirmButton: true,
+            //   confirmButtonText: "Cerrar",
+            //   closeOnConfirm: false
+  
+            // }).then((result)=>{
+  
+            //   if(result.value){
+  
+            //     window.location = "respaldo-restauracion";
+  
+            //   }
+  
+            // });
+  
+  
+            // </script>';
+  
+  
+          }
+  
+  
+        // }else{
+  
+
+  
+        
   
   
       }

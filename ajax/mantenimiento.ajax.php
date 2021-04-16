@@ -167,6 +167,22 @@ class AjaxMantenimiento{
     
     }
 
+    /*========================================
+        GUARDAR BACKUP EN BD
+    ==========================================*/ 
+    public $nombreBackup;
+    // public $correo;
+    // public $telefono;
+
+    public function ajaxNuevoBackup(){
+        $nombre = $this->nombreBackup;
+
+        $respuesta = ControladorMantenimientos::ctrBackupInsertar($nombre);
+
+        echo json_encode($respuesta);
+    
+    }
+
 }
 
 /*========================================
@@ -234,6 +250,16 @@ if(isset($_POST["parametro"])){
     $mostrarParametro->parametro = $_POST["parametro"];
     $mostrarParametro->ajaxMostrarParametro();
 }  
+
+
+/*========================================
+    INSERTAR BACKUP
+==========================================*/ 
+if(isset($_POST["nombreBackup"])){ 
+    $backup = new AjaxMantenimiento();
+    $backup->nombreBackup = $_POST["nombreBackup"];
+    $backup-> ajaxNuevoBackup();
+}
 
 
 
