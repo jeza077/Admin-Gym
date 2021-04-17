@@ -281,11 +281,11 @@ class ControladorGlobales{
     /*=============================================
     RANGO DINAMICO ADMINISTRAR
     =============================================*/
-	static public function ctrRangoAdministrar($rango){
+	static public function ctrRangoPermisosRol($rango){
 
 		$tabla = 'tbl_permisos';
 		
-		$respuesta = ModeloGlobales::mdlRangoAdministrar($tabla, $rango);
+		$respuesta = ModeloGlobales::mdlRangoPermisosRol($tabla, $rango);
 		
 		return $respuesta;
 	}

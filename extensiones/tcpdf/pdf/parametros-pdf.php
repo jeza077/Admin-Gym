@@ -144,8 +144,8 @@ $pdf->Ln(45);
 $pdf->SetFont('times', '', 13);
 $pdf->SetFillColor(225, 235, 255);
 $pdf->Cell(15, 5, 'No', 1, 0, 'C', 1);
-$pdf->Cell(100, 5, 'Parametros', 1, 0, 'C', 1);
-$pdf->Cell(60, 5, 'Valor', 1, 0, 'C', 1);
+$pdf->MultiCell(100, 5, 'Parametros', 1, 'C', 0, 0, '', '', true);
+$pdf->MultiCell(70, 5, 'Valor', 1, 'C', 0, 0, '', '', true);
 
 
 
@@ -180,7 +180,7 @@ if(!$parametross){
 }
 else{
     $i = 1; //Contador
-$max = 15; //Maximo de registros a mostrar en una pagina
+$max = 12; //Maximo de registros a mostrar en una pagina
 
 foreach ($parametross as $key => $value) {
 
@@ -192,8 +192,8 @@ foreach ($parametross as $key => $value) {
         $pdf->SetFont('times', '', 13);
         $pdf->SetFillColor(225, 235, 255);
         $pdf->Cell(15, 5, 'No', 1, 0, 'C', 1);
-        $pdf->Cell(200, 5, 'Parametros', 1, 0, 'C', 1);
-        $pdf->Cell(120, 5, 'Valor', 1, 0, 'C', 1);
+        $pdf->MultiCell(100, 5, 'Parametros', 1, 'C', 1, 0, '', '', true);
+        $pdf->MultiCell(70, 5, 'Valor', 1, 'C', 0, 0, '', '', true);
         
     }
     // $pdf->Cell(15, 5, ''.$i.'', 1, 0, 'C');
@@ -201,19 +201,18 @@ foreach ($parametross as $key => $value) {
     $pdf->Ln(8);
     $pdf->SetFont('times', '', 12);
     // $pdf->SetFillColor(225, 235, 255);
-    $pdf->Cell(15, 4, ''.($key+1).'', 0, 0, 'l');
-    $pdf->Cell(100, 4, ''.$value['parametro'].' ', 0, 0, 'l');
-    $pdf->Cell(40, 4, ''.$value['valor'].'', 0, 0, 'l');
+    $pdf->Cell(15, 4, ''.($key+1).'', 0, 0, 'C');
+    $pdf->MultiCell(100, 4, ''.$value['parametro'], 0, 'C', 0, 0, '', '', true);
+    // $pdf->MultiCell(55, 5, '[CENTER] '.$txt, 0, 'C', 0, 0, '', '', true);
+    $pdf->MultiCell(70, 4, ''.$value['valor'], 0, 'C', 0, 0, '', '', true);
+    // $pdf->Ln();
     
 
 }
 
 }
 
-
-
-
-
+ob_end_clean();
 
 // Close and output PDF document
 $pdf->Output('Reporteparametross.pdf', 'I');

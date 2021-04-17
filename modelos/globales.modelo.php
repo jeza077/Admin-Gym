@@ -70,7 +70,7 @@ class ModeloGlobales{
 			
 		} else {
 
-			$stmt = Conexion::conectar() ->prepare("SELECT * FROM $tabla  where inscripcion LIKE '%$rango%'");
+			$stmt = Conexion::conectar() ->prepare("SELECT * FROM $tabla WHERE tipo_inscripcion LIKE '%$rango%' OR precio_inscripcion LIKE '%$rango%' OR cantidad_dias LIKE '%$rango%'");
 
             $stmt-> execute();
 			return $stmt ->fetchAll();
@@ -92,7 +92,7 @@ class ModeloGlobales{
 			
 		} else {
 
-			$stmt = Conexion::conectar() ->prepare("SELECT * FROM $tabla  WHERE matricula LIKE '%$rango%'");
+			$stmt = Conexion::conectar() ->prepare("SELECT * FROM $tabla WHERE tipo_matricula LIKE '%$rango%' OR precio_matricula LIKE '%$rango%'");
 
             $stmt-> execute();
 			return $stmt ->fetchAll();
@@ -113,7 +113,7 @@ class ModeloGlobales{
 			
 		} else {
 
-			$stmt = Conexion::conectar() ->prepare("SELECT * FROM $tabla  where descuento LIKE '%$rango%'");
+			$stmt = Conexion::conectar() ->prepare("SELECT * FROM $tabla  WHERE tipo_descuento LIKE '%$rango%' OR valor_descuento LIKE '%$rango%'");
 
             $stmt-> execute();
 			return $stmt ->fetchAll();
@@ -134,7 +134,7 @@ class ModeloGlobales{
 			
 		} else {
 
-			$stmt = Conexion::conectar() ->prepare("SELECT * FROM $tabla  where roles LIKE '%$rango%'");
+			$stmt = Conexion::conectar() ->prepare("SELECT * FROM $tabla  WHERE rol LIKE '%$rango%' OR descripcion LIKE '%$rango%'");
 
             $stmt-> execute();
 			return $stmt ->fetchAll();
@@ -143,7 +143,7 @@ class ModeloGlobales{
     }
     
 
-     /*=============================================
+	/*=============================================
 			RANGO DINAMICO PARAMETRO
 	=============================================*/
 	static public function mdlRangoParametro($tabla, $rango){
@@ -156,7 +156,7 @@ class ModeloGlobales{
 			
 		} else {
 
-			$stmt = Conexion::conectar() ->prepare("SELECT * FROM $tabla  where parametross LIKE '%$rango%'");
+			$stmt = Conexion::conectar() ->prepare("SELECT * FROM $tabla WHERE parametro LIKE '%$rango%' OR valor LIKE '%$rango%'");
 
             $stmt-> execute();
 			return $stmt ->fetchAll();
@@ -167,21 +167,21 @@ class ModeloGlobales{
     /*=============================================
 			RANGO DINAMICO ADMINISTRAR
 	=============================================*/
-	static public function mdlRangoAdministrar($tabla, $rango){
+	static public function mdlRangoPermisosRol($tabla, $rango){
 	
 		if($rango == null){
 
 			$stmt = Conexion::conectar() ->prepare("SELECT * FROM $tabla AS pr\n"
-			. " INNER JOIN tbl_roles AS r ON pr.id_rol = r.id_rol\n"
-			. " INNER JOIN tbl_objetos AS o ON pr.id_objeto = o.id_objeto");
+			. " LEFT JOIN tbl_roles AS r ON pr.id_rol = r.id_rol\n"
+			. " LEFT JOIN tbl_objetos AS o ON pr.id_objeto = o.id_objeto");
             $stmt-> execute();
 			return $stmt ->fetchAll();
 			
 		} else {
 
 			$stmt = Conexion::conectar() ->prepare("SELECT * FROM $tabla AS pr\n"
-			. " INNER JOIN tbl_roles AS r ON pr.id_rol = r.id_rol\n" 
-			. " INNER JOIN tbl_objetos AS o ON pr.id_objeto = o.id_objeto\n"
+			. " LEFT JOIN tbl_roles AS r ON pr.id_rol = r.id_rol\n" 
+			. " LEFT JOIN tbl_objetos AS o ON pr.id_objeto = o.id_objeto\n"
 			. " WHERE rol LIKE '%$rango%' OR objeto LIKE '%$rango%'");
 
             $stmt-> execute();

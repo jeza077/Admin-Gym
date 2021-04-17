@@ -202,7 +202,7 @@ foreach ($matricula as $key => $value) {
     // $pdf->SetFillColor(225, 235, 255);
     $pdf->Cell(15, 4, ''.($key+1).'', 0, 0, 'C');
     $pdf->Cell(70, 4, ''.$value['tipo_matricula'].' ', 0, 0, 'C');
-    $pdf->Cell(60, 4, ''.$value['precio_matricula'].'', 0, 0, 'C');
+    $pdf->Cell(60, 4, 'L. '.number_format($value['precio_matricula'],2).'', 0, 0, 'C');
     if($value["estado"] == 0){
         $pdf->Cell(40, 4, 'Desactivado', 0, 0, 'C');
     } else {
@@ -215,8 +215,7 @@ foreach ($matricula as $key => $value) {
 }
 
 
-
-
+ob_end_clean();
 
 
 // Close and output PDF document

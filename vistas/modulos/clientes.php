@@ -217,10 +217,11 @@
                           <option selected="selected">Seleccionar...</option>
                             <?php 
                                 $tabla = "tbl_matricula";
-                                $item = null;
-                                $valor = null;
+                                $item = 'estado';
+                                $valor = 1;
+                                $all = true;
 
-                                $matriculasClienteVenta = ControladorClientes::ctrMostrar($tabla, $item, $valor);
+                                $matriculasClienteVenta = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all);
                               
                                 foreach ($matriculasClienteVenta as $key => $value) { ?>
                                   <option value="<?php echo $value['id_matricula']?>"><?php echo $value['tipo_matricula']?></option>        
@@ -248,10 +249,11 @@
                           
                             <?php 
                                 $tabla = "tbl_descuento";
-                                $item = null;
-                                $valor = null;
+                                $item = 'estado';
+                                $valor = 1;
+                                $all = true;
 
-                                $descuentos = ControladorClientes::ctrMostrar($tabla, $item, $valor);
+                                $descuentos = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all);
 
                                 foreach ($descuentos as $key => $value) { ?>
                                   <option value="<?php echo $value['id_descuento']?>"><?php echo $value['tipo_descuento']?></option>        
@@ -364,17 +366,17 @@
                       <select class="form-control" name="editarTipoDocumento" style="width: 100%;">
                           <option value="" id="editarTipoDocumento"></option>
                           <?php 
-                              $tabla = "tbl_documento";
-                              $item = 'estado';
-                              $valor = 1;
-                              $all = true;
+                            $tabla = "tbl_documento";
+                            $item = 'estado';
+                            $valor = 1;
+                            $all = true;
 
-                              $documentoEditar = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all);
+                            $documentoEditar = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all);
 
-                              foreach ($documentoEditar as $key => $value) { ?>
-                                  <option value="<?php echo $value['id_documento']?>"><?php echo $value['tipo_documento']?></option>        
-                              <?php 
-                              }
+                            foreach ($documentoEditar as $key => $value) { ?>
+                                <option value="<?php echo $value['id_documento']?>"><?php echo $value['tipo_documento']?></option>        
+                            <?php 
+                            }
                           ?>
                       </select>
                     </div>
@@ -625,15 +627,15 @@
                             <option selected="selected">Seleccionar...</option>
                             <?php 
                                 $tabla = "tbl_matricula";
-                                $item = null;
-                                $valor = null;
+                                $item = 'estado';
+                                $valor = 1;
+                                $all = true;
 
-                                $matriculas = ControladorClientes::ctrMostrar($tabla, $item, $valor);
-
+                                $matriculas = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all);
                               
-                                  foreach ($matriculas as $key => $value) { ?>
-                                    <option value="<?php echo $value['id_matricula']?>"><?php echo $value['tipo_matricula']?></option>        
-                                  <?php 
+                                foreach ($matriculas as $key => $value) { ?>
+                                  <option value="<?php echo $value['id_matricula']?>"><?php echo $value['tipo_matricula']?></option>        
+                                <?php 
                                 }
                             ?>
                             
@@ -659,10 +661,11 @@
                           
                             <?php 
                                 $tabla = "tbl_descuento";
-                                $item = null;
-                                $valor = null;
+                                $item = 'estado';
+                                $valor = 1;
+                                $all = true;
 
-                                $descuentos = ControladorClientes::ctrMostrar($tabla, $item, $valor);
+                                $descuentos = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all);
 
                                 foreach ($descuentos as $key => $value) { ?>
                                   <option value="<?php echo $value['id_descuento']?>"><?php echo $value['tipo_descuento']?></option>        
@@ -827,10 +830,11 @@
                       <option selected="selected">Seleccionar...</option>
                         <?php 
                             $tabla = "tbl_matricula";
-                            $item = null;
-                            $valor = null;
+                            $item = 'estado';
+                            $valor = 1;
+                            $all = true;
 
-                            $matriculasClienteVenta = ControladorClientes::ctrMostrar($tabla, $item, $valor);
+                            $matriculasClienteVenta = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all);
                           
                             foreach ($matriculasClienteVenta as $key => $value) { ?>
                               <option value="<?php echo $value['id_matricula']?>"><?php echo $value['tipo_matricula']?></option>        
@@ -858,10 +862,11 @@
                       
                         <?php 
                             $tabla = "tbl_descuento";
-                            $item = null;
-                            $valor = null;
+                            $item = 'estado';
+                            $valor = 1;
+                            $all = true;
 
-                            $descuentos = ControladorClientes::ctrMostrar($tabla, $item, $valor);
+                            $descuentos = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all);
 
                             foreach ($descuentos as $key => $value) { ?>
                               <option value="<?php echo $value['id_descuento']?>"><?php echo $value['tipo_descuento']?></option>        

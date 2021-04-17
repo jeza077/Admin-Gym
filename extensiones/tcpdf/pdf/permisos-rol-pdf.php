@@ -169,7 +169,7 @@ if(isset($_GET["rango"])){
 
 } 
 
-$permisosRol = ControladorGlobales::ctrRangoAdministrar($rango);
+$permisosRol = ControladorGlobales::ctrRangoPermisosRol($rango);
 // var_dump($permisosRol);
 
 $i = 1; //Contador
@@ -179,7 +179,7 @@ if(!$permisosRol){
 
     $pdf->Ln(15);
     $pdf->SetFont('times', '', 12);
-    $pdf->Cell(170, 4, '******* NO HAY DATOS PARA MOSTRAR *******', 0, 0, 'C');
+    $pdf->Cell(270, 4, '******* NO HAY DATOS PARA MOSTRAR *******', 0, 0, 'C');
 
 }
 else{
@@ -238,11 +238,9 @@ else{
 }
 
 
-
-
-
+ob_end_clean();
 
 // Close and output PDF document
-$pdf->Output('Reporteadministrarrol.pdf', 'I');
+$pdf->Output('reporte_permisos_rol.pdf', 'I');
 
 ?>

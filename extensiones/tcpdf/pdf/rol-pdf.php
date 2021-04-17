@@ -149,7 +149,7 @@ $pdf->Cell(60, 5, 'Descripcion', 1, 0, 'C', 1);
 $pdf->Cell(40, 5, 'Estado', 1, 0, 'C', 1);
 // return;
 //$tabla = "tbl_inscripcion";
-/*
+
 if(isset($_GET["rango"])){
 
 
@@ -180,46 +180,44 @@ if(!$roles){
 }
 else{
     $i = 1; //Contador
-$max = 10; //Maximo de registros a mostrar en una pagina
+    $max = 10; //Maximo de registros a mostrar en una pagina
 
-foreach ($roles as $key => $value) {
+    foreach ($roles as $key => $value) {
 
-    if(($i%$max) == 0){
-        $pdf->AddPage();
+        if(($i%$max) == 0){
+            $pdf->AddPage();
 
-        $pdf->Ln(40);
-        
-        $pdf->SetFont('times', '', 13);
-        $pdf->SetFillColor(225, 235, 255);
-        $pdf->Cell(15, 5, 'No', 1, 0, 'C', 1);
-        $pdf->Cell(70, 5, 'Rol', 1, 0, 'C', 1);
-        $pdf->Cell(60, 5, 'Descripcion', 1, 0, 'C', 1);
-        $pdf->Cell(40, 5, 'Estado', 1, 0, 'C', 1);
+            $pdf->Ln(40);
+            
+            $pdf->SetFont('times', '', 13);
+            $pdf->SetFillColor(225, 235, 255);
+            $pdf->Cell(15, 5, 'No', 1, 0, 'C', 1);
+            $pdf->Cell(70, 5, 'Rol', 1, 0, 'C', 1);
+            $pdf->Cell(60, 5, 'Descripcion', 1, 0, 'C', 1);
+            $pdf->Cell(40, 5, 'Estado', 1, 0, 'C', 1);
+        }
+        // $pdf->Cell(15, 5, ''.$i.'', 1, 0, 'C');
+
+        $pdf->Ln(8);
+        $pdf->SetFont('times', '', 12);
+        // $pdf->SetFillColor(225, 235, 255);
+        $pdf->Cell(15, 4, ''.($key+1).'', 0, 0, 'C');
+        $pdf->Cell(70, 4, ''.$value['rol'].' ', 0, 0, 'C');
+        $pdf->Cell(60, 4, ''.$value['descripcion'].'', 0, 0, 'C');
+        if($value["estado"] == 0){
+            $pdf->Cell(40, 4, 'Desactivado', 0, 0, 'C');
+        } else {
+            $pdf->Cell(40, 4, 'Activado', 0, 0, 'C');
+        }
+        $i++;
+
     }
-    // $pdf->Cell(15, 5, ''.$i.'', 1, 0, 'C');
 
-    $pdf->Ln(8);
-    $pdf->SetFont('times', '', 12);
-    // $pdf->SetFillColor(225, 235, 255);
-    $pdf->Cell(15, 4, ''.($key+1).'', 0, 0, 'C');
-    $pdf->Cell(70, 4, ''.$value['rol'].' ', 0, 0, 'C');
-    $pdf->Cell(60, 4, ''.$value['descripcion'].'', 0, 0, 'C');
-    if($value["estado"] == 0){
-        $pdf->Cell(40, 4, 'Desactivado', 0, 0, 'C');
-    } else {
-        $pdf->Cell(40, 4, 'Activado', 0, 0, 'C');
-    }
-    $i++;
 
 }
-*
-
-}
-*/
 
 
-
-
+ob_end_clean();
 
 // Close and output PDF document
 $pdf->Output('reporte_roles.pdf', 'I');
