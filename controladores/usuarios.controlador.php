@@ -1363,7 +1363,7 @@ class ControladorUsuarios{
 							}
 						}
 					
-
+					}
 					
 				} else {
 					echo '<script>			
@@ -1378,6 +1378,7 @@ class ControladorUsuarios{
 						</script>';
 				}
 
+			
 			// } else {
 			// 		echo '<script>			
 			// 				Swal.fire({
