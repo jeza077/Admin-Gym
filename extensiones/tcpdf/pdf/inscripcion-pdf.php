@@ -60,7 +60,7 @@ class PDF extends TCPDF{
 
         $this->Ln(20); //Espacios
         $this->SetFont('helvetica', 'B', 14);
-        $this->Cell(180, 3, 'REPORTE DE TIPOS DE INSCRIPCION', 0, 1, 'C');
+        $this->Cell(180, 3, 'REPORTE DE TIPOS DE INSCRIPCIÓN', 0, 1, 'C');
         $this->Ln(3);
         $this->SetFont('helvetica', 'B', 11);
         $año = date('Y-m-d');
@@ -68,7 +68,7 @@ class PDF extends TCPDF{
 
         // $this->Cell(180, 3, 'Del '.$fecha.'', 0, 1, 'C');
 
-        $this->Cell(180, 3, 'Año '.$año.'', 0, 1, 'C');
+        $this->Cell(180, 3, 'Fecha '.$año.'', 0, 1, 'C');
     }
 
     // Footer de la pagina
@@ -144,7 +144,7 @@ $pdf->Ln(45);
 $pdf->SetFont('times', '', 13);
 $pdf->SetFillColor(225, 235, 255);
 $pdf->Cell(15, 5, 'No', 1, 0, 'C', 1);
-$pdf->Cell(70, 5, 'Tipo Inscripcion', 1, 0, 'C', 1);
+$pdf->Cell(70, 5, 'Tipo Inscripción', 1, 0, 'C', 1);
 $pdf->Cell(60, 5, 'Precio', 1, 0, 'C', 1);
 $pdf->Cell(40, 5, 'Estado', 1, 0, 'C', 1);
 
