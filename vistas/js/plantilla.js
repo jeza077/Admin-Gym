@@ -691,56 +691,100 @@ $(document).on('blur', '.fechaEditar', function () {
 function esFecha(fecha,selector){
     $('.alert').remove();
 
-    if( (trim(fecha) == "") || (trim(fecha).length != 10) )
-        return false;
-        var anio = parseInt(fecha.substr(0,4), 10);
-        var mes  = parseInt(fecha.substr(5,2), 10);
-        var dia  = parseInt(fecha.substr(8,2), 10);
-        // console.log(anio);
-        // console.log(mes);
-        // console.log(dia);
+    let parametro = 'ADMIN_MIN_FECHA';
+    var datos = new FormData();
+    datos.append("parametro", parametro)
 
-        let padre = selector.closest('.form-row');
-        // console.log(padre);
+    $.ajax({
 
-        let anioActual = (new Date).getFullYear();
-        let anioAnterior = anioActual - 15
-        // console.log(anioAnterior);0
+        url:"ajax/mantenimiento.ajax.php",
+        method: "POST",
+        data: datos,
+        cache: false,
+        contentType: false,
+        processData: false,  
+        dataType: "json",
+        success: function(respuesta) {
+            // console.log(respuesta['valor']);
 
-
-        // Año
-        if( isNaN(anio) || (anio < 1950) || anio > anioAnterior) {
-
-            // console.log('no se aceptan menor a 1950')
-            padre.before('<div class="alert alert-danger fade show mt-2" role="alert"><i class="icon fas fa-ban"></i>Ingrese un año valido. Entre 1950 y ' + anioAnterior + '</div>');
-            setTimeout(function () {
-                $('.alert').remove();
-            }, 3000)
+            minFecha = respuesta['valor'];
+     
             
-            // $('.fecha').css('border', '1px solid red');
-            selector.focus();
-            // return false;
-        } else {
-            $('.alert').remove();
+            parametro = 'ADMIN_MAX_FECHA';
+            datos = new FormData();
+            datos.append("parametro", parametro)
+        
+            $.ajax({
+        
+                url:"ajax/mantenimiento.ajax.php",
+                method: "POST",
+                data: datos,
+                cache: false,
+                contentType: false,
+                processData: false,  
+                dataType: "json",
+                success: function(respuesta) {
+                    // console.log(respuesta);
+        
+                    maxFecha = respuesta['valor'];
+             
+                    
+                        if( (trim(fecha) == "") || (trim(fecha).length != 10) )
+                            return false;
+                            var anio = parseInt(fecha.substr(0,4), 10);
+                            var mes  = parseInt(fecha.substr(5,2), 10);
+                            var dia  = parseInt(fecha.substr(8,2), 10);
+                            // console.log(anio);
+                            // console.log(mes);
+                            // console.log(dia);
+                    
+                            let padre = selector.closest('.form-row');
+                            // console.log(padre);
+                    
+                            // let anioActual = (new Date).getFullYear();
+                            // let anioAnterior = anioActual - 15
+                            // console.log(anioAnterior);0
+                    
+                    
+                            // Año
+                            if( isNaN(anio) || (anio < minFecha) || anio > maxFecha) {
+                    
+                                // console.log('no se aceptan menor a 1950')
+                                padre.before('<div class="alert alert-danger fade show mt-2" role="alert"><i class="icon fas fa-ban"></i>Ingrese un año valido. Entre '+ minFecha+' y ' + maxFecha + '</div>');
+                                setTimeout(function () {
+                                    $('.alert').remove();
+                                }, 3000)
+                                
+                                // $('.fecha').css('border', '1px solid red');
+                                selector.focus();
+                                // return false;
+                            } else {
+                                $('.alert').remove();
+                            }
+                            // Mes
+                            if( isNaN(mes) || (mes < 1) || (mes > 12) )
+                                return false;
+                            // Día
+                            if( isNaN(dia) || (dia < 1) || (dia > 31) )
+                                return false;
+                            else {
+                            if( (dia == 31) && ((mes == 4 ) || (mes == 6) || (mes == 9) || (mes == 11)) )
+                                return false;
+                            var diaMax = 31;
+                            if( (anio % 4 == 0) && (anio % 100 != 0) || (anio % 400 == 0) )
+                                diaMax = 29;
+                            else
+                                diaMax = 28;
+                            if( dia > diaMax )
+                                return false;
+                        }
+                }
+        
+            });
         }
-        // Mes
-        if( isNaN(mes) || (mes < 1) || (mes > 12) )
-            return false;
-        // Día
-        if( isNaN(dia) || (dia < 1) || (dia > 31) )
-            return false;
-        else
-    {
-        if( (dia == 31) && ((mes == 4 ) || (mes == 6) || (mes == 9) || (mes == 11)) )
-            return false;
-        var diaMax = 31;
-        if( (anio % 4 == 0) && (anio % 100 != 0) || (anio % 400 == 0) )
-            diaMax = 29;
-        else
-            diaMax = 28;
-        if( dia > diaMax )
-            return false;
-    }
+
+    });
+
         return true;
 }
 // Elimina espacios al principio y fin de la fecha

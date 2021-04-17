@@ -561,7 +561,7 @@ $(".tablaVentas").on("click", ".btnEliminarVenta", function(){
 /*=============================================
 IMPRIMIR PAGO EN PDF
 =============================================*/
-$(".tablaVentas").on("click", ".btnImprimirFactura", function(){
+$(".tablas").on("click", ".btnImprimirFactura", function(){
 
   var codigoVenta = $(this).attr("codigoVenta");
 

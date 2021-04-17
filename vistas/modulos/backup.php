@@ -1,4 +1,8 @@
 <?php
+require_once "../../controladores/mantenimiento.controlador.php";
+require_once "../../modelos/mantenimiento.modelo.php";
+require_once "../../controladores/usuarios.controlador.php";
+require_once "../../modelos/usuarios.modelo.php";
 include './connet.php';
 
 $usuario=$_POST['usuario'];
@@ -24,6 +28,8 @@ if($result){
     $sql.='USE '.$nombrebd.";\n\n";
     foreach($tables as $table){
         $result=$sgbd->sql('SELECT * FROM '.$table);
+        // var_dump($result);
+        // return $result;
         if($result){
             $numFields=mysqli_num_fields($result);
             $sql.='DROP TABLE IF EXISTS '.$table.';';
@@ -52,6 +58,7 @@ if($result){
         }else{
             $error=1;
         }
+        // return $sql;
     }
     if($error==1){
         echo 'Ocurrio un error inesperado al crear la copia de seguridad 1';
@@ -62,8 +69,9 @@ if($result){
         if(fwrite($handle, $sql)){
             fclose($handle);
             echo json_encode(1);
+            // return 'si';
 
-           /* echo 'Copia de seguridad realizada con éxito';*/
+            // echo 'Copia de seguridad realizada con éxito';
         }else{
             echo 'Ocurrio un error inesperado al crear la copia de seguridad2';
 
