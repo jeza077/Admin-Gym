@@ -258,8 +258,19 @@
                       <label>Sexo</label>
                       <select class="form-control select2" name="nuevoSexo" style="width: 100%;" required>
                         <option selected="selected">Seleccionar...</option>
-                        <option value="M">Masculino</option>
-                        <option value="F">Femenino</option>
+                        <?php 
+                            $tabla = "tbl_sexo";
+                            $item = 'estado';
+                            $valor = 1;
+                            $all = true;
+
+                            $sexo = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all);
+
+                            foreach ($sexo as $key => $value) { ?>
+                                <option value="<?php echo $value['id_sexo']?>"><?php echo $value['descripcion_sexo']?></option>        
+                            <?php 
+                            }
+                        ?>
                       </select>
                     </div>
                 
@@ -455,8 +466,19 @@
                       <label>Sexo</label>
                       <select class="form-control" name="editarSexo" style="width: 100%;" required>
                         <option value="" id="editarSexo"></option>
-                        <option value="M">Masculino</option>
-                        <option value="F">Femenino</option>
+                        <?php 
+                            $tabla = "tbl_sexo";
+                            $item = 'estado';
+                            $valor = 1;
+                            $all = true;
+
+                            $sexo = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all);
+
+                            foreach ($sexo as $key => $value) { ?>
+                                <option value="<?php echo $value['id_sexo']?>"><?php echo $value['descripcion_sexo']?></option>        
+                            <?php 
+                            }
+                        ?>
                       </select>
                     </div>
                     <input type="hidden" class="idPersona" value="" name="idPersona">
