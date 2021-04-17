@@ -9,12 +9,12 @@
     <div class="card-body login-card-body iniciarSesion">
       <p class="login-box-msg">Inicio de Sesión</p>
 
-      <form method="post">
+      <form method="post" autocomplete="off">
         <div class="form-group mb-3">
-          <input type="text" class="form-control mayus usuario" name="ingUsuario" placeholder="Usuario" required>
+          <input type="text" class="form-control mayus usuario sinCaracteres" name="ingUsuario" placeholder="Usuario" required autocomplete="off" spellcheck="false">
         </div>
         <div class="form-group mb-3">
-          <input type="password" class="form-control password" name="ingPassword" placeholder="Contraseña" required> 
+          <input type="password" class="form-control password" name="ingPassword" placeholder="Contraseña" required autocomplete="off" spellcheck="false"> 
           <i class="far fa-eye show-pass" action="hide"></i>
         </div>
         <div class="row mb-2">
@@ -173,15 +173,15 @@
           </div>
           <div class="form-group col-md-3">
             <label for="identidad">Numero de Documento</label>
-            <input type="text" class="form-control numeroDocumento" name="nuevoNumeroDocumento" placeholder="Ingrese Identidad" required>
+            <input type="text" class="form-control numeroDocumento longitudDocumento sinEspacioDoc" name="nuevoNumeroDocumento" placeholder="Ingrese Identidad" required>
           </div>
           <div class="form-group col-md-3">
             <label for="nombre">Nombre</label>
-            <input type="text" class="form-control mayus nombre" name="nuevoNombre" placeholder="Ingrese Nombre" required>
+            <input type="text" class="form-control mayus nombre unEspacio" name="nuevoNombre" placeholder="Ingrese Nombre" required>
           </div>
           <div class="form-group col-md-3">
             <label for="apellido">Apellido</label>
-            <input type="text" class="form-control mayus apellidos" name="nuevoApellido" placeholder="Ingrese Apellidos" required>
+            <input type="text" class="form-control mayus apellidos unEspacio" name="nuevoApellido" placeholder="Ingrese Apellidos" required>
           </div>
         </div>
 
@@ -193,11 +193,11 @@
 
           <div class="form-group col-md-3">
             <label for="">Usuario</label>
-            <input type="text" class="form-control nuevoUsuario mayus personas" name="nuevoUsuario" placeholder="Ingrese Usuario" required>
+            <input type="text" class="form-control nuevoUsuario mayus personas" name="nuevoUsuario" placeholder="Ingrese Usuario" required autocomplete="off">
           </div>
           <div class="form-group col-md-3">
             <label for="">Contraseña</label>
-            <input type="password" class="form-control password autoreg" name="nuevoPassword" placeholder="Ingrese Contraseña" required>
+            <input type="password" class="form-control password autoreg" name="nuevoPassword" placeholder="Ingrese Contraseña" required autocomplete="off">
             <i class="far fa-eye show-pass-registro" action="hide"></i>
           </div>
           <div class="form-group col-md-3">
@@ -217,7 +217,7 @@
         <div class="form-row">
           <div class="form-group col-md-7">
             <label for="inputAddress">Dirección</label>
-            <input type="text" class="form-control mayus" id="inputAddress" name="nuevaDireccion" placeholder="Col. Alameda, calle #2..." required>
+            <input type="text" class="form-control mayus longitudDireccion soloUnEspacio" id="inputAddress" name="nuevaDireccion" placeholder="Col. Alameda, calle #2..." required>
           </div>
           <div class="form-group col-md-3">
             <label>Fecha de nacimiento</label>

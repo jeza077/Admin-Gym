@@ -111,12 +111,12 @@
             <!-- <div class="form-row"> -->
               <div class="form-group col-md-12">
                 <label for="stock">Cantidad</label>
-                <input type="number" min="0" class="form-control stock" id="nuevoCantidad" name="nuevoCantidad" placeholder="Ingrese Cantidad" min="0" required class="fa fa-arrow-up"></i></span>
+                <input type="number" min="0" class="form-control stock longitudCantidad" id="nuevoCantidad" name="nuevoCantidad" placeholder="Ingrese Cantidad" min="0" required class="fa fa-arrow-up" oninput="validity.valid||(value='');"></i></span>
               </div>
 
               <div class="form-group col-md-12">
                 <label for="stock">Precio de Compra</label>
-                <input type="number" class="form-control stock" min="0" id="nuevoPrecio" name="nuevoPrecio" placeholder="Ingrese Precio" min="0" required class="fa fa-arrow-up"></i></span>
+                <input type="number" class="form-control stock longitudCantidad" min="0" id="nuevoPrecio" name="nuevoPrecio" placeholder="Ingrese Precio" min="0" required class="fa fa-arrow-up" oninput="validity.valid||(value='');"></i></span>
               </div>
             <!-- </div> -->
 
