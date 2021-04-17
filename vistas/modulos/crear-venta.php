@@ -10,15 +10,16 @@
         </div>
       </div><!-- /.container-fluid -->
     </section>  
+   
       <!--=====================================
                  FORMULARIO 
       ======================================-->
     <section class="content"> 
-      <?php
-        $descripcionEvento = " Consulto la pantalla de crear ventas";
-        $accion = "consulta";
+    <?php
+        $descripcionEvento = "".$_SESSION["usuario"]." Consultó la pantalla de crear ventas";
+        $accion = "Consulta";
 
-        $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 5,$accion, $descripcionEvento);
+        $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 15,$accion, $descripcionEvento);
 
       ?>
                     
@@ -28,43 +29,47 @@
 
             <div class="card">
               <div class="card-body"> 
-                <div class="form-group"  class="formularioVenta"> 
-                 <!--=====================================
-                  ENTRADA VENDEDOR/USUARIO
-                ======================================-->  
-                    <label for="usuario">Usuario</label>
-                    <input type="text" class="form-control" id="nuevoVendedor" value="<?php echo $_SESSION["usuario"]  ?>" readonly>
-                    <input type="hidden" name="idVendedor" value="<?php echo $_SESSION["id_usuario"]; ?>">
-                </div>       
-              
-                <div class="form-group">     
+                <div class="form-row">
+                  <div class="form-group col-md-8"  class="formularioVenta"> 
                   <!--=====================================
-                   ENTRADA DEL CÓDIGO
+                    ENTRADA VENDEDOR/USUARIO
                   ======================================-->  
-                  <label for="cod_factura">Número de Recibo</label>
-                    <?php
-                      $item= null;
-                      $valor= null;
+                      <label for="usuario">Usuario</label>
+                      <input type="text" class="form-control" id="nuevoVendedor" value="<?php echo $_SESSION["usuario"]  ?>" readonly>
+                      <input type="hidden" name="idVendedor" value="<?php echo $_SESSION["id_usuario"]; ?>">
+                  </div>       
 
-                      $ventas= ControladorVentas::ctrMostrarVentas($item, $valor);
-                      // echo "<pre>";
-                      // var_dump($ventas);
-                      // echo "</pre>";
-                      if (!$ventas){
-                        echo '<input type="text" class="form-control" id="nuevaVenta" 
-                        name="nuevaVenta" value="1001" readonly>';
+                  <div class="form-group col-md-4">     
+                    <!--=====================================
+                    ENTRADA DEL CÓDIGO
+                    ======================================-->  
+                    <label for="cod_factura">Número de Recibo</label>
+                      <?php
+                        $item= null;
+                        $valor= null;
 
-                      } else {
+                        $ventas= ControladorVentas::ctrMostrarVentas($item, $valor);
+                        // echo "<pre>";
+                        // var_dump($ventas);
+                        // echo "</pre>";
+                        if (!$ventas){
+                          echo '<input type="text" class="form-control" id="nuevaVenta" 
+                          name="nuevaVenta" value="1001" readonly>';
 
-                        foreach ($ventas as $key =>$value) {
-                        
+                        } else {
+
+                          foreach ($ventas as $key =>$value) {
+                          
+                          }
+                          $codigo = $value["numero_factura"] + 1;
+                          echo '<input type="text" class="form-control" id="nuevaVenta" 
+                          name="nuevaVenta" value= '. $codigo.' readonly>';
                         }
-                        $codigo = $value["numero_factura"] + 1;
-                        echo '<input type="text" class="form-control" id="nuevaVenta" 
-                        name="nuevaVenta" value= '. $codigo.' readonly>';
-                      }
-                    ?>    
+                      ?>    
+                  </div>
+
                 </div>
+              
 
                 <div class="form-row">
                   <div class="form-group col-md-9">
@@ -145,6 +150,7 @@
                 BOTÓN PARA AGREGAR PRODUCTO
                 ======================================-->
               <div class="card-footer">
+                <a href="administrar-ventas" class="btn btn-outline-danger ml-2 float-right">Salir</a>
                 <button type="submit" class="btn btn-primary float-right btnAgregarProducto">Guardar venta</button>
               </div>  
 
@@ -165,9 +171,9 @@
                   <tr>
                     <th scope="col">#</th>
                     <th scope="col">Imagen</th>
-                    <!-- <th scope="col">Código</th> -->
                     <th scope="col">Descripción</th>
                     <th scope="col">Stock</th>
+                    <th scope="col">Precio</th>
                     <th scope="col">Acciones</th> 
                   </tr>
                 </thead>

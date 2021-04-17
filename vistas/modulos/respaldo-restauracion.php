@@ -27,10 +27,10 @@
 
                 <!-- <div class="card-body"> -->
                 <?php
-                $descripcionEvento = " Consulto la pantalla de Respaldo y Restauracion";
-                $accion = "consulta";
+                $descripcionEvento = "".$_SESSION["usuario"]." Consultó la pantalla de respaldo y restauracion";
+                $accion = "Consulta";
 
-                $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 7,$accion, $descripcionEvento);
+                $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 27,$accion, $descripcionEvento);
 
                 ?>
         
@@ -43,11 +43,11 @@
 
                       <a class="nav-link active" id="datosRespaldo" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Respaldo</a>
                       <?php
-                        $descripcionEvento = " Consulto la pantalla de Respaldo";
-                        $accion = "consulta";
-
-                        $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 7,$accion, $descripcionEvento);
-    
+                         $descripcionEvento = "".$_SESSION["usuario"]." Consultó la pantalla de respaldo y restauracion";
+                         $accion = "Consulta";
+         
+                         $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 27,$accion, $descripcionEvento);
+         
                       ?>
                    
                     </li>
@@ -60,11 +60,11 @@
 
                       <a class="nav-link" id="datosRestauracion" data-toggle="tab" href="#second" role="tab" aria-controls="second" aria-selected="false">Restauracion</a>
                       <?php
-                        $descripcionEvento = " Consulto la pantalla de Restauracion";
-                        $accion = "consulta";
-
-                        $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 7,$accion, $descripcionEvento);
-    
+                        $descripcionEvento = "".$_SESSION["usuario"]." Consultó la pantalla de respaldo y restauracion";
+                        $accion = "Consulta";
+        
+                        $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 27,$accion, $descripcionEvento);
+        
                       ?>
                    
                    

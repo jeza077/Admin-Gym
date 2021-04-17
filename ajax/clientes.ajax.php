@@ -154,8 +154,9 @@ class AjaxClientes{
         $tabla = $this->tabla;
         $item = $this->item;
         $valor = $this->valor;
+        $all = null;
         
-        $respuesta = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
+        $respuesta = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all);
         // echo "<pre>";
         // var_dump($respuesta);
         // echo "</pre>";

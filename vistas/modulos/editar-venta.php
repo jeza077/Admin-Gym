@@ -15,10 +15,10 @@
       ======================================-->
     <section class="content">  
           <?php
-            $descripcionEvento = " Consulto la pantalla de Editar Venta";
-            $accion = "consulta";
+            $descripcionEvento = " Consultó la pantalla de editar venta";
+            $accion = "Consulta";
 
-            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 5,$accion, $descripcionEvento);
+            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 14,$accion, $descripcionEvento);
 
             // $tabla1 = "tbl_personas";
             // $tabla2 = "tbl_clientes";
@@ -52,29 +52,31 @@
                     
                 ?>
               <div class="card-body"> 
-                <div class="form-group"  class="formularioVenta"> 
 
-                   
-                 <!--=====================================
-                  ENTRADA VENDEDOR/USUARIO
-                 ======================================-->  
-                    <label for="usuario">Usuario</label>
-                    <input type="text" class="form-control" id="nuevoVendedor" value="<?php echo $vendedor["usuario"];  ?>" readonly>
-                    <input type="hidden" name="idVendedor" value="<?php echo $vendedor["id_usuario"]; ?>">
-                </div>       
+                <div class="form-row">                
+                  <div class="form-group col-md-8"  class="formularioVenta">                    
+                  <!--=====================================
+                    ENTRADA VENDEDOR/USUARIO
+                  ======================================-->  
+                      <label for="usuario">Usuario</label>
+                      <input type="text" class="form-control" id="nuevoVendedor" value="<?php echo $vendedor["usuario"];  ?>" readonly>
+                      <input type="hidden" name="idVendedor" value="<?php echo $vendedor["id_usuario"]; ?>">
+                  </div>       
+
+                    <!--=====================================
+                    ENTRADA DEL CÓDIGO
+                    ======================================-->  
+                  <div class="form-group col-md-4">     
+                    <label for="cod_factura">Codigo de Factura</label>  
+                    <input type="text" class="form-control" id="nuevaVenta" 
+                      name="editarVenta" value="<?php echo $venta["numero_factura"]; ?>" readonly>
+                  </div>
+                </div>
               
                 
-                  <!--=====================================
-                   ENTRADA DEL CÓDIGO y editar venta
-                  ======================================-->  
-                <div class="form-group">     
-                  <label for="cod_factura">Codigo de Factura</label>  
-                  <input type="text" class="form-control" id="nuevaVenta" 
-                    name="editarVenta" value="<?php echo $venta["numero_factura"]; ?>" readonly>
-                </div>
 
                 <div class="form-row">
-                  <div class="form-group col-md-9">
+                  <div class="form-group col-md-12">
                     <!--=====================================
                     ENTRADA DEL CLIENTE
                     ======================================--> 
@@ -122,7 +124,7 @@
                     $respuesta = ControladorProductos::ctrMostrarProductos($item, $valor, $all);
                     // var_dump($respuesta);
 
-                    $stockAntiguo = $respuesta["stock"] + $value["cantidad"];
+                    $stockAntiguo = ($respuesta["stock"]) + $value["cantidad"];
                     
                     echo '<div class="row" style="padding:5px 6px">
                             <div class="col-md-6">
@@ -217,9 +219,9 @@
                   <tr>
                     <th scope="col">#</th>
                     <th scope="col">Imagen</th>
-                    <!-- <th scope="col">Código</th> -->
                     <th scope="col">Descripción</th>
                     <th scope="col">Stock</th>
+                    <th scope="col">Precio</th>
                     <th scope="col">Acciones</th> 
                   </tr>
                 </thead>

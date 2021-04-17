@@ -136,6 +136,7 @@ $(document).on('change', '.tipoClienteRegistrado', function () {
 // ALERTA PARA CONFIRMAR PAGO ANTES DE GUARDAR CLIENTE
 // --------------------------------------*/ 
 $('.btnNuevoClienteGym').hide();
+$('.btnNuevoClienteGymRegistrado').hide();
 
 $(document).on('click', '.btnConfirmarPago', function (e) {
     e.preventDefault();
@@ -144,8 +145,11 @@ $(document).on('click', '.btnConfirmarPago', function (e) {
 
     var clienteNuevo = $('.clientePersonaNueva').val();
 
-    // console.log(clienteNuevo)
-    // console.log('cliente: ', valorCliente)
+    console.log(clienteNuevo)
+    console.log('cliente: ', valorCliente)
+
+
+    // return;
 
     if(clienteNuevo !== 'clientePersonaNueva'){
 
@@ -180,7 +184,7 @@ $(document).on('click', '.btnConfirmarPago', function (e) {
             Swal.fire({
             icon: 'info',
                 title: '¿Se realizo el pago correctamente?',
-                html: '<button type="submit" role="button" class="SwalBtnGuardarCliente btn btn-success customSwalBtn">' + 'Si, guardar' + '</button>' +
+                html: '<button type="submit" role="button" class="SwalBtnGuardarClienteRegistrado btn btn-success customSwalBtn">' + 'Si, guardar' + '</button>' +
                     '<button type="button" role="button" class="SwalBtnCancelarCliente btn btn-danger customSwalBtn">' + 'No, salir' + '</button>',
                 width: 500,
                 allowOutsideClick: false,
@@ -231,6 +235,16 @@ $(document).on('click', '.SwalBtnGuardarCliente', function () {
     btnGuardar.click(); 
     // window.location = ruta;
 });
+$(document).on('click', '.SwalBtnGuardarClienteRegistrado', function () {
+    // $('#btnNuevoCliente').show();
+    // $('.btnConfirmarPago').hide();
+    // console.log('click')
+    // return;
+    var btnGuardar = $('.btnNuevoClienteGymRegistrado');
+    btnGuardar.click(); 
+    // window.location = ruta;
+});
+
 
 $(document).on('click', '.SwalBtnCancelarCliente', function () {
     // window.location = ruta;

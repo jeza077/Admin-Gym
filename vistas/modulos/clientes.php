@@ -32,10 +32,10 @@
         //   echo $key;
         // }
         
-        $descripcionEvento = " Consulto la pantalla de cliente";
-        $accion = "consulta";
+        $descripcionEvento ="".$_SESSION['usuario']. " Consultó la pantalla de administrar clientes";
+        $accion = "Consulta";
 
-        $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 3,$accion, $descripcionEvento);
+        $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 4,$accion, $descripcionEvento);
 
       ?>
 
@@ -56,6 +56,19 @@
                     <th scope="col">Acciones</th>
                   </tr>
                 </thead>
+
+                <?php 
+                
+                // $tabla = "tbl_clientes";
+                // $item = null;
+                // $valor = null;
+                // $clientes = ControladorClientes::ctrMostrarClientesSinPago($tabla, $item, $valor);
+        
+                //   echo "<pre>";
+                //   var_dump($clientes);
+                //   echo "</pre>";
+                  // return;
+                ?>
               
               </table>
             </div>
@@ -99,12 +112,13 @@
                           <option selected="selected">Seleccionar...</option>
                           <?php 
                               $tabla = "tbl_documento";
-                              $item = null;
-                              $valor = null;
+                              $item = 'estado';
+                              $valor = 1;
+                              $all = true;
 
-                              $preguntas = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
+                              $documento = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all);
 
-                              foreach ($preguntas as $key => $value) { ?>
+                              foreach ($documento as $key => $value) { ?>
                                   <option value="<?php echo $value['id_documento']?>"><?php echo $value['tipo_documento']?></option>        
                               <?php 
                               }
@@ -245,11 +259,11 @@
                               <option selected="selected">Seleccionar...</option>
                               <?php 
                                   $tabla = "tbl_inscripcion";
-                                  $item = null;
-                                  $valor = null;
-                                  
-
-                                  $inscripciones = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
+                                  $item = 'estado';
+                                  $valor = 1;
+                                  $all = true;
+    
+                                  $inscripciones = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all);
 
                                   foreach ($inscripciones as $key => $value) { ?>
                                     <option value="<?php echo $value['id_inscripcion']?>"><?php echo $value['tipo_inscripcion']?></option>        
@@ -332,12 +346,13 @@
                           <option value="" id="editarTipoDocumento"></option>
                           <?php 
                               $tabla = "tbl_documento";
-                              $item = null;
-                              $valor = null;
+                              $item = 'estado';
+                              $valor = 1;
+                              $all = true;
 
-                              $preguntas = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
+                              $documentoEditar = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all);
 
-                              foreach ($preguntas as $key => $value) { ?>
+                              foreach ($documentoEditar as $key => $value) { ?>
                                   <option value="<?php echo $value['id_documento']?>"><?php echo $value['tipo_documento']?></option>        
                               <?php 
                               }
@@ -450,12 +465,13 @@
                           <option value="" id="tipoDocumentoClienteVentas"></option>
                           <?php 
                               $tabla = "tbl_documento";
-                              $item = null;
-                              $valor = null;
+                              $item = 'estado';
+                              $valor = 1;
+                              $all = true;
 
-                              $preguntas = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
+                              $documento = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all);
 
-                              foreach ($preguntas as $key => $value) { ?>
+                              foreach ($documento as $key => $value) { ?>
                                   <option value="<?php echo $value['id_documento']?>"><?php echo $value['tipo_documento']?></option>        
                               <?php 
                               }
@@ -597,10 +613,11 @@
                               <option selected="selected">Seleccionar...</option>
                               <?php 
                                   $tabla = "tbl_inscripcion";
-                                  $item = null;
-                                  $valor = null;
-
-                                  $inscripciones = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
+                                  $item = 'estado';
+                                  $valor = 1;
+                                  $all = true;
+    
+                                  $inscripciones = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all);
 
                                   foreach ($inscripciones as $key => $value) { ?>
                                     <option value="<?php echo $value['id_inscripcion']?>"><?php echo $value['tipo_inscripcion']?></option>        
@@ -703,9 +720,12 @@
 
                           $personas = ControladorPersonas::ctrMostrarPersonas($item, $valor, $all);
 
+                          
                           foreach ($personas as $key => $value) {
-                            echo '<option value="'.$value["id_personas"].'">'.$value["nombre"]. ' ' .$value["apellidos"].'</option>';
-                            
+                              if($value['nombre'] !== 'SUPER' && $value['apellidos'] !== 'ADMIN'){
+                                echo '<option value="'.$value["id_personas"].'">'.$value["nombre"]. ' ' .$value["apellidos"].'</option>';
+                              } 
+
                           }
                         ?>
                     </select>
@@ -791,11 +811,11 @@
                           <option selected="selected">Seleccionar...</option>
                           <?php 
                               $tabla = "tbl_inscripcion";
-                              $item = null;
-                              $valor = null;
-                              
+                              $item = 'estado';
+                              $valor = 1;
+                              $all = true;                            
 
-                              $inscripciones = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
+                              $inscripciones = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all);
 
                               foreach ($inscripciones as $key => $value) { ?>
                                 <option value="<?php echo $value['id_inscripcion']?>"><?php echo $value['tipo_inscripcion']?></option>        
@@ -836,7 +856,7 @@
 
             <div class="form-group mt-4 float-right">
               <button type="" class="btn btn-primary btnConfirmarPago">Guardar</button>
-              <button type="" class="btn btn-primary btnNuevoClienteGym">Guardar</button>
+              <button type="" class="btn btn-primary btnNuevoClienteGymRegistrado">Guardar</button>
               <button type="" class="btn btn-primary btnNuevoClienteVentas">Guardar</button>
               <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
             </div>

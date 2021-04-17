@@ -4,20 +4,19 @@ class ControladorMantenimientos {
     /*===========================================================
     BITACORA
     =============================================================*/
-    static public function ctrBitacoraInsertar($usuario, $objeto,$accion,$descripcion){
+    static public function ctrBitacoraInsertar($usuario, $objeto, $accion, $descripcion){
 
-     $tabla = "tbl_bitacora";
-     date_default_timezone_set('America/Tegucigalpa');
+      $tabla = "tbl_bitacora";
+      date_default_timezone_set('America/Tegucigalpa');
 
       $fecha = date('Y-m-d');
-     $hora = date('H:i:s'); 
-
+      $hora = date('H:i:s'); 
    
-     $fechaActual = $fecha.' '.$hora;
-   
+      $fechaActual = $fecha.' '.$hora;
 
+      $respuesta = ModeloUsuarios::mdlInsertarBitacora($tabla, $fechaActual, $usuario, $objeto, $accion, $descripcion);
 
-     $respuesta = ModeloUsuarios::mdlInsertarBitacora($tabla, $fechaActual, $usuario, $objeto, $accion, $descripcion);
+      return $respuesta;
     }
 
   	/*=============================================
@@ -61,11 +60,12 @@ class ControladorMantenimientos {
           // return $respuesta;
           // var_dump($respuesta);
           if($respuesta == true){
-         
-            // $descripcionEvento = "Nuevo rol";
-            // $accion = "Nuevo";
-            // $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
 
+            $descripcionEvento = "".$_SESSION["usuario"]." Registró un nuevo rol";
+				    $accion = "Nuevo";
+            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 18,$accion, $descripcionEvento);
+
+         
             $totalId = array();
             $item = null;
             $valor = null;
@@ -79,6 +79,8 @@ class ControladorMantenimientos {
             $idRol = end($totalId);
             // echo $idRol;
             $id = intval($idRol);
+
+            
 
             return $id;
 
@@ -239,7 +241,9 @@ class ControladorMantenimientos {
           // return $datos;
           $tabla = 'tbl_permisos';
           $respuesta = ModeloMantenimiento::mdlInsertarPermisosRoles($tabla, $idRol, $pant, $consulta, $agregar, $actualizar, $eliminar);
-    
+          
+          
+
           return $respuesta;
         }
 
@@ -279,9 +283,9 @@ class ControladorMantenimientos {
           if($respuesta == true){
   
            
-            $descripcionEvento = "Nueva Inscripcion del Gimnasio";
+            $descripcionEvento = "".$_SESSION["usuario"]." Agregó una nueva inscripción del gimnasio llamada ".$_POST["nuevoInscripcion"]."";
             $accion = "Nuevo";
-            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
+            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 21,$accion, $descripcionEvento);
 
          
        
@@ -384,10 +388,10 @@ class ControladorMantenimientos {
           // var_dump($respuesta);
           if($respuesta == true){
             
-            $descripcionEvento = "Nueva Matricula del Gimnasio";
+            $descripcionEvento = "".$_SESSION["usuario"]." Agregó una nueva matricula del gimnasio llamada ".$_POST["nuevoMatricula"]."";
             $accion = "Nuevo";
 
-            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);  
+            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 22,$accion, $descripcionEvento);  
   
             echo '<script>
   
@@ -523,10 +527,10 @@ class ControladorMantenimientos {
           // var_dump($respuesta);
           if($respuesta == true){
             
-            $descripcionEvento = "Nuevo Descuento del Gimnasio";
+            $descripcionEvento = "".$_SESSION["usuario"]." Agregó un nuevo descuento del gimnasio llamado ".$_POST["nuevoDescuento"]."";
             $accion = "Nuevo";
 
-            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
+            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 23,$accion, $descripcionEvento);
   
             echo '<script>
 
@@ -633,7 +637,7 @@ class ControladorMantenimientos {
       // return;
       if(isset($_POST["nuevoDocumento"])){
 
-        if(preg_match('/^[A-ZñÑáéíóúÁÉÍÓÚ]+$/', $_POST["nuevoDocumento"])){
+        if(preg_match('/^[A-ZñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevoDocumento"])){
 
           $tabla = "tbl_documento";
 
@@ -645,9 +649,9 @@ class ControladorMantenimientos {
     
           if($respuesta == true){
               
-              // $descripcionEvento = "Actualizo rol";
-              // $accion = "Actualizo";
-              // $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
+            $descripcionEvento = "".$_SESSION["usuario"]." Agregó un nuevo documento llamado ".$_POST["nuevoDocumento"]."";
+            $accion = "Nuevo";
+            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 24,$accion, $descripcionEvento);
 
               echo'<script>
       
@@ -719,6 +723,101 @@ class ControladorMantenimientos {
 
 
     /*=============================================
+    AGREGAR NUEVA PREGUNTA DE SEGURIDAD
+    =============================================*/
+    
+    static public function ctrPreguntaSeguridadInsertar(){
+
+      // var_dump($_POST);
+      // return;
+      if(isset($_POST["nuevaPregunta"])){
+
+        if(preg_match('/^[A-ZÑÁÉÍÓÚ¿? ]+$/', $_POST["nuevaPregunta"])){
+
+          $tabla = "tbl_preguntas";
+
+          $datos = array ("pregunta" => $_POST["nuevaPregunta"]);
+
+
+          $respuesta =  ModeloMantenimiento::mdlPreguntaSeguridadInsertar($tabla,$datos);
+
+    
+          if($respuesta == true){
+              
+              // $descripcionEvento = "Actualizo rol";
+              // $accion = "Actualizo";
+              // $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
+
+              echo'<script>
+      
+              Swal.fire({
+                  icon: "success",
+                    title: "Pregunta creada exitosamente!",
+                    showConfirmButton: true,
+                    confirmButtonText: "Cerrar",
+                    closeOnConfirm: false
+                    }).then((result) => {
+                        if (result.value) {
+
+                        window.location = "preguntas-seguridad";
+
+                        }
+                    })
+      
+              </script>';
+      
+          }else{
+
+            echo'<script>
+      
+              Swal.fire({
+                    icon: "error",
+                    title: "Opps, ocurrio un problema. Intente de nuevo.",
+                    showConfirmButton: true,
+                    confirmButtonText: "Cerrar",
+                    closeOnConfirm: false
+                    }).then((result) => {
+                              if (result.value) {
+      
+                              window.location = "preguntas-seguridad";
+      
+                              }
+                          })
+      
+              </script>';
+          }
+
+        } else {
+          echo '<script>
+  
+              Swal.fire({
+
+                icon: "error",
+                title: "¡El campo no puede ir vacío, escrito en minusculas o llevar caracteres especiales con excepción de los signos de interrogacion!",
+                showConfirmButton: true,
+                confirmButtonText: "Cerrar",
+                closeOnConfirm: false
+
+              }).then((result)=>{
+
+                if(result.value){
+
+                  window.location = "preguntas-seguridad";
+
+                }
+
+              });
+
+
+            </script>';
+
+        }
+      }
+
+    }
+
+
+    /*=============================================
     AGREGAR NUEVO PROVEEDOR
     =============================================*/
     static public function ctrNuevoProveedor($datos){
@@ -742,10 +841,11 @@ class ControladorMantenimientos {
     
           if($respuesta == true){
               
-              // $descripcionEvento = "Actualizo rol";
-              // $accion = "Actualizo";
-              // $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
-
+            $descripcionEvento = "".$_SESSION["usuario"]." Agregó un nuevo proveedor ";
+            $accion = "Nuevo";
+        
+            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 25,$accion, $descripcionEvento);
+        
               return true;
       
           }else{
@@ -788,9 +888,9 @@ class ControladorMantenimientos {
     
         if($respuesta == true){
             
-            $descripcionEvento = "Actualizo rol";
-            $accion = "Actualizo";
-            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
+            $descripcionEvento = "".$_SESSION["usuario"]." Actualizó el rol ".$_POST["editarRol"]."";
+            $accion = "Actualizar";
+            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 18,$accion, $descripcionEvento);
 
           
 
@@ -858,9 +958,9 @@ class ControladorMantenimientos {
     
         if($respuesta == true){
             
-            $descripcionEvento = "Actualizo Matricula ";
-            $accion = "Actualizo";
-            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
+            $descripcionEvento = "".$_SESSION["usuario"]." Actualizó el tipo de matricula ".$_POST["editarMatricula"]."";
+            $accion = "Actualizar";
+            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 22,$accion, $descripcionEvento);
 
           
 
@@ -929,9 +1029,9 @@ class ControladorMantenimientos {
     
         if($respuesta == true){
             
-            $descripcionEvento = "Actualizo Inscripcion";
-            $accion = "Actualizo";
-            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
+            $descripcionEvento = "".$_SESSION["usuario"]." Actualizó la inscripción ".$_POST["editarInscripcion"]."";
+            $accion = "Actualizar";
+            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 21,$accion, $descripcionEvento);
 
           
 
@@ -998,10 +1098,10 @@ class ControladorMantenimientos {
 
         if($respuesta == true){
              
-          $descripcionEvento = "Actualizo Descuento";
-          $accion = "consulta";
+          $descripcionEvento = "".$_SESSION["usuario"]." Actualizó el descuento ". $_POST["editarDescuento"]."";
+          $accion = "Actualizar";
 
-          $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
+          $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 23,$accion, $descripcionEvento);
           
           echo'<script>
     
@@ -1048,7 +1148,7 @@ class ControladorMantenimientos {
 
 
     /*=============================================
-    EDITAR ROL
+    EDITAR DOCUMENTO
     =============================================*/
     
     static public function ctrEditarDocumento(){
@@ -1070,10 +1170,11 @@ class ControladorMantenimientos {
       
           if($respuesta == true){
               
-              // $descripcionEvento = "Actualizo rol";
-              // $accion = "Actualizo";
-              // $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);            
-
+            $descripcionEvento = "".$_SESSION["usuario"]." Actualizó el documento ".$_POST["editarDocumento"]."";
+            $accion = "Actualizar";
+        
+            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 24,$accion, $descripcionEvento);
+        
               echo'<script>
       
               Swal.fire({
@@ -1145,7 +1246,104 @@ class ControladorMantenimientos {
     }
 
     /*=============================================
-    EDITAR ROL
+    EDITAR PREGUNTA
+    =============================================*/
+    
+    static public function ctrEditarPregunta(){
+      // var_dump($_POST);
+      // return;
+
+      if(isset($_POST["editarIdPregunta"])){
+
+        if(preg_match('/^[A-ZÑÁÉÍÓÚ¿? ]+$/', $_POST["editarPregunta"])){
+
+          $tabla = "tbl_preguntas";
+
+          $datos = array ("pregunta"=> $_POST["editarPregunta"],
+                          "id_pregunta"=>$_POST["editarIdPregunta"]);
+
+
+          $respuesta =  ModeloMantenimiento::mdlEditarPregunta($tabla,$datos);
+
+      
+          if($respuesta == true){
+              
+              // $descripcionEvento = "Actualizo rol";
+              // $accion = "Actualizo";
+              // $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);            
+
+              echo'<script>
+      
+              Swal.fire({
+                    icon: "success",
+                    title: "Pregunta editada correctamente",
+                    showConfirmButton: true,
+                    confirmButtonText: "Cerrar",
+                    closeOnConfirm: false
+                    }).then((result) => {
+                              if (result.value) {
+      
+                              window.location = "preguntas-seguridad";
+      
+                              }
+                          })
+      
+              </script>';
+      
+          }else{
+
+            echo'<script>
+      
+              Swal.fire({
+                    icon: "error",
+                    title: "Opps, algo salio mal, intenta de nuevo!",
+                    showConfirmButton: true,
+                    confirmButtonText: "Cerrar",
+                    closeOnConfirm: false
+                    }).then((result) => {
+                              if (result.value) {
+      
+                              window.location = "preguntas-seguridad";
+      
+                              }
+                          })
+      
+              </script>';
+          }
+        
+        } else {
+          echo '<script>
+  
+            Swal.fire({
+  
+              icon: "error",
+              title: "¡El campo no puede ir vacío, escrito en minusculas o llevar caracteres especiales con excepción de los signos de interrogacion!",
+              showConfirmButton: true,
+              confirmButtonText: "Cerrar",
+              closeOnConfirm: false
+  
+            }).then((result)=>{
+  
+              if(result.value){
+  
+                window.location = "preguntas-seguridad";
+  
+              }
+  
+            });
+  
+  
+          </script>';
+  
+
+        }
+
+      }
+
+    }
+
+    /*=============================================
+    EDITAR PROVEEDOR
     =============================================*/
     
     static public function ctrEditarProveedor(){
@@ -1167,10 +1365,11 @@ class ControladorMantenimientos {
       
           if($respuesta == true){
               
-              // $descripcionEvento = "Actualizo rol";
-              // $accion = "Actualizo";
-              // $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);          
-
+            $descripcionEvento = "".$_SESSION["usuario"]." Actualizó un proveedor ";
+            $accion = "Actualizar";
+        
+            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 25,$accion, $descripcionEvento);
+        
               echo'<script>
       
               Swal.fire({
@@ -1262,7 +1461,7 @@ class ControladorMantenimientos {
             echo '<script>
                 Swal.fire({
                     title: "¡No se pudo borrar el rol!",
-                    text: "Abóquese con el administrador",
+                    text: "No se puede borrar ya que esta asociado con otros datos",
                     icon: "error",
                     heightAuto: false
                 }).then((result)=>{
@@ -1344,7 +1543,7 @@ class ControladorMantenimientos {
             echo '<script>
                 Swal.fire({
                     title: "¡No se pudo borrar la matricula!",
-                    text: "Abóquese con el administrador",
+                    text: "No se puede borrar ya que esta asociado con otros datos",
                     icon: "error",
                     heightAuto: false
                 }).then((result)=>{
@@ -1376,6 +1575,11 @@ class ControladorMantenimientos {
             </script>';
             
           } else {
+
+            $descripcionEvento = "".$_SESSION["usuario"]." Eliminó una matricula ";
+            $accion = "Eliminar";
+            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 22,$accion, $descripcionEvento);
+
             
             echo'<script>
 
@@ -1425,7 +1629,7 @@ class ControladorMantenimientos {
             echo '<script>
                 Swal.fire({
                     title: "¡No se pudo borrar la inscripción!",
-                    text: "Abóquese con el administrador",
+                    text: "No se puede borrar ya que esta asociado con otros datos",
                     icon: "error",
                     heightAuto: false
                 }).then((result)=>{
@@ -1457,6 +1661,11 @@ class ControladorMantenimientos {
             </script>';
             
           } else {
+
+            $descripcionEvento = "".$_SESSION["usuario"]." Eliminó una inscripción del gimnasio ";
+            $accion = "Eliminar";
+            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 21,$accion, $descripcionEvento);
+
             
             echo'<script>
 
@@ -1506,7 +1715,7 @@ class ControladorMantenimientos {
             echo '<script>
                 Swal.fire({
                     title: "¡No se pudo borrar el descuento!",
-                    text: "Abóquese con el administrador",
+                    text: "No se puede borrar ya que esta asociado con otros datos",
                     icon: "error",
                     heightAuto: false
                 }).then((result)=>{
@@ -1538,6 +1747,10 @@ class ControladorMantenimientos {
             </script>';
             
           } else {
+
+            $descripcionEvento = "".$_SESSION["usuario"]." Eliminó un descuento ";
+            $accion = "Eliminar";
+            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 23,$accion, $descripcionEvento);
             
             echo'<script>
 
@@ -1588,7 +1801,7 @@ class ControladorMantenimientos {
             echo '<script>
                 Swal.fire({
                     title: "¡No se pudo borrar el documento!",
-                    text: "Abóquese con el administrador",
+                    text: "No se puede borrar ya que esta asociado con otros datos",
                     icon: "error",
                     heightAuto: false
                 }).then((result)=>{
@@ -1620,6 +1833,12 @@ class ControladorMantenimientos {
             </script>';
             
           } else {
+
+            $descripcionEvento = "".$_SESSION["usuario"]." Eliminó el documento ".$_POST["editarDocumento"]."";
+            $accion = "Eliminar";
+        
+            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 24,$accion, $descripcionEvento);
+        
             
             echo'<script>
 
@@ -1633,6 +1852,89 @@ class ControladorMantenimientos {
                       if (result.value) {
 
                       window.location = "documentos";
+
+                      }
+                  })
+
+            </script>';
+          } 
+          
+      }
+    }
+
+    /*=============================================
+    BORRAR PREGUNTA
+    =============================================*/
+    static public function ctrBorrarPregunta(){
+      // var_dump($_GET['idEliminarpregunta']);
+      // return;
+
+      if(isset($_GET['idEliminarPregunta'])){
+
+          $tabla = 'tbl_preguntas';
+          $item = 'id_preguntas';
+          $valor = $_GET['idEliminarPregunta'];
+
+          $respuesta = ModeloMantenimiento::mdlBorrarDinamico($tabla, $item, $valor);
+
+          // var_dump($respuesta);
+          // return;
+
+          if($respuesta[1] == 1451){
+
+            // $descripcionEvento = "Elimino el Rol";
+            // $accion = "Elimino";
+
+            // $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
+
+            echo '<script>
+                Swal.fire({
+                    title: "¡No se pudo borrar la pregunta!",
+                    text: "No se puede borrar ya que esta asociado con otros datos",
+                    icon: "error",
+                    heightAuto: false
+                }).then((result)=>{
+                    if(result.value){
+                        window.location = "preguntas-seguridad";
+                    }
+                });                                      
+            </script>';
+            
+            
+          }else if($respuesta[1] == 1054) {
+
+            echo'<script>
+
+            Swal.fire({
+            icon: "error",
+            title: "Opps, algo salio mal, intenta de nuevo!",
+            showConfirmButton: true,
+            confirmButtonText: "Cerrar",
+            closeOnConfirm: false
+            }).then((result) => {
+              if (result.value) {
+
+                window.location = "preguntas-seguridad";
+                
+              }
+            })
+            
+            </script>';
+            
+          } else {
+            
+            echo'<script>
+
+            Swal.fire({
+                  icon: "success",
+                  title: "Pregunta eliminada exitosamente!",
+                  showConfirmButton: true,
+                  confirmButtonText: "Cerrar",
+                  closeOnConfirm: false
+                  }).then((result) => {
+                      if (result.value) {
+
+                      window.location = "preguntas-seguridad";
 
                       }
                   })
@@ -1671,7 +1973,7 @@ class ControladorMantenimientos {
             echo '<script>
                 Swal.fire({
                     title: "¡No se pudo borrar el proveedor!",
-                    text: "Abóquese con el administrador",
+                    text: "No se puede borrar ya que esta asociado con otros datos",
                     icon: "error",
                     heightAuto: false
                 }).then((result)=>{
@@ -1703,6 +2005,12 @@ class ControladorMantenimientos {
             </script>';
             
           } else {
+
+            $descripcionEvento = "".$_SESSION["usuario"]." Eliminó un proveedor ";
+            $accion = "Eliminar";
+        
+            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 25,$accion, $descripcionEvento);
+        
             
             echo'<script>
 
@@ -1749,6 +2057,20 @@ class ControladorMantenimientos {
       $tabla1 = "tbl_inscripcion";
       
       $respuesta = ModeloMantenimiento::mdlRangoInscripcion($tabla,$rango);
+
+      return $respuesta;
+
+    }
+
+    /*=============================================
+    RANGO DE PREGUNTAS
+    =============================================*/
+
+    static public function ctrRangoPreguntas($rango) {
+
+      $tabla = "tbl_preguntas";
+      
+      $respuesta = ModeloMantenimiento::mdlRangoPreguntas($tabla, $rango);
 
       return $respuesta;
 

@@ -34,10 +34,10 @@
   <section class="content">
 
     <?php
-      $descripcionEvento = " Consulto la pantalla de Administracion de Ventas";
-      $accion = "consulta";
+      $descripcionEvento = "".$_SESSION["usuario"]." Consultó la pantalla de administrar ventas";
+      $accion = "Consulta";
 
-      $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 4,$accion, $descripcionEvento);
+      $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 14,$accion, $descripcionEvento);
 
       // var_dump($_SESSION['permisos']);
     ?>

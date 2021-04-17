@@ -4,6 +4,35 @@ require_once "conexion.php";
 
 class ModeloPersonas{
 
+	/*=============================================
+		INGRESAR A TABLA LOG-QUIEN ELIMINA LOS DATOS
+	=============================================*/
+	 
+	static public function mdlIngresarLog($tablaLog,$usuario,$item){
+
+		$stmt = Conexion::conectar()->prepare("UPDATE $tablaLog SET eliminado_por = :eliminado_por WHERE id_bitacora = :id_bitacora");
+
+		$stmt->bindParam(":eliminado_por",$usuario, PDO::PARAM_STR);
+		$stmt->bindParam(":id_bitacora", $item, PDO::PARAM_INT);
+
+
+		// return $stmt->execute();
+		if($stmt->execute()){
+
+			return true;	
+
+		}else{
+
+			return false;
+		
+		}
+
+		$stmt->close();
+		
+		$stmt = null;
+
+	}
+
     /*=============================================
 	CREAR PERSONAS	
 	=============================================*/	 
@@ -130,6 +159,30 @@ class ModeloPersonas{
 		$stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE id_personas = :id_personas");
 
 		$stmt->bindParam(":id_personas", $datos, PDO::PARAM_INT);
+
+		if($stmt->execute()){
+
+			return true;
+
+		} else {
+		
+			return $stmt->errorInfo();
+
+		}
+
+		$stmt->close();
+
+		$stmt = null;
+	}
+
+	/*=============================================
+	BORRAR BITACORA
+	=============================================*/
+	static public function mdlBorrarBitacora($tabla, $datos){
+
+		$stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE id_bitacora = :id_bitacora");
+
+		$stmt->bindParam(":id_bitacora", $datos, PDO::PARAM_INT);
 
 		if($stmt->execute()){
 

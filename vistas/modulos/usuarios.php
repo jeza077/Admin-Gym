@@ -8,10 +8,19 @@
     // echo "<pre>";
     // var_dump($_SESSION['permisos']);
     // echo "</pre>";
-
-?>
+    
+    ?>
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
+    <?php
+    // echo "<pre>";
+    // var_dump($_SESSION['permisos']);
+    // foreach ($_SESSION['permisos'] as $key => $value) {
+    //   var_dump($value['agregar']);
+    // }
+    
+    // echo "</pre>";
+   ?>
 
     <section class="content-header">
       <div class="container-fluid">
@@ -34,26 +43,18 @@
       </div><!-- /.container-fluid -->
     </section>  
 
- <!-- Main content -->
+    <!-- Main content -->
     <section class="content">
 
           <?php
 
-            $descripcionEvento = " Consulto la pantalla de Usuario";
-            $accion = "consulta";
+            $descripcionEvento = "".$_SESSION["usuario"]." Consultó la pantalla de usuarios";
+            $accion = "Consulta";
 
             $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 2,$accion, $descripcionEvento);
 
-            // $tabla = "tbl_roles";
-            // $item = "estado";
-            // $valor = 1;
-
-            // $roles = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
-
-            // var_dump($roles);
           ?>
         
-
         <div class="card">
 
           <div class="card-body">
@@ -62,6 +63,7 @@
               <thead>
                 <tr>
                   <th scope="col">#</th>
+                  <th scope="col">No. Documento</th>
                   <th scope="col">Nombre</th>
                   <th scope="col">Usuario</th>
                   <th scope="col">Foto</th>
@@ -86,45 +88,51 @@
                 
 
                 foreach ($usuarios as $key => $value) {
-                  echo '
-                        <tr>
-                        <td scope="row">'.($key+1).'</td>
-                        <td>'.$value["nombre"] .' '.$value["apellidos"].'</td>
-                        <td>'.$value["usuario"].'</td>';
+                  if($value['nombre'] !== 'SUPER' && $value['apellidos'] !== 'ADMIN'){
 
-                        if($value["foto"] != ""){
-                          echo '<td><img src="'.$value["foto"].'" class="img-thumbnail" width="40px"></td>';
-                        } else {
-                          echo '<td><img src="vistas/img/usuarios/default/default2.jpg" class="img-thumbnail" width="40px"></td>';
-                        }
+                    echo '
+                          <tr>
+                          <td scope="row">'.($key+1).'</td>
+                          <td>'.$value["num_documento"].'</td>
+                          <td>'.$value["nombre"] .' '.$value["apellidos"].'</td>
+                          <td>'.$value["usuario"].'</td>';
+  
+                          if($value["foto"] != ""){
+                            echo '<td><img src="'.$value["foto"].'" class="img-thumbnail" width="40px"></td>';
+                          } else {
+                            echo '<td><img src="vistas/img/usuarios/default/default2.jpg" class="img-thumbnail" width="40px"></td>';
+                          }
+  
+                      echo '<td>'.$value["rol"].'</td>';
+  
+                          if($value['estado'] != 0){
+                            echo '<td><button class="btn btn-success btn-md btnActivar" idUsuario="'.$value["id_usuario"].'" estadoUsuario="0">Activado</button></td>';
+                          } else {
+                            echo '<td><button class="btn btn-danger btn-md btnActivar" idUsuario="'.$value["id_usuario"].'" estadoUsuario="1">Desactivado</button></td>';
+                          }
+                    if($permisoActualizar == 1 && $permisoEliminar == 0){
+  
+                      echo '<td>
+                              <button class="btn btn-warning btnEditarUsuario" idUsuario="'.$value["id_personas"].'" data-toggle="modal" data-target="#modalEditarUsuario"><i class="fas fa-pencil-alt" style="color:#fff"></i></button>
+                            </td>
+                          </tr>
+                    ';
+                    } else if($permisoActualizar == 0 && $permisoEliminar == 1){
+                      echo '<td>
+                              <button class="btn btn-danger btnEliminarUsuario" idPersona="'.$value["id_personas"].'" fotoUsuario="'.$value["foto"].'" usuario="'.$value["usuario"].'"><i class="fas fa-trash-alt"></i></button>
+                            </td>
+                          </tr>
+                    ';
+                    } else {
+                      echo '<td>
+                              <button class="btn btn-info btnVerUsuario" idUsuario="'.$value["id_personas"].'" data-toggle="modal" data-target="#modalVerUsuario"><i class="fas fa-eye" style="color:#fff"></i></button>
+                              <button class="btn btn-warning btnEditarUsuario" idUsuario="'.$value["id_personas"].'" data-toggle="modal" data-target="#modalEditarUsuario"><i class="fas fa-pencil-alt" style="color:#fff"></i></button>
+                              <button class="btn btn-danger btnEliminarUsuario" idPersona="'.$value["id_personas"].'" fotoUsuario="'.$value["foto"].'" usuario="'.$value["usuario"].'"><i class="fas fa-trash-alt"></i></button>
+                            </td>
+                          </tr>
+                    ';
+                    }
 
-                    echo '<td>'.$value["rol"].'</td>';
-
-                        if($value['estado'] != 0){
-                          echo '<td><button class="btn btn-success btn-md btnActivar" idUsuario="'.$value["id_usuario"].'" estadoUsuario="0">Activado</button></td>';
-                        } else {
-                          echo '<td><button class="btn btn-danger btn-md btnActivar" idUsuario="'.$value["id_usuario"].'" estadoUsuario="1">Desactivado</button></td>';
-                        }
-                  if($permisoActualizar == 1 && $permisoEliminar == 0){
-
-                    echo '<td>
-                            <button class="btn btn-warning btnEditarUsuario" idUsuario="'.$value["id_personas"].'" data-toggle="modal" data-target="#modalEditarUsuario"><i class="fas fa-pencil-alt" style="color:#fff"></i></button>
-                          </td>
-                        </tr>
-                  ';
-                  } else if($permisoActualizar == 0 && $permisoEliminar == 1){
-                    echo '<td>
-                            <button class="btn btn-danger btnEliminarUsuario" idPersona="'.$value["id_personas"].'" fotoUsuario="'.$value["foto"].'" usuario="'.$value["usuario"].'"><i class="fas fa-trash-alt"></i></button>
-                          </td>
-                        </tr>
-                  ';
-                  } else {
-                    echo '<td>
-                            <button class="btn btn-warning btnEditarUsuario" idUsuario="'.$value["id_personas"].'" data-toggle="modal" data-target="#modalEditarUsuario"><i class="fas fa-pencil-alt" style="color:#fff"></i></button>
-                            <button class="btn btn-danger btnEliminarUsuario" idPersona="'.$value["id_personas"].'" fotoUsuario="'.$value["foto"].'" usuario="'.$value["usuario"].'"><i class="fas fa-trash-alt"></i></button>
-                          </td>
-                        </tr>
-                  ';
                   }
                         
                     
@@ -155,9 +163,10 @@
    
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Nuevo usuario</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <button type="button" class="close modalClose" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
+          <button type="button" class="cerrar" aria-label="Close" style="display:none"></button>
         </div>
         <div class="modal-body">
           <form role="form" method="post" class="formulario" enctype="multipart/form-data">
@@ -180,12 +189,13 @@
                           <option selected="selected">Seleccionar...</option>
                           <?php 
                               $tabla = "tbl_documento";
-                              $item = null;
-                              $valor = null;
+                              $item = 'estado';
+                              $valor = 1;
+                              $all = true;
 
-                              $preguntas = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
+                              $documento = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all);
 
-                              foreach ($preguntas as $key => $value) { ?>
+                              foreach ($documento as $key => $value) { ?>
                                   <option value="<?php echo $value['id_documento']?>"><?php echo $value['tipo_documento']?></option>        
                               <?php 
                               }
@@ -258,10 +268,11 @@
                         <!-- <option value="2">Default</option> -->
                           <?php 
                               $tabla = "tbl_roles";
-                              $item = null;
-                              $valor = null;
+                              $item = 'estado';
+                              $valor = 1;
+                              $all = true;
 
-                              $roles = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
+                              $roles = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all);
 
                               foreach ($roles as $key => $value) {
                                 if($value["rol"] == 'DEFAULT'){
@@ -322,7 +333,7 @@
                 <!-- <div class="modal-footer"> -->
                 <div class="form-group final mt-4 float-right">
                   <button type="" class="btn btn-primary">Guardar</button>
-                  <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
+                  <button type="button" class="btn btn-danger modalClose">Salir</button>
                 </div>
             
                 <?php
@@ -352,9 +363,10 @@
       <div class="modal-content">      
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Editar usuario</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <button type="button" class="close modalClose" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
+          <button type="button" class="cerrar" aria-label="Close" style="display:none"></button>
         </div>
 
         <div class="modal-body">
@@ -378,12 +390,13 @@
                           <option value="" id="editarTipoDocumento"></option>
                           <?php 
                               $tabla = "tbl_documento";
-                              $item = null;
-                              $valor = null;
+                              $item = 'estado';
+                              $valor = 1;
+                              $all = true;
 
-                              $preguntas = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
+                              $documentoEditar = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all);
 
-                              foreach ($preguntas as $key => $value) { ?>
+                              foreach ($documentoEditar as $key => $value) { ?>
                                   <option value="<?php echo $value['id_documento']?>"><?php echo $value['tipo_documento']?></option>        
                               <?php 
                               }
@@ -453,10 +466,11 @@
                         <option value="" id="editarRol"></option>
                           <?php 
                               $tabla = "tbl_roles";
-                              $item = null;
-                              $valor = null;
+                              $item = 'estado';
+                              $valor = 1;
+                              $all = true;
 
-                              $roles = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
+                              $roles = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all);
 
                               foreach ($roles as $key => $value) {
                                 if($value["rol"] == 'DEFAULT'){
@@ -516,7 +530,7 @@
                 <!-- <div class="modal-footer"> -->
                 <div class="form-group mt-2 float-right">
                   <button type="" class="btn btn-primary">Guardar cambios</button>
-                  <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
+                  <button type="button" class="btn btn-danger modalClose">Salir</button>
                 </div>
             
                 <?php
@@ -538,6 +552,77 @@
   </div>
 
 
+  <!-- =======================================
+      MODAL DATOS DE USUARIO A DETALLE
+  ======================================----->
+  <div class="modal fade" id="modalVerUsuario" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md" role="document">
+      <div class="modal-content">      
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Datos usuario</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          
+        <form role="form" method="post" class="formulario" enctype="multipart/form-data">
+          
+          <div class="form-row">
+            <div class="form-group col-md-12">
+              <label>Correo</label>
+              <input type="text" class="form-control" value="" id=detalleCorreoUsuario disabled>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-md-12">
+              <label>Telefono</label>
+              <input type="text" class="form-control" value="" id=detalleTelefonoUsuario disabled>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-md-12">
+              <label>Dirección</label>
+              <input type="text" class="form-control" value="" id=detalleDireccionUsuario disabled>
+            </div>
+          </div>
+
+          <!-- <div class="form-row">
+            <div class="form-group col-md-12">
+              <label>Sexo</label>
+              <input type="text" class="form-control" value="" id=detalleSexoUsuario disabled>
+            </div>
+          </div> -->
+          
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label>Fecha nacimiento</label>
+              <input type="text" class="form-control" value="" id=detalleFechaNacUsuario disabled>
+            </div>
+            <div class="form-group col-md-6">
+              <label>Sexo</label>
+              <input type="text" class="form-control" value="" id=detalleSexoUsuario disabled>
+            </div>
+          </div>
+      
+          <!-- <div class="modal-footer"> -->
+          <div class="form-group final mt-4 float-right">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
+          </div>
+      
+        </form>
+
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
 
   <!-- =========================================
   MODAL AGREGAR USUARIO DE PERSONA YA REGISTRADA
@@ -547,12 +632,14 @@
       <div class="modal-content">   
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Nuevo usuario</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <button type="button" class="close modalClose" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
+          <button type="button" class="cerrar" aria-label="Close" style="display:none"></button>
         </div>
 
         <div class="modal-body">
+
           <form role="form" method="post" class="formulario" enctype="multipart/form-data">
           
             <div class="form-row">
@@ -588,10 +675,11 @@
                   <!-- <option value="2">Default</option> -->
                     <?php 
                         $tabla = "tbl_roles";
-                        $item = null;
-                        $valor = null;
+                        $item = 'estado';
+                        $valor = 1;
+                        $all = true;
 
-                        $roles = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
+                        $roles = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all);
 
                         foreach ($roles as $key => $value) {
                           if($value["rol"] == 'DEFAULT'){
@@ -656,7 +744,7 @@
             <!-- <div class="modal-footer"> -->
             <div class="form-group final mt-4 float-right">
               <button type="" class="btn btn-primary">Guardar</button>
-              <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
+              <button type="button" class="btn btn-danger modalClose">Salir</button>
             </div>
           
               <?php

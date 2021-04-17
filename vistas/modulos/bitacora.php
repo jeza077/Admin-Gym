@@ -23,6 +23,14 @@
         </div>
       </div><!-- /.container-fluid -->
     </section>
+
+    <?php
+      $descripcionEvento = "".$_SESSION["usuario"]." Consultó la pantalla de bitacora";
+      $accion = "Consulta";
+
+      $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 26,$accion, $descripcionEvento);
+
+    ?>
     
     <!-- Main content -->
     <section class="content">
@@ -40,7 +48,8 @@
                 <th width="100px">Objeto</th>
                 <th width="100px">Accion</th>
                 <th width="100px">Descripcion</th>
-                <th width="100px">Fecha</th>            
+                <th width="100px">Fecha</th>
+                <th width="100px">Depurar</th> 
               </tr>
             </thead>
           </table>
@@ -54,3 +63,12 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
+
+  <!-- =======================================
+  ELIMINAR BITACORA
+  ======================================----->
+  <?php 
+    $pantalla = 'bitacora';
+    $borrarUsuario = new ControladorPersonas();
+    $borrarUsuario->ctrBorrarBitacora($pantalla);
+  ?>

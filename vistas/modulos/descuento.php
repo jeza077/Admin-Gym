@@ -22,10 +22,10 @@
   </section>  
 
          <?php
-            $descripcionEvento = " Consulto la pantalla de Descuento";
-            $accion = "consulta";
+            $descripcionEvento = "".$_SESSION["usuario"]." Consultó la pantalla de descuento";
+            $accion = "Consulta";
 
-            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
+            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 23,$accion, $descripcionEvento);
 
           ?>
         
@@ -36,11 +36,7 @@
 
         <div class="card-body">
             <?php
-            $descripcionEvento = " Consulto la pantalla de mantenimiento";
-            $accion = "consulta";
-
-            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
-
+            
             ?>
 
             <table class="table table-bordered table-striped tablas text-center">                

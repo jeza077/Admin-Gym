@@ -73,8 +73,9 @@ class ControladorPersonas{
                             $tabla = "tbl_roles";
                             $item = "rol";
                             $valor = "Default";
+                            $all = null;
 
-                            $roles  = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
+                            $roles  = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all);
                             // var_dump($roles);
 
                             $idRol = $roles["id_rol"];
@@ -96,6 +97,22 @@ class ControladorPersonas{
 
                             if($crearUsuario == true){
 
+                                $tabla1 = "tbl_personas";
+                                $tabla2 = "tbl_usuarios";
+                                
+                                $item = "usuario";
+                                $valor = $datos["usuario"];
+
+                                $respuesta = ModeloUsuarios::mdlMostrarUsuarios($tabla1, $tabla2, $item, $valor);
+                                
+                                $descripcionEvento = "Se envio correo con usuario y contraseña a ".$datos['usuario']."";
+                                $accion = "Auto-registro";
+                                $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($respuesta['id_usuario'], 30, $accion, $descripcionEvento);
+
+                                $descripcionEvento = "".$datos['nombre']." se auto-registro";
+                                $accion = "Auto-registro";
+                                $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($respuesta['id_usuario'], 30, $accion, $descripcionEvento);						
+                                
                                 echo '<script>
                                         Swal.fire({
                                             title: "Tus datos han sido guardados correctamente!",
@@ -569,6 +586,11 @@ class ControladorPersonas{
                     // return;        
     
                     if($respuestaDeEditarPersona == true){
+
+                        $descripcionEvento = "".$_SESSION['usuario']." Actualizó el cliente de gimnasio llamado ".$_POST["editarNombre"]."";
+					    $accion = "Actualizar";
+					    $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION['id_usuario'], 4, $accion, $descripcionEvento);
+					    
                         
                         echo '<script>
                                 Swal.fire({
@@ -826,6 +848,7 @@ class ControladorPersonas{
                 echo '<script>
                     Swal.fire({
                         title: "No se pudo borrar el '.$tipoPersona.'!",
+                        text: "No se puede borrar ya que esta asociado con otros datos",
                         icon: "error",
                         heightAuto: false
                     }).then((result)=>{
@@ -836,8 +859,8 @@ class ControladorPersonas{
                 </script>';
 
             } else if($tipoPersona == 'usuario') {
-                $descripcionEvento = " Elimino un usuario.";
-                $accion = "Elimino";
+                $descripcionEvento = "".$_SESSION["usuario"]." Eliminó el usuario ".$_GET['usuario']."";
+                $accion = "Eliminar";
     
                 $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 2,$accion, $descripcionEvento);
     
@@ -878,6 +901,61 @@ class ControladorPersonas{
                         });                                      
                     </script>';
             }
+        }
+    }
+
+    /*=============================================
+    BORRAR BITACORA
+    =============================================*/
+    static public function ctrBorrarBitacora($pantalla){
+        // var_dump($_GET);
+        // return;
+
+        if(isset($_GET['idBitacora'])){
+            $tabla = 'tbl_bitacora';
+            $datos = $_GET['idBitacora'];
+
+
+            $respuesta = ModeloPersonas::mdlBorrarBitacora($tabla, $datos);
+            
+            // var_dump($respuesta);
+            // return;
+            
+
+            if ($respuesta==true) {
+
+                $tablaLog='tbl_bitacora_log';
+                $item=$_GET['idBitacora'];
+                $usuario=$_SESSION['usuario'];
+                
+                $respuestaLog = ModeloPersonas::mdlIngresarLog($tablaLog,$usuario,$item);
+
+                echo '<script>
+                        Swal.fire({
+                            title: "El registro ha sido borrado correctamente!",
+                            icon: "success",
+                            heightAuto: false
+                        }).then((result)=>{
+                            if(result.value){
+                                window.location = "'.$pantalla.'";
+                            }
+                        });                                      
+                    </script>';
+            }else{
+                echo '<script>
+                    Swal.fire({
+                        title: "No se pudo borrar el registro!",
+                        text: "No se puede borrar",
+                        icon: "error",
+                        heightAuto: false
+                    }).then((result)=>{
+                        if(result.value){
+                            window.location = "'.$pantalla.'";
+                        }
+                    });                                      
+                </script>';
+            }
+
         }
     }
 }

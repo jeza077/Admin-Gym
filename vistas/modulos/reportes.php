@@ -30,6 +30,12 @@
       $permisoActualizar = $_SESSION['permisos']['Usuarios']['actualizar'];
       $permisoConsulta = $_SESSION['permisos']['Usuarios']['consulta'];
 
+      $descripcionEvento = "".$_SESSION['usuario']." Consultó la pantalla de reporte de ventas";
+      $accion = "Consulta";
+
+      $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 16,$accion, $descripcionEvento);
+
+
       // var_dump($_SESSION['perm']);
 
       // foreach ($permisos_pantalla as $key => $value) {

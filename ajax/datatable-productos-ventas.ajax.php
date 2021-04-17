@@ -78,6 +78,7 @@ class TablaProductosVentas{
 			     
 			      "'.$productos[$i]["nombre_producto"].'",
 			      "'.$stock.'",
+			      "L. '.number_format($productos[$i]["precio_venta"], 2).'",
 			      "'.$botones.'"
 			    ],';
 

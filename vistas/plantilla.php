@@ -91,9 +91,14 @@
         $permisos = $_SESSION['permisos'];
 
         $val = false;
+        foreach($permisos as $key => $value) {
+          // var_dump($value['agregar']);
+          if($value['consulta'] == 1){
 
-        foreach ($permisos as $value) {
-          $val = $val || ($_GET['ruta'] == $value['link']);
+            // foreach ($permisos as $value) {
+              $val = $val || ($_GET['ruta'] == $value['link']);
+            // }
+          }
         }
       
           if($val  ||

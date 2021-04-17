@@ -1,4 +1,4 @@
-<?php
+    <?php
 
 class ControladorGlobales{
 
@@ -83,10 +83,10 @@ class ControladorGlobales{
     =============================================*/
     
     static public function ctrMostrarParametros($item,$valor){
-      $tabla = 'tbl_parametros';
-		  $respuesta = ModeloGlobales::mdlMostrarParametros($tabla, $item, $valor);
+        $tabla = 'tbl_parametros';
+        $respuesta = ModeloGlobales::mdlMostrarParametros($tabla, $item, $valor);
 
-		  return $respuesta;
+        return $respuesta;
     }
 
     /*=============================================
@@ -167,9 +167,9 @@ class ControladorGlobales{
     
         if($respuesta == true){
             
-            $descripcionEvento = "Actualizo parametro";
-            $accion = "Actualizo";
-            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
+            $descripcionEvento = "".$_SESSION["usuario"]." Actualizó el valor del parametro ".$_POST["editarParametro"]."";
+            $accion = "Actualizar";
+            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 20,$accion, $descripcionEvento);
 
           
        

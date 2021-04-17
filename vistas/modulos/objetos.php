@@ -4,13 +4,13 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Documentos</h1>
+            <h1>Objetos</h1>
           </div>
           <div class="col-sm-6">
-                <button class="btn btn-orange float-right"  data-toggle="modal" data-target="#modalNuevoDocumento">
-                  Nuevo Documento      
+                <button class="btn btn-orange float-right"  data-toggle="modal" data-target="#modalNuevoObjeto">
+                  Nuevo objeto      
                 </button>
-                <button class="btn btn-danger btnExportarDocumento float-right mr-3 ">
+                <button class="btn btn-danger btnExportarPreguntas float-right mr-3 ">
                 Exportar PDF      
                </button>
           </div>
@@ -20,31 +20,23 @@
 
   <section class="content">
 
-  <?php
-    $descripcionEvento = "".$_SESSION["usuario"]." Consultó la pantalla de documentos";
-    $accion = "Consulta";
-
-    $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 24,$accion, $descripcionEvento);
-
-  ?>
-
     <div class="card">
 
       <div class="card-body">
 
         <?php
-           
-        ?>
+            // $descripcionEvento = " Consulto la pantalla de Documentos";
+            // $accion = "Consulta";
 
-        <!--========================================================
-                    DOCUMENTOS
-        ==========================================================-->  
+            // $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
+
+        ?>
         <table class="table table-bordered table-striped tablas text-center">
             
             <thead>
               <tr>
                 <th scope="col">#</th>
-                <th scope="col">Tipo Documento</th>
+                <th scope="col">Pregunta</th>
                 <th scope="col">Estado</th>
                 <th scope="col">Acciones</th>
 
@@ -53,29 +45,29 @@
             
             <tbody>  
                 <?php
-                  $tabla = "tbl_documento";
+                  $tabla = "tbl_preguntas";
                   $item = null;
                   $valor = null;
                   $all = null;
                   
-                  $documentos = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all);
-                  // var_dump($documentos);
+                  $preguntas = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all);
+                  // var_dump($preguntas);
 
-                  foreach ($documentos as $key => $value){
+                  foreach ($preguntas as $key => $value){
                     echo '
                       <tr>  
                           <td>'.($key + 1).'</td>
-                          <td>'.$value["tipo_documento"].'</td>';
+                          <td>'.$value["pregunta"].'</td>';
                           if($value['estado'] != 0){
-                            echo '<td><button class="btn btn-success btn-md btnActivarDocumento" idDocumento="'.$value["id_documento"].'" estadoDocumento="0">Activado</button></td>';
+                            echo '<td><button class="btn btn-success btn-md btnActivarPregunta" idPregunta="'.$value["id_preguntas"].'" estadoPregunta="0">Activado</button></td>';
                           }else{
-                            echo '<td><button class="btn btn-danger btn-md btnActivarDocumento" idDocumento="'.$value["id_documento"].'" estadoDocumento="1">Desactivado</button></td>';
+                            echo '<td><button class="btn btn-danger btn-md btnActivarPregunta" idPregunta="'.$value["id_preguntas"].'" estadoPregunta="1">Desactivado</button></td>';
                           } 
                           echo '
                           <td>
-                              <button class="btn btn-warning btnEditarDocumento" idDocumento="'.$value["id_documento"].'" data-toggle="modal" data-target="#modalEditarDocumento" data-toggle="tooltip" data-placement="left" title="Editar"><i class="fas fa-pencil-alt" style="color:#fff"></i></button>
+                              <button class="btn btn-warning btnEditarPregunta" idPregunta="'.$value["id_preguntas"].'" data-toggle="modal" data-target="#modalEditarPregunta" data-toggle="tooltip" data-placement="left" title="Editar"><i class="fas fa-pencil-alt" style="color:#fff"></i></button>
 
-                              <button class="btn btn-danger btnEliminarDocumento" idEliminarDocumento="'.$value["id_documento"].'" data-toggle="tooltip" data-placement="left" title="Borrar"><i class="fas fa-trash-alt"></i></button></td>
+                              <button class="btn btn-danger btnEliminarPregunta" idEliminarPregunta="'.$value["id_preguntas"].'" data-toggle="tooltip" data-placement="left" title="Borrar"><i class="fas fa-trash-alt"></i></button></td>
                           </td>
                       </tr>  '; 
                   }       
@@ -94,10 +86,10 @@
 
 
 <!--=====================================
-MODAL AGREGAR NUEVA MATRICULA
+MODAL AGREGAR NUEVA PREGUNTA
 ======================================-->
 
-<div class="modal fade" id="modalNuevoDocumento" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modalNuevaPregunta" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   
   <div class="modal-dialog" role="document">
 
@@ -110,7 +102,7 @@ MODAL AGREGAR NUEVA MATRICULA
         ======================================-->
 
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Nuevo Documento</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Nueva Pregunta</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -122,8 +114,8 @@ MODAL AGREGAR NUEVA MATRICULA
 
         <div class="modal-body">
           <div class="form-group col-md-12">
-            <label for="Rol">Tipo Documento</label>
-            <input type="text" class="form-control nombre mayus" name="nuevoDocumento" value="" placeholder="Ingresa Documento" required>
+            <label for="">Pregunta</label>
+            <input type="text" class="form-control mayus" name="nuevaPregunta" value="" placeholder="Ingrese Pregunta" required>
           </div>
 
           <!-- <div class="form-group col-md-12">
@@ -138,13 +130,13 @@ MODAL AGREGAR NUEVA MATRICULA
 
         <div class="modal-footer">
           <button type="submit" class="btn btn-primary">Guardar</button>
-          <button type="button" class="btn btn-orange" data-dismiss="modal">Salir</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
         </div>
 
         <?php
 
-          $crearDocumento = new ControladorMantenimientos();
-          $crearDocumento-> ctrDocumentoInsertar();
+          $crearPregunta = new ControladorMantenimientos();
+          $crearPregunta-> ctrPreguntaSeguridadInsertar();
 
         ?>
 
@@ -164,10 +156,10 @@ MODAL AGREGAR NUEVA MATRICULA
 
 
 <!--=====================================
-MODAL EDITAR MATRICULA
+MODAL EDITAR PREGUNTA
 ======================================-->
 
-<div class="modal fade" id="modalEditarDocumento" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modalEditarPregunta" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   
   <div class="modal-dialog " role="document">
 
@@ -180,7 +172,7 @@ MODAL EDITAR MATRICULA
         ======================================-->
 
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Editar Documento</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Editar Pregunta</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -192,15 +184,15 @@ MODAL EDITAR MATRICULA
 
         <div class="modal-body">
           <div class="form-group col-md-12">
-            <label for="Rol">Tipo Documento</label>
-            <input type="text" class="form-control nombre mayus" id="editarDocumento" name="editarDocumento" value="" required>
+            <label for="Rol">Pregunta</label>
+            <input type="text" class="form-control mayus" id="editarPregunta" name="editarPregunta" value="" required>
           </div>
 
           <!-- <div class="form-group col-md-12">
             <label for="Descripcion">Precio Matricula</label>
             <input type="textarea" class="form-control preciom" id="editarPrecioMatricula" name="editarPrecioMatricula" value="" required>
           </div> -->
-          <input type="hidden" id="editarIdDocumento" name="editarIdDocumento">
+          <input type="hidden" id="editarIdPregunta" name="editarIdPregunta">
         </div>
 
         <!--=====================================
@@ -209,13 +201,13 @@ MODAL EDITAR MATRICULA
 
         <div class="modal-footer">
           <button type="submit" class="btn btn-primary">Guardar Cambios</button>
-          <button type="button" class="btn btn-orange" data-dismiss="modal">Salir</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
         </div>
 
         <?php
 
-          $editarDocumento = new ControladorMantenimientos();
-          $editarDocumento->ctrEditarDocumento();
+          $editarPregunta = new ControladorMantenimientos();
+          $editarPregunta->ctrEditarPregunta();
 
         ?>
 
@@ -236,8 +228,8 @@ MODAL EDITAR MATRICULA
 
 <?php
 
- $borrarDocumento = new ControladorMantenimientos();
- $borrarDocumento->ctrBorrarDocumento();
+ $borrarPregunta = new ControladorMantenimientos();
+ $borrarPregunta->ctrBorrarPregunta();
 
 ?>
 

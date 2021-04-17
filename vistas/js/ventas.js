@@ -188,8 +188,7 @@ $(".formularioVenta").on("click", "button.quitarProducto", function(){
 		$("#nuevoTotalVenta").attr("total",0);
 
 
-  }
-   else{
+  } else{
 
 		// SUMAR TOTAL DE PRECIOS
 
@@ -288,12 +287,13 @@ function sumarTotalPrecios(){
 	}
 
 	var sumaTotalPrecio = arraySumaPrecio.reduce(sumaArrayPrecios);
+  // console.log(sumaTotalPrecio)
   
-  $("#nuevoPrecioNeto").val(sumaTotalPrecio);
-  $("#precioNeto").val(sumaTotalPrecio);
-	$("#nuevoTotalVenta").val(sumaTotalPrecio);
-	$("#totalVenta").val(sumaTotalPrecio);
-	$("#nuevoTotalVenta").attr("total",sumaTotalPrecio);
+  $("#nuevoPrecioNeto").val(sumaTotalPrecio.toFixed(2));
+  $("#precioNeto").val(sumaTotalPrecio.toFixed(2));
+	$("#nuevoTotalVenta").val(sumaTotalPrecio.toFixed(2));
+	$("#totalVenta").val(sumaTotalPrecio.toFixed(2));
+	$("#nuevoTotalVenta").attr("total",sumaTotalPrecio.toFixed(2));
 
 
 }

@@ -58,8 +58,9 @@ class ControladorClientes{
 					$tabla = "tbl_inscripcion";
 					$item = "id_inscripcion";
 					$valor = $idInscripcion;
+					$all = null;
 
-					$inscripcion = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
+					$inscripcion = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all);
 
 					$cantidadDias = $inscripcion['cantidad_dias'];
 
@@ -126,6 +127,10 @@ class ControladorClientes{
 						// echo "</pre>";
 						// return;
 						if ($respuestaPago ==true) {
+							$descripcionEvento = "".$_SESSION['usuario']." Creó el nuevo cliente del gimnasio llamado ".$_POST['nuevoNombre']."";
+							$accion = "Nuevo";
+							$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION['id_usuario'], 4, $accion, $descripcionEvento);
+
 							return true;
 						}
 					
@@ -135,6 +140,9 @@ class ControladorClientes{
 					}
 
 				} else {
+					$descripcionEvento = "".$_SESSION['usuario']." Creó el nuevo cliente de ventas llamado ".$_POST['nuevoNombre']."";
+					$accion = "Nuevo";
+					$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION['id_usuario'], 4, $accion, $descripcionEvento);
 					return true;
 				}
 
@@ -180,6 +188,7 @@ class ControladorClientes{
 				"tipo_cliente" => $_POST["tipoClienteRegistrado"],
 				"id_matricula" => $_POST["nuevaMatriculaRegistrado"],
 				"id_descuento" => $id_descuento);
+
 			} else {
 				$datos = array("id_persona" => $_POST["nuevoIdPersona"],
 				"tipo_cliente" => $_POST["tipoClienteRegistrado"]);
@@ -188,7 +197,8 @@ class ControladorClientes{
 			$tabla = "tbl_clientes";
 
             $respuestaCrearCliente = ModeloClientes::mdlCrearCliente($tabla, $datos);
-			// return $respuestaCrearCliente;
+			// var_dump($respuestaCrearCliente);
+			// return;
 
             if($respuestaCrearCliente == true){
 
@@ -219,8 +229,9 @@ class ControladorClientes{
 					$tabla = "tbl_inscripcion";
 					$item = "id_inscripcion";
 					$valor = $idInscripcion;
+					$all = null;
 
-					$inscripcion = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
+					$inscripcion = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all);
 
 					$cantidadDias = $inscripcion['cantidad_dias'];
 
@@ -313,18 +324,28 @@ class ControladorClientes{
 					}
 
 				} else {
+					$tabla1 = "tbl_personas";
+				
+					$item1 = "tipo_persona";
+					$valor1 = "ambos";
+		
+					$item2 = "id_personas";
+					$valor2 = $_POST["nuevoIdPersona"];
+			
+					$respuesta = ModeloClientes::mdlActualizarCliente($tabla1, $item1, $valor1, $item2, $valor2);
+
 					echo '<script>
-						Swal.fire({
-							title: "Opps, algo salio mal, intenta de nuevo!",
-							icon: "error",
-							heightAuto: false,
-							allowOutsideClick: false
-						}).then((result)=>{
-							if(result.value){
-								window.location = "clientes";
-							}
-						});                       
-					</script>';
+							Swal.fire({
+								title: "Cliente creado correctamente!",
+								icon: "success",
+								heightAuto: false,
+								allowOutsideClick: false
+							}).then((result)=>{
+								if(result.value){
+									window.location = "clientes";
+								}
+							});                       
+						</script>';
 				}
 
 
@@ -372,8 +393,9 @@ class ControladorClientes{
 			$tabla = "tbl_clientes";
 			$item = "id_persona";
 			$valor = $idDelCliente;
+			$all = null;
 
-			$clientesCompras = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
+			$clientesCompras = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all);
 			// echo "<pre>";
 			// var_dump($clientesCompras['compras']);
 			// echo "</pre>";
@@ -410,7 +432,21 @@ class ControladorClientes{
 			// echo "</pre>";
 			// return $respuestaEditarCliente;			
 
-            if($respuestaEditarCliente = true){			
+            if($respuestaEditarCliente = true){	
+
+				
+
+				//$tabla = "tbl_personas";
+				$item = "id_personas";
+				$valor = $datos['id_persona'];
+				$all = null;
+
+				$mostrarNombreCliente= ControladorPersonas::ctrMostrarPersonas($item, $valor, $all);
+				
+				$descripcionEvento = "".$_SESSION['usuario']." Actualizó el cliente de ventas llamado ".$mostrarNombreCliente['nombre']."";
+				$accion = "Actualizar";
+				$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION['id_usuario'], 4, $accion, $descripcionEvento);
+				
 
 				// GUARDAR EN LA TABLA CLIENTE INSCRIPCION
 
@@ -445,8 +481,9 @@ class ControladorClientes{
 				$tabla = "tbl_inscripcion";
 				$item = "id_inscripcion";
 				$valor = $idDeInscripcion;
+				$all = null;
 
-				$inscripcion = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
+				$inscripcion = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all);
 
 				$cantidadDias = $inscripcion['cantidad_dias'];
 
@@ -522,13 +559,11 @@ class ControladorClientes{
 					// echo "</pre>";
 					// return;
 					if ($respuestaPago == true) {
+						
 						return true;
 					}
 				
-					$descripcionEvento = "Nuevo cliente";
-					$accion = "Nuevo";
-					$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 3,$accion, $descripcionEvento);
-
+					
 
 				}	
 
@@ -708,6 +743,11 @@ class ControladorClientes{
 			$respuesta = ModeloClientes::mdlActualizarPagoCliente($tabla, $datos, $fecha);
 
 			if($respuesta == true){
+				/*
+				$descripcionEvento = "".$_SESSION['usuario']." Realizó el pago de inscripción al cliente manteniendo su inscripción ".$mostrarNombreCliente['nombre']."";
+				$accion = "Actualizar";
+				$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION['id_usuario'], 5, $accion, $descripcionEvento);
+				*/
 
 				$tabla = 'tbl_pagos_cliente';
 				$datos = array('id_cliente_inscripcion' => $idClienteInscripcion,
@@ -751,8 +791,9 @@ class ControladorClientes{
 			$tabla = "tbl_inscripcion";
 			$item = "id_inscripcion";
 			$valor = $idInscripcion;
+			$all = null;
 			
-			$inscripciones = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);  
+			$inscripciones = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all);  
 
 			// var_dump($inscripciones);
 			// return;
@@ -807,6 +848,20 @@ class ControladorClientes{
 				$respuestaPagoCliente = ModeloClientes::mdlActualizarInscripcionPagoCliente($tabla, $datos, $fecha);
 	
 				if($respuestaPagoCliente == true){
+
+					//$tabla = "tbl_personas";
+					$item = "id_personas";
+					$valor = $respuesta['id_personas'];
+					$all = null;
+
+					$mostrarNombreCliente= ControladorPersonas::ctrMostrarPersonas($item, $valor, $all);
+				
+
+					$descripcionEvento = "".$_SESSION['usuario']." Cambió el pago de inscripción al cliente ".$mostrarNombreCliente['nombre']."";
+					$accion = "Actualizar";
+					$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION['id_usuario'], 5, $accion, $descripcionEvento);
+
+
 					echo "<script>
 							Swal.fire({
 								title: 'El cambio y pago de inscripcion, se realizo exitosamente!',
@@ -878,8 +933,9 @@ class ControladorClientes{
 			$tabla = "tbl_inscripcion";
 			$item = "id_inscripcion";
 			$valor = $idInscripcion;
-			
-			$inscripciones = ControladorUsuarios::ctrMostrar($tabla, $item, $valor); 
+			$all = null;
+
+			$inscripciones = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all); 
 
 			if($inscripciones){
 
@@ -888,8 +944,9 @@ class ControladorClientes{
 				$tabla = "tbl_cliente_inscripcion";
 				$item = "id_cliente";
 				$valor = $_POST['nuevoClienteInscripcion'];
+				$all = null;
 				
-				$clienteInscripcion = ControladorUsuarios::ctrMostrar($tabla, $item, $valor); 
+				$clienteInscripcion = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all); 
 
 				
 				$idClienteInscripcion = $clienteInscripcion['id_cliente_inscripcion'];
@@ -975,6 +1032,12 @@ class ControladorClientes{
 				
 		
 					if($respuestaPago == true){
+
+						$descripcionEvento = "".$_SESSION['usuario']." Registró la inscripción ";
+						$accion = "Nuevo";
+						$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION['id_usuario'], 5, $accion, $descripcionEvento);
+
+
 						echo "<script>
 								Swal.fire({
 									title: 'Inscripcion agregada exitosamente!',
@@ -1060,8 +1123,9 @@ class ControladorClientes{
 			$tabla = "tbl_inscripcion";
 			$item = "id_inscripcion";
 			$valor = $idInscripcion;
+			$all = null;
 			
-			$inscripciones = ControladorUsuarios::ctrMostrar($tabla, $item, $valor); 
+			$inscripciones = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all); 
 
 			if($inscripciones){
 
@@ -1073,8 +1137,9 @@ class ControladorClientes{
 				$tabla = "tbl_cliente_inscripcion";
 				$item = "id_cliente_inscripcion";
 				$valor = $_POST['nuevoClienteSinInscripcion'];
+				$all = null;
 				
-				$clienteInscripcion = ControladorUsuarios::ctrMostrar($tabla, $item, $valor); 
+				$clienteInscripcion = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all); 
 
 				// var_dump($clienteInscripcion);
 				// return;
@@ -1155,6 +1220,9 @@ class ControladorClientes{
 				
 		
 					if($respuestaPago == true){
+						$descripcionEvento = "".$_SESSION['usuario']." Agregó una nueva inscripción ";
+						$accion = "Nuevo";
+						$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION['id_usuario'], 5, $accion, $descripcionEvento);
 						echo "<script>
 								Swal.fire({
 									title: 'Inscripcion agregada exitosamente!',

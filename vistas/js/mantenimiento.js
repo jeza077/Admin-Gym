@@ -658,6 +658,36 @@ $(document).on("click", ".btnEditarDocumento", function(){
 });
 
 /*===================================
+//    EDITAR PREGUNTA
+====================================*/
+$(document).on("click", ".btnEditarPregunta", function(){
+    
+    var idPregunta = $(this).attr("idPregunta");
+    // console.log(idPregunta)
+    var datos = new FormData();
+    datos.append("idPregunta", idPregunta);
+
+    $.ajax({
+
+        url:"ajax/mantenimiento.ajax.php",
+        method:"POST",
+        data: datos,
+        cache: false,
+        contentType:false,
+        processData:false,
+        dataType: "json",
+        success:function(respuesta){ 
+            // console.log(respuesta)
+
+            $('#editarPregunta').val(respuesta['pregunta']);
+            $('#editarIdPregunta').val(respuesta['id_preguntas']);
+         
+        } 
+
+    });
+});
+
+/*===================================
     EDITAR PROVEEDOR
 ====================================*/
 $(document).on("click", ".btnEditarProveedor", function(){
@@ -737,6 +767,15 @@ get = 'idEliminarDocumento';
 titulo = "¿Estás seguro de querer borrar el documento?";
 texto = "¡Si no lo estas, puedes cancelar la acción!";
 ruta = 'documentos';
+borrarDinamico(boton, atributo, get, titulo, texto, ruta);
+
+/*** Borrar Pregunta ***/
+boton = '.btnEliminarPregunta';
+atributo = 'idEliminarPregunta';
+get = 'idEliminarPregunta';
+titulo = "¿Estás seguro de querer borrar la pregunta?";
+texto = "¡Si no lo estas, puedes cancelar la acción!";
+ruta = 'preguntas-seguridad';
 borrarDinamico(boton, atributo, get, titulo, texto, ruta);
 
 /*** Borrar Proveedores ***/
@@ -1025,6 +1064,50 @@ $(document).on("click", ".btnActivarDocumento", function(){
 
 })
 
+/*=====================================
+ACTIVAR PREGUNTA
+========================================*/
+$(document).on("click", ".btnActivarPregunta", function(){
+
+    var idPregunta = $(this).attr("idPregunta");
+    var estadoPregunta = $(this).attr("estadoPregunta");
+    // console.log(idPregunta)
+    var datos = new FormData();
+    datos.append("idPreguntaActivar", idPregunta);
+    datos.append("estadoPregunta",estadoPregunta);
+
+    $.ajax({
+        
+      url:"ajax/mantenimiento.ajax.php",
+      method:"POST",
+      data: datos,
+      cache: false,
+      contentType:false,
+      processData:false,
+      success:function(respuesta){ 
+        //   console.log(respuesta)
+     } 
+
+    }) 
+
+    if(estadoPregunta == 0){
+        $(this).removeClass('btn-success');
+        $(this).addClass('btn-danger');
+        $(this).html('Desactivado');
+        $(this).attr('estadoPregunta',1);
+
+    }else{
+
+
+        $(this).addClass('btn-success');
+        $(this).removeClass('btn-danger');
+        $(this).html('Activado');
+        $(this).attr('estadoPregunta',0);
+
+    }
+
+})
+
 
 
 
@@ -1049,12 +1132,17 @@ exportarPdf('.btnExportarDescuento', 'descuento');
 exportarPdf('.btnExportarRol', 'rol');
 
 //** ------------------------------------*/
+//         IMPRIMIR PDF PREGUNTAS
+// --------------------------------------*/ 
+exportarPdf('.btnExportarPreguntas', 'preguntas-seguridad');
+
+//** ------------------------------------*/
 //         IMPRIMIR PDF Parametros
 // --------------------------------------*/ 
 exportarPdf('.btnExportarParametro', 'parametros');
 
 //** ------------------------------------*/
-//         IMPRIMIR PDF Parametros
+//       IMPRIMIR PDF PERMISOS-ROL
 // --------------------------------------*/ 
 exportarPdf('.btnExportarPermisosRol', 'permisos-rol');
 

@@ -92,7 +92,7 @@ class ModeloGlobales{
 			
 		} else {
 
-			$stmt = Conexion::conectar() ->prepare("SELECT * FROM $tabla  where matricula LIKE '%$rango%'");
+			$stmt = Conexion::conectar() ->prepare("SELECT * FROM $tabla  WHERE matricula LIKE '%$rango%'");
 
             $stmt-> execute();
 			return $stmt ->fetchAll();

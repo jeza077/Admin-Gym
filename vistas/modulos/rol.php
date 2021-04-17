@@ -25,10 +25,10 @@
       <div class="card-body">
 
         <?php
-            $descripcionEvento = " Consulto la pantalla de Rol";
-            $accion = "consulta";
+            $descripcionEvento = "".$_SESSION["usuario"]." Consultó la pantalla de rol";
+            $accion = "Consulta";
 
-            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
+            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 18,$accion, $descripcionEvento);
 
         ?>
 
@@ -154,8 +154,9 @@ MODAL AGREGAR ROL
                           $tabla = "tbl_objetos";
                           $item = null;
                           $valor = null;
+                          $all = null;
 
-                          $roles = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
+                          $roles = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all);
 
                           foreach ($roles as $key => $value) {
                             echo '<option value="'.$value["id_objeto"].'">'.$value["objeto"].'</option>';
@@ -298,8 +299,9 @@ MODAL EDITAR ROL
                                 $tabla = "tbl_objetos";
                                 $item = null;
                                 $valor = null;
-      
-                                $roles = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
+                                $all = null;
+
+                                $roles = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all);
       
                                 foreach ($roles as $key => $value) {
                                   echo '<option value="'.$value["id_objeto"].'">'.$value["objeto"].'</option>';

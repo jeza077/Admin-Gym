@@ -611,6 +611,53 @@ class ModeloMantenimiento{
     }
 
 
+    /*============================================
+    AGREGAR NUEVA PREGUNTA
+	==============================================*/
+	static public function mdlPreguntaSeguridadInsertar($tabla, $datos){
+
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(pregunta) VALUES (:pregunta)");
+       
+        $stmt->bindParam(":pregunta", $datos["pregunta"], PDO::PARAM_STR);
+
+		if($stmt->execute()){
+			return true;
+
+		}else{
+			return false;
+		
+		}
+
+		$stmt->close();
+		$stmt = null;
+    }
+
+    /*=============================================
+    EDITAR PREGUNTA
+    =============================================*/
+    
+    static public function mdlEditarPregunta($tabla,$datos){
+        
+        $stmt = Conexion::conectar()->prepare("UPDATE $tabla SET pregunta = :pregunta WHERE id_preguntas = :id_preguntas");
+
+        $stmt -> bindParam(":pregunta", $datos["pregunta"], PDO::PARAM_STR);
+        $stmt -> bindParam(":id_preguntas", $datos["id_pregunta"], PDO::PARAM_INT);
+
+        if($stmt->execute()){
+
+            return true;
+
+        }else{
+
+            return false;
+        
+        }
+
+        $stmt->close();
+        $stmt = null;
+    }
+
+
     /*=============================================
     BORRAR ROLES
 	=============================================*/
@@ -858,8 +905,38 @@ class ModeloMantenimiento{
 	}
 
 
+    /*=============================================
+			RANGO PREGUNTAS
+	=============================================*/
+	static public function mdlRangoPreguntas($tabla, $rango){
+        
+        if($rango == null){
+            
+            $stmt = Conexion::conectar() ->prepare("SELECT * FROM $tabla\n"
+			. "ORDER BY id_preguntas DESC");
+            $stmt-> execute();
+			return $stmt ->fetchAll();
+			
+		} else {
+        
+			$stmt = Conexion::conectar() ->prepare("SELECT * FROM $tabla\n"
+			. "WHERE pregunta LIKE '%$rango%'");
+            // OR fecha LIKE '%$rango%' OR objeto LIKE '%$rango%' OR accion LIKE '%$rango%'
+			$stmt->bindParam(":pregunta", $rango, PDO::PARAM_STR);
+			// $stmt->bindParam(":fecha", $rango, PDO::PARAM_STR);
+            // $stmt->bindParam(":objeto", $rango, PDO::PARAM_STR);
+			// $stmt->bindParam(":accion", $rango, PDO::PARAM_STR);
+        
 
-     /*====================================================
+            $stmt-> execute();
+			return $stmt ->fetchAll();
+			
+		} 	
+	}
+
+
+
+    /*====================================================
        Actualizar DESCUENTO
     ======================================================*/
 

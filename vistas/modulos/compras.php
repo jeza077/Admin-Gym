@@ -34,10 +34,10 @@
         //   echo $key;
         // }
 
-        $descripcionEvento = " Consulto la pantalla de Compras";
-        $accion = "consulta";
+        $descripcionEvento =  "".$_SESSION["usuario"]." Consultó la pantalla de compras";
+        $accion = "Consulta";
 
-        $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 4,$accion, $descripcionEvento);      
+        $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 9,$accion, $descripcionEvento);      
 
       ?>
 

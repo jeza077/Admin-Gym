@@ -83,6 +83,21 @@ class AjaxParametro{
     }  
 
 
+    //** ------------------------------------*/
+    //  SELECT A PARAMETRO PRODUCTO MINIMO
+    // --------------------------------------*/ 
+    public $parametroProducto;
+
+    public function ajaxparametroProducto(){
+
+        // $tabla = "tbl_parametros";
+        $item = "parametro";
+        $valor = $this->parametroProducto;
+        
+        $respuesta = ControladorUsuarios::ctrMostrarParametros($item, $valor);
+
+        echo json_encode($respuesta);
+    }
 
     
 }    
@@ -121,7 +136,7 @@ class AjaxParametro{
         $editar-> ajaxEditarInscripcion();
     }    
     
-       /*========================================
+    /*========================================
         Editar Matricula
     ==========================================*/ 
 
@@ -132,7 +147,7 @@ class AjaxParametro{
         $editar-> ajaxEditarMatricula();
     }  
     
-     /*========================================
+    /*========================================
         Editar DESCUENTO
     ==========================================*/ 
 
@@ -141,6 +156,17 @@ class AjaxParametro{
         $editar = new AjaxParametro();
         $editar-> idDescuento = $_POST["idDescuento"];
         $editar-> ajaxEditarDescuento();
+    }     
+
+    /*========================================
+        SELECT A PARAMETRO PRODUCTO MINIMO
+    ==========================================*/ 
+
+    if(isset($_POST["parametroProducto"])){ 
+
+        $pMinimo = new AjaxParametro();
+        $pMinimo->parametroProducto = $_POST["parametroProducto"];
+        $pMinimo->ajaxParametroProducto();
     }     
     
     

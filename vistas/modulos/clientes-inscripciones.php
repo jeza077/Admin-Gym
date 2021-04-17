@@ -26,17 +26,18 @@
         $permisoActualizar = $_SESSION['permisos']['Clientes']['actualizar'];
         $permisoConsulta = $_SESSION['permisos']['Clientes']['consulta'];
 
+        $descripcionEvento = "".$_SESSION['usuario']." Consultó la pantalla de clientes inscripciones";
+        $accion = "Consulta";
+
+        $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 5,$accion, $descripcionEvento);
+
         // var_dump($_SESSION['perm']);
 
         // foreach ($permisos_pantalla as $key => $value) {
         //   echo $key;
         // }
         
-        $descripcionEvento = " Consulto la pantalla de cliente";
-        $accion = "consulta";
-
-        $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 3,$accion, $descripcionEvento);
-
+        
       ?>
 
       <div class="card">
@@ -88,11 +89,11 @@
                         <option value="" id="actualizarInscripcion"></option>
                         <?php 
                             $tabla = "tbl_inscripcion";
-                            $item = null;
-                            $valor = null;
-                            
+                            $item = 'estado';
+                            $valor = 1;
+                            $all = true;
 
-                            $inscripciones = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);           
+                            $inscripciones = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all);           
  
                             foreach ($inscripciones as $key => $value) { ?>
                               <option value="<?php echo $value['id_inscripcion']?>"><?php echo $value['tipo_inscripcion']?></option>        
@@ -350,11 +351,11 @@
                         <option selected="selected">Seleccionar...</option>
                         <?php 
                             $tabla = "tbl_inscripcion";
-                            $item = null;
-                            $valor = null;
-                            
+                            $item = 'estado';
+                            $valor = 1;
+                            $all = true;
 
-                            $inscripciones = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);           
+                            $inscripciones = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all);           
  
                             foreach ($inscripciones as $key => $value) { ?>
                               <option value="<?php echo $value['id_inscripcion']?>"><?php echo $value['tipo_inscripcion']?></option>        
@@ -458,11 +459,11 @@
                         <option selected="selected">Seleccionar...</option>
                         <?php 
                             $tabla = "tbl_inscripcion";
-                            $item = null;
-                            $valor = null;
-                            
+                            $item = 'estado';
+                            $valor = 1;
+                            $all = true;
 
-                            $inscripciones = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);           
+                            $inscripciones = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all);           
  
                             foreach ($inscripciones as $key => $value) { ?>
                               <option value="<?php echo $value['id_inscripcion']?>"><?php echo $value['tipo_inscripcion']?></option>        

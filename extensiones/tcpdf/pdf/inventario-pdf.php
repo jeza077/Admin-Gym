@@ -1,10 +1,17 @@
 <?php
+require_once("../../../controladores/mantenimiento.controlador.php");
 require_once("../../../controladores/usuarios.controlador.php");
 require_once "../../../modelos/usuarios.modelo.php";
 require_once('../../../controladores/inventario.controlador.php');
 require_once "../../../modelos/inventario.modelo.php";
 require_once('../examples/tcpdf_include.php');
 
+session_start();
+
+$descripcionEvento = "".$_SESSION['usuario']." Generó reporte pdf de inventario";
+$accion = "Generar";
+$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION['id_usuario'], 10, $accion,
+$descripcionEvento);
 
 class PDF extends TCPDF{
     
@@ -81,7 +88,7 @@ class PDF extends TCPDF{
         date_default_timezone_set("America/Tegucigalpa");
         $fecha = date('Y-m-d H:i:s');
         $this->Cell(0, 10, ''.$fecha.'', 0, false, 'C', 0, '', 0, false, 'T', 'M');
-        $this->Cell(0, 10, 'Page '.$this->getAliasNumPage().'/'.$this->getAliasNbPages(), 0, false, 'C', 0, '', 0, false, 'T', 'M');
+        $this->Cell(0, 10, 'Página '.$this->getAliasNumPage().'/'.$this->getAliasNbPages(), 0, false, 'C', 0, '', 0, false, 'T', 'M');
     }
 }
 

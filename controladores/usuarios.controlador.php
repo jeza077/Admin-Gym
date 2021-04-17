@@ -37,10 +37,10 @@ class ControladorUsuarios{
 	MOSTRAR (DINAMICO)
 	=============================================*/
 
-	static public function ctrMostrar($tabla, $item, $valor) {
+	static public function ctrMostrar($tabla, $item, $valor, $all) {
 
 		$tabla1 = $tabla;
-		$respuesta = ModeloUsuarios::mdlMostrar($tabla1, $item, $valor);
+		$respuesta = ModeloUsuarios::mdlMostrar($tabla1, $item, $valor, $all);
 
 		return $respuesta;
 
@@ -161,8 +161,8 @@ class ControladorUsuarios{
 
 						if($respuesta["usuario"] == $_POST["ingUsuario"] && $respuesta["password"] == $encriptar){
 							
-							
-							if($respuesta["estado"] == 0 && $respuesta["primera_vez"] == 1 && $respuesta["rol"] == "Default" || $respuesta["estado"] == 1 && $respuesta["primera_vez"] == 1 && $respuesta["rol"] == "Default"){
+								#AUTO-REGISTRO
+							if($respuesta["estado"] == 0 && $respuesta["primera_vez"] == 1 && $respuesta["rol"] == "DEFAULT" || $respuesta["estado"] == 1 && $respuesta["primera_vez"] == 1 && $respuesta["rol"] == "DEFAULT"){
 
 								echo '<script>			
 										Swal.fire({
@@ -173,6 +173,7 @@ class ControladorUsuarios{
 										});
 									</script>';
 									
+								#PRIMERA VEZ
 							} else if($respuesta["estado"] == 0 && $respuesta["primera_vez"] == 1 || $respuesta["estado"] == 1 && $respuesta["primera_vez"] == 1) {
 
 								$_SESSION["iniciarSesion"] = "ok";
@@ -183,6 +184,10 @@ class ControladorUsuarios{
 								$_SESSION["apellidos"] = $respuesta["apellidos"];
 								$_SESSION["primerIngreso"] = $respuesta["primera_vez"];
 			
+								$descripcionEvento = "".$_SESSION['usuario']." ingreso al sistema por primera vez";
+								$accion = "Ingreso";
+								$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION['id_usuario'], 31, $accion, $descripcionEvento);						
+
 								echo '<script>
 								Swal.fire({
 									title: "Bienvenid@ '.$_SESSION['nombre'] . " " . $_SESSION["apellidos"] . '",
@@ -197,7 +202,7 @@ class ControladorUsuarios{
 								</script>';
 
 														
-
+								#SI ESTA ACTIVO Y NO ES PRIMER INGRESO
 							} else if($respuesta["estado"] == 1 && $respuesta["primera_vez"] == 0 && $fechaHoy < $fechaVencimiento || $respuesta["estado"] == 1 && $respuesta["primera_vez"] == 0 && $fechaHoy > $fechaVencimiento && $_POST['ingUsuario'] == 'SUPERADMIN') {
 
 								$_SESSION["iniciarSesion"] = "ok";
@@ -238,13 +243,9 @@ class ControladorUsuarios{
 
 								if($ultimoLogin == true){
 
-									// $descripcionEvento = " Ingreso a Login";
-									// $accion = "Ingreso";
-						 
-									// $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
-
-									// return var_dump($bitacoraConsulta);
-									
+									$descripcionEvento = "".$_SESSION['usuario']." ingreso al sistema";
+									$accion = "Ingreso";
+									$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION['id_usuario'], 1, $accion, $descripcionEvento);						
 
 									echo '<script>
 										Swal.fire({
@@ -262,6 +263,7 @@ class ControladorUsuarios{
 
 								}
 
+								#SI ESTA VENCIDO SU USUARIO Y NO ES SUPERADMIN
 							} else if($respuesta["estado"] == 1 && $fechaHoy > $fechaVencimiento && $_POST['ingUsuario'] != 'SUPERADMIN'){
 								
 								echo '<script>			
@@ -274,6 +276,7 @@ class ControladorUsuarios{
 									</script>';
 								session_destroy();
 
+								#USUARIO DESACTIVADO
 							} else {
 
 								echo '<script>			
@@ -306,7 +309,7 @@ class ControladorUsuarios{
 								// echo $intentosRestantes;
 								// session_destroy();
 
-								if($_SESSION['contadorLogin'] > $intentos) {
+								if($_SESSION['contadorLogin'] >= $intentos) {
 									$tabla1 = "tbl_personas";
 									$tabla2 = "tbl_usuarios";
 									
@@ -314,6 +317,11 @@ class ControladorUsuarios{
 									$valor = $_POST["ingUsuario"];
 
 									$respuesta = ModeloUsuarios::mdlMostrarUsuarios($tabla1, $tabla2, $item, $valor);
+
+									$idUser = $respuesta['id_usuario'];
+									$user = $respuesta['usuario'];
+									// var_dump($respuesta);
+									// return;
 
 									if($respuesta["usuario"] == $_POST["ingUsuario"]){
 										$tabla = "tbl_usuarios";
@@ -333,6 +341,13 @@ class ControladorUsuarios{
 
 										if($respuestaEstado == true){
 											
+											$descripcionEvento = "".$user." intento ingresar al sistema y fue bloqueado por intentos invalidos";
+											$accion = "Ingreso";
+											$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($idUser, 30, $accion, $descripcionEvento);
+
+											// var_dump($bitacoraConsulta);
+											// return;
+
 											echo '<script>			
 													Swal.fire({
 														title: "¡Lo sentimos! Su usuario ha sido bloqueado, comuniquese con el Administrador.",
@@ -559,8 +574,8 @@ class ControladorUsuarios{
 							$respuestaCorreo = ControladorUsuarios::ctrGenerarCorreo($email, $nombreUsuario, $asunto, $template, $require);
 
 							if($respuestaCorreo = true){
-							
-								$descripcionEvento = "Nuevo Usuario";
+								
+								$descripcionEvento = "".$_SESSION["usuario"]." Creó un nuevo usuario llamado ".$nombreUsuario."";
 								$accion = "Nuevo";
 								$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 2,$accion, $descripcionEvento);
 			
@@ -1133,8 +1148,8 @@ class ControladorUsuarios{
 						$respuestaPass = ModeloUsuarios::mdlHistorialPassword($tabla,$idUsuario, $password);
 
 					
-						$descripcionEvento = " Actualizo registro en la pantalla de usuario";
-						$accion = "Actualizo";
+						$descripcionEvento = "".$_SESSION["usuario"]." Actualizó el registro del usuario ".$datos["usuario"]."";
+						$accion = "Actualizar";
 			
 						$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 2,$accion, $descripcionEvento);
 			
@@ -1289,8 +1304,19 @@ class ControladorUsuarios{
 						$respuestaContraseña = ModeloUsuarios::mdlActualizarUsuario($tabla2, $item1, $valor1, $item2, $valor2, $item3, $valor3, $item4, $valor4);
 
 						if($respuestaContraseña == true) {
+
+							$descripcionEvento = "".$usuario." cambio su contraseña por primera vez";
+							$accion = "Primer ingreso";
+							$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($id, 31, $accion, $descripcionEvento);						
 							$tabla = "tbl_preguntas_usuarios";
 							
+							//INSERTAR UN PASSWORD NUEVO
+							$tabla="tbl_historial_pass";
+							$idUsuario=$id;
+							$password = crypt($_POST['editarPassword'], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
+
+							$respuestapass = ModeloUsuarios::mdlHistorialPassword($tabla,$idUsuario, $password);
+
 							$datos = array("idUsuario" => $id,
 											"idPregunta" => $_POST["nuevaPregunta"],
 											"respuesta" => $_POST["respuestaPregunta"]);
@@ -1299,6 +1325,10 @@ class ControladorUsuarios{
 							$respuestaPreguntas = ModeloUsuarios::mdlIngresarPreguntaUsuario($tabla, $datos);
 				
 							if($respuestaPreguntas == true){
+
+								$descripcionEvento = "".$usuario." agrego sus preguntas de seguridad por primera vez";
+								$accion = "Primer ingreso";
+								$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($id, 31, $accion, $descripcionEvento);	
 
 								$tabla = "tbl_usuarios";
 
@@ -1316,13 +1346,7 @@ class ControladorUsuarios{
 				
 								$respuestaEstadoPrimeraVez = ModeloUsuarios::mdlActualizarUsuario($tabla, $item1, $valor1, $item2, $valor2, $item3, $valor3, $item4, $valor4);
 
-								
-									//INSERTAR UN PASSWORD NUEVO
-							        $tabla="tbl_historial_pass";
-									$idUsuario=$id;
-									$password = crypt($_POST['editarPassword'], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
-
-									$respuestapass = ModeloUsuarios::mdlHistorialPassword($tabla,$idUsuario, $password);
+								if($respuestaEstadoPrimeraVez == true) {
 
 									echo '<script>
 										Swal.fire({

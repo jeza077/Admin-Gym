@@ -130,7 +130,7 @@ class ModeloUsuarios{
 
 			$stmt = Conexion::conectar()->prepare("SELECT p.*, u.*, r.rol FROM $tabla1 AS p\n"
 					. " INNER JOIN $tabla2 AS u ON p.id_personas = u.id_persona\n"
-					. " INNER JOIN tbl_roles AS r ON u.id_rol = r.id_rol");
+					. " INNER JOIN tbl_roles AS r ON u.id_rol = r.id_rol ORDER BY u.id_usuario DESC");
 			$stmt -> execute();
 			return $stmt -> fetchAll();
 
@@ -213,9 +213,16 @@ class ModeloUsuarios{
 	MOSTRAR (DINAMICO)
 	=============================================*/
 
-	static public function mdlMostrar($tabla, $item, $valor){
+	static public function mdlMostrar($tabla, $item, $valor, $all){
 
-		if($item != null){
+		if($item != null && $all != null){
+
+			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item");
+			$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+			$stmt -> execute();
+			return $stmt -> fetchAll();
+
+		} else if($item != null && $all == null){
 
 			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item");
 			$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
@@ -550,7 +557,7 @@ class ModeloUsuarios{
     
     static public function mdlMostrarParametros($tabla, $item, $valor){
 		if($item != null){
-			$stmt = Conexion::conectar()->prepare("SELECT parametro, valor FROM $tabla WHERE $item = :$item");
+			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item");
 			$stmt->bindParam(":".$item, $valor, PDO::PARAM_STR);
 			$stmt->execute();
 			return $stmt->fetch();
@@ -573,11 +580,11 @@ class ModeloUsuarios{
 
 		if($stmt->execute()){
 
-			return "ok";
+			return true;
 
 		}else{
 
-			return "error";
+			return $stmt->errorInfo();
 		
 		}
 

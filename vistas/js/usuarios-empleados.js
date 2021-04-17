@@ -128,6 +128,40 @@ $(document).on('click', '.btnEditarUsuario', function () {
     });
 
 });
+//** ------------------------------------*/
+//   VER DATOS DE USUARIO A DETALLES
+// --------------------------------------*/ 
+$(document).on('click', '.btnVerUsuario', function () {
+    // e.preventDefault();
+    let idPersonaUsuario = $(this).attr('idUsuario');
+    // console.log(idPersonaUsuario);
+
+    let datos = new FormData();
+    datos.append('idPersonaUsuario', idPersonaUsuario);
+
+    $.ajax({
+
+        url:"ajax/usuarios.ajax.php",
+        method: "POST",
+        data: datos,
+        cache: false,
+        contentType: false,
+        processData: false,  
+        dataType: "json",
+        success: function(respuesta) {
+            console.log(respuesta);
+
+            $('#detalleCorreoUsuario').val(respuesta['correo']);
+            $('#detalleTelefonoUsuario').val(respuesta['telefono']);
+            $('#detalleDireccionUsuario').val(respuesta['direccion']);
+            $('#detalleSexoUsuario').val(respuesta['sexo']);
+            $('#detalleFechaNacUsuario').val(respuesta['fecha_nacimiento']);
+            
+        }
+
+    });
+
+});
 
 
 
@@ -194,6 +228,30 @@ $(document).on('click', '.btnEliminarUsuario', function () {
         }
     });
 });
+
+
+//** ------------------------------------*/
+//         BORRAR BITACORA 
+// --------------------------------------*/ 
+$(document).on('click', '.btnEliminarBitacora', function () {
+    var idBitacora = $(this).attr('idBitacora');
+   
+
+    Swal.fire({
+        title: "¿Estas seguro de borrar el registro de bitacora?",
+        text: "¡Si no lo estas, puedes cancelar la accion!",
+        icon: "info",
+        showCancelButton: true,
+        cancelButtonColor: "#DC3545",
+        heightAuto: false,
+        allowOutsideClick: false
+    }).then((result)=>{
+        if(result.value){
+            window.location = "index.php?ruta=bitacora&idBitacora="+idBitacora;
+        }
+    });
+});
+
 
 
 
