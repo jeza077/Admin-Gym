@@ -2198,12 +2198,25 @@ class ControladorMantenimientos {
     /*=============================================
     RANGO DE PREGUNTAS
     =============================================*/
-
     static public function ctrRangoPreguntas($rango) {
 
       $tabla = "tbl_preguntas";
       
       $respuesta = ModeloMantenimiento::mdlRangoPreguntas($tabla, $rango);
+
+      return $respuesta;
+
+    }
+
+
+    /*=============================================
+    RANGO DE RESPALDO
+    =============================================*/
+    static public function ctrRangoRespaldo($rango) {
+
+      $tabla = "tbl_backup";
+      
+      $respuesta = ModeloMantenimiento::mdlRangoRespaldo($tabla, $rango);
 
       return $respuesta;
 

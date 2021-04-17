@@ -982,6 +982,38 @@ class ModeloMantenimiento{
 	}
 
 
+    /*=============================================
+			RANGO RESPALDO
+	=============================================*/
+	static public function mdlRangoRespaldo($tabla, $rango){
+        
+        if($rango == null){
+            
+            $stmt = Conexion::conectar() ->prepare("SELECT b.*, u.* FROM $tabla as b\n"
+            . "LEFT JOIN tbl_usuarios as u ON b.creado_por = u.id_usuario\n"
+			. "ORDER BY id_backup DESC");
+            $stmt-> execute();
+			return $stmt ->fetchAll();
+			
+		} else {
+        
+			$stmt = Conexion::conectar() ->prepare("SELECT * FROM $tabla as b\n"
+            . "LEFT JOIN tbl_usuarios as u ON b.creado_por = u.id_usuario\n"
+			. "WHERE nombre_backup LIKE '%$rango%' OR fecha_creacion LIKE '%$rango%' OR u.usuario LIKE '%$rango%'");
+            // OR fecha LIKE '%$rango%' OR objeto LIKE '%$rango%' OR accion LIKE '%$rango%'
+			$stmt->bindParam(":pregunta", $rango, PDO::PARAM_STR);
+			// $stmt->bindParam(":fecha", $rango, PDO::PARAM_STR);
+            // $stmt->bindParam(":objeto", $rango, PDO::PARAM_STR);
+			// $stmt->bindParam(":accion", $rango, PDO::PARAM_STR);
+        
+
+            $stmt-> execute();
+			return $stmt ->fetchAll();
+			
+		} 	
+	}
+
+
 
     /*====================================================
        Actualizar DESCUENTO
