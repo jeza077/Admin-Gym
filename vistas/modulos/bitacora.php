@@ -48,7 +48,8 @@
                 <th width="100px">Objeto</th>
                 <th width="100px">Accion</th>
                 <th width="100px">Descripcion</th>
-                <th width="100px">Fecha</th>            
+                <th width="100px">Fecha</th>
+                <th width="100px">Depurar</th> 
               </tr>
             </thead>
           </table>
@@ -62,3 +63,12 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
+
+  <!-- =======================================
+  ELIMINAR BITACORA
+  ======================================----->
+  <?php 
+    $pantalla = 'bitacora';
+    $borrarUsuario = new ControladorPersonas();
+    $borrarUsuario->ctrBorrarBitacora($pantalla);
+  ?>

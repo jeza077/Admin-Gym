@@ -145,4 +145,28 @@ class ModeloPersonas{
 
 		$stmt = null;
 	}
+
+	/*=============================================
+	BORRAR BITACORA
+	=============================================*/
+	static public function mdlBorrarBitacora($tabla, $datos){
+
+		$stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE id_bitacora = :id_bitacora");
+
+		$stmt->bindParam(":id_bitacora", $datos, PDO::PARAM_INT);
+
+		if($stmt->execute()){
+
+			return true;
+
+		} else {
+		
+			return $stmt->errorInfo();
+
+		}
+
+		$stmt->close();
+
+		$stmt = null;
+	}
 }

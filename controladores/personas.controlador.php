@@ -903,4 +903,52 @@ class ControladorPersonas{
             }
         }
     }
+
+    /*=============================================
+    BORRAR BITACORA
+    =============================================*/
+    static public function ctrBorrarBitacora($pantalla){
+        // var_dump($_GET);
+        // return;
+
+        if(isset($_GET['idBitacora'])){
+            $tabla = 'tbl_bitacora';
+            $datos = $_GET['idBitacora'];
+
+
+            $respuesta = ModeloPersonas::mdlBorrarBitacora($tabla, $datos);
+            
+            // var_dump($respuesta);
+            // return;
+            
+
+            if ($respuesta==true) {
+                echo '<script>
+                        Swal.fire({
+                            title: "El registro ha sido borrado correctamente!",
+                            icon: "success",
+                            heightAuto: false
+                        }).then((result)=>{
+                            if(result.value){
+                                window.location = "'.$pantalla.'";
+                            }
+                        });                                      
+                    </script>';
+            }else{
+                echo '<script>
+                    Swal.fire({
+                        title: "No se pudo borrar el registro!",
+                        text: "No se puede borrar",
+                        icon: "error",
+                        heightAuto: false
+                    }).then((result)=>{
+                        if(result.value){
+                            window.location = "'.$pantalla.'";
+                        }
+                    });                                      
+                </script>';
+            }
+
+        }
+    }
 }

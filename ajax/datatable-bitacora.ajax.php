@@ -2,6 +2,12 @@
 require_once "../controladores/mantenimiento.controlador.php";
 require_once "../modelos/mantenimiento.modelo.php";
 
+require_once "../controladores/clientes.controlador.php";
+require_once "../modelos/clientes.modelo.php";
+require_once "../controladores/personas.controlador.php";
+require_once "../modelos/personas.modelo.php";
+
+
 class TablaBitacora{
 
  	/*=============================================
@@ -31,13 +37,16 @@ class TablaBitacora{
 
 		  for($i = 0; $i < count($bitac); $i++){
 
+			$botones = "<button class='btn btn-danger btnEliminarBitacora' idBitacora='".$bitac[$i]["id_bitacora"]."'><i class='fas fa-trash-alt'></i></button>";
+
 		  	$datosJson .='[
 			      "'.($i+1).'",
                   "'.$bitac[$i]["usuario"].'",
 			      "'.$bitac[$i]["objeto"].'",
                   "'.$bitac[$i]["accion"].'",
 			      "'.$bitac[$i]["descripcion"].'",
-			      "'.$bitac[$i]["fecha"].'"
+			      "'.$bitac[$i]["fecha"].'",
+				  "'.$botones.'"
 			    ],';
 
 		  }

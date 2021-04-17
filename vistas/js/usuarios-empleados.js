@@ -230,6 +230,30 @@ $(document).on('click', '.btnEliminarUsuario', function () {
 });
 
 
+//** ------------------------------------*/
+//         BORRAR BITACORA 
+// --------------------------------------*/ 
+$(document).on('click', '.btnEliminarBitacora', function () {
+    var idBitacora = $(this).attr('idBitacora');
+   
+
+    Swal.fire({
+        title: "¿Estas seguro de borrar el registro de bitacora?",
+        text: "¡Si no lo estas, puedes cancelar la accion!",
+        icon: "info",
+        showCancelButton: true,
+        cancelButtonColor: "#DC3545",
+        heightAuto: false,
+        allowOutsideClick: false
+    }).then((result)=>{
+        if(result.value){
+            window.location = "index.php?ruta=bitacora&idBitacora="+idBitacora;
+        }
+    });
+});
+
+
+
 
 valorBuscar = "";
 $(document).on('blur', '.ClaseBuscar', function () {
