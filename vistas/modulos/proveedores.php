@@ -135,7 +135,7 @@ MODAL AGREGAR NUEVO PROVEEDOR
 
         <div class="modal-footer">
           <button type="submit" class="btn btn-primary btnGuardarProveedor">Guardar</button>
-          <button type="button" class="btn btn-orange salirModal" data-dismiss="modal">Salir</button>
+          <button type="button" class="btn btn-danger salirModal" data-dismiss="modal">Salir</button>
         </div>
 
       </form> 
@@ -198,7 +198,7 @@ MODAL EDITAR PROVEEDOR
 
         <div class="modal-footer">
           <button type="submit" class="btn btn-primary">Guardar cambios</button>
-          <button type="button" class="btn btn-orange" data-dismiss="modal">Salir</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
         </div>
 
         <?php

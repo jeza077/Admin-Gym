@@ -214,13 +214,13 @@ MODAL AGREGAR ROL
         <div class="modal-footer" id="modalFooterRol">
           <button type="submit" class="btn btn-primary btnGuardarRol">Guardar
           </button>
-          <button type="button" class="btn btn-orange" data-dismiss="modal">Salir</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
           
         </div>
         <div class="modal-footer mt-4" id="modalFooterPermisos">
           <button type="submit" class="btn btn-primary btnGuardarCambios">Guardar cambios
           </button>
-          <button type="button" class="btn btn-orange" data-dismiss="modal">Salir</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
           
         </div>
 
@@ -363,7 +363,7 @@ MODAL EDITAR ROL
         <div class="modal-footer" id="modalFooterPermisosEditar">
           <button type="submit" class="btn btn-primary btnGuardarCambiosEditar">Guardar cambios
           </button>
-          <button type="button" class="btn btn-orange" data-dismiss="modal">Salir</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
           
         </div>
 

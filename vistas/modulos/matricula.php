@@ -139,7 +139,7 @@ MODAL AGREGAR NUEVA MATRICULA
 
         <div class="modal-footer">
           <button type="submit" class="btn btn-primary">Guardar</button>
-          <button type="button" class="btn btn-orange" data-dismiss="modal">Salir</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
         </div>
 
         <?php
@@ -210,7 +210,7 @@ MODAL EDITAR MATRICULA
 
         <div class="modal-footer">
           <button type="submit" class="btn btn-primary">Guardar cambios</button>
-          <button type="button" class="btn btn-orange" data-dismiss="modal">Salir</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
         </div>
 
         <?php

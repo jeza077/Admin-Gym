@@ -93,7 +93,7 @@ $(document).on('click', '.btnGuardarRol', function (e) {
                     Swal.fire({
 
                         icon: "info",
-                        title: "Por ultimo, agregue los permisos",
+                        title: "Por último, agregue los permisos",
                         showConfirmButton: true,
                         showCancelButton: false,
                         confirmButtonText: "Vamos",

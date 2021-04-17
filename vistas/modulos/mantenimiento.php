@@ -463,7 +463,7 @@ MODAL AGREGAR ROL
 
         <div class="modal-footer">
           <button type="submit" class="btn btn-primary">Guardar</button>
-          <button type="button" class="btn btn-orange" data-dismiss="modal">Salir</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
           
         </div>
 
@@ -592,7 +592,7 @@ MODAL AGREGAR ROL
 
         <div class="modal-footer">
           <button type="submit" class="btn btn-primary">Guardar</button>
-           <button type="button" class="btn btn-orange" data-dismiss="modal">Salir</button>
+           <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
         </div>
 
         <?php
@@ -666,7 +666,7 @@ MODAL Modificar ROL
 
         <div class="modal-footer">
           <button type="submit" class="btn btn-primary">Guardar</button>
-           <button type="button" class="btn btn-orange" data-dismiss="modal">Salir</button>
+           <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
         </div>
 
         <?php
@@ -746,7 +746,7 @@ MODIFICAR PARAMETROS
 
         <div class="modal-footer">
           <button type="submit" class="btn btn-primary">Guardar</button>
-           <button type="button" class="btn btn-orange" data-dismiss="modal">Salir</button>
+           <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
         </div>
 
         <?php
@@ -821,8 +821,8 @@ MODAL AGREGAR NUEVA INSCRIPCION
         ======================================-->
 
         <div class="modal-footer">
-          <button type="button" class="btn btn-orange" data-dismiss="modal">Salir</button>
           <button type="submit" class="btn btn-primary">Guardar</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
         </div>
 
         <?php
@@ -896,7 +896,7 @@ MODAL AGREGAR NUEVA MATRICULA
 
         <div class="modal-footer">
           <button type="submit" class="btn btn-primary">Guardar</button>
-          <button type="button" class="btn btn-orange" data-dismiss="modal">Salir</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
         </div>
 
         <?php
@@ -971,7 +971,7 @@ MODAL NUEVO DESCUENTO
 
         <div class="modal-footer">
           <button type="submit" class="btn btn-primary">Guardar</button>
-          <button type="button" class="btn btn-orange" data-dismiss="modal">Salir</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
         </div>
 
         <?php
