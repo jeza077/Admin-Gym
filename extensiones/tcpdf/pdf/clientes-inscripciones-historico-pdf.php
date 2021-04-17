@@ -57,12 +57,12 @@ class PDF extends TCPDF{
 
         $this->Ln(20); //Espacios
         $this->SetFont('helvetica', 'B', 14);
-        $this->Cell(260, 3, 'REPORTE INSCRIPCIONES CLIENTES HISTORICO', 0, 1, 'C');
+        $this->Cell(260, 3, 'REPORTE INSCRIPCIONES CLIENTES HISTÓRICO', 0, 1, 'C');
         $this->Ln(3);
         $this->SetFont('helvetica', 'B', 11);
 
         $año = date('Y-m-d');
-        $this->Cell(260, 3, 'Año '.$año.'', 0, 1, 'C');
+        $this->Cell(260, 3, 'Fecha '.$año.'', 0, 1, 'C');
     }
 
     // Footer de la pagina
@@ -140,10 +140,10 @@ $pdf->SetFillColor(225, 235, 255);
 $pdf->Cell(15, 5, 'No', 1, 0, 'C', 1);
 $pdf->Cell(45, 5, 'No. Documento', 1, 0, 'C', 1);
 $pdf->Cell(73, 5, 'Nombre', 1, 0, 'C', 1);
-$pdf->Cell(36, 5, 'Tipo Inscripcion', 1, 0, 'C', 1);
+$pdf->Cell(36, 5, 'Tipo Inscripción', 1, 0, 'C', 1);
 // $pdf->Cell(45, 5, 'Valor Ultimo Pago', 1, 0, 'C', 1);
-$pdf->Cell(38, 5, 'Fecha Ult. Pago', 1, 0, 'C', 1);
-$pdf->Cell(36, 5, 'Fecha Prox. Pago', 1, 0, 'C', 1);
+$pdf->Cell(38, 5, 'Fecha Últ. Pago', 1, 0, 'C', 1);
+$pdf->Cell(36, 5, 'Fecha Próx. Pago', 1, 0, 'C', 1);
 $pdf->Cell(30, 5, 'Estado', 1, 0, 'C', 1);
 
 if(isset($_GET["rango"])){
