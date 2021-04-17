@@ -183,7 +183,7 @@ $(document).on('click', '.btnConfirmarPago', function (e) {
             $('.alert').remove();
             Swal.fire({
             icon: 'info',
-                title: '¿Se realizo el pago correctamente?',
+                title: '¿Se realizó el pago correctamente?',
                 html: '<button type="submit" role="button" class="SwalBtnGuardarClienteRegistrado btn btn-success customSwalBtn">' + 'Si, guardar' + '</button>' +
                     '<button type="button" role="button" class="SwalBtnCancelarCliente btn btn-danger customSwalBtn">' + 'No, salir' + '</button>',
                 width: 500,
@@ -213,7 +213,7 @@ $(document).on('click', '.btnConfirmarPago', function (e) {
             $('.alert').remove();
             Swal.fire({
             icon: 'info',
-                title: '¿Se realizo el pago correctamente?',
+                title: '¿Se realizó el pago correctamente?',
                 html: '<button type="submit" role="button" class="SwalBtnGuardarCliente btn btn-success customSwalBtn">' + 'Si, guardar' + '</button>' +
                     '<button type="button" role="button" class="SwalBtnCancelarCliente btn btn-danger customSwalBtn">' + 'No, salir' + '</button>',
                 width: 500,
@@ -516,7 +516,7 @@ $('.verTotalPago').click(function (e) {
         $('.nuevaMatricula').focus();
 
     } else if(!totalInscripcion) {
-        $('.nuevaInscripcion').after('<div class="alert alert-danger fade show mt-2" role="alert">Por favor seleccione un tipo de inscripcion</div>');
+        $('.nuevaInscripcion').after('<div class="alert alert-danger fade show mt-2" role="alert">Por favor, seleccione un tipo de inscripción</div>');
         $('.nuevaInscripcion').focus();
 
   
@@ -566,7 +566,7 @@ $(document).on('click', '.verTotalPagoRegistrado', function (e) {
         $('.nuevaMatriculaRegistrado').focus();
 
     } else if(!totalInscripcion) {
-        $('.nuevaInscripcionRegistrado').after('<div class="alert alert-danger fade show mt-2" role="alert">Por favor seleccione un tipo de inscripcion</div>');
+        $('.nuevaInscripcionRegistrado').after('<div class="alert alert-danger fade show mt-2" role="alert">Por favor, seleccione un tipo de inscripción</div>');
         $('.nuevaInscripcionRegistrado').focus();
 
   
@@ -616,7 +616,7 @@ $('.verTotalPagoCliente').click(function (e) {
         $('.nuevaMatriculaClienteVenta').focus();
 
     } else if(!totalInscripcion) {
-        $('.nuevaInscripcionClienteVenta').after('<div class="alert alert-danger fade show mt-2" role="alert">Por favor seleccione un tipo de inscripcion</div>');
+        $('.nuevaInscripcionClienteVenta').after('<div class="alert alert-danger fade show mt-2" role="alert">Por favor, seleccione un tipo de inscripción</div>');
         $('.nuevaInscripcionClienteVenta').focus();
 
   
@@ -709,11 +709,11 @@ $(document).on('click', '.btnEditarPago', function (e) {
     // console.log(idClientePago)
 
     Swal.fire({
-        title: 'Actualizar Pago',
-        html: '<p class="SwalParrafo">¿Deseás mantener el Tipo de Inscripcion actual?</p>' +
+        title: 'Actualizar pago',
+        html: '<p class="SwalParrafo">¿Desea mantener el tipo de inscripción actual?</p>' +
             '<button type="button" role="button" tabindex="0" class="SwalBtnConfirmarPago btn btn-success customSwalBtn">' + 'Si, mantener' + '</button>' +
             '<button type="button" role="button" tabindex="0" class="SwalBtnCambiarInscripcion btn btn-primary customSwalBtn" data-toggle="modal" data-target="#modalEditarPagos">' + 'No, cambiar' + '</button>' +
-            '<button type="button" role="button" tabindex="0" class="SwalBtnCancelar btn btn-secondary customSwalBtn">' + 'Cancelar' + '</button>',
+            '<button type="button" role="button" tabindex="0" class="SwalBtnCancelar btn btn-danger customSwalBtn">' + 'Cancelar' + '</button>',
         width: 600,
         allowOutsideClick: false,
         showCancelButton: false,
@@ -725,7 +725,7 @@ $(document).on('click', '.SwalBtnConfirmarPago', function (e) {
 
     Swal.fire({
         icon: 'info',
-        title: '¿Se realizo el pago correctamente?',
+        title: '¿Se realizó el pago correctamente?',
         html: '<button type="submit" role="button" class="SwalBtnMantenerInscripcion btn btn-success customSwalBtn">' + 'Si, guardar' + '</button>' +
             '<button type="button" role="button" class="SwalBtnCancelar btn btn-danger customSwalBtn">' + 'No, salir' + '</button>',
         width: 500,
@@ -772,8 +772,8 @@ $(document).on('click', '.SwalBtnMantenerInscripcion', function (e) {
 
                 if(respuesta){
                     Swal.fire({
-                        title: 'El pago se agrego correctamente!',
-                        text: 'Fecha proximo pago actualizada al '+fechaProximaPago,
+                        title: '¡El pago se agregó correctamente!',
+                        text: 'Fecha próximo pago actualizada al '+fechaProximaPago,
                         icon: 'success',
                         // width: 600,
                         allowOutsideClick: false,
@@ -917,7 +917,7 @@ $(document).on('click', '#btnConfirmarDatosInscripcion', function (e) {
         let padre = $('.nuevaTipoInscripcion2').next();
         
         setTimeout(() => {
-            padre.after('<div class="alert alert-danger fade show mt-2" role="alert">Por favor elija un tipo de inscripción</div>');
+            padre.after('<div class="alert alert-danger fade show mt-2" role="alert">Por favor, seleccione un tipo de inscripción</div>');
         }, 200);
         
     } else if(valorTotalPago == "") {
@@ -958,7 +958,7 @@ $(document).on('click', '#btnConfirmarCambioInscripcion', function (e) {
         // console.log('no puede vacio')   
         
         setTimeout(() => {
-            padre.after('<div class="alert alert-danger fade show mt-2" role="alert">Por favor elija un tipo de inscripción.</div>');
+            padre.after('<div class="alert alert-danger fade show mt-2" role="alert">Por favor, seleccione un tipo de inscripción</div>');
         }, 200);
         
     } else if(valorTotalPago == "") {
@@ -1000,7 +1000,7 @@ $(document).on('click', '.btnCancelarInscripcion', function (e) {
         icon: 'info',
         title: '¿Está seguro de cancelar la inscripción?',
         html: '<button type="button" role="button" tabindex="0" class="SwalBtnCancelarInscripcion btn btn-success customSwalBtn" data-toggle="modal" data-target="">' + 'Si, cancelar' + '</button>' +
-            '<button type="button" role="button" tabindex="0" class="SwalBtnCancelar btn btn-secondary customSwalBtn">' + 'No, salir' + '</button>',
+            '<button type="button" role="button" tabindex="0" class="SwalBtnCancelar btn btn-danger customSwalBtn">' + 'No, salir' + '</button>',
         width: 500,
         allowOutsideClick: false,
         showCancelButton: false,

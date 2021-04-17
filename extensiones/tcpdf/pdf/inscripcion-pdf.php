@@ -94,7 +94,7 @@ $pdf = new PDF('p', 'mm', 'A4', true, 'UTF-8', false);
 // set document information
 $pdf->SetCreator(PDF_CREATOR);
 $pdf->SetAuthor('Carlos Ortez');
-$pdf->SetTitle('Reporte de Tipo de Inscripciones');
+$pdf->SetTitle('Reporte de tipo de inscripciones');
 $pdf->SetSubject('');
 $pdf->SetKeywords('');
 

@@ -207,15 +207,15 @@
 
                     <div class="form-group col-md-3">
                       <label for="identidad">Número de documento</label>
-                      <input type="text" class="form-control numeroDocumento" name="nuevoNumeroDocumento" placeholder="Ingrese Identidad" required>
+                      <input type="text" class="form-control numeroDocumento" name="nuevoNumeroDocumento" placeholder="Ingrese identidad" required>
                     </div>
                     <div class="form-group col-md-3">
                       <label for="nombre">Nombre</label>
-                      <input type="text" class="form-control nombre mayus" name="nuevoNombre" placeholder="Ingrese Nombre" required>
+                      <input type="text" class="form-control nombre mayus" name="nuevoNombre" placeholder="Ingrese nombre" required>
                     </div>
                     <div class="form-group col-md-3">
                       <label for="apellido">Apellido</label>
-                      <input type="text" class="form-control apellidos mayus" name="nuevoApellido" placeholder="Ingrese Apellidos" required>
+                      <input type="text" class="form-control apellidos mayus" name="nuevoApellido" placeholder="Ingrese apellido" required>
                     </div>
                   </div>
 
