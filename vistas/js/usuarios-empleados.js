@@ -186,6 +186,8 @@ $(document).on('click', '.btnActivar', function () {
         contentType: false,
         processData: false,
         success: function(respuesta) {
+            // console.log(respuesta);
+
 
         }
 

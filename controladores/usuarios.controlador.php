@@ -6,6 +6,59 @@ use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
 class ControladorUsuarios{
+	
+	/*=============================================
+	ACTIVAR USUARIO E INSERTAR EN BITACORA LA ACCIÓN
+	=============================================*/
+	static public function ctrActivarUsuario($tabla, $item1, $valor1, $item2, $valor2){
+
+		if(isset($valor2)){
+			
+			$item3 = null;
+			$valor3 = null;
+			
+			$item4 = null;
+			$valor4 = null;
+		  
+			$respuesta = ModeloUsuarios::mdlActualizarUsuario($tabla, $item1, $valor1, $item2, $valor2, $item3, $valor3, $item4, $valor4);
+
+			// return $respuesta;
+
+			if($respuesta == true){
+
+				$tabla1 = "tbl_personas";
+				$tabla2 = "tbl_usuarios";
+				
+				$item = "id_usuario";
+				$valor = $valor2;
+
+				$respuestaUsuarios = ModeloUsuarios::mdlMostrarUsuarios($tabla1, $tabla2, $item, $valor);
+
+				require_once 'mantenimiento.controlador.php';
+
+				session_start();
+
+				if($valor1 == 1){
+
+					$descripcionEvento = "".$_SESSION['usuario']." cambio el estado de ".$respuestaUsuarios['usuario']." a activado";
+					$accion = "Cambio de estado";
+					$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION['id_usuario'], 2, $accion, $descripcionEvento);	
+					return $bitacoraConsulta;					
+					
+				} else {
+					
+					$descripcionEvento = "".$_SESSION['usuario']." cambio el estado de ".$respuestaUsuarios['usuario']." a desactivado";
+					$accion = "Cambio de estado";
+					$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION['id_usuario'], 2, $accion, $descripcionEvento);	
+					return $bitacoraConsulta;					
+				}
+
+			}
+
+		}
+
+	}
+
 
 	/*=============================================
 	MOSTRAR SOLO USUARIOS
@@ -949,7 +1002,7 @@ class ControladorUsuarios{
 									});
 								</script>';
 				}
-//--------------------------------------------------------------------------------------------------------
+					//--------------------------------------------------------------------------------------------------------
 
 
 					/*=============================================
@@ -1362,7 +1415,7 @@ class ControladorUsuarios{
 								}
 							}
 						}
-					
+					}
 
 					
 				} else {

@@ -37,13 +37,15 @@ class AjaxUsuarios{
         $item2 = "id_usuario";
         $valor2 = $this->activarId;
 
-        $item3 = null;
-        $valor3 = null;
+        // $item3 = null;
+        // $valor3 = null;
         
-        $item4 = null;
-        $valor4 = null;
+        // $item4 = null;
+        // $valor4 = null;
       
-        $respuesta = ModeloUsuarios::mdlActualizarUsuario($tabla, $item1, $valor1, $item2, $valor2, $item3, $valor3, $item4, $valor4);
+        $respuesta = ControladorUsuarios::ctrActivarUsuario($tabla, $item1, $valor1, $item2, $valor2);
+
+        // echo json_encode($respuesta);
 
     }
 
