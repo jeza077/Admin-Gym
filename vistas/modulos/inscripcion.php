@@ -134,12 +134,12 @@ MODAL AGREGAR NUEVA INSCRIPCION
 
                     <div class="form-group col-md-12">
                         <label for="Descripcion">Cantidad Dias Inscripción</label>
-                        <input type="text" class="form-control preciom " name="nuevoDias" value="" placeholder="Ingresa Cantidad Dias" required>
+                        <input type="text" class="form-control preciom sinCaracteres cantidadInt" name="nuevoDias" value="" placeholder="Ingresa Cantidad Dias" required>
                     </div>
 
                     <div class="form-group col-md-12">
                         <label for="Descripcion">Precio Inscripción</label>
-                        <input type="text" class="form-control preciom " name="nuevoPrecio" value="" placeholder="Ingresa Precio" required>
+                        <input type="text" class="form-control preciom sinCaracteres" name="nuevoPrecio" value="" placeholder="Ingresa Precio" required>
                     </div>
                 </div>
 
@@ -204,7 +204,7 @@ MODAL EDITAR INSCRIPCION
 
                         <div class="form-group col-md-12">
                             <label for="Descripcion">Cantidad Dias Inscripción</label>
-                            <input type="text" class="form-control preciom" id="editarDiasInscripcion" name="editarDiasInscripcion" value="" required>
+                            <input type="text" class="form-control preciom sinCaracteres cantidadInt" id="editarDiasInscripcion" name="editarDiasInscripcion" value="" required>
                         </div>
 
                         <div class="form-group col-md-12">
@@ -212,7 +212,7 @@ MODAL EDITAR INSCRIPCION
                             <input type="textarea" class="form-control preciom" id="editarPrecioInscripcion" name="editarPrecioInscripcion" value="" required>
                         </div>
 
-                        <input type="hidden" id="editarIdInscripcion" name="editarIdInscripcion">
+                        <input type="hidden" id="editarIdInscripcion sinCaracteres" name="editarIdInscripcion">
 
                     </div>
 

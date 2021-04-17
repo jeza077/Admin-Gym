@@ -146,11 +146,11 @@
           <div class="form-group col-md-12">
             <label for="nombreproducto">Nombre Producto</label>
             <html>
-            <input type="text" class="form-control mayus sinNumeros sinCaracteres" name="nuevoNombreProducto" placeholder="Ingrese Producto" required>
+            <input type="text" class="form-control mayus sinNumeros sinCaracteres soloUnEspacio longitudNombre" name="nuevoNombreProducto" placeholder="Ingrese Producto" required>
           </div>
           <div class="form-group col-md-12">
             <label for="stock">Cantidad en stock</label>
-            <input type="number" class="form-control sinLetras sinCaracteres" name="nuevoStock" placeholder="Cantidad en stock" min="0" required class="fa fa-arrow-up"></i></span>
+            <input type="number" class="form-control sinLetras sinCaracteres longitudEntero" name="nuevoStock" placeholder="Cantidad en stock" min="0" required class="fa fa-arrow-up"></i></span>
           </div>
 
           <div class="form-row">
@@ -211,11 +211,11 @@
           <div class="form-group col-12">
             <label for="nombreEquipo">Nombre Equipo</label>
             <html>
-            <input type="text" value="" class="form-control sinCaracteres sinNumeros mayus" name="editarNombreEquipo" id="editarNombreEquipo" required>
+            <input type="text" value="" class="form-control sinCaracteres sinNumeros mayus longitudNombre soloUnEspacio" name="editarNombreEquipo" id="editarNombreEquipo" required>
           </div>
           <div class="form-group col-12">
             <label for="stock">Cantidad en stock</label>
-            <input type="number" value="" class="form-control sinLetras sinCaracteres" name="editarStockEquipo" id="editarStockEquipo"  min="0" required class="fa fa-arrow-up"></i></span>
+            <input type="number" value="" class="form-control sinLetras sinCaracteres longitudEntero" name="editarStockEquipo" id="editarStockEquipo"  min="0" required class="fa fa-arrow-up"></i></span>
           </div>
 
           <div class="form-group col-12">

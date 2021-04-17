@@ -217,15 +217,15 @@
 
                     <div class="form-group col-md-3">
                       <label for="identidad">Numero de documento</label>
-                      <input type="text" class="form-control numeroDocumento" name="nuevoNumeroDocumento" placeholder="Ingrese Identidad" required>
+                      <input type="text" class="form-control numeroDocumento longitudDocumento sinEspacioDoc" name="nuevoNumeroDocumento" placeholder="Ingrese Identidad" required>
                     </div>
                     <div class="form-group col-md-3">
                       <label for="nombre">Nombre</label>
-                      <input type="text" class="form-control nombre mayus" name="nuevoNombre" placeholder="Ingrese Nombre" required>
+                      <input type="text" class="form-control nombre mayus sinCaracteres sinNumeros" name="nuevoNombre" placeholder="Ingrese Nombre" required>
                     </div>
                     <div class="form-group col-md-3">
                       <label for="apellido">Apellido</label>
-                      <input type="text" class="form-control apellidos mayus" name="nuevoApellido" placeholder="Ingrese Apellidos" required>
+                      <input type="text" class="form-control apellidos mayus sinCaracteres sinNumeros" name="nuevoApellido" placeholder="Ingrese Apellidos" required>
                     </div>
                   </div>
 
@@ -234,7 +234,7 @@
                   <div class="form-row">
                     <div class="form-group col-md-4">
                       <label for="inputEmail4">Email</label>
-                      <input type="email" class="form-control email" id="inputEmail4" name="nuevoEmail" placeholder="Ingrese Email" required>
+                      <input type="email" class="form-control email longitudCorreo" id="inputEmail4" name="nuevoEmail" placeholder="Ingrese Email" required>
                     </div>
                     <div class="form-group col-md-4">
                       <label>Teléfono</label>
@@ -251,7 +251,7 @@
                   <div class="form-row">
                     <div class="form-group col-md-9">
                       <label for="inputAddress">Dirección</label>
-                      <input type="text" class="form-control mayus" id="inputAddress" name="nuevaDireccion" placeholder="Col. Alameda, calle #2..." required>
+                      <input type="text" class="form-control mayus nuevaDireccion longitudDireccion" id="inputAddress" name="nuevaDireccion" placeholder="Col. Alameda, calle #2..." required>
                     </div>
                   
                     <div class="form-group col-md-3">
@@ -283,7 +283,7 @@
                   <div class="form-row">
                     <div class="form-group col-md-3">
                       <label for="">Usuario</label>
-                      <input type="text" class="form-control mayus nuevoUsuario" name="nuevoUsuario" placeholder="Ingrese Usuario">
+                      <input type="text" class="form-control mayus nuevoUsuario sinCaracteres sinNumeros" name="nuevoUsuario" placeholder="Ingrese Usuario" autocomplete="off">
                     </div>
                     <div class="form-group col-md-3">
                       <label>Rol</label>
@@ -310,7 +310,7 @@
 
                     <div class="form-group col-md-3">
                       <label for="">Contraseña Generada</label>
-                      <input type="text" class="form-control passwordGenerado" name="nuevoPassword">
+                      <input type="password" class="form-control passwordGenerado" name="nuevoPassword" autocomplete="off" spellcheck="false">
                     </div>
                     <div class="col-md-3">
                       <a href="javascript:void(0);"  class="btn btn-block btn-orange generarPassword" style="margin-top:2em">Generar contraseña</a>
@@ -429,7 +429,7 @@
 
                     <div class="form-group col-md-3">
                       <label for="identidad">Numero de documento</label>
-                      <input type="text" class="form-control numeroDocumento" name="editarNumeroDocumento" value="" required>
+                      <input type="text" class="form-control numeroDocumento longitudDocumento sinEspacioDoc" name="editarNumeroDocumento" value="" required>
                     </div>
                     <div class="form-group col-md-3">
                       <label for="nombre">Nombre</label>
@@ -459,7 +459,7 @@
                   <div class="form-row">
                     <div class="form-group col-md-9">
                       <label for="direccion">Dirección</label>
-                      <input type="text" class="form-control mayus" id="direccion" name="editarDireccion" value="" required>
+                      <input type="text" class="form-control mayus permitirUnEspacio longitudDireccion soloUnEspacio" id="direccion" name="editarDireccion" value="" required>
                     </div>
                   
                     <div class="form-group col-md-3">
@@ -492,7 +492,7 @@
                   <div class="form-row">
                     <div class="form-group col-md-3">
                       <label for="">Usuario</label>
-                      <input type="text" class="form-control nuevoUsuario" name="editarUsuario" value="" readonly>
+                      <input type="text" class="form-control nuevoUsuario" name="editarUsuario" value="" readonly autocomplete="off">
                     </div>
                     <div class="form-group col-md-3">
                       <label>Rol</label>
@@ -519,7 +519,7 @@
 
                     <div class="form-group col-md-3">
                       <label for="inputPass">Contraseña Generada</label>
-                      <input type="text" class="form-control passwordGenerado" id="inputPass" name="editarPassword">
+                      <input type="password" class="form-control passwordGenerado" id="inputPass" name="editarPassword" autocomplete="off" spellcheck="false">
                       <input type="hidden" class="form-control" id="passwordActual" name="passwordActual">
                     </div>
                     <div class="col-md-3">
@@ -700,7 +700,7 @@
             <div class="form-row">
               <div class="form-group col-md-6">
                 <label for="">Usuario</label>
-                <input type="text" class="form-control mayus nuevoUsuario" name="nuevoUsuario" placeholder="Ingrese Usuario">
+                <input type="text" class="form-control mayus nuevoUsuario" name="nuevoUsuario" placeholder="Ingrese Usuario" autocomplete="off">
               </div>
             
               <div class="form-group col-md-6">
@@ -732,7 +732,7 @@
             <div class="form-row">
               <div class="form-group col-md-6">
                 <label for="inputPassword4">Contraseña Generada</label>
-                <input type="text" class="form-control passwordGenerado" id="inputPassword4" name="nuevoPassword">
+                <input type="text" class="form-control passwordGenerado" id="inputPassword4" name="nuevoPassword" autocomplete="off" spellcheck="false">
               </div>
               <div class="col-md-6">
                 <a href="javascript:void(0);"  class="btn btn-block btn-orange generarPassword" style="margin-top:2em">Generar contraseña</a>

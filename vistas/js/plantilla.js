@@ -793,8 +793,6 @@ function trim(fecha){
     fecha = fecha.replace(/^\s+/, '');
     return fecha.replace(/\s+$/, '');
 }
-
-
 /*=============================================
     EJECUCION DE VALIDACIONES
 =============================================*/
@@ -810,11 +808,21 @@ $('.apellidos').keydown(sinCaracteres)
 $('.nuevoUsuario').keydown(sinNumeros)
 $('.nuevoUsuario').keydown(sinCaracteres)
 longitudString($('.nuevoUsuario'),45); //Longitud maxima de Usuario.
+longitudString($('.longitudCantidad'),15);
+longitudString($('.cantidadInt'),11);
     
 //** VALIDACIONES GLOBALES */
-longitudString($('input[type=password]'),16); //Longitud maxima Input tipo Password Global.
+longitudString($('input[type=password]'),100); //Longitud maxima Input tipo Password Global.
+longitudString($('input[type=email]'),100);  //Longitud maxima Input email globa.
+longitudString($('.longitudDireccion'),100);
+longitudString($('.longitudValorParam'),100);
+longitudString($('.longitudNombre'),45);
+longitudString($('.longitudDocumento'),45);
+longitudString($('.longitudEntero'),11);
 $('input[type=password]').keydown(impedirEspacios); //Evitar espacios en Input de tipo Password, Global.
 $('input[type=email]').keydown(impedirEspacios); // Evitar espacios en Input de tipo Email, Global.
+$('.sinEspacioDoc').keydown(impedirEspacios);
+$('.soloUnEspacio').keydown(permitirUnEspacio);
 
 $( '.preciom').keydown(impedirEspacios)
 $( '.preciom').keydown(sinCaracteres)
