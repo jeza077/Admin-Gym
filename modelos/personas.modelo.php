@@ -4,6 +4,35 @@ require_once "conexion.php";
 
 class ModeloPersonas{
 
+	/*=============================================
+		INGRESAR A TABLA LOG-QUIEN ELIMINA LOS DATOS
+	=============================================*/
+	 
+	static public function mdlIngresarLog($tablaLog,$usuario,$item){
+
+		$stmt = Conexion::conectar()->prepare("UPDATE $tablaLog SET eliminado_por = :eliminado_por WHERE id_bitacora = :id_bitacora");
+
+		$stmt->bindParam(":eliminado_por",$usuario, PDO::PARAM_STR);
+		$stmt->bindParam(":id_bitacora", $item, PDO::PARAM_INT);
+
+
+		// return $stmt->execute();
+		if($stmt->execute()){
+
+			return true;	
+
+		}else{
+
+			return false;
+		
+		}
+
+		$stmt->close();
+		
+		$stmt = null;
+
+	}
+
     /*=============================================
 	CREAR PERSONAS	
 	=============================================*/	 

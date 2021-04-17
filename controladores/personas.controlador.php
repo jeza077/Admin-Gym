@@ -923,6 +923,13 @@ class ControladorPersonas{
             
 
             if ($respuesta==true) {
+
+                $tablaLog='tbl_bitacora_log';
+                $item=$_GET['idBitacora'];
+                $usuario=$_SESSION['usuario'];
+                
+                $respuestaLog = ModeloPersonas::mdlIngresarLog($tablaLog,$usuario,$item);
+
                 echo '<script>
                         Swal.fire({
                             title: "El registro ha sido borrado correctamente!",
