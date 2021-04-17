@@ -147,8 +147,9 @@ $pdf->Cell(15, 5, 'No', 1, 0, 'C', 1);
 $pdf->Cell(70, 5, 'Rol', 1, 0, 'C', 1);
 $pdf->Cell(60, 5, 'Descripcion', 1, 0, 'C', 1);
 $pdf->Cell(40, 5, 'Estado', 1, 0, 'C', 1);
-
+// return;
 //$tabla = "tbl_inscripcion";
+/*
 if(isset($_GET["rango"])){
 
 
@@ -211,15 +212,16 @@ foreach ($roles as $key => $value) {
     $i++;
 
 }
+*
 
 }
-
+*/
 
 
 
 
 
 // Close and output PDF document
-$pdf->Output('Reporteroles.pdf', 'I');
+$pdf->Output('reporte_roles.pdf', 'I');
 
 ?>

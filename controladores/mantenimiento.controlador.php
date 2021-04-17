@@ -255,7 +255,7 @@ class ControladorMantenimientos {
 
 
     /*======================================================
-    Inscripciones Insertar
+    INSCRIPCIONES INSERTAR
     =============================================================================================*/
     static public function ctrInscripcionInsertar(){
 
@@ -342,6 +342,173 @@ class ControladorMantenimientos {
           </script>';
   
         }
+  
+  
+      }
+  
+    }
+    /*======================================================
+    OBJETO INSERTAR
+    =======================================================*/
+    static public function ctrObjetoInsertar(){
+
+      if(isset($_POST["nuevoObjeto"])){
+
+        if(preg_match('/^[A-ZÑÁÉÍÓÚ ]+$/', $_POST["nuevoObjeto"]) && 
+           preg_match('/^[A-Za-zñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevoLink"])&& 
+           preg_match('/^[A-Za-zñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevoIcono"])){
+         
+          
+          $tabla = "tbl_objetos";          
+  
+          $datos = array("objeto" => $_POST["nuevoObjeto"], 
+                          "link" => $_POST["nuevoLink"],
+                          "icono" => $_POST["nuevoIcono"]);
+
+            // echo "<pre>";
+            // var_dump($_POST);
+            // echo "</pre>";
+            // return;
+  
+          $respuesta = ModeloMantenimiento::mdlObjetoInsertar($tabla, $datos);
+          
+          // var_dump($respuesta);
+          if($respuesta == true){
+  
+           
+            // $descripcionEvento = "Nueva Inscripcion del Gimnasio";
+            // $accion = "Nuevo";
+            // $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
+
+         
+       
+            echo '<script>
+  
+            Swal.fire({
+  
+              icon: "success",
+              title: "Objeto creado exitosamente!",
+              showConfirmButton: true,
+              confirmButtonText: "Cerrar",
+              closeOnConfirm: false
+  
+            }).then((result)=>{
+  
+              if(result.value){
+  
+                window.location = "objetos";
+  
+              }
+  
+            });
+  
+  
+            </script>';
+  
+  
+          }
+  
+  
+        }else{
+  
+          echo '<script>
+  
+            Swal.fire({
+  
+              icon: "error",
+              title: "¡Los datos no pueden ir vacíos!",
+              showConfirmButton: true,
+              confirmButtonText: "Cerrar",
+              closeOnConfirm: false
+  
+            }).then((result)=>{
+  
+              if(result.value){
+  
+                window.location = "objetos";
+  
+              }
+  
+            });
+  
+  
+          </script>';
+  
+        }
+  
+  
+      }
+  
+    }
+
+
+    /*======================================================
+    BACKUP INSERTAR
+    =======================================================*/
+    static public function ctrBackupInsertar($nombreBackup){
+
+      if(isset($nombreBackup)){
+
+        // if(preg_match('/^[A-ZÑÁÉÍÓÚ ]+$/', $nombreBackup)){
+         
+          
+          $tabla = "tbl_backup";          
+  
+          session_start();
+          $datos = array("nombre_backup" => $nombreBackup, 
+                          "creado_por" => $_SESSION["id_usuario"]);
+          
+          // $datos = $nombreBackup;
+
+            // echo "<pre>";
+            // var_dump($_POST);
+            // echo "</pre>";
+            // return;
+  
+          $respuesta = ModeloMantenimiento::mdlBackupInsertar($tabla, $datos);
+          
+          // var_dump($respuesta);
+          if($respuesta == true){
+  
+           return true;
+            // $descripcionEvento = "Nueva Inscripcion del Gimnasio";
+            // $accion = "Nuevo";
+            // $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
+
+         
+       
+            // echo '<script>
+  
+            // Swal.fire({
+  
+            //   icon: "success",
+            //   title: "Objeto creado exitosamente!",
+            //   showConfirmButton: true,
+            //   confirmButtonText: "Cerrar",
+            //   closeOnConfirm: false
+  
+            // }).then((result)=>{
+  
+            //   if(result.value){
+  
+            //     window.location = "respaldo-restauracion";
+  
+            //   }
+  
+            // });
+  
+  
+            // </script>';
+  
+  
+          }
+  
+  
+        // }else{
+  
+
+  
+        
   
   
       }
@@ -2065,12 +2232,25 @@ class ControladorMantenimientos {
     /*=============================================
     RANGO DE PREGUNTAS
     =============================================*/
-
     static public function ctrRangoPreguntas($rango) {
 
       $tabla = "tbl_preguntas";
       
       $respuesta = ModeloMantenimiento::mdlRangoPreguntas($tabla, $rango);
+
+      return $respuesta;
+
+    }
+
+
+    /*=============================================
+    RANGO DE RESPALDO
+    =============================================*/
+    static public function ctrRangoRespaldo($rango) {
+
+      $tabla = "tbl_backup";
+      
+      $respuesta = ModeloMantenimiento::mdlRangoRespaldo($tabla, $rango);
 
       return $respuesta;
 

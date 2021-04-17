@@ -174,6 +174,30 @@ class ModeloMantenimiento{
 		$stmt = null;
     }
 
+    /*============================================
+    INSERTAR OBJETO
+	==============================================*/
+	static public function mdlObjetoInsertar($tabla, $datos){
+
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(objeto, link_objeto, icono) VALUES (:objeto, :link_objeto, :icono)");
+       
+        $stmt->bindParam(":objeto", $datos["objeto"], PDO::PARAM_STR);
+        $stmt->bindParam(":link_objeto", $datos["link"], PDO::PARAM_STR);
+        $stmt->bindParam(":icono", $datos["icono"], PDO::PARAM_STR);
+        
+
+		if($stmt->execute()){
+			return true;
+
+		}else{
+			return false;
+		
+		}
+
+		$stmt->close();
+		$stmt = null;
+    }
+
     /*=============================================
     MOSTRAR INSCRIPCION
 	=============================================*/
@@ -583,6 +607,29 @@ class ModeloMantenimiento{
 		$stmt = null;
     }
 
+    /*============================================
+    AGREGAR BACKUP
+	==============================================*/
+	static public function mdlBackupInsertar($tabla, $datos){
+
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(nombre_backup, creado_por) VALUES (:nombre_backup, :creado_por)");
+       
+        $stmt->bindParam(":nombre_backup", $datos["nombre_backup"], PDO::PARAM_STR);
+        $stmt->bindParam(":creado_por", $datos["creado_por"], PDO::PARAM_INT);
+        /*$stmt->bindParam(":estado", $datos["estado"], PDO::PARAM_INT);*/
+
+		if($stmt->execute()){
+			return true;
+
+		}else{
+			return $stmt->errorInfo();
+		
+		}
+
+		$stmt->close();
+		$stmt = null;
+    }
+
 
     /*=============================================
     EDITAR DOCUMENTO
@@ -921,6 +968,38 @@ class ModeloMantenimiento{
         
 			$stmt = Conexion::conectar() ->prepare("SELECT * FROM $tabla\n"
 			. "WHERE pregunta LIKE '%$rango%'");
+            // OR fecha LIKE '%$rango%' OR objeto LIKE '%$rango%' OR accion LIKE '%$rango%'
+			$stmt->bindParam(":pregunta", $rango, PDO::PARAM_STR);
+			// $stmt->bindParam(":fecha", $rango, PDO::PARAM_STR);
+            // $stmt->bindParam(":objeto", $rango, PDO::PARAM_STR);
+			// $stmt->bindParam(":accion", $rango, PDO::PARAM_STR);
+        
+
+            $stmt-> execute();
+			return $stmt ->fetchAll();
+			
+		} 	
+	}
+
+
+    /*=============================================
+			RANGO RESPALDO
+	=============================================*/
+	static public function mdlRangoRespaldo($tabla, $rango){
+        
+        if($rango == null){
+            
+            $stmt = Conexion::conectar() ->prepare("SELECT b.*, u.* FROM $tabla as b\n"
+            . "LEFT JOIN tbl_usuarios as u ON b.creado_por = u.id_usuario\n"
+			. "ORDER BY id_backup DESC");
+            $stmt-> execute();
+			return $stmt ->fetchAll();
+			
+		} else {
+        
+			$stmt = Conexion::conectar() ->prepare("SELECT * FROM $tabla as b\n"
+            . "LEFT JOIN tbl_usuarios as u ON b.creado_por = u.id_usuario\n"
+			. "WHERE nombre_backup LIKE '%$rango%' OR fecha_creacion LIKE '%$rango%' OR u.usuario LIKE '%$rango%'");
             // OR fecha LIKE '%$rango%' OR objeto LIKE '%$rango%' OR accion LIKE '%$rango%'
 			$stmt->bindParam(":pregunta", $rango, PDO::PARAM_STR);
 			// $stmt->bindParam(":fecha", $rango, PDO::PARAM_STR);

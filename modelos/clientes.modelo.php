@@ -67,8 +67,9 @@ class ModeloClientes{
 
 		if($item != null){
 
-			$stmt = Conexion::conectar()->prepare("SELECT p.*, c.*, d.tipo_documento, m.tipo_matricula, m.precio_matricula FROM $tabla1 as p\n"
+			$stmt = Conexion::conectar()->prepare("SELECT p.*, c.*, s.*, d.tipo_documento, m.tipo_matricula, m.precio_matricula FROM $tabla1 as p\n"
 			. "LEFT JOIN $tabla2 as c ON p.id_personas = c.id_persona\n"
+			. "LEFT JOIN tbl_sexo AS s ON p.sexo = s.id_sexo\n"
 			. "LEFT JOIN tbl_documento as d ON p.id_documento = d.id_documento\n"
 			. "LEFT JOIN tbl_matricula as m ON c.id_matricula = m.id_matricula\n"
 			. "LEFT JOIN tbl_descuento as pd ON c.id_descuento = pd.id_descuento\n"
@@ -84,8 +85,9 @@ class ModeloClientes{
 		} else {
 			 
 
-			$stmt = Conexion::conectar()->prepare("SELECT p.*, c.*, d.tipo_documento, i.fecha_creacion, i.tipo_inscripcion, pd.tipo_descuento, valor_descuento, pc.* FROM $tabla1 as p\n"
+			$stmt = Conexion::conectar()->prepare("SELECT p.*, c.*, s.*, d.tipo_documento, i.fecha_creacion, i.tipo_inscripcion, pd.tipo_descuento, valor_descuento, pc.* FROM $tabla1 as p\n"
 			. "LEFT JOIN $tabla2 as c ON p.id_personas = c.id_persona\n"
+			. "LEFT JOIN tbl_sexo AS s ON p.sexo = s.id_sexo\n"
 			. "LEFT JOIN tbl_documento as d ON p.id_documento = d.id_documento\n"
 			. "LEFT JOIN tbl_matricula as m ON c.id_matricula = m.id_matricula\n"
 			. "LEFT JOIN tbl_descuento as pd ON c.id_descuento = pd.id_descuento\n"
@@ -747,7 +749,7 @@ class ModeloClientes{
 			. "LEFT JOIN tbl_cliente_inscripcion as ci ON c.id_cliente = ci.id_cliente\n"
 			. "LEFT JOIN tbl_inscripcion as i ON ci.id_inscripcion = i.id_inscripcion\n"
 			// . "LEFT JOIN tbl_pagos_cliente as pc ON ci.id_cliente_inscripcion = pc.id_cliente_inscripcion\n"
-			. "WHERE c.tipo_cliente = 'Gimnasio' AND ci.estado = 1 AND (nombre LIKE '%$rango%' OR apellidos LIKE '%$rango%' OR tipo_inscripcion LIKE '%$rango%' OR num_documento LIKE '%$rango%' OR fecha_proximo_pago LIKE '%$rango%' OR fecha_vencimiento LIKE '%$rango%')\n"
+			. "WHERE c.tipo_cliente = 'Gimnasio' AND ci.estado = 1 AND (nombre LIKE '%$rango%' OR apellidos LIKE '%$rango%' OR tipo_inscripcion LIKE '%$rango%' OR num_documento LIKE '%$rango%' OR fecha_inscripcion LIKE '%$rango%' OR fecha_proximo_pago LIKE '%$rango%' OR fecha_pago LIKE '%$rango%')\n"
 			. "ORDER BY ci.id_cliente_inscripcion DESC"); 
 
 			// $stmt->bindParam(":".$item, $valor, PDO::PARAM_STR);
@@ -798,7 +800,7 @@ class ModeloClientes{
 			. "LEFT JOIN tbl_cliente_inscripcion as ci ON c.id_cliente = ci.id_cliente\n"
 			. "LEFT JOIN tbl_inscripcion as i ON ci.id_inscripcion = i.id_inscripcion\n"
 			// . "LEFT JOIN tbl_pagos_cliente as pc ON ci.id_cliente_inscripcion = pc.id_cliente_inscripcion\n"
-			. "WHERE c.tipo_cliente = 'Gimnasio' AND ci.estado = 0 AND (nombre LIKE '%$rango%' OR apellidos LIKE '%$rango%' OR tipo_inscripcion LIKE '%$rango%' OR num_documento LIKE '%$rango%' OR fecha_proximo_pago LIKE '%$rango%' OR fecha_vencimiento LIKE '%$rango%')\n"
+			. "WHERE c.tipo_cliente = 'Gimnasio' AND ci.estado = 0 AND (nombre LIKE '%$rango%' OR apellidos LIKE '%$rango%' OR tipo_inscripcion LIKE '%$rango%' OR num_documento LIKE '%$rango%' OR fecha_inscripcion LIKE '%$rango%' OR fecha_proximo_pago LIKE '%$rango%' OR fecha_pago LIKE '%$rango%')\n"
 			. "ORDER BY ci.id_cliente_inscripcion DESC"); 
 
 			// $stmt->bindParam(":".$item, $valor, PDO::PARAM_STR);
@@ -863,7 +865,7 @@ class ModeloClientes{
 		
 			. "	LEFT JOIN tbl_pagos_cliente as pc ON ci.id_cliente_inscripcion = pc.id_cliente_inscripcion\n"
 		
-			. "	WHERE tipo_cliente = 'Gimnasio' AND num_documento LIKE '%$rango%' OR nombre LIKE '%$rango%' OR apellidos LIKE '%$rango%' OR fecha_de_pago LIKE '%$rango%'\n"
+			. "	WHERE tipo_cliente = 'Gimnasio' AND num_documento LIKE '%$rango%' OR nombre LIKE '%$rango%' OR apellidos LIKE '%$rango%' OR pago_matricula LIKE '%$rango%' OR pago_descuento LIKE '%$rango%' OR pago_inscripcion LIKE '%$rango%' OR pago_total LIKE '%$rango%' OR fecha_de_pago LIKE '%$rango%'\n"
 		
 			. "ORDER BY ci.id_cliente_inscripcion DESC");
 
@@ -895,7 +897,7 @@ class ModeloClientes{
             // . "LEFT JOIN tbl_inscripcion as i ON c.id_inscripcion = i.id_inscripcion\n"
 			// . "LEFT JOIN tbl_descuento as pd ON c.id_descuento = pd.id_descuento\n"
 			// . "LEFT JOIN tbl_pagos_cliente as pc ON c.id_cliente = pc.id_cliente\n"
-		    . "WHERE p.tipo_persona = 'clientes'");
+		    . "WHERE p.tipo_persona = 'clientes' OR p.tipo_persona = 'ambos'");
 			
 			$stmt -> execute();
 			return $stmt -> fetchAll();
@@ -908,7 +910,7 @@ class ModeloClientes{
             // . "LEFT JOIN tbl_inscripcion as i ON c.id_inscripcion = i.id_inscripcion\n"
 			// . "LEFT JOIN tbl_descuento as pd ON c.id_descuento = pd.id_descuento\n"
 			// . "LEFT JOIN tbl_pagos_cliente as pc ON c.id_cliente = pc.id_cliente\n"
-		    . "WHERE p.tipo_persona = 'clientes' AND nombre LIKE '%$rango%' OR apellidos LIKE '%$rango%' OR num_documento LIKE '%$rango%' OR correo LIKE '%$rango%' OR telefono LIKE '%$rango%' ");
+		    . "WHERE p.tipo_persona = 'clientes' AND nombre LIKE '%$rango%' OR apellidos LIKE '%$rango%' OR num_documento LIKE '%$rango%' OR correo LIKE '%$rango%' OR telefono LIKE '%$rango%' OR tipo_cliente LIKE '%$rango%'");
 
 			$stmt->bindParam(":nombre", $rango, PDO::PARAM_STR);
 			$stmt->bindParam(":apellidos", $rango, PDO::PARAM_STR);

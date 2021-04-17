@@ -1,6 +1,0 @@
-
- Nuevo : entroc.id_cliente 15
- Nuevo : entroc.id_cliente 15
- Nuevo : entroc.id_cliente 15
- Nuevo : entroc.id_cliente 15
- Nuevo : entroc.id_cliente 15

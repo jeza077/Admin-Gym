@@ -36,18 +36,18 @@ class TablaClientesPagosHistorico{
             for($i = 0; $i < count($clientes); $i++){
                     
                 if($clientes[$i]["pago_matricula"] == null){
-                    $pagoMatricula = "<div>$0</div>";
+                    $pagoMatricula = "<div>L. 0.00</div>";
                     // $pagoMatricula = "50";
                 } else {
-                    $pagoMatricula = "<div>$".$clientes[$i]["pago_matricula"]."</div>";
+                    $pagoMatricula = "<div>L. ".number_format($clientes[$i]["pago_matricula"],2)."</div>";
                     // $pagoMatricula = "100";
                 }
                 
                 if($clientes[$i]["pago_descuento"] == null){
-                    $pagoDescuento = "<div>$0</div>";
+                    $pagoDescuento = "<div>L. 0.00</div>";
                     // $pagoDescuento = "400";
                 } else {
-                    $pagoDescuento = "<div>$".$clientes[$i]["pago_descuento"]."</div>";
+                    $pagoDescuento = "<div>L. ".number_format($clientes[$i]["pago_descuento"],2)."</div>";
                     // $pagoDescuento = "200";
                 }
                 
@@ -65,8 +65,8 @@ class TablaClientesPagosHistorico{
                     "'.$clientes[$i]["nombre"].' '.$clientes[$i]["apellidos"].'",
                     "'.$pagoMatricula.'",
                     "'.$pagoDescuento.'",
-                    "'.$clientes[$i]["pago_inscripcion"].'",
-                    "'.$clientes[$i]["pago_total"].'",
+                    "L. '.number_format($clientes[$i]["pago_inscripcion"],2).'",
+                    "L. '.number_format($clientes[$i]["pago_total"],2).'",
                     "'.$clientes[$i]["fecha_de_pago"].'",
                     "'.$botones.'"
                     ],';

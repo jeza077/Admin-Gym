@@ -1,4 +1,16 @@
+    <?php
+    
+      $permisoAgregar = $_SESSION['permisos']['Administrar Clientes']['agregar'];
+      $permisoEliminar = $_SESSION['permisos']['Administrar Clientes']['eliminar'];
+      $permisoActualizar = $_SESSION['permisos']['Administrar Clientes']['actualizar'];
+      $permisoConsulta = $_SESSION['permisos']['Administrar Clientes']['consulta'];
+    // echo "<pre>";
+    // var_dump($_SESSION['permisos']);
+    // echo "</pre>";
+    // echo $permisoActualizar;
 
+    ?>
+    
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -9,9 +21,13 @@
             <h1>Administrar Clientes</h1>
           </div>
           <div class="col-sm-6">
-          <button class="btn btn-orange float-right" id="clienteNuevo">
-            Nuevo Cliente       
-          </button>
+
+          <?php if($permisoAgregar == 1){ ?>
+            <button class="btn btn-orange float-right" id="clienteNuevo">
+              Nuevo Cliente       
+            </button>
+          <?php } ?>
+          
           <button class="btn btn-danger btnExportarClientes float-right mr-3">
               Exportar PDF          
           </button>
@@ -21,16 +37,6 @@
 
     <section class="content">
       <?php 
-        $permisoAgregar = $_SESSION['permisos']['Clientes']['agregar'];
-        $permisoEliminar = $_SESSION['permisos']['Clientes']['eliminar'];
-        $permisoActualizar = $_SESSION['permisos']['Clientes']['actualizar'];
-        $permisoConsulta = $_SESSION['permisos']['Clientes']['consulta'];
-
-        // var_dump($_SESSION['perm']);
-
-        // foreach ($permisos_pantalla as $key => $value) {
-        //   echo $key;
-        // }
         
         $descripcionEvento ="".$_SESSION['usuario']. " Consultó la pantalla de administrar clientes";
         $accion = "Consulta";
@@ -52,8 +58,10 @@
                     <th scope="col">Tipo Cliente</th>
                     <th scope="col">Correo</th>
                     <th scope="col">Telefono</th>
-                    <th scope="col">Fecha Creacion</th>
-                    <th scope="col">Acciones</th>
+                    
+                    <?php if($permisoActualizar == 1 && $permisoEliminar == 1 && $permisoConsulta == 1 || $permisoActualizar == 1 && $permisoEliminar == 0  && $permisoConsulta == 1 || $permisoActualizar == 0 && $permisoEliminar == 1  && $permisoConsulta == 1 || $permisoActualizar == 0 && $permisoEliminar == 0  && $permisoConsulta == 1 ){ ?>         
+                      <th scope="col">Acciones</th>
+                    <?php } ?>
                   </tr>
                 </thead>
 
@@ -168,9 +176,20 @@
                     <div class="form-group col-md-3">
                       <label>Sexo</label>
                       <select class="form-control select2" name="nuevoSexo" style="width: 100%;" required>
-                        <option selected="selected">Seleccionar...</option>
-                        <option value="M">Masculino</option>
-                        <option value="F">Femenino</option>
+                      <option selected="selected">Seleccionar...</option>
+                        <?php 
+                            $tabla = "tbl_sexo";
+                            $item = 'estado';
+                            $valor = 1;
+                            $all = true;
+
+                            $sexo = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all);
+
+                            foreach ($sexo as $key => $value) { ?>
+                                <option value="<?php echo $value['id_sexo']?>"><?php echo $value['descripcion_sexo']?></option>        
+                            <?php 
+                            }
+                        ?>
                       </select>
                     </div>
                   </div>
@@ -422,6 +441,64 @@
                 ?>
          
           </form>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- =======================================
+    MODAL DATOS DE CLIENTE VENTAS A DETALLE
+  ======================================----->
+  <div class="modal fade" id="modalVerClienteVenta" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md" role="document">
+      <div class="modal-content">      
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Datos cliente</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          
+        <form role="form" method="post" class="formulario" enctype="multipart/form-data">
+
+          <div class="alertaClienteVenta"></div>
+
+          <div class="form-row">
+            <div class="form-group col-md-12">
+              <label>Dirección</label>
+              <input type="text" class="form-control" value="" id=detalleDireccionClienteVenta disabled>
+            </div>
+          </div>
+
+          <!-- <div class="form-row">
+            <div class="form-group col-md-12">
+              <label>Sexo</label>
+              <input type="text" class="form-control" value="" id=detalleSexoClienteVenta disabled>
+            </div>
+          </div> -->
+          
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label>Fecha nacimiento</label>
+              <input type="text" class="form-control" value="" id=detalleFechaNacClienteVenta disabled>
+            </div>
+            <div class="form-group col-md-6">
+              <label>Sexo</label>
+              <input type="text" class="form-control" value="" id=detalleSexoClienteVenta disabled>
+            </div>
+          </div>
+      
+          <!-- <div class="modal-footer"> -->
+          <div class="form-group final mt-4 float-right">
+            <button type="button" class="btn btn-danger" id="salirCliVenta" data-dismiss="modal">Salir</button>
+          </div>
+      
+        </form>
+
 
         </div>
 
@@ -871,6 +948,64 @@
       </div>
     </div>
   </div>
+
+  <!-- =======================================
+      MODAL DATOS DE CLIENTE GYM A DETALLE
+  ======================================----->
+  <div class="modal fade" id="modalVerClienteGym" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md" role="document">
+      <div class="modal-content">      
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Datos cliente</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          
+        <form role="form" method="post" class="formulario" enctype="multipart/form-data">
+
+          <div class="form-row">
+            <div class="form-group col-md-12">
+              <label>Dirección</label>
+              <input type="text" class="form-control" value="" id=detalleDireccionClienteGym disabled>
+            </div>
+          </div>
+
+          <!-- <div class="form-row">
+            <div class="form-group col-md-12">
+              <label>Sexo</label>
+              <input type="text" class="form-control" value="" id=detalleSexoClienteGym disabled>
+            </div>
+          </div> -->
+          
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label>Fecha nacimiento</label>
+              <input type="text" class="form-control" value="" id=detalleFechaNacClienteGym disabled>
+            </div>
+            <div class="form-group col-md-6">
+              <label>Sexo</label>
+              <input type="text" class="form-control" value="" id=detalleSexoClienteGym disabled>
+            </div>
+          </div>
+      
+          <!-- <div class="modal-footer"> -->
+          <div class="form-group final mt-4 float-right">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
+          </div>
+      
+        </form>
+
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
 
 
   <!-- =======================================

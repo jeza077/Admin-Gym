@@ -149,6 +149,40 @@ class AjaxMantenimiento{
     
     }
 
+    /*========================================
+        MOSTRAR PARAMETRO (DINAMICO)
+    ==========================================*/ 
+    public $parametro;
+
+    public function ajaxMostrarParametro(){
+
+        $tabla = "tbl_parametros";
+        $item = "parametro";
+        $valor = $this->parametro;
+        $all = null;
+
+        $respuesta = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all);
+
+        echo json_encode($respuesta);
+    
+    }
+
+    /*========================================
+        GUARDAR BACKUP EN BD
+    ==========================================*/ 
+    public $nombreBackup;
+    // public $correo;
+    // public $telefono;
+
+    public function ajaxNuevoBackup(){
+        $nombre = $this->nombreBackup;
+
+        $respuesta = ControladorMantenimientos::ctrBackupInsertar($nombre);
+
+        echo json_encode($respuesta);
+    
+    }
+
 }
 
 /*========================================
@@ -207,6 +241,25 @@ if(isset($_POST["idProveedor"])){
     $mostrarProveedor->idProveedor = $_POST["idProveedor"];
     $mostrarProveedor->ajaxMostrarProveedor();
 }  
+
+/*========================================
+    MOSTRAR PARAMETROS (DINAMICO)
+==========================================*/ 
+if(isset($_POST["parametro"])){ 
+    $mostrarParametro = new AjaxMantenimiento();
+    $mostrarParametro->parametro = $_POST["parametro"];
+    $mostrarParametro->ajaxMostrarParametro();
+}  
+
+
+/*========================================
+    INSERTAR BACKUP
+==========================================*/ 
+if(isset($_POST["nombreBackup"])){ 
+    $backup = new AjaxMantenimiento();
+    $backup->nombreBackup = $_POST["nombreBackup"];
+    $backup-> ajaxNuevoBackup();
+}
 
 
 

@@ -70,7 +70,7 @@
                   <th scope="col">Rol</th>
                   <th scope="col">Estado</th>
                   
-                  <?php if($permisoActualizar == 1 && $permisoEliminar == 1 || $permisoActualizar == 1 && $permisoEliminar == 0 || $permisoActualizar == 0 && $permisoEliminar == 1){ ?>         
+                  <?php if($permisoActualizar == 1 && $permisoEliminar == 1 && $permisoConsulta == 1 || $permisoActualizar == 1 && $permisoEliminar == 0  && $permisoConsulta == 1 || $permisoActualizar == 0 && $permisoEliminar == 1  && $permisoConsulta == 1 || $permisoActualizar == 0 && $permisoEliminar == 0  && $permisoConsulta == 1 ){ ?>         
                     <th scope="col">Acciones</th>
                   <?php } ?>
                 </tr>
@@ -110,24 +110,36 @@
                           } else {
                             echo '<td><button class="btn btn-danger btn-md btnActivar" idUsuario="'.$value["id_usuario"].'" estadoUsuario="1">Desactivado</button></td>';
                           }
-                    if($permisoActualizar == 1 && $permisoEliminar == 0){
+                    if($permisoActualizar == 1 && $permisoEliminar == 0  && $permisoConsulta == 1){
   
                       echo '<td>
+                              <button class="btn btn-info btnVerUsuario" idUsuario="'.$value["id_personas"].'" data-toggle="modal" data-target="#modalVerUsuario" data-toggle="tooltip" data-placement="left" title="Ver más"><i class="fas fa-eye" style="color:#fff"></i></button>
                               <button class="btn btn-warning btnEditarUsuario" idUsuario="'.$value["id_personas"].'" data-toggle="modal" data-target="#modalEditarUsuario"><i class="fas fa-pencil-alt" style="color:#fff"></i></button>
                             </td>
                           </tr>
                     ';
-                    } else if($permisoActualizar == 0 && $permisoEliminar == 1){
+                    } else if($permisoActualizar == 0 && $permisoEliminar == 1  && $permisoConsulta == 1){
                       echo '<td>
+                              <button class="btn btn-info btnVerUsuario" idUsuario="'.$value["id_personas"].'" data-toggle="modal" data-target="#modalVerUsuario" data-toggle="tooltip" data-placement="left" title="Ver más"><i class="fas fa-eye" style="color:#fff"></i></button>
                               <button class="btn btn-danger btnEliminarUsuario" idPersona="'.$value["id_personas"].'" fotoUsuario="'.$value["foto"].'" usuario="'.$value["usuario"].'"><i class="fas fa-trash-alt"></i></button>
                             </td>
                           </tr>
                     ';
+                    
+                    } else if($permisoActualizar == 0 && $permisoEliminar == 0  && $permisoConsulta == 1){
+
+                      echo '<td>
+                              <button class="btn btn-info btnVerUsuario" idUsuario="'.$value["id_personas"].'" data-toggle="modal" data-target="#modalVerUsuario" data-toggle="tooltip" data-placement="left" title="Ver más"><i class="fas fa-eye" style="color:#fff"></i></button>
+                            </td>
+                          </tr>';
+
                     } else {
                       echo '<td>
-                              <button class="btn btn-info btnVerUsuario" idUsuario="'.$value["id_personas"].'" data-toggle="modal" data-target="#modalVerUsuario"><i class="fas fa-eye" style="color:#fff"></i></button>
-                              <button class="btn btn-warning btnEditarUsuario" idUsuario="'.$value["id_personas"].'" data-toggle="modal" data-target="#modalEditarUsuario"><i class="fas fa-pencil-alt" style="color:#fff"></i></button>
-                              <button class="btn btn-danger btnEliminarUsuario" idPersona="'.$value["id_personas"].'" fotoUsuario="'.$value["foto"].'" usuario="'.$value["usuario"].'"><i class="fas fa-trash-alt"></i></button>
+                              <button class="btn btn-info btnVerUsuario" idUsuario="'.$value["id_personas"].'" data-toggle="modal" data-target="#modalVerUsuario" data-toggle="tooltip" data-placement="left" title="Ver más"><i class="fas fa-eye" style="color:#fff"></i></button>
+
+                              <button class="btn btn-warning btnEditarUsuario" idUsuario="'.$value["id_personas"].'" data-toggle="modal" data-target="#modalEditarUsuario" data-toggle="tooltip" data-placement="left" title="Editar"><i class="fas fa-pencil-alt" style="color:#fff"></i></button>
+
+                              <button class="btn btn-danger btnEliminarUsuario" idPersona="'.$value["id_personas"].'" fotoUsuario="'.$value["foto"].'" usuario="'.$value["usuario"].'" data-toggle="tooltip" data-placement="left" title="Eliminiar"><i class="fas fa-trash-alt"></i></button>
                             </td>
                           </tr>
                     ';
@@ -246,8 +258,19 @@
                       <label>Sexo</label>
                       <select class="form-control select2" name="nuevoSexo" style="width: 100%;" required>
                         <option selected="selected">Seleccionar...</option>
-                        <option value="M">Masculino</option>
-                        <option value="F">Femenino</option>
+                        <?php 
+                            $tabla = "tbl_sexo";
+                            $item = 'estado';
+                            $valor = 1;
+                            $all = true;
+
+                            $sexo = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all);
+
+                            foreach ($sexo as $key => $value) { ?>
+                                <option value="<?php echo $value['id_sexo']?>"><?php echo $value['descripcion_sexo']?></option>        
+                            <?php 
+                            }
+                        ?>
                       </select>
                     </div>
                 
@@ -443,8 +466,19 @@
                       <label>Sexo</label>
                       <select class="form-control" name="editarSexo" style="width: 100%;" required>
                         <option value="" id="editarSexo"></option>
-                        <option value="M">Masculino</option>
-                        <option value="F">Femenino</option>
+                        <?php 
+                            $tabla = "tbl_sexo";
+                            $item = 'estado';
+                            $valor = 1;
+                            $all = true;
+
+                            $sexo = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all);
+
+                            foreach ($sexo as $key => $value) { ?>
+                                <option value="<?php echo $value['id_sexo']?>"><?php echo $value['descripcion_sexo']?></option>        
+                            <?php 
+                            }
+                        ?>
                       </select>
                     </div>
                     <input type="hidden" class="idPersona" value="" name="idPersona">

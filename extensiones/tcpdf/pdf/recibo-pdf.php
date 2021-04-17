@@ -37,6 +37,13 @@ class imprimirFactura{
 		$direccion = $direccionEmpresa ['valor'];
 
 		$item="parametro";
+		$valor="ADMIN_TELEFONO_EMPRESA";
+
+		$telefonoEmpresa = ControladorUsuarios::ctrMostrarParametros($item, $valor);
+		// var_dump($telefonoEmpresa ['valor']);
+		$telefono = $telefonoEmpresa ['valor'];
+		
+		$item="parametro";
 		$valor="ADMIN_CORREO";
 
 		$correoEmpresa = ControladorUsuarios::ctrMostrarParametros($item, $valor);
@@ -125,7 +132,7 @@ $bloque1 = <<<EOF
 			<div style="font-size:10.5px; text-align:right; line-height:15px;">
 				
 				<br>
-				Teléfono: 2275-1354
+				Tel: $telefono
 				
 				<br>
 				$direccion
