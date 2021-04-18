@@ -101,7 +101,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fas fa-unlock"></i></span>
                         </div>
-                            <input type="text-center" class="form-control" id="contrasenia" name="contrasenia" placeholder="db password" readonly>
+                            <input type="text-center" class="form-control" id="contrasenia" name="contrasenia" placeholder="contraseña_bd" readonly>
                       </div>
                   </div>
                   
