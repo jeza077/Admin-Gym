@@ -7,7 +7,7 @@
 
     <!-- CONTENEDOR LOGIN -->
     <div class="card-body login-card-body iniciarSesion">
-      <p class="login-box-msg">Inicio de Sesión</p>
+      <p class="login-box-msg">Inicio de sesión</p>
 
       <form method="post" autocomplete="off">
         <div class="form-group mb-3">
@@ -26,10 +26,10 @@
 
 
       <p class="mb-1">
-        <a href="javascript:void(0);" onclick="toggleForm();">¿Olvidaste tu contraseña</a>
+        <a href="javascript:void(0);" onclick="toggleForm();">¿Olvidó su contraseña?</a>
       </p>
       <p class="mb-0">
-        ¿No tienes una cuenta? <a href="javascript:void(0);" onclick="toggleRegistrar()" class="text-center">Registrate</a>
+        ¿No tiene una cuenta? <a href="javascript:void(0);" onclick="toggleRegistrar()" class="text-center">Regístrese</a>
       </p>
       
         <?php 
@@ -51,10 +51,10 @@
 
     <!-- CONTENEDOR VERIFICAR EL EMAIL -->
     <div class="card-body login-card-body verificarEmail">
-      <p class="login-box-msg">Verifica tu correo</p>
+      <p class="login-box-msg">Verifique su correo</p>
       <form method="post">
         <div class="form-group has-feedback">
-          <input type="email" class="form-control"  id="verificarEmail" placeholder="Email" name="" required>
+          <input type="email" class="form-control"  id="verificarEmail" placeholder="Correo" name="" required>
           <span class="glyphicon glyphicon-user form-control-feedback"></span>
         </div>
 
@@ -117,7 +117,7 @@
 
     <!-- CONTENEDOR CAMBIAR CONTRASEÑA -->
     <div class="card-body login-card-body cambiarPassword" >
-      <p class="login-box-msg">Cambia tu contraseña</p>
+      <p class="login-box-msg">Cambie su contraseña</p>
       <form method="post" id="cambiarPassword">
 
       <div class="form-row">
@@ -149,7 +149,7 @@
 
     <!-- CONTENEDOR REGISTRAR PERSONA -->
     <div class="card-body login-card-body registrar" >
-      <p class="login-box-msg">Registra tus datos personales</p>
+      <p class="login-box-msg">Registre sus datos personales</p>
       <form method="post" id="">
         <div class="form-row">
           <div class="form-group col-md-3">
@@ -172,16 +172,16 @@
             </select>
           </div>
           <div class="form-group col-md-3">
-            <label for="identidad">Numero de Documento</label>
-            <input type="text" class="form-control numeroDocumento longitudDocumento sinEspacioDoc" name="nuevoNumeroDocumento" placeholder="Ingrese Identidad" required>
+            <label for="identidad">Número de Documento</label>
+            <input type="text" class="form-control numeroDocumento longitudDocumento sinEspacioDoc" name="nuevoNumeroDocumento" placeholder="Ingrese identidad" required>
           </div>
           <div class="form-group col-md-3">
             <label for="nombre">Nombre</label>
-            <input type="text" class="form-control mayus nombre unEspacio" name="nuevoNombre" placeholder="Ingrese Nombre" required>
+            <input type="text" class="form-control mayus nombre unEspacio" name="nuevoNombre" placeholder="Ingrese nombre" required>
           </div>
           <div class="form-group col-md-3">
             <label for="apellido">Apellido</label>
-            <input type="text" class="form-control mayus apellidos unEspacio" name="nuevoApellido" placeholder="Ingrese Apellidos" required>
+            <input type="text" class="form-control mayus apellidos unEspacio" name="nuevoApellido" placeholder="Ingrese apellidos" required>
           </div>
         </div>
 
@@ -193,20 +193,20 @@
 
           <div class="form-group col-md-3">
             <label for="">Usuario</label>
-            <input type="text" class="form-control nuevoUsuario mayus personas" name="nuevoUsuario" placeholder="Ingrese Usuario" required autocomplete="off">
+            <input type="text" class="form-control nuevoUsuario mayus personas" name="nuevoUsuario" placeholder="Ingrese usuario" required autocomplete="off">
           </div>
           <div class="form-group col-md-3">
             <label for="">Contraseña</label>
-            <input type="password" class="form-control password autoreg" name="nuevoPassword" placeholder="Ingrese Contraseña" required autocomplete="off">
+            <input type="password" class="form-control password autoreg" name="nuevoPassword" placeholder="Ingrese contraseña" required autocomplete="off">
             <i class="far fa-eye show-pass-registro" action="hide"></i>
           </div>
           <div class="form-group col-md-3">
-            <label for="inputEmail4">Email</label>
-            <input type="email" class="form-control email" id="inputEmail4" name="nuevoEmail" placeholder="Ingrese Email" required>
+            <label for="inputEmail4">Correo</label>
+            <input type="email" class="form-control email" id="inputEmail4" name="nuevoEmail" placeholder="Ingrese correo" required>
           </div>
           <div class="form-group col-md-3">
             <label>Teléfono</label>
-            <input type="text" class="form-control" data-inputmask='"mask": "(999) 9999-9999"' data-mask  name="nuevoTelefono" placeholder="Ingrese Telefono" required>
+            <input type="text" class="form-control" data-inputmask='"mask": "(999) 9999-9999"' data-mask  name="nuevoTelefono" placeholder="Ingrese teléfono" required>
           </div>
         </div>
 
@@ -221,7 +221,7 @@
           </div>
           <div class="form-group col-md-3">
             <label>Fecha de nacimiento</label>
-              <input type="text" class="form-control fecha" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy-mm-dd" data-mask  name="nuevaFechaNacimiento" placeholder="Ingrese Fecha de Nacimiento" required>
+              <input type="text" class="form-control fecha" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy-mm-dd" data-mask  name="nuevaFechaNacimiento" placeholder="Fecha de nacimiento" required>
           </div>
           <div class="form-group col-md-2">
             <label>Sexo</label>

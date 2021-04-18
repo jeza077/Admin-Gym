@@ -32,7 +32,7 @@
           <div class="col-sm-6">
           <?php if($permisoAgregar == 1){ ?>
             <button class="btn btn-orange float-right" id="usuarioNuevo">
-              Nuevo Usuario          
+              Nuevo usuario          
             </button>
           <?php } ?>
             <button class="btn btn-danger btnExportarUsuarios float-right mr-3 ">
@@ -62,8 +62,8 @@
             <table class="table table-striped table-bordered tablas text-center">
               <thead>
                 <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">No. Documento</th>
+                  <th scope="col">N.°</th>
+                  <th scope="col">Número de documento</th>
                   <th scope="col">Nombre</th>
                   <th scope="col">Usuario</th>
                   <th scope="col">Foto</th>
@@ -187,7 +187,7 @@
                 <a class="nav-link active" id="datosPersona" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Datos personales</a>
               </li>
               <li class="nav-item" role="presentation">
-                <a class="nav-link" id="datosUsuario" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Datos Usuario</a>
+                <a class="nav-link" id="datosUsuario" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Datos usuario</a>
               </li>
             </ul>
             
@@ -216,7 +216,7 @@
                     </div>
 
                     <div class="form-group col-md-3">
-                      <label for="identidad">Numero de documento</label>
+                      <label for="identidad">Número de documento</label>
                       <input type="text" class="form-control numeroDocumento longitudDocumento sinEspacioDoc" name="nuevoNumeroDocumento" placeholder="Ingrese Identidad" required>
                     </div>
                     <div class="form-group col-md-3">
@@ -233,16 +233,16 @@
       
                   <div class="form-row">
                     <div class="form-group col-md-4">
-                      <label for="inputEmail4">Email</label>
-                      <input type="email" class="form-control email longitudCorreo" id="inputEmail4" name="nuevoEmail" placeholder="Ingrese Email" required>
+                      <label for="inputEmail4">Correo</label>
+                      <input type="email" class="form-control email longitudCorreo" id="inputEmail4" name="nuevoEmail" placeholder="Ingrese correo" required>
                     </div>
                     <div class="form-group col-md-4">
                       <label>Teléfono</label>
-                      <input type="text" class="form-control" data-inputmask='"mask": "(999) 9999-9999"' data-mask  name="nuevoTelefono" placeholder="Ingrese Telefono" required>
+                      <input type="text" class="form-control" data-inputmask='"mask": "(999) 9999-9999"' data-mask  name="nuevoTelefono" placeholder="Ingrese teléfono" required>
                     </div>
                     <div class="form-group col-md-4">
                       <label>Fecha de nacimiento</label>
-                        <input type="text" class="form-control fecha" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy/mm/dd" data-mask  name="nuevaFechaNacimiento" placeholder="Ingrese Fecha de Nacimiento" required>
+                        <input type="text" class="form-control fecha" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy/mm/dd" data-mask  name="nuevaFechaNacimiento" placeholder="Ingrese fecha de nacimiento" required>
                     </div>
                   </div>
 
@@ -283,7 +283,7 @@
                   <div class="form-row">
                     <div class="form-group col-md-3">
                       <label for="">Usuario</label>
-                      <input type="text" class="form-control mayus nuevoUsuario sinCaracteres sinNumeros" name="nuevoUsuario" placeholder="Ingrese Usuario" autocomplete="off">
+                      <input type="text" class="form-control mayus nuevoUsuario sinCaracteres sinNumeros" name="nuevoUsuario" placeholder="Ingrese usuario" autocomplete="off">
                     </div>
                     <div class="form-group col-md-3">
                       <label>Rol</label>
@@ -309,7 +309,7 @@
                     </div>
 
                     <div class="form-group col-md-3">
-                      <label for="">Contraseña Generada</label>
+                      <label for="">Contraseña generada</label>
                       <input type="text" class="form-control passwordGenerado" name="nuevoPassword" autocomplete="off" spellcheck="false">
                     </div>
                     <div class="col-md-3">
@@ -326,10 +326,10 @@
                         <img class="img-thumbnail previsualizar mr-2" src="vistas/img/usuarios/default/default2.jpg" alt="imagen-del-usuario" width="100px">
                         <div class="custom-file">
                           <input type="file" class="custom-file-input nuevaFoto" name="nuevaFoto">
-                          <label class="custom-file-label" for="">Escoger foto</label>
+                          <label class="custom-file-label" for="">Escoger Imagen</label>
                         </div>
                       </div>
-                          <p class="p-foto help-block ml-4">Peso máximo de la foto 2 MB</p>
+                          <p class="p-foto help-block ml-4">Peso máximo de la imagen 2 MB</p>
                     </div>
                     <div class="form-group col-md-3">
                       <label>Estado</label>
@@ -428,7 +428,7 @@
                     </div>
 
                     <div class="form-group col-md-3">
-                      <label for="identidad">Numero de documento</label>
+                      <label for="identidad">Número de documento</label>
                       <input type="text" class="form-control numeroDocumento longitudDocumento sinEspacioDoc" name="editarNumeroDocumento" value="" required>
                     </div>
                     <div class="form-group col-md-3">
@@ -443,7 +443,7 @@
       
                   <div class="form-row">
                     <div class="form-group col-md-4">
-                      <label for="inputEmail">Email</label>
+                      <label for="inputEmail">Correo</label>
                       <input type="email" class="form-control email" id="inputEmail" name="editarEmail" value="" required>
                     </div>
                     <div class="form-group col-md-4">
@@ -518,7 +518,7 @@
                     </div>
 
                     <div class="form-group col-md-3">
-                      <label for="inputPass">Contraseña Generada</label>
+                      <label for="inputPass">Contraseña generada</label>
                       <input type="text" class="form-control passwordGenerado" id="inputPass" name="editarPassword" autocomplete="off" spellcheck="false">
                       <input type="hidden" class="form-control" id="passwordActual" name="passwordActual">
                     </div>
@@ -529,16 +529,16 @@
 
                   <div class="form-row">
                     <div class="form-group col-md-6">
-                      <label for="inputFoto">Foto</label>
+                      <label for="inputFoto">Imagen</label>
                       <div class="input-group">
                         <img class="img-thumbnail previsualizar mr-2" src="" alt="imagen-del-usuario" width="100px">
                         <div class="custom-file">
                           <input type="file" class="custom-file-input nuevaFoto" id="inputFoto" name="editarFoto">
-                          <label class="custom-file-label" for="inputFoto">Escoger foto</label>
+                          <label class="custom-file-label" for="inputFoto">Escoger imagen</label>
                           <input type="hidden" name="fotoActual" id="fotoActual">
                         </div>
                       </div>
-                          <p class="p-foto help-block ml-4">Peso máximo de la foto 2 MB</p>
+                          <p class="p-foto help-block ml-4">Peso máximo de la imagen 2 MB</p>
                     </div>
                     <!-- <div class="form-group col-md-3">
                       <input type="text" value="Desactivado" style="color:red;" readonly>
@@ -612,7 +612,7 @@
 
           <div class="form-row">
             <div class="form-group col-md-12">
-              <label>Telefono</label>
+              <label>Teléfono</label>
               <input type="text" class="form-control" value="" id=detalleTelefonoUsuario disabled>
             </div>
           </div>
@@ -633,7 +633,7 @@
           
           <div class="form-row">
             <div class="form-group col-md-6">
-              <label>Fecha nacimiento</label>
+              <label>Fecha de nacimiento</label>
               <input type="text" class="form-control" value="" id=detalleFechaNacUsuario disabled>
             </div>
             <div class="form-group col-md-6">
@@ -731,7 +731,7 @@
 
             <div class="form-row">
               <div class="form-group col-md-6">
-                <label for="inputPassword4">Contraseña Generada</label>
+                <label for="inputPassword4">Contraseña generada</label>
                 <input type="text" class="form-control passwordGenerado" id="inputPassword4" name="nuevoPassword" autocomplete="off" spellcheck="false">
               </div>
               <div class="col-md-6">
@@ -741,15 +741,15 @@
 
             <div class="form-row">
               <div class="form-group col-md-12">
-                <label for="exampleInputFile">Foto</label>
+                <label for="exampleInputFile">Imagen</label>
                 <div class="input-group">
                   <img class="img-thumbnail previsualizar mr-2" src="vistas/img/usuarios/default/default2.jpg" alt="imagen-del-usuario" width="100px">
                   <div class="custom-file">
                     <input type="file" class="custom-file-input nuevaFoto" id="exampleInputFile" name="nuevaFoto">
-                    <label class="custom-file-label" for="exampleInputFile">Escoger foto</label>
+                    <label class="custom-file-label" for="exampleInputFile">Escoger imagen</label>
                   </div>
                 </div>
-                    <p class="p-foto help-block ml-4">Peso máximo de la foto 2 MB</p>
+                    <p class="p-foto help-block ml-4">Peso máximo de la imagen 2 MB</p>
               </div>
             </div>
 

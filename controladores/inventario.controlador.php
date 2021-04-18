@@ -174,7 +174,7 @@ class ControladorInventario{
                     } else {
                         echo '<script>
                                 Swal.fire({
-                                    title: "Opps, algo salio mal, intenta de nuevo!",
+                                    title: "¡Algo salió mal. Intenta de nuevo!",
                                     icon: "error",
                                     heightAuto: false,
                                     allowOutsideClick: false,
@@ -328,7 +328,7 @@ class ControladorInventario{
                     else {
                         echo '<script>
                                 Swal.fire({
-                                    title: "Opps, algo salio mal, intenta de nuevo!",
+                                    title: "¡Algo salió mal. Intenta de nuevo!",
                                     icon: "error",
                                     heightAuto: false,
                                     allowOutsideClick: false,
@@ -588,7 +588,7 @@ class ControladorInventario{
                             
                         echo '<script>
                                 Swal.fire({
-                                    title: "Producto editado correctamente!",
+                                    title: "¡Producto editado correctamente!",
                                     icon: "success",
                                     heightAuto: false,
                                     allowOutsideClick: false
@@ -602,7 +602,7 @@ class ControladorInventario{
                     else {
                         echo '<script>
                                 Swal.fire({
-                                    title: "No se pudo guardar tus datos. Intenta de nuevo!",
+                                    title: "¡No se pudo guardar tus datos, intente de nuevo!",
                                     icon: "error",
                                     heightAuto: false,
                                     allowOutsideClick: false,
@@ -739,7 +739,7 @@ class ControladorInventario{
                             
                         echo '<script>
                                 Swal.fire({
-                                    title: "Equipo editado correctamente!",
+                                    title: "¡Equipo editado correctamente!",
                                     icon: "success",
                                     heightAuto: false,
                                     allowOutsideClick: false
@@ -752,7 +752,7 @@ class ControladorInventario{
                     } else {
                         echo '<script>
                                 Swal.fire({
-                                    title: "Opps, algo salio mal, intenta de nuevo!",
+                                    title: "¡Algo salió mal, intente de nuevo!",
                                     icon: "error",
                                     heightAuto: false,
                                     allowOutsideClick: false,
@@ -766,7 +766,7 @@ class ControladorInventario{
             } else {
                 echo '<script>
                     Swal.fire({
-                        title: "Por favor llene los campos correctamente. Intente de nuevo!",
+                        title: "¡Por favor llene los campos correctamente, intente de nuevo!",
                         icon: "error",
                         heightAuto: false,
                         allowOutsideClick: false,
@@ -823,7 +823,7 @@ class ControladorInventario{
                   
                 echo '<script>
                         Swal.fire({
-                            title: "Opps, algo salio mal, intenta de nuevo!",
+                            title: "¡Algo salió mal, intente de nuevo!",
                             icon: "error",
                             heightAuto: false
                         }).then((result)=>{

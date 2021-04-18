@@ -47,31 +47,31 @@
                 </select>
               </div>
               <div class="form-group col-md-3">
-                <label for="identidad">Numero de documento</label>
-                <input type="text" class="form-control id" id="numDocumento" name="nuevoNumeroDocumento" placeholder="Ingrese Identidad" required>
+                <label for="identidad">Número de documento</label>
+                <input type="text" class="form-control id" id="numDocumento" name="nuevoNumeroDocumento" placeholder="Ingrese identidad" required>
               </div>
               <div class="form-group col-md-3">
                 <label for="nombre">Nombre</label>
-                <input type="text" class="form-control nombre" id="nombre" name="nuevoNombre" placeholder="Ingrese Nombre" required>
+                <input type="text" class="form-control nombre" id="nombre" name="nuevoNombre" placeholder="Ingrese nombre" required>
               </div>
               <div class="form-group col-md-3">
                 <label for="apellido">Apellido</label>
-                <input type="text" class="form-control nuevoApellido" id="apellido" name="nuevoApellido" placeholder="Ingrese Apellidos" required>
+                <input type="text" class="form-control nuevoApellido" id="apellido" name="nuevoApellido" placeholder="Ingrese apellido" required>
               </div>
             </div>
             
             <div class="form-row">
               <div class="form-group col-md-4">
-                <label for="inputEmail4">Email</label>
-                <input type="email" class="form-control email" id="inputEmail4" name="nuevoEmail" placeholder="Ingrese Email" required>
+                <label for="inputEmail4">Correo</label>
+                <input type="email" class="form-control email" id="inputEmail4" name="nuevoEmail" placeholder="Ingrese correo" required>
               </div>
               <div class="form-group col-md-4">
                 <label>Teléfono</label>
-                <input type="text" class="form-control" id="inputTelefono" data-inputmask='"mask": "(504) 9999-9999"' data-mask  name="nuevoTelefono" placeholder="Ingrese Telefono" required>
+                <input type="text" class="form-control" id="inputTelefono" data-inputmask='"mask": "(504) 9999-9999"' data-mask  name="nuevoTelefono" placeholder="Ingrese teléfono" required>
               </div>
               <div class="form-group col-md-4">
                 <label>Fecha de nacimiento</label>
-                  <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy/mm/dd" data-mask  name="nuevaFechaNacimiento" placeholder="Ingrese Fecha de Nacimiento" required>
+                  <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy/mm/dd" data-mask  name="nuevaFechaNacimiento" placeholder="Ingrese fecha de nacimiento" required>
               </div>
             </div>
 
@@ -108,7 +108,7 @@
             <div class="form-row">
               <div class="form-group col-md-6">
                 <label for="">Usuario</label>
-                <input type="text" class="form-control nuevoUsuario" onKeyUp="this.value=this.value.toUpperCase();" name="nuevoUsuario" placeholder="Ingrese Usuario">
+                <input type="text" class="form-control nuevoUsuario" onKeyUp="this.value=this.value.toUpperCase();" name="nuevoUsuario" placeholder="Ingrese usuario">
               </div>
               <div class="form-group col-md-6">
                 <label>Rol</label>
@@ -154,7 +154,7 @@
             </div>
           
             <div class="form-group">
-              <a href="#" class="btn btn-danger float-left" onclick="toggleUser();">Atras</a>
+              <a href="#" class="btn btn-danger float-left" onclick="toggleUser();">Atrás</a>
               <button type="submit" class="btn btn-primary btnGuardar float-right">Guardar</button>
 
             </div>
@@ -163,7 +163,7 @@
           <div class="card-body contenedor agregarCliente">
           
             <div class="form-group">
-              <a href="#" class="btn btn-danger float-left" onclick="toggleCliente();">Atras</a>
+              <a href="#" class="btn btn-danger float-left" onclick="toggleCliente();">Atrás</a>
               <button type="submit" class="btn btn-primary float-right">Guardar</button>
             </div>
           </div>
@@ -181,7 +181,7 @@
     </section>
     
  <?php
-		       $descripcionEvento = "Nuevo Usuario";
+		       $descripcionEvento = "Nuevo usuario";
 	         $accion = "Nuevo";
   
 	         $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);

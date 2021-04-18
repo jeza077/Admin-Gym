@@ -75,7 +75,7 @@ class PDF extends TCPDF{
 
         // $this->Cell(260, 3, 'Del '.$fecha.'', 0, 1, 'C');
 
-        $this->Cell(260, 3, 'Año '.$año.'', 0, 1, 'C');
+        $this->Cell(260, 3, 'Fecha '.$año.'', 0, 1, 'C');
     }
 
     // Footer de la pagina
@@ -150,7 +150,7 @@ $pdf->Ln(45);
 $pdf->SetFont('times', '', 13);
 $pdf->SetFillColor(225, 235, 255);
 $pdf->Cell(15, 5, 'No', 1, 0, 'C', 1);
-$pdf->Cell(30, 5, 'Cod. Factura', 1, 0, 'C', 1);
+$pdf->Cell(30, 5, 'Cód. Factura', 1, 0, 'C', 1);
 $pdf->Cell(50, 5, 'Cliente', 1, 0, 'C', 1);
 $pdf->Cell(40, 5, 'Productos', 1, 0, 'C', 1);
 $pdf->Cell(32, 5, 'Impuesto', 1, 0, 'C', 1);
@@ -202,7 +202,7 @@ if(!$ventas){
             $pdf->SetFont('times', '', 13);
             $pdf->SetFillColor(225, 235, 255);
             $pdf->Cell(15, 5, 'No', 1, 0, 'C', 1);
-            $pdf->Cell(30, 5, 'Cod. Factura', 1, 0, 'C', 1);
+            $pdf->Cell(30, 5, 'Cód. Factura', 1, 0, 'C', 1);
             $pdf->Cell(50, 5, 'Cliente', 1, 0, 'C', 1);
             $pdf->Cell(40, 5, 'Productos', 1, 0, 'C', 1);
             $pdf->Cell(32, 5, 'Impuesto', 1, 0, 'C', 1);

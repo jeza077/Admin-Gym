@@ -352,7 +352,7 @@ class ControladorClientes{
             } else {
 				echo '<script>
 					Swal.fire({
-						title: "Opps, algo salio mal, intenta de nuevo!",
+						title: "¡Algo salió mal, intenta de nuevo!",
 						icon: "error",
 						heightAuto: false,
 						allowOutsideClick: false
@@ -881,7 +881,7 @@ class ControladorClientes{
 				} else {
 					echo "<script>
 							Swal.fire({
-								title: 'Oops, algo salio. Intenta de nuevo!',
+								title: '¡Algo salió mal. Intenta de nuevo!',
 								icon: 'error',
 								allowOutsideClick: false,
 								showCancelButton: false,
@@ -898,7 +898,7 @@ class ControladorClientes{
 			} else {
 				echo "<script>
 							Swal.fire({
-								title: 'Oops, algo salio. Intenta de nuevo!',
+								title: '¡Algo salió. Intenta de nuevo!',
 								icon: 'error',
 								allowOutsideClick: false,
 								showCancelButton: false,
@@ -1055,7 +1055,7 @@ class ControladorClientes{
 					} else {
 						echo "<script>
 								Swal.fire({
-									title: 'Oops, algo salio. Intenta de nuevo!',
+									title: '¡Algo salió mal. Intenta de nuevo!',
 									icon: 'error',
 									allowOutsideClick: false,
 									showCancelButton: false,
@@ -1072,7 +1072,7 @@ class ControladorClientes{
 				} else {
 					echo "<script>
 								Swal.fire({
-									title: 'Oops, algo salio. Intenta de nuevo!',
+									title: '¡Algo salió. Intenta de nuevo!',
 									icon: 'error',
 									allowOutsideClick: false,
 									showCancelButton: false,
@@ -1088,7 +1088,7 @@ class ControladorClientes{
 			} else {
 				echo "<script>
 						Swal.fire({
-							title: 'Oops, algo salio. Intenta de nuevo!',
+							title: '¡Algo salió mal. Intenta de nuevo!',
 							icon: 'error',
 							allowOutsideClick: false,
 							showCancelButton: false,
@@ -1240,7 +1240,7 @@ class ControladorClientes{
 					} else {
 						echo "<script>
 								Swal.fire({
-									title: 'Oops, algo salio. Intenta de nuevo!',
+									title: '¡Algo salió. Intenta de nuevo!',
 									icon: 'error',
 									allowOutsideClick: false,
 									showCancelButton: false,
@@ -1257,7 +1257,7 @@ class ControladorClientes{
 				} else {
 					echo "<script>
 								Swal.fire({
-									title: 'Oops, algo salio. Intenta de nuevo!',
+									title: '¡Algo salió mal. Intenta de nuevo!',,
 									icon: 'error',
 									allowOutsideClick: false,
 									showCancelButton: false,
@@ -1273,7 +1273,7 @@ class ControladorClientes{
 			} else {
 				echo "<script>
 						Swal.fire({
-							title: 'Oops, algo salio. Intenta de nuevo!',
+							title: '¡Algo salió mal. Intenta de nuevo!',
 							icon: 'error',
 							allowOutsideClick: false,
 							showCancelButton: false,

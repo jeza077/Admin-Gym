@@ -10,7 +10,7 @@
           </div>
           <div class="col-sm-6">
           <button class="btn btn-orange float-right"  data-toggle="modal" data-target="#modalAgregarInventario">
-              Nuevo Producto        
+              Nuevo producto        
           </button>
           <!-- <button class="btn btn-danger btnExportarProductos float-right mr-3">
               Exportar PDF          
@@ -49,13 +49,13 @@
           <table class="table table-striped table-bordered tablaProductos text-center">
             <thead>
               <tr>
-              <th scope="col">#</th>
-              <th scope="col">Codigo</th>
-              <th scope="col">Foto</th>
+              <th scope="col">N.°</th>
+              <th scope="col">Código</th>
+              <th scope="col">Imagen</th>
               <th scope="col">Nombre</th>
               <th scope="col">Precio venta</th>
-              <th scope="col">Producto min.</th>
-              <th scope="col">Producto max.</th>
+              <th scope="col">Producto mínimo</th>
+              <th scope="col">Producto máximo</th>
               <th scope="col">Acciones</th>
               </tr>
             </thead>
@@ -79,7 +79,7 @@
   <div class="modal-dialog modal-md" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Nuevo Producto</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Nuevo producto</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -90,7 +90,7 @@
             <div class="form-row">
             
               <div class="form-group col-md-12">
-                <label for="nombreproducto">Codigo</label>
+                <label for="nombreproducto">Código</label>
                 <?php
                   $tabla = "tbl_inventario";
                   $item = "tipo_producto";
@@ -118,9 +118,9 @@
 
             <div class="form-row">
               <div class="form-group col-md-12">
-                <label for="nombreproducto">Nombre Producto</label>
+                <label for="nombreproducto">Nombre producto</label>
                 <html>
-                <input type="text" class="form-control mayus sinCaracteres sinNumeros longitudNombre soloUnEspacio" id="nuevoNombreProducto" name="nuevoNombreProducto" placeholder="Ingrese Producto" required>
+                <input type="text" class="form-control mayus sinCaracteres sinNumeros longitudNombre soloUnEspacio" id="nuevoNombreProducto" name="nuevoNombreProducto" placeholder="Ingrese el producto" required>
               </div>
             </div>
 
@@ -130,27 +130,27 @@
                 <input type="text" class="form-control sinLetras sinCaracteres longitudEntero sinEspacioDoc" id="nuevoPrecio" name="nuevoPrecio" placeholder="Ingrese Precio"  required>
               </div>
               <div class="form-group col-md-4">
-                <label for="productominimo">Producto Minimo</label>
-                <input type="number" class="form-control sinLetras sinCaracteres longitudEntero" id="nuevoProductoMinimo" name="nuevoProductoMinimo" placeholder="Cantidad Minima" min="0" required class="fa fa-arrow-up"></i></span>
+                <label for="productominimo">Producto mínimo</label>
+                <input type="number" class="form-control sinLetras sinCaracteres longitudEntero" id="nuevoProductoMinimo" name="nuevoProductoMinimo" placeholder="Cantidad mínima" min="0" required class="fa fa-arrow-up"></i></span>
               </div>
               <div class="form-group col-md-4">
-                <label for="productomaximo">Producto Maximo</label>
-                <input type="number" class="form-control sinLetras sinCaracteres longitudEntero" id="nuevoProductoMaximo" name="nuevoProductoMaximo" placeholder="Cantidad Maximo" min="0" required class="fa fa-arrow-up"></i></span>
+                <label for="productomaximo">Producto máximo</label>
+                <input type="number" class="form-control sinLetras sinCaracteres longitudEntero" id="nuevoProductoMaximo" name="nuevoProductoMaximo" placeholder="Cantidad máximo" min="0" required class="fa fa-arrow-up"></i></span>
               </div>
             </div>
 
 
             <div class="form-row">
               <div class="form-group col-md-12">
-                  <label for="exampleInputFile">Foto</label>
+                  <label for="exampleInputFile">Imagen</label>
                   <div class="input-group">
                     <img class="img-thumbnail previsualizar mr-2" src="vistas/img/productos/default/product.png" alt="imagen-del-usuario" width="100px">
                     <div class="custom-file">
                       <input type="file" class="custom-file-input nuevaFotoProducto" id="nuevaFotoProducto" name="nuevaFotoProducto">
-                      <label class="custom-file-label" for="nuevaFotoProducto">Escoger foto</label>
+                      <label class="custom-file-label" for="nuevaFotoProducto">Escoger imagen</label>
                     </div>
                   </div>
-                      <p class="p-foto help-block ml-4">Peso máximo de la foto 2 MB</p>
+                      <p class="p-foto help-block ml-4">Peso máximo de la imagen 2 MB</p>
                 </div>
             </div>
 
@@ -179,7 +179,7 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Editar Producto</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Editar producto</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -190,13 +190,13 @@
           <div class="form-row">
             
             <div class="form-group col-md-4">
-              <label for="nombreproducto">Codigo</label>
+              <label for="nombreproducto">Código</label>
               <input type="text" value="" class="form-control" readonly id="editarCodigo" name="editarCodigo"  required>
               <input type="hidden" name="editarTipoProducto" id="editarTipoProducto">
             </div>
             
             <div class="form-group col-md-4">
-              <label for="nombreproducto">Nombre Producto</label>
+              <label for="nombreproducto">Nombre producto</label>
               <html>
               <input type="text" value="" class="form-control mayus sinCaracteres sinNumeros longitudNombre soloUnEspacio"  name="editarNombreProducto" id="editarNombreProducto" required>
             </div>
@@ -213,11 +213,11 @@
                   <input type="text" value="" class="form-control sinLetras sinCaracteres longitudEntero sinEspacioDoc" name="editarPrecio" id="editarPrecio" required>
                 </div>
                 <div class="form-group col-md-4">
-                  <label for="productominimo">Producto Minimo</label>
+                  <label for="productominimo">Producto mínimo</label>
                   <input type="number" value="" class="form-control sinCaracteres sinLetras longitudEntero" name="editarProductoMinimo" id="editarProductoMinimo" min="0" required class="fa fa-arrow-up"></i></span>
                 </div>
                 <div class="form-group col-md-4">
-                  <label for="productomaximo">Producto Maximo</label>
+                  <label for="productomaximo">Producto máximo</label>
                   <input type="number" value="" class="form-control sinCaracteres sinLetras longitudEntero" name="editarProductoMaximo" id="editarProductoMaximo" min="0" required class="fa fa-arrow-up"></i></span>
                 </div>
               </div>
@@ -225,13 +225,13 @@
               <div class="form-row">
 
                 <div class="form-group col-md-12">
-                    <label for="exampleInputFile">Foto</label>
+                    <label for="exampleInputFile">Imagen</label>
                     <div class="input-group">
                     <img class="img-thumbnail previsualizarFotoProducto mr-2" alt="imagen-del-producto" width="100px">
                     <input type="hidden" name="imagenActual" id=imagenActual>
                     <div class="custom-file">
                         <input type="file" class="custom-file-input nuevaFotoProducto" name="editarFotoProducto">
-                        <label class="custom-file-label">Escoger foto</label>
+                        <label class="custom-file-label">Escoger imagen</label>
                     </div>
                     </div>
                         <p class="p-foto help-block ml-4">Peso máximo de la foto 2 MB</p>

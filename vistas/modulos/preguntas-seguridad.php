@@ -25,7 +25,7 @@
       <div class="card-body">
 
         <?php
-            // $descripcionEvento = " Consulto la pantalla de Documentos";
+            // $descripcionEvento = " Consultó la pantalla de Documentos";
             // $accion = "Consulta";
 
             // $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
@@ -35,7 +35,7 @@
             
             <thead>
               <tr>
-                <th scope="col">#</th>
+                <th scope="col">N.°</th>
                 <th scope="col">Pregunta</th>
                 <th scope="col">Estado</th>
                 <th scope="col">Acciones</th>
@@ -102,7 +102,7 @@ MODAL AGREGAR NUEVA PREGUNTA
         ======================================-->
 
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Nueva Pregunta</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Nueva pregunta</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -115,7 +115,7 @@ MODAL AGREGAR NUEVA PREGUNTA
         <div class="modal-body">
           <div class="form-group col-md-12">
             <label for="">Pregunta</label>
-            <input type="text" class="form-control mayus" name="nuevaPregunta" value="" placeholder="Ingrese Pregunta" required>
+            <input type="text" class="form-control mayus" name="nuevaPregunta" value="" placeholder="Ingrese la pregunta" required>
           </div>
 
           <!-- <div class="form-group col-md-12">
@@ -172,7 +172,7 @@ MODAL EDITAR PREGUNTA
         ======================================-->
 
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Editar Pregunta</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Editar pregunta</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -200,7 +200,7 @@ MODAL EDITAR PREGUNTA
         ======================================-->
 
         <div class="modal-footer">
-          <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+          <button type="submit" class="btn btn-primary">Guardar cambios</button>
           <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
         </div>
 

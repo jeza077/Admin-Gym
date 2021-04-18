@@ -47,7 +47,7 @@ class TablaClientesInscripcionesHistorico{
                     $fechaProximoPago = "<div class='badge badge-success mt-2' data-toggle='tooltip' data-placement='left' title='Inscrito'>".$clientes[$i]["fecha_proximo_pago"]."</div>";
                     // $fechaProximoPago = 'hoy';
                 } else {
-                    $fechaProximoPago = "<div class='badge badge-danger mt-2' data-toggle='tooltip' data-placement='left' title='Inscripcion vencida'>".$clientes[$i]["fecha_proximo_pago"]."</div>";
+                    $fechaProximoPago = "<div class='badge badge-danger mt-2' data-toggle='tooltip' data-placement='left' title='Inscripción vencida'>".$clientes[$i]["fecha_proximo_pago"]."</div>";
                     
                     // $fechaProximoPago = 'mañana';
 

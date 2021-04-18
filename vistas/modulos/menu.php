@@ -94,7 +94,7 @@
               <a href="dashboard" class="nav-link menu-lateral">
                 <i class="nav-icon fas fa-th"></i>
                 <p>
-                  Dashboard
+                  Inicio
                   <!-- <span class="right badge badge-danger">New</span> -->
                 </p>
               </a>
@@ -127,7 +127,7 @@
                     <li class="nav-item">
                       <a href="clientes" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
-                        <p>Administrar Clientes</p>
+                        <p>Administrar clientes</p>
                       </a>
                     </li>
                   <?php }?>
@@ -135,7 +135,7 @@
                     <li class="nav-item">
                       <a href="clientes-inscripciones" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
-                        <p>Clientes Inscripciones</p>
+                        <p>Clientes inscripciones</p>
                       </a>
                     </li>
                   <?php }?>
@@ -143,7 +143,7 @@
                     <li class="nav-item">
                       <a href="clientes-inscripciones-historico" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
-                        <p>Clientes Inscripciones Historico</p>
+                        <p>Clientes inscripciones histórico</p>
                       </a>
                     </li>
                   <?php }?>
@@ -151,7 +151,7 @@
                     <li class="nav-item">
                       <a href="clientes-pagos-historico" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
-                        <p>Clientes Pagos Historico</p>
+                        <p>Clientes pagos histórico</p>
                       </a>
                     </li>
                   <?php }?>
@@ -219,7 +219,7 @@
                   <li class="nav-item">
                     <a href="administrar-ventas" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
-                      <p>Administrar Venta</p>
+                      <p>Administrar venta</p>
                     </a>
                   </li>
                 <?php }?>
@@ -227,7 +227,7 @@
                   <li class="nav-item">
                     <a href="crear-venta" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
-                      <p>Nueva Venta</p>
+                      <p>Nueva venta</p>
                     </a>
                   </li>
                 <?php }?>
@@ -235,7 +235,7 @@
                   <li class="nav-item">
                     <a href="reportes" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
-                      <p>Reporte de Ventas</p>
+                      <p>Reporte de ventas</p>
                     </a>
                   </li>
                 <?php }?>
@@ -265,7 +265,7 @@
                   <li class="nav-item">
                     <a href="permisos-rol" class="nav-link">
                       <i class="fas fa-circle nav-icon"></i>
-                      <p>Permisos Rol</p>
+                      <p>Permisos rol</p>
                     </a>
                   </li>
                 <?php }?>
@@ -273,7 +273,7 @@
                   <li class="nav-item">
                     <a href="parametro" class="nav-link">
                       <i class="fab fa-product-hunt nav-icon"></i>
-                      <p>Parametros</p>
+                      <p>Parámetros</p>
                     </a>
                   </li>
                 <?php }?>
@@ -289,7 +289,7 @@
                   <li class="nav-item">
                     <a href="matricula" class="nav-link">
                       <i class="fas fa-money-bill-alt nav-icon"></i>
-                      <p>Matriculas</p>
+                      <p>Matrículas</p>
                     </a>
                   </li>
                 <?php }?>
@@ -352,7 +352,7 @@
               <a href="bitacora" class="nav-link menu-lateral">
                 <i class="nav-icon fas fa-bold"></i>
                 <p>
-                  Bitacora
+                  Bitácora
                   <!-- <span class="right badge badge-danger">New</span> -->
                 </p>
               </a>
@@ -365,7 +365,7 @@
               <a href="respaldo-restauracion" class="nav-link menu-lateral">
                 <i class="nav-icon fas fa-download"></i>
                 <p>
-                  Respaldo y Restauracion
+                  Respaldo y restauración
                   <!-- <span class="right badge badge-danger">New</span> -->
                 </p>
               </a>

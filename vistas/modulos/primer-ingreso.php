@@ -14,7 +14,7 @@
             <div class="contenedor2 card-body col-md-7">
                 <div class="titulo">
                     <a href="login"><b>Bienvenid@ a bordo </b><?php echo $_SESSION["usuario"]?> :)</a>
-                    <p class="login-box-msg">Por favor, cambia tu contraseña y agrega las preguntas de seguridad!</p>
+                    <p class="login-box-msg">Por favor, cambia su contraseña y agregue las preguntas de seguridad!</p>
                 </div>
 
                 <form method="post" id="primerIngreso">

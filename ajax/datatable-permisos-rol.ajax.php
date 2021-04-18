@@ -36,13 +36,13 @@ class TablaPermisosRol{
                 $pantalla = "<div>".$permisosRol[$i]["objeto"]."</div>";
             
             }else{
-                $pantalla = "<div>**No tiene pantallas asiganadas aun**</div>";                           
+                $pantalla = "<div>**No tiene pantallas asignadas aún**</div>";                           
             }
             
             // <div>'.$permisosRol[$i]["objeto"].'</div>';
 
             if($permisosRol[$i]["consulta"] == null){
-                $consulta = "<div>**No tiene permiso aun**</div>";                           
+                $consulta = "<div>**No tiene permiso aún**</div>";                           
 
             
             }else if($permisosRol[$i]["consulta"] == 0){
@@ -54,7 +54,7 @@ class TablaPermisosRol{
             }
 
             if($permisosRol[$i]["agregar"] == null){
-                $agregar = "<div>**No tiene permiso aun**</div>";                           
+                $agregar = "<div>**No tiene permiso aún**</div>";                           
             
             }else if($permisosRol[$i]["agregar"] == 0){
                 $agregar = "<div><button class='btn btn-danger btn-md btnActivarPermisos' idPermiso='".$permisosRol[$i]["id_permiso"]."' estadoPermiso='1' tipoPermiso='agregar'>No</button></div>";                           
@@ -65,7 +65,7 @@ class TablaPermisosRol{
             }
 
             if($permisosRol[$i]["actualizar"] == null){
-                $actualizar = "<div>**No tiene permiso aun**</div>";                           
+                $actualizar = "<div>**No tiene permiso aún**</div>";                           
             
             }else if($permisosRol[$i]["actualizar"] == 0){
                 $actualizar = "<div><button class='btn btn-danger btn-md btnActivarPermisos' idPermiso='".$permisosRol[$i]["id_permiso"]."' estadoPermiso='1' tipoPermiso='actualizar'>No</button></div>";                           
@@ -76,7 +76,7 @@ class TablaPermisosRol{
             }
 
             if($permisosRol[$i]["eliminar"] == null){
-                $eliminar = "<div>**No tiene permiso aun**</div>";                           
+                $eliminar = "<div>**No tiene permiso aún**</div>";                           
             
             }else if($permisosRol[$i]["eliminar"] == 0){
                 $eliminar = "<div><button class='btn btn-danger btn-md btnActivarPermisos' idPermiso='".$permisosRol[$i]["id_permiso"]."' estadoPermiso='1' tipoPermiso='eliminar'>No</button></div>";                           

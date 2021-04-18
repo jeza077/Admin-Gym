@@ -40,10 +40,10 @@
           <table class="table table-striped table-bordered tablaInventario text-center">
               <thead>
                   <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Codigo</th>
+                  <th scope="col">N.°</th>
+                  <th scope="col">Código</th>
                   <th scope="col">Nombre producto</th>
-                  <th scope="col">Tipo Producto</th>
+                  <th scope="col">Tipo producto</th>
                   <th scope="col">Stock</th>
 
                   </tr>

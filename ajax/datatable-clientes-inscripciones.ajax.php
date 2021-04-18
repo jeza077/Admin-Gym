@@ -89,7 +89,7 @@ class TablaClientesInscripciones{
                 TRAEMOS LAS ACCIONES
                 =============================================*/ 
 
-                $botones = "<button class='btn btn-success btnEditarPago' data-toggle='tooltip' data-placement='left' title='Pagar' idCliente='".$clientes[$i]["id_cliente"]."'><i class='fas fa-dollar-sign p-1'></i></button> <button class='btn btn-danger btnCancelarInscripcion' data-toggle='tooltip' data-placement='left' title='Cancelar Inscripcion' idClienteInscripcion='".$clientes[$i]["id_cliente_inscripcion"]."' idClientePagoInscripcion='".$clientes[$i]["id_cliente"]."'><i class='fas fa-strikethrough'></i></button>";
+                $botones = "<button class='btn btn-success btnEditarPago' data-toggle='tooltip' data-placement='left' title='Pagar' idCliente='".$clientes[$i]["id_cliente"]."'><i class='fas fa-dollar-sign p-1'></i></button> <button class='btn btn-danger btnCancelarInscripcion' data-toggle='tooltip' data-placement='left' title='Cancelar inscripción' idClienteInscripcion='".$clientes[$i]["id_cliente_inscripcion"]."' idClientePagoInscripcion='".$clientes[$i]["id_cliente"]."'><i class='fas fa-strikethrough'></i></button>";
 
                 $datosJson .='[
                     "'.($i+1).'",

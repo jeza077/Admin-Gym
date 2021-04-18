@@ -6,11 +6,11 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Clientes Inscripciones</h1>
+            <h1>Clientes inscripciones</h1>
           </div>
           <div class="col-sm-6">
           <button class="btn btn-orange float-right"  data-toggle="modal" data-target="#modalNuevaInsc">
-            Nueva Inscripción       
+            Nueva inscripción       
           </button>
           <button class="btn btn-danger btnExportarClientesInscripciones float-right mr-3">
               Exportar PDF          
@@ -47,13 +47,13 @@
             <table class="table table-bordered table-striped tablaClientesInscripciones text-center">
               <thead>
                 <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">No. Documento</th>
+                  <th scope="col">N.°</th>
+                  <th scope="col">Número de documento</th>
                   <th scope="col">Nombre</th>
                   <th scope="col">T. Inscripción</th>
                   <th scope="col">F. Inscripción</th>
-                  <th scope="col">F. Último Pago</th>
-                  <th scope="col">F. Próx. Pago</th>
+                  <th scope="col">F. Último pago</th>
+                  <th scope="col">F. Próx. pago</th>
                   <th scope="col">Deuda</th>
                   <th scope="col">Estado</th>
                   <th scope="col">Acciones</th>
@@ -74,7 +74,7 @@
     <div class="modal-dialog modal-md" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Actualizar Inscripción</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Actualizar inscripción</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -84,7 +84,7 @@
               <div class="container-fluid mt-4">
                 <!-- <div class="form-row"> -->
                   <div class="form-group col-md-12"> 
-                    <label>Tipo inscripcion</label>
+                    <label>Tipo inscripción</label>
                     <select class="form-control actualizarInscripcion" style="width: 100%;" name="actualizarTipoInscripcion">
                         <option value="" id="actualizarInscripcion"></option>
                         <?php 
@@ -104,7 +104,7 @@
                     </select>
                   </div>
                   <div class="form-group col-md-12">
-                    <label for="">Precio inscripcion</label>
+                    <label for="">Precio inscripción</label>
                     <div class="input-group">
                       <div class="input-group-prepend">
                           <span class="input-group-text">$</span>  
@@ -328,7 +328,7 @@
     <div class="modal-dialog modal-md" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Nueva Inscripción</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Nueva inscripción</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -346,7 +346,7 @@
 
                 <!-- <div class="form-row"> -->
                   <div class="form-group col-md-12"> 
-                    <label>Tipo inscripcion</label>
+                    <label>Tipo inscripción</label>
                     <select class="form-control select2 actualizarNuevaInscripcion" style="width: 100%;" name="nuevaTipoInscripcion">
                         <option selected="selected">Seleccionar...</option>
                         <?php 
@@ -366,7 +366,7 @@
                     </select>
                   </div>
                   <div class="form-group col-md-12">
-                    <label for="">Precio inscripcion</label>
+                    <label for="">Precio inscripción</label>
                     <div class="input-group">
                       <div class="input-group-prepend">
                           <span class="input-group-text">$</span>  
@@ -425,7 +425,7 @@
     <div class="modal-dialog modal-md" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Nueva Inscripción</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Nueva inscripción</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -454,7 +454,7 @@
 
                 <!-- <div class="form-row"> -->
                   <div class="form-group col-md-12"> 
-                    <label>Tipo inscripcion</label>
+                    <label>Tipo inscripción</label>
                     <select class="form-control select2 nuevaTipoInscripcion2" style="width: 100%;" name="nuevaTipoInscripcion2">
                         <option selected="selected">Seleccionar...</option>
                         <?php 
@@ -474,7 +474,7 @@
                     </select>
                   </div>
                   <div class="form-group col-md-12">
-                    <label for="">Precio inscripcion</label>
+                    <label for="">Precio inscripción</label>
                     <div class="input-group">
                       <div class="input-group-prepend">
                           <span class="input-group-text">$</span>  

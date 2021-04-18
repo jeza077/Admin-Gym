@@ -277,7 +277,7 @@ function maximo(selector) {
                 if(valProdMinimo > parseInt(respuesta['valor'])){
                     // console.log('mayor el valor del parametro');
 
-                    padre.before('<div class="alert alert-danger fade show mt-2" role="alert"><i class="icon fas fa-ban"></i>Producto maximo supera al establecido. El producto maximo aceptado es ' + parseInt(respuesta['valor']) + '</div>');
+                    padre.before('<div class="alert alert-danger fade show mt-2" role="alert"><i class="icon fas fa-ban"></i>Producto máximo supera al establecido. El producto máximo aceptado es ' + parseInt(respuesta['valor']) + '</div>');
                     setTimeout(function () {
                         $('.alert').remove();
                     }, 5000)

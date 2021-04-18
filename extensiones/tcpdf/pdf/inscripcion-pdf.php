@@ -60,7 +60,7 @@ class PDF extends TCPDF{
 
         $this->Ln(20); //Espacios
         $this->SetFont('helvetica', 'B', 14);
-        $this->Cell(180, 3, 'REPORTE DE TIPOS DE INSCRIPCION', 0, 1, 'C');
+        $this->Cell(180, 3, 'REPORTE DE TIPOS DE INSCRIPCIÓN', 0, 1, 'C');
         $this->Ln(3);
         $this->SetFont('helvetica', 'B', 11);
         $año = date('Y-m-d');
@@ -68,7 +68,7 @@ class PDF extends TCPDF{
 
         // $this->Cell(180, 3, 'Del '.$fecha.'', 0, 1, 'C');
 
-        $this->Cell(180, 3, 'Año '.$año.'', 0, 1, 'C');
+        $this->Cell(180, 3, 'Fecha '.$año.'', 0, 1, 'C');
     }
 
     // Footer de la pagina
@@ -94,7 +94,7 @@ $pdf = new PDF('p', 'mm', 'A4', true, 'UTF-8', false);
 // set document information
 $pdf->SetCreator(PDF_CREATOR);
 $pdf->SetAuthor('Carlos Ortez');
-$pdf->SetTitle('Reporte de Tipo de Inscripciones');
+$pdf->SetTitle('Reporte de tipo de inscripciones');
 $pdf->SetSubject('');
 $pdf->SetKeywords('');
 

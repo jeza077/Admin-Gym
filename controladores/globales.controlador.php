@@ -171,14 +171,11 @@ class ControladorGlobales{
             $accion = "Actualizar";
             $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 20,$accion, $descripcionEvento);
 
-          
-       
-    
             echo'<script>
     
             Swal.fire({
                   icon: "success",
-                  title: "El parametro ha sido editado correctamente",
+                  title: "El parámetro ha sido editado correctamente",
                   showConfirmButton: true,
                   confirmButtonText: "Cerrar",
                   closeOnConfirm: false
@@ -198,7 +195,7 @@ class ControladorGlobales{
     
             Swal.fire({
                   icon: "error",
-                  title: "Error al editar parametro",
+                  title: "Error al editar parámetro",
                   showConfirmButton: true,
                   confirmButtonText: "Cerrar",
                   closeOnConfirm: false

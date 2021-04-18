@@ -170,7 +170,7 @@
             <div class="form-row">
               <div class="form-group col-md-3">
                 <label for="">Usuario</label>
-                <input type="text" class="form-control nuevoUsuario" onKeyUp="this.value=this.value.toUpperCase();" name="nuevoUsuario" placeholder="Ingrese Usuario">
+                <input type="text" class="form-control nuevoUsuario" onKeyUp="this.value=this.value.toUpperCase();" name="nuevoUsuario" placeholder="Ingrese usuario">
               </div>
               <div class="form-group col-md-3">
                 <label>Rol</label>

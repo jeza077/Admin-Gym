@@ -93,7 +93,7 @@ $(document).on('click', '.btnGuardarRol', function (e) {
                     Swal.fire({
 
                         icon: "info",
-                        title: "Por ultimo, agregue los permisos",
+                        title: "Por último, agregue los permisos",
                         showConfirmButton: true,
                         showCancelButton: false,
                         confirmButtonText: "Vamos",
@@ -208,7 +208,7 @@ $(document).on('click', '.btnGuardarRol', function (e) {
                                                 }, 4000)
                                             } else {
                                                 // $('input[type=checkbox]').prop('checked',false);
-                                                $('#modalFooterPermisos').before('<div class="alert alert-danger alert-dismissible ml-3 mr-3 mt-4" role="alert"><i class="icon fas fa-ban"></i>Opps, algo salio mal. Intenta de nuevo!</div>');
+                                                $('#modalFooterPermisos').before('<div class="alert alert-danger alert-dismissible ml-3 mr-3 mt-4" role="alert"><i class="icon fas fa-ban"></i>¡Algo salió mal, intenta de nuevo!</div>');
                                                 setTimeout(function () {
                                                     $('.alert').remove();
                                                 }, 4000)
@@ -307,7 +307,7 @@ $(document).on('click', '.btnGuardarProveedor', function (e) {
             } else if(respuesta == '"Mal"'){
 
                 Swal.fire({
-                    title: "Campos no pueden ir vacíos, escrito en minusculas o llevar caracteres especiales. Intenta de nuevo!",
+                    title: "¡Campos no pueden ir vacíos, escrito en minúsculas o llevar caracteres especiales, intente de nuevo!",
                     icon: "error",
                     heightAuto: false,
                     allowOutsideClick: false
@@ -316,7 +316,7 @@ $(document).on('click', '.btnGuardarProveedor', function (e) {
             } else {
                 
                 Swal.fire({
-                    title: "Opps, algo salio mal, intenta de nuevo!",
+                    title: "¡Algo salió mal, intente de nuevo!",
                     icon: "error",
                     heightAuto: false,
                     allowOutsideClick: false
@@ -466,7 +466,7 @@ $(document).on("click", ".btnEditarRol", function(){
                                     }, 4000)
                                 } else {
                                     // $('input[type=checkbox]').prop('checked',false);
-                                    padreNotificacion.after('<div class="alert alert-danger alert-dismissible" role="alert" style="margin:70px 0 0 0"><i class="icon fas fa-ban"></i>Opps, algo salio mal. Intenta de nuevo!</div>');
+                                    padreNotificacion.after('<div class="alert alert-danger alert-dismissible" role="alert" style="margin:70px 0 0 0"><i class="icon fas fa-ban"></i>Algo salió mal, intenta de nuevo!</div>');
                                     setTimeout(function () {
                                         $('.alert').remove();
                                     }, 4000)

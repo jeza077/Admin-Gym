@@ -64,12 +64,12 @@ class PDF extends TCPDF{
 
         $this->Ln(20); //Espacios
         $this->SetFont('helvetica', 'B', 14);
-        $this->Cell(260, 3, 'REPORTE PAGOS CLIENTES HISTORICO', 0, 1, 'C');
+        $this->Cell(260, 3, 'REPORTE PAGOS CLIENTES HISTÓRICO', 0, 1, 'C');
         $this->Ln(3);
         $this->SetFont('helvetica', 'B', 11);
 
         $año = date('Y-m-d');
-        $this->Cell(260, 3, 'Año '.$año.'', 0, 1, 'C');
+        $this->Cell(260, 3, 'Fecha '.$año.'', 0, 1, 'C');
     }
 
     // Footer de la pagina

@@ -80,7 +80,7 @@ class PDF extends TCPDF{
         $this->SetFont('helvetica', 'B', 11);
 
         $año = date('Y-m-d');
-        $this->Cell(260, 3, 'Año '.$año.'', 0, 1, 'C');
+        $this->Cell(260, 3, 'Fecha '.$año.'', 0, 1, 'C');
     }
 
     // Footer de la pagina

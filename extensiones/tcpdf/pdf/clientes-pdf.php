@@ -69,7 +69,7 @@ class PDF extends TCPDF{
         $this->SetFont('helvetica', 'B', 11);
 
         $año = date('Y-m-d');
-        $this->Cell(260, 3, 'Año '.$año.'', 0, 1, 'C');
+        $this->Cell(260, 3, 'Fecha '.$año.'', 0, 1, 'C');
     }
 
     // Footer de la pagina
@@ -149,7 +149,7 @@ $pdf->Cell(40, 5, 'No. Documento', 1, 0, 'C', 1);
 $pdf->Cell(70, 5, 'Nombre', 1, 0, 'C', 1);
 $pdf->Cell(35, 5, 'Tipo Cliente', 1, 0, 'C', 1);
 $pdf->Cell(70, 5, 'Correo', 1, 0, 'C', 1);
-$pdf->Cell(40, 5, 'Telefono', 1, 0, 'C', 1);
+$pdf->Cell(40, 5, 'Teléfono', 1, 0, 'C', 1);
 
 if(isset($_GET["rango"])){
 

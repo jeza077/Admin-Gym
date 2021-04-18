@@ -115,7 +115,7 @@ class ControladorPersonas{
                                 
                                 echo '<script>
                                         Swal.fire({
-                                            title: "Tus datos han sido guardados correctamente!",
+                                            title: "¡Sus datos han sido guardados correctamente!",
                                             icon: "success",
                                             heightAuto: false,
                                             allowOutsideClick: false
@@ -130,7 +130,7 @@ class ControladorPersonas{
                         } else {
                             echo '<script>
                                     Swal.fire({
-                                        title: "No se pudo guardar tus datos. Intenta de nuevo!",
+                                        title: "¡No se pudo guardar sus datos, intente de nuevo!",
                                         icon: "error",
                                         heightAuto: false,
                                         allowOutsideClick: false,
@@ -200,7 +200,7 @@ class ControladorPersonas{
                             if($crearUsuario == true){
                                 echo '<script>
                                         Swal.fire({
-                                            title: "Usuario creado correctamente!",
+                                            title: "¡Usuario creado correctamente!",
                                             icon: "success",
                                             heightAuto: false
                                         }).then((result)=>{
@@ -219,7 +219,7 @@ class ControladorPersonas{
 
                                     echo '<script>
                                             Swal.fire({
-                                                title: "Llenar los campos correctamente e intente de nuevo!",
+                                                title: "¡Llenar los campos correctamente e intente de nuevo!",
                                                 icon: "error",
                                                 heightAuto: false
                                             }).then((result)=>{
@@ -325,7 +325,7 @@ class ControladorPersonas{
                             if($crearCliente == true){
                                 echo '<script>
                                         Swal.fire({
-                                            title: "Cliente creado correctamente!",
+                                            title: "¡Cliente creado correctamente!",
                                             icon: "success",
                                             heightAuto: false,
                                             allowOutsideClick: false
@@ -401,7 +401,7 @@ class ControladorPersonas{
                         if($respuestaPersona == true){
                             echo '<script>
                                     Swal.fire({
-                                        title: "Datos guardados correctamente!",
+                                        title: "¡Datos guardados correctamente!",
                                         icon: "success",
                                         heightAuto: false
                                     }).then((result)=>{
@@ -500,7 +500,7 @@ class ControladorPersonas{
                                 // return;
                                 echo '<script>
                                         Swal.fire({
-                                            title: "Usuario editado correctamente!",
+                                            title: "¡Usuario editado correctamente!",
                                             icon: "success",
                                             heightAuto: false
                                         }).then((result)=>{
@@ -594,7 +594,7 @@ class ControladorPersonas{
                         
                         echo '<script>
                                 Swal.fire({
-                                    title: "Cliente fue editado correctamente!",
+                                    title: "¡Cliente fue editado correctamente!",
                                     icon: "success",
                                     heightAuto: false,
                                     allowOutsideClick: false
@@ -640,7 +640,7 @@ class ControladorPersonas{
                                 if($respuestaPersona == true){
                                     echo '<script>
                                             Swal.fire({
-                                                title: "Datos guardados correctamente!",
+                                                title: "¡Datos guardados correctamente!",
                                                 icon: "success",
                                                 heightAuto: false
                                             }).then((result)=>{
@@ -742,7 +742,7 @@ class ControladorPersonas{
                         if($crearClienteVenta == true){
                             echo '<script>
                                     Swal.fire({
-                                        title: "Cliente editado correctamente!",
+                                        title: "¡Cliente editado correctamente!",
                                         icon: "success",
                                         heightAuto: false,
                                         allowOutsideClick: false
@@ -805,15 +805,15 @@ class ControladorPersonas{
 
         if($respuestaEditarPagoCliente == true){
 
-            $descripcionEvento = "Actualizo Pago Cliente";
-            $accion = "Actualizo";
+            $descripcionEvento = "Actualizó pago cliente";
+            $accion = "Actualizó";
   
             $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 3,$accion, $descripcionEvento);
   
             
             echo '<script>
                     Swal.fire({
-                        title: "Pago fue editado correctamente!",
+                        title: "¡Pago fue editado correctamente!",
                         icon: "success",
                         heightAuto: false,
                         allowOutsideClick: false
@@ -847,8 +847,8 @@ class ControladorPersonas{
       
                 echo '<script>
                     Swal.fire({
-                        title: "No se pudo borrar el '.$tipoPersona.'!",
-                        text: "No se puede borrar ya que esta asociado con otros datos",
+                        title: "¡No se pudo borrar el '.$tipoPersona.'!",
+                        text: "¡No se puede borrar ya que está asociado con otros datos!",
                         icon: "error",
                         heightAuto: false
                     }).then((result)=>{
@@ -871,7 +871,7 @@ class ControladorPersonas{
                 }
                 echo '<script>
                         Swal.fire({
-                            title: "El usuario ha sido borrado correctamente!",
+                            title: "¡El usuario ha sido eliminado correctamente!",
                             icon: "success",
                             heightAuto: false
                         }).then((result)=>{
@@ -883,7 +883,7 @@ class ControladorPersonas{
                     
             } else {
                 
-                $descripcionEvento = " Elimino un cliente.";
+                $descripcionEvento = " Eliminó un cliente.";
                 $accion = "Elimino";
     
                 $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 3,$accion, $descripcionEvento);
@@ -891,7 +891,7 @@ class ControladorPersonas{
               
                 echo '<script>
                         Swal.fire({
-                            title: "El cliente ha sido borrado correctamente!",
+                            title: "¡El cliente ha sido eliminado correctamente!",
                             icon: "success",
                             heightAuto: false
                         }).then((result)=>{

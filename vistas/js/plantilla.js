@@ -346,7 +346,7 @@ function validarEmail(selector, alerta) {
 					selector.removeClass('border-valid border-invalid');
 				} else {
 					selector.addClass('border-invalid').removeClass('border-valid');
-					selector.after('<div class="alert alert-warning mt-2">Correo invalido, intente de nuevo.</div>');
+					selector.after('<div class="alert alert-warning mt-2">Correo inválido, intente de nuevo.</div>');
 					setTimeout(function () {
 						$('.alert').remove();
 					}, 3000)
@@ -425,10 +425,10 @@ function requisitosPassword(posicion){
               '<h4>La contraseña debe cumplir con los siguientes requerimientos:</h4> ' +
                 '<ul> ' +
                 '<li class="letter">Al menos debe tener <strong>una letra</strong></li> ' +
-                '<li class="capital">Al menos debe tener <strong>una letra en mayuscula</strong></li> ' +
-                '<li class="number">Al menos debe tener <strong>un numero</strong></li> ' +
+                '<li class="capital">Al menos debe tener <strong>una letra en mayúscula</strong></li> ' +
+                '<li class="number">Al menos debe tener <strong>un número</strong></li> ' +
                 '<li class="special">Al menos debe tener <strong>un caracter especial</strong></li> ' +
-                '<li class="length">Al menos debe tener <strong>8 caracteres como minimo y 16 maximo</strong></li> ' +
+                '<li class="length">Al menos debe tener <strong>8 caracteres como mínimo y 16 máximo</strong></li> ' +
                 '</ul> ' + 
               '</div>',
             toast: true,
@@ -1026,8 +1026,8 @@ function cerrarModal() {
 
         Swal.fire({
             icon: "info",
-            title: "¿Está seguro de salir del modal? Perdera la información que haya ingresado.",
-            text: "Si no esta seguro puede cancelar la acción.",
+            title: "¿Está seguro de salir del modal? Perderá la información que haya ingresado.",
+            text: "Si no está seguro, puede cancelar la acción.",
             // heightAuto: false,
             allowOutsideClick: false,
             showCancelButton: true,

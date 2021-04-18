@@ -175,7 +175,7 @@ $('#btnPreguntaDos').click(function (e) {
                     
                                 if(respuesta == false){
                                     $('#passwordAnterior').css('border', '1px solid red');
-                                    $('#passwordAnterior').after('<div class="alert alert-danger alert-dismissible" role="alert" style="margin:5px 0 0 0"><i class="icon fas fa-ban"></i>La contraseña no coincide con la anterior. Intente de nuevo!</div>');
+                                    $('#passwordAnterior').after('<div class="alert alert-danger alert-dismissible" role="alert" style="margin:5px 0 0 0"><i class="icon fas fa-ban"></i>¡La contraseña no coincide con la anterior, intente de nuevo!</div>');
                                         setTimeout(function () {
                                             $('.alert').remove();
                                         }, 4000)

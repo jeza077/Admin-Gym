@@ -69,7 +69,7 @@ class PDF extends TCPDF{
         $this->SetFont('helvetica', 'B', 11);
 
         $año = date('Y-m-d');
-        $this->Cell(260, 3, 'Año '.$año.'', 0, 1, 'C');
+        $this->Cell(260, 3, 'Fecha '.$año.'', 0, 1, 'C');
     }
 
     // Footer de la pagina
@@ -146,10 +146,10 @@ $pdf->SetFont('times', '', 13);
 $pdf->SetFillColor(225, 235, 255);
 $pdf->Cell(15, 5, 'No', 1, 0, 'C', 1);
 $pdf->Cell(75, 5, 'Nombre', 1, 0, 'C', 1);
-$pdf->Cell(35, 5, 'Tipo Inscripcion', 1, 0, 'C', 1);
+$pdf->Cell(35, 5, 'Tipo Inscripción', 1, 0, 'C', 1);
 $pdf->Cell(35, 5, 'F. Inscripción', 1, 0, 'C', 1);
-$pdf->Cell(32, 5, 'F. Ult. Pago', 1, 0, 'C', 1);
-$pdf->Cell(32, 5, 'F. Prox. Pago', 1, 0, 'C', 1);
+$pdf->Cell(32, 5, 'F. Últ. Pago', 1, 0, 'C', 1);
+$pdf->Cell(32, 5, 'F. Próx. Pago', 1, 0, 'C', 1);
 $pdf->Cell(25, 5, 'Estado', 1, 0, 'C', 1);
 $pdf->Cell(25, 5, 'Deuda', 1, 0, 'C', 1);
 

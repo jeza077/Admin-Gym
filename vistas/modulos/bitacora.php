@@ -5,7 +5,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Bitacora</h1>
+            <h1>Bitácora</h1>
           </div>
 
           <div class="col-sm-6">
@@ -25,7 +25,7 @@
     </section>
 
     <?php
-      $descripcionEvento = "".$_SESSION["usuario"]." Consultó la pantalla de bitacora";
+      $descripcionEvento = "".$_SESSION["usuario"]." Consultó la pantalla de bitácora";
       $accion = "Consulta";
 
       $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 26,$accion, $descripcionEvento);
@@ -43,11 +43,11 @@
           <table class="table table-bordered table-striped tablaBitacora text-center">
             <thead>
               <tr>
-                <th width="15px">#</th>
+                <th width="15px">N.°</th>
                 <th width="100px">Usuario</th>
                 <th width="100px">Objeto</th>
-                <th width="100px">Accion</th>
-                <th width="100px">Descripcion</th>
+                <th width="100px">Acción</th>
+                <th width="100px">Descripción</th>
                 <th width="100px">Fecha</th>
                 <th width="100px">Depurar</th> 
               </tr>

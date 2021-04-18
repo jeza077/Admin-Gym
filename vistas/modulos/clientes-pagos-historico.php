@@ -6,7 +6,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Clientes Pagos Historico</h1>
+            <h1>Clientes pagos históricos</h1>
           </div>
           <div class="col-sm-6">
           <!-- <button class="btn btn-orange float-right"  data-toggle="modal" data-target="#modalAgregarCliente">
@@ -46,14 +46,14 @@
             <table class="table table-bordered table-striped tablaClientesPagosHistorico text-center">
               <thead>
                 <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">No. Documento</th>
+                  <th scope="col">N.°</th>
+                  <th scope="col">Número de documento</th>
                   <th scope="col">Nombre</th>
-                  <th scope="col">Pago Matricula</th>
-                  <th scope="col">Valor Descuento</th>
-                  <th scope="col">Pago Inscripción</th>
-                  <th scope="col">Pago Total</th>
-                  <th scope="col">Fecha de Pago</th>
+                  <th scope="col">Pago matrícula</th>
+                  <th scope="col">Valor descuento</th>
+                  <th scope="col">Pago inscripción</th>
+                  <th scope="col">Pago total</th>
+                  <th scope="col">Fecha de pago</th>
                   <th scope="col">Acciones</th>
 
                 </tr>
