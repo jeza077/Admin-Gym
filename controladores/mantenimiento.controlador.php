@@ -89,6 +89,26 @@ class ControladorMantenimientos {
               
               $descripcionEvento = "".$_SESSION['usuario']." cambio el estado de ".$respuestaGenero['tipo_documento']." a activado";
               
+            } elseif($tabla == 'tbl_roles') {
+              
+              $descripcionEvento = "".$_SESSION['usuario']." cambio el estado de ".$respuestaGenero['rol']." a activado";
+              
+            } elseif($tabla == 'tbl_matricula') {
+              
+              $descripcionEvento = "".$_SESSION['usuario']." cambio el estado de ".$respuestaGenero['tipo_matricula']." a activado";
+              
+            } elseif($tabla == 'tbl_inscripcion') {
+              
+              $descripcionEvento = "".$_SESSION['usuario']." cambio el estado de ".$respuestaGenero['tipo_inscripcion']." a activado";
+              
+            } elseif($tabla == 'tbl_descuento') {
+              
+              $descripcionEvento = "".$_SESSION['usuario']." cambio el estado de ".$respuestaGenero['tipo_descuento']." a activado";
+              
+            } elseif($tabla == 'tbl_preguntas') {
+              
+              $descripcionEvento = "".$_SESSION['usuario']." cambio el estado de ".$respuestaGenero['pregunta']." a activado";
+              
             } 
 
             $accion = "Cambio de estado";
@@ -104,6 +124,26 @@ class ControladorMantenimientos {
             } elseif($tabla == 'tbl_documento') {
               
               $descripcionEvento = "".$_SESSION['usuario']." cambio el estado de ".$respuestaGenero['tipo_documento']." a desactivado";
+              
+            } elseif($tabla == 'tbl_roles') {
+              
+              $descripcionEvento = "".$_SESSION['usuario']." cambio el estado de ".$respuestaGenero['rol']." a desactivado";
+              
+            } elseif($tabla == 'tbl_matricula') {
+              
+              $descripcionEvento = "".$_SESSION['usuario']." cambio el estado de ".$respuestaGenero['tipo_matricula']." a desactivado";
+              
+            } elseif($tabla == 'tbl_inscripcion') {
+              
+              $descripcionEvento = "".$_SESSION['usuario']." cambio el estado de ".$respuestaGenero['tipo_inscripcion']." a desactivado";
+              
+            } elseif($tabla == 'tbl_descuento') {
+              
+              $descripcionEvento = "".$_SESSION['usuario']." cambio el estado de ".$respuestaGenero['tipo_descuento']." a desactivado";
+              
+            } elseif($tabla == 'tbl_preguntas') {
+              
+              $descripcionEvento = "".$_SESSION['usuario']." cambio el estado de ".$respuestaGenero['pregunta']." a desactivado";
               
             } 
             // $descripcionEvento = "".$_SESSION['usuario']." cambio el estado de ".$respuestaGenero['sexo']." a desactivado";

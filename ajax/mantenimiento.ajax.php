@@ -127,33 +127,31 @@ class AjaxMantenimiento{
     /*=============================================
             ACTIVAR PREGUNTA
     ==============================================*/
-    public $idPreguntaActivar;
-    public $estadoPregunta;
-    
-    public function ajaxActivarPregunta(){ 
+    public $estadoDinamico;
+    public $idActivarDinamico; 
+    public $tablaDinamica;
+    public $idTablaDinamica;
+    public $idPantallaDinamica; 
 
-        $tabla = "tbl_preguntas";
+    public function ajaxActivarDinamico(){
 
-        $item1 = "estado";
-        $valor1 = $this->estadoPregunta;
+        $table = $this->tablaDinamica;
 
-        $item2 = "id_preguntas";
-        $valor2 = $this->idPreguntaActivar;
+        $estado = "estado";
+        $valorEstado = $this->estadoDinamico;
 
-        $item3 = null;
-        $valor3 = null;
+        $idItem2 = $this->idTablaDinamica;
+        $valorItem2 = $this->idActivarDinamico;
 
-        $item4 = null;
-        $valor4 = null;
+        $pantalla = "pregunta";
 
-        $respuesta = ModeloMantenimiento::mdlActualizarMantenimiento($tabla, $item1, $valor1, $item2, $valor2, $item3, $valor3, $item4, $valor4);
+        $idPant = $this->idPantallaDinamica;
+      
+        $respuesta = ControladorMantenimientos::ctrActivar($table, $estado, $valorEstado, $idItem2, $valorItem2, $pantalla, $idPant);
+
         echo json_encode($respuesta);
 
-        // $respuesta = ModeloMantenimiento::mdlActualizarRol($tabla,$item1,$valor1,$item2,$valor2);
-        // echo json_encode($respuesta);
-
-
-    }    
+    }
 
 
 
@@ -386,25 +384,32 @@ class AjaxRol{
     /*=============================================
             ACTIVAR ROL
     ==============================================*/
-    public $activarRol;
-    public $activarid;
-    
-    public function ajaxActivarRol(){ 
 
-        $tabla = "tbl_roles";
+    public $estadoDinamico;
+    public $idActivarDinamico; 
+    public $tablaDinamica;
+    public $idTablaDinamica;
+    public $idPantallaDinamica; 
 
-        $item1 = "estado";
-        $valor1 = $this->activarRol;
+    public function ajaxActivarDinamico(){
 
-        $item2 = "id_rol";
-        $valor2 = $this->activarid;
+        $table = $this->tablaDinamica;
 
+        $estado = "estado";
+        $valorEstado = $this->estadoDinamico;
 
-        $respuesta = ModeloMantenimiento::mdlActualizarRol($tabla,$item1,$valor1,$item2,$valor2);
+        $idItem2 = $this->idTablaDinamica;
+        $valorItem2 = $this->idActivarDinamico;
+
+        $pantalla = "roles";
+
+        $idPant = $this->idPantallaDinamica;
+      
+        $respuesta = ControladorMantenimientos::ctrActivar($table, $estado, $valorEstado, $idItem2, $valorItem2, $pantalla, $idPant);
+
         echo json_encode($respuesta);
 
-
-    }    
+    }
 
 
     /*=============================================
@@ -495,25 +500,32 @@ class AjaxInscripcion{
     /*=============================================
                    Activar INSCRIPCIONES
     ==============================================*/
-    public $activarInscripcion;
-    public $activarid;
-    
-    public function ajaxActivarInscripcion(){ 
+   
+    public $estadoDinamico;
+    public $idActivarDinamico; 
+    public $tablaDinamica;
+    public $idTablaDinamica;
+    public $idPantallaDinamica; 
 
-        $tabla = "tbl_Inscripcion";
+    public function ajaxActivarDinamico(){
 
-        $item1 = "estado";
-        $valor1 = $this->activarInscripcion;
+        $table = $this->tablaDinamica;
 
-        $item2 = "id_inscripcion";
-        $valor2 = $this->activarid;
+        $estado = "estado";
+        $valorEstado = $this->estadoDinamico;
 
+        $idItem2 = $this->idTablaDinamica;
+        $valorItem2 = $this->idActivarDinamico;
 
-        $respuesta = ModeloMantenimiento::mdlActualizarInscripcion($tabla,$item1,$valor1,$item2,$valor2);
+        $pantalla = "inscripcion";
+
+        $idPant = $this->idPantallaDinamica;
+      
+        $respuesta = ControladorMantenimientos::ctrActivar($table, $estado, $valorEstado, $idItem2, $valorItem2, $pantalla, $idPant);
+
         echo json_encode($respuesta);
 
-
-    }    
+    }
 
 
 }    
@@ -539,29 +551,32 @@ class AjaxMatricula{
     /*=============================================
             ACTIVAR MATRICULA
     ==============================================*/
-    public $idMatricula;
-    public $estadoMatricula;
     
-    public function ajaxActivarMatricula(){ 
+    public $estadoDinamico;
+    public $idActivarDinamico; 
+    public $tablaDinamica;
+    public $idTablaDinamica;
+    public $idPantallaDinamica; 
 
-        $tabla = "tbl_matricula";
+    public function ajaxActivarDinamico(){
 
-        $item1 = "estado";
-        $valor1 = $this->estadoMatricula;
+        $table = $this->tablaDinamica;
 
-        $item2 = "id_matricula";
-        $valor2 = $this->idMatricula;
+        $estado = "estado";
+        $valorEstado = $this->estadoDinamico;
 
-        $item3 = null;
-        $valor3 = null;
+        $idItem2 = $this->idTablaDinamica;
+        $valorItem2 = $this->idActivarDinamico;
 
-        $item4 = null;
-        $valor4 = null;
+        $pantalla = "matricula";
 
-        $respuesta = ModeloMantenimiento::mdlActualizarMantenimiento($tabla, $item1, $valor1, $item2, $valor2, $item3, $valor3, $item4, $valor4);
+        $idPant = $this->idPantallaDinamica;
+      
+        $respuesta = ControladorMantenimientos::ctrActivar($table, $estado, $valorEstado, $idItem2, $valorItem2, $pantalla, $idPant);
+
         echo json_encode($respuesta);
 
-    }    
+    }
 
 
 }    
@@ -584,34 +599,32 @@ class AjaxDescuento{
     /*=============================================
             ACTIVAR DESCUENTO
     ==============================================*/
-    public $idDescuento;
-    public $estadoDescuento;
     
-    public function ajaxActivarDescuento(){ 
+    public $estadoDinamico;
+    public $idActivarDinamico; 
+    public $tablaDinamica;
+    public $idTablaDinamica;
+    public $idPantallaDinamica; 
 
-        $tabla = "tbl_descuento";
+    public function ajaxActivarDinamico(){
 
-        $item1 = "estado";
-        $valor1 = $this->estadoDescuento;
+        $table = $this->tablaDinamica;
 
-        $item2 = "id_descuento";
-        $valor2 = $this->idDescuento;
+        $estado = "estado";
+        $valorEstado = $this->estadoDinamico;
 
-        $item3 = null;
-        $valor3 = null;
+        $idItem2 = $this->idTablaDinamica;
+        $valorItem2 = $this->idActivarDinamico;
 
-        $item4 = null;
-        $valor4 = null;
+        $pantalla = "descuento";
 
-        $respuesta = ModeloMantenimiento::mdlActualizarMantenimiento($tabla, $item1, $valor1, $item2, $valor2, $item3, $valor3, $item4, $valor4);
+        $idPant = $this->idPantallaDinamica;
+      
+        $respuesta = ControladorMantenimientos::ctrActivar($table, $estado, $valorEstado, $idItem2, $valorItem2, $pantalla, $idPant);
+
         echo json_encode($respuesta);
 
-
-        // $respuesta = ModeloMantenimiento::mdlActualizarDescuento($tabla,$item1,$valor1,$item2,$valor2);
-        // echo json_encode($respuesta);
-
-
-    }    
+    }
 
 }    
 

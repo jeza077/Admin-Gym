@@ -836,12 +836,19 @@ ACTIVAR ROL
 ========================================*/
 $(document).on("click", ".btnActivarRol", function(){
 
-    var idRol = $(this).attr("idRol");
-    var estadoRol = $(this).attr("estadoRol");
-    // console.log(idRol)
-    var datos = new FormData();
-    datos.append("activarid", idRol);
-    datos.append("activarRol",estadoRol);
+    let idActivarDinamico = $(this).attr("idRol");
+    let estadoDinamico = $(this).attr("estadoRol");
+    let tablaDinamica = 'tbl_roles';
+    let idTablaDinamica = 'id_rol';
+    let idPantallaDinamica = 18;
+    // console.log(estadoGenero)
+    let datos = new FormData();
+    datos.append("idActivarDinamico", idActivarDinamico);
+    datos.append("estadoDinamico",estadoDinamico);
+    datos.append("tablaDinamica",tablaDinamica);
+    datos.append("idTablaDinamica",idTablaDinamica);
+    datos.append("idPantallaDinamica",idPantallaDinamica);
+
 
     $.ajax({
         
@@ -933,12 +940,19 @@ ACTIVAR INSCRIPCIONES
 ========================================*/
 $(document).on("click", ".btnActivarInscripcion", function(){
 
-    var idInscripcion = $(this).attr("idInscripcion");
-    var estadoInscripcion = $(this).attr("estadoInscripcion");
-    // console.log(idInscripcion)
-    var datos = new FormData();
-    datos.append("activarid", idInscripcion);
-    datos.append("activarInscripcion",estadoInscripcion);
+    let idActivarDinamico = $(this).attr("idInscripcion");
+    let estadoDinamico = $(this).attr("estadoInscripcion");
+    let tablaDinamica = 'tbl_inscripcion';
+    let idTablaDinamica = 'id_inscripcion';
+    let idPantallaDinamica = 22;
+    // console.log(estadoGenero)
+    let datos = new FormData();
+    datos.append("idActivarDinamico", idActivarDinamico);
+    datos.append("estadoDinamico",estadoDinamico);
+    datos.append("tablaDinamica",tablaDinamica);
+    datos.append("idTablaDinamica",idTablaDinamica);
+    datos.append("idPantallaDinamica",idPantallaDinamica);
+
 
     $.ajax({
         
@@ -977,12 +991,18 @@ ACTIVAR MATRICULA
 ========================================*/
 $(document).on("click", ".btnActivarMatricula", function(){
 
-    var idMatricula = $(this).attr("idMatricula");
-    var estadoMatricula = $(this).attr("estadoMatricula");
-    // console.log(idMatricula)
-    var datos = new FormData();
-    datos.append("idMatricula", idMatricula);
-    datos.append("estadoMatricula",estadoMatricula);
+    let idActivarDinamico = $(this).attr("idMatricula");
+    let estadoDinamico = $(this).attr("estadoMatricula");
+    let tablaDinamica = 'tbl_matricula';
+    let idTablaDinamica = 'id_matricula';
+    let idPantallaDinamica = 22;
+    // console.log(estadoGenero)
+    let datos = new FormData();
+    datos.append("idActivarDinamico", idActivarDinamico);
+    datos.append("estadoDinamico",estadoDinamico);
+    datos.append("tablaDinamica",tablaDinamica);
+    datos.append("idTablaDinamica",idTablaDinamica);
+    datos.append("idPantallaDinamica",idPantallaDinamica);
 
     $.ajax({
       url:"ajax/mantenimiento.ajax.php",
@@ -1020,12 +1040,18 @@ ACTIVAR DESCUENTO
 ========================================*/
 $(document).on("click", ".btnActivarDescuento", function(){
 
-    var idDescuento = $(this).attr("idDescuento");
-    var estadoDescuento = $(this).attr("estadoDescuento");
-    // console.log(idDescuento)
-    var datos = new FormData();
-    datos.append("idDescuento", idDescuento);
-    datos.append("estadoDescuento",estadoDescuento);
+    let idActivarDinamico = $(this).attr("idDescuento");
+    let estadoDinamico = $(this).attr("estadoDescuento");
+    let tablaDinamica = 'tbl_descuento';
+    let idTablaDinamica = 'id_descuento';
+    let idPantallaDinamica = 23;
+    // console.log(estadoGenero)
+    let datos = new FormData();
+    datos.append("idActivarDinamico", idActivarDinamico);
+    datos.append("estadoDinamico",estadoDinamico);
+    datos.append("tablaDinamica",tablaDinamica);
+    datos.append("idTablaDinamica",idTablaDinamica);
+    datos.append("idPantallaDinamica",idPantallaDinamica);
 
     $.ajax({
         
@@ -1165,12 +1191,18 @@ ACTIVAR PREGUNTA
 ========================================*/
 $(document).on("click", ".btnActivarPregunta", function(){
 
-    var idPregunta = $(this).attr("idPregunta");
-    var estadoPregunta = $(this).attr("estadoPregunta");
-    // console.log(idPregunta)
-    var datos = new FormData();
-    datos.append("idPreguntaActivar", idPregunta);
-    datos.append("estadoPregunta",estadoPregunta);
+    let idActivarDinamico = $(this).attr("idPregunta");
+    let estadoDinamico = $(this).attr("estadoPregunta");
+    let tablaDinamica = 'tbl_preguntas';
+    let idTablaDinamica = 'id_preguntas';
+    let idPantallaDinamica = 24;
+    // console.log(estadoGenero)
+    let datos = new FormData();
+    datos.append("idActivarDinamico", idActivarDinamico);
+    datos.append("estadoDinamico",estadoDinamico);
+    datos.append("tablaDinamica",tablaDinamica);
+    datos.append("idTablaDinamica",idTablaDinamica);
+    datos.append("idPantallaDinamica",idPantallaDinamica);
 
     $.ajax({
         
