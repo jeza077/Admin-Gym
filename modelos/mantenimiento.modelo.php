@@ -313,7 +313,7 @@ class ModeloMantenimiento{
 
     
     /*=============================================
-    MOSTRAR MATRICULA
+    MOSTRAR DOCUMENTO
 	=============================================*/
 		
 	static public function mdlMostrarDocumento($tabla, $item, $valor){
@@ -607,6 +607,30 @@ class ModeloMantenimiento{
 		$stmt = null;
     }
 
+
+    /*============================================
+    AGREGAR NUEVO GENERO
+	==============================================*/
+	static public function mdlGeneroInsertar($tabla, $datos){
+
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(sexo, creado_por) VALUES (:sexo, :creado_por)");
+       
+        $stmt->bindParam(":sexo", $datos["sexo"], PDO::PARAM_STR);
+        $stmt->bindParam(":creado_por", $datos["creado_por"], PDO::PARAM_INT);
+        // $stmt->bindParam(":valor_descuento", $datos["valor"], PDO::PARAM_STR);
+
+		if($stmt->execute()){
+			return true;
+
+		}else{
+			return $stmt->errorInfo();
+		
+		}
+
+		$stmt->close();
+		$stmt = null;
+    }
+
     /*============================================
     AGREGAR BACKUP
 	==============================================*/
@@ -633,8 +657,7 @@ class ModeloMantenimiento{
 
     /*=============================================
     EDITAR DOCUMENTO
-    =============================================*/
-    
+    =============================================*/    
     static public function mdlEditarDocumento($tabla,$datos){
         
         $stmt = Conexion::conectar()->prepare("UPDATE $tabla SET tipo_documento = :tipo_documento WHERE id_documento = :id_documento");
@@ -650,6 +673,32 @@ class ModeloMantenimiento{
         }else{
 
             return false;
+        
+        }
+
+        $stmt->close();
+        $stmt = null;
+    }
+
+
+    /*=============================================
+    EDITAR GENERO
+    =============================================*/    
+    static public function mdlEditarGenero($tabla,$datos){
+        
+        $stmt = Conexion::conectar()->prepare("UPDATE $tabla SET sexo = :sexo WHERE id_sexo = :id_sexo");
+
+        $stmt -> bindParam(":sexo", $datos["sexo"], PDO::PARAM_STR);
+        $stmt -> bindParam(":id_sexo", $datos["id_sexo"], PDO::PARAM_INT);
+        // $stmt -> bindParam(":descripcion", $datos["descripcion"], PDO::PARAM_STR);
+
+        if($stmt->execute()){
+
+            return true;
+
+        }else{
+
+            return $stmt->errorInfo();
         
         }
 

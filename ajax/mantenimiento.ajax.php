@@ -7,6 +7,52 @@ require_once "../modelos/usuarios.modelo.php";
 
 class AjaxMantenimiento{
 
+    /*=============================================
+                ACTIVAR GENERO
+    =============================================*/
+
+    public $estadoGenero;
+    public $idGeneroActivar; 
+
+    public function ajaxActivarDinamico(){
+
+        $tabla = "tbl_sexo";
+
+        $estado = "estado";
+        $valorEstado = $this->estadoGenero;
+
+        $idItem2 = "id_sexo";
+        $valorItem2 = $this->idGeneroActivar;
+
+        $pantalla = "género";
+
+        $idPantalla = 35;
+      
+        $respuesta = ControladorMantenimientos::ctrActivar($tabla, $estado, $valorEstado, $idItem2, $valorItem2, $pantalla, $idPantalla);
+
+        echo json_encode($respuesta);
+
+    }
+
+
+    /*========================================
+        MOSTRAR-EDITAR DOCUMENTO
+    ==========================================*/ 
+    public $idGenero;
+
+    public function ajaxEditarGenero(){
+
+        $tabla = "tbl_sexo";
+        $item = "id_sexo";
+        $valor = $this->idGenero;
+        $all = null;
+
+        $respuesta = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all);
+
+        echo json_encode($respuesta);
+    
+    }
+
     /*========================================
         MOSTRAR-EDITAR DOCUMENTO
     ==========================================*/ 
@@ -186,6 +232,15 @@ class AjaxMantenimiento{
 }
 
 /*========================================
+    MOSTRAR-EDITAR GENERO
+==========================================*/ 
+if(isset($_POST["idGenero"])){ 
+    $editarGenero = new AjaxMantenimiento();
+    $editarGenero->idGenero = $_POST["idGenero"];
+    $editarGenero-> ajaxEditarGenero();
+}  
+
+/*========================================
     MOSTRAR-EDITAR DOCUMENTO
 ==========================================*/ 
 if(isset($_POST["idDocumento"])){ 
@@ -211,6 +266,16 @@ if(isset($_POST["idDocumentoActivar"])){
     $activarDocumento->estadoDocumento = $_POST["estadoDocumento"];
     $activarDocumento->idDocumentoActivar = $_POST["idDocumentoActivar"];
     $activarDocumento->ajaxActivarDocumento();
+}  
+
+/*========================================
+        ACTIVAR GENERO
+==========================================*/ 
+if(isset($_POST["idGeneroActivar"])){ 
+    $activarDinamico = new AjaxMantenimiento();
+    $activarDinamico->estadoGenero = $_POST["estadoGenero"];
+    $activarDinamico->idGeneroActivar = $_POST["idGeneroActivar"];
+    $activarDinamico->ajaxActivarDinamico();
 }  
 
 /*========================================

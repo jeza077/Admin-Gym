@@ -310,7 +310,7 @@
 
                     <div class="form-group col-md-3">
                       <label for="">Contraseña Generada</label>
-                      <input type="password" class="form-control passwordGenerado" name="nuevoPassword" autocomplete="off" spellcheck="false">
+                      <input type="text" class="form-control passwordGenerado" name="nuevoPassword" autocomplete="off" spellcheck="false">
                     </div>
                     <div class="col-md-3">
                       <a href="javascript:void(0);"  class="btn btn-block btn-orange generarPassword" style="margin-top:2em">Generar contraseña</a>
@@ -519,7 +519,7 @@
 
                     <div class="form-group col-md-3">
                       <label for="inputPass">Contraseña Generada</label>
-                      <input type="password" class="form-control passwordGenerado" id="inputPass" name="editarPassword" autocomplete="off" spellcheck="false">
+                      <input type="text" class="form-control passwordGenerado" id="inputPass" name="editarPassword" autocomplete="off" spellcheck="false">
                       <input type="hidden" class="form-control" id="passwordActual" name="passwordActual">
                     </div>
                     <div class="col-md-3">

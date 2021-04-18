@@ -1,6 +1,56 @@
 <?php
   
 class ControladorMantenimientos {
+
+  	/*=============================================
+    ACTIVAR USUARIO E INSERTAR EN BITACORA LA ACCIÓN
+    =============================================*/
+    static public function ctrActivar($tabla, $estado, $valorEstado, $idItem2, $valorItem2, $pantalla, $idPantalla){
+
+      if(isset($valorItem2)){
+        
+        $item3 = null;
+        $valor3 = null;
+        
+        $item4 = null;
+        $valor4 = null;
+        
+        $respuesta = ModeloUsuarios::mdlActualizarUsuario($tabla, $estado, $valorEstado, $idItem2, $valorItem2, $item3, $valor3, $item4, $valor4);
+
+        // return $respuesta;
+
+        if($respuesta == true){
+
+          $all = null;
+  
+          $respuestaGenero = ControladorUsuarios::ctrMostrar($tabla, $idItem2, $valorItem2, $all);
+  
+
+          require_once 'mantenimiento.controlador.php';
+
+          session_start();
+
+          if($valorEstado == 1){
+            $descripcionEvento = "".$_SESSION['usuario']." cambio el estado de ".$respuestaGenero['sexo']." a activado";
+            $accion = "Cambio de estado";
+            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION['id_usuario'], $idPantalla, $accion, $descripcionEvento);	
+            return $bitacoraConsulta;					
+            
+          } else {
+            
+            $descripcionEvento = "".$_SESSION['usuario']." cambio el estado de ".$respuestaGenero['sexo']." a desactivado";
+            $accion = "Cambio de estado";
+            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION['id_usuario'], $idPantalla, $accion, $descripcionEvento);	
+            return $bitacoraConsulta;					
+          }
+
+        }
+
+      }
+
+    }
+
+
     /*===========================================================
     BITACORA
     =============================================================*/
@@ -347,6 +397,8 @@ class ControladorMantenimientos {
       }
   
     }
+
+
     /*======================================================
     OBJETO INSERTAR
     =======================================================*/
@@ -795,9 +847,103 @@ class ControladorMantenimientos {
 
 
     /*=============================================
-    AGREGAR NUEVO DOCUMENTO
-    =============================================*/
+    AGREGAR NUEVO GENERO
+    =============================================*/    
+    static public function ctrGeneroInsertar(){
+
+      // var_dump($_POST);
+      // return;
+      if(isset($_POST["nuevoGenero"])){
+
+        if(preg_match('/^[A-ZÑÁÉÍÓÚ ]+$/', $_POST["nuevoGenero"])){
+
+          $tabla = "tbl_sexo";
+
+          $datos = array ("sexo" => $_POST["nuevoGenero"],
+                          "creado_por" => $_SESSION["id_usuario"]);
+
+
+          $respuesta =  ModeloMantenimiento::mdlGeneroInsertar($tabla,$datos);
+          // var_dump($respuesta);
+          // return;
     
+          if($respuesta == true){
+              
+            $descripcionEvento = "".$_SESSION["usuario"]." agregó un nuevo Genero llamado ".$_POST["nuevoGenero"]."";
+            $accion = "Agregar";
+            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 35,$accion, $descripcionEvento);
+
+              echo'<script>
+      
+              Swal.fire({
+                  icon: "success",
+                    title: "Género creado exitosamente!",
+                    showConfirmButton: true,
+                    confirmButtonText: "Cerrar",
+                    closeOnConfirm: false
+                    }).then((result) => {
+                              if (result.value) {
+      
+                              window.location = "genero";
+      
+                              }
+                          })
+      
+              </script>';
+      
+          }else{
+
+            echo'<script>
+      
+              Swal.fire({
+                    icon: "error",
+                    title: "Ocurrio un error. Intente de nuevo!",
+                    showConfirmButton: true,
+                    confirmButtonText: "Cerrar",
+                    closeOnConfirm: false
+                    }).then((result) => {
+                              if (result.value) {
+      
+                              window.location = "genero";
+      
+                              }
+                          })
+      
+              </script>';
+          }
+
+        } else {
+          echo '<script>
+  
+              Swal.fire({
+
+                icon: "error",
+                title: "¡No puede ir vacío, escrito en minusculas o llevar caracteres especiales!",
+                showConfirmButton: true,
+                confirmButtonText: "Cerrar",
+                closeOnConfirm: false
+
+              }).then((result)=>{
+
+                if(result.value){
+
+                  window.location = "genero";
+
+                }
+
+              });
+
+
+            </script>';
+
+        }
+      }
+
+    }
+
+    /*=============================================
+    AGREGAR NUEVO DOCUMENTO
+    =============================================*/    
     static public function ctrDocumentoInsertar(){
 
       // var_dump($_POST);
@@ -1315,9 +1461,106 @@ class ControladorMantenimientos {
 
 
     /*=============================================
+    EDITAR GENERO
+    =============================================*/ 
+    static public function ctrEditarGenero(){
+      // var_dump($_POST);
+      // return;
+
+      if(isset($_POST["editarIdGenero"])){
+
+        if(preg_match('/^[A-ZÑÁÉÍÓÚ ]+$/', $_POST["editarGenero"])){
+
+          $tabla = "tbl_sexo";
+
+          $datos = array ("sexo"=> $_POST["editarGenero"],
+                          "id_sexo"=>$_POST["editarIdGenero"]);
+
+          $respuesta =  ModeloMantenimiento::mdlEditarGenero($tabla,$datos);
+          // var_dump($respuesta);
+          // return;
+
+          if($respuesta == true){
+              
+            $descripcionEvento = "".$_SESSION["usuario"]." actualizó el Genero ".$_POST["editarGenero"]."";
+            $accion = "Actualizar";
+        
+            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 35,$accion, $descripcionEvento);
+        
+              echo'<script>
+      
+              Swal.fire({
+                    icon: "success",
+                    title: "Género editado correctamente",
+                    showConfirmButton: true,
+                    confirmButtonText: "Cerrar",
+                    closeOnConfirm: false
+                    }).then((result) => {
+                              if (result.value) {
+      
+                              window.location = "genero";
+      
+                              }
+                          })
+      
+              </script>';
+      
+          }else{
+
+            echo'<script>
+      
+              Swal.fire({
+                    icon: "error",
+                    title: "Opps, algo salio mal, intenta de nuevo!",
+                    showConfirmButton: true,
+                    confirmButtonText: "Cerrar",
+                    closeOnConfirm: false
+                    }).then((result) => {
+                              if (result.value) {
+      
+                              window.location = "genero";
+      
+                              }
+                          })
+      
+              </script>';
+          }
+        
+        } else {
+          echo '<script>
+  
+            Swal.fire({
+  
+              icon: "error",
+              title: "¡No puede ir vacío, escrito en minusculas o llevar caracteres especiales!",
+              showConfirmButton: true,
+              confirmButtonText: "Cerrar",
+              closeOnConfirm: false
+  
+            }).then((result)=>{
+  
+              if(result.value){
+  
+                window.location = "genero";
+  
+              }
+  
+            });
+  
+  
+          </script>';
+  
+
+        }
+
+      }
+
+    }
+
+
+    /*=============================================
     EDITAR DOCUMENTO
-    =============================================*/
-    
+    =============================================*/ 
     static public function ctrEditarDocumento(){
       // var_dump($_POST);
       // return;
@@ -1937,6 +2180,102 @@ class ControladorMantenimientos {
 
             </script>';
           } 
+      }
+    }
+
+    /*=============================================
+    BORRAR GENERO
+    =============================================*/
+    static public function ctrBorrarGenero(){
+      // var_dump($_GET['idEliminarDocumento']);
+      // return;
+
+      if(isset($_GET['idEliminarGenero'])){
+
+          $tabla = 'tbl_sexo';
+          
+          $item = 'id_sexo';
+          $valor = $_GET['idEliminarGenero'];
+
+          $all = null;
+  
+          $respuestaGeneros = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all);
+
+          $genero =  $respuestaGeneros['sexo'];
+
+          $respuesta = ModeloMantenimiento::mdlBorrarDinamico($tabla, $item, $valor);
+
+          // var_dump($respuesta);
+          // return;
+
+          if($respuesta[1] == 1451){
+
+            // $descripcionEvento = "Elimino el Rol";
+            // $accion = "Elimino";
+
+            // $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
+
+            echo '<script>
+                Swal.fire({
+                    title: "¡No se pudo borrar el género!",
+                    text: "No se puede borrar ya que esta asociado con otros datos",
+                    icon: "error",
+                    heightAuto: false
+                }).then((result)=>{
+                    if(result.value){
+                        window.location = "genero";
+                    }
+                });                                      
+            </script>';
+            
+            
+          }else if($respuesta[1] == 1054) {
+
+            echo'<script>
+
+            Swal.fire({
+            icon: "error",
+            title: "Opps, algo salio mal, intenta de nuevo!",
+            showConfirmButton: true,
+            confirmButtonText: "Cerrar",
+            closeOnConfirm: false
+            }).then((result) => {
+              if (result.value) {
+
+                window.location = "genero";
+                
+              }
+            })
+            
+            </script>';
+            
+          } else {
+
+            $descripcionEvento = "".$_SESSION["usuario"]." eliminó el género ".$genero."";
+            $accion = "Eliminar";
+        
+            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 35,$accion, $descripcionEvento);
+        
+            
+            echo'<script>
+
+            Swal.fire({
+                  icon: "success",
+                  title: "Género eliminado exitosamente!",
+                  showConfirmButton: true,
+                  confirmButtonText: "Cerrar",
+                  closeOnConfirm: false
+                  }).then((result) => {
+                      if (result.value) {
+
+                      window.location = "genero";
+
+                      }
+                  })
+
+            </script>';
+          } 
+          
       }
     }
 

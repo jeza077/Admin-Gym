@@ -325,6 +325,14 @@
                     </a>
                   </li>
                 <?php }?>
+                <?php if($_SESSION['permisos']['Genero']['consulta'] == 1){?>
+                  <li class="nav-item">
+                    <a href="genero" class="nav-link">
+                      <i class="fas fa-cash-register nav-icon"></i>
+                      <p>Géneros</p>
+                    </a>
+                  </li>
+                <?php }?>
                 <?php if($_SESSION['permisos']['Objetos']['consulta'] == 1){?>
                   <li class="nav-item">
                     <a href="objetos" class="nav-link">

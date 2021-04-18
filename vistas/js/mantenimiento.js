@@ -628,6 +628,36 @@ $(document).on("click", ".btnEditarDescuento", function(){
 });
 
 /*===================================
+//    EDITAR GENERO
+====================================*/
+$(document).on("click", ".btnEditarSexo", function(){
+    
+    var idGenero = $(this).attr("idGenero");
+    // console.log(idGenero)
+    var datos = new FormData();
+    datos.append("idGenero", idGenero);
+
+    $.ajax({
+
+        url:"ajax/mantenimiento.ajax.php",
+        method:"POST",
+        data: datos,
+        cache: false,
+        contentType:false,
+        processData:false,
+        dataType: "json",
+        success:function(respuesta){ 
+            // console.log(respuesta)
+
+            $('#editarGenero').val(respuesta['sexo']);
+            $('#editarIdGenero').val(respuesta['id_sexo']);
+         
+        } 
+
+    });
+});
+
+/*===================================
 //    EDITAR DOCUMENTO
 ====================================*/
 $(document).on("click", ".btnEditarDocumento", function(){
@@ -758,6 +788,15 @@ get = 'idEliminarDescuento';
 titulo = "¿Estás seguro de querer borrar el descuento?";
 texto = "¡Si no lo estas, puedes cancelar la acción!";
 ruta = 'descuento';
+borrarDinamico(boton, atributo, get, titulo, texto, ruta);
+
+/*** Borrar Genero ***/
+boton = '.btnEliminarGenero';
+atributo = 'idEliminarGenero';
+get = 'idEliminarGenero';
+titulo = "¿Estás seguro de querer borrar el género?";
+texto = "¡Si no lo estas, puedes cancelar la acción!";
+ruta = 'genero';
 borrarDinamico(boton, atributo, get, titulo, texto, ruta);
 
 /*** Borrar Documento ***/
@@ -1015,6 +1054,50 @@ $(document).on("click", ".btnActivarDescuento", function(){
         $(this).removeClass('btn-danger');
         $(this).html('Activado');
         $(this).attr('estadoDescuento',0);
+
+    }
+
+})
+
+/*=====================================
+ACTIVAR GENERO
+========================================*/
+$(document).on("click", ".btnActivarGenero", function(){
+
+    var idGenero = $(this).attr("idGenero");
+    var estadoGenero = $(this).attr("estadoGenero");
+    // console.log(estadoGenero)
+    var datos = new FormData();
+    datos.append("idGeneroActivar", idGenero);
+    datos.append("estadoGenero",estadoGenero);
+
+    $.ajax({
+        
+      url:"ajax/mantenimiento.ajax.php",
+      method:"POST",
+      data: datos,
+      cache: false,
+      contentType:false,
+      processData:false,
+      success:function(respuesta){ 
+          console.log(respuesta)
+     } 
+
+    }) 
+
+    if(estadoGenero == 0){
+        $(this).removeClass('btn-success');
+        $(this).addClass('btn-danger');
+        $(this).html('Desactivado');
+        $(this).attr('estadoGenero',1);
+
+    }else{
+
+
+        $(this).addClass('btn-success');
+        $(this).removeClass('btn-danger');
+        $(this).html('Activado');
+        $(this).attr('estadoGenero',0);
 
     }
 
