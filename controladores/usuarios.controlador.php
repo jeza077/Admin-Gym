@@ -117,7 +117,7 @@ class ControladorUsuarios{
 
 	static public function ctrIngresoUsuario(){
 
-		if(isset($_POST["ingusuario"])){
+		if(isset($_POST["ingUsuario"])){
 
 			if($_POST["ingUsuario"] === "" && $_POST["ingPassword"] === ""){
 				echo '<script>			
