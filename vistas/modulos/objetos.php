@@ -107,17 +107,17 @@ MODAL AGREGAR NUEVO OBJETO
         <div class="modal-body">
             <div class="form-group col-md-12">
                 <label for="Rol">Objeto</label>
-                <input type="text" class="form-control mayus" name="nuevoObjeto" value="" placeholder="Ingrese objeto" required>
+                <input type="text" class="form-control mayus sinCaracteres sinNumeros soloUnEspacio longitudNombre" name="nuevoObjeto" value="" placeholder="Ingrese objeto" required>
             </div>
 
             <div class="form-group col-md-12">
                 <label for="Descripcion">Link</label>
-                <input type="text" class="form-control" name="nuevoLink" value="" placeholder="Ingrese el link" required>
+                <input type="text" class="form-control sinNumeros longitudNombre sinEspacioDoc" name="nuevoLink" value="" placeholder="Ingrese el link" required>
             </div>
 
             <div class="form-group col-md-12">
                 <label for="Descripcion">Icono</label>
-                <input type="text" class="form-control" name="nuevoIcono" value="" placeholder="Ingrese el icono" required>
+                <input type="text" class="form-control sinNumeros longitudNombre soloUnEspacio" name="nuevoIcono" value="" placeholder="Ingrese el icono" required>
             </div>
         </div>
 
