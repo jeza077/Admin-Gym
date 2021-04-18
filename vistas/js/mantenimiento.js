@@ -1064,16 +1064,18 @@ ACTIVAR GENERO
 ========================================*/
 $(document).on("click", ".btnActivarGenero", function(){
 
-    let idGenero = $(this).attr("idGenero");
-    let estadoGenero = $(this).attr("estadoGenero");
-    let tabla = 'tbl_sexo';
-    let idPantalla = 35;
+    let idActivarDinamico = $(this).attr("idGenero");
+    let estadoDinamico = $(this).attr("estadoGenero");
+    let tablaDinamica = 'tbl_sexo';
+    let idTablaDinamica = 'id_sexo';
+    let idPantallaDinamica = 35;
     // console.log(estadoGenero)
     let datos = new FormData();
-    datos.append("idGeneroActivar", idGenero);
-    datos.append("estadoGenero",estadoGenero);
-    datos.append("tabla",tabla);
-    datos.append("idPantalla",idPantalla);
+    datos.append("idActivarDinamico", idActivarDinamico);
+    datos.append("estadoDinamico",estadoDinamico);
+    datos.append("tablaDinamica",tablaDinamica);
+    datos.append("idTablaDinamica",idTablaDinamica);
+    datos.append("idPantallaDinamica",idPantallaDinamica);
 
     $.ajax({
         
@@ -1089,7 +1091,7 @@ $(document).on("click", ".btnActivarGenero", function(){
 
     }) 
 
-    if(estadoGenero == 0){
+    if(estadoDinamico == 0){
         $(this).removeClass('btn-success');
         $(this).addClass('btn-danger');
         $(this).html('Desactivado');
@@ -1112,12 +1114,19 @@ ACTIVAR DOCUMENTO
 ========================================*/
 $(document).on("click", ".btnActivarDocumento", function(){
 
-    var idDocumento = $(this).attr("idDocumento");
-    var estadoDocumento = $(this).attr("estadoDocumento");
-    // console.log(idDocumento)
-    var datos = new FormData();
-    datos.append("idDocumentoActivar", idDocumento);
-    datos.append("estadoDocumento",estadoDocumento);
+    let idActivarDinamico = $(this).attr("idDocumento");
+    let estadoDinamico = $(this).attr("estadoDocumento");
+    let tablaDinamica = 'tbl_documento';
+    let idTablaDinamica = 'id_documento';
+    let idPantallaDinamica = 24;
+    // console.log(estadoGenero)
+    let datos = new FormData();
+    datos.append("idActivarDinamico", idActivarDinamico);
+    datos.append("estadoDinamico",estadoDinamico);
+    datos.append("tablaDinamica",tablaDinamica);
+    datos.append("idTablaDinamica",idTablaDinamica);
+    datos.append("idPantallaDinamica",idPantallaDinamica);
+
 
     $.ajax({
         
@@ -1133,7 +1142,7 @@ $(document).on("click", ".btnActivarDocumento", function(){
 
     }) 
 
-    if(estadoDocumento == 0){
+    if(estadoDinamico == 0){
         $(this).removeClass('btn-success');
         $(this).addClass('btn-danger');
         $(this).html('Desactivado');

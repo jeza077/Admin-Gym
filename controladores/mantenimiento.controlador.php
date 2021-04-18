@@ -5,6 +5,55 @@ class ControladorMantenimientos {
   	/*=============================================
     ACTIVAR USUARIO E INSERTAR EN BITACORA LA ACCIÓN
     =============================================*/
+    static public function ctrActivarDocumento($tabla, $estado, $valorEstado, $idItem2, $valorItem2, $pantalla, $idPantalla){
+
+      if(isset($valorItem2)){
+        
+        $item3 = null;
+        $valor3 = null;
+        
+        $item4 = null;
+        $valor4 = null;
+        
+        $respuesta = ModeloUsuarios::mdlActualizarUsuario($tabla, $estado, $valorEstado, $idItem2, $valorItem2, $item3, $valor3, $item4, $valor4);
+
+        // return $respuesta;
+
+        if($respuesta == true){
+
+          $all = null;
+  
+          $respuestaDocumento = ControladorUsuarios::ctrMostrar($tabla, $idItem2, $valorItem2, $all);
+  
+
+          require_once 'mantenimiento.controlador.php';
+
+          session_start();
+
+          if($valorEstado == 1){
+            $descripcionEvento = "".$_SESSION['usuario']." cambio el estado de ".$respuestaDocumento['tipo_documento']." a activado";
+            $accion = "Cambio de estado";
+            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION['id_usuario'], $idPantalla, $accion, $descripcionEvento);	
+            return $bitacoraConsulta;					
+            
+          } else {
+            
+            $descripcionEvento = "".$_SESSION['usuario']." cambio el estado de ".$respuestaDocumento['tipo_documento']." a desactivado";
+            $accion = "Cambio de estado";
+            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION['id_usuario'], $idPantalla, $accion, $descripcionEvento);	
+            return $bitacoraConsulta;					
+          }
+
+        }
+
+      }
+
+    }
+
+
+    /*=============================================
+    ACTIVAR USUARIO E INSERTAR EN BITACORA LA ACCIÓN
+    =============================================*/
     static public function ctrActivar($tabla, $estado, $valorEstado, $idItem2, $valorItem2, $pantalla, $idPantalla){
 
       if(isset($valorItem2)){
@@ -31,14 +80,33 @@ class ControladorMantenimientos {
           session_start();
 
           if($valorEstado == 1){
-            $descripcionEvento = "".$_SESSION['usuario']." cambio el estado de ".$respuestaGenero['sexo']." a activado";
+
+            if($tabla == 'tbl_sexo'){
+
+              $descripcionEvento = "".$_SESSION['usuario']." cambio el estado de ".$respuestaGenero['sexo']." a activado";
+              
+            } elseif($tabla == 'tbl_documento') {
+              
+              $descripcionEvento = "".$_SESSION['usuario']." cambio el estado de ".$respuestaGenero['tipo_documento']." a activado";
+              
+            } 
+
             $accion = "Cambio de estado";
             $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION['id_usuario'], $idPantalla, $accion, $descripcionEvento);	
             return $bitacoraConsulta;					
             
           } else {
             
-            $descripcionEvento = "".$_SESSION['usuario']." cambio el estado de ".$respuestaGenero['sexo']." a desactivado";
+            if($tabla == 'tbl_sexo'){
+
+              $descripcionEvento = "".$_SESSION['usuario']." cambio el estado de ".$respuestaGenero['sexo']." a desactivado";
+              
+            } elseif($tabla == 'tbl_documento') {
+              
+              $descripcionEvento = "".$_SESSION['usuario']." cambio el estado de ".$respuestaGenero['tipo_documento']." a desactivado";
+              
+            } 
+            // $descripcionEvento = "".$_SESSION['usuario']." cambio el estado de ".$respuestaGenero['sexo']." a desactivado";
             $accion = "Cambio de estado";
             $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION['id_usuario'], $idPantalla, $accion, $descripcionEvento);	
             return $bitacoraConsulta;					

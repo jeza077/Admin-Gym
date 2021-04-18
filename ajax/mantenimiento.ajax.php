@@ -11,24 +11,25 @@ class AjaxMantenimiento{
                 ACTIVAR GENERO
     =============================================*/
 
-    public $estadoGenero;
-    public $idGeneroActivar; 
-    public $tabla;
-    public $idPantalla; 
+    public $estadoDinamico;
+    public $idActivarDinamico; 
+    public $tablaDinamica;
+    public $idTablaDinamica;
+    public $idPantallaDinamica; 
 
     public function ajaxActivarDinamico(){
 
-        $table = $this->tabla;
+        $table = $this->tablaDinamica;
 
         $estado = "estado";
-        $valorEstado = $this->estadoGenero;
+        $valorEstado = $this->estadoDinamico;
 
-        $idItem2 = "id_sexo";
-        $valorItem2 = $this->idGeneroActivar;
+        $idItem2 = $this->idTablaDinamica;
+        $valorItem2 = $this->idActivarDinamico;
 
         $pantalla = "género";
 
-        $idPant = $this->idPantalla;
+        $idPant = $this->idPantallaDinamica;
       
         $respuesta = ControladorMantenimientos::ctrActivar($table, $estado, $valorEstado, $idItem2, $valorItem2, $pantalla, $idPant);
 
@@ -273,12 +274,13 @@ if(isset($_POST["idDocumentoActivar"])){
 /*========================================
         ACTIVAR GENERO
 ==========================================*/ 
-if(isset($_POST["idGeneroActivar"])){ 
+if(isset($_POST["idActivarDinamico"])){ 
     $activarDinamico = new AjaxMantenimiento();
-    $activarDinamico->estadoGenero = $_POST["estadoGenero"];
-    $activarDinamico->idGeneroActivar = $_POST["idGeneroActivar"];
-    $activarDinamico->tabla = $_POST["tabla"];
-    $activarDinamico->idPantalla = $_POST["idPantalla"];
+    $activarDinamico->estadoDinamico = $_POST["estadoDinamico"];
+    $activarDinamico->idActivarDinamico = $_POST["idActivarDinamico"];
+    $activarDinamico->tablaDinamica = $_POST["tablaDinamica"];
+    $activarDinamico->idTablaDinamica = $_POST["idTablaDinamica"];
+    $activarDinamico->idPantallaDinamica = $_POST["idPantallaDinamica"];
     $activarDinamico->ajaxActivarDinamico();
 }  
 
