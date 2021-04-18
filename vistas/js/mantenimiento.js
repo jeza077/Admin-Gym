@@ -1064,12 +1064,16 @@ ACTIVAR GENERO
 ========================================*/
 $(document).on("click", ".btnActivarGenero", function(){
 
-    var idGenero = $(this).attr("idGenero");
-    var estadoGenero = $(this).attr("estadoGenero");
+    let idGenero = $(this).attr("idGenero");
+    let estadoGenero = $(this).attr("estadoGenero");
+    let tabla = 'tbl_sexo';
+    let idPantalla = 35;
     // console.log(estadoGenero)
-    var datos = new FormData();
+    let datos = new FormData();
     datos.append("idGeneroActivar", idGenero);
     datos.append("estadoGenero",estadoGenero);
+    datos.append("tabla",tabla);
+    datos.append("idPantalla",idPantalla);
 
     $.ajax({
         
@@ -1080,7 +1084,7 @@ $(document).on("click", ".btnActivarGenero", function(){
       contentType:false,
       processData:false,
       success:function(respuesta){ 
-          console.log(respuesta)
+        //   console.log(respuesta)
      } 
 
     }) 

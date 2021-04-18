@@ -13,10 +13,12 @@ class AjaxMantenimiento{
 
     public $estadoGenero;
     public $idGeneroActivar; 
+    public $tabla;
+    public $idPantalla; 
 
     public function ajaxActivarDinamico(){
 
-        $tabla = "tbl_sexo";
+        $table = $this->tabla;
 
         $estado = "estado";
         $valorEstado = $this->estadoGenero;
@@ -26,9 +28,9 @@ class AjaxMantenimiento{
 
         $pantalla = "género";
 
-        $idPantalla = 35;
+        $idPant = $this->idPantalla;
       
-        $respuesta = ControladorMantenimientos::ctrActivar($tabla, $estado, $valorEstado, $idItem2, $valorItem2, $pantalla, $idPantalla);
+        $respuesta = ControladorMantenimientos::ctrActivar($table, $estado, $valorEstado, $idItem2, $valorItem2, $pantalla, $idPant);
 
         echo json_encode($respuesta);
 
@@ -275,6 +277,8 @@ if(isset($_POST["idGeneroActivar"])){
     $activarDinamico = new AjaxMantenimiento();
     $activarDinamico->estadoGenero = $_POST["estadoGenero"];
     $activarDinamico->idGeneroActivar = $_POST["idGeneroActivar"];
+    $activarDinamico->tabla = $_POST["tabla"];
+    $activarDinamico->idPantalla = $_POST["idPantalla"];
     $activarDinamico->ajaxActivarDinamico();
 }  
 
