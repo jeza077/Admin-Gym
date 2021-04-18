@@ -200,7 +200,7 @@ $bloque4 = <<<EOF
 		<td style="font-size:11.5px; background-color:white; width:158px">
 
 			
-			<strong> Nombre Cliente: </strong> 
+			<strong> Nombre cliente: </strong> 
 			<br>
 			 $clientes[nombre] $clientes[apellidos]
 
@@ -208,7 +208,7 @@ $bloque4 = <<<EOF
 
 		<td style="font-size:11.5px; background-color:white; width:125px;">
 		
-			<strong> Fecha Emisión: </strong>
+			<strong> Fecha emisión: </strong>
 			<br>
 			 $fechaHoy
 
@@ -216,7 +216,7 @@ $bloque4 = <<<EOF
 
 		<td style="font-size:11.5px; background-color:white; width:100px;">
 		
-			<strong> Fecha Pago: </strong>
+			<strong> Fecha pago: </strong>
 			<br>
 			 $clientes[fecha_de_pago]
 

@@ -58,7 +58,7 @@ function respaldarBd(){
                 
                 if(respuesta){
                   Swal.fire({
-                    title: "Respaldo realizado exitosamente.",
+                    title: "¡Respaldo realizado exitosamente!",
                     icon: "success",
                     showConfirmButton: true,
                     heightAuto: false,
@@ -80,7 +80,7 @@ function respaldarBd(){
         }else {
 
           Swal.fire({
-            title: "Error al realizar el respaldo. Intente de nuevo.",
+            title: "Error al realizar el respaldo. ¡Intente de nuevo!",
             icon: "error",
             showConfirmButton: true,
             heightAuto: false,
@@ -131,7 +131,7 @@ function restaurarBd(){
                 if(data==1){
 
                   Swal.fire({
-                    title: "Restauracion exitosa!",
+                    title: "¡Restauración exitosa!",
                     icon: "success",
                     // background: "rgb(255 75 75 / 85%)",
                     showConfirmButton: true,
@@ -148,7 +148,7 @@ function restaurarBd(){
                 }else {
 
                   Swal.fire({
-                    title: "Algo salio mal, intenta de nuevo!",
+                    title: "¡Algo salió mal, intente de nuevo!",
                     icon: "error",
                     // background: "rgb(255 75 75 / 85%)",
                     showConfirmButton: true,

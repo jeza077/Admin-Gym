@@ -305,7 +305,7 @@ class ControladorClientes{
 
 							echo '<script>
 								Swal.fire({
-									title: "Cliente creado correctamente!",
+									title: "¡Cliente creado correctamente!",
 									icon: "success",
 									heightAuto: false,
 									allowOutsideClick: false
@@ -336,7 +336,7 @@ class ControladorClientes{
 
 					echo '<script>
 							Swal.fire({
-								title: "Cliente creado correctamente!",
+								title: "¡Cliente creado correctamente!",
 								icon: "success",
 								heightAuto: false,
 								allowOutsideClick: false
@@ -352,7 +352,7 @@ class ControladorClientes{
             } else {
 				echo '<script>
 					Swal.fire({
-						title: "¡Algo salió mal, intenta de nuevo!",
+						title: "¡Algo salió mal, intente de nuevo!",
 						icon: "error",
 						heightAuto: false,
 						allowOutsideClick: false
@@ -864,7 +864,7 @@ class ControladorClientes{
 
 					echo "<script>
 							Swal.fire({
-								title: 'El cambio y pago de inscripcion, se realizo exitosamente!',
+								title: '¡El cambio y pago de inscripción, se realizó exitosamente!',
 								text: 'Fecha proximo pago actualizada al ".$fechaVencimientoCliente."',
 								icon: 'success',
 								width: 600,
@@ -1040,7 +1040,7 @@ class ControladorClientes{
 
 						echo "<script>
 								Swal.fire({
-									title: 'Inscripcion agregada exitosamente!',
+									title: '¡Inscripción agregada exitosamente!',
 									icon: 'success',
 									allowOutsideClick: false,
 									showCancelButton: false,
@@ -1055,7 +1055,7 @@ class ControladorClientes{
 					} else {
 						echo "<script>
 								Swal.fire({
-									title: '¡Algo salió mal. Intenta de nuevo!',
+									title: '¡Algo salió mal, intente de nuevo!',
 									icon: 'error',
 									allowOutsideClick: false,
 									showCancelButton: false,
@@ -1072,7 +1072,7 @@ class ControladorClientes{
 				} else {
 					echo "<script>
 								Swal.fire({
-									title: '¡Algo salió. Intenta de nuevo!',
+									title: '¡Algo salió, intente de nuevo!',
 									icon: 'error',
 									allowOutsideClick: false,
 									showCancelButton: false,
@@ -1088,7 +1088,7 @@ class ControladorClientes{
 			} else {
 				echo "<script>
 						Swal.fire({
-							title: '¡Algo salió mal. Intenta de nuevo!',
+							title: '¡Algo salió mal, intente de nuevo!',
 							icon: 'error',
 							allowOutsideClick: false,
 							showCancelButton: false,
@@ -1225,7 +1225,7 @@ class ControladorClientes{
 						$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION['id_usuario'], 5, $accion, $descripcionEvento);
 						echo "<script>
 								Swal.fire({
-									title: 'Inscripcion agregada exitosamente!',
+									title: '¡Inscripción agregada exitosamente!',
 									icon: 'success',
 									allowOutsideClick: false,
 									showCancelButton: false,
@@ -1240,7 +1240,7 @@ class ControladorClientes{
 					} else {
 						echo "<script>
 								Swal.fire({
-									title: '¡Algo salió. Intenta de nuevo!',
+									title: '¡Algo salió mal, intente de nuevo!',
 									icon: 'error',
 									allowOutsideClick: false,
 									showCancelButton: false,
@@ -1257,7 +1257,7 @@ class ControladorClientes{
 				} else {
 					echo "<script>
 								Swal.fire({
-									title: '¡Algo salió mal. Intenta de nuevo!',,
+									title: '¡Algo salió mal, intente de nuevo!',,
 									icon: 'error',
 									allowOutsideClick: false,
 									showCancelButton: false,
@@ -1273,7 +1273,7 @@ class ControladorClientes{
 			} else {
 				echo "<script>
 						Swal.fire({
-							title: '¡Algo salió mal. Intenta de nuevo!',
+							title: '¡Algo salió mal, intente de nuevo!',
 							icon: 'error',
 							allowOutsideClick: false,
 							showCancelButton: false,
@@ -1374,7 +1374,7 @@ class ControladorClientes{
 
 				echo '<script>
 						Swal.fire({
-							title: "Cliente eliminado correctamente!",
+							title: "¡Cliente eliminado correctamente!",
 							icon: "success",
 							heightAuto: false,
 							allowOutsideClick: false

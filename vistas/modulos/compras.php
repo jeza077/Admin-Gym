@@ -210,7 +210,7 @@
                             <input type="hidden" name="imagenActual" id=imagenActual>
                             <div class="custom-file">
                                 <input type="file" class="custom-file-input nuevaFotoProducto" id="exampleInputFile" name="editarFotoProducto">
-                                <label class="custom-file-label" for="exampleInputFile">Escoger imagen</label>
+                                <label class="custom-file-label" for="exampleInputFile"></label>
                             </div>
                             </div>
                                 <p class="p-foto help-block ml-4">Peso máximo de la imagen 2 MB</p>

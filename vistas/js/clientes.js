@@ -181,7 +181,7 @@ $(document).on('click', '.btnConfirmarPago', function (e) {
             Swal.fire({
             icon: 'info',
                 title: '¿Se realizó el pago correctamente?',
-                html: '<button type="submit" role="button" class="SwalBtnGuardarClienteRegistrado btn btn-success customSwalBtn">' + 'Si, guardar' + '</button>' +
+                html: '<button type="submit" role="button" class="SwalBtnGuardarClienteRegistrado btn btn-success customSwalBtn">' + 'Sí, guardar' + '</button>' +
                     '<button type="button" role="button" class="SwalBtnCancelarCliente btn btn-danger customSwalBtn">' + 'No, salir' + '</button>',
                 width: 500,
                 allowOutsideClick: false,
@@ -211,7 +211,7 @@ $(document).on('click', '.btnConfirmarPago', function (e) {
             Swal.fire({
             icon: 'info',
                 title: '¿Se realizó el pago correctamente?',
-                html: '<button type="submit" role="button" class="SwalBtnGuardarCliente btn btn-success customSwalBtn">' + 'Si, guardar' + '</button>' +
+                html: '<button type="submit" role="button" class="SwalBtnGuardarCliente btn btn-success customSwalBtn">' + 'Sí, guardar' + '</button>' +
                     '<button type="button" role="button" class="SwalBtnCancelarCliente btn btn-danger customSwalBtn">' + 'No, salir' + '</button>',
                 width: 500,
                 allowOutsideClick: false,
@@ -723,7 +723,7 @@ $(document).on('click', '.SwalBtnConfirmarPago', function (e) {
     Swal.fire({
         icon: 'info',
         title: '¿Se realizó el pago correctamente?',
-        html: '<button type="submit" role="button" class="SwalBtnMantenerInscripcion btn btn-success customSwalBtn">' + 'Si, guardar' + '</button>' +
+        html: '<button type="submit" role="button" class="SwalBtnMantenerInscripcion btn btn-success customSwalBtn">' + 'Sí, guardar' + '</button>' +
             '<button type="button" role="button" class="SwalBtnCancelar btn btn-danger customSwalBtn">' + 'No, salir' + '</button>',
         width: 500,
         allowOutsideClick: false,
