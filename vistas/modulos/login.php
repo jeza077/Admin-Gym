@@ -11,7 +11,7 @@
 
       <form method="post" autocomplete="off">
         <div class="form-group mb-3">
-          <input type="text" class="form-control mayus usuario sinCaracteres" name="ingUsuario" placeholder="Usuario" required autocomplete="off" spellcheck="false">
+          <input type="text" class="form-control mayus usuario sinCaracteres sinNumeros" name="ingUsuario" placeholder="Usuario" required autocomplete="off" spellcheck="false">
         </div>
         <div class="form-group mb-3">
           <input type="password" class="form-control password" name="ingPassword" placeholder="Contraseña" required autocomplete="off" spellcheck="false"> 
