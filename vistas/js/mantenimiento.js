@@ -81,7 +81,7 @@ $(document).on('click', '.btnGuardarRol', function (e) {
                 title: "¡El rol ha sido creado exitosamente!",
                 showConfirmButton: true,
                 // showCloseButton: true,
-                confirmButtonText: "Ok",
+                confirmButtonText: "Cerrar",
                 heightAuto: false,
                 allowOutsideClick: false
     

@@ -217,15 +217,15 @@
 
                     <div class="form-group col-md-3">
                       <label for="identidad">Número de documento</label>
-                      <input type="text" class="form-control numeroDocumento longitudDocumento sinEspacioDoc" name="nuevoNumeroDocumento" placeholder="Ingrese Identidad" required>
+                      <input type="text" class="form-control numeroDocumento longitudDocumento sinEspacioDoc" name="nuevoNumeroDocumento" placeholder="Ingrese identidad" required>
                     </div>
                     <div class="form-group col-md-3">
                       <label for="nombre">Nombre</label>
-                      <input type="text" class="form-control nombre mayus sinCaracteres sinNumeros" name="nuevoNombre" placeholder="Ingrese Nombre" required>
+                      <input type="text" class="form-control nombre mayus sinCaracteres sinNumeros" name="nuevoNombre" placeholder="Ingrese nombre" required>
                     </div>
                     <div class="form-group col-md-3">
                       <label for="apellido">Apellido</label>
-                      <input type="text" class="form-control apellidos mayus sinCaracteres sinNumeros" name="nuevoApellido" placeholder="Ingrese Apellidos" required>
+                      <input type="text" class="form-control apellidos mayus sinCaracteres sinNumeros" name="nuevoApellido" placeholder="Ingrese apellidos" required>
                     </div>
                   </div>
 
@@ -267,7 +267,7 @@
                             $sexo = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all);
 
                             foreach ($sexo as $key => $value) { ?>
-                                <option value="<?php echo $value['id_sexo']?>"><?php echo $value['descripcion_sexo']?></option>        
+                                <option value="<?php echo $value['id_sexo']?>"><?php echo $value['sexo']?></option>        
                             <?php 
                             }
                         ?>
@@ -326,7 +326,7 @@
                         <img class="img-thumbnail previsualizar mr-2" src="vistas/img/usuarios/default/default2.jpg" alt="imagen-del-usuario" width="100px">
                         <div class="custom-file">
                           <input type="file" class="custom-file-input nuevaFoto" name="nuevaFoto">
-                          <label class="custom-file-label" for="">Escoger Imagen</label>
+                          <label class="custom-file-label" for=""></label>
                         </div>
                       </div>
                           <p class="p-foto help-block ml-4">Peso máximo de la imagen 2 MB</p>
@@ -475,7 +475,7 @@
                             $sexo = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all);
 
                             foreach ($sexo as $key => $value) { ?>
-                                <option value="<?php echo $value['id_sexo']?>"><?php echo $value['descripcion_sexo']?></option>        
+                                <option value="<?php echo $value['id_sexo']?>"><?php echo $value['sexo']?></option>        
                             <?php 
                             }
                         ?>
@@ -534,7 +534,7 @@
                         <img class="img-thumbnail previsualizar mr-2" src="" alt="imagen-del-usuario" width="100px">
                         <div class="custom-file">
                           <input type="file" class="custom-file-input nuevaFoto" id="inputFoto" name="editarFoto">
-                          <label class="custom-file-label" for="inputFoto">Escoger imagen</label>
+                          <label class="custom-file-label" for="inputFoto"></label>
                           <input type="hidden" name="fotoActual" id="fotoActual">
                         </div>
                       </div>
@@ -700,7 +700,7 @@
             <div class="form-row">
               <div class="form-group col-md-6">
                 <label for="">Usuario</label>
-                <input type="text" class="form-control mayus nuevoUsuario" name="nuevoUsuario" placeholder="Ingrese Usuario" autocomplete="off">
+                <input type="text" class="form-control mayus nuevoUsuario" name="nuevoUsuario" placeholder="Ingrese usuario" autocomplete="off">
               </div>
             
               <div class="form-group col-md-6">
@@ -746,7 +746,7 @@
                   <img class="img-thumbnail previsualizar mr-2" src="vistas/img/usuarios/default/default2.jpg" alt="imagen-del-usuario" width="100px">
                   <div class="custom-file">
                     <input type="file" class="custom-file-input nuevaFoto" id="exampleInputFile" name="nuevaFoto">
-                    <label class="custom-file-label" for="exampleInputFile">Escoger imagen</label>
+                    <label class="custom-file-label" for="exampleInputFile"></label>
                   </div>
                 </div>
                     <p class="p-foto help-block ml-4">Peso máximo de la imagen 2 MB</p>

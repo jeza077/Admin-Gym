@@ -35,7 +35,7 @@ export const defaultParams = {
   showCancelButton: false,
   preConfirm: undefined,
   preDeny: undefined,
-  confirmButtonText: 'OK',
+  confirmButtonText: 'Cerrar',
   confirmButtonAriaLabel: '',
   confirmButtonColor: undefined,
   denyButtonText: 'No',

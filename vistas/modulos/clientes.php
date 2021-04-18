@@ -170,7 +170,7 @@
                   <div class="form-row">
                     <div class="form-group col-md-9">
                       <label for="">Dirección</label>
-                      <input type="text" class="form-control mayus nuevaDireccion longitudDireccion soloUnEspacio" name="nuevaDireccion" placeholder="Col. Alameda, calle #2..." required>
+                      <input type="text" class="form-control mayus nuevaDireccion longitudDireccion soloUnEspacio" name="nuevaDireccion" placeholder="Col. alameda, calle #2..." required>
                     </div>
                   
                     <div class="form-group col-md-3">
@@ -186,7 +186,7 @@
                             $sexo = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all);
 
                             foreach ($sexo as $key => $value) { ?>
-                                <option value="<?php echo $value['id_sexo']?>"><?php echo $value['descripcion_sexo']?></option>        
+                                <option value="<?php echo $value['id_sexo']?>"><?php echo $value['sexo']?></option>        
                             <?php 
                             }
                         ?>
@@ -297,7 +297,7 @@
                          <label for="">Precio inscripción</label>
                          <div class="input-group">
                             <div class="input-group-prepend">
-                                <span class="input-group-text">$</span>  
+                                <span class="input-group-text">L.</span>  
                               </div>
                             <input type="text" class="form-control text-right nuevoPrecioInscripcion totalInscripcion" name="nuevoPrecioInscripcion" value="" readonly>    
                             <!-- <input type="hidden" id="pagoInscripcion" name="pagoInscripcion">-->
@@ -312,7 +312,7 @@
                         <label for="">Total a pagar:</label>
                         <div class="input-group">
                           <div class="input-group-prepend">
-                              <span class="input-group-text">$</span>  
+                              <span class="input-group-text">L.</span>  
                           </div>
                           <input type="text" class="form-control float-right text-right totalPagar" name="nuevoTotalCliente" value="" readonly>  
                          </div>
@@ -421,8 +421,19 @@
                       <label>Sexo</label>
                       <select class="form-control" name="editarSexo" style="width: 100%;" required>
                         <option value="" id="editarSexo"></option>
-                        <option value="M">Masculino</option>
-                        <option value="F">Femenino</option>
+                        <?php 
+                            $tabla = "tbl_sexo";
+                            $item = 'estado';
+                            $valor = 1;
+                            $all = true;
+
+                            $sexo = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all);
+
+                            foreach ($sexo as $key => $value) { ?>
+                                <option value="<?php echo $value['id_sexo']?>"><?php echo $value['sexo']?></option>        
+                            <?php 
+                            }
+                        ?>
                       </select>
                     </div>       
                   </div>
