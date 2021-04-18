@@ -1190,7 +1190,7 @@ $(document).on("click", ".btnActivarDocumento", function(){
 ACTIVAR PREGUNTA
 ========================================*/
 $(document).on("click", ".btnActivarPregunta", function(){
-
+/*
     let idActivarDinamico = $(this).attr("idPregunta");
     let estadoDinamico = $(this).attr("estadoPregunta");
     let tablaDinamica = 'tbl_preguntas';
@@ -1217,6 +1217,7 @@ $(document).on("click", ".btnActivarPregunta", function(){
      } 
 
     }) 
+    */
 
     if(estadoPregunta == 0){
         $(this).removeClass('btn-success');

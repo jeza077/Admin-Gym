@@ -127,6 +127,7 @@ class AjaxMantenimiento{
     /*=============================================
             ACTIVAR PREGUNTA
     ==============================================*/
+    /*
     public $estadoDinamico;
     public $idActivarDinamico; 
     public $tablaDinamica;
@@ -152,7 +153,7 @@ class AjaxMantenimiento{
         echo json_encode($respuesta);
 
     }
-
+    */
 
 
     /*========================================
