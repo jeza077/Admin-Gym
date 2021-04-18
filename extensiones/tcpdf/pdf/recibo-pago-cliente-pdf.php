@@ -21,6 +21,7 @@ class imprimirReciboPagoCliente{
 
 	
 	public function traerImpresionFactura(){
+		date_default_timezone_set("America/Tegucigalpa");
 
 		$fechaHoy = date('Y-m-d H:i:s');
 

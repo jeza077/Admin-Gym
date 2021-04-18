@@ -30,7 +30,10 @@ class PDF extends TCPDF{
     // public $fechaFin;
 
     public function Header() {
-           $item="parametro";
+
+        date_default_timezone_set("America/Tegucigalpa");
+    
+        $item="parametro";
         $valor="ADMIN_NOMBRE_EMPRESA";
 
         $nombreEmpresa = ControladorUsuarios::ctrMostrarParametros($item, $valor);

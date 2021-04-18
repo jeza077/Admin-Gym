@@ -5,7 +5,7 @@ require_once "../../../modelos/usuarios.modelo.php";
 require_once('../../../controladores/clientes.controlador.php');
 require_once "../../../modelos/clientes.modelo.php";
 require_once('../examples/tcpdf_include.php');
-date_default_timezone_set("America/Tegucigalpa");
+//date_default_timezone_set("America/Tegucigalpa");
 
 
 session_start();
@@ -19,6 +19,8 @@ class PDF extends TCPDF{
     
     // Header de la pagina
     public function Header() {
+
+        date_default_timezone_set("America/Tegucigalpa");
 
         $item="parametro";
         $valor="ADMIN_NOMBRE_EMPRESA";

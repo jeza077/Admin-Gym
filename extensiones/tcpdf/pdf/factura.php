@@ -19,6 +19,7 @@ public $codigo;
 public function traerImpresionFactura(){
 
 //TRAEMOS LA INFORMACIÓN DE LA VENTA
+date_default_timezone_set("America/Tegucigalpa");
 
 $itemVenta = "codigo";
 $valorVenta = $this->codigo;
