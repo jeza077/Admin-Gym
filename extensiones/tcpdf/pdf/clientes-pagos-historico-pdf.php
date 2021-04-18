@@ -11,7 +11,7 @@ session_start();
 
 $descripcionEvento = "".$_SESSION['usuario']." Generó reporte pdf de clientes pagos histórico";
 $accion = "Generar";
-$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION['id_usuario'], 5, $accion,
+$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION['id_usuario'], 7, $accion,
 $descripcionEvento);
 
 class PDF extends TCPDF{
