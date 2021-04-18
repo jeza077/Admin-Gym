@@ -10,7 +10,7 @@
                 <button class="btn btn-orange float-right"  data-toggle="modal" data-target="#modalNuevoObjeto">
                   Nuevo objeto      
                 </button>
-                <button class="btn btn-danger btnExportarPreguntas float-right mr-3 ">
+                <button class="btn btn-danger btnExportarObjetos float-right mr-3 ">
                 Exportar PDF      
                </button>
           </div>

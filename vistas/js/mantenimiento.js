@@ -1122,6 +1122,11 @@ exportarPdf('.btnExportarInscripcion', 'inscripcion');
 exportarPdf('.btnExportarMatricula', 'matricula');
 
 //** ------------------------------------*/
+//         IMPRIMIR PDF DOCUMENTO
+// --------------------------------------*/ 
+exportarPdf('.btnExportarDocumento', 'documentos');
+
+//** ------------------------------------*/
 //         IMPRIMIR PDF DESCUENTO
 // --------------------------------------*/ 
 exportarPdf('.btnExportarDescuento', 'descuento');
@@ -1137,9 +1142,19 @@ exportarPdf('.btnExportarRol', 'rol');
 exportarPdf('.btnExportarPreguntas', 'preguntas-seguridad');
 
 //** ------------------------------------*/
-//         IMPRIMIR PDF Parametros
+//         IMPRIMIR PDF PARAMETROS
 // --------------------------------------*/ 
 exportarPdf('.btnExportarParametro', 'parametros');
+
+//** ------------------------------------*/
+//         IMPRIMIR PDF PROVEEDORES
+// --------------------------------------*/ 
+exportarPdf('.btnExportarProveedores', 'proveedores');
+
+//** ------------------------------------*/
+//         IMPRIMIR PDF OBJETOS
+// --------------------------------------*/ 
+exportarPdf('.btnExportarObjetos', 'objetos');
 
 //** ------------------------------------*/
 //       IMPRIMIR PDF PERMISOS-ROL

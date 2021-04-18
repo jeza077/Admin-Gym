@@ -77,6 +77,48 @@ class ModeloGlobales{
 			
 		} 	
     }
+
+    /*=============================================
+			RANGO DINAMICO PROVEEDOR
+	=============================================*/
+	static public function mdlRangoObjetos($tabla, $rango){
+	
+		if($rango == null){
+
+			$stmt = Conexion::conectar() ->prepare("SELECT * FROM $tabla");
+            $stmt-> execute();
+			return $stmt ->fetchAll();
+			
+		} else {
+
+			$stmt = Conexion::conectar() ->prepare("SELECT * FROM $tabla WHERE objeto LIKE '%$rango%' OR link_objeto LIKE '%$rango%' OR icono LIKE '%$rango%'");
+
+            $stmt-> execute();
+			return $stmt ->fetchAll();
+			
+		} 	
+    }
+    
+    /*=============================================
+			RANGO DINAMICO PROVEEDOR
+	=============================================*/
+	static public function mdlRangoProveedor($tabla, $rango){
+	
+		if($rango == null){
+
+			$stmt = Conexion::conectar() ->prepare("SELECT * FROM $tabla");
+            $stmt-> execute();
+			return $stmt ->fetchAll();
+			
+		} else {
+
+			$stmt = Conexion::conectar() ->prepare("SELECT * FROM $tabla WHERE nombre LIKE '%$rango%' OR correo LIKE '%$rango%' OR telefono LIKE '%$rango%'");
+
+            $stmt-> execute();
+			return $stmt ->fetchAll();
+			
+		} 	
+    }
     
 
     /*=============================================
@@ -93,6 +135,27 @@ class ModeloGlobales{
 		} else {
 
 			$stmt = Conexion::conectar() ->prepare("SELECT * FROM $tabla WHERE tipo_matricula LIKE '%$rango%' OR precio_matricula LIKE '%$rango%'");
+
+            $stmt-> execute();
+			return $stmt ->fetchAll();
+			
+		} 	
+    }
+
+    /*=============================================
+			RANGO DINAMICO DOCUMENTO
+	=============================================*/
+	static public function mdlRangoDocumento($tabla, $rango){
+	
+		if($rango == null){
+
+			$stmt = Conexion::conectar() ->prepare("SELECT * FROM $tabla");
+            $stmt-> execute();
+			return $stmt ->fetchAll();
+			
+		} else {
+
+			$stmt = Conexion::conectar() ->prepare("SELECT * FROM $tabla WHERE tipo_documento LIKE '%$rango%'");
 
             $stmt-> execute();
 			return $stmt ->fetchAll();

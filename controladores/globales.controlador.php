@@ -229,6 +229,30 @@ class ControladorGlobales{
 		
 		return $respuesta;
     }
+
+    /*=============================================
+    RANGO DINAMICO PROVEEDOR
+    =============================================*/
+	static public function ctrRangoObjetos($rango){
+
+		$tabla = 'tbl_objetos';
+		
+		$respuesta = ModeloGlobales::mdlRangoObjetos($tabla, $rango);
+		
+		return $respuesta;
+    }
+
+    /*=============================================
+    RANGO DINAMICO PROVEEDOR
+    =============================================*/
+	static public function ctrRangoProveedor($rango){
+
+		$tabla = 'tbl_proveedores';
+		
+		$respuesta = ModeloGlobales::mdlRangoProveedor($tabla, $rango);
+		
+		return $respuesta;
+    }
   
     /*=============================================
     RANGO DINAMICO MATRICULA
@@ -238,6 +262,18 @@ class ControladorGlobales{
 		$tabla = 'tbl_matricula';
 		
 		$respuesta = ModeloGlobales::mdlRangoMatricula($tabla, $rango);
+		
+		return $respuesta;
+	}
+
+    /*=============================================
+    RANGO DINAMICO DOCUMENTOS
+    =============================================*/
+	static public function ctrRangoDocumento($rango){
+
+		$tabla = 'tbl_documento';
+		
+		$respuesta = ModeloGlobales::mdlRangoDocumento($tabla, $rango);
 		
 		return $respuesta;
 	}
