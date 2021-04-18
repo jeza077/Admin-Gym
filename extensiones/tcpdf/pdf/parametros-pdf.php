@@ -192,7 +192,7 @@ foreach ($parametross as $key => $value) {
         $pdf->SetFont('times', '', 13);
         $pdf->SetFillColor(225, 235, 255);
         $pdf->Cell(15, 5, 'No', 1, 0, 'C', 1);
-        $pdf->MultiCell(100, 5, 'Parametros', 1, 'C', 1, 0, '', '', true);
+        $pdf->MultiCell(100, 5, 'Parámetros', 1, 'C', 1, 0, '', '', true);
         $pdf->MultiCell(70, 5, 'Valor', 1, 'C', 0, 0, '', '', true);
         
     }

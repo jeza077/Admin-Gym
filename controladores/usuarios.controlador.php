@@ -117,7 +117,7 @@ class ControladorUsuarios{
 
 	static public function ctrIngresoUsuario(){
 
-		if(isset($_POST["ingUsuario"])){
+		if(isset($_POST["ingusuario"])){
 
 			if($_POST["ingUsuario"] === "" && $_POST["ingPassword"] === ""){
 				echo '<script>			
@@ -1204,7 +1204,7 @@ class ControladorUsuarios{
 						$descripcionEvento = "".$_SESSION["usuario"]." Actualizó el registro del usuario ".$datos["usuario"]."";
 						$accion = "Actualizar";
 			
-						$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 2,$accion, $descripcionEvento);
+						$bitacoraconsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 2,$accion, $descripcionEvento);
 			
 					
 
