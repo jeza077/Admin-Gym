@@ -128,7 +128,7 @@ MODAL NUEVO DESCUENTO
 
           <div class="form-group col-md-12">
             <label for="Descripcion">Porcentaje descuento</label>
-            <input type="textarea" class="form-control preciom sinCaracteres cantidadDecimal" name="nuevoValor" value="" placeholder="Ingresa el porcentaje" required>
+            <input type="textarea" class="form-control preciom sinCaracteres cantidadDecimal" name="nuevoValor" value="" placeholder="Ingrese el porcentaje" required>
           </div>
         </div>
 
