@@ -350,7 +350,7 @@ class ModeloUsuarios{
 
 		}else{
 
-			return false;
+			return $stmt->errorInfo();
 		
 		}
 

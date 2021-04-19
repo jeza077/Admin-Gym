@@ -112,7 +112,7 @@ $(document).on('click', '.btnEditarUsuario', function () {
             $('input[name=editarFechaNacimiento]').val(respuesta['fecha_nacimiento']);
             $('input[name=editarDireccion]').val(respuesta['direccion']);
             $('#editarSexo').html(respuesta['sexo']);
-            $('#editarSexo').val(respuesta['sexo']); 
+            $('#editarSexo').val(respuesta['id_sexo']); 
             $('input[name=editarUsuario]').val(respuesta['usuario']);
             $('#editarRol').html(respuesta['rol']);
             $('#editarRol').val(respuesta['id_rol']);

@@ -128,7 +128,7 @@ class ModeloPersonas{
 		$stmt->bindParam(":num_documento", $datos["numero_documento"], PDO::PARAM_STR);
 		$stmt->bindParam(":tipo_persona", $datos["tipo_persona"], PDO::PARAM_STR);
 		$stmt->bindParam(":fecha_nacimiento", $datos["fecha_nacimiento"], PDO::PARAM_STR);
-		$stmt->bindParam(":sexo", $datos["sexo"], PDO::PARAM_STR);
+		$stmt->bindParam(":sexo", $datos["sexo"], PDO::PARAM_INT);
 		$stmt->bindParam(":telefono", $datos["telefono"], PDO::PARAM_STR);
 		$stmt->bindParam(":direccion", $datos["direccion"], PDO::PARAM_STR);
 		$stmt->bindParam(":correo", $datos["email"], PDO::PARAM_STR);
@@ -140,7 +140,7 @@ class ModeloPersonas{
 
 		}else{
 
-			return false;
+			return $stmt->errorInfo();
 		
 		}
 

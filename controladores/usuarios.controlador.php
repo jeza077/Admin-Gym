@@ -192,9 +192,26 @@ class ControladorUsuarios{
 					}
 	
 					//   echo "<pre>";
-					// 	var_dump($permisos_objetos);
+						// var_dump(in_array("Dashboard", $permisos_objetos));
+						$totalLink = array();
+						foreach ($permisos_objetos as $key => $value) {
+							array_push($totalLink, $value['link']);
+							// var_dump($value['link']);
+						}
+
+						// $ruta = reset($totalLink);
+						// if((in_array("venta", $totalLink)))
+						$ruta = '';
+						if(reset($totalLink) == 'venta' || reset($totalLink) == 'mantenimiento' || reset($totalLink) == 'clientes' || reset($totalLink) == 'stock' ){
+							// echo 'si';
+							$ruta = next($totalLink);
+						} else {
+							// echo 'no';
+							$ruta = reset($totalLink);
+						}
+						// var_dump((in_array("venta", $totalLink)));
 					//   echo "</pre>";
-					
+						
 					//   return;
 					
 
@@ -273,6 +290,9 @@ class ControladorUsuarios{
 								$_SESSION["primerIngreso"] = $respuesta["primera_vez"];
 								$_SESSION['permisos'] = $permisos_objetos;
 
+								// var_dump($_SESSION['permisos']);
+								// return;
+
 								//* =====REGISTRAR FECHA Y HORA PARA SABER EL ULTIMO LOGIN ====== */
 
 								$fecha = date('Y-m-d');
@@ -309,7 +329,7 @@ class ControladorUsuarios{
 											confirmButtonColor: "#ff8303"
 										}).then((result)=>{
 											if(result.value){
-												window.location = "dashboard";
+												window.location = "'.$ruta.'";
 											}
 										});
 										</script>';
@@ -917,19 +937,20 @@ class ControladorUsuarios{
 	static public function ctrEditarUsuario($datos){
 
 		// return var_dump($datos);
-		// return;
+		// return $datos;
 
 		
 		if(isset($datos["usuario"])){
 			
 
-			if(preg_match('/^[A-Z]+$/', $datos["usuario"]) && preg_match('/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%.])\S{8,16}$/', $datos["password_nueva"])){
+			if(preg_match('/^[A-Z]+$/', $datos["usuario"])){
+			// return $datos;
 
 				$emailUsuario = $datos["email"];
 				$contraSinEncriptar = $datos["password_nueva"];
 				$nombre = $datos["nombre"];
 
-
+				/*
 				//AQUI INICIA LA PARTE DE HISTORIAL DE PASSWORD--------------------------------------------------
 				$tabla='tbl_historial_pass';
 				$item= 'pass';
@@ -1002,7 +1023,8 @@ class ControladorUsuarios{
 									});
 								</script>';
 				}
-					//--------------------------------------------------------------------------------------------------------
+				*/
+				// 	--------------------------------------------------------------------------------------------------------
 
 
 					/*=============================================
@@ -1114,10 +1136,11 @@ class ControladorUsuarios{
 
 					$respuestaEmpleado = ModeloUsuarios::mdlEditarUsuario($tabla, $datos);
 
-					// return var_dump($respuestaEmpleado);
+					return ($respuestaEmpleado);
 
 					if($respuestaEmpleado == true){
 
+						/*
 						if($longitudRecursiva>10){
 
 							if ($fecha1<$fecha2 and $fecha1<$fecha3 and $fecha1<$fecha4 
@@ -1186,7 +1209,8 @@ class ControladorUsuarios{
 							$respuestaEliminar = ModeloUsuarios::mdlEliminarHistorialPassword($tabla,$item,$fechaAntigua);
 						
 						}
-
+						
+						/*
 						//INSERTAR UN PASSWORD NUEVO
 
 						$tabla1 = "tbl_usuarios";
@@ -1199,13 +1223,13 @@ class ControladorUsuarios{
 						$password = crypt($datos['password_nueva'], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
 
 						$respuestaPass = ModeloUsuarios::mdlHistorialPassword($tabla,$idUsuario, $password);
-
+						*/
 					
 						$descripcionEvento = "".$_SESSION["usuario"]." Actualizó el registro del usuario ".$datos["usuario"]."";
 						$accion = "Actualizar";
 			
 						$bitacoraconsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 2,$accion, $descripcionEvento);
-			
+						
 					
 
 						// return true;
