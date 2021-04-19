@@ -105,7 +105,7 @@
   
                       echo '<td>'.$value["rol"].'</td>';
   
-                          if($value['estado'] != 0){
+                          if($value['estado_usuario'] != 0){
                             echo '<td><button class="btn btn-success btn-md btnActivar" idUsuario="'.$value["id_usuario"].'" estadoUsuario="0">Activado</button></td>';
                           } else {
                             echo '<td><button class="btn btn-danger btn-md btnActivar" idUsuario="'.$value["id_usuario"].'" estadoUsuario="1">Desactivado</button></td>';

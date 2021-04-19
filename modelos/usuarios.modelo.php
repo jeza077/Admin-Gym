@@ -116,7 +116,7 @@ class ModeloUsuarios{
 
 		if($item != null){
 
-			$stmt = Conexion::conectar()->prepare("SELECT p.*, u.*, s.*, d.tipo_documento, r.rol FROM $tabla1 AS p\n"
+			$stmt = Conexion::conectar()->prepare("SELECT p.*, u.*, u.estado as estado_usuario, s.*, d.tipo_documento, r.rol FROM $tabla1 AS p\n"
 			. " INNER JOIN $tabla2 AS u ON p.id_personas = u.id_persona\n"
 			. " INNER JOIN tbl_sexo AS s ON p.sexo = s.id_sexo\n"
 			. " INNER JOIN tbl_documento AS d ON p.id_documento = d.id_documento\n"
@@ -129,7 +129,7 @@ class ModeloUsuarios{
 
 		} else {
 
-			$stmt = Conexion::conectar()->prepare("SELECT p.*, u.*, s.*, d.tipo_documento, r.rol FROM $tabla1 AS p\n"
+			$stmt = Conexion::conectar()->prepare("SELECT p.*, u.*, u.estado as estado_usuario, s.*, d.tipo_documento, r.rol FROM $tabla1 AS p\n"
 					. " INNER JOIN $tabla2 AS u ON p.id_personas = u.id_persona\n"
 					. " INNER JOIN tbl_sexo AS s ON p.sexo = s.id_sexo\n"
 					. " INNER JOIN tbl_documento AS d ON p.id_documento = d.id_documento\n"
