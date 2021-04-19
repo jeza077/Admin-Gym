@@ -1048,7 +1048,7 @@ function cerrarModal() {
             showConfirmButton: true,
             showCancelButton: true,
             showConfirmButton: true,
-            confirmButtonText: "Si, cerrar",
+            confirmButtonText: "Sí, cerrar",
             cancelButtonText: "Cancelar",
             cancelButtonColor: "#dc3545"
         }).then((result)=>{

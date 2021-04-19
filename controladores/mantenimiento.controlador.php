@@ -453,7 +453,7 @@ class ControladorMantenimientos {
             Swal.fire({
   
               icon: "success",
-              title: "¡Inscripcion creada exitosamente!",
+              title: "¡Inscripción creada exitosamente!",
               showConfirmButton: true,
               confirmButtonText: "Cerrar",
               closeOnConfirm: false
@@ -482,7 +482,7 @@ class ControladorMantenimientos {
             Swal.fire({
   
               icon: "error",
-              title: "¡La inscrpcion no puede ir vacío o llevar caracteres especiales!",
+              title: "¡La inscripción no puede ir vacía o llevar caracteres especiales!",
               showConfirmButton: true,
               confirmButtonText: "Cerrar",
               closeOnConfirm: false
@@ -548,7 +548,7 @@ class ControladorMantenimientos {
             Swal.fire({
   
               icon: "success",
-              title: "Objeto creado exitosamente!",
+              title: "¡Objeto creado exitosamente!",
               showConfirmButton: true,
               confirmButtonText: "Cerrar",
               closeOnConfirm: false
@@ -716,7 +716,7 @@ class ControladorMantenimientos {
           // var_dump($respuesta);
           if($respuesta == true){
             
-            $descripcionEvento = "".$_SESSION["usuario"]." Agregó una nueva matricula del gimnasio llamada ".$_POST["nuevoMatricula"]."";
+            $descripcionEvento = "".$_SESSION["usuario"]." Agregó una nueva matrícula del gimnasio llamada ".$_POST["nuevoMatricula"]."";
             $accion = "Nuevo";
 
             $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 22,$accion, $descripcionEvento);  
@@ -726,7 +726,7 @@ class ControladorMantenimientos {
             Swal.fire({
   
               icon: "success",
-              title: "¡Matricula creada exitosamente!",
+              title: "¡Matrícula creada exitosamente!",
               showConfirmButton: true,
               confirmButtonText: "Cerrar",
               closeOnConfirm: false
@@ -748,7 +748,7 @@ class ControladorMantenimientos {
             echo'<script>
                 Swal.fire({
                       icon: "error",
-                      title: "¡Algo salió mal. Intenta de nuevo!",
+                      title: "¡Algo salió mal, intente de nuevo!",
                       showConfirmButton: true,
                       confirmButtonText: "Cerrar",
                       closeOnConfirm: false
@@ -772,7 +772,7 @@ class ControladorMantenimientos {
             Swal.fire({
   
               icon: "error",
-              title: "¡La matricula no puede ir vacío o llevar caracteres especiales!",
+              title: "¡La matrícula no puede ir vacía o llevar caracteres especiales!",
               showConfirmButton: true,
               confirmButtonText: "Cerrar",
               closeOnConfirm: false
@@ -889,7 +889,7 @@ class ControladorMantenimientos {
     
             Swal.fire({
                   icon: "error",
-                  title: "¡Algo salió mal. Intenta de nuevo!",
+                  title: "¡Algo salió mal, intente de nuevo!",
                   showConfirmButton: true,
                   confirmButtonText: "Cerrar",
                   closeOnConfirm: false
@@ -986,7 +986,7 @@ class ControladorMantenimientos {
       
               Swal.fire({
                   icon: "success",
-                    title: "Género creado exitosamente!",
+                    title: "¡Género creado exitosamente!",
                     showConfirmButton: true,
                     confirmButtonText: "Cerrar",
                     closeOnConfirm: false
@@ -1006,7 +1006,7 @@ class ControladorMantenimientos {
       
               Swal.fire({
                     icon: "error",
-                    title: "Ocurrio un error. Intente de nuevo!",
+                    title: "¡Ocurrió un error, intente de nuevo!",
                     showConfirmButton: true,
                     confirmButtonText: "Cerrar",
                     closeOnConfirm: false
@@ -1027,7 +1027,7 @@ class ControladorMantenimientos {
               Swal.fire({
 
                 icon: "error",
-                title: "¡No puede ir vacío, escrito en minusculas o llevar caracteres especiales!",
+                title: "¡No puede ir vacío, escrito en minúsculas o llevar caracteres especiales!",
                 showConfirmButton: true,
                 confirmButtonText: "Cerrar",
                 closeOnConfirm: false
@@ -1194,7 +1194,7 @@ class ControladorMantenimientos {
       
               Swal.fire({
                     icon: "error",
-                    title: "Opps, ocurrio un problema. Intente de nuevo.",
+                    title: "Ocurrio un problema, intente de nuevo.",
                     showConfirmButton: true,
                     confirmButtonText: "Cerrar",
                     closeOnConfirm: false
@@ -1380,7 +1380,7 @@ class ControladorMantenimientos {
     
         if($respuesta == true){
             
-            $descripcionEvento = "".$_SESSION["usuario"]." Actualizó el tipo de matricula ".$_POST["editarMatricula"]."";
+            $descripcionEvento = "".$_SESSION["usuario"]." Actualizó el tipo de matrícula ".$_POST["editarMatricula"]."";
             $accion = "Actualizar";
             $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 22,$accion, $descripcionEvento);
 
@@ -1532,7 +1532,7 @@ class ControladorMantenimientos {
     
             Swal.fire({
                  icon: "success",
-                  title: "Descuento editado correctamente",
+                  title: "¡Descuento editado correctamente!",
                   showConfirmButton: true,
                   confirmButtonText: "Cerrar",
                   closeOnConfirm: false
@@ -1603,7 +1603,7 @@ class ControladorMantenimientos {
       
               Swal.fire({
                     icon: "success",
-                    title: "Género editado correctamente",
+                    title: "¡Género editado correctamente!",
                     showConfirmButton: true,
                     confirmButtonText: "Cerrar",
                     closeOnConfirm: false
@@ -1623,7 +1623,7 @@ class ControladorMantenimientos {
       
               Swal.fire({
                     icon: "error",
-                    title: "Opps, algo salio mal, intenta de nuevo!",
+                    title: "¡Algo salió mal, intente de nuevo!",
                     showConfirmButton: true,
                     confirmButtonText: "Cerrar",
                     closeOnConfirm: false
@@ -1644,7 +1644,7 @@ class ControladorMantenimientos {
             Swal.fire({
   
               icon: "error",
-              title: "¡No puede ir vacío, escrito en minusculas o llevar caracteres especiales!",
+              title: "¡No puede ir vacío, escrito en minúsculas o llevar caracteres especiales!",
               showConfirmButton: true,
               confirmButtonText: "Cerrar",
               closeOnConfirm: false
@@ -1701,7 +1701,7 @@ class ControladorMantenimientos {
       
               Swal.fire({
                     icon: "success",
-                    title: "Documento editado correctamente",
+                    title: "¡Documento editado correctamente!",
                     showConfirmButton: true,
                     confirmButtonText: "Cerrar",
                     closeOnConfirm: false
@@ -1798,7 +1798,7 @@ class ControladorMantenimientos {
       
               Swal.fire({
                     icon: "success",
-                    title: "Pregunta editada correctamente",
+                    title: "¡Pregunta editada correctamente!",
                     showConfirmButton: true,
                     confirmButtonText: "Cerrar",
                     closeOnConfirm: false
@@ -1896,7 +1896,7 @@ class ControladorMantenimientos {
       
               Swal.fire({
                   icon: "success",
-                    title: "Proveedor editado correctamente!",
+                    title: "¡Proveedor editado correctamente!",
                     showConfirmButton: true,
                     confirmButtonText: "Cerrar",
                     closeOnConfirm: false
@@ -2107,7 +2107,7 @@ class ControladorMantenimientos {
 
             Swal.fire({
                   icon: "success",
-                  title: "Matrícula eliminada exitosamente!",
+                  title: "¡Matrícula eliminada exitosamente!",
                   showConfirmButton: true,
                   confirmButtonText: "Cerrar",
                   closeOnConfirm: false
@@ -2330,7 +2330,7 @@ class ControladorMantenimientos {
             echo '<script>
                 Swal.fire({
                     title: "¡No se pudo borrar el género!",
-                    text: "No se puede borrar ya que esta asociado con otros datos",
+                    text: "No se puede borrar ya que está asociado con otros datos",
                     icon: "error",
                     heightAuto: false
                 }).then((result)=>{
@@ -2347,7 +2347,7 @@ class ControladorMantenimientos {
 
             Swal.fire({
             icon: "error",
-            title: "Opps, algo salio mal, intenta de nuevo!",
+            title: "¡Algo salió mal, intente de nuevo!",
             showConfirmButton: true,
             confirmButtonText: "Cerrar",
             closeOnConfirm: false
@@ -2373,7 +2373,7 @@ class ControladorMantenimientos {
 
             Swal.fire({
                   icon: "success",
-                  title: "Género eliminado exitosamente!",
+                  title: "¡Género eliminado exitosamente!",
                   showConfirmButton: true,
                   confirmButtonText: "Cerrar",
                   closeOnConfirm: false

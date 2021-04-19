@@ -240,8 +240,8 @@ $(document).on('click', '.btnEliminarBitacora', function () {
    
 
     Swal.fire({
-        title: "¿Estas seguro de borrar el registro de bitacora?",
-        text: "¡Si no lo estas, puedes cancelar la accion!",
+        title: "¿Está seguro de borrar el registro de bitácora?",
+        text: "¡Si no lo esta, puede cancelar la acción!",
         icon: "info",
         showCancelButton: true,
         cancelButtonColor: "#DC3545",

@@ -29,6 +29,7 @@ class imprimirFactura{
 
 	
 	public function traerImpresionFactura(){
+		date_default_timezone_set("America/Tegucigalpa");
 
 		$item="parametro";
 		$valor="ADMIN_NOMBRE_EMPRESA";

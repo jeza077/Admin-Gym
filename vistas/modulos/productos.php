@@ -147,7 +147,7 @@
                     <img class="img-thumbnail previsualizar mr-2" src="vistas/img/productos/default/product.png" alt="imagen-del-usuario" width="100px">
                     <div class="custom-file">
                       <input type="file" class="custom-file-input nuevaFotoProducto" id="nuevaFotoProducto" name="nuevaFotoProducto">
-                      <label class="custom-file-label" for="nuevaFotoProducto">Escoger imagen</label>
+                      <label class="custom-file-label" for="nuevaFotoProducto"></label>
                     </div>
                   </div>
                       <p class="p-foto help-block ml-4">Peso máximo de la imagen 2 MB</p>
@@ -231,7 +231,7 @@
                     <input type="hidden" name="imagenActual" id=imagenActual>
                     <div class="custom-file">
                         <input type="file" class="custom-file-input nuevaFotoProducto" name="editarFotoProducto">
-                        <label class="custom-file-label">Escoger imagen</label>
+                        <label class="custom-file-label"></label>
                     </div>
                     </div>
                         <p class="p-foto help-block ml-4">Peso máximo de la foto 2 MB</p>

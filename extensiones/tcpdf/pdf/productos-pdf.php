@@ -10,6 +10,8 @@ class PDF extends TCPDF{
     // Header de la pagina
     public function Header() {
         // Logo
+        date_default_timezone_set("America/Tegucigalpa");
+
         $image_file = K_PATH_IMAGES.'logo_gym.png';
         $this->Image($image_file, 40, 10, 25, '', 'PNG', '', 'T', false, 300, '', false, false, 0, false, false, false);
         

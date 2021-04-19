@@ -16,6 +16,8 @@ class PDF extends TCPDF{
     
     // Header de la pagina
     public function Header() {
+        date_default_timezone_set("America/Tegucigalpa");
+
         $item="parametro";
         $valor="ADMIN_NOMBRE_EMPRESA";
 

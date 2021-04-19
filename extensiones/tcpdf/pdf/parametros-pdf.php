@@ -21,6 +21,8 @@ class PDF extends TCPDF{
     // Header de la pagina
     public function Header() {
         // Logo
+        date_default_timezone_set("America/Tegucigalpa");
+
         $item="parametro";
         $valor="ADMIN_NOMBRE_EMPRESA";
 
@@ -86,7 +88,7 @@ class PDF extends TCPDF{
         $this->SetFont('helvetica', 'I', 8);
         // Page number
 
-        date_default_timezone_set("America/Tegucigalpa");
+       // date_default_timezone_set("America/Tegucigalpa");
         $fecha = date('Y-m-d H:i:s');
         $this->Cell(0, 10, ''.$fecha.'', 0, false, 'C', 0, '', 0, false, 'T', 'M');
         $this->Cell(0, 10, 'Página '.$this->getAliasNumPage().'/'.$this->getAliasNbPages(), 0, false, 'C', 0, '', 0, false, 'T', 'M');

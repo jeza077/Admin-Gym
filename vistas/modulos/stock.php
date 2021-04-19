@@ -286,7 +286,7 @@
                           <img class="img-thumbnail previsualizar mr-2" src="vistas/img/usuarios/default/anonymous.png" alt="imagen-del-usuario" width="100px">
                           <div class="custom-file">
                             <input type="file" class="custom-file-input nuevaFotoProducto" id="exampleInputFile" name="nuevaFotoProducto">
-                            <label class="custom-file-label" for="exampleInputFile">Escoger imagen</label>
+                            <label class="custom-file-label" for="exampleInputFile"></label>
                           </div>
                         </div>
                             <p class="p-foto help-block ml-4">Peso máximo de la imagen 2 MB</p>

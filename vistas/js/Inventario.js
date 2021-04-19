@@ -336,7 +336,7 @@ $(document).on('blur', '#nuevoProductoMaximo', function () {
 
     if(valProdMaximo <= valProdMinimo){
         
-        padre.before('<div class="alert alert-danger fade show mt-2" role="alert"><i class="icon fas fa-ban"></i>El producto maximo no puede ser menor o igual al producto minimo.</div>');
+        padre.before('<div class="alert alert-danger fade show mt-2" role="alert"><i class="icon fas fa-ban"></i>El producto máximo no puede ser menor o igual al producto mínimo.</div>');
         setTimeout(function () {
             $('.alert').remove();
         }, 3000)

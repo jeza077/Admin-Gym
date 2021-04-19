@@ -281,7 +281,7 @@ $(document).on('click', '.btnGuardarProveedor', function (e) {
             if(respuesta == 'true'){
                 Swal.fire({
                     icon: "success",
-                    title: "Proveedor creado exitosamente!",
+                    title: "¡Proveedor creado exitosamente!",
                     showConfirmButton: true,
                     confirmButtonText: "Cerrar",
                     closeOnConfirm: false
