@@ -1006,14 +1006,24 @@ function selectDinamico() {
 
             if(respuesta) {
                 // $('#nuevoProveedor').addClass('select2');
-                $("#selectProveedor").prepend("<select class='form-control select2' id='nuevoProveedor' style='width: 100%;' name='nuevoProveedor'></select>");
-                
-                $("#nuevoProveedor").append("<option selected='selected'>Seleccionar...</option>");
 
-                for(var i in respuesta){
-                    // console.log(respuesta[i][1]);
-                    $("#nuevoProveedor").append("<option value="+respuesta[i]['id_proveedor']+">"+respuesta[i]['nombre']+"</option>");
-                }
+                
+                // if($("#selectProveedor").length > 0){
+
+                    // $("#selectProveedor").remove("<select class='form-control select2' id='nuevoProveedor' style='width: 100%;' name='nuevoProveedor'></select>");
+
+                    $("#selectProveedor").prepend("<select class='form-control select2' id='nuevoProveedor' style='width: 100%;' name='nuevoProveedor'></select>");
+                    
+                    $("#nuevoProveedor").append("<option selected='selected'>Seleccionar...</option>");
+    
+                    for(var i in respuesta){
+                        // console.log(respuesta[i][1]);
+                        $("#nuevoProveedor").append("<option value="+respuesta[i]['id_proveedor']+">"+respuesta[i]['nombre']+"</option>");
+                    }
+                // } else {
+
+                // }
+                
             }
         }    
     });

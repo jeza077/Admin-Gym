@@ -42,8 +42,8 @@ class ControladorInventario{
     MOSTRAR PROVEEDORES
     =============================================*/
     static public function ctrMostrarProveedores($tabla, $item, $valor){
-            $respuesta = ModeloInventario::mdlMostrarProveedores($tabla, $item, $valor);
-            return $respuesta;
+        $respuesta = ModeloInventario::mdlMostrarProveedores($tabla, $item, $valor);
+        return $respuesta;
     }
 
 

@@ -128,8 +128,10 @@ MODAL AGREGAR NUEVO PROVEEDOR
 
           <div class="form-group col-md-12">
             <label for="Descripcion">Correo</label>
-            <input type="email" class="form-control email" name="nuevoCorreo" value="" placeholder="Ingrese el correo" required>
+            <input type="email" class="form-control emailProv" name="nuevoCorreo" value="" placeholder="Ingrese el correo" required>
           </div>
+
+          <div class="alertaEmailProv"></div>
 
           <div class="form-group col-md-12">
             <label for="Descripcion">Teléfono</label>

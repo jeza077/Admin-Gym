@@ -88,8 +88,7 @@ class AjaxUsuarios{
 
     /*=============================================
             REVISAR CORREO
-    =============================================*/
-    
+    =============================================*/ 
     public $verificarEmail;
 
     public function ajaxVerificarEmail(){
@@ -99,6 +98,28 @@ class AjaxUsuarios{
         $valor = $this->verificarEmail;
         
         $respuesta = ControladorUsuarios::ctrMostrarUsuarios($tabla, $item, $valor);
+        // echo "<pre>";
+        // var_dump($respuesta);
+        // echo "</pre>";
+        // return;
+
+        echo json_encode($respuesta);
+    }
+
+    /*=============================================
+            REVISAR CORREO PROVEEDOR
+    =============================================*/
+    
+    public $verificarEmailProv;
+
+    public function ajaxVerificarEmailProv(){
+
+        $tabla = "tbl_proveedores";
+        $item = "correo";
+        $valor = $this->verificarEmailProv;
+        $all = null;
+        
+        $respuesta = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all);
         // echo "<pre>";
         // var_dump($respuesta);
         // echo "</pre>";
@@ -258,6 +279,15 @@ if(isset($_POST["passAnterior"])){
     $valUsuario = new AjaxUsuarios();
     $valUsuario->passAnterior = $_POST["passAnterior"];
     $valUsuario->ajaxPassAnterior();
+}
+
+/*=============================================
+    REVISAR CORREO PROVEEDORES
+=============================================*/
+if(isset($_POST["verificarEmailProv"])){
+    $valProv = new AjaxUsuarios();
+    $valProv->verificarEmailProv = $_POST["verificarEmailProv"];
+    $valProv->ajaxverificarEmailProv();
 }
 
 /*=============================================

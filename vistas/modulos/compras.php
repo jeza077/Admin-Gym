@@ -108,17 +108,20 @@
               </div>
             </div>
 
-            <!-- <div class="form-row"> -->
+            <div class="form-row">
               <div class="form-group col-md-12">
                 <label for="stock">Cantidad</label>
                 <input type="number" min="0" class="form-control stock longitudCantidad" id="nuevoCantidad" name="nuevoCantidad" placeholder="Ingrese cantidad" min="0" required class="fa fa-arrow-up" oninput="validity.valid||(value='');"></i></span>
               </div>
+            </div>
 
+            <div class="form-row">
               <div class="form-group col-md-12">
                 <label for="stock">Precio de compra</label>
                 <input type="number" class="form-control stock longitudCantidad" min="0" id="nuevoPrecio" name="nuevoPrecio" placeholder="Ingrese precio" min="0" required class="fa fa-arrow-up" oninput="validity.valid||(value='');"></i></span>
               </div>
-            <!-- </div> -->
+            </div>
+            
 
               <div class="form-group mt-4 float-right">
                 <button type="" class="btn btn-primary">Guardar</button>
@@ -270,8 +273,10 @@
 
             <div class="form-group col-md-12">
               <label for="Descripcion">Correo</label>
-              <input type="email" class="form-control email" name="nuevoCorreo" value="" placeholder="Ingrese correo" required>
+              <input type="email" class="form-control emailProv" name="nuevoCorreo" value="" placeholder="Ingrese correo" required>
             </div>
+
+            <div class="alertaEmailProv"></div>
 
             <div class="form-group col-md-12">
               <label for="Descripcion">Teléfono</label>

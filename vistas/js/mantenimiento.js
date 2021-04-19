@@ -1309,3 +1309,72 @@ $(document).ready(function () {
         }
     });
 });
+
+//*==========================================
+//*	   FUNCION PARA VALIDAR EMAILPROVEEDOR
+//*===========================================
+function validarEmailProv(selector, alerta) {
+	selector.blur(function() {
+        $('.alert').remove();
+
+		var emailIngresado = selector.val();
+
+		var datos = new FormData();
+		datos.append("verificarEmailProv", emailIngresado);
+	
+		$.ajax({
+	
+			url:"ajax/usuarios.ajax.php",
+			method: "POST",
+			data: datos,
+			cache: false,
+			contentType: false,
+			processData: false,  
+			dataType: "json",
+			success: function(respuesta) {
+				// console.log(respuesta);
+	
+				if(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.([a-zA-Z]{2,4})+$/.test(emailIngresado) && respuesta){
+                
+                    alerta.append('<div class="alert alert-danger fade show mt-2" role="alert"><i class="icon fas fa-ban"></i>Email ya existente, ingrese uno diferente.</div>');
+                    
+					// Swal.fire({
+					// 	title: "Email ya existente, ingrese uno diferente.",
+					// 	icon: "error",
+					// 	// background: "rgb(255 75 75 / 85%)",
+					// 	toast: true,
+					// 	position: "top",
+					// 	showConfirmButton: false,
+					// 	timer: 3000
+					// });
+					
+					//E inmeditamente Limpiamos el input
+					// selector.val("");
+					selector.focus();
+				} else if(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.([a-zA-Z]{2,4})+$/.test(emailIngresado) && respuesta == false) {
+					selector.addClass('border-valid').removeClass('border-invalid');
+					// setTimeout(function () {
+					// 	selector.removeClass('border-valid');
+					// }, 3000)
+				} else if(emailIngresado == ""){
+					selector.removeClass('border-valid border-invalid');
+				} else {
+					selector.addClass('border-invalid').removeClass('border-valid');
+					selector.after('<div class="alert alert-warning mt-2">Correo inválido, intente de nuevo.</div>');
+					setTimeout(function () {
+						$('.alert').remove();
+					}, 3000)
+					
+					//E inmeditamente Limpiamos el input
+					// selector.val("");
+					// selector.focus();
+					
+				}
+			}
+	
+		});
+
+	})
+}
+
+validarEmailProv($('.emailProv'), $('.alertaEmailProv')); //Validar que no exista en DB, email de la persona ingresada
