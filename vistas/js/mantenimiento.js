@@ -864,7 +864,7 @@ $(document).on("click", ".btnActivarRol", function(){
 
     }) 
 
-    if(estadoRol == 0){
+    if(estadoDinamico == 0){
         $(this).removeClass('btn-success');
         $(this).addClass('btn-danger');
         $(this).html('Desactivado');
@@ -944,7 +944,7 @@ $(document).on("click", ".btnActivarInscripcion", function(){
     let estadoDinamico = $(this).attr("estadoInscripcion");
     let tablaDinamica = 'tbl_inscripcion';
     let idTablaDinamica = 'id_inscripcion';
-    let idPantallaDinamica = 22;
+    let idPantallaDinamica = 21;
     // console.log(estadoGenero)
     let datos = new FormData();
     datos.append("idActivarDinamico", idActivarDinamico);
@@ -968,7 +968,7 @@ $(document).on("click", ".btnActivarInscripcion", function(){
 
     }) 
 
-    if(estadoInscripcion == 0){
+    if(estadoDinamico == 0){
         $(this).removeClass('btn-success');
         $(this).addClass('btn-danger');
         $(this).html('Desactivado');
@@ -1017,7 +1017,7 @@ $(document).on("click", ".btnActivarMatricula", function(){
 
     }) 
 
-    if(estadoMatricula == 0){
+    if(estadoDinamico == 0){
         $(this).removeClass('btn-success');
         $(this).addClass('btn-danger');
         $(this).html('Desactivado');
@@ -1067,7 +1067,7 @@ $(document).on("click", ".btnActivarDescuento", function(){
 
     }) 
 
-    if(estadoDescuento == 0){
+    if(estadoDinamico == 0){
         $(this).removeClass('btn-success');
         $(this).addClass('btn-danger');
         $(this).html('Desactivado');
