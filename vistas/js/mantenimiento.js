@@ -1189,14 +1189,14 @@ $(document).on("click", ".btnActivarDocumento", function(){
 /*=====================================
 ACTIVAR PREGUNTA
 ========================================*/
-/*
+
 $(document).on("click", ".btnActivarPregunta", function(){
 
     let idActivarDinamico = $(this).attr("idPreguntaActivar ");
     let estadoDinamico = $(this).attr("estadoPregunta");
     let tablaDinamica = 'tbl_preguntas';
     let idTablaDinamica = 'id_preguntas';
-    let idPantallaDinamica = 24;
+    let idPantallaDinamica = 32;
     // console.log(estadoGenero)
     let datos = new FormData();
     datos.append("idActivarDinamico", idActivarDinamico);
@@ -1239,7 +1239,7 @@ $(document).on("click", ".btnActivarPregunta", function(){
 
 })
 
-*/
+
 
 
 //** ------------------------------------*/

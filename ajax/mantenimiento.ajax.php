@@ -127,33 +127,34 @@ class AjaxMantenimiento{
     /*=============================================
             ACTIVAR PREGUNTA
     ==============================================*/
-    /*
-    public $estadoDinamico;
-    public $idActivarDinamico; 
-    public $tablaDinamica;
-    public $idTablaDinamica;
-    public $idPantallaDinamica; 
+    public $idPreguntaActivar;
+    public $estadoPregunta;
+    
+    public function ajaxActivarPregunta(){ 
 
-    public function ajaxActivarDinamico(){
+        $tabla = "tbl_preguntas";
 
-        $table = $this->tablaDinamica;
+        $item1 = "estado";
+        $valor1 = $this->estadoPregunta;
 
-        $estado = "estado";
-        $valorEstado = $this->estadoDinamico;
+        $item2 = "id_preguntas";
+        $valor2 = $this->idPreguntaActivar;
 
-        $idItem2 = $this->idTablaDinamica;
-        $valorItem2 = $this->idActivarDinamico;
+        $item3 = null;
+        $valor3 = null;
 
-        $pantalla = "pregunta";
+        $item4 = null;
+        $valor4 = null;
 
-        $idPant = $this->idPantallaDinamica;
-      
-        $respuesta = ControladorMantenimientos::ctrActivar($table, $estado, $valorEstado, $idItem2, $valorItem2, $pantalla, $idPant);
-
+        $respuesta = ModeloMantenimiento::mdlActualizarMantenimiento($tabla, $item1, $valor1, $item2, $valor2, $item3, $valor3, $item4, $valor4);
         echo json_encode($respuesta);
 
-    }
-    */
+        // $respuesta = ModeloMantenimiento::mdlActualizarRol($tabla,$item1,$valor1,$item2,$valor2);
+        // echo json_encode($respuesta);
+
+
+    }    
+    
 
 
     /*========================================
