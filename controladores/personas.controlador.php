@@ -445,30 +445,32 @@ class ControladorPersonas{
 
                     $respuestaPersona = ModeloPersonas::mdlEditarPersona($tabla, $datos);
                     
-                    if($tipoPersona == 'usuarios') {                    
+                    // if($tipoPersona == 'usuarios') {                    
 
-                        // echo "<pre>";
-                        // var_dump($_POST);
-                        // echo "</pre>";
-                        // // return;
-                        // var_dump($_FILES);
-                        // echo $tipoPersona;
+                    //     // echo "<pre>";
+                    //     // var_dump($_POST);
+                    //     // echo "</pre>";
+                    //     // // return;
+                    //     // var_dump($_FILES);
+                    //     // echo $tipoPersona;
+                    //     // return;
+
+                    //     $datos = array("nombre" => $_POST["editarNombre"],
+                    //                 "apellido" => $_POST["editarApellido"],
+                    //                 "id_documento" => $_POST["editarTipoDocumento"],
+                    //                 "numero_documento" => $_POST["editarNumeroDocumento"],
+                    //                 "tipo_persona" => $tipoPersona,
+                    //                 "fecha_nacimiento" => $_POST["editarFechaNacimiento"],
+                    //                 "sexo" => $_POST["editarSexo"],
+                    //                 "telefono" => $_POST["editarTelefono"],
+                    //                 "direccion" => $_POST["editarDireccion"],
+                    //                 "email" => $_POST["editarEmail"],
+                    //                 "id_persona" => $_POST["idPersona"]);
+
+                    //     $respuestaPersona = ModeloPersonas::mdlEditarPersona($tabla, $datos);
+                        // var_dump($respuestaPersona);
                         // return;
 
-                        $datos = array("nombre" => $_POST["editarNombre"],
-                                    "apellido" => $_POST["editarApellido"],
-                                    "id_documento" => $_POST["editarTipoDocumento"],
-                                    "numero_documento" => $_POST["editarNumeroDocumento"],
-                                    "tipo_persona" => $tipoPersona,
-                                    "fecha_nacimiento" => $_POST["editarFechaNacimiento"],
-                                    "sexo" => $_POST["editarSexo"],
-                                    "telefono" => $_POST["editarTelefono"],
-                                    "direccion" => $_POST["editarDireccion"],
-                                    "email" => $_POST["editarEmail"],
-                                    "id_persona" => $_POST["idPersona"]);
-
-                        $respuestaPersona = ModeloPersonas::mdlEditarPersona($tabla, $datos);
-                        
                         if($respuestaPersona == true){
                             // echo '<script>
                             //         Swal.fire({
@@ -495,7 +497,9 @@ class ControladorPersonas{
                                         "email" => $_POST["editarEmail"]);
 
                             $editarUsuario = ControladorUsuarios::ctrEditarUsuario($datos);
-
+                            // var_dump($editarUsuario);
+                            // return;
+                            
                             if($editarUsuario == true){
                                 // return;
                                 echo '<script>
@@ -553,7 +557,7 @@ class ControladorPersonas{
                         //         </script>';
                             
                         //         return;
-                    }
+                    // }
 
                 } else {
                     // echo "<pre>";

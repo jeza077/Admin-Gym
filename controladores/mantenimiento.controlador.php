@@ -1438,6 +1438,9 @@ class ControladorMantenimientos {
 
       if(isset($_POST["editarInscripcion"])){
 
+        var_dump($_POST);
+        return;
+
         $tabla = "tbl_inscripcion";
 
         $datos = array ("tipo_inscripcion"=> $_POST["editarInscripcion"],
