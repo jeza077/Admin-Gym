@@ -31,6 +31,13 @@ class PDF extends TCPDF{
         $direccion = $direccionEmpresa ['valor'];
     
         $item="parametro";
+        $valor="ADMIN_TELEFONO_EMPRESA";
+
+        $telefonoEmpresa = ControladorUsuarios::ctrMostrarParametros($item, $valor);
+        // var_dump($telefonoEmpresa ['valor']);
+        $telefono = $telefonoEmpresa ['valor'];
+
+        $item="parametro";
         $valor="ADMIN_CORREO";
 
         $correoEmpresa = ControladorUsuarios::ctrMostrarParametros($item, $valor);
@@ -59,6 +66,8 @@ class PDF extends TCPDF{
         $this->Cell(180, 7, 'Direccion: '.$direccion.'', 0, 1, 'C');
         // $this->Cell(180, 3, 'Calle xxxxxxxxxx.....', 0, 1, 'C');
         $this->Cell(180, 3, 'Correo: '.$correo.'', 0, 1, 'C');
+        $this->Cell(180, 7, 'Teléfono: '.$telefono.'', 0, 1, 'C');
+        
 
         $this->Ln(20); //Espacios
         $this->SetFont('helvetica', 'B', 14);
