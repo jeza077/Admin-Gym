@@ -24,7 +24,7 @@
     $descripcionEvento = "".$_SESSION["usuario"]." Consultó la pantalla de género";
     $accion = "Consulta";
 
-    $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 24,$accion, $descripcionEvento);
+    $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 35,$accion, $descripcionEvento);
 
   ?>
 

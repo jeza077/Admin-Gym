@@ -8,6 +8,13 @@ require_once "../../../modelos/mantenimiento.modelo.php";
 require_once('../examples/tcpdf_include.php');
 
 
+session_start();
+
+$descripcionEvento = "".$_SESSION['usuario']." Generó reporte pdf de preguntas de seguridad";
+$accion = "Generar";
+$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION['id_usuario'], 32, $accion,
+$descripcionEvento);
+
 
 class PDF extends TCPDF{
     

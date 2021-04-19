@@ -161,9 +161,9 @@ $pdf->Ln(55);
 $pdf->SetFont('times', '', 13);
 $pdf->SetFillColor(225, 235, 255);
 $pdf->Cell(15, 5, 'No', 1, 0, 'C', 1);
-$pdf->Cell(75, 5, 'Tipo Inscripcion', 1, 0, 'C', 1);
+$pdf->Cell(75, 5, 'Tipo Inscripción', 1, 0, 'C', 1);
 $pdf->Cell(30, 5, 'Precio', 1, 0, 'C', 1);
-$pdf->Cell(20, 5, 'Dias', 1, 0, 'C', 1);
+$pdf->Cell(20, 5, 'Días', 1, 0, 'C', 1);
 $pdf->Cell(40, 5, 'Estado', 1, 0, 'C', 1);
 
 //$tabla = "tbl_inscripcion";
@@ -209,9 +209,9 @@ foreach ($inscripcion as $key => $value) {
         $pdf->SetFont('times', '', 13);
         $pdf->SetFillColor(225, 235, 255);
         $pdf->Cell(15, 5, 'No', 1, 0, 'C', 1);
-        $pdf->Cell(75, 5, 'Tipo Inscripcion', 1, 0, 'C', 1);
+        $pdf->Cell(75, 5, 'Tipo Inscripción', 1, 0, 'C', 1);
         $pdf->Cell(30, 5, 'Precio', 1, 0, 'C', 1);
-        $pdf->Cell(20, 5, 'Dias', 1, 0, 'C', 1);
+        $pdf->Cell(20, 5, 'Días', 1, 0, 'C', 1);
         $pdf->Cell(40, 5, 'Estado', 1, 0, 'C', 1);
     }
     // $pdf->Cell(15, 5, ''.$i.'', 1, 0, 'C');

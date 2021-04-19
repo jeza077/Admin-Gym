@@ -543,6 +543,20 @@ function sinCaracteres(event) {
     }
      
 }
+/*=============================================
+    SOLO SIGNOS INTER
+=============================================*/
+function soloSignosInter(event) {
+    var key = event.which || event.keyCode;
+    // console.log(key)
+
+    if(key == 106 || key == 107 || key == 109 || key == 110 || key == 111 || key == 186 ||key == 187 ||key == 188 || key == 189 || key == 190 || key == 191 || key == 220 || key == 222) {
+        event.preventDefault();
+    } else {
+        $('.alert').remove();
+    }
+     
+}
 
 /*=============================================
     FUNCION VALIDAR DOCUMENTO
@@ -799,6 +813,7 @@ function trim(fecha){
 $('.sinLetras').keydown(sinLetras)
 $('.sinCaracteres').keydown(sinCaracteres)
 $('.sinNumeros').keydown(sinNumeros)
+$('.soloSignos').keydown(soloSignosInter)
 
 validarEmail($('.email'), $('.alertaEmail')); //Validar que no exista en DB, email de la persona ingresada
 $('.nombre').keydown(sinNumeros)

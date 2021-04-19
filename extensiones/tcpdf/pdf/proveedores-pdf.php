@@ -4,10 +4,18 @@ require_once('../../../controladores/usuarios.controlador.php');
 require_once "../../../modelos/usuarios.modelo.php";
 require_once('../../../controladores/globales.controlador.php');
 require_once "../../../modelos/globales.modelo.php";
+require_once("../../../controladores/mantenimiento.controlador.php");
+require_once "../../../modelos/mantenimiento.modelo.php";
 
 require_once('../examples/tcpdf_include.php');
 
 
+session_start();
+
+$descripcionEvento = "".$_SESSION['usuario']." Generó reporte pdf de proveedores";
+$accion = "Generar";
+$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION['id_usuario'], 25, $accion,
+$descripcionEvento);
 
 class PDF extends TCPDF{
     
@@ -156,7 +164,7 @@ $pdf->SetFillColor(225, 235, 255);
 $pdf->Cell(15, 5, 'No', 1, 0, 'C', 1);
 $pdf->Cell(75, 5, 'Nombre', 1, 0, 'C', 1);
 $pdf->Cell(55, 5, 'Correo', 1, 0, 'C', 1);
-$pdf->Cell(40, 5, 'Telefono', 1, 0, 'C', 1);
+$pdf->Cell(40, 5, 'Teléfono', 1, 0, 'C', 1);
 
 //$tabla = "tbl_inscripcion";
 if(isset($_GET["rango"])){
@@ -203,7 +211,7 @@ foreach ($proveedor as $key => $value) {
         $pdf->Cell(15, 5, 'No', 1, 0, 'C', 1);
         $pdf->Cell(75, 5, 'Nombre', 1, 0, 'C', 1);
         $pdf->Cell(55, 5, 'Correo', 1, 0, 'C', 1);
-        $pdf->Cell(40, 5, 'Telefono', 1, 0, 'C', 1);
+        $pdf->Cell(40, 5, 'Teléfono', 1, 0, 'C', 1);
     }
     // $pdf->Cell(15, 5, ''.$i.'', 1, 0, 'C');
 

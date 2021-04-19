@@ -25,10 +25,10 @@
       <div class="card-body">
 
         <?php
-            // $descripcionEvento = " Consultó la pantalla de documentos";
-            // $accion = "Consulta";
+            $descripcionEvento = "".$_SESSION["usuario"]." Consultó la pantalla de Objetos";
+            $accion = "Consulta";
 
-            // $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
+            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 33,$accion, $descripcionEvento);
 
         ?>
         <table class="table table-bordered table-striped tablas text-center">

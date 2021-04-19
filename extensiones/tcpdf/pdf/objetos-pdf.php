@@ -4,9 +4,17 @@ require_once('../../../controladores/usuarios.controlador.php');
 require_once "../../../modelos/usuarios.modelo.php";
 require_once('../../../controladores/globales.controlador.php');
 require_once "../../../modelos/globales.modelo.php";
+require_once("../../../controladores/mantenimiento.controlador.php");
+require_once "../../../modelos/mantenimiento.modelo.php";
 
 require_once('../examples/tcpdf_include.php');
 
+session_start();
+
+$descripcionEvento = "".$_SESSION['usuario']." Generó reporte pdf de objetos";
+$accion = "Generar";
+$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION['id_usuario'], 33, $accion,
+$descripcionEvento);
 
 
 class PDF extends TCPDF{
@@ -104,7 +112,7 @@ $pdf = new PDF('p', 'mm', 'A4', true, 'UTF-8', false);
 // set document information
 $pdf->SetCreator(PDF_CREATOR);
 $pdf->SetAuthor('Jesús Zuniga');
-$pdf->SetTitle('Reporte de Proveedores');
+$pdf->SetTitle('Reporte de Objetos');
 $pdf->SetSubject('');
 $pdf->SetKeywords('');
 
