@@ -34,10 +34,10 @@
   <section class="content">
 
     <?php
-      $descripcionEvento = "".$_SESSION["usuario"]." Consultó la pantalla de administrar ventas";
-      $accion = "Consulta";
+      // $descripcionEvento = "".$_SESSION["usuario"]." Consultó la pantalla de administrar ventas";
+      // $accion = "Consulta";
 
-      $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 14,$accion, $descripcionEvento);
+      // $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 14,$accion, $descripcionEvento);
 
       // var_dump($_SESSION['permisos']);
     ?>
@@ -45,7 +45,7 @@
     <div class="card">
       <div class="card-body">
 
-        <table class="table table-striped table-bordered tablaVentas text-center">
+        <table class="table table-striped table-bordered tablas text-center">
 
           <thead>
 
@@ -81,7 +81,7 @@
       
               $respuesta = ControladorVentas::ctrRangoFechasVentas($fechaInicial, $fechaFinal);
               // echo "<pre>";
-              // var_dump($respuesta[0]['productos']);
+              // var_dump($respuesta);
               // echo "</pre>";
 
               // $decod = json_decode($respuesta[0]['productos']);

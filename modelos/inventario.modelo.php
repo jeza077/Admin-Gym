@@ -459,7 +459,7 @@ class ModeloInventario{
 			$stmt = Conexion::conectar()->prepare("SELECT c.*, c.fecha as fecha_compra, i.*,p.nombre FROM $tabla AS c\n"
 			. " LEFT JOIN tbl_inventario AS i ON c.id_inventario = i.id_inventario\n"
 			. " LEFT JOIN tbl_proveedores AS p ON c.id_proveedor = p.id_proveedor\n"
-			. " WHERE nombre_producto LIKE '%$rango%' OR nombre LIKE '%$rango%' OR precio LIKE '%$rango%' OR c.fecha LIKE '%$rango%'");
+			. " WHERE nombre_producto LIKE '%$rango%' OR nombre LIKE '%$rango%' OR cantidad LIKE '%$rango%' OR precio LIKE '%$rango%' OR c.fecha LIKE '%$rango%'");
 
 			$stmt->bindParam(":nombre_producto", $rango, PDO::PARAM_STR);
 			$stmt->bindParam(":nombre", $rango, PDO::PARAM_STR);

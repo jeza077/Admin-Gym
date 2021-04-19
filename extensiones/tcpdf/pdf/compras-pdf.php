@@ -239,6 +239,6 @@ foreach ($inventarios as $key => $value) {
 
 
 // Close and output PDF document
-$pdf->Output('example_001.pdf', 'I');
+$pdf->Output('compras.pdf', 'I');
 
 ?>
