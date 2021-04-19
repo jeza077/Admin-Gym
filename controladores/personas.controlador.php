@@ -51,6 +51,8 @@ class ControladorPersonas{
 
                     $respuestaPersona = ModeloPersonas::mdlCrearPersona($tabla, $datos);
 
+                    
+
                         if($respuestaPersona == true){
                             
                             // /*------------------------------------------ Crear usuario -----------------------------------------------*/

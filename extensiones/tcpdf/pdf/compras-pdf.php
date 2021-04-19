@@ -237,6 +237,7 @@ foreach ($inventarios as $key => $value) {
 
 }
 
+ob_end_clean();
 
 // Close and output PDF document
 $pdf->Output('compras.pdf', 'I');

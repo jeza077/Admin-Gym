@@ -3,14 +3,21 @@
 require_once("../../../controladores/usuarios.controlador.php");
 // require_once('../../../controladores/ventas.controlador.php');
 require_once('../../../controladores/clientes.controlador.php');
-// require_once('../../../controladores/productos.controlador.php');
-// require_once "../../../modelos/productos.modelo.php";
+require_once('../../../controladores/mantenimiento.controlador.php');
+require_once "../../../modelos/mantenimiento.modelo.php";
 require_once "../../../modelos/clientes.modelo.php";
 // require_once "../../../modelos/ventas.modelo.php";
 require_once "../../../modelos/usuarios.modelo.php";
 require_once('../examples/tcpdf_include.php');
 
 // echo $_GET["codigo"];
+
+session_start();
+
+$descripcionEvento = "".$_SESSION['usuario']." Generó recibo de pago del cliente";
+$accion = "Generar";
+$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION['id_usuario'], 7, $accion,
+$descripcionEvento);
 
 
 class imprimirReciboPagoCliente{
@@ -325,7 +332,7 @@ $pdf->writeHTML($bloque7, false, false, false, false, '');
 		## FIN 07/12/2020
 		$pdf->lastPage();
 
-		$pdf->Output('recibo-pdf.pdf', 'I');
+		$pdf->Output('recibo_pago_cliente-pdf.pdf', 'I');
 
 		}else{
 

@@ -57,7 +57,7 @@ class ModeloPersonas{
 
 		}else{
 
-			return false;
+			return $stmt->errorInfo();
 		
 		}
 
