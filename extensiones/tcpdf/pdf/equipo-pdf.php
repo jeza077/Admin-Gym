@@ -155,7 +155,10 @@ foreach ($inventarios as $key => $value) {
 
 }
 
+ob_end_clean();
+
+
 // Close and output PDF document
-$pdf->Output('example_001.pdf', 'I');
+$pdf->Output('reporte_equipo.pdf', 'I');
 
 ?>

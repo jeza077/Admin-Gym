@@ -223,6 +223,6 @@ if(!$usuarios){
 
 
 // Close and output PDF document
-$pdf->Output('example_001.pdf', 'I');
+$pdf->Output('reporte_usuarios.pdf', 'I');
 
 ?>

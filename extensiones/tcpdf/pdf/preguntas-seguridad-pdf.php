@@ -214,8 +214,7 @@ foreach ($preguntas as $key => $value) {
 }
 
 
-
-
+ob_end_clean();
 
 
 // Close and output PDF document

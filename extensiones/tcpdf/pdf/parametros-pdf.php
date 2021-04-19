@@ -224,6 +224,6 @@ foreach ($parametross as $key => $value) {
 ob_end_clean();
 
 // Close and output PDF document
-$pdf->Output('Reporteparametross.pdf', 'I');
+$pdf->Output('reporte_parametros.pdf', 'I');
 
 ?>

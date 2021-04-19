@@ -7,6 +7,12 @@ require_once "../../../modelos/mantenimiento.modelo.php";
 
 require_once('../examples/tcpdf_include.php');
 
+session_start();
+
+$descripcionEvento = "".$_SESSION['usuario']." Generó reporte pdf de respaldo de la base de datos";
+$accion = "Generar";
+$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION['id_usuario'], 14, $accion,
+$descripcionEvento);
 
 
 class PDF extends TCPDF{
@@ -181,7 +187,7 @@ if(!$backup){
 }
 else{
     $i = 1; //Contador
-$max = 5; //Maximo de registros a mostrar en una pagina
+$max = 14; //Maximo de registros a mostrar en una pagina
 
 foreach ($backup as $key => $value) {
 
@@ -214,11 +220,10 @@ foreach ($backup as $key => $value) {
 }
 
 
-
-
+ob_end_clean();
 
 
 // Close and output PDF document
-$pdf->Output('Reportedescuento.pdf', 'I');
+$pdf->Output('reporte_respaldo.pdf', 'I');
 
 ?>

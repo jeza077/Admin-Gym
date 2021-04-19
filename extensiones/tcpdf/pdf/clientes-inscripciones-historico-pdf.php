@@ -233,6 +233,9 @@ if(!$clientes){
     }
 }
 
+ob_end_clean();
+
+
 // Close and output PDF document
 $pdf->Output('reporte_inscripciones_clientes_historico.pdf', 'I');
 

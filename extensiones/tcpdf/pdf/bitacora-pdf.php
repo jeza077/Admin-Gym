@@ -249,6 +249,9 @@ if(!$bitac){
 
 }
 
+ob_end_clean();
+
+
 // Close and output PDF document
 $pdf->Output('reporte_bitacora.pdf', 'I');
 

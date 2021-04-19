@@ -216,7 +216,9 @@ if(!$clientes){
     }
 }
 
+ob_end_clean();
+
 // Close and output PDF document
-$pdf->Output('reporte_total_clientes.pdf', 'I');
+$pdf->Output('reporte_clientes.pdf', 'I');
 
 ?>

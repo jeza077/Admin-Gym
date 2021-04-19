@@ -9,7 +9,7 @@ require_once('../examples/tcpdf_include.php');
 
 session_start();
 
-$descripcionEvento = "".$_SESSION['usuario']." Generó reporte pdf de administrar venta";
+$descripcionEvento = "".$_SESSION['usuario']." Generó reporte pdf de administrar ventas";
 $accion = "Generar";
 $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION['id_usuario'], 13, $accion,
 $descripcionEvento);
@@ -241,6 +241,8 @@ if(!$ventas){
     }
 
 }
+
+ob_end_clean();
 
 // Close and output PDF document
 $pdf->Output('reporte_ventas.pdf', 'I');

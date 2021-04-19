@@ -224,6 +224,8 @@
               <input type="email" class="form-control email" name="nuevoEmail" placeholder="Ingrese correo" required>
             </div>
 
+            <div class="alertaEmail"></div>
+
             <input type="hidden" name="tipoCliente" value="Ventas">
 
             <div class="form-group mt-4 float-right">        

@@ -220,6 +220,6 @@ foreach ($proveedor as $key => $value) {
 ob_end_clean();
 
 // Close and output PDF document
-$pdf->Output('reporte_inscripcion.pdf', 'I');
+$pdf->Output('reporte_objetos.pdf', 'I');
 
 ?>

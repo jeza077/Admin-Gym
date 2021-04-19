@@ -228,6 +228,6 @@ ob_end_clean();
 
 
 // Close and output PDF document
-$pdf->Output('Reportematricula.pdf', 'I');
+$pdf->Output('reporte_matricula.pdf', 'I');
 
 ?>
