@@ -212,7 +212,7 @@ MODAL EDITAR INSCRIPCION
                             <input type="textarea" class="form-control preciom" id="editarPrecioInscripcion" name="editarPrecioInscripcion" value="" required>
                         </div>
 
-                        <input type="hidden" id="editarIdInscripcion sinCaracteres" name="editarIdInscripcion">
+                        <input type="hidden" id="editarIdInscripcion" name="editarIdInscripcion">
 
                     </div>
 

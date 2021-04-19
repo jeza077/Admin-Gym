@@ -545,11 +545,12 @@ $(document).on("click", ".btnEditarInscripcion", function(){
         processData:false,
         dataType: "json",
         success:function(respuesta){ 
+            console.log(respuesta);
 
             $('#editarInscripcion').val(respuesta['tipo_inscripcion']);
             $('#editarPrecioInscripcion').val(respuesta['precio_inscripcion']);
             $('#editarDiasInscripcion').val(respuesta['cantidad_dias']);
-            $('#editarIdInscripcion').val(respuesta['id_inscripcion']);
+            $('#editarIdInscripcion').attr('value', respuesta['id_inscripcion']);
             
          
         } 
