@@ -150,7 +150,7 @@ $pdf->SetFont('dejavusans', '', 14, '', true);
 // This method has several options, check the source code documentation for more information.
 $pdf->AddPage();
 
-$pdf->Ln(45);
+$pdf->Ln(55);
 
 $pdf->SetFont('times', '', 13);
 $pdf->SetFillColor(225, 235, 255);
@@ -198,7 +198,7 @@ if(!$usuarios){
             if(($i%$max) == 0){
                 $pdf->AddPage();
         
-                $pdf->Ln(40);
+                $pdf->Ln(55);
                 $pdf->SetFont('times', '', 13);
                 $pdf->SetFillColor(225, 235, 255);
                 $pdf->Cell(15, 5, 'No', 1, 0, 'C', 1);

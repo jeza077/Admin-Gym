@@ -154,7 +154,7 @@ $pdf->SetFont('dejavusans', '', 14, '', true);
 // This method has several options, check the source code documentation for more information.
 $pdf->AddPage();
 
-$pdf->Ln(45);
+$pdf->Ln(55);
 
 $pdf->SetFont('times', '', 13);
 $pdf->SetFillColor(225, 235, 255);
@@ -206,7 +206,7 @@ if(!$ventas){
         if(($i%$max) == 0){
             $pdf->AddPage();
 
-            $pdf->Ln(45);
+            $pdf->Ln(55);
             
             $pdf->SetFont('times', '', 13);
             $pdf->SetFillColor(225, 235, 255);
@@ -232,13 +232,14 @@ if(!$ventas){
         
         // $decod = json_decode($value['productos']);
                 
-        $decod = json_decode($value['productos']);
-        foreach ($decod as $key => $val) {
-            $pdf->Ln();
-            $pdf->MultiCell(40, 4, ''.$val->descripcion.'('.$val->cantidad.')', 1,'J', 0, 0, '', '', true, 0, true, 40);
-        }
+        // $decod = json_decode($value['productos']);
+        // foreach ($decod as $key => $val) {
+        //     $pdf->Ln();
+        //     $pdf->MultiCell(40, 4, ''.$val->descripcion.'('.$val->cantidad.')', 1,'J', 0, 0, '', '', true, 0, true, 40);
+        // }
 
 
+        $pdf->Cell(38, 4, 'Productos', 0, 0, 'C');
         $pdf->Cell(32, 4, 'L. '.number_format($value['impuesto'],2).'', 0, 0, 'C');
         $pdf->Cell(32, 4, 'L. '.number_format($value['neto'],2).'', 0, 0, 'C');
         $pdf->Cell(32, 4, 'L. '.number_format($value['total'],2).'', 0, 0, 'C');

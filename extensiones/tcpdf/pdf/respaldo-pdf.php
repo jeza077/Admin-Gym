@@ -203,7 +203,7 @@ foreach ($backup as $key => $value) {
     if(($i%$max) == 0){
         $pdf->AddPage();
 
-        $pdf->Ln(40);
+        $pdf->Ln(55);
         
         $pdf->SetFont('times', '', 13);
         $pdf->SetFillColor(225, 235, 255);
