@@ -64,7 +64,7 @@ class PDF extends TCPDF{
         $this->SetTextColor(0,0,0);
         $this->SetFont('helvetica', '', 9);
         // $this->Cell(180, 3, 'Gimnasio La roca', 0, 1, 'C');
-        $this->Cell(180, 7, 'Direccion: '.$direccion.'', 0, 1, 'C');
+        $this->Cell(180, 7, 'Dirección: '.$direccion.'', 0, 1, 'C');
         // $this->Cell(180, 3, 'Calle xxxxxxxxxx.....', 0, 1, 'C');
         $this->Cell(180, 3, 'Correo: '.$correo.'', 0, 1, 'C');
         $this->Cell(180, 7, 'Teléfono: '.$telefono.'', 0, 1, 'C');

@@ -614,9 +614,12 @@ class ControladorMantenimientos {
          
           
           $tabla = "tbl_backup";          
-  
+        date_default_timezone_set("America/Tegucigalpa");
+        $fecha = date('Y-m-d H:i:s');
+          
           session_start();
           $datos = array("nombre_backup" => $nombreBackup, 
+                          "fecha" => $fecha,
                           "creado_por" => $_SESSION["id_usuario"]);
           
           // $datos = $nombreBackup;

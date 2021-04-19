@@ -67,7 +67,7 @@
                             
                                 <td>'.($key + 1).'</td>
                                 <td>'.$value["tipo_inscripcion"].'</td>
-                                <td>$'.$value["precio_inscripcion"].'.00</td>
+                                <td>L. '.number_format($value["precio_inscripcion"],2).'</td>
                                 <td>'.$value["cantidad_dias"].'</td>';
 
                                 if($value['estado'] != 0){

@@ -183,6 +183,27 @@ class ModeloGlobales{
 			
 		} 	
     }
+
+		/*=============================================
+			RANGO DINAMICO DOCUMENTO
+	=============================================*/
+	static public function mdlRangoGenero($tabla, $rango){
+	
+		if($rango == null){
+
+			$stmt = Conexion::conectar() ->prepare("SELECT * FROM $tabla");
+            $stmt-> execute();
+			return $stmt ->fetchAll();
+			
+		} else {
+
+			$stmt = Conexion::conectar() ->prepare("SELECT * FROM $tabla WHERE sexo LIKE '%$rango%'");
+
+            $stmt-> execute();
+			return $stmt ->fetchAll();
+			
+		} 	
+    }
     
     /*=============================================
 			RANGO DINAMICO ROL

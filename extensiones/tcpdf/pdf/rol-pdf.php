@@ -70,7 +70,7 @@ class PDF extends TCPDF{
         $this->SetTextColor(0,0,0);
         $this->SetFont('helvetica', '', 9);
         // $this->Cell(180, 3, 'Gimnasio La roca', 0, 1, 'C');
-        $this->Cell(180, 7, 'Direccion: '.$direccion.'', 0, 1, 'C');
+        $this->Cell(180, 7, 'Dirección: '.$direccion.'', 0, 1, 'C');
         // $this->Cell(180, 3, 'Calle xxxxxxxxxx.....', 0, 1, 'C');
         $this->Cell(180, 3, 'Correo: '.$correo.'', 0, 1, 'C');
         $this->Cell(180, 7, 'Teléfono: '.$telefono.'', 0, 1, 'C');
@@ -162,7 +162,7 @@ $pdf->SetFont('times', '', 13);
 $pdf->SetFillColor(225, 235, 255);
 $pdf->Cell(15, 5, 'No', 1, 0, 'C', 1);
 $pdf->Cell(70, 5, 'Rol', 1, 0, 'C', 1);
-$pdf->Cell(60, 5, 'Descripcion', 1, 0, 'C', 1);
+$pdf->Cell(60, 5, 'Descripción', 1, 0, 'C', 1);
 $pdf->Cell(40, 5, 'Estado', 1, 0, 'C', 1);
 // return;
 //$tabla = "tbl_inscripcion";
@@ -210,7 +210,7 @@ else{
             $pdf->SetFillColor(225, 235, 255);
             $pdf->Cell(15, 5, 'No', 1, 0, 'C', 1);
             $pdf->Cell(70, 5, 'Rol', 1, 0, 'C', 1);
-            $pdf->Cell(60, 5, 'Descripcion', 1, 0, 'C', 1);
+            $pdf->Cell(60, 5, 'Descripción', 1, 0, 'C', 1);
             $pdf->Cell(40, 5, 'Estado', 1, 0, 'C', 1);
         }
         // $pdf->Cell(15, 5, ''.$i.'', 1, 0, 'C');

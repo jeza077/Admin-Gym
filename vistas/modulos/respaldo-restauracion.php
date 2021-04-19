@@ -101,7 +101,8 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fas fa-unlock"></i></span>
                         </div>
-                            <input type="text-center" class="form-control" id="contrasenia" name="contrasenia" placeholder="contraseña_bd" readonly>
+                        <input type="text-center" class="form-control" placeholder="db password" readonly>
+                            <input type="hidden" class="form-control" id="contrasenia" name="contrasenia" placeholder="db password" value="root136." readonly>
                       </div>
                   </div>
                   
@@ -128,7 +129,7 @@
               ==========================================================-->  
               <div class="tab-pane fade" id="second" role="tabpanel" aria-labelledby="Inscripciones  y   Matricula">
 
-                <!-- <div class="form-group ">
+                <div class="form-group ">
                       <label>Servidor</label>
                     <div class="input-group col-md-12">
                       <div class="input-group-prepend">
@@ -154,7 +155,9 @@
                       <div class="input-group-prepend">
                           <span class="input-group-text"><i class="fas fa-unlock"></i></span>
                       </div>
-                          <input type="text-center" class="form-control" id="contrasenia2" name="contrasenia2" placeholder="db password" readonly>
+                          <!-- <input type="text-center" class="form-control" id="contrasenia2" name="contrasenia2" placeholder="db password" readonly> -->
+                          <input type="text-center" class="form-control" placeholder="db password" readonly>
+                            <input type="hidden" class="form-control" id="contrasenia2" name="contrasenia2" placeholder="db password" value="root136." readonly>
                     </div>
                 </div>
 
@@ -166,7 +169,7 @@
                       </div>
                           <input type="text-center" class="form-control" minlength="1" maxlength="30" id="nombrebd2" name="nombrebd2" value="gym_la_roca" readonly placeholder="Nombre de la base de datos a respaldar" required>
                     </div>
-                </div> -->
+                </div>
 
                 <div class="form-group ">
                   <label>Selección de la restauracion </label>

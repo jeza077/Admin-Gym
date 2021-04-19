@@ -64,14 +64,14 @@ class PDF extends TCPDF{
         $this->SetTextColor(0,0,0);
         $this->SetFont('helvetica', '', 9);
         // $this->Cell(180, 3, 'Gimnasio La roca', 0, 1, 'C');
-        $this->Cell(180, 7, 'Direccion: '.$direccion.'', 0, 1, 'C');
+        $this->Cell(180, 7, 'Dirección: '.$direccion.'', 0, 1, 'C');
         // $this->Cell(180, 3, 'Calle xxxxxxxxxx.....', 0, 1, 'C');
         $this->Cell(180, 3, 'Correo: '.$correo.'', 0, 1, 'C');
         $this->Cell(180, 7, 'Teléfono: '.$telefono.'', 0, 1, 'C');
 
         $this->Ln(20); //Espacios
         $this->SetFont('helvetica', 'B', 14);
-        $this->Cell(180, 3, 'REPORTE DE PROVEEDORES', 0, 1, 'C');
+        $this->Cell(180, 3, 'REPORTE DE OBJETOS', 0, 1, 'C');
         $this->Ln(3);
         $this->SetFont('helvetica', 'B', 11);
         $año = date('Y-m-d');
@@ -136,7 +136,7 @@ if (@file_exists(dirname(__FILE__).'/lang/eng.php')) {
 	$pdf->setLanguageArray($l);
 }
 
-// set default font subsetting mode
+// set default font subsetting mode4
 $pdf->setFontSubsetting(true);
 
 // Set font

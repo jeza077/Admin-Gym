@@ -2,10 +2,27 @@ $( document ).ready(function() {
 
 
 $("#btn_respaldar").click(function(){
+  Swal.fire({
+    title: "Espere por favor...",
+    heightAuto: false,
+    showConfirmButton: false,
+    allowOutsideClick: false
+  })
+  Swal.showLoading();
+
     respaldarBd();
   })
 
 $("#btn_restaurar").click(function(){
+  // console.log('click')
+  Swal.fire({
+    title: "Espere por favor...",
+    heightAuto: false,
+    showConfirmButton: false,
+    allowOutsideClick: false
+  })
+  Swal.showLoading();
+
     restaurarBd();
   })
 
@@ -54,7 +71,7 @@ function respaldarBd(){
               contentType: false,
               processData: false,
               success: function(respuesta) {
-                console.log(respuesta);
+                // console.log(respuesta);
                 
                 if(respuesta){
                   Swal.fire({
@@ -127,7 +144,9 @@ function restaurarBd(){
     type: 'post',
     success: function(data){
                 //var datar = data[0];
-                //console.log(datar[0].res);
+                // console.log(data);
+
+              
                 if(data==1){
 
                   Swal.fire({

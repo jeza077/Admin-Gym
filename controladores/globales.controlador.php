@@ -276,6 +276,19 @@ class ControladorGlobales{
 	}
 
     /*=============================================
+    RANGO DINAMICO DOCUMENTOS
+    =============================================*/
+	static public function ctrRangoGenero($rango){
+
+		$tabla = 'tbl_sexo';
+		
+		$respuesta = ModeloGlobales::mdlRangoGenero($tabla, $rango);
+		
+		return $respuesta;
+	}
+
+
+    /*=============================================
     RANGO DINAMICO DESCUENTO
     =============================================*/
 	static public function ctrRangoDescuento($rango){

@@ -1294,6 +1294,11 @@ exportarPdf('.btnExportarObjetos', 'objetos');
 exportarPdf('.btnExportarPermisosRol', 'permisos-rol');
 
 
+//** ------------------------------------*/
+//       IMPRIMIR PDF GENEROS
+// --------------------------------------*/ 
+exportarPdf('.btnExportarGeneros', 'generos');
+
 
 $(document).ready(function () {
 

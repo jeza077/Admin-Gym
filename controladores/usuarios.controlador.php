@@ -1385,7 +1385,6 @@ class ControladorUsuarios{
 							$descripcionEvento = "".$usuario." cambió su contraseña por primera vez";
 							$accion = "Primer ingreso";
 							$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($id, 31, $accion, $descripcionEvento);						
-							$tabla = "tbl_preguntas_usuarios";
 							
 							//INSERTAR UN PASSWORD NUEVO
 							$tabla="tbl_historial_pass";
@@ -1393,6 +1392,9 @@ class ControladorUsuarios{
 							$password = crypt($_POST['editarPassword'], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
 
 							$respuestapass = ModeloUsuarios::mdlHistorialPassword($tabla,$idUsuario, $password);
+
+
+							$tabla = "tbl_preguntas_usuarios";
 
 							$datos = array("idUsuario" => $id,
 											"idPregunta" => $_POST["nuevaPregunta"],
@@ -1494,7 +1496,7 @@ class ControladorUsuarios{
 
 				// return $respuestaContraseñas;
 
-
+				/*
 				$itemNuevo = '*';
 				$respuestamostrar = ModeloUsuarios::mdlMostrarHistorialPassword($tabla,$itemNuevo,$id_usuario);
 
@@ -1539,6 +1541,7 @@ class ControladorUsuarios{
 			     $longitudRecursiva = count($respuestamostrar, COUNT_RECURSIVE); // Devuelve 6
 			    //echo 'elnumero de elementos del arreglo es:--> '.$longitud;
 			    //echo "<br>";
+				*/
 				
 
 				if($respuestaContraseñas['password'] == $encriptar){

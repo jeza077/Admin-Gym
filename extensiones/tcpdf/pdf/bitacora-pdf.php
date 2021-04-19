@@ -170,7 +170,7 @@ $pdf->Cell(15, 5, 'No', 1, 0, 'C', 1);
 $pdf->Cell(50, 5, 'Usuario', 1, 0, 'C', 1);
 $pdf->Cell(40, 5, 'Objeto', 1, 0, 'C', 1);
 $pdf->Cell(30, 5, 'Accion', 1, 0, 'C', 1);
-$pdf->Cell(130, 5, 'Descripcion', 1, 0, 'C', 1);
+$pdf->Cell(130, 5, 'Descripción', 1, 0, 'C', 1);
 
 
 // if(isset($_GET["fechaInicial"])){
@@ -238,7 +238,7 @@ if(!$bitac){
             $pdf->Cell(50, 5, 'Usuario', 1, 0, 'C', 1);
             $pdf->Cell(40, 5, 'Objeto', 1, 0, 'C', 1);
             $pdf->Cell(30, 5, 'Accion', 1, 0, 'C', 1);
-            $pdf->Cell(130, 5, 'Descripcion', 1, 0, 'C', 1);
+            $pdf->Cell(130, 5, 'Descripción', 1, 0, 'C', 1);
             
         }
         // $pdf->Cell(15, 5, ''.$i.'', 1, 0, 'C');
