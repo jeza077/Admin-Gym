@@ -28,6 +28,14 @@
         $permisoActualizar = $_SESSION['permisos']['Usuarios']['actualizar'];
         $permisoConsulta = $_SESSION['permisos']['Usuarios']['consulta'];
 
+        // $tabla = "tbl_compras";
+        // $item = null;
+        // $valor = null;
+        // $compras = ControladorInventario::ctrMostrarCompras($tabla, $item, $valor);
+        
+          // echo "<pre>";
+          // var_dump($compras);
+          // echo "</pre>";
         // var_dump($_SESSION['permisos']['Usuarios']['agregar']);
 
         // foreach ($permisos_pantalla as $key => $value) {
@@ -54,6 +62,7 @@
                   <th scope="col">Fecha</th>  
                 </tr>
               </thead>
+              
            
           </table>
         </div> 

@@ -229,7 +229,7 @@ foreach ($inventarios as $key => $value) {
     $pdf->Cell(35, 4, ''.$value['nombre'].'', 0, 0, 'C');
     $pdf->Cell(20, 4, ''.$value['cantidad'].'', 0, 0, 'C');
     $pdf->Cell(20, 4, ''.$value['precio'].'', 0, 0, 'C');
-    $pdf->Cell(45, 4, ''.$value['fecha'].'', 0, 0, 'C');
+    $pdf->Cell(45, 4, ''.$value['fecha_compra'].'', 0, 0, 'C');
     $i++;
 
 }

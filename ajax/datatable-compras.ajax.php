@@ -47,7 +47,7 @@ class TablaCompras{
 			      "'.$compras[$i]["nombre"].'",
                   "'.$compras[$i]["cantidad"].'",
 			      "'.$compras[$i]["precio"].'",
-			      "'.$compras[$i]["fecha"].'"
+			      "'.$compras[$i]["fecha_compra"].'"
 			    ],';
 
 		  }

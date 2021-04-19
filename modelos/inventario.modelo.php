@@ -42,7 +42,7 @@ class ModeloInventario{
 
 	static public function mdlMostrarCompras($tabla1,$item, $valor){
 		if ($item != null){
-			$stmt = Conexion::conectar()->prepare("SELECT c.*,i.*,p.nombre FROM $tabla1 AS c\n"
+			$stmt = Conexion::conectar()->prepare("SELECT c.*, c.fecha as fecha_compra, i.*,p.nombre FROM $tabla1 AS c\n"
 			. " LEFT JOIN tbl_inventario AS i ON c.id_inventario = i.id_inventario\n"
 			. " LEFT JOIN tbl_proveedores AS p ON c.id_proveedor = p.id_proveedor\n");
 
@@ -52,7 +52,7 @@ class ModeloInventario{
 		
 	
 		} else {
-			$stmt = Conexion::conectar()->prepare("SELECT c.*,i.*,p.nombre FROM $tabla1 AS c\n"
+			$stmt = Conexion::conectar()->prepare("SELECT c.*, c.fecha as fecha_compra, i.*,p.nombre FROM $tabla1 AS c\n"
 			. " LEFT JOIN tbl_inventario AS i ON c.id_inventario = i.id_inventario"
 			. " LEFT JOIN tbl_proveedores AS p ON c.id_proveedor = p.id_proveedor");
 			$stmt -> execute();
@@ -446,16 +446,17 @@ class ModeloInventario{
 
 	static public function mdlRangoCompras($tabla, $rango){
 		if ($rango == null){
-			$stmt = Conexion::conectar()->prepare("SELECT c.*,i.*,p.nombre FROM $tabla AS c\n"
+			$stmt = Conexion::conectar()->prepare("SELECT c.*, c.fecha as fecha_compra, i.*,p.nombre FROM $tabla AS c\n"
 			. " LEFT JOIN tbl_inventario AS i ON c.id_inventario = i.id_inventario\n"
-			. " LEFT JOIN tbl_proveedores AS p ON c.id_proveedor = p.id_proveedor\n");
+			. " LEFT JOIN tbl_proveedores AS p ON c.id_proveedor = p.id_proveedor\n"
+			. " ORDER BY c.id_compra DESC");
 			// $stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
 			$stmt -> execute();
 			return $stmt -> fetchAll();
 		
 	
 		} else {
-			$stmt = Conexion::conectar()->prepare("SELECT c.*,i.*,p.nombre FROM $tabla AS c\n"
+			$stmt = Conexion::conectar()->prepare("SELECT c.*, c.fecha as fecha_compra, i.*,p.nombre FROM $tabla AS c\n"
 			. " LEFT JOIN tbl_inventario AS i ON c.id_inventario = i.id_inventario\n"
 			. " LEFT JOIN tbl_proveedores AS p ON c.id_proveedor = p.id_proveedor\n"
 			. " WHERE nombre_producto LIKE '%$rango%' OR nombre LIKE '%$rango%' OR precio LIKE '%$rango%' OR c.fecha LIKE '%$rango%'");
