@@ -129,7 +129,7 @@ MODAL AGREGAR NUEVA MATRICULA
 
           <div class="form-group col-md-12">
             <label for="Descripcion">Precio</label>
-            <input type="textarea" class="form-control preciom sinCaracteres" name="nuevoPrecio" value="" placeholder="Ingrese el precio" required>
+            <input type="textarea" class="form-control preciom sinCaracteres cantidadFloat" name="nuevoPrecio" value="" placeholder="Ingrese el precio" required>
           </div>
         </div>
 
@@ -199,7 +199,7 @@ MODAL EDITAR MATRICULA
 
           <div class="form-group col-md-12">
             <label for="Descripcion">Precio</label>
-            <input type="textarea" class="form-control preciom sinCaracteres" id="editarPrecioMatricula" name="editarPrecioMatricula" value="" required>
+            <input type="textarea" class="form-control preciom sinCaracteres cantidadFloat" id="editarPrecioMatricula" name="editarPrecioMatricula" value="" required>
           </div>
           <input type="hidden" id="editarIdMatricula" name="editarIdMatricula">
         </div>

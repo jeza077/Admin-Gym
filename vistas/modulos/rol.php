@@ -149,7 +149,7 @@ MODAL AGREGAR ROL
               <div class="form-group row">
                   <label for="Pantalla" class="col-sm-4">Pantalla</label>
                   <select class="form-control col-sm-8 select2" style="width: 100%;" id="nuevaPantalla">
-                    <option selected="selected">Seleccione...</option>
+                    <option selected="selected">Seleccionar pantalla</option>
                       <?php 
                           $tabla = "tbl_objetos";
                           $item = null;
@@ -294,7 +294,7 @@ MODAL EDITAR ROL
                     <div class="form-group row">
                         <label for="Pantalla" class="col-sm-4">Pantalla</label>
                         <select class="form-control col-sm-8 select2" style="width: 100%;" id="nuevaPantallaEditar">
-                          <option selected="selected">Seleccione...</option>
+                          <option selected="selected">Seleccionar pantalla</option>
                             <?php 
                                 $tabla = "tbl_objetos";
                                 $item = null;

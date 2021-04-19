@@ -127,7 +127,7 @@
             <div class="form-row">
               <div class="form-group col-md-4">
                 <label for="precio">Precio de venta</label>
-                <input type="text" class="form-control sinLetras sinCaracteres longitudEntero sinEspacioDoc" id="nuevoPrecio" name="nuevoPrecio" placeholder="Ingrese Precio"  required>
+                <input type="text" class="form-control sinLetras sinCaracteres cantidadFloat sinEspacioDoc" id="nuevoPrecio" name="nuevoPrecio" placeholder="Ingrese precio"  required>
               </div>
               <div class="form-group col-md-4">
                 <label for="productominimo">Producto mínimo</label>
@@ -209,8 +209,8 @@
 
               <div class="form-row">
                 <div class="form-group col-md-4">
-                  <label for="precio">Precio Venta</label>
-                  <input type="text" value="" class="form-control sinLetras sinCaracteres longitudEntero sinEspacioDoc" name="editarPrecio" id="editarPrecio" required>
+                  <label for="precio">Precio venta</label>
+                  <input type="text" value="" class="form-control sinLetras sinCaracteres cantidadFloat sinEspacioDoc" name="editarPrecio" id="editarPrecio" required>
                 </div>
                 <div class="form-group col-md-4">
                   <label for="productominimo">Producto mínimo</label>

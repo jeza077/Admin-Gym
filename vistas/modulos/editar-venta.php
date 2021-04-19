@@ -67,7 +67,7 @@
                     ENTRADA DEL CÓDIGO
                     ======================================-->  
                   <div class="form-group col-md-4">     
-                    <label for="cod_factura">Codigo de Factura</label>  
+                    <label for="cod_factura">Código de factura</label>  
                     <input type="text" class="form-control" id="nuevaVenta" 
                       name="editarVenta" value="<?php echo $venta["numero_factura"]; ?>" readonly>
                   </div>

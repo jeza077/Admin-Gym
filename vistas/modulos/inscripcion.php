@@ -133,13 +133,13 @@ MODAL AGREGAR NUEVA INSCRIPCION
                     </div>
 
                     <div class="form-group col-md-12">
-                        <label for="Descripcion">Cantidad días</label>
-                        <input type="text" class="form-control preciom sinCaracteres cantidadInt" name="nuevoDias" value="" placeholder="Ingresa cantidad días" required>
+                        <label for="Descripcion">Cantidad de días</label>
+                        <input type="text" class="form-control preciom sinCaracteres cantidadInt" name="nuevoDias" value="" placeholder="Ingrese cantidad días" required>
                     </div>
 
                     <div class="form-group col-md-12">
                         <label for="Descripcion">Precio</label>
-                        <input type="text" class="form-control preciom sinCaracteres" name="nuevoPrecio" value="" placeholder="Ingresa precio" required>
+                        <input type="text" class="form-control preciom sinCaracteres cantidadFloat" name="nuevoPrecio" value="" placeholder="Ingrese precio" required>
                     </div>
                 </div>
 
@@ -209,7 +209,7 @@ MODAL EDITAR INSCRIPCION
 
                         <div class="form-group col-md-12">
                             <label for="Descripcion">Precio</label>
-                            <input type="textarea" class="form-control preciom" id="editarPrecioInscripcion" name="editarPrecioInscripcion" value="" required>
+                            <input type="textarea" class="form-control preciom sinCaracteres cantidadFloat" id="editarPrecioInscripcion" name="editarPrecioInscripcion" value="" required>
                         </div>
 
                         <input type="hidden" id="editarIdInscripcion" name="editarIdInscripcion">
