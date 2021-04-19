@@ -503,7 +503,7 @@ function alertas(modulo) {
 =============================================*/
 function sinNumeros(event) {
     var codigo = event.which || event.keyCode;
-    // console.log(codigo);
+    console.log(codigo);
     if(codigo >= 48 && codigo <= 57  || codigo >= 97  && codigo <= 105){
         event.preventDefault();
 
@@ -812,8 +812,8 @@ function trim(fecha){
 =============================================*/
 $('.sinLetras').keydown(sinLetras)
 $('.sinCaracteres').keydown(sinCaracteres)
-$('.sinNumeros').keydown(sinNumeros)
 $('.soloSignos').keydown(soloSignosInter)
+$('.sinNumeros').keydown(sinNumeros)
 
 validarEmail($('.email'), $('.alertaEmail')); //Validar que no exista en DB, email de la persona ingresada
 $('.nombre').keydown(sinNumeros)

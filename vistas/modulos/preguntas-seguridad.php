@@ -122,7 +122,7 @@ MODAL AGREGAR NUEVA PREGUNTA
         <div class="modal-body">
           <div class="form-group col-md-12">
             <label for="">Pregunta</label>
-            <input type="text" class="form-control mayus soloSignos SinNumeros longitudPregunta soloUnEspacio" name="nuevaPregunta" value="" placeholder="Ingrese la pregunta" required>
+            <input type="text" class="form-control mayus soloSignos sinNumeros longitudPregunta soloUnEspacio" name="nuevaPregunta" value="" placeholder="Ingrese la pregunta" required>
           </div>
 
           <!-- <div class="form-group col-md-12">
