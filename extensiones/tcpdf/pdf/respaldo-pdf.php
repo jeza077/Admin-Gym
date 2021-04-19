@@ -11,7 +11,7 @@ session_start();
 
 $descripcionEvento = "".$_SESSION['usuario']." Generó reporte pdf de respaldo de la base de datos";
 $accion = "Generar";
-$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION['id_usuario'], 14, $accion,
+$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION['id_usuario'], 27, $accion,
 $descripcionEvento);
 
 
@@ -28,6 +28,13 @@ class PDF extends TCPDF{
         $nombreEmpresa = ControladorUsuarios::ctrMostrarParametros($item, $valor);
         // var_dump($nombreEmpresa ['valor']);
         $nombre = $nombreEmpresa ['valor'];
+  
+        $item="parametro";
+        $valor="ADMIN_TELEFONO_EMPRESA";
+
+        $telefonoEmpresa = ControladorUsuarios::ctrMostrarParametros($item, $valor);
+        // var_dump($telefonoEmpresa ['valor']);
+        $telefono = $telefonoEmpresa ['valor'];
     
         $item="parametro";
         $valor="ADMIN_DIRECCION_EMPRESA";
@@ -65,6 +72,8 @@ class PDF extends TCPDF{
         $this->Cell(180, 7, 'Direccion: '.$direccion.'', 0, 1, 'C');
         // $this->Cell(180, 3, 'Calle xxxxxxxxxx.....', 0, 1, 'C');
         $this->Cell(180, 3, 'Correo: '.$correo.'', 0, 1, 'C');
+        $this->Cell(180, 7, 'Teléfono: '.$telefono.'', 0, 1, 'C');
+
 
         $this->Ln(20); //Espacios
         $this->SetFont('helvetica', 'B', 14);

@@ -46,6 +46,13 @@ class PDF extends TCPDF{
         $direccionEmpresa = ControladorUsuarios::ctrMostrarParametros($item, $valor);
         // var_dump($direccionEmpresa ['valor']);
         $direccion = $direccionEmpresa ['valor'];
+
+        $item="parametro";
+        $valor="ADMIN_TELEFONO_EMPRESA";
+
+        $telefonoEmpresa = ControladorUsuarios::ctrMostrarParametros($item, $valor);
+        // var_dump($telefonoEmpresa ['valor']);
+        $telefono = $telefonoEmpresa ['valor'];
     
         $item="parametro";
         $valor="ADMIN_CORREO";
@@ -75,6 +82,7 @@ class PDF extends TCPDF{
         $this->Cell(260, 3, ''.$direccion.'', 0, 1, 'C');
         // $this->Cell(260, 3, 'Calle xxxxxxxxxx.....', 0, 1, 'C');
         $this->Cell(260, 5, ''.$correo.'', 0, 1, 'C');
+        $this->Cell(260, 7, 'Teléfono: '.$telefono.'', 0, 1, 'C');
 
         $this->Ln(20); //Espacios
         $this->SetFont('helvetica', 'B', 14);
@@ -154,7 +162,7 @@ $pdf->SetFont('dejavusans', '', 14, '', true);
 // This method has several options, check the source code documentation for more information.
 $pdf->AddPage();
 
-$pdf->Ln(45);
+$pdf->Ln(55);
 
 $pdf->SetFont('times', '', 13);
 $pdf->SetFillColor(225, 235, 255);
@@ -215,14 +223,14 @@ if(!$bitac){
 } else {
 
     $i = 1; //Contador
-    $max = 12; //Maximo de registros a mostrar en una pagina
+    $max = 11; //Maximo de registros a mostrar en una pagina
 
     foreach ($bitac as $key => $value) {
 
         if(($i%$max) == 0){
             $pdf->AddPage();
 
-            $pdf->Ln(40);
+            $pdf->Ln(55);
             
             $pdf->SetFont('times', '', 13);
             $pdf->SetFillColor(225, 235, 255);
