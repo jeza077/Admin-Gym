@@ -105,8 +105,12 @@ class ControladorMantenimientos {
               
               $descripcionEvento = "".$_SESSION['usuario']." cambio el estado de ".$respuestaGenero['tipo_descuento']." a activado";
               
+            }/*elseif($tabla == 'tbl_preguntas') {
+              
+              $descripcionEvento = "".$_SESSION['usuario']." cambio el estado de ".$respuestaGenero['pregunta']." a activado";
+              
             }
-
+            */
             $accion = "Cambio de estado";
             $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION['id_usuario'], $idPantalla, $accion, $descripcionEvento);	
             return $bitacoraConsulta;					
@@ -137,7 +141,12 @@ class ControladorMantenimientos {
               
               $descripcionEvento = "".$_SESSION['usuario']." cambio el estado de ".$respuestaGenero['tipo_descuento']." a desactivado";
               
+            } /*elseif($tabla == 'tbl_preguntas') {
+              
+              $descripcionEvento = "".$_SESSION['usuario']." cambio el estado de ".$respuestaGenero['pregunta']." a desactivado";
+              
             } 
+            */
             // $descripcionEvento = "".$_SESSION['usuario']." cambio el estado de ".$respuestaGenero['sexo']." a desactivado";
             $accion = "Cambio de estado";
             $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION['id_usuario'], $idPantalla, $accion, $descripcionEvento);	

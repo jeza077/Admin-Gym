@@ -17,6 +17,13 @@
         </div>
       </div><!-- /.container-fluid -->
   </section>  
+  <?php
+            $descripcionEvento = "".$_SESSION["usuario"]." Consultó la pantalla de preguntas de seguridad";
+            $accion = "Consulta";
+
+            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 32,$accion, $descripcionEvento);
+
+        ?>
 
   <section class="content">
 

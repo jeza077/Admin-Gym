@@ -1189,9 +1189,10 @@ $(document).on("click", ".btnActivarDocumento", function(){
 /*=====================================
 ACTIVAR PREGUNTA
 ========================================*/
-$(document).on("click", ".btnActivarPregunta", function(){
 /*
-    let idActivarDinamico = $(this).attr("idPregunta");
+$(document).on("click", ".btnActivarPregunta", function(){
+
+    let idActivarDinamico = $(this).attr("idPreguntaActivar ");
     let estadoDinamico = $(this).attr("estadoPregunta");
     let tablaDinamica = 'tbl_preguntas';
     let idTablaDinamica = 'id_preguntas';
@@ -1217,9 +1218,9 @@ $(document).on("click", ".btnActivarPregunta", function(){
      } 
 
     }) 
-    */
+    
 
-    if(estadoPregunta == 0){
+    if(estadoDinamico == 0){
         $(this).removeClass('btn-success');
         $(this).addClass('btn-danger');
         $(this).html('Desactivado');
@@ -1234,10 +1235,11 @@ $(document).on("click", ".btnActivarPregunta", function(){
         $(this).attr('estadoPregunta',0);
 
     }
+    
 
 })
 
-
+*/
 
 
 //** ------------------------------------*/
