@@ -37,13 +37,15 @@ class AjaxUsuarios{
         $item2 = "id_usuario";
         $valor2 = $this->activarId;
 
-        $item3 = null;
-        $valor3 = null;
+        // $item3 = null;
+        // $valor3 = null;
         
-        $item4 = null;
-        $valor4 = null;
+        // $item4 = null;
+        // $valor4 = null;
       
-        $respuesta = ModeloUsuarios::mdlActualizarUsuario($tabla, $item1, $valor1, $item2, $valor2, $item3, $valor3, $item4, $valor4);
+        $respuesta = ControladorUsuarios::ctrActivarUsuario($tabla, $item1, $valor1, $item2, $valor2);
+
+        // echo json_encode($respuesta);
 
     }
 
@@ -63,10 +65,30 @@ class AjaxUsuarios{
 
         echo json_encode($respuesta);
     }
+    
     /*=============================================
-            REVISAR CORREO
+    REVISAR QUE LA CONTRASEÑA SEA IGUAL A LA ANTERIOR
     =============================================*/
     
+    public $passAnterior;
+
+    public function ajaxPassAnterior(){
+        
+        $tabla = "tbl_usuarios";
+        $item = "password";
+        $valor = $this->passAnterior;
+        
+        $encriptar = crypt($valor, '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
+
+        $respuesta = ControladorUsuarios::ctrMostrarUsuarios($tabla, $item, $encriptar);
+
+        echo json_encode($respuesta);
+    }
+
+
+    /*=============================================
+            REVISAR CORREO
+    =============================================*/ 
     public $verificarEmail;
 
     public function ajaxVerificarEmail(){
@@ -76,6 +98,28 @@ class AjaxUsuarios{
         $valor = $this->verificarEmail;
         
         $respuesta = ControladorUsuarios::ctrMostrarUsuarios($tabla, $item, $valor);
+        // echo "<pre>";
+        // var_dump($respuesta);
+        // echo "</pre>";
+        // return;
+
+        echo json_encode($respuesta);
+    }
+
+    /*=============================================
+            REVISAR CORREO PROVEEDOR
+    =============================================*/
+    
+    public $verificarEmailProv;
+
+    public function ajaxVerificarEmailProv(){
+
+        $tabla = "tbl_proveedores";
+        $item = "correo";
+        $valor = $this->verificarEmailProv;
+        $all = null;
+        
+        $respuesta = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all);
         // echo "<pre>";
         // var_dump($respuesta);
         // echo "</pre>";
@@ -226,6 +270,24 @@ if(isset($_POST["validarUsuario"])){
     $valUsuario = new AjaxUsuarios();
     $valUsuario->validarUsuario = $_POST["validarUsuario"];
     $valUsuario->ajaxValidarUsuario();
+}
+
+/*=============================================
+REVISAR QUE LA CONTRASEÑA SEA IGUAL A LA ANTERIOR
+=============================================*/
+if(isset($_POST["passAnterior"])){
+    $valUsuario = new AjaxUsuarios();
+    $valUsuario->passAnterior = $_POST["passAnterior"];
+    $valUsuario->ajaxPassAnterior();
+}
+
+/*=============================================
+    REVISAR CORREO PROVEEDORES
+=============================================*/
+if(isset($_POST["verificarEmailProv"])){
+    $valProv = new AjaxUsuarios();
+    $valProv->verificarEmailProv = $_POST["verificarEmailProv"];
+    $valProv->ajaxverificarEmailProv();
 }
 
 /*=============================================

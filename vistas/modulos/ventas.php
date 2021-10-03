@@ -10,7 +10,7 @@
           </div>
           <div class="col-sm-6">
           <button class="btn btn-orange float-right"  data-toggle="modal" data-target="#modalAgregarUsuario">
-            Agregar Usuario          
+            Agregar usuario          
           </button>
 
           </div>
@@ -32,8 +32,8 @@
       //   echo $key;
       // }
       
-      $descripcionEvento = " Consulto la pantalla de Venta";
-      $accion = "consulta";
+      $descripcionEvento = "".$_SESSION["usuario"]." Consultó la pantalla de administrar ventas";
+      $accion = "Consulta";
 
       $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 5,$accion, $descripcionEvento);
 
@@ -106,10 +106,11 @@
                         <option selected="selected">Seleccionar...</option>
                         <?php 
                             $tabla = "tbl_documento";
-                            $item = null;
-                            $valor = null;
+                            $item = 'estado';
+                            $valor = 1;
+                            $all = true;
 
-                            $preguntas = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
+                            $preguntas = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all);
 
                             foreach ($preguntas as $key => $value) { ?>
                                 <option value="<?php echo $value['id_documento']?>"><?php echo $value['tipo_documento']?></option>        
@@ -120,31 +121,31 @@
                   </div>
 
                   <div class="form-group col-md-3">
-                    <label for="identidad">Numero de documento</label>
-                    <input type="text" class="form-control id" name="nuevoNumeroDocumento" placeholder="Ingrese Identidad" required>
+                    <label for="identidad">Número de documento</label>
+                    <input type="text" class="form-control id" name="nuevoNumeroDocumento" placeholder="Ingrese identidad" required>
                   </div>
                   <div class="form-group col-md-3">
                     <label for="nombre">Nombre</label>
-                    <input type="text" class="form-control nombre" name="nuevoNombre" placeholder="Ingrese Nombre" required>
+                    <input type="text" class="form-control nombre" name="nuevoNombre" placeholder="Ingrese nombre" required>
                   </div>
                   <div class="form-group col-md-3">
                     <label for="apellido">Apellido</label>
-                    <input type="text" class="form-control apellidos" name="nuevoApellido" placeholder="Ingrese Apellidos" required>
+                    <input type="text" class="form-control apellidos" name="nuevoApellido" placeholder="Ingrese apellidos" required>
                   </div>
                 </div>
     
                 <div class="form-row">
                   <div class="form-group col-md-4">
-                    <label for="inputEmail4">Email</label>
-                    <input type="email" class="form-control email" id="inputEmail4" name="nuevoEmail" placeholder="Ingrese Email" required>
+                    <label for="inputEmail4">Correo</label>
+                    <input type="email" class="form-control email" id="inputEmail4" name="nuevoEmail" placeholder="Ingrese correo" required>
                   </div>
                   <div class="form-group col-md-4">
                     <label>Teléfono</label>
-                    <input type="text" class="form-control" data-inputmask='"mask": "(999) 9999-9999"' data-mask  name="nuevoTelefono" placeholder="Ingrese Telefono" required>
+                    <input type="text" class="form-control" data-inputmask='"mask": "(999) 9999-9999"' data-mask  name="nuevoTelefono" placeholder="Ingrese teléfono" required>
                   </div>
                   <div class="form-group col-md-4">
                     <label>Fecha de nacimiento</label>
-                      <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy/mm/dd" data-mask  name="nuevaFechaNacimiento" placeholder="Ingrese Fecha de Nacimiento" required>
+                      <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy/mm/dd" data-mask  name="nuevaFechaNacimiento" placeholder="Ingrese fecha de nacimiento" required>
                   </div>
                 </div>
 
@@ -178,7 +179,7 @@
             <div class="form-row">
               <div class="form-group col-md-3">
                 <label for="">Usuario</label>
-                <input type="text" class="form-control nuevoUsuario" onKeyUp="this.value=this.value.toUpperCase();" name="nuevoUsuario" placeholder="Ingrese Usuario">
+                <input type="text" class="form-control nuevoUsuario" onKeyUp="this.value=this.value.toUpperCase();" name="nuevoUsuario" placeholder="Ingrese usuario">
               </div>
               <div class="form-group col-md-3">
                 <label>Rol</label>
@@ -186,10 +187,11 @@
                   <!-- <option value="2">Default</option> -->
                     <?php 
                         $tabla = "tbl_roles";
-                        $item = null;
-                        $valor = null;
+                        $item = 'estado';
+                        $valor = 1;
+                        $all = true;
 
-                        $roles = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
+                        $roles = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all);
 
                         foreach ($roles as $key => $value) {
                           if($value["rol"] == 'Default'){
@@ -203,7 +205,7 @@
               </div>
 
               <div class="form-group col-md-3">
-                <label for="inputPassword4">Cambiar Contraseña</label>
+                <label for="inputPassword4">Cambiar contraseña</label>
                 <input type="text" class="form-control passwordGenerado" id="inputPassword4" name="nuevoPassword" disabled>
               </div>
             
@@ -211,16 +213,16 @@
 
             <div class="form-row">
             <div class="form-group col-md-6">
-                <label for="exampleInputFile">Foto</label>
+                <label for="exampleInputFile">Imagen</label>
                 <div class="input-group">
                 <img class="img-thumbnail previsualizar mr-2" src="vistas/img/usuarios/default/anonymous.png" alt="imagen-del-usuario" width="100px">
                   <div class="custom-file">
                     <input type="file" class="custom-file-input nuevaFoto" id="exampleInputFile" name="nuevaFoto">
-                    <label class="custom-file-label" for="exampleInputFile">Escoger foto</label>
+                    <label class="custom-file-label" for="exampleInputFile"></label>
                   </div>
 
                 </div>
-                    <p class="p-foto help-block ml-4">Peso máximo de la foto 2 MB</p>
+                    <p class="p-foto help-block ml-4">Peso máximo de la imagen 2 MB</p>
               </div>
             </div>
             

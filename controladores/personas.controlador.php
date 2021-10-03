@@ -2,20 +2,22 @@
 
 class ControladorPersonas{
     /*=============================================
-				MOSTRAR PERSONAS
+    MOSTRAR PERSONAS
 	=============================================*/
-	static public function ctrMostrarPersonas($item, $valor) {
+	static public function ctrMostrarPersonas($item, $valor, $all) {
 
 		$tabla = "tbl_personas";
-		$respuesta = ModeloPersonas::mdlMostrarPersona($tabla, $item, $valor);
+        $respuesta = ModeloPersonas::mdlMostrarPersonas($tabla, $item, $valor, $all);
+		// $respuesta = ModeloPersonas::mdlMostrarPersona($tabla, $item, $valor);    
 
 		return $respuesta;
 
     }
     
 
+
     /*=============================================
-				REGISTRAR PERSONAS
+    REGISTRAR PERSONAS
 	=============================================*/
     static public function ctrCrearPersona($tipoPersona, $pantalla){
 
@@ -29,7 +31,7 @@ class ControladorPersonas{
 
         if(isset($_POST["nuevoNombre"])){
 
-            if(preg_match('/^[a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevoNombre"]) && 
+            if(preg_match('/^[A-ZñÑÁÉÍÓÚ ]+$/', $_POST["nuevoNombre"]) && 
                preg_match('/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.([a-zA-Z]{2,4})+$/', $_POST["nuevoEmail"])){
 
                 $tabla = "tbl_personas";
@@ -49,16 +51,19 @@ class ControladorPersonas{
 
                     $respuestaPersona = ModeloPersonas::mdlCrearPersona($tabla, $datos);
 
+                    
+
                         if($respuestaPersona == true){
                             
                             // /*------------------------------------------ Crear usuario -----------------------------------------------*/
                             $totalId = array();
                             $tabla = "tbl_personas";
                             // $tabla2 = null;
-                            // $item = null;
-                            // $valor = null;
+                            $item = null;
+                            $valor = null;
+                            $all = null;
     
-                            $personaTotal = ModeloPersonas::mdlMostrarPersonas($tabla);
+                            $personaTotal = ModeloPersonas::mdlMostrarPersonas($tabla, $item, $valor, $all);
                             
                             foreach($personaTotal as $keyPersona => $valuePersona){
                             array_push($totalId, $valuePersona["id_personas"]);
@@ -70,8 +75,9 @@ class ControladorPersonas{
                             $tabla = "tbl_roles";
                             $item = "rol";
                             $valor = "Default";
+                            $all = null;
 
-                            $roles  = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
+                            $roles  = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all);
                             // var_dump($roles);
 
                             $idRol = $roles["id_rol"];
@@ -93,9 +99,25 @@ class ControladorPersonas{
 
                             if($crearUsuario == true){
 
+                                $tabla1 = "tbl_personas";
+                                $tabla2 = "tbl_usuarios";
+                                
+                                $item = "usuario";
+                                $valor = $datos["usuario"];
+
+                                $respuesta = ModeloUsuarios::mdlMostrarUsuarios($tabla1, $tabla2, $item, $valor);
+                                
+                                $descripcionEvento = "Se envio correo con usuario y contraseña a ".$datos['usuario']."";
+                                $accion = "Auto-registro";
+                                $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($respuesta['id_usuario'], 30, $accion, $descripcionEvento);
+
+                                $descripcionEvento = "".$datos['nombre']." se auto-registro";
+                                $accion = "Auto-registro";
+                                $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($respuesta['id_usuario'], 30, $accion, $descripcionEvento);						
+                                
                                 echo '<script>
                                         Swal.fire({
-                                            title: "Tus datos han sido guardados correctamente!",
+                                            title: "¡Sus datos han sido guardados correctamente!",
                                             icon: "success",
                                             heightAuto: false,
                                             allowOutsideClick: false
@@ -110,7 +132,7 @@ class ControladorPersonas{
                         } else {
                             echo '<script>
                                     Swal.fire({
-                                        title: "No se pudo guardar tus datos. Intenta de nuevo!",
+                                        title: "¡No se pudo guardar sus datos, intente de nuevo!",
                                         icon: "error",
                                         heightAuto: false,
                                         allowOutsideClick: false,
@@ -140,15 +162,19 @@ class ControladorPersonas{
 
                     $respuestaPersona = ModeloPersonas::mdlCrearPersona($tabla, $datos);
                     
+                    // var_dump($respuestaPersona);
+                    // return;
+
                     if($respuestaPersona == true){
                         
                         $totalId = array();
                         $tabla = "tbl_personas";
                         // $tabla2 = null;
-                        // $item = null;
-                        // $valor = null;
+                        $item = null;
+                        $valor = null;
+                        $all = null;
 
-                        $personaTotal = ModeloPersonas::mdlMostrarPersonas($tabla);
+                        $personaTotal = ModeloPersonas::mdlMostrarPersonas($tabla, $item, $valor, $all);
                         
                         foreach($personaTotal as $keyPersona => $valuePersona){
                         array_push($totalId, $valuePersona["id_personas"]);
@@ -169,12 +195,14 @@ class ControladorPersonas{
                                         "email" => $_POST["nuevoEmail"]);
 
                             $crearUsuario = ControladorUsuarios::ctrCrearUsuario($datos);
-
+                            
+                            // var_dump($crearUsuario);
+                            // return;
 
                             if($crearUsuario == true){
                                 echo '<script>
                                         Swal.fire({
-                                            title: "Usuario guardado correctamente!",
+                                            title: "¡Usuario creado correctamente!",
                                             icon: "success",
                                             heightAuto: false
                                         }).then((result)=>{
@@ -183,21 +211,40 @@ class ControladorPersonas{
                                             }
                                         });                                      
                                     </script>';
+
                             } else {
-                                echo '<script>
-                                        Swal.fire({
-                                            title: "Error al guardar.",
-                                            icon: "error",
-                                            heightAuto: false
-                                        }).then((result)=>{
-                                            if(result.value){
-                                                window.location = "'.$pantalla.'";
-                                            }
-                                        });                                      
-                                    </script>';
+
+                                $tabla = 'tbl_personas';
+                                $borrarPersona = ModeloPersonas::mdlBorrarPersona($tabla, $idPersona);
+
+                                if($borrarPersona == true) {
+
+                                    echo '<script>
+                                            Swal.fire({
+                                                title: "¡Llenar los campos correctamente e intente de nuevo!",
+                                                icon: "error",
+                                                heightAuto: false
+                                            }).then((result)=>{
+                                                if(result.value){
+                                                    window.location = "'.$pantalla.'";
+                                                }
+                                            });                                      
+                                        </script>';
+
+                                } 
                             }
 
+                    } else {
+                        echo '<script>
+                                Swal.fire({
+                                    title: "Llene los campos correctamente.",
+                                    icon: "error",									
+                                    heightAuto: false,
+                                    showConfirmButton: true,
+                                });					
+                            </script>';
                     }
+
 
                 } else {
                     // echo "<pre>";
@@ -229,10 +276,11 @@ class ControladorPersonas{
                             $totalId = array();
                             $tabla = "tbl_personas";
                             // $tabla2 = "tbl_clientes";
-                            // $item = null;
-                            // $valor = null;
+                            $item = null;
+                            $valor = null;
+                            $all = null;
 
-                            $personaTotal = ModeloPersonas::mdlMostrarPersonas($tabla);
+                            $personaTotal = ModeloPersonas::mdlMostrarPersonas($tabla, $item, $valor, $all);
                             
                             foreach($personaTotal as $keyPersona => $valuePersona){
                             array_push($totalId, $valuePersona["id_personas"]);
@@ -279,7 +327,7 @@ class ControladorPersonas{
                             if($crearCliente == true){
                                 echo '<script>
                                         Swal.fire({
-                                            title: "Cliente guardado correctamente!",
+                                            title: "¡Cliente creado correctamente!",
                                             icon: "success",
                                             heightAuto: false,
                                             allowOutsideClick: false
@@ -312,7 +360,7 @@ class ControladorPersonas{
 
 
     /*=============================================
-				EDITAR PERSONAS
+    EDITAR PERSONAS
     =============================================*/ 
     static public function ctrEditarPersona($ajustes, $tipoPersona, $pantalla){
         // echo "<pre>";
@@ -355,7 +403,7 @@ class ControladorPersonas{
                         if($respuestaPersona == true){
                             echo '<script>
                                     Swal.fire({
-                                        title: "Datos guardados correctamente!",
+                                        title: "¡Datos guardados correctamente!",
                                         icon: "success",
                                         heightAuto: false
                                     }).then((result)=>{
@@ -399,30 +447,32 @@ class ControladorPersonas{
 
                     $respuestaPersona = ModeloPersonas::mdlEditarPersona($tabla, $datos);
                     
-                    if($tipoPersona == 'usuarios') {                    
+                    // if($tipoPersona == 'usuarios') {                    
 
-                        // echo "<pre>";
-                        // var_dump($_POST);
-                        // echo "</pre>";
-                        // // return;
-                        // var_dump($_FILES);
-                        // echo $tipoPersona;
+                    //     // echo "<pre>";
+                    //     // var_dump($_POST);
+                    //     // echo "</pre>";
+                    //     // // return;
+                    //     // var_dump($_FILES);
+                    //     // echo $tipoPersona;
+                    //     // return;
+
+                    //     $datos = array("nombre" => $_POST["editarNombre"],
+                    //                 "apellido" => $_POST["editarApellido"],
+                    //                 "id_documento" => $_POST["editarTipoDocumento"],
+                    //                 "numero_documento" => $_POST["editarNumeroDocumento"],
+                    //                 "tipo_persona" => $tipoPersona,
+                    //                 "fecha_nacimiento" => $_POST["editarFechaNacimiento"],
+                    //                 "sexo" => $_POST["editarSexo"],
+                    //                 "telefono" => $_POST["editarTelefono"],
+                    //                 "direccion" => $_POST["editarDireccion"],
+                    //                 "email" => $_POST["editarEmail"],
+                    //                 "id_persona" => $_POST["idPersona"]);
+
+                    //     $respuestaPersona = ModeloPersonas::mdlEditarPersona($tabla, $datos);
+                        // var_dump($respuestaPersona);
                         // return;
 
-                        $datos = array("nombre" => $_POST["editarNombre"],
-                                    "apellido" => $_POST["editarApellido"],
-                                    "id_documento" => $_POST["editarTipoDocumento"],
-                                    "numero_documento" => $_POST["editarNumeroDocumento"],
-                                    "tipo_persona" => $tipoPersona,
-                                    "fecha_nacimiento" => $_POST["editarFechaNacimiento"],
-                                    "sexo" => $_POST["editarSexo"],
-                                    "telefono" => $_POST["editarTelefono"],
-                                    "direccion" => $_POST["editarDireccion"],
-                                    "email" => $_POST["editarEmail"],
-                                    "id_persona" => $_POST["idPersona"]);
-
-                        $respuestaPersona = ModeloPersonas::mdlEditarPersona($tabla, $datos);
-                        
                         if($respuestaPersona == true){
                             // echo '<script>
                             //         Swal.fire({
@@ -449,12 +499,14 @@ class ControladorPersonas{
                                         "email" => $_POST["editarEmail"]);
 
                             $editarUsuario = ControladorUsuarios::ctrEditarUsuario($datos);
-
+                            // var_dump($editarUsuario);
+                            // return;
+                            
                             if($editarUsuario == true){
                                 // return;
                                 echo '<script>
                                         Swal.fire({
-                                            title: "Usuario editado correctamente!",
+                                            title: "¡Usuario editado correctamente!",
                                             icon: "success",
                                             heightAuto: false
                                         }).then((result)=>{
@@ -507,7 +559,7 @@ class ControladorPersonas{
                         //         </script>';
                             
                         //         return;
-                    }
+                    // }
 
                 } else {
                     // echo "<pre>";
@@ -540,10 +592,15 @@ class ControladorPersonas{
                     // return;        
     
                     if($respuestaDeEditarPersona == true){
+
+                        $descripcionEvento = "".$_SESSION['usuario']." Actualizó el cliente de gimnasio llamado ".$_POST["editarNombre"]."";
+					    $accion = "Actualizar";
+					    $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION['id_usuario'], 4, $accion, $descripcionEvento);
+					    
                         
                         echo '<script>
                                 Swal.fire({
-                                    title: "Cliente fue editado correctamente!",
+                                    title: "¡Cliente fue editado correctamente!",
                                     icon: "success",
                                     heightAuto: false,
                                     allowOutsideClick: false
@@ -589,7 +646,7 @@ class ControladorPersonas{
                                 if($respuestaPersona == true){
                                     echo '<script>
                                             Swal.fire({
-                                                title: "Datos guardados correctamente!",
+                                                title: "¡Datos guardados correctamente!",
                                                 icon: "success",
                                                 heightAuto: false
                                             }).then((result)=>{
@@ -607,7 +664,7 @@ class ControladorPersonas{
     }
 
     /*=============================================
-				EDITAR CLIENTE VENTAS
+    EDITAR CLIENTE VENTAS
     =============================================*/
     
     static public function ctrEditarClienteVentas($tipoCliente, $pantalla) {
@@ -691,7 +748,7 @@ class ControladorPersonas{
                         if($crearClienteVenta == true){
                             echo '<script>
                                     Swal.fire({
-                                        title: "Cliente editado correctamente!",
+                                        title: "¡Cliente editado correctamente!",
                                         icon: "success",
                                         heightAuto: false,
                                         allowOutsideClick: false
@@ -721,7 +778,7 @@ class ControladorPersonas{
         }
     }
     /*=============================================
-            ACTUALIZAR PAGO CLIENTE
+    ACTUALIZAR PAGO CLIENTE
     =============================================*/
     static public function ctrActualizarPagoCliente($tipoPersona, $pantalla){
         // echo "<pre>";
@@ -754,15 +811,15 @@ class ControladorPersonas{
 
         if($respuestaEditarPagoCliente == true){
 
-            $descripcionEvento = "Actualizo Pago Cliente";
-            $accion = "Actualizo";
+            $descripcionEvento = "Actualizó pago cliente";
+            $accion = "Actualizó";
   
             $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 3,$accion, $descripcionEvento);
   
             
             echo '<script>
                     Swal.fire({
-                        title: "Pago fue editado correctamente!",
+                        title: "¡Pago fue editado correctamente!",
                         icon: "success",
                         heightAuto: false,
                         allowOutsideClick: false
@@ -776,7 +833,7 @@ class ControladorPersonas{
     }
     
 	/*=============================================
-            BORRAR PERSONAS (USUARIO/CLIENTE)
+    BORRAR PERSONAS (USUARIO/CLIENTE)
 	=============================================*/
     static public function ctrBorrarPersona($tipoPersona, $pantalla){
         // var_dump($_GET);
@@ -795,20 +852,21 @@ class ControladorPersonas{
             if($respuesta[1] == 1451){
       
                 echo '<script>
-                        Swal.fire({
-                            title: "No se pudo borrar el '.$tipoPersona.'!",
-                            icon: "error",
-                            heightAuto: false
-                        }).then((result)=>{
-                            if(result.value){
-                                window.location = "'.$pantalla.'";
-                            }
-                        });                                      
-                    </script>';
+                    Swal.fire({
+                        title: "¡No se pudo borrar el '.$tipoPersona.'!",
+                        text: "¡No se puede borrar ya que está asociado con otros datos!",
+                        icon: "error",
+                        heightAuto: false
+                    }).then((result)=>{
+                        if(result.value){
+                            window.location = "'.$pantalla.'";
+                        }
+                    });                                      
+                </script>';
 
             } else if($tipoPersona == 'usuario') {
-                $descripcionEvento = " Elimino un usuario.";
-                $accion = "Elimino";
+                $descripcionEvento = "".$_SESSION["usuario"]." Eliminó el usuario ".$_GET['usuario']."";
+                $accion = "Eliminar";
     
                 $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 2,$accion, $descripcionEvento);
     
@@ -819,7 +877,7 @@ class ControladorPersonas{
                 }
                 echo '<script>
                         Swal.fire({
-                            title: "El usuario ha sido borrado correctamente!",
+                            title: "¡El usuario ha sido eliminado correctamente!",
                             icon: "success",
                             heightAuto: false
                         }).then((result)=>{
@@ -831,7 +889,7 @@ class ControladorPersonas{
                     
             } else {
                 
-                $descripcionEvento = " Elimino un cliente.";
+                $descripcionEvento = " Eliminó un cliente.";
                 $accion = "Elimino";
     
                 $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 3,$accion, $descripcionEvento);
@@ -839,7 +897,7 @@ class ControladorPersonas{
               
                 echo '<script>
                         Swal.fire({
-                            title: "El cliente ha sido borrado correctamente!",
+                            title: "¡El cliente ha sido eliminado correctamente!",
                             icon: "success",
                             heightAuto: false
                         }).then((result)=>{
@@ -849,6 +907,61 @@ class ControladorPersonas{
                         });                                      
                     </script>';
             }
+        }
+    }
+
+    /*=============================================
+    BORRAR BITACORA
+    =============================================*/
+    static public function ctrBorrarBitacora($pantalla){
+        // var_dump($_GET);
+        // return;
+
+        if(isset($_GET['idBitacora'])){
+            $tabla = 'tbl_bitacora';
+            $datos = $_GET['idBitacora'];
+
+
+            $respuesta = ModeloPersonas::mdlBorrarBitacora($tabla, $datos);
+            
+            // var_dump($respuesta);
+            // return;
+            
+
+            if ($respuesta==true) {
+
+                $tablaLog='tbl_bitacora_log';
+                $item=$_GET['idBitacora'];
+                $usuario=$_SESSION['usuario'];
+                
+                $respuestaLog = ModeloPersonas::mdlIngresarLog($tablaLog,$usuario,$item);
+
+                echo '<script>
+                        Swal.fire({
+                            title: "El registro ha sido borrado correctamente!",
+                            icon: "success",
+                            heightAuto: false
+                        }).then((result)=>{
+                            if(result.value){
+                                window.location = "'.$pantalla.'";
+                            }
+                        });                                      
+                    </script>';
+            }else{
+                echo '<script>
+                    Swal.fire({
+                        title: "No se pudo borrar el registro!",
+                        text: "No se puede borrar",
+                        icon: "error",
+                        heightAuto: false
+                    }).then((result)=>{
+                        if(result.value){
+                            window.location = "'.$pantalla.'";
+                        }
+                    });                                      
+                </script>';
+            }
+
         }
     }
 }

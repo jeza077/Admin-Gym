@@ -63,7 +63,7 @@
     <div class="card-header border-0">
         <h3 class="card-title" style="color:#fff">
             <i class="fas fa-th mr-1"></i>
-            Grafico de Ventas
+            Gráfico de ventas
         </h3>
     </div>
 

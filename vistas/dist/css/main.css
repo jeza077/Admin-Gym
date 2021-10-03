@@ -59,6 +59,14 @@ box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.5);
 }
 
 
+.paginate_button.page-item.active a{
+    background: var(--orangeThird)!important;
+    border-color: var(--orangeThird)!important;
+}
+
+.custom-file-input ~ .custom-file-label::after {
+    content: "Escoger imagen"!important;
+}
 
 .login-page {
     /* background: rgb(255, 158, 30); */
@@ -109,6 +117,10 @@ body.login-page .login-box.recu-password .card{
     font-weight: 300;
     font-size: 2rem;
 } */
+.input-group.mySelect {
+    flex-wrap: inherit;
+}
+
 
 
 /** COLORES **/
@@ -271,18 +283,19 @@ body.primer-ingreso .card .contenedor2 a.salir{
     left: 100%;
     transition: 0.5s;
     width: 520px;
+    margin: 0 2rem;
 }
 .contenedor-primer-ingreso.password-primer-ingreso .passwords i.show-nueva-pass.primero{
     cursor: pointer;
     position: absolute;
-    top: 117px;
+    top: 195px;
     right: 17px;
     z-index: 1000;
 }
 .contenedor-primer-ingreso.password-primer-ingreso .passwords i.show-confir-pass.segundo{
     cursor: pointer;
     position: absolute;
-    top: 195px;
+    top: 271px;
     right: 17px;
     z-index: 1000;
 }
@@ -590,7 +603,7 @@ i.show-confir-pass{
     left: 100%;
 }
 .login-box.active.quest.changePassword{
-    margin: 6.5% 35%;
+    /* margin: 6|.5% 35%; */
     height: 500px;
 }
 .login-box.active.quest.changePassword.contenedor-rp{
@@ -683,9 +696,15 @@ i.show-confir-pass{
 
 /***** SIDEBAR ******/
 .main-sidebar{
-    position: fixed!important;
+    /* position: fixed!important; */
     background-color: var(--darkFirst);
 }
+/* .os-theme-dark>.os-scrollbar, .os-theme-light>.os-scrollbar{
+    background: red!important;
+}
+.os-scrollbar{
+    background-color: red!important;
+} */
 .nav-link.active {
     background: var(--orangeThird)!important;
     color: #fff!important;
@@ -702,6 +721,11 @@ i.show-confir-pass{
     background: #d7dce4 !important;
     color: #fff;
 } */
+[class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link:hover{
+    background-color: var(--orangeFirst);
+}
+
+
 
 /** AGREGAR PERSONA */
 .card.agregar-persona{

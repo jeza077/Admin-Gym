@@ -14,14 +14,14 @@ $password->ctrRevisarCodigoFecha();
 <!--Bitacora cod.-->
 
 <?php
-		       $descripcionEvento = " Ingreso a Recuperar Contraseña ";
-	         $accion = "Ingreso";
+	         $accion = "Ingresó";
+		       $descripcionEvento = " Ingresó a recuperar contraseña ";
   
 	         $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 1,$accion, $descripcionEvento);
            ?>
     <!-- CONTENEDOR CAMBIAR CONTRASEÑA -->
     <div class="card-body login-card-body">
-      <p class="login-box-msg">Cambia tu contraseña</p>
+      <p class="login-box-msg">Cambie su contraseña</p>
       <form method="post" id="cambiarPassword">
       <div class="form-row">
         <div class="form-group col-md-12 passwords">
@@ -47,7 +47,7 @@ $password->ctrRevisarCodigoFecha();
         
         <div class="row mb-2" id="linkLogin">    
             <div class="col-12">
-              <button type='submit' class='btn btn-orange btn-block btn-flat' id='cambiarContraseñaPorCorreo'>Cambiar Contraseña</button>
+              <button type='submit' class='btn btn-orange btn-block btn-flat' id='cambiarContraseñaPorCorreo'>Cambiar contraseña</button>
             </div>  
         </div>
         

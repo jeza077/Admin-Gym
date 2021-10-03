@@ -3,7 +3,7 @@
 class ModeloClientes{
     
     /*=============================================
-			CREAR CLIENTES	
+	CREAR CLIENTES	
 	=============================================*/
 	 
 	static public function mdlCrearCliente($tabla, $datos){
@@ -60,15 +60,16 @@ class ModeloClientes{
 	}
 
     /*=============================================
-		MOSTRAR CLIENTES
+	MOSTRAR CLIENTES
 	=============================================*/
 	
 	static public function mdlMostrarClientes($tabla1, $tabla2, $item, $valor){
 
 		if($item != null){
 
-			$stmt = Conexion::conectar()->prepare("SELECT p.*, c.*, d.tipo_documento, m.tipo_matricula, m.precio_matricula FROM $tabla1 as p\n"
+			$stmt = Conexion::conectar()->prepare("SELECT p.*, c.*, s.*, d.tipo_documento, m.tipo_matricula, m.precio_matricula FROM $tabla1 as p\n"
 			. "LEFT JOIN $tabla2 as c ON p.id_personas = c.id_persona\n"
+			. "LEFT JOIN tbl_sexo AS s ON p.sexo = s.id_sexo\n"
 			. "LEFT JOIN tbl_documento as d ON p.id_documento = d.id_documento\n"
 			. "LEFT JOIN tbl_matricula as m ON c.id_matricula = m.id_matricula\n"
 			. "LEFT JOIN tbl_descuento as pd ON c.id_descuento = pd.id_descuento\n"
@@ -84,8 +85,9 @@ class ModeloClientes{
 		} else {
 			 
 
-			$stmt = Conexion::conectar()->prepare("SELECT p.*, c.*, d.tipo_documento, i.fecha_creacion, i.tipo_inscripcion, pd.tipo_descuento, valor_descuento, pc.* FROM $tabla1 as p\n"
+			$stmt = Conexion::conectar()->prepare("SELECT p.*, c.*, s.*, d.tipo_documento, i.fecha_creacion, i.tipo_inscripcion, pd.tipo_descuento, valor_descuento, pc.* FROM $tabla1 as p\n"
 			. "LEFT JOIN $tabla2 as c ON p.id_personas = c.id_persona\n"
+			. "LEFT JOIN tbl_sexo AS s ON p.sexo = s.id_sexo\n"
 			. "LEFT JOIN tbl_documento as d ON p.id_documento = d.id_documento\n"
 			. "LEFT JOIN tbl_matricula as m ON c.id_matricula = m.id_matricula\n"
 			. "LEFT JOIN tbl_descuento as pd ON c.id_descuento = pd.id_descuento\n"
@@ -108,7 +110,7 @@ class ModeloClientes{
 	
 
 	/*=============================================
-		MOSTRAR CLIENTES SIN PAGO
+	MOSTRAR CLIENTES SIN PAGO
 	=============================================*/
 	
 	static public function mdlMostrarClientesSinPago($tabla1, $tabla2, $item, $valor){
@@ -130,13 +132,13 @@ class ModeloClientes{
 
 		} else {
 
-			$stmt = Conexion::conectar()->prepare("SELECT p.*, c.*, m.* FROM $tabla1 as p\n"
+			$stmt = Conexion::conectar()->prepare("SELECT p.*, c.*, m.tipo_matricula, m.precio_matricula FROM $tabla1 as p\n"
             . "LEFT JOIN $tabla2 as c ON p.id_personas = c.id_persona\n"
             . "LEFT JOIN tbl_matricula as m ON c.id_matricula = m.id_matricula\n"
             // . "LEFT JOIN tbl_inscripcion as i ON c.id_inscripcion = i.id_inscripcion\n"
 			// . "LEFT JOIN tbl_descuento as pd ON c.id_descuento = pd.id_descuento\n"
 			// . "LEFT JOIN tbl_pagos_cliente as pc ON c.id_cliente = pc.id_cliente\n"
-		    . "WHERE p.tipo_persona = 'clientes'");
+		    . "WHERE p.tipo_persona = 'clientes' OR p.tipo_persona = 'ambos' ");
 			
 			$stmt -> execute();
 			return $stmt -> fetchAll();
@@ -151,7 +153,7 @@ class ModeloClientes{
 
 
 	/*=============================================
-		MOSTRAR CLIENTES INSCRIPCION (mdlMostrarClientesPagos)
+	MOSTRAR CLIENTES INSCRIPCION (mdlMostrarClientesPagos)
 	=============================================*/
 	
 	static public function mdlMostrarClientesInscripcionPagos($tabla1, $tabla2, $item1, $valor1, $item2, $valor2, $max){
@@ -176,7 +178,7 @@ class ModeloClientes{
 		
 			. " GROUP BY c.id_cliente"); 
 
-			$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+			// $stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
 			$stmt -> execute();
 			return $stmt -> fetchAll();
 
@@ -206,8 +208,8 @@ class ModeloClientes{
 	}
 
 
-	 /*=============================================
-		MOSTRAR PAGOS POR CLIENTE 
+	/*=============================================
+	MOSTRAR PAGOS POR CLIENTE 
 	=============================================*/
 	
 	static public function mdlMostrarPagoPorCliente($tabla1, $tabla2, $item, $valor){
@@ -270,7 +272,7 @@ class ModeloClientes{
 
 
 	/*=============================================
-		MOSTRAR TODOS LOS PAGOS DE LOS CLIENTES
+	MOSTRAR TODOS LOS PAGOS DE LOS CLIENTES
 	=============================================*/
 	static public function mdlMostrarPagosClientes($item, $valor){
 
@@ -368,7 +370,7 @@ class ModeloClientes{
 
 
 	/*=============================================
-			MOSTRAR (DINAMICO)
+	MOSTRAR (DINAMICO)
 	=============================================*/
 
 	static public function mdlMostrar($tabla, $item, $valor){
@@ -392,8 +394,9 @@ class ModeloClientes{
 		$stmt = null;
 		
 	} 
+
 	/*=============================================
-			EDITAR CLIENTE
+	EDITAR CLIENTE
 	=============================================*/
 	 
 	static public function mdlEditarCliente($tabla, $datos){
@@ -443,8 +446,9 @@ class ModeloClientes{
 
 		
 	}
+
 	/*=============================================
-				ELIMINAR CLIENTES
+	ELIMINAR CLIENTES
 	=============================================*/
 
 	static public function mdlEliminarCliente($tabla, $datos){
@@ -468,8 +472,9 @@ class ModeloClientes{
 		$stmt = null;
 
 	}
+
 	/*=============================================
-				REGISTRAR PAGO CLIENTE
+	REGISTRAR PAGO CLIENTE
 	=============================================*/
 	static public function mdlCrearPago($tabla3, $datos){
 
@@ -497,7 +502,7 @@ class ModeloClientes{
 	}
 
 	/*=============================================
-				REGISTRAR  CLIENTE INSCRIPCION
+	REGISTRAR  CLIENTE INSCRIPCION
 	=============================================*/
 	static public function mdlCrearClienteInscripcion($tabla, $datos){
 
@@ -526,7 +531,7 @@ class ModeloClientes{
 
 
 	/*=============================================
-			EDITAR PAGO CLIENTE
+	EDITAR PAGO CLIENTE
 	=============================================*/
 	static public function mdlEditarPago($tabla, $datos){
 
@@ -552,7 +557,6 @@ class ModeloClientes{
 	/*=============================================
 	ACTUALIZAR CLIENTE
 	=============================================*/
-
 	static public function mdlActualizarCliente($tabla1, $item1, $valor1, $item2, $valor2){
 
 		// return $item1;
@@ -582,7 +586,6 @@ class ModeloClientes{
 	/*=============================================
 	ACTUALIZAR CLIENTE VARIOS CAMPOS
 	=============================================*/
-
 	static public function mdlActualizarClienteVarios($tabla1, $item1, $valor1, $item2, $valor2, $item3, $valor3){
 
 		$stmt = Conexion::conectar()->prepare("UPDATE $tabla1 SET $item1 = :$item1, $item2 = :$item2 WHERE $item3 = :$item3");
@@ -693,9 +696,28 @@ class ModeloClientes{
 
 	}
 
+	/*=============================================
+	ALERTA DE FECHAS DE INSCRIPCIÓN A VENCER CLIENTES
+	=============================================*/
+	static public function mdlInscripcionVencimiento($item, $fechaHoy, $fechaFinal){
+
+		$stmt = Conexion::conectar()->prepare("SELECT p.*, c.*, d.tipo_documento, m.tipo_matricula, pd.tipo_descuento, i.*, ci.* FROM tbl_personas as p\n"
+		. "	LEFT JOIN tbl_clientes as c ON p.id_personas = c.id_persona\n"
+		. "	LEFT JOIN tbl_documento as d ON p.id_documento = d.id_documento\n"
+		. "	LEFT JOIN tbl_matricula as m ON c.id_matricula = m.id_matricula\n"
+		. "	LEFT JOIN tbl_descuento as pd ON c.id_descuento = pd.id_descuento\n"
+		. "	LEFT JOIN tbl_cliente_inscripcion as ci ON c.id_cliente = ci.id_cliente\n"
+		. "	LEFT JOIN tbl_inscripcion as i ON ci.id_inscripcion = i.id_inscripcion\n"
+		. "	WHERE c.tipo_cliente = 'Gimnasio' AND ci.estado = 1 AND (ci.$item BETWEEN '$fechaHoy' AND '$fechaFinal')\n"
+		. "	ORDER BY ci.id_cliente_inscripcion DESC");
+
+		// $stmt->bindParam(":".$item, $valor, PDO::PARAM_STR);
+		$stmt -> execute();
+		return $stmt -> fetchAll();
+	}
 
 	/*=============================================
-		RANGO INSCRIPCIONES ACTIVAS DE CLIENTES
+	RANGO INSCRIPCIONES ACTIVAS DE CLIENTES
 	=============================================*/
 	static public function mdlRangoClienteInscripcionActiva($tabla, $rango){
 	
@@ -727,7 +749,7 @@ class ModeloClientes{
 			. "LEFT JOIN tbl_cliente_inscripcion as ci ON c.id_cliente = ci.id_cliente\n"
 			. "LEFT JOIN tbl_inscripcion as i ON ci.id_inscripcion = i.id_inscripcion\n"
 			// . "LEFT JOIN tbl_pagos_cliente as pc ON ci.id_cliente_inscripcion = pc.id_cliente_inscripcion\n"
-			. "WHERE c.tipo_cliente = 'Gimnasio' AND ci.estado = 1 AND (nombre LIKE '%$rango%' OR apellidos LIKE '%$rango%' OR tipo_inscripcion LIKE '%$rango%' OR num_documento LIKE '%$rango%' OR fecha_proximo_pago LIKE '%$rango%' OR fecha_vencimiento LIKE '%$rango%')\n"
+			. "WHERE c.tipo_cliente = 'Gimnasio' AND ci.estado = 1 AND (nombre LIKE '%$rango%' OR apellidos LIKE '%$rango%' OR tipo_inscripcion LIKE '%$rango%' OR num_documento LIKE '%$rango%' OR fecha_inscripcion LIKE '%$rango%' OR fecha_proximo_pago LIKE '%$rango%' OR fecha_pago LIKE '%$rango%')\n"
 			. "ORDER BY ci.id_cliente_inscripcion DESC"); 
 
 			// $stmt->bindParam(":".$item, $valor, PDO::PARAM_STR);
@@ -778,7 +800,7 @@ class ModeloClientes{
 			. "LEFT JOIN tbl_cliente_inscripcion as ci ON c.id_cliente = ci.id_cliente\n"
 			. "LEFT JOIN tbl_inscripcion as i ON ci.id_inscripcion = i.id_inscripcion\n"
 			// . "LEFT JOIN tbl_pagos_cliente as pc ON ci.id_cliente_inscripcion = pc.id_cliente_inscripcion\n"
-			. "WHERE c.tipo_cliente = 'Gimnasio' AND ci.estado = 0 AND (nombre LIKE '%$rango%' OR apellidos LIKE '%$rango%' OR tipo_inscripcion LIKE '%$rango%' OR num_documento LIKE '%$rango%' OR fecha_proximo_pago LIKE '%$rango%' OR fecha_vencimiento LIKE '%$rango%')\n"
+			. "WHERE c.tipo_cliente = 'Gimnasio' AND ci.estado = 0 AND (nombre LIKE '%$rango%' OR apellidos LIKE '%$rango%' OR tipo_inscripcion LIKE '%$rango%' OR num_documento LIKE '%$rango%' OR fecha_inscripcion LIKE '%$rango%' OR fecha_proximo_pago LIKE '%$rango%' OR fecha_pago LIKE '%$rango%')\n"
 			. "ORDER BY ci.id_cliente_inscripcion DESC"); 
 
 			// $stmt->bindParam(":".$item, $valor, PDO::PARAM_STR);
@@ -798,7 +820,7 @@ class ModeloClientes{
 
 
 	/*=============================================
-		RANGO HISTORIAL PAGOS CLIENTES
+	RANGO HISTORIAL PAGOS CLIENTES
     =============================================*/
 	static public function mdlRangoHistorialPagosCliente($tabla, $rango){
 			
@@ -843,7 +865,7 @@ class ModeloClientes{
 		
 			. "	LEFT JOIN tbl_pagos_cliente as pc ON ci.id_cliente_inscripcion = pc.id_cliente_inscripcion\n"
 		
-			. "	WHERE tipo_cliente = 'Gimnasio' AND num_documento LIKE '%$rango%' OR nombre LIKE '%$rango%' OR apellidos LIKE '%$rango%' OR fecha_de_pago LIKE '%$rango%'\n"
+			. "	WHERE tipo_cliente = 'Gimnasio' AND num_documento LIKE '%$rango%' OR nombre LIKE '%$rango%' OR apellidos LIKE '%$rango%' OR pago_matricula LIKE '%$rango%' OR pago_descuento LIKE '%$rango%' OR pago_inscripcion LIKE '%$rango%' OR pago_total LIKE '%$rango%' OR fecha_de_pago LIKE '%$rango%'\n"
 		
 			. "ORDER BY ci.id_cliente_inscripcion DESC");
 
@@ -863,7 +885,7 @@ class ModeloClientes{
 
 
 	/*=============================================
-		RANGO CLIENTES TOTALES
+	RANGO CLIENTES TOTALES
     =============================================*/
 	static public function mdlRangoCliente($tabla, $rango){
 			
@@ -875,7 +897,7 @@ class ModeloClientes{
             // . "LEFT JOIN tbl_inscripcion as i ON c.id_inscripcion = i.id_inscripcion\n"
 			// . "LEFT JOIN tbl_descuento as pd ON c.id_descuento = pd.id_descuento\n"
 			// . "LEFT JOIN tbl_pagos_cliente as pc ON c.id_cliente = pc.id_cliente\n"
-		    . "WHERE p.tipo_persona = 'clientes'");
+		    . "WHERE p.tipo_persona = 'clientes' OR p.tipo_persona = 'ambos'");
 			
 			$stmt -> execute();
 			return $stmt -> fetchAll();
@@ -888,7 +910,7 @@ class ModeloClientes{
             // . "LEFT JOIN tbl_inscripcion as i ON c.id_inscripcion = i.id_inscripcion\n"
 			// . "LEFT JOIN tbl_descuento as pd ON c.id_descuento = pd.id_descuento\n"
 			// . "LEFT JOIN tbl_pagos_cliente as pc ON c.id_cliente = pc.id_cliente\n"
-		    . "WHERE p.tipo_persona = 'clientes' AND nombre LIKE '%$rango%' OR apellidos LIKE '%$rango%' OR num_documento LIKE '%$rango%' OR correo LIKE '%$rango%' OR telefono LIKE '%$rango%' ");
+		    . "WHERE p.tipo_persona = 'clientes' AND nombre LIKE '%$rango%' OR apellidos LIKE '%$rango%' OR num_documento LIKE '%$rango%' OR correo LIKE '%$rango%' OR telefono LIKE '%$rango%' OR tipo_cliente LIKE '%$rango%'");
 
 			$stmt->bindParam(":nombre", $rango, PDO::PARAM_STR);
 			$stmt->bindParam(":apellidos", $rango, PDO::PARAM_STR);

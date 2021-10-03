@@ -6,7 +6,7 @@ class ModeloProductos{
     static public function mdlMostrarProductos($tabla, $item, $valor, $all){
         if($item != null && $all != null){
 
-			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item=:$item");
+			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item=:$item AND stock > 0");
 			
 			$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
 			$stmt -> execute();

@@ -8,7 +8,7 @@
           </div>
           <div class="col-sm-6">
               <button class="btn btn-orange float-right"  data-toggle="modal" data-target="#modalNuevoRol">
-                Nuevo Rol        
+                Nuevo rol        
               </button>
               <button class="btn btn-danger btnExportarRol float-right mr-3 ">
                 Exportar PDF      
@@ -25,10 +25,10 @@
       <div class="card-body">
 
         <?php
-            $descripcionEvento = " Consulto la pantalla de Rol";
-            $accion = "consulta";
+            $descripcionEvento = "".$_SESSION["usuario"]." Consultó la pantalla de rol";
+            $accion = "Consulta";
 
-            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
+            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 18,$accion, $descripcionEvento);
 
         ?>
 
@@ -36,14 +36,14 @@
                       ROL
             ==========================================================-->   
 
-        <table class="table table-striped table-bordered tablas text-center">
+        <table class="table table-bordered table-striped tablas text-center">
 
           <thead>
                           
             <tr>                    
-                <th scope="col">#</th>   
+                <th scope="col">N.°</th>   
                 <th scope="col">Rol</th> 
-                <th scope="col">Descripcion</th>  
+                <th scope="col">Descripción</th>  
                 <th scope="col">Estado</th>
                 <th scope="col">Acciones</th>
             </tr>
@@ -70,17 +70,18 @@
                     
                     
                         if($value["estado"] != 0){
-                        echo' <td><button class="btn btn-success btn-md btnActivar" idRol="'.$value["id_rol"].'" estadoRol="0" >Activado</button></td>';
+                        echo' <td><button class="btn btn-success btn-md btnActivarRol" idRol="'.$value["id_rol"].'" estadoRol="0" >Activado</button></td>';
                         
                         }else{
-                        echo' <td><button class="btn btn-danger btn-md btnActivar" idRol="'.$value["id_rol"].'" estadoRol="1" >Desactivado</button></td>';
+                        echo' <td><button class="btn btn-danger btn-md btnActivarRol" idRol="'.$value["id_rol"].'" estadoRol="1" >Desactivado</button></td>';
                         
                         }
 
                         echo'
                         <td>
-                        <button class="btn btn-warning btnEditarRol" editarIdRol="'.$value["id_rol"].'" data-toggle="modal" data-target="#modalEditarRol"><i class="fas fa-pencil-alt" style="color:#fff"></i></button>
-                        <button class="btn btn-danger btnEliminarRoles" ideliminarRoles="'.$value["id_rol"].'"><i class="fas fa-trash-alt"></i></button>
+                        <button class="btn btn-warning btnEditarRol" editarIdRol="'.$value["id_rol"].'" data-toggle="modal" data-target="#modalEditarRol" data-toggle="tooltip" data-placement="left" title="Editar"><i class="fas fa-pencil-alt" style="color:#fff"></i></button>
+
+                        <button class="btn btn-danger btnEliminarRoles" ideliminarRoles="'.$value["id_rol"].'" data-toggle="tooltip" data-placement="left" title="Borrar"><i class="fas fa-trash-alt"></i></button>
                         </td>
 
                       </tr>';
@@ -105,7 +106,7 @@
 
 
 <!--=======================================================================
-                  MODAL AGREGAR ROL
+MODAL AGREGAR ROL
 =========================================================================-->
 
 <div class="modal fade" id="modalNuevoRol" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -121,7 +122,7 @@
         ======================================-->
 
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Nuevo Rol</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Nuevo rol</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -136,25 +137,26 @@
             <div class="form-group row">
               <label for="Rol" class="col-sm-4">Rol</label>
             
-              <input type="text" class="form-control col-sm-8 nombre mayus" name="nuevoRol" value="" required>
+              <input type="text" class="form-control col-sm-8 nombre mayus" name="nuevoRol" value="" placeholder="Ingrese el rol" required>
             </div>
 
             <div class="form-group row">
-              <label for="Descripcion" class="col-sm-4">Descripcion</label>            
-              <input type="textarea" class="form-control col-sm-8 nombre mayus" name="nuevaDescripcionRol" value="" required>
+              <label for="Descripcion" class="col-sm-4">Descripción</label>            
+              <input type="textarea" class="form-control col-sm-8 nombre mayus" name="nuevaDescripcionRol" value="" placeholder="Ingrese la descripción" required>
             </div>
 
             <div class="pantalla-permisos" id="datos-permisos">
               <div class="form-group row">
                   <label for="Pantalla" class="col-sm-4">Pantalla</label>
                   <select class="form-control col-sm-8 select2" style="width: 100%;" id="nuevaPantalla">
-                    <option selected="selected">Seleccione...</option>
+                    <option selected="selected">Seleccionar pantalla</option>
                       <?php 
                           $tabla = "tbl_objetos";
                           $item = null;
                           $valor = null;
+                          $all = null;
 
-                          $roles = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
+                          $roles = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all);
 
                           foreach ($roles as $key => $value) {
                             echo '<option value="'.$value["id_objeto"].'">'.$value["objeto"].'</option>';
@@ -212,13 +214,13 @@
         <div class="modal-footer" id="modalFooterRol">
           <button type="submit" class="btn btn-primary btnGuardarRol">Guardar
           </button>
-          <button type="button" class="btn btn-orange" data-dismiss="modal">Salir</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
           
         </div>
         <div class="modal-footer mt-4" id="modalFooterPermisos">
-          <button type="submit" class="btn btn-primary btnGuardarCambios">Guardar Cambios
+          <button type="submit" class="btn btn-primary btnGuardarCambios">Guardar cambios
           </button>
-          <button type="button" class="btn btn-orange" data-dismiss="modal">Salir</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
           
         </div>
 
@@ -260,7 +262,7 @@ MODAL EDITAR ROL
         ======================================-->
 
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Editar  rol</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Editar rol</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -272,85 +274,85 @@ MODAL EDITAR ROL
 
         <div class="modal-body">
 
-           <div class="card-body">
-              <div class= "form-group col-md-12">
-               <label for="rol">Rol</label>
-               <input type="text" class="form-control  nombre mayus" id="editarRol" name="editarRol" value=""requiered>
-              </div>
-              <div class= "form-group col-md-12">
-               <label for="Descripcion">Descripción</label>
-               <input type="text" class="form-control nombre mayus" id="editarDescripcionRol" name="editarDescripcionRol" value=""requiered>
-              </div>
-              <input type="hidden" id="editarIdRol" name="editarIdRol">
+            <div class= "form-group col-md-12">
+              <label for="rol">Rol</label>
+              <input type="text" class="form-control  nombre mayus" id="editarRol" name="editarRol" requiered>
+            </div>
+            <div class= "form-group col-md-12">
+              <label for="Descripcion">Descripción</label>
+              <input type="text" class="form-control nombre mayus" id="editarDescripcionRol" name="editarDescripcionRol" requiered>
+            </div>
+            <input type="hidden" id="editarIdRol" name="editarIdRol">
+            
+            <div class="ml-2">
+              <a class="btn btn-primary" data-toggle="collapse" href="#permisosRolCollapse" role="button" aria-expanded="false" aria-controls="permisosRolCollapse">
+               + Agregar permisos
+              </a>
+              <div class="collapse mt-3" id="permisosRolCollapse">
+                <div class="card card-body">
+                  <div class="pantalla-permisos" id="datos-permisos">
+                    <div class="form-group row">
+                        <label for="Pantalla" class="col-sm-4">Pantalla</label>
+                        <select class="form-control col-sm-8 select2" style="width: 100%;" id="nuevaPantallaEditar">
+                          <option selected="selected">Seleccionar pantalla</option>
+                            <?php 
+                                $tabla = "tbl_objetos";
+                                $item = null;
+                                $valor = null;
+                                $all = null;
 
-              <div class="pantalla-permisos" id="datos-permisos">
-              <div class="form-group row">
-                  <label for="Pantalla" class="col-sm-4">Pantalla</label>
-                  <select class="form-control col-sm-8 select2" style="width: 100%;" id="nuevaPantallaEditar">
-                    <option selected="selected">Seleccione...</option>
-                      <?php 
-                          $tabla = "tbl_objetos";
-                          $item = null;
-                          $valor = null;
-
-                          $roles = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
-
-                          foreach ($roles as $key => $value) {
-                            echo '<option value="'.$value["id_objeto"].'">'.$value["objeto"].'</option>';
-                          }
-                      ?>
-                  </select>
-              </div>
-
-              <div class="form-group row">
-                <label for="Pantalla" class="col-sm-4">Permisos</label>
-
-                <div class="col-sm-8">
-                
-                  <div class="form-check col-sm-12">
-                    <input class="form-check-input" name="nuevoEditarConsulta" type="checkbox">
-                    <label class="form-check-label" for="defaultCheck1">
-                      Consulta
-                    </label>
+                                $roles = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all);
+      
+                                foreach ($roles as $key => $value) {
+                                  echo '<option value="'.$value["id_objeto"].'">'.$value["objeto"].'</option>';
+                                }
+                            ?>
+                        </select>
+                    </div>
+      
+                    <div class="form-group row">
+                      <label for="Pantalla" class="col-sm-4">Permisos</label>
+      
+                      <div class="col-sm-8">
+                      
+                        <div class="form-check col-sm-12">
+                          <input class="form-check-input" name="nuevoEditarConsulta" type="checkbox">
+                          <label class="form-check-label" for="defaultCheck1">
+                            Consulta
+                          </label>
+                        </div>
+      
+                        <div class="form-check col-sm-12">
+                          <input class="form-check-input" name="nuevoEditarAgregar" type="checkbox">
+                          <label class="form-check-label" for="defaultCheck1">
+                            Agregar
+                          </label>
+                        </div>
+                        
+                        <div class="form-check col-sm-12">
+                          <input class="form-check-input" name="nuevoEditarActualizar" type="checkbox">
+                          <label class="form-check-label" for="defaultCheck1">
+                            Actualizar
+                          </label>
+                        </div>
+      
+                        <div class="form-check col-sm-12">
+                          <input class="form-check-input" name="nuevoEditarEliminar" type="checkbox">
+                          <label class="form-check-label" for="defaultCheck1">
+                            Eliminar
+                          </label>
+                        </div>
+      
+                      </div>
+                    </div>
+      
+                    <div class="form-row float-right">
+                      <button class="btn btn-primary" id="btnGuardarPermisosEditar">Agregar</button>
+                    </div>
                   </div>
-
-                  <div class="form-check col-sm-12">
-                    <input class="form-check-input" name="nuevoEditarAgregar" type="checkbox">
-                    <label class="form-check-label" for="defaultCheck1">
-                      Agregar
-                    </label>
-                  </div>
-                  
-                  <div class="form-check col-sm-12">
-                    <input class="form-check-input" name="nuevoEditarActualizar" type="checkbox">
-                    <label class="form-check-label" for="defaultCheck1">
-                      Actualizar
-                    </label>
-                  </div>
-
-                  <div class="form-check col-sm-12">
-                    <input class="form-check-input" name="nuevoEditarEliminar" type="checkbox">
-                    <label class="form-check-label" for="defaultCheck1">
-                      Eliminar
-                    </label>
-                  </div>
-
                 </div>
               </div>
-
-              <div class="form-row float-right">
-                <button class="btn btn-primary" id="btnGuardarPermisosEditar">Agregar</button>
-              </div>
-          </div>
-
-
-
-
-
-          </div>
-
-
-
+            </div>
 
         </div>
 
@@ -358,99 +360,21 @@ MODAL EDITAR ROL
         PIE DEL MODAL
         ======================================-->
      
-        <div class="modal-footer mt-4" id="modalFooterPermisosEditar">
-          <button type="submit" class="btn btn-primary btnGuardarCambiosEditar">Guardar Cambios
+        <div class="modal-footer" id="modalFooterPermisosEditar">
+          <button type="submit" class="btn btn-primary btnGuardarCambiosEditar">Guardar cambios
           </button>
-          <button type="button" class="btn btn-orange" data-dismiss="modal">Salir</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
           
         </div>
+
         <?php
 
-          $EditarRol = new ControladorGlobales();
+          $EditarRol = new ControladorMantenimientos();
           $EditarRol->ctrEditarRol();
 
         ?>
-
-
-
-
-      </form>
-
-
-    
-
-    </div>
-
-  </div>
         
-
-</div>
-
-
-<!--==============================================================================
-                     MODAL PERMISOS ROL PANTALLA
-==============================================================-->
-
-<div class="modal fade" id="modalEditarPermisos" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  
-  <div class="modal-dialog modal-lg  " role="document">
-
-    <div class="modal-content">
-
-      <form role="form" method="post" autocomplete="off">
-
-        <!--=====================================
-        CABEZA DEL MODAL
-        ======================================-->
-
-        <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Editar permiso para pantallas</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-
-        <!--=====================================
-        CUERPO DEL MODAL
-        ======================================-->
-
-        <div class="modal-body">
-          <div class="card-body">
-                <div class= "form-group col-md-12">
-                <label for="rol">Rol</label>
-                <input type="text" class="form-control  nombre mayus" id="editarRol" name="editarRol" value=""requiered>
-                </div>
-                <div class= "form-group col-md-12">
-                <label for="Descripcion">Descripción</label>
-                <input type="text" class="form-control nombre mayus" id="editarDescripcionRol" name="editarDescripcionRol" value=""requiered>
-                </div>
-                <input type="hidden" id="editarIdRol" name="editarIdRol">
-          </div>
-         
-         
-        </div>
-
-        <!--=====================================
-        PIE DEL MODAL
-        ======================================-->
-
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-primary">Guardar</button>
-           <button type="button" class="btn btn-orange" data-dismiss="modal">Salir</button>
-        </div>
-
-        <?php
-           $EditarRol = new ControladorGlobales();
-           $EditarRol->ctrEditarRol();
-        ?>
-
-
-
-
       </form>
-
-
-    
 
     </div>
 
@@ -462,7 +386,7 @@ MODAL EDITAR ROL
 
 <?php
 
-$borrarRol = new ControladorGlobales();
+$borrarRol = new ControladorMantenimientos();
 $borrarRol->ctrBorrarRoles();
 
 ?>

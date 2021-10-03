@@ -1,6 +1,7 @@
 <?php
 
 require_once("../../../controladores/usuarios.controlador.php");
+require_once("../../../controladores/mantenimiento.controlador.php");
 require_once('../../../controladores/ventas.controlador.php');
 require_once('../../../controladores/clientes.controlador.php');
 require_once('../../../controladores/productos.controlador.php');
@@ -8,9 +9,16 @@ require_once "../../../modelos/productos.modelo.php";
 require_once "../../../modelos/clientes.modelo.php";
 require_once "../../../modelos/ventas.modelo.php";
 require_once "../../../modelos/usuarios.modelo.php";
+require_once "../../../modelos/mantenimiento.modelo.php";
 require_once('../examples/tcpdf_include.php');
 
 // echo $_GET["codigo"];
+session_start();
+
+$descripcionEvento = "".$_SESSION['usuario']." Generó recibo de compras del cliente";
+$accion = "Generar";
+$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION['id_usuario'], 14, $accion,
+$descripcionEvento);
 
 
 class imprimirFactura{
@@ -21,6 +29,7 @@ class imprimirFactura{
 
 	
 	public function traerImpresionFactura(){
+		date_default_timezone_set("America/Tegucigalpa");
 
 		$item="parametro";
 		$valor="ADMIN_NOMBRE_EMPRESA";
@@ -36,6 +45,13 @@ class imprimirFactura{
 		// var_dump($direccionEmpresa ['valor']);
 		$direccion = $direccionEmpresa ['valor'];
 
+		$item="parametro";
+		$valor="ADMIN_TELEFONO_EMPRESA";
+
+		$telefonoEmpresa = ControladorUsuarios::ctrMostrarParametros($item, $valor);
+		// var_dump($telefonoEmpresa ['valor']);
+		$telefono = $telefonoEmpresa ['valor'];
+		
 		$item="parametro";
 		$valor="ADMIN_CORREO";
 
@@ -91,7 +107,7 @@ class imprimirFactura{
 		$pdf = new TCPDF('p', 'mm', 'A4', true, 'UTF-8', false);
 		$pdf->SetCreator(PDF_CREATOR);
 		$pdf->SetAuthor('Poleth Solorzano');
-		$pdf->SetTitle('Recibo de Ventas');
+		$pdf->SetTitle('Recibo de Venta');
 		$pdf->SetSubject('');
 		$pdf->SetKeywords('');
 
@@ -125,7 +141,7 @@ $bloque1 = <<<EOF
 			<div style="font-size:10.5px; text-align:right; line-height:15px;">
 				
 				<br>
-				Teléfono: 2275-1354
+				Tel: $telefono
 				
 				<br>
 				$direccion
@@ -281,7 +297,7 @@ EOF;
 
 		}else{
 
-			echo "no hay datos, algo salio mal";
+			echo "No hay datos, algo salió mal";
 		}
 
 	}

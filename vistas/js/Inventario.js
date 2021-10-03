@@ -1,3 +1,14 @@
+// Datatable Compras
+// $.ajax({
+//     url: "ajax/datatable-productos.ajax.php",
+//     success: function (response) {  
+//         console.log(response)
+//     }
+// });
+lenguageDataTable('.tablaCompras', 'ajax/datatable-compras.ajax.php');
+lenguageDataTable('.tablaInventario', 'ajax/datatable-inventario.ajax.php');
+lenguageDataTable('.tablaProductos', 'ajax/datatable-productos.ajax.php');
+
 
 //** ----------------- EDITAR INVENTARIO  --------------------------*/
 $(document).on("click",".btnEditarInventario",function(){
@@ -16,7 +27,7 @@ $(document).on("click",".btnEditarInventario",function(){
         processData: false,
         dataType: "json",
         success: function(respuesta){
-            console.log("respuesta",respuesta)
+            // console.log(respuesta)
 
 
             $("#editarCodigo").val(respuesta["codigo"]);
@@ -29,10 +40,24 @@ $(document).on("click",".btnEditarInventario",function(){
             $("#editarProductoMinimo").val(respuesta["producto_minimo"]);
             $("#editarProductoMaximo").val(respuesta["producto_maximo"]);
 
+            if(respuesta["stock"] == null){
+
+                $("#editarStock").val(0);
+
+            } else {
+
+                $("#editarStock").val(respuesta["stock"]);
+            }
+
             if (respuesta["foto"] !=""){
                
                 $("#editarFotoProducto").val(respuesta["foto"]); 
-                $("#previsualizar").attr("src", respuesta["foto"]);
+                $(".previsualizarFotoProducto").attr("src", respuesta["foto"]);
+                
+            } else {
+                
+                $(".previsualizarFotoProducto").attr("src", "vistas/img/productos/default/product.png");
+
             }
              
             
@@ -44,8 +69,6 @@ $(document).on("click",".btnEditarInventario",function(){
 
 
 //** ----------------- EDITAR EQUIPO  --------------------------*/
-
-
 $(document).on("click",".btnEditarEquipo",function(){
     var idEquipo = $(this).attr("idInventario");
     // console.log("idEquipo", idEquipo)
@@ -62,116 +85,85 @@ $(document).on("click",".btnEditarEquipo",function(){
         processData: false,
         dataType: "json",
         success: function(respuesta){
-            console.log("respuesta",respuesta)
+            // console.log("respuesta",respuesta["foto"])
 
 
             $("#editarCodigoE").val(respuesta["codigo"]);
             $("#editarNombreEquipo").val(respuesta["nombre_producto"]);
             $("#editarTipoEquipo").val(respuesta["id_inventario"]);
-            $("#editarStockEquipo").val(respuesta["stock"]);
+            $("#imagenActualEquipo").val(respuesta["foto"]);
 
-            if (respuesta["foto"] !=""){
-               
-                $("#editarFotoEquipo").val(respuesta["foto"]); 
-                $("#previsualizar").attr("src", respuesta["foto"]);
-            }  
+            if(respuesta["stock"] == null){
+                // console.log('es nulo')
+                $("#editarStockEquipo").val(0);
+
+            } else {
+                // console.log('no es nulo')
+
+                $("#editarStockEquipo").val(respuesta["stock"]);
+            }
+
+            if(respuesta["foto"] != "" && respuesta["foto"] != null){
+
+                $('.previsualizar').attr('src', respuesta['foto']);
+
+            } else if(respuesta["foto"] != "" && respuesta["foto"] == null){
+
+                $('.previsualizar').attr('src', 'vistas/img/productos/default/product.png');
+
+            } else {
+
+                $('.previsualizar').attr('src', 'vistas/img/productos/default/product.png');
+
+            }
         }    
     });
 
 })
 
-//** ----------------- GENERAR CODIGO  --------------------------*/
 
+//** ----------------- BORRAR EQUIPO  --------------------------*/
+$(document).on('click', '.btnEliminarEquipo', function () {
+    var idEquipo = $(this).attr('idEquipo');
+    var fotoEquipo = $(this).attr('fotoEquipo');
+    var equipo = $(this).attr('equipo');
 
-$("#nuevoTipoProducto").change(function(){
-    var idCategoria = $(this).val();
-    var datos = new FormData();
-    datos.append("idCategoria", idCategoria);
-    console.log("idCategoria", idCategoria)
-    $.ajax({ 
-        url:"ajax/inventario.ajax.php",
-        method: "POST",
-        data: datos,
-        cache: false,
-        contentType: false,
-        processData: false,
-        dataType: "json",
-        success: function(respuesta){
-            console.log("respuesta",respuesta);
-            var nuevoCodigo = parseInt(respuesta["codigo"]) + 1;
-            console.log("nuevoCodigo",nuevoCodigo);
-
-            if(!respuesta && idCategoria == 1){
-                $(".nuevoCodigo").val(100)
-            } 
-            else if (!respuesta && idCategoria == 2){
-                $(".nuevoCodigo").val(700)
-            }
-            else {
-                $(".nuevoCodigo").val(nuevoCodigo)
-            }
+    Swal.fire({
+        title: "¿Estás seguro de borrar el equipo?",
+        text: "¡Si no lo estas, puedes cancelar la acción!",
+        icon: "info",
+        showCancelButton: true,
+        cancelButtonColor: "#DC3545",
+        heightAuto: false,
+        allowOutsideClick: false
+    }).then((result)=>{
+        if(result.value){
+            window.location = "index.php?ruta=equipo&idEquipo="+idEquipo+"&equipo="+equipo+"&fotoEquipo="+fotoEquipo;
         }
     });
-})
+});
+
+//** -----------------------------------------------------*/
+//MOSTRAR INFO EN SELECT DESDE LA BASE DE DATOS DINAMICAMENTE
+// -------------------------------------------------------*/ 
+$(document).on('click', '#nuevaCompra', function () {
+    // console.log('clickkk')
+    selectDinamico();    
+});
 
 
-//** ------------------------------------*/
-//         IMPRIMIR PRODUCTO
-// // --------------------------------------*/ 
-// $(document).on('click', '.btnExportarProductos', function () {
-//     window.open("extensiones/tcpdf/pdf/productos-pdf.php", "_blank");
-// });
-
-
-// //** ------------------------------------*/
-// //         IMPRIMIR PRODUCTO
-// // --------------------------------------*/ 
-// $(document).on('click', '.btnExportarEquipo', function () {
-//     window.open("extensiones/tcpdf/pdf/productos-pdf.php", "_blank");
-// });
-
-
-
-/*=============================================
-    Sin numeros
-=============================================*/
-function sinNumeros(event) {
-    var codigo = event.which || event.keyCode;
-    // console.log(codigo);
-    if(codigo >= 48 && codigo <= 57  || codigo >= 97  && codigo <= 105){
-        event.preventDefault();
-
-    } else {
-        $('.alert').remove();
-    }
-     
-}
-
-/*=============================================
-    Sin letras
-=============================================*/
-function sinLetras(event) {
-    var codigo = event.which || event.keyCode;
-    // console.log(codigo);
-
-    if(codigo >= 65 && codigo <= 90 || codigo == 192){
-        event.preventDefault();
-
-    } else {
-        $('.alert').remove();
-    }
-     
-}
 
 /*=============================================
     EJECUCION DE VALIDACIONES
 =============================================*/
-var identidad = $('.nombre_producto');
-validarDoc(identidad);
-$('.nombre_producto').keydown(sinNumeros)
-$('.editar_Nombre_Producto').keydown(sinNumeros)
-$('.precio').keydown(sinLetras)
-$('.editar_Precio').keydown(sinLetras)
+// var identidad = $('.nombre_producto');
+// validarDoc(identidad);
+// $('.nombre_producto').keydown(sinNumeros)
+// $('.editar_Nombre_Producto').keydown(sinNumeros)
+// $('.precio').keydown(sinLetras)
+// $('.editar_Precio').keydown(sinLetras)
+
+
 
 
 
@@ -182,19 +174,175 @@ exportarPdf('.btnExportarInventario', 'inventario');
 exportarPdf('.btnExportarCompras', 'compras');
 
 
-function exportarPdf(btnExportar, rutaArchivoPdf) {
+// function exportarPdf(btnExportar, rutaArchivoPdf) {
     
-    $(document).on('click', btnExportar, function (e) {
-        // console.log("click");
-        // return;
-        // console.log(valorBuscar);
-        if(!valorBuscar){
-            window.open("extensiones/tcpdf/pdf/"+rutaArchivoPdf+"-pdf.php");
-        } else {
-            var rango = valorBuscar;
-            window.open("extensiones/tcpdf/pdf/"+rutaArchivoPdf+"-pdf.php?&rango="+rango);
-        }
+//     $(document).on('click', btnExportar, function (e) {
+//         // console.log("click");
+//         // return;
+//         // console.log(valorBuscar);
+//         if(!valorBuscar){
+//             window.open("extensiones/tcpdf/pdf/"+rutaArchivoPdf+"-pdf.php");
+//         } else {
+//             var rango = valorBuscar;
+//             window.open("extensiones/tcpdf/pdf/"+rutaArchivoPdf+"-pdf.php?&rango="+rango);
+//         }
 
     
+//     });
+// }
+
+//** ------------------------------------*/
+//    FUNCION PRODUCTO MINIMO
+// --------------------------------------*/ 
+function minimo() {
+
+    $(document).on('blur', '#nuevoProductoMinimo', function () {
+        
+        $('.alert').remove();
+
+        let valProdMinimo = parseInt($(this).val());
+        let prodMinimo = "ADMIN_PROD_MINIMO";
+        // console.log(typeof(valProdMinimo))
+
+        let datos = new FormData();
+        datos.append("parametroProducto", prodMinimo);
+
+        let padre = $('#nuevoProductoMinimo').closest('.form-row');
+        
+        $.ajax({
+    
+            url:"ajax/parametro.ajax.php",
+            method: "POST",
+            data: datos,
+            cache: false,
+            contentType: false,
+            processData: false,  
+            dataType: "json",
+            success: function(respuesta) {
+                // console.log(typeof(respuesta['valor']));
+                
+                if(valProdMinimo < parseInt(respuesta['valor'])){
+                    // console.log('mayor el valor del parametro');
+
+                    padre.before('<div class="alert alert-danger fade show mt-2" role="alert"><i class="icon fas fa-ban"></i>Producto minimo supera al establecido. El producto minimo aceptado es ' + parseInt(respuesta['valor']) + '</div>');
+                    setTimeout(function () {
+                        $('.alert').remove();
+                    }, 5000)
+
+                    $('#nuevoProductoMinimo').focus();
+                    $('#nuevoProductoMinimo').val(parseInt(respuesta['valor']));
+                   
+                } else {
+                    // console.log('menor el valor del parametro');
+                    $('.alert').remove();
+                }
+            }
+    
+        });
     });
+
 }
+// minimo();
+
+//** ------------------------------------*/
+//    FUNCION PRODUCTO MAXIMO
+// --------------------------------------*/ 
+function maximo(selector) {
+
+    $(document).on('blur', selector, function () {
+        
+        $('.alert').remove();
+
+        let valProdMinimo = parseInt($(this).val());
+        let prodMinimo = "ADMIN_PROD_MAXIMO";
+        // console.log(typeof(valProdMinimo))
+
+        let datos = new FormData();
+        datos.append("parametroProducto", prodMinimo);
+
+        let padre = $(selector).closest('.form-row');
+        
+        $.ajax({
+    
+            url:"ajax/parametro.ajax.php",
+            method: "POST",
+            data: datos,
+            cache: false,
+            contentType: false,
+            processData: false,  
+            dataType: "json",
+            success: function(respuesta) {
+                // console.log(typeof(respuesta['valor']));
+                
+                if(valProdMinimo > parseInt(respuesta['valor'])){
+                    // console.log('mayor el valor del parametro');
+
+                    padre.before('<div class="alert alert-danger fade show mt-2" role="alert"><i class="icon fas fa-ban"></i>Producto máximo supera al establecido. El producto máximo aceptado es ' + parseInt(respuesta['valor']) + '</div>');
+                    setTimeout(function () {
+                        $('.alert').remove();
+                    }, 5000)
+
+                    $(selector).focus();
+                    $(selector).val(parseInt(respuesta['valor']));
+                   
+                } else {
+                    // console.log('menor el valor del parametro');
+                    $('.alert').remove();
+                }
+            }
+    
+        });
+    });
+
+}
+// maximo('#nuevoProductoMaximo');
+
+
+//** ------------------------------------*/
+// VALIDAR PROD MINIMO Y MAXIMO NO SEAN IGUALES O MAYORES O MENORES SEGUN SU USO
+// --------------------------------------*/ 
+$(document).on('blur', '#nuevoProductoMinimo', function () {
+        
+    $('.alert').remove();
+
+    let valProdMinimo = parseInt($(this).val());
+    let valProdMaximo = parseInt($('#nuevoProductoMaximo').val());
+
+    let padre = $(this).closest('.form-row');
+
+    if(valProdMinimo >= valProdMaximo){
+        
+        padre.before('<div class="alert alert-danger fade show mt-2" role="alert"><i class="icon fas fa-ban"></i>El producto minimo no puede ser mayor o igual al producto maximo.</div>');
+        setTimeout(function () {
+            $('.alert').remove();
+        }, 3000)
+
+        $('#nuevoProductoMinimo').focus();       
+
+    }
+    
+});
+
+$(document).on('blur', '#nuevoProductoMaximo', function () {
+        
+    $('.alert').remove();
+
+    let valProdMaximo = parseInt($(this).val());
+    let valProdMinimo = parseInt($('#nuevoProductoMinimo').val());
+    // console.log(valProdMaximo)
+    // console.log(valProdMinimo)
+
+    let padre = $(this).closest('.form-row');
+
+    if(valProdMaximo <= valProdMinimo){
+        
+        padre.before('<div class="alert alert-danger fade show mt-2" role="alert"><i class="icon fas fa-ban"></i>El producto máximo no puede ser menor o igual al producto mínimo.</div>');
+        setTimeout(function () {
+            $('.alert').remove();
+        }, 3000)
+
+        $('#nuevoProductoMaximo').focus();       
+
+    }
+    
+});

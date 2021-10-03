@@ -1,10 +1,18 @@
 <?php
+
+require_once("../../../controladores/mantenimiento.controlador.php");
 require_once("../../../controladores/usuarios.controlador.php");
 require_once "../../../modelos/usuarios.modelo.php";
 require_once('../../../controladores/inventario.controlador.php');
 require_once "../../../modelos/inventario.modelo.php";
 require_once('../examples/tcpdf_include.php');
 
+session_start();
+
+$descripcionEvento = "".$_SESSION['usuario']." Generó reporte pdf de compras";
+$accion = "Generar";
+$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION['id_usuario'], 9, $accion,
+$descripcionEvento);
 
 class PDF extends TCPDF{
     
@@ -12,6 +20,7 @@ class PDF extends TCPDF{
 
     
     public function Header() {
+        date_default_timezone_set("America/Tegucigalpa");
         
         $item="parametro";
         $valor="ADMIN_NOMBRE_EMPRESA";
@@ -26,6 +35,14 @@ class PDF extends TCPDF{
         $direccionEmpresa = ControladorUsuarios::ctrMostrarParametros($item, $valor);
         // var_dump($direccionEmpresa ['valor']);
         $direccion = $direccionEmpresa ['valor'];
+
+        $item="parametro";
+        $valor="ADMIN_TELEFONO_EMPRESA";
+
+        $telefonoEmpresa = ControladorUsuarios::ctrMostrarParametros($item, $valor);
+        // var_dump($telefonoEmpresa ['valor']);
+        $telefono = $telefonoEmpresa ['valor'];
+    
     
         $item="parametro";
         $valor="ADMIN_CORREO";
@@ -53,9 +70,10 @@ class PDF extends TCPDF{
         $this->SetTextColor(0,0,0);
         $this->SetFont('helvetica', '', 9);
         // $this->Cell(180, 3, 'Gimnasio La roca', 0, 1, 'C');
-        $this->Cell(180, 7, 'Direccion: '.$direccion.'', 0, 1, 'C');
+        $this->Cell(180, 7, 'Dirección: '.$direccion.'', 0, 1, 'C');
         // $this->Cell(180, 3, 'Calle xxxxxxxxxx.....', 0, 1, 'C');
         $this->Cell(180, 3, 'Correo: '.$correo.'', 0, 1, 'C');
+        $this->Cell(180, 7, 'Teléfono: '.$telefono.'', 0, 1, 'C');
 
         $this->Ln(20); //Espacios
         $this->SetFont('helvetica', 'B', 14);
@@ -67,7 +85,7 @@ class PDF extends TCPDF{
 
         // $this->Cell(180, 3, 'Del '.$fecha.'', 0, 1, 'C');
 
-        $this->Cell(180, 3, 'Año '.$año.'', 0, 1, 'C');
+        $this->Cell(180, 3, 'Fecha '.$año.'', 0, 1, 'C');
     }
 
     // Footer de la pagina
@@ -78,10 +96,10 @@ class PDF extends TCPDF{
         $this->SetFont('helvetica', 'I', 8);
         // Page number
 
-        date_default_timezone_set("America/Tegucigalpa");
+        //date_default_timezone_set("America/Tegucigalpa");
         $fecha = date('Y-m-d H:i:s');
         $this->Cell(0, 10, ''.$fecha.'', 0, false, 'C', 0, '', 0, false, 'T', 'M');
-        $this->Cell(0, 10, 'Page '.$this->getAliasNumPage().'/'.$this->getAliasNbPages(), 0, false, 'C', 0, '', 0, false, 'T', 'M');
+        $this->Cell(0, 10, 'Página '.$this->getAliasNumPage().'/'.$this->getAliasNbPages(), 0, false, 'C', 0, '', 0, false, 'T', 'M');
     }
 }
 
@@ -138,7 +156,7 @@ $pdf->SetFont('dejavusans', '', 14, '', true);
 // This method has several options, check the source code documentation for more information.
 $pdf->AddPage();
 
-$pdf->Ln(45);
+$pdf->Ln(55);
 
 $pdf->SetFont('times', '', 13);
 $pdf->SetFillColor(225, 235, 255);
@@ -199,7 +217,7 @@ foreach ($inventarios as $key => $value) {
     if(($i%$max) == 0){
         $pdf->AddPage();
 
-        $pdf->Ln(40);
+        $pdf->Ln(55);
         
         $pdf->SetFont('times', '', 13);
         $pdf->SetFillColor(225, 235, 255);
@@ -221,7 +239,7 @@ foreach ($inventarios as $key => $value) {
     $pdf->Cell(35, 4, ''.$value['nombre'].'', 0, 0, 'C');
     $pdf->Cell(20, 4, ''.$value['cantidad'].'', 0, 0, 'C');
     $pdf->Cell(20, 4, ''.$value['precio'].'', 0, 0, 'C');
-    $pdf->Cell(45, 4, ''.$value['fecha'].'', 0, 0, 'C');
+    $pdf->Cell(45, 4, ''.$value['fecha_compra'].'', 0, 0, 'C');
     $i++;
 
 }
@@ -229,8 +247,9 @@ foreach ($inventarios as $key => $value) {
 
 }
 
+ob_end_clean();
 
 // Close and output PDF document
-$pdf->Output('example_001.pdf', 'I');
+$pdf->Output('compras.pdf', 'I');
 
 ?>

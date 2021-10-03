@@ -1,4 +1,5 @@
 <?php
+require_once("../../../controladores/mantenimiento.controlador.php");
 // require_once "../../controladores/usuarios.controlador.php";
 require_once('../../../controladores/usuarios.controlador.php');
 require_once "../../../modelos/usuarios.modelo.php";
@@ -8,12 +9,20 @@ require_once "../../../modelos/globales.modelo.php";
 require_once('../examples/tcpdf_include.php');
 
 
+session_start();
+
+$descripcionEvento = "".$_SESSION['usuario']." Generó reporte pdf de roles";
+$accion = "Generar";
+$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION['id_usuario'], 18, $accion,
+$descripcionEvento);
 
 class PDF extends TCPDF{
     
     // Header de la pagina
     public function Header() {
         // Logo
+        date_default_timezone_set("America/Tegucigalpa");
+
         $item="parametro";
         $valor="ADMIN_NOMBRE_EMPRESA";
 
@@ -27,6 +36,13 @@ class PDF extends TCPDF{
         $direccionEmpresa = ControladorUsuarios::ctrMostrarParametros($item, $valor);
         // var_dump($direccionEmpresa ['valor']);
         $direccion = $direccionEmpresa ['valor'];
+
+        $item="parametro";
+        $valor="ADMIN_TELEFONO_EMPRESA";
+
+        $telefonoEmpresa = ControladorUsuarios::ctrMostrarParametros($item, $valor);
+        // var_dump($telefonoEmpresa ['valor']);
+        $telefono = $telefonoEmpresa ['valor'];
     
         $item="parametro";
         $valor="ADMIN_CORREO";
@@ -54,9 +70,10 @@ class PDF extends TCPDF{
         $this->SetTextColor(0,0,0);
         $this->SetFont('helvetica', '', 9);
         // $this->Cell(180, 3, 'Gimnasio La roca', 0, 1, 'C');
-        $this->Cell(180, 7, 'Direccion: '.$direccion.'', 0, 1, 'C');
+        $this->Cell(180, 7, 'Dirección: '.$direccion.'', 0, 1, 'C');
         // $this->Cell(180, 3, 'Calle xxxxxxxxxx.....', 0, 1, 'C');
         $this->Cell(180, 3, 'Correo: '.$correo.'', 0, 1, 'C');
+        $this->Cell(180, 7, 'Teléfono: '.$telefono.'', 0, 1, 'C');
 
         $this->Ln(20); //Espacios
         $this->SetFont('helvetica', 'B', 14);
@@ -68,7 +85,7 @@ class PDF extends TCPDF{
 
         // $this->Cell(180, 3, 'Del '.$fecha.'', 0, 1, 'C');
 
-        $this->Cell(180, 3, 'Año '.$año.'', 0, 1, 'C');
+        $this->Cell(180, 3, 'Fecha '.$año.'', 0, 1, 'C');
     }
 
     // Footer de la pagina
@@ -79,10 +96,10 @@ class PDF extends TCPDF{
         $this->SetFont('helvetica', 'I', 8);
         // Page number
 
-        date_default_timezone_set("America/Tegucigalpa");
+        //date_default_timezone_set("America/Tegucigalpa");
         $fecha = date('Y-m-d H:i:s');
         $this->Cell(0, 10, ''.$fecha.'', 0, false, 'C', 0, '', 0, false, 'T', 'M');
-        $this->Cell(0, 10, 'Page '.$this->getAliasNumPage().'/'.$this->getAliasNbPages(), 0, false, 'C', 0, '', 0, false, 'T', 'M');
+        $this->Cell(0, 10, 'Página '.$this->getAliasNumPage().'/'.$this->getAliasNbPages(), 0, false, 'C', 0, '', 0, false, 'T', 'M');
     }
 }
 
@@ -145,10 +162,11 @@ $pdf->SetFont('times', '', 13);
 $pdf->SetFillColor(225, 235, 255);
 $pdf->Cell(15, 5, 'No', 1, 0, 'C', 1);
 $pdf->Cell(70, 5, 'Rol', 1, 0, 'C', 1);
-$pdf->Cell(60, 5, 'Descripcion', 1, 0, 'C', 1);
+$pdf->Cell(60, 5, 'Descripción', 1, 0, 'C', 1);
 $pdf->Cell(40, 5, 'Estado', 1, 0, 'C', 1);
-
+// return;
 //$tabla = "tbl_inscripcion";
+
 if(isset($_GET["rango"])){
 
 
@@ -179,47 +197,46 @@ if(!$roles){
 }
 else{
     $i = 1; //Contador
-$max = 10; //Maximo de registros a mostrar en una pagina
+    $max = 10; //Maximo de registros a mostrar en una pagina
 
-foreach ($roles as $key => $value) {
+    foreach ($roles as $key => $value) {
 
-    if(($i%$max) == 0){
-        $pdf->AddPage();
+        if(($i%$max) == 0){
+            $pdf->AddPage();
 
-        $pdf->Ln(40);
-        
-        $pdf->SetFont('times', '', 13);
-        $pdf->SetFillColor(225, 235, 255);
-        $pdf->Cell(15, 5, 'No', 1, 0, 'C', 1);
-        $pdf->Cell(70, 5, 'Rol', 1, 0, 'C', 1);
-        $pdf->Cell(60, 5, 'Descripcion', 1, 0, 'C', 1);
-        $pdf->Cell(40, 5, 'Estado', 1, 0, 'C', 1);
+            $pdf->Ln(55);
+            
+            $pdf->SetFont('times', '', 13);
+            $pdf->SetFillColor(225, 235, 255);
+            $pdf->Cell(15, 5, 'No', 1, 0, 'C', 1);
+            $pdf->Cell(70, 5, 'Rol', 1, 0, 'C', 1);
+            $pdf->Cell(60, 5, 'Descripción', 1, 0, 'C', 1);
+            $pdf->Cell(40, 5, 'Estado', 1, 0, 'C', 1);
+        }
+        // $pdf->Cell(15, 5, ''.$i.'', 1, 0, 'C');
+
+        $pdf->Ln(8);
+        $pdf->SetFont('times', '', 12);
+        // $pdf->SetFillColor(225, 235, 255);
+        $pdf->Cell(15, 4, ''.($key+1).'', 0, 0, 'C');
+        $pdf->Cell(70, 4, ''.$value['rol'].' ', 0, 0, 'C');
+        $pdf->Cell(60, 4, ''.$value['descripcion'].'', 0, 0, 'C');
+        if($value["estado"] == 0){
+            $pdf->Cell(40, 4, 'Desactivado', 0, 0, 'C');
+        } else {
+            $pdf->Cell(40, 4, 'Activado', 0, 0, 'C');
+        }
+        $i++;
+
     }
-    // $pdf->Cell(15, 5, ''.$i.'', 1, 0, 'C');
 
-    $pdf->Ln(8);
-    $pdf->SetFont('times', '', 12);
-    // $pdf->SetFillColor(225, 235, 255);
-    $pdf->Cell(15, 4, ''.($key+1).'', 0, 0, 'C');
-    $pdf->Cell(70, 4, ''.$value['rol'].' ', 0, 0, 'C');
-    $pdf->Cell(60, 4, ''.$value['descripcion'].'', 0, 0, 'C');
-    if($value["estado"] == 0){
-        $pdf->Cell(40, 4, 'Desactivado', 0, 0, 'C');
-    } else {
-        $pdf->Cell(40, 4, 'Activado', 0, 0, 'C');
-    }
-    $i++;
 
 }
 
-}
 
-
-
-
-
+ob_end_clean();
 
 // Close and output PDF document
-$pdf->Output('Reporteroles.pdf', 'I');
+$pdf->Output('reporte_roles.pdf', 'I');
 
 ?>

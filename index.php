@@ -19,7 +19,6 @@ require_once "modelos/globales.modelo.php";
 require_once "modelos/personas.modelo.php";
 require_once "modelos/usuarios.modelo.php";
 require_once "modelos/inventario.modelo.php";
-require_once "modelos/categorias.modelo.php";
 require_once "modelos/mantenimiento.modelo.php";
 require_once "modelos/productos.modelo.php";
 require_once "modelos/clientes.modelo.php";

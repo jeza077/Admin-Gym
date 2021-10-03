@@ -10,6 +10,8 @@ class PDF extends TCPDF{
     // Header de la pagina
     public function Header() {
         // Logo
+        date_default_timezone_set("America/Tegucigalpa");
+
         $image_file = K_PATH_IMAGES.'logo_gym.png';
         $this->Image($image_file, 40, 10, 25, '', 'PNG', '', 'T', false, 300, '', false, false, 0, false, false, false);
         
@@ -46,7 +48,7 @@ class PDF extends TCPDF{
         // Set font
         $this->SetFont('helvetica', 'I', 8);
         // Page number
-        $this->Cell(0, 10, 'Page '.$this->getAliasNumPage().'/'.$this->getAliasNbPages(), 0, false, 'C', 0, '', 0, false, 'T', 'M');
+        $this->Cell(0, 10, 'Página '.$this->getAliasNumPage().'/'.$this->getAliasNbPages(), 0, false, 'C', 0, '', 0, false, 'T', 'M');
     }
 }
 
@@ -103,7 +105,7 @@ $pdf->SetFont('dejavusans', '', 14, '', true);
 // This method has several options, check the source code documentation for more information.
 $pdf->AddPage();
 
-$pdf->Ln(45);
+$pdf->Ln(55);
 
 $pdf->SetFont('times', '', 13);
 $pdf->SetFillColor(225, 235, 255);
@@ -129,7 +131,7 @@ foreach ($inventarios as $key => $value) {
     if(($i%$max) == 0){
         $pdf->AddPage();
 
-        $pdf->Ln(40);
+        $pdf->Ln(55);
         
         $pdf->SetFont('times', '', 13);
         $pdf->SetFillColor(225, 235, 255);
@@ -154,6 +156,6 @@ foreach ($inventarios as $key => $value) {
 }
 
 // Close and output PDF document
-$pdf->Output('example_001.pdf', 'I');
+$pdf->Output('reporte_productos.pdf', 'I');
 
 ?>

@@ -31,12 +31,12 @@
         <div class="inner">
         <h3>L<?php echo number_format($ventas[0]["total"],2);?><sup style="font-size: 20px"></sup></h3>
 
-        <p>Ventas Totales</p>
+        <p>Ventas totales</p>
         </div>
         <div class="icon">
         <i class="fas fa-dollar-sign"></i>
         </div>
-        <a href="administrar-venta" class="small-box-footer">Más info <i class="fas fa-arrow-circle-right"></i></a>
+        <a href="administrar-venta" class="small-box-footer">Más información<i class="fas fa-arrow-circle-right"></i></a>
     </div>
 </div>
 
@@ -51,7 +51,7 @@
         <div class="icon">
         <i class="ion ion-person-add"></i>
         </div>
-        <a href="clientes" class="small-box-footer">Más info <i class="fas fa-arrow-circle-right"></i></a>
+        <a href="clientes" class="small-box-footer">Más información<i class="fas fa-arrow-circle-right"></i></a>
     </div>
 </div>    
 
@@ -61,12 +61,12 @@
         <div class="inner">
         <h3><?php echo number_format($totalProductos);?></h3>
 
-        <p>Total de Productos</p>
+        <p>Total de productos</p>
         </div>
         <div class="icon">
         <i class="ion ion-bag"></i>
         </div>
-        <a href="productos" class="small-box-footer">Más info <i class="fas fa-arrow-circle-right"></i></a>
+        <a href="productos" class="small-box-footer">Más información<i class="fas fa-arrow-circle-right"></i></a>
     </div>
 </div>
 
@@ -76,11 +76,11 @@
         <div class="inner">
         <h3><?php echo number_format($totalEquipo);?></h3>
 
-        <p>Total de Equipo</p>
+        <p>Total de equipo</p>
         </div>
         <div class="icon">
         <i class="fas fa-dumbbell"></i>
         </div>
-        <a href="equipo" class="small-box-footer">Más info <i class="fas fa-arrow-circle-right"></i></a>
+        <a href="equipo" class="small-box-footer">Más información<i class="fas fa-arrow-circle-right"></i></a>
     </div>
 </div>

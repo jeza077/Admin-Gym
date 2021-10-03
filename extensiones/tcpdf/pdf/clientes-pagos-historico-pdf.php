@@ -1,16 +1,24 @@
 <?php
+require_once("../../../controladores/mantenimiento.controlador.php");
 require_once("../../../controladores/usuarios.controlador.php");
 require_once "../../../modelos/usuarios.modelo.php";
 require_once('../../../controladores/clientes.controlador.php');
 require_once "../../../modelos/clientes.modelo.php";
 require_once('../examples/tcpdf_include.php');
-date_default_timezone_set("America/Tegucigalpa");
+//date_default_timezone_set("America/Tegucigalpa");
 
+session_start();
+
+$descripcionEvento = "".$_SESSION['usuario']." Generó reporte pdf de clientes pagos histórico";
+$accion = "Generar";
+$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION['id_usuario'], 7, $accion,
+$descripcionEvento);
 
 class PDF extends TCPDF{
     
     // Header de la pagina
     public function Header() {
+        date_default_timezone_set("America/Tegucigalpa");
 
         $item="parametro";
         $valor="ADMIN_NOMBRE_EMPRESA";
@@ -25,6 +33,13 @@ class PDF extends TCPDF{
         $direccionEmpresa = ControladorUsuarios::ctrMostrarParametros($item, $valor);
         // var_dump($direccionEmpresa ['valor']);
         $direccion = $direccionEmpresa ['valor'];
+
+        $item="parametro";
+        $valor="ADMIN_TELEFONO_EMPRESA";
+
+        $telefonoEmpresa = ControladorUsuarios::ctrMostrarParametros($item, $valor);
+        // var_dump($telefonoEmpresa ['valor']);
+        $telefono = $telefonoEmpresa ['valor'];
     
         $item="parametro";
         $valor="ADMIN_CORREO";
@@ -54,15 +69,16 @@ class PDF extends TCPDF{
         $this->Cell(260, 3, ''.$direccion.'', 0, 1, 'C');
         // $this->Cell(260, 3, 'Calle xxxxxxxxxx.....', 0, 1, 'C');
         $this->Cell(260, 5, ''.$correo.'', 0, 1, 'C');
+        $this->Cell(260, 7, 'Teléfono: '.$telefono.'', 0, 1, 'C');
 
         $this->Ln(20); //Espacios
         $this->SetFont('helvetica', 'B', 14);
-        $this->Cell(260, 3, 'REPORTE PAGOS CLIENTES HISTORICO', 0, 1, 'C');
+        $this->Cell(260, 3, 'REPORTE PAGOS CLIENTES HISTÓRICO', 0, 1, 'C');
         $this->Ln(3);
         $this->SetFont('helvetica', 'B', 11);
 
         $año = date('Y-m-d');
-        $this->Cell(260, 3, 'Año '.$año.'', 0, 1, 'C');
+        $this->Cell(260, 3, 'Fecha '.$año.'', 0, 1, 'C');
     }
 
     // Footer de la pagina
@@ -72,11 +88,11 @@ class PDF extends TCPDF{
         // Set font
         $this->SetFont('helvetica', 'I', 8);
         // Page number
-        // $this->Cell(0, 10, 'Page '.$this->getAliasNumPage().'/'.$this->getAliasNbPages(), 0, false, 'C', 0, '', 0, false, 'T', 'M');
+        // $this->Cell(0, 10, 'Página '.$this->getAliasNumPage().'/'.$this->getAliasNbPages(), 0, false, 'C', 0, '', 0, false, 'T', 'M');
 
         $fecha = date('Y-m-d H:i:s');
         $this->Cell(0, 10, ''.$fecha.'', 0, false, 'C', 0, '', 0, false, 'T', 'M');
-        $this->Cell(0, 10, 'Page '.$this->getAliasNumPage().'/'.$this->getAliasNbPages(), 0, false, 'C', 0, '', 0, false, 'T', 'M');
+        $this->Cell(0, 10, 'Página '.$this->getAliasNumPage().'/'.$this->getAliasNbPages(), 0, false, 'C', 0, '', 0, false, 'T', 'M');
     }
 }
 
@@ -133,7 +149,7 @@ $pdf->SetFont('dejavusans', '', 14, '', true);
 // This method has several options, check the source code documentation for more information.
 $pdf->AddPage();
 
-$pdf->Ln(45);
+$pdf->Ln(55);
 
 $pdf->SetFont('times', '', 13);
 $pdf->SetFillColor(225, 235, 255);
@@ -179,7 +195,7 @@ if(!$clientes){
         if(($i%$max) == 0){
             $pdf->AddPage();
     
-            $pdf->Ln(40);
+            $pdf->Ln(55);
             
             $pdf->SetFont('times', '', 13);
             $pdf->SetFillColor(225, 235, 255);
@@ -212,6 +228,9 @@ if(!$clientes){
     
     }
 }
+
+ob_end_clean();
+
 
 // Close and output PDF document
 $pdf->Output('reporte_inscripciones_clientes_historico.pdf', 'I');

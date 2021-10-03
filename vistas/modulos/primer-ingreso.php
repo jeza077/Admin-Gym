@@ -14,7 +14,7 @@
             <div class="contenedor2 card-body col-md-7">
                 <div class="titulo">
                     <a href="login"><b>Bienvenid@ a bordo </b><?php echo $_SESSION["usuario"]?> :)</a>
-                    <p class="login-box-msg">Por favor, cambie su contraseña y agregue las preguntas de seguridad!</p>
+                    <p class="login-box-msg">Por favor, cambia su contraseña y agregue las preguntas de seguridad!</p>
                 </div>
 
                 <form method="post" id="primerIngreso">
@@ -33,14 +33,15 @@
 
                                 <div class="form-group">
                                     <label for="">Pregunta <?php echo $i?></label>
-                                    <select class="form-control select2" name="nuevaPregunta[]">
+                                    <select class="form-control" id="selectPreguntas<?php echo $i?>" name="nuevaPregunta[]">
                                         <option selected="selected">Seleccionar...</option>
                                         <?php 
                                             $tabla = "tbl_preguntas";
-                                            $item = null;
-                                            $valor = null;
-
-                                            $preguntas = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
+                                            $item = 'estado';
+                                            $valor = 1;
+                                            $all = true;
+              
+                                            $preguntas = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all);
 
                                             foreach ($preguntas as $key => $value) { ?>
                                                 <option value="<?php echo $value['id_preguntas']?>"><?php echo $value['pregunta']?></option>        
@@ -56,8 +57,7 @@
                                 </div>
 
                                 <div class="form-group mt-4" id="pregunta<?php echo $i?>">
-                                    <!-- <a href="salir" class="btn btn-danger salir float-left">Salir</a>
-                                    <a href="javascript:void(0);" class="btn btn-primary salir float-right" onclick="togglePregunta<?php echo $i+1?>();">Siguiente</a> -->
+
                                 </div>
                             <!-- </div> -->
 
@@ -88,13 +88,7 @@
                         $contraseñaPreguntas->ctrNuevaContraseñaPreguntasSeguridad($id, $usuario);
                     ?>
                 </form>
-                
-                <?php
-                    $descripcionEvento = " Primer Ingreso";
-                    $accion = "Ingreso";
-
-                    $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
-                ?>    
+                   
             </div>
         </div>
     </div>

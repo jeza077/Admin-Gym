@@ -12,7 +12,7 @@
       
       <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
       
-      <li class="active">Página no encontrada</li>
+      <li class="active"> Página no encontrada</li>
     
     </ol>
 
@@ -30,13 +30,13 @@
 
           <i class="fa fa-warning text-primary"></i> 
 
-          Ooops! Página no encontrada.
+          ¡Página no encontrada!
 
         </h3>
 
         <p>
         
-           Ingresa al menú lateral y allí podrás encontrar las páginas disponibles. También puedes regresar haciendo <a href="inicio">click aquí.</a>
+           Ingresa al menú lateral y ahí podrás encontrar las páginas disponibles.</a>
         
         </p>
 

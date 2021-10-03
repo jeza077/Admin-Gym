@@ -1,30 +1,31 @@
 <?php
-require_once "../controladores/productos.controlador.php";
-require_once "../modelos/productos.modelo.php";
 
-class TablaProductosVentas{
+require_once "../controladores/ventas.controlador.php";
+require_once "../modelos/ventas.modelo.php";
+
+class TablaVentas{
 
  	/*=============================================
  	 MOSTRAR LA TABLA DE PRODUCTOS
   	=============================================*/ 
 
-	public function mostrarTablaProductosVentas(){
+	public function mostrarTablaVentas(){
 
-		// $item = null;
-    	// $valor = null;
+        // if(isset($_GET["fechaInicial"])){
 
+        //     $fechaInicial = $_GET["fechaInicial"];
+        //     $fechaFinal = $_GET["fechaFinal"];
 
-		$item = 'id_tipo_producto';
-		$valor = 1;
-		$all = true;
+        // } else {
 
-		$productos = ControladorProductos::ctrMostrarProductos($item, $valor, $all);	
-        //   echo "<pre>";
-        //   var_dump($productos);
-        //   echo "</pre>";
-        //   return;
-		
-  		if(count($productos) == 0){
+            $fechaInicial = null;
+            $fechaFinal = null;
+
+        // }
+
+        $ventas = ControladorVentas::ctrRangoFechasVentas($fechaInicial, $fechaFinal);
+
+  		if(count($ventas) == 0){
 
   			echo '{"data": []}';
 
@@ -34,47 +35,47 @@ class TablaProductosVentas{
   		$datosJson = '{
 		  "data": [';
 
-		  for($i = 0; $i < count($productos); $i++){
+		  for($i = 0; $i < count($ventas); $i++){
 
-		  	/*=============================================
- 	 		TRAEMOS LA IMAGEN
-  			=============================================*/ 
+            // $prod = "<div>";
+            
+                $decod = json_decode($ventas[$i]['productos']);
+                error_reporting(0);
+                foreach ($decod as $key => $val) {
+                    $contador = count($val->descripcion);
+                    // echo ($contador);
+                    if($contador == 11){
+                        // echo 'mas de uno';
+                        // echo  $val->descripcion.',';
+                        "<div>'".$val->descripcion.",'</div>"
+                    } else {
+                        "<div>'".$val->descripcion.", '</div>"
+                        // echo  $val->descripcion.', ';
+                        // echo 'solo uno';
+                        // echo  $val->descripcion;
+                    }
+                }
+                // "</div>";
+                // var_dump($decod); 
+                $listaProductos = 'Proteina'; 
 
-              // $imagen = "<img src='".$productos[$i]["imagen"]."' width='40px'>";
-		  	$imagen = "<img src='vistas/img/usuarios/default/anonymous.png' width='40px'>";
-              
+                // $listaProductos = "<div>'".$decod."'</div>"; 
 
-		  	/*=============================================
- 	 		STOCK
-  			=============================================*/ 
-			$stockTotal = $productos[$i]["stock"]  + $productos[$i]["devolucion"];
+            // $botones = "<button class='btn btn-info btnImprimirFactura' codigoVenta='".$ventas[$i]["numero_factura"]."'><i class='fa fa-print' style='color:#fff'></i></button>  
 
-  			if($productos[$i]["stock"] <= 10){
+            // <button class='btn btn-warning btnEditarVenta' idVenta='".$ventas[$i]["id_venta"]."'><i class='fas fa-pencil-alt' style='color:#fff'></i></button>   
 
-  				$stock = "<button class='btn btn-danger'>".$stockTotal."</button>";
+            // <button class='btn btn-danger btnEliminarVenta' idVenta='".$ventas[$i]["id_venta"]."'><i class='fas fa-trash-alt'></i></button>";
 
-  			}else if($productos[$i]["stock"] > 11 && $productos[$i]["stock"] <= 15){
+            $botones = 'boton';
 
-  				$stock = "<button class='btn btn-warning'>".$stockTotal."</button>";
-
-  			}else{
-
-  				$stock = "<button class='btn btn-success'>".$stockTotal."</button>";
-
-  			}
-
-		  	/*=============================================
- 	 		TRAEMOS LAS ACCIONES
-  			=============================================*/ 
-
-		  	$botones =  "<div class='btn-group'><button class='btn btn-primary agregarProducto recuperarBoton' idProducto='".$productos[$i]["id_inventario"]."'>Agregar</button></div>"; 
-
-		  	$datosJson .='[
+            $datosJson .='[
 			      "'.($i+1).'",
-			      "'.$imagen.'",
-			     
-			      "'.$productos[$i]["nombre_producto"].'",
-			      "'.$stock.'",
+			      "'.$ventas[$i]["numero_factura"].'",
+                  "'.$ventas[$i]["nombre"].' '.$ventas[$i]["apellidos"].'",
+                  "'.$listaProductos.'",
+                  "'.number_format($ventas[$i]["total"],2).'",
+                  "'.$ventas[$i]["fecha"].'",
 			      "'.$botones.'"
 			    ],';
 
@@ -97,6 +98,6 @@ class TablaProductosVentas{
 /*=============================================
 ACTIVAR TABLA DE PRODUCTOS
 =============================================*/ 
-$activarProductosVentas = new TablaProductosVentas();
-$activarProductosVentas -> mostrarTablaProductosVentas();
+$mostrarVentas = new TablaVentas();
+$mostrarVentas -> mostrarTablaVentas();
     

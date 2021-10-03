@@ -6,9 +6,62 @@ use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
 class ControladorUsuarios{
+	
+	/*=============================================
+	ACTIVAR USUARIO E INSERTAR EN BITACORA LA ACCIÓN
+	=============================================*/
+	static public function ctrActivarUsuario($tabla, $item1, $valor1, $item2, $valor2){
+
+		if(isset($valor2)){
+			
+			$item3 = null;
+			$valor3 = null;
+			
+			$item4 = null;
+			$valor4 = null;
+		  
+			$respuesta = ModeloUsuarios::mdlActualizarUsuario($tabla, $item1, $valor1, $item2, $valor2, $item3, $valor3, $item4, $valor4);
+
+			// return $respuesta;
+
+			if($respuesta == true){
+
+				$tabla1 = "tbl_personas";
+				$tabla2 = "tbl_usuarios";
+				
+				$item = "id_usuario";
+				$valor = $valor2;
+
+				$respuestaUsuarios = ModeloUsuarios::mdlMostrarUsuarios($tabla1, $tabla2, $item, $valor);
+
+				require_once 'mantenimiento.controlador.php';
+
+				session_start();
+
+				if($valor1 == 1){
+
+					$descripcionEvento = "".$_SESSION['usuario']." cambio el estado de ".$respuestaUsuarios['usuario']." a activado";
+					$accion = "Cambio de estado";
+					$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION['id_usuario'], 2, $accion, $descripcionEvento);	
+					return $bitacoraConsulta;					
+					
+				} else {
+					
+					$descripcionEvento = "".$_SESSION['usuario']." cambio el estado de ".$respuestaUsuarios['usuario']." a desactivado";
+					$accion = "Cambio de estado";
+					$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION['id_usuario'], 2, $accion, $descripcionEvento);	
+					return $bitacoraConsulta;					
+				}
+
+			}
+
+		}
+
+	}
+
 
 	/*=============================================
-				MOSTRAR SOLO USUARIOS
+	MOSTRAR SOLO USUARIOS
 	=============================================*/
 
 	static public function ctrMostrarSoloUsuarios($tabla, $item, $valor){
@@ -21,7 +74,7 @@ class ControladorUsuarios{
 	}
 
 	/*=============================================
-				MOSTRAR USUARIOS
+	MOSTRAR USUARIOS
 	=============================================*/
 
 	static public function ctrMostrarUsuarios($tabla, $item, $valor){
@@ -34,13 +87,13 @@ class ControladorUsuarios{
 	}
 
 	/*=============================================
-				MOSTRAR (DINAMICO)
+	MOSTRAR (DINAMICO)
 	=============================================*/
 
-	static public function ctrMostrar($tabla, $item, $valor) {
+	static public function ctrMostrar($tabla, $item, $valor, $all) {
 
 		$tabla1 = $tabla;
-		$respuesta = ModeloUsuarios::mdlMostrar($tabla1, $item, $valor);
+		$respuesta = ModeloUsuarios::mdlMostrar($tabla1, $item, $valor, $all);
 
 		return $respuesta;
 
@@ -48,7 +101,7 @@ class ControladorUsuarios{
 
 	
 	/*=============================================
-			MOSTRAR MODULOS POR ROL-USUARIO
+	MOSTRAR MODULOS POR ROL-USUARIO
 	=============================================*/
 
 	static public function ctrMostrarUsuarioModulo($item1, $item2, $valor1, $valor2){
@@ -59,7 +112,7 @@ class ControladorUsuarios{
 	}
 
 	/*=============================================
-			INGRESO DE USUARIO
+	INGRESO DE USUARIO
 	=============================================*/
 
 	static public function ctrIngresoUsuario(){
@@ -69,7 +122,7 @@ class ControladorUsuarios{
 			if($_POST["ingUsuario"] === "" && $_POST["ingPassword"] === ""){
 				echo '<script>			
 					Swal.fire({
-						title: "No dejar los campos vacios.",
+						title: "No dejar los campos vacíos.",
 						icon: "error",
 						toast: true,
 						position: "top-end",
@@ -82,7 +135,7 @@ class ControladorUsuarios{
 			} else {
 
 				if(preg_match('/^[A-Z]+$/', $_POST["ingUsuario"]) &&
-				preg_match('/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%.])\S{8,16}$/', $_POST["ingPassword"])){
+				preg_match('/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%*-,_+?¡¿=&.])\S{8,16}$/', $_POST["ingPassword"])){
 
 					$encriptar = crypt($_POST["ingPassword"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
 					
@@ -121,6 +174,7 @@ class ControladorUsuarios{
 					  $link_objeto = $modulo['link_objeto'];
 	
 					  $permisos = array(
+						'link' => $link_objeto,
 						'agregar' => $modulo['agregar'],
 						'eliminar' => $modulo['eliminar'],
 						'actualizar' => $modulo['actualizar'],
@@ -138,9 +192,26 @@ class ControladorUsuarios{
 					}
 	
 					//   echo "<pre>";
-					// 	var_dump($permisos_objetos);
+						// var_dump(in_array("Dashboard", $permisos_objetos));
+						$totalLink = array();
+						foreach ($permisos_objetos as $key => $value) {
+							array_push($totalLink, $value['link']);
+							// var_dump($value['link']);
+						}
+
+						// $ruta = reset($totalLink);
+						// if((in_array("venta", $totalLink)))
+						$ruta = '';
+						if(reset($totalLink) == 'venta' || reset($totalLink) == 'mantenimiento' || reset($totalLink) == 'clientes' || reset($totalLink) == 'stock' ){
+							// echo 'si';
+							$ruta = next($totalLink);
+						} else {
+							// echo 'no';
+							$ruta = reset($totalLink);
+						}
+						// var_dump((in_array("venta", $totalLink)));
 					//   echo "</pre>";
-					
+						
 					//   return;
 					
 
@@ -160,8 +231,8 @@ class ControladorUsuarios{
 
 						if($respuesta["usuario"] == $_POST["ingUsuario"] && $respuesta["password"] == $encriptar){
 							
-							
-							if($respuesta["estado"] == 0 && $respuesta["primera_vez"] == 1 && $respuesta["rol"] == "Default" || $respuesta["estado"] == 1 && $respuesta["primera_vez"] == 1 && $respuesta["rol"] == "Default"){
+								#AUTO-REGISTRO
+							if($respuesta["estado"] == 0 && $respuesta["primera_vez"] == 1 && $respuesta["rol"] == "DEFAULT" || $respuesta["estado"] == 1 && $respuesta["primera_vez"] == 1 && $respuesta["rol"] == "DEFAULT"){
 
 								echo '<script>			
 										Swal.fire({
@@ -172,6 +243,7 @@ class ControladorUsuarios{
 										});
 									</script>';
 									
+								#PRIMERA VEZ
 							} else if($respuesta["estado"] == 0 && $respuesta["primera_vez"] == 1 || $respuesta["estado"] == 1 && $respuesta["primera_vez"] == 1) {
 
 								$_SESSION["iniciarSesion"] = "ok";
@@ -182,6 +254,10 @@ class ControladorUsuarios{
 								$_SESSION["apellidos"] = $respuesta["apellidos"];
 								$_SESSION["primerIngreso"] = $respuesta["primera_vez"];
 			
+								$descripcionEvento = "".$_SESSION['usuario']." ingresó al sistema por primera vez";
+								$accion = "Ingresó";
+								$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION['id_usuario'], 31, $accion, $descripcionEvento);						
+
 								echo '<script>
 								Swal.fire({
 									title: "Bienvenid@ '.$_SESSION['nombre'] . " " . $_SESSION["apellidos"] . '",
@@ -196,7 +272,7 @@ class ControladorUsuarios{
 								</script>';
 
 														
-
+								#SI ESTA ACTIVO Y NO ES PRIMER INGRESO
 							} else if($respuesta["estado"] == 1 && $respuesta["primera_vez"] == 0 && $fechaHoy < $fechaVencimiento || $respuesta["estado"] == 1 && $respuesta["primera_vez"] == 0 && $fechaHoy > $fechaVencimiento && $_POST['ingUsuario'] == 'SUPERADMIN') {
 
 								$_SESSION["iniciarSesion"] = "ok";
@@ -213,6 +289,9 @@ class ControladorUsuarios{
 								$_SESSION["consulta"] = $respuesta["consulta"];
 								$_SESSION["primerIngreso"] = $respuesta["primera_vez"];
 								$_SESSION['permisos'] = $permisos_objetos;
+
+								// var_dump($_SESSION['permisos']);
+								// return;
 
 								//* =====REGISTRAR FECHA Y HORA PARA SABER EL ULTIMO LOGIN ====== */
 
@@ -237,13 +316,9 @@ class ControladorUsuarios{
 
 								if($ultimoLogin == true){
 
-									// $descripcionEvento = " Ingreso a Login";
-									// $accion = "Ingreso";
-						 
-									// $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
-
-									// return var_dump($bitacoraConsulta);
-									
+									$descripcionEvento = "".$_SESSION['usuario']." ingresó al sistema";
+									$accion = "Ingresó";
+									$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION['id_usuario'], 1, $accion, $descripcionEvento);						
 
 									echo '<script>
 										Swal.fire({
@@ -254,18 +329,19 @@ class ControladorUsuarios{
 											confirmButtonColor: "#ff8303"
 										}).then((result)=>{
 											if(result.value){
-												window.location = "dashboard";
+												window.location = "'.$ruta.'";
 											}
 										});
 										</script>';
 
 								}
 
+								#SI ESTA VENCIDO SU USUARIO Y NO ES SUPERADMIN
 							} else if($respuesta["estado"] == 1 && $fechaHoy > $fechaVencimiento && $_POST['ingUsuario'] != 'SUPERADMIN'){
 								
 								echo '<script>			
 										Swal.fire({
-											title: "Su usuario ha vencido, comuniquese con el administrador.",
+											title: "Su usuario ha vencido, comuníquese con el administrador.",
 											icon: "error",
 											heightAuto: false,
 											allowOutsideClick: false
@@ -273,11 +349,12 @@ class ControladorUsuarios{
 									</script>';
 								session_destroy();
 
+								#USUARIO DESACTIVADO
 							} else {
 
 								echo '<script>			
 										Swal.fire({
-											title: "Usuario desactivado, comuniquese con el administrador.",
+											title: "Usuario desactivado, comuníquese con el administrador.",
 											icon: "error",
 											heightAuto: false,
 											allowOutsideClick: false
@@ -305,7 +382,7 @@ class ControladorUsuarios{
 								// echo $intentosRestantes;
 								// session_destroy();
 
-								if($_SESSION['contadorLogin'] > $intentos) {
+								if($_SESSION['contadorLogin'] >= $intentos) {
 									$tabla1 = "tbl_personas";
 									$tabla2 = "tbl_usuarios";
 									
@@ -313,6 +390,11 @@ class ControladorUsuarios{
 									$valor = $_POST["ingUsuario"];
 
 									$respuesta = ModeloUsuarios::mdlMostrarUsuarios($tabla1, $tabla2, $item, $valor);
+
+									$idUser = $respuesta['id_usuario'];
+									$user = $respuesta['usuario'];
+									// var_dump($respuesta);
+									// return;
 
 									if($respuesta["usuario"] == $_POST["ingUsuario"]){
 										$tabla = "tbl_usuarios";
@@ -332,9 +414,16 @@ class ControladorUsuarios{
 
 										if($respuestaEstado == true){
 											
+											$descripcionEvento = "".$user." intentó ingresar al sistema y fue bloqueado por intentos inválidos";
+											$accion = "Ingresó";
+											$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($idUser, 30, $accion, $descripcionEvento);
+
+											// var_dump($bitacoraConsulta);
+											// return;
+
 											echo '<script>			
 													Swal.fire({
-														title: "¡Lo sentimos! Su usuario ha sido bloqueado, comuniquese con el Administrador.",
+														title: "¡Lo sentimos! Su usuario ha sido bloqueado, comuníquese con el Administrador.",
 														icon: "error",
 														heightAuto: false,
 														allowOutsideClick: false
@@ -353,7 +442,7 @@ class ControladorUsuarios{
 								} else {
 									echo '<script>			
 											Swal.fire({
-												title: "¡Usuario y contraseña invalidos. Intento '. $_SESSION['contadorLogin'].' le queda '. ($intentos - $_SESSION['contadorLogin']).' intentos.",
+												title: "¡Usuario y contraseña inválidos. Intento '. $_SESSION['contadorLogin'].' le queda '. ($intentos - $_SESSION['contadorLogin']).' intentos.",
 												icon: "error",
 												toast: true,
 												position: "top",
@@ -366,7 +455,7 @@ class ControladorUsuarios{
 							} else {
 								echo '<script>			
 										Swal.fire({
-											title: "¡Usuario y contraseña invalidos!",
+											title: "¡Usuario y contraseña inválidos!",
 											icon: "error",
 											toast: true,
 											position: "top-end",
@@ -382,7 +471,7 @@ class ControladorUsuarios{
 					
 					echo '<script>			
 						Swal.fire({
-							title: "Usuario/contraseña incorrectos! Intente de nuevo.",
+							title: "¡Usuario/contraseña incorrectos! Intente de nuevo.",
 							icon: "error",
 							toast: true,
 							position: "top-end",
@@ -404,7 +493,7 @@ class ControladorUsuarios{
 	}
 
 	/*=============================================
-			REGISTRO DE USUARIOS
+	REGISTRO DE USUARIOS
 	=============================================*/
 	static public function ctrCrearUsuario($datos){
 
@@ -413,7 +502,7 @@ class ControladorUsuarios{
 		if(isset($datos["usuario"])){
 
 			if(preg_match('/^[A-Z]+$/', $datos["usuario"]) &&
-			   preg_match('/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%.])\S{8,16}$/', $datos["password"])){
+			   preg_match('/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%*-,_+?¡¿=&.])\S{8,16}$/', $datos["password"])){
 
 				$emailUsuario = $datos["email"];
 				// $contraSinEncriptar = ControladorUsuarios::password_seguro_random();
@@ -521,40 +610,53 @@ class ControladorUsuarios{
 
 						if($respuestaEmpleado == true){
 
+							//INSERTAR EL NUEVO PASSWORD EN LA TABLA tbl_historial_pass 
+							$tabla1 = "tbl_usuarios";
+							$usuario=$datos["id_persona"];
+
+							$respuestaContraseñas = ModeloUsuarios::mdlMostrarUser($tabla1,$usuario);
+
+							//INSERTAR UN PASSWORD NUEVO
+				            $tabla="tbl_historial_pass";
+							$idUsuario=$respuestaContraseñas['id_usuario'];
+							//$id_usuario=$datos['usuario'];
+
+							$password = crypt($datos["password"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
+
+							$respuestaPass = ModeloUsuarios::mdlHistorialPassword($tabla,$idUsuario, $password);
+							//////////////////////////////////////////////////////////////////////////////////
+
+							$email = $emailUsuario;
+							$nombreUsuario = $datos["usuario"];
+							$contraseña =  $contraSinEncriptar;
+							$asunto = 'Envío de usuario y contraseña';
+							$require = false;
+
 							if($tipoPersona == 'default'){
 
+								// return true;
+								$template = 'Hola '.$nombre.'! <br><br> Tu usuario es: '.$nombreUsuario.' <br> Tu contraseña es: '.$contraseña.'<br><br><br> El administrador pronto le dará permisos para entrar al sistema. <br><br> Saludos!'; 
+
+							} else {
+
+
+								$template = 'Hola '.$nombre.'! <br><br> Tu usuario es: '.$nombreUsuario.' <br> Tu contraseña es: '.$contraseña; 
+								
+							}
+							
+							$respuestaCorreo = ControladorUsuarios::ctrGenerarCorreo($email, $nombreUsuario, $asunto, $template, $require);
+
+							if($respuestaCorreo = true){
+								
+								$descripcionEvento = "".$_SESSION["usuario"]." Creó un nuevo usuario llamado ".$nombreUsuario."";
+								$accion = "Nuevo";
+								$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 2,$accion, $descripcionEvento);
+			
 								return true;
 
 							} else {
 
-								$email = $emailUsuario;
-								$nombreUsuario = $datos["usuario"];
-								$contraseña =  $contraSinEncriptar;
-								$asunto = 'Envio de Usuario y Contraseña';
-								$require = false;
-
-								$template = 'Hola '.$nombre.'! <br><br> Tu usuario es: '.$nombreUsuario.' <br> Tu contraseña es: '.$contraseña; 
-								
-								$respuestaCorreo = ControladorUsuarios::ctrGenerarCorreo($email, $nombreUsuario, $asunto, $template, $require);
-
-								if($respuestaCorreo = true){
-
-								
-									$descripcionEvento = "Nuevo Usuario";
-									$accion = "Nuevo";
-			                        $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 2,$accion, $descripcionEvento);
-				
-								 
-							   
-									
-
-									return true;
-
-								} else {
-
-									return false;
-								}
-
+								return false;
 							}
 
 						} else {
@@ -568,7 +670,7 @@ class ControladorUsuarios{
 					echo "<script>
 						Swal.fire({
 								icon: 'error',
-								title: '¡Llenar campos correctamente!',
+								title: '¡Llenar los campos correctamente!',
 							})
 						</script>";
 
@@ -581,7 +683,7 @@ class ControladorUsuarios{
 				echo "<script>
 						Swal.fire({
 							icon: 'error',
-							title: '¡Llenar campos correctamente!',
+							title: '¡Llenar los campos correctamente!',
 						})
 					</script>";
 
@@ -592,23 +694,338 @@ class ControladorUsuarios{
 
 
 	/*=============================================
-			EDITAR USUARIOS
+	REGISTRO DE USUARIOS YA REGISTRADO
+	=============================================*/
+	static public function ctrCrearUsuarioYaRegistrado(){
+
+		// var_dump($_POST);
+		// var_dump($_FILES);
+		// return;
+
+		if(isset($_POST["nuevoIdPersona"])){
+
+			if(preg_match('/^[A-Z]+$/', $_POST["nuevoUsuario"]) &&
+			   preg_match('/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%*-,_+?¡¿=&.])\S{8,16}$/', $_POST["nuevoPassword"])){
+
+				$contraSinEncriptar = $_POST["nuevoPassword"];
+
+				$item = 'id_personas';
+				$valor = $_POST["nuevoIdPersona"];
+				$all = null;
+
+				$personas = ControladorPersonas::ctrMostrarPersonas($item, $valor, $all);
+
+				$nombre = $personas["nombre"];
+				$emailUsuario = $personas["correo"];
+				
+				/*=============================================
+						VALIDAR IMAGEN
+				=============================================*/
+
+				$ruta = "";
+
+				if(isset($_FILES["nuevaFoto"]["tmp_name"])){
+
+					list($ancho, $alto) = getimagesize($_FILES["nuevaFoto"]["tmp_name"]);
+
+					$nuevoAncho = 500;
+					$nuevoAlto = 500;
+
+					/*==============================================================
+					CREAMOS EL DIRECTORIO DONDE VAMOS A GUARDAR LA FOTO DEL USUARIO
+					===============================================================*/
+
+					$directorio = "vistas/img/usuarios/".$_POST["nuevoUsuario"];
+
+					mkdir($directorio, 0755); 
+
+					/*=====================================================================
+					DE ACUERDO AL TIPO DE IMAGEN APLICAMOS LAS FUNCIONES POR DEFECTO DE PHP
+					======================================================================*/
+
+					if($_FILES["nuevaFoto"]["type"] == "image/jpeg"){
+
+						/*=============================================
+						GUARDAMOS LA IMAGEN EN EL DIRECTORIO
+						=============================================*/
+
+						$aleatorio = mt_rand(100,999);
+
+						$ruta = "vistas/img/usuarios/".$_POST["nuevoUsuario"]."/".$aleatorio.".jpg";
+
+						$origen = imagecreatefromjpeg($_FILES["nuevaFoto"]["tmp_name"]);
+
+						$destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+
+						imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+
+						imagejpeg($destino, $ruta);
+
+					}
+
+					if($_FILES["nuevaFoto"]["type"] == "image/png"){
+
+						/*=============================================
+						GUARDAMOS LA IMAGEN EN EL DIRECTORIO
+						=============================================*/
+
+						$aleatorio = mt_rand(100,999);
+
+						$ruta = "vistas/img/usuarios/".$_POST["nuevoUsuario"]."/".$aleatorio.".png";
+
+						$origen = imagecreatefrompng($_FILES["nuevaFoto"]["tmp_name"]);
+
+						$destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+
+						imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+
+						imagepng($destino, $ruta);
+
+					}
+
+				}
+					
+				//**================= ENCRIPTAMOS LA CONTRASEÑA ===================*/
+				$encriptar = crypt($_POST["nuevoPassword"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
+
+
+				//** =============== CREAMOS LA FECHA VENCIMIENTO DEL USUARIO =================*/
+				$item = 'parametro';
+				$valor = 'ADMIN_DIAS_VIGENCIA';
+				$parametros = ControladorUsuarios::ctrMostrarParametros($item, $valor);
+		
+				$vigenciaUsuario = $parametros['valor'];
+				
+				date_default_timezone_set("America/Tegucigalpa");
+				$fechaVencimiento = date("Y-m-d H:i:s", strtotime('+'.$vigenciaUsuario.' days'));
+
+				$tabla = "tbl_usuarios";
+				$datos = array("id_persona" => $_POST["nuevoIdPersona"],
+								"usuario" => $_POST["nuevoUsuario"],
+								"password" => $encriptar,
+								"rol" => $_POST["nuevoRol"],
+								"foto" => $ruta,
+								"fecha_vencimiento" => $fechaVencimiento);
+
+				// var_dump($datos);
+				// return;
+
+				$respuestaUsuario = ModeloUsuarios::mdlIngresarUsuarioEmpleado($tabla, $datos);
+
+				// return var_dump($respuestaUsuario);
+
+				if($respuestaUsuario == true){
+					
+
+					//PARA ESTA PARTE SOLO SE NECESITA EL INSERT A LA TABLA tbl_historial_pass
+					$tabla1 = "tbl_usuarios";
+					$usuario=$_POST["nuevoIdPersona"];
+
+					$respuestaContraseñas = ModeloUsuarios::mdlMostrarUser($tabla1,$usuario);
+
+					//INSERTAR UN PASSWORD NUEVO
+					$tabla="tbl_historial_pass";
+					$idUsuario=$respuestaContraseñas['id_usuario'];
+					//$id_usuario=$_POST['nuevoUsuario'];
+
+					$password = crypt($_POST['editarPassword'], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
+
+					$respuestaPass = ModeloUsuarios::mdlHistorialPassword($tabla,$idUsuario, $password);
+					//////////////////////////////////////////////////////////////////////////////////
+			
+					$tabla = "tbl_personas";
+
+					$item1 = "tipo_persona";
+					$valor1 = "ambos";
+			
+					$item2 = 'id_personas';
+					$valor2 = $_POST["nuevoIdPersona"];
+
+					$item3 = null;
+					$valor3 = null;
+
+					$item4 = null;
+					$valor4 = null;
+
+					$respuestaAct = ModeloUsuarios::mdlActualizarUsuario($tabla, $item1, $valor1, $item2, $valor2, $item3, $valor3, $item4, $valor4);
+
+					$email = $emailUsuario;
+					$nombreUsuario = $datos["usuario"];
+					$contraseña =  $contraSinEncriptar;
+					$asunto = 'Envío de usuario y contraseña';
+					$require = false;
+
+					$template = 'Hola '.$nombre.'! <br><br> Tu usuario es: '.$nombreUsuario.' <br> Tu contraseña es: '.$contraseña; 
+					
+					$respuestaCorreo = ControladorUsuarios::ctrGenerarCorreo($email, $nombreUsuario, $asunto, $template, $require);
+
+					if($respuestaCorreo = true){
+
+						$descripcionEvento = "Nuevo Usuario";
+						$accion = "Nuevo";
+						$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 2,$accion, $descripcionEvento);
+	
+						echo '<script>
+							Swal.fire({
+								title: "¡Usuario creado correctamente!",
+								icon: "success",
+								heightAuto: false,
+								allowOutsideClick: false
+							}).then((result)=>{
+								if(result.value){
+									window.location = "usuarios";
+								}
+							});                       
+						</script>';
+					
+						
+					} else {
+
+						echo '<script>
+							Swal.fire({
+								title: "¡Algo salió mal, intente de nuevo!",
+								icon: "error",
+								heightAuto: false,
+								allowOutsideClick: false
+							}).then((result)=>{
+								if(result.value){
+									window.location = "usuarios";
+								}
+							});                       
+						</script>';
+
+					}
+
+				} else {
+					
+					echo '<script>
+						Swal.fire({
+							title: "¡Algo salió mal, intente de nuevo!",
+							icon: "error",
+							heightAuto: false,
+							allowOutsideClick: false
+						}).then((result)=>{
+							if(result.value){
+								window.location = "usuarios";
+							}
+						});                       
+					</script>';
+
+				}
+
+			} else {
+
+				echo "<script>
+					Swal.fire({
+							icon: 'error',
+							title: '¡Llenar los campos correctamente!',
+						})
+					</script>";
+
+			}
+
+						
+
+		} 
+
+	}
+
+	/*=============================================
+	EDITAR USUARIOS
 	=============================================*/
 	
 	static public function ctrEditarUsuario($datos){
 
 		// return var_dump($datos);
-		// return;
+		// return $datos;
 
 		
 		if(isset($datos["usuario"])){
 			
 
 			if(preg_match('/^[A-Z]+$/', $datos["usuario"])){
+			// return $datos;
 
 				$emailUsuario = $datos["email"];
 				$contraSinEncriptar = $datos["password_nueva"];
 				$nombre = $datos["nombre"];
+
+				/*
+				//AQUI INICIA LA PARTE DE HISTORIAL DE PASSWORD--------------------------------------------------
+				$tabla='tbl_historial_pass';
+				$item= 'pass';
+				$valor=$datos["password_nueva"];
+
+				$tabla1 = "tbl_usuarios";
+				$usuario=$datos['id_persona'];
+
+				$respuestaContraseñas = ModeloUsuarios::mdlMostrarUser($tabla1,$usuario);
+
+				$idUsuario=$respuestaContraseñas['id_usuario'];
+
+				
+				$respuestaMostrar = ModeloUsuarios::mdlMostrarHistorialPassword($tabla,$item,$idUsuario);
+
+				$mostrarPass1= $respuestaMostrar[0]['pass'];
+				$mostrarPass2= $respuestaMostrar[1]['pass'];
+				$mostrarPass3= $respuestaMostrar[2]['pass'];
+				$mostrarPass4= $respuestaMostrar[3]['pass'];
+				$mostrarPass5= $respuestaMostrar[4]['pass'];
+				$mostrarPass6= $respuestaMostrar[5]['pass'];
+				$mostrarPass7= $respuestaMostrar[6]['pass'];
+				$mostrarPass8= $respuestaMostrar[7]['pass'];
+				$mostrarPass9= $respuestaMostrar[8]['pass'];
+				$mostrarPass10= $respuestaMostrar[9]['pass'];
+
+				 //echo "</br>";
+				
+				//-------------------------------MOSTRAR LAS FECHAS DE LOS PASSWORD
+				$tabla='tbl_historial_pass';
+				$item= 'fecha_creacion';
+				$idUsuario=$respuestaContraseñas['id_usuario'];
+
+				$respuestaFechas = ModeloUsuarios::mdlFechasHistorialPassword($tabla,$idUsuario);        
+				$fecha1= $respuestaFechas[0]['fecha_creacion'];
+				$fecha2= $respuestaFechas[1]['fecha_creacion'];
+				$fecha3= $respuestaFechas[2]['fecha_creacion'];
+				$fecha4= $respuestaFechas[3]['fecha_creacion'];
+				$fecha5= $respuestaFechas[4]['fecha_creacion'];
+				$fecha6= $respuestaFechas[5]['fecha_creacion'];
+				$fecha7= $respuestaFechas[6]['fecha_creacion'];
+				$fecha8= $respuestaFechas[7]['fecha_creacion'];
+				$fecha9= $respuestaFechas[8]['fecha_creacion'];
+				$fecha10= $respuestaFechas[9]['fecha_creacion'];
+				
+				$longitud = count($respuestaMostrar); // Devuelve 2, pero nosotros queremos 6
+				$longitudRecursiva = count($respuestaMostrar, COUNT_RECURSIVE); // Devuelve 6
+				//echo 'elnumero de elementos del arreglo es:--> '.$longitud;
+				//echo "<br>";
+		   
+
+				$encriptarPassIngresado = crypt($datos['password_nueva'], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');			 
+
+				if ($encriptarPassIngresado==$mostrarPass1 || 
+					$encriptarPassIngresado==$mostrarPass2 || 
+					$encriptarPassIngresado==$mostrarPass3 || 
+					$encriptarPassIngresado==$mostrarPass4 || 
+					$encriptarPassIngresado==$mostrarPass5 ||
+					$encriptarPassIngresado==$mostrarPass6 || 
+					$encriptarPassIngresado==$mostrarPass7 || 
+					$encriptarPassIngresado==$mostrarPass8 || 
+					$encriptarPassIngresado==$mostrarPass9 || 
+					$encriptarPassIngresado==$mostrarPass10) {
+					echo '<script>			
+									Swal.fire({
+										title: "Este password ha sido utilizado recientemente",
+										icon: "error",
+										showConfirmButton: true,
+										timer: 3000,
+									});
+								</script>';
+				}
+				*/
+				// 	--------------------------------------------------------------------------------------------------------
+
 
 					/*=============================================
 							VALIDAR IMAGEN
@@ -687,7 +1104,7 @@ class ControladorUsuarios{
 					}
 					
 					if($datos['password_nueva'] != ""){
-						if(preg_match('/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%.])\S{8,16}$/', $datos["password_nueva"])){
+						if(preg_match('/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%*-,_+?¡¿=&.])\S{8,16}$/', $datos["password_nueva"])){
 
 							//**================= ENCRIPTAMOS LA CONTRASEÑA ===================*/
 							$encriptar = crypt($datos["password_nueva"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
@@ -719,16 +1136,100 @@ class ControladorUsuarios{
 
 					$respuestaEmpleado = ModeloUsuarios::mdlEditarUsuario($tabla, $datos);
 
-					// return var_dump($respuestaEmpleado);
+					return ($respuestaEmpleado);
 
 					if($respuestaEmpleado == true){
 
+						/*
+						if($longitudRecursiva>10){
+
+							if ($fecha1<$fecha2 and $fecha1<$fecha3 and $fecha1<$fecha4 
+								and $fecha1<$fecha5 and $fecha1<$fecha6 and $fecha1<$fecha7 
+								and $fecha1<$fecha8 and $fecha1<$fecha9 and $fecha1<$fecha10) {
+
+								$passwordMenor=$fecha1;
+
+							}else if ($fecha2<$fecha1 and $fecha2<$fecha3 and $fecha2<$fecha4 
+								and $fecha2<$fecha5 and $fecha2<$fecha6 and $fecha2<$fecha7 
+								and $fecha2<$fecha8 and $fecha2<$fecha9 and $fecha2<$fecha10) {
+								
+								$passwordMenor=$fecha2;
+
+							}else if ($fecha3<$fecha1 and $fecha3<$fecha2 and $fecha3<$fecha4 
+								and $fecha3<$fecha5 and $fecha3<$fecha6 and $fecha3<$fecha7 
+								and $fecha3<$fecha8 and $fecha3<$fecha9 and $fecha3<$fecha10) {
+								
+								$passwordMenor=$fecha3;
+
+							}else if ($fecha4<$fecha1 and $fecha4<$fecha2 and $fecha4<$fecha3 
+								and $fecha4<$fecha5 and $fecha4<$fecha6 and $fecha4<$fecha7 
+								and $fecha4<$fecha8 and $fecha4<$fecha9 and $fecha4<$fecha10) {
+								
+								$passwordMenor=$fecha4;
+
+							}else if ($fecha5<$fecha1 and $fecha5<$fecha2 and $fecha5<$fecha3 
+								and $fecha5<$fecha4 and $fecha5<$fecha6 and $fecha5<$fecha7 
+								and $fecha5<$fecha8 and $fecha5<$fecha9 and $fecha5<$fecha10){
+
+								$passwordMenor=$fecha5;
+
+							}else if ($fecha6<$fecha1 and $fecha6<$fecha2 and $fecha6<$fecha3 
+								and $fecha6<$fecha4 and $fecha6<$fecha5 and $fecha6<$fecha7 
+								and $fecha6<$fecha8 and $fecha6<$fecha9 and $fecha6<$fecha10){
+
+								$passwordMenor=$fecha6;
+							
+							}else if ($fecha7<$fecha1 and $fecha7<$fecha2 and $fecha7<$fecha3 
+								and $fecha7<$fecha4 and $fecha7<$fecha5 and $fecha7<$fecha6 
+								and $fecha7<$fecha8 and $fecha7<$fecha9 and $fecha7<$fecha10){
+
+								$passwordMenor=$fecha7;
+							
+							}else if ($fecha8<$fecha1 and $fecha8<$fecha2 and $fecha8<$fecha3 
+								and $fecha8<$fecha4 and $fecha8<$fecha5 and $fecha8<$fecha6 
+								and $fecha8<$fecha7 and $fecha8<$fecha9 and $fecha8<$fecha10){
+
+								$passwordMenor=$fecha8;
+
+							}else if ($fecha9<$fecha1 and $fecha9<$fecha2 and $fecha9<$fecha3 
+								and $fecha9<$fecha4 and $fecha9<$fecha5 and $fecha9<$fecha6 
+								and $fecha9<$fecha7 and $fecha9<$fecha8 and $fecha9<$fecha10){
+
+								$passwordMenor=$fecha9;
+							}else{
+								$passwordMenor=$fecha10;
+							}
+
+
+							$tabla='tbl_historial_pass';
+							$item= 'fecha_creacion';
+							$fechaAntigua=$passwordMenor;
+							$idUsuario=$respuestaContraseñas['id_usuario'];
+						
+							$respuestaEliminar = ModeloUsuarios::mdlEliminarHistorialPassword($tabla,$item,$fechaAntigua);
+						
+						}
+						
+						/*
+						//INSERTAR UN PASSWORD NUEVO
+
+						$tabla1 = "tbl_usuarios";
+						$usuario=$datos['id_persona'];
+						$respuestaContraseñas = ModeloUsuarios::mdlMostrarUser($tabla1,$usuario);
+
+
+						$tabla="tbl_historial_pass";
+						$idUsuario=$respuestaContraseñas["id_usuario"];
+						$password = crypt($datos['password_nueva'], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
+
+						$respuestaPass = ModeloUsuarios::mdlHistorialPassword($tabla,$idUsuario, $password);
+						*/
 					
-						$descripcionEvento = " Actualizo registro en la pantalla de usuario";
-						$accion = "Actualizo";
+						$descripcionEvento = "".$_SESSION["usuario"]." Actualizó el registro del usuario ".$datos["usuario"]."";
+						$accion = "Actualizar";
 			
-						$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 2,$accion, $descripcionEvento);
-			
+						$bitacoraconsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 2,$accion, $descripcionEvento);
+						
 					
 
 						// return true;
@@ -738,7 +1239,7 @@ class ControladorUsuarios{
 							$nombreUsuario = $datos["usuario"];
 							$email = $emailUsuario;
 							$contraseña =  $contraSinEncriptar;
-							$asunto = 'Envio de Contraseña Nueva';
+							$asunto = 'Envío de contraseña nueva';
 							$require = false;
 
 							$template = 'Hola '.$nombreUsuario.'! <br><br> Tu contraseña es: '.$contraseña; 
@@ -770,7 +1271,7 @@ class ControladorUsuarios{
 				echo "<script>
 					Swal.fire({
 							icon: 'error',
-							title: '¡Llenar campos correctamente!',
+							title: '¡Llenar los campos correctamente!',
 						})
 					</script>";
 
@@ -781,7 +1282,7 @@ class ControladorUsuarios{
 				echo "<script>
 						Swal.fire({
 							icon: 'error',
-							title: '¡Llenar campos correctamente!',
+							title: '¡Llenar los campos correctamente!',
 						})
 					</script>";
 
@@ -796,7 +1297,7 @@ class ControladorUsuarios{
 	}
 
 	/*=============================================
-                MOSTRAR PREGUNTAS
+	MOSTRAR PREGUNTAS
 	=============================================*/	
 	static public function ctrMostrarPreguntas($item1, $valor1, $item2, $valor2, $item3, $valor3) {
 
@@ -819,7 +1320,7 @@ class ControladorUsuarios{
 			
 			// if($_POST["nuevaPregunta"][0] !== 'Seleccionar...' && $_POST["nuevaPregunta"][1] !== 'Seleccionar...' && $_POST["nuevaPregunta"][2] !== 'Seleccionar...'){
 
-				if(preg_match('/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%.])\S{8,16}$/', $_POST["editarPassword"]) && preg_grep('/^(?=.*[A-ZñÑáéíóúÁÉÍÓÚ])\S{1,50}$/', $_POST["respuestaPregunta"])){
+				if(preg_match('/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%*-,_+?¡¿=&.])\S{8,16}$/', $_POST["editarPassword"]) && preg_grep('/^(?=.*[A-ZñÑáéíóúÁÉÍÓÚ])\S{1,50}$/', $_POST["respuestaPregunta"])){
 					// echo '<br><div class="alert alert-danger">bien.</div>';
 					// return;		
 
@@ -835,11 +1336,13 @@ class ControladorUsuarios{
 
 					// var_dump($respuestaContraseñas);
 					// return;
+
+
 					if($respuestaContraseñas['password'] == $encriptar){
 						// echo '<br><div class="alert alert-danger">Contraseña igual a la anterior, intente de nuevo.</div>';
 						echo '<script>			
 							Swal.fire({
-								title: "Contraseña no puede ser igual a la anterior. Por favor, intente de nuevo.",
+								title: "La contraseña no puede ser igual a la anterior. Por favor, intente de nuevo.",
 								icon: "error",
 								toast: true,
 								position: "top",
@@ -878,8 +1381,21 @@ class ControladorUsuarios{
 						$respuestaContraseña = ModeloUsuarios::mdlActualizarUsuario($tabla2, $item1, $valor1, $item2, $valor2, $item3, $valor3, $item4, $valor4);
 
 						if($respuestaContraseña == true) {
-							$tabla = "tbl_preguntas_usuarios";
+
+							$descripcionEvento = "".$usuario." cambió su contraseña por primera vez";
+							$accion = "Primer ingreso";
+							$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($id, 31, $accion, $descripcionEvento);						
 							
+							//INSERTAR UN PASSWORD NUEVO
+							$tabla="tbl_historial_pass";
+							$idUsuario=$id;
+							$password = crypt($_POST['editarPassword'], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
+
+							$respuestapass = ModeloUsuarios::mdlHistorialPassword($tabla,$idUsuario, $password);
+
+
+							$tabla = "tbl_preguntas_usuarios";
+
 							$datos = array("idUsuario" => $id,
 											"idPregunta" => $_POST["nuevaPregunta"],
 											"respuesta" => $_POST["respuestaPregunta"]);
@@ -888,6 +1404,10 @@ class ControladorUsuarios{
 							$respuestaPreguntas = ModeloUsuarios::mdlIngresarPreguntaUsuario($tabla, $datos);
 				
 							if($respuestaPreguntas == true){
+
+								$descripcionEvento = "".$usuario." agregó sus preguntas de seguridad por primera vez";
+								$accion = "Primer ingresó";
+								$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($id, 31, $accion, $descripcionEvento);	
 
 								$tabla = "tbl_usuarios";
 
@@ -906,6 +1426,7 @@ class ControladorUsuarios{
 								$respuestaEstadoPrimeraVez = ModeloUsuarios::mdlActualizarUsuario($tabla, $item1, $valor1, $item2, $valor2, $item3, $valor3, $item4, $valor4);
 
 								if($respuestaEstadoPrimeraVez == true) {
+
 									echo '<script>
 										Swal.fire({
 											title: "Contraseña y preguntas guardadas correctamente.",
@@ -926,7 +1447,7 @@ class ControladorUsuarios{
 				} else {
 					echo '<script>			
 							Swal.fire({
-								title: "Por favor, llena los campos corectamente. Intente de nuevo.",
+								title: "Por favor, llene los campos corectamente. Intente de nuevo.",
 								icon: "error",
 								toast: true,
 								position: "top",
@@ -959,16 +1480,69 @@ class ControladorUsuarios{
 
 		$tabla1 = "tbl_personas";
 		$tabla2 = "tbl_usuarios";
+
+		// return $post;
+		$tabla='tbl_historial_pass';
+		//$item= 'pass';
+		$id_usuario=$valor;     
 			
 		if(isset($post)){
 			
-			if(preg_match('/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%.])\S{8,16}$/', $post)){
+			if(preg_match('/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%*-,_+?¡¿=&.])\S{8,16}$/', $post)){
 				
 				$encriptar = crypt($post, '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
 
 				$respuestaContraseñas = ModeloUsuarios::mdlMostrarUsuarios($tabla1, $tabla2, $itemUsuario, $valorUsuario);
 
 				// return $respuestaContraseñas;
+
+				/*
+				$itemNuevo = '*';
+				$respuestamostrar = ModeloUsuarios::mdlMostrarHistorialPassword($tabla,$itemNuevo,$id_usuario);
+
+				// return $respuestamostrar;
+				// if($respuestamostrar[] == 10){
+					
+				// } else {
+					
+				// }
+
+				
+			    $mostrarpass1= $respuestamostrar[0]['pass'];
+				$mostrarpass2= $respuestamostrar[1]['pass'];
+				$mostrarpass3= $respuestamostrar[2]['pass'];
+				$mostrarpass4= $respuestamostrar[3]['pass'];
+				$mostrarpass5= $respuestamostrar[4]['pass'];
+				$mostrarpass6= $respuestamostrar[5]['pass'];
+				$mostrarpass7= $respuestamostrar[6]['pass'];
+				$mostrarpass8= $respuestamostrar[7]['pass'];
+				$mostrarpass9= $respuestamostrar[8]['pass'];
+				$mostrarpass10= $respuestamostrar[9]['pass'];
+
+			     //-------------------------------MOSTRAR LAS FECHAS DE LOS PASSWORD
+				$tabla='tbl_historial_pass';
+				$item= 'fecha_creacion';
+				$id_usuario=$valor;
+
+				$respuestafechas = ModeloUsuarios::mdlFechasHistorialPassword($tabla,$id_usuario);  
+
+				$fecha1= $respuestafechas[0]['fecha_creacion'];
+				$fecha2= $respuestafechas[1]['fecha_creacion'];
+				$fecha3= $respuestafechas[2]['fecha_creacion'];
+				$fecha4= $respuestafechas[3]['fecha_creacion'];
+				$fecha5= $respuestafechas[4]['fecha_creacion'];
+				$fecha6= $respuestafechas[5]['fecha_creacion'];
+				$fecha7= $respuestafechas[6]['fecha_creacion'];
+				$fecha8= $respuestafechas[7]['fecha_creacion'];
+				$fecha9= $respuestafechas[8]['fecha_creacion'];
+				$fecha10= $respuestafechas[9]['fecha_creacion'];
+			                
+				$longitud = count($respuestamostrar); // Devuelve 2, pero nosotros queremos 6
+			     $longitudRecursiva = count($respuestamostrar, COUNT_RECURSIVE); // Devuelve 6
+			    //echo 'elnumero de elementos del arreglo es:--> '.$longitud;
+			    //echo "<br>";
+				*/
+				
 
 				if($respuestaContraseñas['password'] == $encriptar){
 
@@ -979,7 +1553,85 @@ class ControladorUsuarios{
 					return false;
 					
 				} else {
+
 					
+					if ($longitudRecursiva>10) {
+						if ($fecha1<$fecha2 and $fecha1<$fecha3 and $fecha1<$fecha4 
+							and $fecha1<$fecha5 and $fecha1<$fecha6 and $fecha1<$fecha7 
+							and $fecha1<$fecha8 and $fecha1<$fecha9 and $fecha1<$fecha10) {
+
+							$passwordmenor=$fecha1;
+
+						}else if ($fecha2<$fecha1 and $fecha2<$fecha3 and $fecha2<$fecha4 
+							and $fecha2<$fecha5 and $fecha2<$fecha6 and $fecha2<$fecha7 
+							and $fecha2<$fecha8 and $fecha2<$fecha9 and $fecha2<$fecha10) {
+											
+						$passwordmenor=$fecha2;
+
+						}else if ($fecha3<$fecha1 and $fecha3<$fecha2 and $fecha3<$fecha4 
+							and $fecha3<$fecha5 and $fecha3<$fecha6 and $fecha3<$fecha7 
+							and $fecha3<$fecha8 and $fecha3<$fecha9 and $fecha3<$fecha10) {
+											
+							$passwordmenor=$fecha3;
+
+						}else if ($fecha4<$fecha1 and $fecha4<$fecha2 and $fecha4<$fecha3 
+							and $fecha4<$fecha5 and $fecha4<$fecha6 and $fecha4<$fecha7 
+							and $fecha4<$fecha8 and $fecha4<$fecha9 and $fecha4<$fecha10) {
+											
+							$passwordmenor=$fecha4;
+
+						}else if ($fecha5<$fecha1 and $fecha5<$fecha2 and $fecha5<$fecha3 
+							and $fecha5<$fecha4 and $fecha5<$fecha6 and $fecha5<$fecha7 
+							and $fecha5<$fecha8 and $fecha5<$fecha9 and $fecha5<$fecha10){
+
+							$passwordmenor=$fecha5;
+
+						}else if ($fecha6<$fecha1 and $fecha6<$fecha2 and $fecha6<$fecha3 
+							and $fecha6<$fecha4 and $fecha6<$fecha5 and $fecha6<$fecha7 
+							and $fecha6<$fecha8 and $fecha6<$fecha9 and $fecha6<$fecha10){
+
+							$passwordmenor=$fecha6;
+										
+						}else if ($fecha7<$fecha1 and $fecha7<$fecha2 and $fecha7<$fecha3 
+							and $fecha7<$fecha4 and $fecha7<$fecha5 and $fecha7<$fecha6 
+							and $fecha7<$fecha8 and $fecha7<$fecha9 and $fecha7<$fecha10){
+
+							$passwordmenor=$fecha7;
+										
+						}else if ($fecha8<$fecha1 and $fecha8<$fecha2 and $fecha8<$fecha3 
+							and $fecha8<$fecha4 and $fecha8<$fecha5 and $fecha8<$fecha6 
+							and $fecha8<$fecha7 and $fecha8<$fecha9 and $fecha8<$fecha10){
+
+							$passwordmenor=$fecha8;
+
+						}else if ($fecha9<$fecha1 and $fecha9<$fecha2 and $fecha9<$fecha3 
+							and $fecha9<$fecha4 and $fecha9<$fecha5 and $fecha9<$fecha6 
+							and $fecha9<$fecha7 and $fecha9<$fecha8 and $fecha9<$fecha10){
+
+							$passwordmenor=$fecha9;
+						}else{
+							$passwordmenor=$fecha10;
+						}
+
+
+					
+						// echo $passwordmenor;
+
+						$tabla='tbl_historial_pass';
+						$item= 'fecha_creacion';
+						$fecha_antigua=$passwordmenor;
+						//$id_usuario=$respuestaContraseñas['id_usuario'];
+					
+						$respuestaEliminar = ModeloUsuarios::mdlEliminarHistorialPassword($tabla, $item, $fecha_antigua);
+					}
+					
+					//INSERTAR UN PASSWORD NUEVO
+					$tabla="tbl_historial_pass";
+					$id_usuario=$respuestaContraseñas["id_usuario"];
+					$password = crypt($post, '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
+					$respuestapass = ModeloUsuarios::mdlHistorialPassword($tabla,$id_usuario, $password);
+
+				
 					//** =============== CREAMOS LA FECHA VENCIMIENTO DEL USUARIO =================*/
 					$itemParam = 'parametro';
 					$valorParam = 'ADMIN_DIAS_VIGENCIA';
@@ -1004,13 +1656,13 @@ class ControladorUsuarios{
 	
 					$respuesta = ModeloUsuarios::mdlActualizarUsuario($tabla2, $item1, $valor1, $item2, $valor2, $item3, $valor3, $item4, $valor4);
 					return $respuesta;
-				
+					
 				}
 				
-			
+				
 			} else {
 
-				$respuesta = false;
+				$respuesta = 'false';
 				return $respuesta;
 
 			}
@@ -1021,7 +1673,7 @@ class ControladorUsuarios{
 
 	
 	/*=============================================
-		ACTUALIZAR USUARIO
+	ACTUALIZAR USUARIO
 	=============================================*/	
 	static public function ctrActualizarUsuario($tabla, $item1, $valor1, $item2, $valor2, $item3, $valor3){
 		
@@ -1031,7 +1683,7 @@ class ControladorUsuarios{
 	}
 
 	/*=============================================
-		CAMBIAR CONTRASEÑA POR CODIGO-CORREO
+	CAMBIAR CONTRASEÑA POR CODIGO-CORREO
 	=============================================*/	
 	static public function ctrCambiarContraseñaPorCodigo(){
 
@@ -1048,23 +1700,83 @@ class ControladorUsuarios{
 		$idUsuario = $respuesta['id_usuario'];
 		$usuario = $respuesta['usuario'];
 		$passwordAnterior = $respuesta['contraseña'];
+
+		//AQUI INICIA LA PARTE DE HISTORISLDE PASSWORD--------------------------------------------------
+		$tabla='tbl_historial_pass';
+		$item= 'pass';
+		$valor=$_POST['editarPassword'];
+		$idUsuario;
+
+		$respuestaMostrar = ModeloUsuarios::mdlMostrarHistorialPassword($tabla,$item,$idUsuario);
+
+		$mostrarPass1= $respuestaMostrar[0]['pass'];
+		$mostrarPass2= $respuestaMostrar[1]['pass'];
+		$mostrarPass3= $respuestaMostrar[2]['pass'];
+		$mostrarPass4= $respuestaMostrar[3]['pass'];
+		$mostrarPass5= $respuestaMostrar[4]['pass'];
+		$mostrarPass6= $respuestaMostrar[5]['pass'];
+		$mostrarPass7= $respuestaMostrar[6]['pass'];
+		$mostrarPass8= $respuestaMostrar[7]['pass'];
+		$mostrarPass9= $respuestaMostrar[8]['pass'];
+		$mostrarPass10= $respuestaMostrar[9]['pass'];
+
+		//-------------------------------MOSTRAR LAS FECHAS DE LOS PASSWORD
+		$tabla='tbl_historial_pass';
+		$item= 'fecha_creacion';
+		$idUsuario;
+
+		$respuestaFechas = ModeloUsuarios::mdlFechasHistorialPassword($tabla,$idUsuario);        
+		$fecha1= $respuestaFechas[0]['fecha_creacion'];
+		$fecha2= $respuestaFechas[1]['fecha_creacion'];
+		$fecha3= $respuestaFechas[2]['fecha_creacion'];
+		$fecha4= $respuestaFechas[3]['fecha_creacion'];
+		$fecha5= $respuestaFechas[4]['fecha_creacion'];
+		$fecha6= $respuestaFechas[5]['fecha_creacion'];
+		$fecha7= $respuestaFechas[6]['fecha_creacion'];
+		$fecha8= $respuestaFechas[7]['fecha_creacion'];
+		$fecha9= $respuestaFechas[8]['fecha_creacion'];
+		$fecha10= $respuestaFechas[9]['fecha_creacion'];
+		
+		$longitud = count($respuestaMostrar); // Devuelve 2, pero nosotros queremos 6
+		$longitudRecursiva = count($respuestaMostrar, COUNT_RECURSIVE); // Devuelve 6
+		//echo 'elnumero de elementos del arreglo es:--> '.$longitud;
+		//echo "<br>";
+
+				 
+
+	 	
+
 		
 		if(isset($_POST['editarPassword'])){
 			
-			if(preg_match('/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%.])\S{8,16}$/', $_POST['editarPassword'])){
+			if(preg_match('/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%*-,_+?¡¿=&.])\S{8,16}$/', $_POST['editarPassword'])){
 				
 				$encriptar = crypt($_POST['editarPassword'], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
+				$encriptarPassIngresado = crypt($_POST['editarPassword'], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');	
 			
-				if($passwordAnterior === $encriptar){
+				if ($encriptarPassIngresado==$mostrarPass1 || $encriptarPassIngresado==$mostrarPass2 ||
+					$encriptarPassIngresado==$mostrarPass3 || $encriptarPassIngresado==$mostrarPass4 || 
+					$encriptarPassIngresado==$mostrarPass5 ||$encriptarPassIngresado==$mostrarpPss6 || 
+					$encriptarPassIngresado==$mostrarPass7 || $encriptarPassIngresado==$mostrarPass8 || 
+					$encriptarPassIngresado==$mostrarPass9 || $encriptarPassIngresado==$mostrarPass10) {
+						echo '<script>			
+								Swal.fire({
+								title: "Este password ha sido utilizado recientemente",
+								icon: "error",
+								showConfirmButton: true,
+								timer: 3000,
+								});
+							</script>';
+
+				} else if($passwordAnterior === $encriptar){
 
 					echo '<script>
 							Swal.fire({
-								title: "Contraseña ingresada no cumple con los requisitos, intente de nuevo.",
+								title: "La contraseña no puede ser igual a la anterior. Por favor, intente de nuevo.",
 								icon: "error",
-								toast: true,
-								position: "top",
+								heightAuto: false,
 								showConfirmButton: false,
-								timer: 3000,
+								timer: 4000,
 							});					
 						</script>';
 
@@ -1074,10 +1786,9 @@ class ControladorUsuarios{
 							Swal.fire({
 								title: "Contraseña ingresada no puede ser igual a usuario, intente de nuevo.",
 								icon: "error",
-								toast: true,
-								position: "top",
+								heightAuto: false,
 								showConfirmButton: false,
-								timer: 3000,
+								timer: 4000,
 							});					
 						</script>';
 
@@ -1110,10 +1821,94 @@ class ControladorUsuarios{
 					$respuesta = ModeloUsuarios::mdlActualizarUsuarioPorCodigo($tabla, $item1, $valor1, $item2, $valor2, $item3, $valor3, $item4, $valor4);
 	
 					if($respuesta == true){
-		
+
+						//HISTORIAL PARA EL PASSWORD ELIMINACION E INSERCION//------------------
+
+						//ELIMINAR EL PASSWORD MAS ANTIGUO ANTES DE INGRESAR UNO NUEVO
+									if($longitudRecursiva>10){
+
+										if ($fecha1<$fecha2 and $fecha1<$fecha3 and $fecha1<$fecha4 
+											and $fecha1<$fecha5 and $fecha1<$fecha6 and $fecha1<$fecha7 
+											and $fecha1<$fecha8 and $fecha1<$fecha9 and $fecha1<$fecha10) {
+
+											$passwordMenor=$fecha1;
+
+										}else if ($fecha2<$fecha1 and $fecha2<$fecha3 and $fecha2<$fecha4 
+											and $fecha2<$fecha5 and $fecha2<$fecha6 and $fecha2<$fecha7 
+											and $fecha2<$fecha8 and $fecha2<$fecha9 and $fecha2<$fecha10) {
+											
+											$passwordMenor=$fecha2;
+
+										}else if ($fecha3<$fecha1 and $fecha3<$fecha2 and $fecha3<$fecha4 
+											and $fecha3<$fecha5 and $fecha3<$fecha6 and $fecha3<$fecha7 
+											and $fecha3<$fecha8 and $fecha3<$fecha9 and $fecha3<$fecha10) {
+											
+											$passwordMenor=$fecha3;
+
+										}else if ($fecha4<$fecha1 and $fecha4<$fecha2 and $fecha4<$fecha3 
+											and $fecha4<$fecha5 and $fecha4<$fecha6 and $fecha4<$fecha7 
+											and $fecha4<$fecha8 and $fecha4<$fecha9 and $fecha4<$fecha10) {
+											
+											$passwordMenor=$fecha4;
+
+										}else if ($fecha5<$fecha1 and $fecha5<$fecha2 and $fecha5<$fecha3 
+											and $fecha5<$fecha4 and $fecha5<$fecha6 and $fecha5<$fecha7 
+											and $fecha5<$fecha8 and $fecha5<$fecha9 and $fecha5<$fecha10){
+
+											$passwordMenor=$fecha5;
+
+										}else if ($fecha6<$fecha1 and $fecha6<$fecha2 and $fecha6<$fecha3 
+											and $fecha6<$fecha4 and $fecha6<$fecha5 and $fecha6<$fecha7 
+											and $fecha6<$fecha8 and $fecha6<$fecha9 and $fecha6<$fecha10){
+
+											$passwordMenor=$fecha6;
+										
+										}else if ($fecha7<$fecha1 and $fecha7<$fecha2 and $fecha7<$fecha3 
+											and $fecha7<$fecha4 and $fecha7<$fecha5 and $fecha7<$fecha6 
+											and $fecha7<$fecha8 and $fecha7<$fecha9 and $fecha7<$fecha10){
+
+											$passwordMenor=$fecha7;
+										
+										}else if ($fecha8<$fecha1 and $fecha8<$fecha2 and $fecha8<$fecha3 
+											and $fecha8<$fecha4 and $fecha8<$fecha5 and $fecha8<$fecha6 
+											and $fecha8<$fecha7 and $fecha8<$fecha9 and $fecha8<$fecha10){
+
+											$passwordMenor=$fecha8;
+
+										}else if ($fecha9<$fecha1 and $fecha9<$fecha2 and $fecha9<$fecha3 
+											and $fecha9<$fecha4 and $fecha9<$fecha5 and $fecha9<$fecha6 
+											and $fecha9<$fecha7 and $fecha9<$fecha8 and $fecha9<$fecha10){
+
+											$passwordMenor=$fecha9;
+										}else{
+											$passwordMenor=$fecha10;
+										}
+
+
+										$tabla='tbl_historial_pass';
+										$item= 'fecha_creacion';
+										$fechaAntigua=$passwordMenor;
+										//$id_usuario=$idUsuario;
+						            
+						            	$respuestaMostrar = ModeloUsuarios::mdlEliminarHistorialPassword($tabla,$item,$fechaAntigua);
+									}
+
+						//INSERTAR UN PASSWORD NUEVO
+
+						$tabla="tbl_historial_pass";
+						$idUsuario;
+						$password = crypt($_POST['editarPassword'], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
+
+						$respuestaPass = ModeloUsuarios::mdlHistorialPassword($tabla,$idUsuario, $password);
+						
+						//ELIMINAR EL ID QUE SE ESTA INGRESANDO EN "0"
+						$tabla="tbl_historial_pass";
+						$item="id_usuario";
+						$eliminarPassRepetido = ModeloUsuarios::mdlEliminarPasswordRepetido($tabla,$item);
+
 						echo '<script>
 								Swal.fire({
-									title: "Contraseña cambiada correctamente.",
+									title: "La contraseña se cambió correctamente.",
 									icon: "success",
 									heightAuto: false,
 									showConfirmButton: true,
@@ -1156,7 +1951,7 @@ class ControladorUsuarios{
 
 
 	/*=============================================
-		ENVIAR CODIGO DE RECUPERAR CONTRASEÑA
+	ENVIAR CODIGO DE RECUPERAR CONTRASEÑA
 	=============================================*/	
     static public function ctrEnviarCodigo($id, $nombre, $correo){
 
@@ -1202,9 +1997,10 @@ class ControladorUsuarios{
 
 
 	/*=============================================
-		ENVIAR CORREO DE RECUPERAR CONTRASEÑA
+	ENVIAR CORREO DE RECUPERAR CONTRASEÑA
 	=============================================*/	
     static public function ctrEnviarCorreoRecuperacion($correoElectronico, $nombre, $codigo){
+
 		// $user_os        =   ControladorGlobales::ctrGetOS();
 		// $user_browser   =   ControladorGlobales::ctrGetBrowser();
 
@@ -1217,14 +2013,16 @@ class ControladorUsuarios{
 
 		$correoDestinatario = $correoElectronico;
 		$nombreDestinatario = $nombre;
-		$asunto = 'Recuperación de Contraseña';
+		$asunto = 'Recuperación de contraseña';
 		$require = true;
 		
 		// $parametros = ControladorGlobales::ctrMostrarParametros();
 
-		// $item = null;
-		// $valor = null;
-		// $parametros = ControladorUsuarios::ctrMostrarParametros($item, $valor);
+		$item = 'parametro';
+		$valor = 'ADMIN_RUTA_URL';
+		$parametros = ControladorUsuarios::ctrMostrarParametros($item, $valor);
+
+		$ruta = $parametros['valor'];
 
 		// $correoEmpresa = $parametros[1]['valor'];
 		// $passwordEmpresa = $parametros[0]['valor'];
@@ -1232,8 +2030,8 @@ class ControladorUsuarios{
 
         $template = file_get_contents('../extensiones/plantillas/template.php');
         $template = str_replace("{{name}}", $nombre, $template);
-        $template = str_replace("{{action_url_1}}", 'localhost/Admin-Gym/index.php?ruta=recuperar-password&codigo='.$codigo, $template);
-        $template = str_replace("{{action_url_2}}", '<b>localhost/Admin-Gym/index.php?ruta=recuperar-password&codigo='.$codigo.'</b>', $template);
+        $template = str_replace("{{action_url_1}}", $ruta.'index.php?ruta=recuperar-password&codigo='.$codigo, $template);
+        $template = str_replace("{{action_url_2}}", '<b>'.$ruta.'index.php?ruta=recuperar-password&codigo='.$codigo.'</b>', $template);
         $template = str_replace("{{year}}", date('Y'), $template);
         // $template = str_replace("{{operating_system}}", $user_os, $template);
 		// $template = str_replace("{{browser_name}}", $user_browser, $template);
@@ -1269,7 +2067,7 @@ class ControladorUsuarios{
 			if($respuesta == false){
 				echo '<script>
 						Swal.fire({
-							title: "El código de recuperación de contraseña no es valido. Por favor intenta de nuevo.",
+							title: "El código de recuperación de contraseña no es válido. Por favor intenta de nuevo.",
 							icon: "error",
 							heightAuto: false,
 							showConfirmButton: true,
@@ -1294,7 +2092,7 @@ class ControladorUsuarios{
 				if($fechaAhora > $respuesta['fecha_recuperacion']) {
 					echo '<script>
 							Swal.fire({
-								title: "El código de recuperación de contraseña ha expirado. Por favor intenta de nuevo.",
+								title: "El código de recuperación de contraseña ha expirado. Por favor intente de nuevo.",
 								icon: "error",
 								heightAuto: false,
 								showConfirmButton: true,
@@ -1323,7 +2121,7 @@ class ControladorUsuarios{
 	
 
 	/*=============================================
-			GENERAR CORREO
+	GENERAR CORREO
 	=============================================*/	
     static public function ctrGenerarCorreo($correoDestinatario, $nombreDestinatario, $asunto, $template, $require){
 
@@ -1339,8 +2137,6 @@ class ControladorUsuarios{
 			require 'extensiones/PHPMailer/PHPMailer/src/PHPMailer.php';
 			require 'extensiones/PHPMailer/PHPMailer/src/SMTP.php';
 		}
-
-		
 
 		
 		$item = null;
@@ -1418,9 +2214,69 @@ class ControladorUsuarios{
 			// echo '</pre>';
 			// return;
 
-			if($respuestaContraseña['password'] == $encriptar){
+			//AQUI INICIA LA PARTE DE HISTORISLDE PASSWORD--------------------------------------------------
+			$tabla='tbl_historial_pass';
+			$item= 'pass';
+			$valor=$_POST['editarPassword'];
+			$idUsuario=$respuestaContraseña['id_usuario'];
 
-				if(preg_match('/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%.])\S{8,16}$/', $_POST['editarPassword'])){
+			$respuestaMostrar = ModeloUsuarios::mdlMostrarHistorialPassword($tabla,$item,$idUsuario);
+
+			$mostrarPass1= $respuestaMostrar[0]['pass'];
+			$mostrarPass2= $respuestaMostrar[1]['pass'];
+			$mostrarPass3= $respuestaMostrar[2]['pass'];
+			$mostrarPass4= $respuestaMostrar[3]['pass'];
+			$mostrarPass5= $respuestaMostrar[4]['pass'];
+			$mostrarPass6= $respuestaMostrar[5]['pass'];
+			$mostrarPass7= $respuestaMostrar[6]['pass'];
+			$mostrarPass8= $respuestaMostrar[7]['pass'];
+			$mostrarPass9= $respuestaMostrar[8]['pass'];
+			$mostrarPass10= $respuestaMostrar[9]['pass'];
+
+			//echo "</br>";
+			
+			//-------------------------------MOSTRAR LAS FECHAS DE LOS PASSWORD
+			$tabla='tbl_historial_pass';
+			$item= 'fecha_creacion';
+			$idUsuario=$respuestaContraseña['id_usuario'];
+
+			$respuestaFechas = ModeloUsuarios::mdlFechasHistorialPassword($tabla,$idUsuario);        
+			$fecha1= $respuestaFechas[0]['fecha_creacion'];
+			$fecha2= $respuestaFechas[1]['fecha_creacion'];
+			$fecha3= $respuestaFechas[2]['fecha_creacion'];
+			$fecha4= $respuestaFechas[3]['fecha_creacion'];
+			$fecha5= $respuestaFechas[4]['fecha_creacion'];
+			$fecha6= $respuestaFechas[5]['fecha_creacion'];
+			$fecha7= $respuestaFechas[6]['fecha_creacion'];
+			$fecha8= $respuestaFechas[7]['fecha_creacion'];
+			$fecha9= $respuestaFechas[8]['fecha_creacion'];
+			$fecha10= $respuestaFechas[9]['fecha_creacion'];
+			
+			$longitud = count($respuestaMostrar); // Devuelve 2, pero nosotros queremos 6
+			$longitudRecursiva = count($respuestaMostrar, COUNT_RECURSIVE); // Devuelve 6
+			//echo 'elnumero de elementos del arreglo es:--> '.$longitud;
+			//echo "<br>";
+
+			$encriptarPassIngresado = crypt($_POST['editarPassword'], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');			 
+
+			if ($encriptarPassIngresado==$mostrarPass1 || $encriptarPassIngresado==$mostrarPass2 ||
+				$encriptarPassIngresado==$mostrarPass3 || $encriptarPassIngresado==$mostrarPass4 || 
+				$encriptarPassIngresado==$mostrarPass5 || $encriptarPassIngresado==$mostrarPass6 || 
+				$encriptarPassIngresado==$mostrarPass7 || $encriptarPassIngresado==$mostrarPass8 || 
+				$encriptarPassIngresado==$mostrarPass9 || $encriptarPassIngresado==$mostrarPass10) {
+				echo '<script>			
+				Swal.fire({
+					title: "Este password ha sido utilizado recientemente",
+					icon: "error",
+					showConfirmButton: true,
+					timer: 3000,
+					});
+				</script>';
+				//---------------------------------------------------------------------------------------------
+
+			}else if($respuestaContraseña['password'] == $encriptar){
+
+				if(preg_match('/^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%*-,_+?¡¿=&.])\S{8,16}$/', $_POST['editarPassword'])){
 					
 					$encriptar = crypt($_POST['editarPassword'], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
 							
@@ -1487,11 +2343,91 @@ class ControladorUsuarios{
 
 						// var_dump($respuesta);
 						// return;
-						if($respuesta == true){
+						if($respuesta == true ){
+
+							//HISTORIAL PARA EL PASSWORD ELIMINACION E INSERCION//------------------
+
+							//ELIMINAR EL PASSWORD MAS ANTIGUO ANTES DE INGRESAR UNO NUEVO
+
+							if($longitudRecursiva>10){
+
+								if ($fecha1<$fecha2 and $fecha1<$fecha3 and $fecha1<$fecha4 
+				                	and $fecha1<$fecha5 and $fecha1<$fecha6 and $fecha1<$fecha7 
+				                	and $fecha1<$fecha8 and $fecha1<$fecha9 and $fecha1<$fecha10) {
+
+				                	$passwordMenor=$fecha1;
+
+				                }else if ($fecha2<$fecha1 and $fecha2<$fecha3 and $fecha2<$fecha4 
+									and $fecha2<$fecha5 and $fecha2<$fecha6 and $fecha2<$fecha7 
+									and $fecha2<$fecha8 and $fecha2<$fecha9 and $fecha2<$fecha10) {
+				                	
+				                	$passwordMenor=$fecha2;
+
+				                }else if ($fecha3<$fecha1 and $fecha3<$fecha2 and $fecha3<$fecha4 
+									and $fecha3<$fecha5 and $fecha3<$fecha6 and $fecha3<$fecha7 
+									and $fecha3<$fecha8 and $fecha3<$fecha9 and $fecha3<$fecha10) {
+				                	
+				                	$passwordMenor=$fecha3;
+
+				                }else if ($fecha4<$fecha1 and $fecha4<$fecha2 and $fecha4<$fecha3 
+									and $fecha4<$fecha5 and $fecha4<$fecha6 and $fecha4<$fecha7 
+									and $fecha4<$fecha8 and $fecha4<$fecha9 and $fecha4<$fecha10) {
+				                	
+				                	$passwordMenor=$fecha4;
+
+				                }else if ($fecha5<$fecha1 and $fecha5<$fecha2 and $fecha5<$fecha3 
+									and $fecha5<$fecha4 and $fecha5<$fecha6 and $fecha5<$fecha7 
+									and $fecha5<$fecha8 and $fecha5<$fecha9 and $fecha5<$fecha10){
+
+				                	$passwordMenor=$fecha5;
+
+				            	}else if ($fecha6<$fecha1 and $fecha6<$fecha2 and $fecha6<$fecha3 
+									and $fecha6<$fecha4 and $fecha6<$fecha5 and $fecha6<$fecha7 
+									and $fecha6<$fecha8 and $fecha6<$fecha9 and $fecha6<$fecha10){
+
+				                	$passwordMenor=$fecha6;
+								
+								}else if ($fecha7<$fecha1 and $fecha7<$fecha2 and $fecha7<$fecha3 
+									and $fecha7<$fecha4 and $fecha7<$fecha5 and $fecha7<$fecha6 
+									and $fecha7<$fecha8 and $fecha7<$fecha9 and $fecha7<$fecha10){
+
+				                	$passwordMenor=$fecha7;
+								
+								}else if ($fecha8<$fecha1 and $fecha8<$fecha2 and $fecha8<$fecha3 
+									and $fecha8<$fecha4 and $fecha8<$fecha5 and $fecha8<$fecha6 
+									and $fecha8<$fecha7 and $fecha8<$fecha9 and $fecha8<$fecha10){
+
+				                	$passwordMenor=$fecha8;
+
+								}else if ($fecha9<$fecha1 and $fecha9<$fecha2 and $fecha9<$fecha3 
+									and $fecha9<$fecha4 and $fecha9<$fecha5 and $fecha9<$fecha6 
+									and $fecha9<$fecha7 and $fecha9<$fecha8 and $fecha9<$fecha10){
+
+				                	$passwordMenor=$fecha9;
+								}else{
+									$passwordMenor=$fecha10;
+								}
+
+								$tabla='tbl_historial_pass';
+								$item= 'fecha_creacion';
+								$fechaAntigua=$passwordMenor;
+								$idUsuario=$respuestaContraseña['id_usuario'];
+								
+									
+								$respuestaEliminar = ModeloUsuarios::mdlEliminarHistorialPassword($tabla,$item,$fechaAntigua);
+							}
+
+							//INSERTAR UN PASSWORD NUEVO
+				            $tabla="tbl_historial_pass";
+							$idUsuario=$respuestaContraseña['id_usuario'];
+
+							$password = crypt($_POST['editarPassword'], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
+
+							$respuestaPass = ModeloUsuarios::mdlHistorialPassword($tabla,$idUsuario, $password);
 
 							echo '<script>
                                     Swal.fire({
-                                        title: "Contraseña cambiada correctamente!",
+                                        title: "¡La contraseña se cambió correctamente!",
                                         icon: "success",
                                         heightAuto: false
                                     }).then((result)=>{
@@ -1695,7 +2631,7 @@ class ControladorUsuarios{
 				if($respuesta == true){
 					echo '<script>
 						Swal.fire({
-							title: "Tu foto se cambio exitosamente!",
+							title: "¡Su foto se cambió exitosamente!",
 							icon: "success",
 							heightAuto: false
 						}).then((result)=>{
@@ -1726,7 +2662,7 @@ class ControladorUsuarios{
 
 
 	/*=============================================
-		CREAR CODIGO RANDOM PARA EL PASSWORD
+	CREAR CODIGO RANDOM PARA EL PASSWORD
 	=============================================*/	
     static public function ctrCreateRandomCode(){
 
@@ -1743,7 +2679,7 @@ class ControladorUsuarios{
 	
 	
     /*=============================================
-			MOSTRAR PARAMETROS
+	MOSTRAR PARAMETROS
     =============================================*/
     static public function ctrMostrarParametros($item, $valor){
         $tabla = 'tbl_parametros';
@@ -1754,7 +2690,7 @@ class ControladorUsuarios{
 	
 
 	/*=============================================
-		RANGO DINAMICO
+	RANGO DINAMICO
 	=============================================*/
 	static public function ctrRangoUsuarios($rango){
 
@@ -1768,7 +2704,7 @@ class ControladorUsuarios{
 
 
     /*=============================================
-			GENERAR CONTRASEÑAS ALEATORIAS
+	GENERAR CONTRASEÑAS ALEATORIAS
     =============================================*/
 	static public function password_seguro_random(){
  

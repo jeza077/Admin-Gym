@@ -3,7 +3,7 @@
 ======================================--*/
 var pathname = window.location.href;
 
-if(localStorage.getItem("capturarRangoVentas") != null && pathname == 'http://localhost/Admin-Gym/administrar-venta'){
+if(localStorage.getItem("capturarRangoVentas") != null && pathname == 'http://localhost/Admin-Gym/administrar-ventas'){
 
   $("#daterange-btn span").html('<i class="fa fa-calendar"></i> Rango de fecha');
   localStorage.removeItem("capturarRangoVentas");
@@ -20,44 +20,22 @@ if(localStorage.getItem("capturarRangoVentas") != null && pathname == 'http://lo
 /*=============================================
   Datos de la tabla dinamica
 =============================================*/
-  
-$('.tablaVentas').DataTable( {
-    "ajax": "ajax/datatable-ventas.ajax.php",
-    "deferRender": true,
-    "retrieve": true,
-    "processing": true,
-    "language": {
+// $.ajax({
+//     url: "ajax/datatable-ventas.ajax.php",
+//     success: function (response) {  
+//         console.log(response)
+//     }
+// });
+lenguageDataTable('.tablaProductosVenta', 'ajax/datatable-productos-ventas.ajax.php');
+// lenguageDataTable('.tablaVentas', 'ajax/datatable-ventas.ajax.php');
 
-      "sProcessing":     "Procesando...",
-      "sLengthMenu":     "Mostrar _MENU_ registros",
-      "sZeroRecords":    "No se encontraron resultados",
-      "sEmptyTable":     "Ningún dato disponible en esta tabla",
-      "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_",
-      "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0",
-      "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
-      "sInfoPostFix":    "",
-      "sSearch":         "Buscar:",
-      "sUrl":            "",
-      "sInfoThousands":  ",",
-      "sLoadingRecords": "Cargando...",
-      "oPaginate": {
-      "sFirst":    "Primero",
-      "sLast":     "Último",
-      "sNext":     "Siguiente",
-      "sPrevious": "Anterior"
-      },
-      "oAria": {
-        "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
-        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-      }
 
-  }
 
-} );
+//***************************************************************
+// AGREGAR PRODUCTOS A LA VENTA DESDE TABLA DINAMICA
+//***************************************************************
 
-// //***************************************************************
-// // AGREGAR PRODUCTOS A LA VENTA DESDE TABLA DINAMICA
-$(".tablaVentas tbody").on("click", "button.agregarProducto", function(){
+$(".tablaProductosVenta tbody").on("click", "button.agregarProducto", function(){
 
   var idProducto = $(this).attr("idProducto");
   // console.log(idProducto);
@@ -81,6 +59,7 @@ $(".tablaVentas tbody").on("click", "button.agregarProducto", function(){
       var descripcion = respuesta["nombre_producto"];
       var stock = respuesta["stock"];
       var precio = respuesta["precio_venta"];
+      // console.log(stock);
 
       /*=============================================
       EVITAR AGREGAR PRODUTO CUANDO EL STOCK ESTÁ EN CERO
@@ -146,7 +125,7 @@ $(".tablaVentas tbody").on("click", "button.agregarProducto", function(){
 CUANDO CARGUE LA TABLA CADA VEZ QUE NAVEGUE EN ELLA
 =============================================*/
 
-$(".tablaVentas").on("draw.dt", function(){
+$(".tablaProductosVenta").on("draw.dt", function(){
 
 	if(localStorage.getItem("quitarProducto") != null){
 
@@ -209,8 +188,7 @@ $(".formularioVenta").on("click", "button.quitarProducto", function(){
 		$("#nuevoTotalVenta").attr("total",0);
 
 
-  }
-   else{
+  } else{
 
 		// SUMAR TOTAL DE PRECIOS
 
@@ -240,6 +218,7 @@ $(".formularioVenta").on("change", "input.nuevaCantidadProducto", function(){
 	var precioFinal = $(this).val() * precio.attr("precioReal");
 	// console.log($(this).val())
   precio.val(precioFinal);
+  // console.log(precioFinal)
   
 
 
@@ -308,12 +287,13 @@ function sumarTotalPrecios(){
 	}
 
 	var sumaTotalPrecio = arraySumaPrecio.reduce(sumaArrayPrecios);
+  // console.log(sumaTotalPrecio)
   
-  $("#nuevoPrecioNeto").val(sumaTotalPrecio);
-  $("#precioNeto").val(sumaTotalPrecio);
-	$("#nuevoTotalVenta").val(sumaTotalPrecio);
-	$("#totalVenta").val(sumaTotalPrecio);
-	$("#nuevoTotalVenta").attr("total",sumaTotalPrecio);
+  $("#nuevoPrecioNeto").val(sumaTotalPrecio.toFixed(2));
+  $("#precioNeto").val(sumaTotalPrecio.toFixed(2));
+	$("#nuevoTotalVenta").val(sumaTotalPrecio.toFixed(2));
+	$("#totalVenta").val(sumaTotalPrecio.toFixed(2));
+	$("#nuevoTotalVenta").attr("total",sumaTotalPrecio.toFixed(2));
 
 
 }
@@ -541,7 +521,7 @@ exportarPdf('.btnExportarCompras', 'compras');
 //** ------------------------------------*/
 //         BOTON EDITAR VENTAS
 // --------------------------------------*/ 
-$(".tablas").on("click", ".btnEditarVenta", function(){
+$(".tablaVentas").on("click", ".btnEditarVenta", function(){
 
 	var idVenta = $(this).attr("idVenta");
 
@@ -554,7 +534,7 @@ $(".tablas").on("click", ".btnEditarVenta", function(){
 /*=============================================
 BORRAR VENTA
 =============================================*/
-$(".tablas").on("click", ".btnEliminarVenta", function(){
+$(".tablaVentas").on("click", ".btnEliminarVenta", function(){
 
   var idVenta = $(this).attr("idVenta");
 
@@ -570,7 +550,7 @@ $(".tablas").on("click", ".btnEliminarVenta", function(){
       }).then(function(result){
         if (result.value) {
           
-          window.location = "index.php?ruta=administrar-venta&idVenta="+idVenta;
+          window.location = "index.php?ruta=administrar-ventas&idVenta="+idVenta;
         }
 
   })

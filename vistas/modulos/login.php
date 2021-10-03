@@ -7,14 +7,14 @@
 
     <!-- CONTENEDOR LOGIN -->
     <div class="card-body login-card-body iniciarSesion">
-      <p class="login-box-msg">Inicio de Sesión</p>
+      <p class="login-box-msg">Inicio de sesión</p>
 
-      <form method="post">
+      <form method="post" autocomplete="off">
         <div class="form-group mb-3">
-          <input type="text" class="form-control mayus usuario" name="ingUsuario" placeholder="Usuario" required>
+          <input type="text" class="form-control mayus usuario sinCaracteres sinNumeros" name="ingUsuario" placeholder="Usuario" required autocomplete="off" spellcheck="false">
         </div>
         <div class="form-group mb-3">
-          <input type="password" class="form-control password" name="ingPassword" placeholder="Contraseña" required> 
+          <input type="password" class="form-control password" name="ingPassword" placeholder="Contraseña" required autocomplete="off" spellcheck="false"> 
           <i class="far fa-eye show-pass" action="hide"></i>
         </div>
         <div class="row mb-2">
@@ -26,10 +26,10 @@
 
 
       <p class="mb-1">
-        <a href="javascript:void(0);" onclick="toggleForm();">¿Olvidaste tu contraseña</a>
+        <a href="javascript:void(0);" onclick="toggleForm();">¿Olvidó su contraseña?</a>
       </p>
       <p class="mb-0">
-        ¿No tienes una cuenta? <a href="javascript:void(0);" onclick="toggleRegistrar()" class="text-center">Registrate</a>
+        ¿No tiene una cuenta? <a href="javascript:void(0);" onclick="toggleRegistrar()" class="text-center">Regístrese</a>
       </p>
       
         <?php 
@@ -51,10 +51,10 @@
 
     <!-- CONTENEDOR VERIFICAR EL EMAIL -->
     <div class="card-body login-card-body verificarEmail">
-      <p class="login-box-msg">Verifica tu correo</p>
+      <p class="login-box-msg">Verifique su correo</p>
       <form method="post">
         <div class="form-group has-feedback">
-          <input type="email" class="form-control"  id="verificarEmail" placeholder="Email" name="" required>
+          <input type="email" class="form-control"  id="verificarEmail" placeholder="Correo" name="" required>
           <span class="glyphicon glyphicon-user form-control-feedback"></span>
         </div>
 
@@ -81,14 +81,15 @@
               // for ($i=1; $i <=3 ; $i++) { ?>
               <div class="form-group col-md-12">
                 <label for="inputPassword4">Pregunta <?php echo $i?></label>
-                <select class="form-control select2" id="preguntaSeleccionada">
+                <select class="form-control" id="preguntaSeleccionada">
                 <option value="" selected="selected">Seleccionar...</option>
-                <?php 
+                    <?php 
                         $tabla = "tbl_preguntas";
-                        $item = null;
-                        $valor = null;
+                        $item = 'estado';
+                        $valor = 1;
+                        $all = true;
 
-                        $preguntas = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
+                        $preguntas = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all);
 
                         foreach ($preguntas as $key => $value) { ?>
                           <option value="<?php echo $value['id_preguntas']?>"><?php echo $value['pregunta']?></option>        
@@ -116,7 +117,7 @@
 
     <!-- CONTENEDOR CAMBIAR CONTRASEÑA -->
     <div class="card-body login-card-body cambiarPassword" >
-      <p class="login-box-msg">Cambia tu contraseña</p>
+      <p class="login-box-msg">Cambie su contraseña</p>
       <form method="post" id="cambiarPassword">
 
       <div class="form-row">
@@ -148,21 +149,22 @@
 
     <!-- CONTENEDOR REGISTRAR PERSONA -->
     <div class="card-body login-card-body registrar" >
-      <p class="login-box-msg">Registra tus datos personales</p>
+      <p class="login-box-msg">Registre sus datos personales</p>
       <form method="post" id="">
         <div class="form-row">
           <div class="form-group col-md-3">
                 <label for="">Tipo de documento <?php echo $i?></label>
-            <select class="form-control select2 tipoDocumento" name="nuevoTipoDocumento">
+            <select class="form-control tipoDocumento" name="nuevoTipoDocumento">
                 <option selected="selected">Seleccionar...</option>
                 <?php 
                     $tabla = "tbl_documento";
-                    $item = null;
-                    $valor = null;
+                    $item = 'estado';
+                    $valor = 1;
+                    $all = true;
 
-                    $preguntas = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);
+                    $documento = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all);
 
-                    foreach ($preguntas as $key => $value) { ?>
+                    foreach ($documento as $key => $value) { ?>
                         <option value="<?php echo $value['id_documento']?>"><?php echo $value['tipo_documento']?></option>        
                     <?php 
                     }
@@ -170,60 +172,74 @@
             </select>
           </div>
           <div class="form-group col-md-3">
-            <label for="identidad">Numero de Documento</label>
-            <input type="text" class="form-control numeroDocumento" name="nuevoNumeroDocumento" placeholder="Ingrese Identidad" required>
+            <label for="identidad">Número de Documento</label>
+            <input type="text" class="form-control numeroDocumento longitudDocumento sinEspacioDoc" name="nuevoNumeroDocumento" placeholder="Ingrese identidad" required>
           </div>
           <div class="form-group col-md-3">
             <label for="nombre">Nombre</label>
-            <input type="text" class="form-control mayus nombre" name="nuevoNombre" placeholder="Ingrese Nombre" required>
+            <input type="text" class="form-control mayus nombre unEspacio" name="nuevoNombre" placeholder="Ingrese nombre" required>
           </div>
           <div class="form-group col-md-3">
             <label for="apellido">Apellido</label>
-            <input type="text" class="form-control mayus apellidos" name="nuevoApellido" placeholder="Ingrese Apellidos" required>
+            <input type="text" class="form-control mayus apellidos unEspacio" name="nuevoApellido" placeholder="Ingrese apellidos" required>
           </div>
         </div>
 
+        <div class="row alertaDocumento">
+        
+        </div>
   
         <div class="form-row">
 
           <div class="form-group col-md-3">
             <label for="">Usuario</label>
-            <input type="text" class="form-control mayus personas" name="nuevoUsuario" placeholder="Ingrese Usuario" required>
+            <input type="text" class="form-control nuevoUsuario mayus personas" name="nuevoUsuario" placeholder="Ingrese usuario" required autocomplete="off">
           </div>
           <div class="form-group col-md-3">
             <label for="">Contraseña</label>
-            <input type="password" class="form-control password autoreg" name="nuevoPassword" placeholder="Ingrese Contraseña" required>
+            <input type="password" class="form-control password autoreg" name="nuevoPassword" placeholder="Ingrese contraseña" required autocomplete="off">
             <i class="far fa-eye show-pass-registro" action="hide"></i>
           </div>
           <div class="form-group col-md-3">
-            <label for="inputEmail4">Email</label>
-            <input type="email" class="form-control email" id="inputEmail4" name="nuevoEmail" placeholder="Ingrese Email" required>
+            <label for="inputEmail4">Correo</label>
+            <input type="email" class="form-control email" id="inputEmail4" name="nuevoEmail" placeholder="Ingrese correo" required>
           </div>
           <div class="form-group col-md-3">
             <label>Teléfono</label>
-            <input type="text" class="form-control" data-inputmask='"mask": "(999) 9999-9999"' data-mask  name="nuevoTelefono" placeholder="Ingrese Telefono" required>
+            <input type="text" class="form-control" data-inputmask='"mask": "(999) 9999-9999"' data-mask  name="nuevoTelefono" placeholder="Ingrese teléfono" required>
           </div>
         </div>
-        <!-- <div class="form-group">
-          <label for="inputAddress">Dirección</label>
-          <input type="text" class="form-control" id="inputAddress" name="nuevaDireccion" placeholder="Col. Alameda, calle #2..." required>
-        </div> -->
+
+        <div class="row alertaUsuario">
+
+        </div>
 
         <div class="form-row">
           <div class="form-group col-md-7">
             <label for="inputAddress">Dirección</label>
-            <input type="text" class="form-control mayus" id="inputAddress" name="nuevaDireccion" placeholder="Col. Alameda, calle #2..." required>
+            <input type="text" class="form-control mayus longitudDireccion soloUnEspacio" id="inputAddress" name="nuevaDireccion" placeholder="Col. Alameda, calle #2..." required>
           </div>
           <div class="form-group col-md-3">
             <label>Fecha de nacimiento</label>
-              <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy/mm/dd" data-mask  name="nuevaFechaNacimiento" placeholder="Ingrese Fecha de Nacimiento" required>
+              <input type="text" class="form-control fecha" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy-mm-dd" data-mask  name="nuevaFechaNacimiento" placeholder="Fecha de nacimiento" required>
           </div>
           <div class="form-group col-md-2">
             <label>Sexo</label>
-            <select class="form-control select2" name="nuevoSexo" style="width: 100%;" required>
+            <select class="form-control" name="nuevoSexo" style="width: 100%;" required>
               <option selected="selected">Seleccionar...</option>
-              <option value="M">M</option>
-              <option value="F">F</option>
+                <?php 
+                    $tabla = "tbl_sexo";
+                    $item = 'estado';
+                    $valor = 1;
+                    $all = true;
+
+                    $sexo = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all);
+
+                    foreach ($sexo as $key => $value) { ?>
+                        <option value="<?php echo $value['id_sexo']?>"><?php echo $value['sexo']?></option>        
+                    <?php 
+                    }
+                ?>
             </select>
         </div>
         
@@ -250,9 +266,9 @@
  <!--Bitacora cod.-->
 
     <?php
-        $descripcionEvento = " Ingreso a Login";
-         $accion = "Ingreso";
-         $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 1,$accion, $descripcionEvento);
+      // $descripcionEvento = " Ingreso a Login";
+      // $accion = "Ingreso";
+      // $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 1,$accion, $descripcionEvento);
     ?>
 <!-- /.login-box -->
 

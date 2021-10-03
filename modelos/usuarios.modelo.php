@@ -4,12 +4,121 @@ require_once "conexion.php";
 
 class ModeloUsuarios{
 
+	static public function mdlEliminarPasswordRepetido($tabla,$item){
+
+		$stmt = Conexion::conectar()->prepare("DELETE  FROM $tabla where $item=0");
+		$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+		$stmt -> execute();
+
+		return $stmt -> fetch();
+
+		$stmt -> close();
+		$stmt = null;
+	
+	} 
+
+	static public function mdlMostrarUser($tabla1,$usuario){
+
+		$stmt = Conexion::conectar()->prepare("SELECT id_usuario FROM $tabla1 where id_persona='$usuario'");
+		$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+		$stmt -> execute();
+
+		return $stmt -> fetch();
+
+		$stmt -> close();
+		$stmt = null;
+	
+	} 
+
+
+	/*=============================================
+		INGRESAR HISTORIAL PASS
+	=============================================*/
+	 
+	static public function mdlHistorialPassword($tabla,$id_usuario, $password){
+
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(id_usuario, pass) 
+			VALUES ('$id_usuario','$password')");
+
+		// return $stmt->execute();
+		if($stmt->execute()){
+
+			return true;	
+
+		}else{
+
+			return false;
+		
+		}
+
+		$stmt->close();
+		
+		$stmt = null;
+
+	}
+
+
+	//MOSTRAR LAS PASSWORD DE HISTORIAL DE PASSWORD
+	static public function mdlMostrarHistorialPassword($tabla,$item,$id_usuario){
+
+		$stmt = Conexion::conectar()->prepare("SELECT $item FROM $tabla where id_usuario=$id_usuario");
+		$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+		$stmt -> execute();
+
+		return $stmt -> fetchAll();
+
+		$stmt -> close();
+		$stmt = null;
+
+		// $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla where $item = :$item");
+		// $stmt -> bindParam(":".$item, $id_usuario, PDO::PARAM_STR);
+		// $stmt -> execute();
+
+		// return $stmt -> fetchAll();
+
+		// $stmt -> close();
+		// $stmt = null;
+	
+	} 
+
+	//MOSTRAR LAS PFECHAS DE LOS PASSWORD
+	static public function mdlFechasHistorialPassword($tabla,$id_usuario){
+
+		$stmt = Conexion::conectar()->prepare("SELECT id_pass,fecha_creacion FROM tbl_historial_pass where id_usuario=$id_usuario");
+		$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+		$stmt -> execute();
+
+		return $stmt -> fetchAll();
+
+		$stmt -> close();
+		$stmt = null;
+	
+	} 
+
+	//ELIMINAR ELPASSWORD CUANDO SE EXCEDE EL NUMERO MAXIMO DE REGISTROS '10'
+	static public function mdlEliminarHistorialPassword($tabla,$item,$fecha_antigua){
+
+	
+
+		$stmt = Conexion::conectar()->prepare("DELETE  FROM $tabla where $item='$fecha_antigua'");
+		$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+		$stmt -> execute();
+
+		return $stmt -> fetch();
+
+		$stmt -> close();
+		$stmt = null;
+	
+	} 
+
+
 	static public function mdlMostrarSoloUsuarios($tabla1, $tabla2, $item, $valor){
 
 		if($item != null){
 
-			$stmt = Conexion::conectar()->prepare("SELECT p.*, u.*, d.tipo_documento, r.rol FROM $tabla1 AS p\n"
+			$stmt = Conexion::conectar()->prepare("SELECT p.*, u.*, u.estado as estado_usuario, s.*, d.tipo_documento, r.rol FROM $tabla1 AS p\n"
 			. " INNER JOIN $tabla2 AS u ON p.id_personas = u.id_persona\n"
+			. " INNER JOIN tbl_sexo AS s ON p.sexo = s.id_sexo\n"
 			. " INNER JOIN tbl_documento AS d ON p.id_documento = d.id_documento\n"
 			. " INNER JOIN tbl_roles AS r ON u.id_rol = r.id_rol\n"
 			. " WHERE $item = :$item");
@@ -20,9 +129,11 @@ class ModeloUsuarios{
 
 		} else {
 
-			$stmt = Conexion::conectar()->prepare("SELECT p.*, u.*, r.rol FROM $tabla1 AS p\n"
+			$stmt = Conexion::conectar()->prepare("SELECT p.*, u.*, u.estado as estado_usuario, s.*, d.tipo_documento, r.rol FROM $tabla1 AS p\n"
 					. " INNER JOIN $tabla2 AS u ON p.id_personas = u.id_persona\n"
-					. " INNER JOIN tbl_roles AS r ON u.id_rol = r.id_rol");
+					. " INNER JOIN tbl_sexo AS s ON p.sexo = s.id_sexo\n"
+					. " INNER JOIN tbl_documento AS d ON p.id_documento = d.id_documento\n"
+					. " INNER JOIN tbl_roles AS r ON u.id_rol = r.id_rol ORDER BY u.id_usuario DESC");
 			$stmt -> execute();
 			return $stmt -> fetchAll();
 
@@ -34,7 +145,7 @@ class ModeloUsuarios{
 	}
 
 	/*=============================================
-		MOSTRAR USUARIOS
+	MOSTRAR USUARIOS
 	=============================================*/
 	
 	static public function mdlMostrarUsuarios($tabla1, $tabla2, $item, $valor){
@@ -70,7 +181,7 @@ class ModeloUsuarios{
 	}
 
 	/*=============================================
-		MOSTRAR USUARIOS-ROLES-MODULO
+	MOSTRAR USUARIOS-ROLES-MODULO
 	=============================================*/
 	
 	static public function mdlMostrarUsuarioModulo($item1, $item2, $valor1, $valor2){
@@ -102,12 +213,19 @@ class ModeloUsuarios{
 	}
 
 	/*=============================================
-			MOSTRAR (DINAMICO)
+	MOSTRAR (DINAMICO)
 	=============================================*/
 
-	static public function mdlMostrar($tabla, $item, $valor){
+	static public function mdlMostrar($tabla, $item, $valor, $all){
 
-		if($item != null){
+		if($item != null && $all != null){
+
+			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item");
+			$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+			$stmt -> execute();
+			return $stmt -> fetchAll();
+
+		} else if($item != null && $all == null){
 
 			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item");
 			$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
@@ -129,7 +247,7 @@ class ModeloUsuarios{
 
 
 	/*=============================================
-			INGRESAR USUARIOS EMPLEADOS	
+	INGRESAR USUARIOS EMPLEADOS	
 	=============================================*/
 	 
 	static public function mdlIngresarUsuarioEmpleado($tabla, $datos){
@@ -213,7 +331,7 @@ class ModeloUsuarios{
 
 
 	/*=============================================
-				EDITAR USUARIOS	
+	EDITAR USUARIOS	
 	=============================================*/	 
 	static public function mdlEditarUsuario($tabla, $datos){
 
@@ -232,7 +350,7 @@ class ModeloUsuarios{
 
 		}else{
 
-			return false;
+			return $stmt->errorInfo();
 		
 		}
 
@@ -263,7 +381,7 @@ class ModeloUsuarios{
 		
 				}else{
 		
-					return false;
+					return $stmt->errorInfo();
 				
 				}
 
@@ -280,7 +398,7 @@ class ModeloUsuarios{
 		
 				}else{
 		
-					return false;
+					return $stmt->errorInfo();
 				
 				}
 
@@ -296,7 +414,7 @@ class ModeloUsuarios{
 	
 			}else{
 	
-				return false;
+				return $stmt->errorInfo();
 			
 			}
 		}
@@ -309,7 +427,7 @@ class ModeloUsuarios{
 
 	
 	/*=============================================
-		CAMBIAR CONTRASEÑA POR CODIGO-CORREO
+	CAMBIAR CONTRASEÑA POR CODIGO-CORREO
 	=============================================*/
 
 	static public function mdlActualizarUsuarioPorCodigo($tabla, $item1, $valor1, $item2, $valor2, $item3, $valor3, $item4, $valor4){
@@ -338,7 +456,7 @@ class ModeloUsuarios{
 	}
 
 	/*=============================================
-                MOSTRAR PREGUNTAS
+	MOSTRAR PREGUNTAS
 	=============================================*/	
 
 	static public function mdlMostrarPreguntas($item1, $valor1, $item2, $valor2, $item3, $valor3){
@@ -437,12 +555,12 @@ class ModeloUsuarios{
 
 	    
 	/*=============================================
-		MOSTRAR PARAMETROS
+	MOSTRAR PARAMETROS
     =============================================*/
     
     static public function mdlMostrarParametros($tabla, $item, $valor){
 		if($item != null){
-			$stmt = Conexion::conectar()->prepare("SELECT parametro, valor FROM $tabla WHERE $item = :$item");
+			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item");
 			$stmt->bindParam(":".$item, $valor, PDO::PARAM_STR);
 			$stmt->execute();
 			return $stmt->fetch();
@@ -457,7 +575,7 @@ class ModeloUsuarios{
 	}
 	
 	/*============================================
-		INSERTAR BITACORA
+	INSERTAR BITACORA
 	==============================================*/
 	static public function mdlInsertarBitacora($tabla, $fecha, $usuario, $objeto, $accion, $descripcion){
 
@@ -465,11 +583,11 @@ class ModeloUsuarios{
 
 		if($stmt->execute()){
 
-			return "ok";
+			return true;
 
 		}else{
 
-			return "error";
+			return $stmt->errorInfo();
 		
 		}
 
@@ -478,7 +596,7 @@ class ModeloUsuarios{
 	}
 		
 	/*=============================================
-		MOSTRAR BITACORA
+	MOSTRAR BITACORA
 	=============================================*/
 		
 	static public function mdlMostrarBitacora($tabla1, $item, $valor){
@@ -534,7 +652,7 @@ class ModeloUsuarios{
 
 
 	/*=============================================
-			RANGO DINAMICO
+	RANGO DINAMICO
 	=============================================*/
 	static public function mdlRango($tabla, $rango){
 	

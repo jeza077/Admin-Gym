@@ -1,6 +1,8 @@
 //** VERIFICAR QUE USUARIO NO SE REPITA */
-$('.nuevoUsuario').keyup(function (){
+$('.nuevoUsuario').blur(function (){
 
+    $('.alert').remove();
+    
     var usuarioIngresado = $(this).val();
 
     var datos = new FormData();
@@ -19,16 +21,16 @@ $('.nuevoUsuario').keyup(function (){
             // console.log(respuesta);
 
             if(respuesta){
-                $('.final').before('<div class="alert alert-danger fade show mt-2" role="alert">Usuario ya existente, ingrese uno diferente.</div>');
-                // setTimeout(function () {
-                    // $('.alert').remove();
-                // }, 3000)
+                $('.alertaUsuario').append('<div class="alert alert-danger fade show mt-2" role="alert"><i class="icon fas fa-ban"></i>Usuario ya existente, ingrese uno diferente.</div>');
+                setTimeout(function () {
+                    $('.alert').remove();
+                }, 3000)
                 
-                //E inmeditamente Limpiamos el input
-                // $('.nuevoUsuario').val("");
-                // $('.nuevoUsuario').focus();
+                $('.nuevoUsuario').css('border', '1px solid red');
+                $('.nuevoUsuario').focus();
             } else {
                 $('.alert').remove();
+                $('.nuevoUsuario').css('border', '1px solid green');
             }
         }
 
@@ -110,7 +112,7 @@ $(document).on('click', '.btnEditarUsuario', function () {
             $('input[name=editarFechaNacimiento]').val(respuesta['fecha_nacimiento']);
             $('input[name=editarDireccion]').val(respuesta['direccion']);
             $('#editarSexo').html(respuesta['sexo']);
-            $('#editarSexo').val(respuesta['sexo']); 
+            $('#editarSexo').val(respuesta['id_sexo']); 
             $('input[name=editarUsuario]').val(respuesta['usuario']);
             $('#editarRol').html(respuesta['rol']);
             $('#editarRol').val(respuesta['id_rol']);
@@ -121,6 +123,40 @@ $(document).on('click', '.btnEditarUsuario', function () {
             } else {
                 $('.previsualizar').attr('src', 'vistas/img/usuarios/default/default2.jpg');
             }
+        }
+
+    });
+
+});
+//** ------------------------------------*/
+//   VER DATOS DE USUARIO A DETALLES
+// --------------------------------------*/ 
+$(document).on('click', '.btnVerUsuario', function () {
+    // e.preventDefault();
+    let idPersonaUsuario = $(this).attr('idUsuario');
+    // console.log(idPersonaUsuario);
+
+    let datos = new FormData();
+    datos.append('idPersonaUsuario', idPersonaUsuario);
+
+    $.ajax({
+
+        url:"ajax/usuarios.ajax.php",
+        method: "POST",
+        data: datos,
+        cache: false,
+        contentType: false,
+        processData: false,  
+        dataType: "json",
+        success: function(respuesta) {
+            console.log(respuesta);
+
+            $('#detalleCorreoUsuario').val(respuesta['correo']);
+            $('#detalleTelefonoUsuario').val(respuesta['telefono']);
+            $('#detalleDireccionUsuario').val(respuesta['direccion']);
+            $('#detalleSexoUsuario').val(respuesta['sexo']);
+            $('#detalleFechaNacUsuario').val(respuesta['fecha_nacimiento']);
+            
         }
 
     });
@@ -150,6 +186,8 @@ $(document).on('click', '.btnActivar', function () {
         contentType: false,
         processData: false,
         success: function(respuesta) {
+            // console.log(respuesta);
+
 
         }
 
@@ -179,8 +217,8 @@ $(document).on('click', '.btnEliminarUsuario', function () {
     var usuario = $(this).attr('usuario');
 
     Swal.fire({
-        title: "¿Estas seguro de borrar el usuario?",
-        text: "¡Si no lo estas, puedes cancelar la accion!",
+        title: "¿Está seguro de borrar el usuario?",
+        text: "¡Si no lo está, puede cancelar la acción!",
         icon: "info",
         showCancelButton: true,
         cancelButtonColor: "#DC3545",
@@ -192,6 +230,30 @@ $(document).on('click', '.btnEliminarUsuario', function () {
         }
     });
 });
+
+
+//** ------------------------------------*/
+//         BORRAR BITACORA 
+// --------------------------------------*/ 
+$(document).on('click', '.btnEliminarBitacora', function () {
+    var idBitacora = $(this).attr('idBitacora');
+   
+
+    Swal.fire({
+        title: "¿Está seguro de borrar el registro de bitácora?",
+        text: "¡Si no lo esta, puede cancelar la acción!",
+        icon: "info",
+        showCancelButton: true,
+        cancelButtonColor: "#DC3545",
+        heightAuto: false,
+        allowOutsideClick: false
+    }).then((result)=>{
+        if(result.value){
+            window.location = "index.php?ruta=bitacora&idBitacora="+idBitacora;
+        }
+    });
+});
+
 
 
 
@@ -405,3 +467,28 @@ $('.salirFoto').click(function (e) {
     $('#datos-generales .user').show();
     toggleCambiarFoto();
 });
+
+
+//** ------------------------------------*/
+//     ALERTA AL AGREGAR NUEVO USUARIO
+// --------------------------------------*/
+$(document).on('click', '#usuarioNuevo', function (e) {
+    e.preventDefault();
+    // console.log('click')
+    Swal.fire({
+        icon: 'info',
+        title: '¿Crear usuario desde una persona ya registrada?',
+        html: '<button type="submit" role="button" class="SwalBtnGuardarUsuarioYaRegistrado btn btn-success customSwalBtn px-5" data-toggle="modal" data-target="#modalAgregarUsuarioYaRegistrado" data-dismiss="modal">' + 'Si' + '</button>' +
+            '<button type="button" role="button" class="SwalGuardarUsuarioNuevo btn btn-primary customSwalBtn" data-toggle="modal" data-target="#modalAgregarUsuarioNuevo" data-dismiss="modal">' + 'No, nuevo' + '</button>'+ 
+            '<button type="button" role="button" class="SwalBtnCancelar btn btn-danger customSwalBtn">' + 'Cancelar' + '</button>',
+        width: 550,
+        allowOutsideClick: false,
+        showCancelButton: false,
+        showConfirmButton: false
+    });
+});
+
+
+cancelarAlerta('.SwalBtnGuardarUsuarioYaRegistrado');
+cancelarAlerta('.SwalGuardarUsuarioNuevo');
+cancelarAlerta('.SwalBtnCancelar');

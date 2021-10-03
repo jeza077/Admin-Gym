@@ -1,12 +1,18 @@
 <?php
+require_once("../../../controladores/mantenimiento.controlador.php");
 require_once("../../../controladores/usuarios.controlador.php");
 require_once "../../../modelos/usuarios.modelo.php";
 require_once('../../../controladores/ventas.controlador.php');
 require_once "../../../modelos/ventas.modelo.php";
 require_once('../examples/tcpdf_include.php');
-date_default_timezone_set("America/Tegucigalpa");
+//date_default_timezone_set("America/Tegucigalpa");
 
+session_start();
 
+$descripcionEvento = "".$_SESSION['usuario']." Generó reporte pdf de administrar ventas";
+$accion = "Generar";
+$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION['id_usuario'], 13, $accion,
+$descripcionEvento);
 
 class PDF extends TCPDF{
     
@@ -14,7 +20,8 @@ class PDF extends TCPDF{
 
     
     public function Header() {
-        
+        date_default_timezone_set("America/Tegucigalpa");
+
         $item="parametro";
         $valor="ADMIN_NOMBRE_EMPRESA";
 
@@ -28,6 +35,13 @@ class PDF extends TCPDF{
         $direccionEmpresa = ControladorUsuarios::ctrMostrarParametros($item, $valor);
         // var_dump($direccionEmpresa ['valor']);
         $direccion = $direccionEmpresa ['valor'];
+
+        $item="parametro";
+        $valor="ADMIN_TELEFONO_EMPRESA";
+
+        $telefonoEmpresa = ControladorUsuarios::ctrMostrarParametros($item, $valor);
+        // var_dump($telefonoEmpresa ['valor']);
+        $telefono = $telefonoEmpresa ['valor'];
     
         $item="parametro";
         $valor="ADMIN_CORREO";
@@ -55,9 +69,10 @@ class PDF extends TCPDF{
         $this->SetTextColor(0,0,0);
         $this->SetFont('helvetica', '', 9);
         // $this->Cell(180, 3, 'Gimnasio La roca', 0, 1, 'C');
-        $this->Cell(260, 7, 'Direccion: '.$direccion.'', 0, 1, 'C');
+        $this->Cell(260, 7, 'Dirección: '.$direccion.'', 0, 1, 'C');
         // $this->Cell(260, 3, 'Calle xxxxxxxxxx.....', 0, 1, 'C');
         $this->Cell(260, 3, 'Correo: '.$correo.'', 0, 1, 'C');
+        $this->Cell(260, 7, 'Teléfono: '.$telefono.'', 0, 1, 'C'); 
 
         $this->Ln(20); //Espacios
         $this->SetFont('helvetica', 'B', 14);
@@ -69,7 +84,7 @@ class PDF extends TCPDF{
 
         // $this->Cell(260, 3, 'Del '.$fecha.'', 0, 1, 'C');
 
-        $this->Cell(260, 3, 'Año '.$año.'', 0, 1, 'C');
+        $this->Cell(260, 3, 'Fecha '.$año.'', 0, 1, 'C');
     }
 
     // Footer de la pagina
@@ -82,7 +97,7 @@ class PDF extends TCPDF{
 
         $fecha = date('Y-m-d H:i:s');
         $this->Cell(0, 10, ''.$fecha.'', 0, false, 'C', 0, '', 0, false, 'T', 'M');
-        $this->Cell(0, 10, 'Page '.$this->getAliasNumPage().'/'.$this->getAliasNbPages(), 0, false, 'C', 0, '', 0, false, 'T', 'M');
+        $this->Cell(0, 10, 'Página '.$this->getAliasNumPage().'/'.$this->getAliasNbPages(), 0, false, 'C', 0, '', 0, false, 'T', 'M');
     }
 }
 
@@ -139,55 +154,31 @@ $pdf->SetFont('dejavusans', '', 14, '', true);
 // This method has several options, check the source code documentation for more information.
 $pdf->AddPage();
 
-$pdf->Ln(45);
+$pdf->Ln(55);
 
 $pdf->SetFont('times', '', 13);
 $pdf->SetFillColor(225, 235, 255);
 $pdf->Cell(15, 5, 'No', 1, 0, 'C', 1);
-$pdf->Cell(30, 5, 'Cod. Factura', 1, 0, 'C', 1);
+$pdf->Cell(30, 5, 'Cód. Factura', 1, 0, 'C', 1);
 $pdf->Cell(50, 5, 'Cliente', 1, 0, 'C', 1);
 $pdf->Cell(40, 5, 'Productos', 1, 0, 'C', 1);
-$pdf->Cell(40, 5, 'Impuesto', 1, 0, 'C', 1);
-$pdf->Cell(40, 5, 'Neto', 1, 0, 'C', 1);
-$pdf->Cell(40, 5, 'Total', 1, 0, 'C', 1);
+$pdf->Cell(32, 5, 'Impuesto', 1, 0, 'C', 1);
+$pdf->Cell(32, 5, 'Neto', 1, 0, 'C', 1);
+$pdf->Cell(32, 5, 'Total', 1, 0, 'C', 1);
+$pdf->Cell(38, 5, 'F. compra', 1, 0, 'C', 1);
 
 
-// if(isset($_GET["fechaInicial"])){
 
-
-//     $fechaInicial = $_GET["fechaInicial"];
-//     $fechaFinal = $_GET["fechaFinal"];
-//     $ventas = ControladorVentas::ctrRangoFechasVentas($fechaInicial, $fechaFinal);
-
-// //     // echo $fechaInicial;
-//     // echo $fechaFinal;
-// } else {
-
-//     $fechaInicial = null;
-//     $fechaFinal = null;
-//     $ventas = ControladorVentas::ctrRangoFechasVentas($fechaInicial, $fechaFinal);
-
-// } 
 
 if(isset($_GET["rango"])){
 
-
     $rango = $_GET["rango"];
-    // $fechaFinal = $_GET["fechaFinal"];
-    // $ventas = ControladorVentas::ctrRango($rango);
 
-    // echo $rango;
-    // echo $fechaFinal;
 } else {
 
     $rango = null;
-    // $fechaFinal = null;
-    // $ventas = ControladorVentas::ctrRango($rango);
 
 } 
-// echo $fechaInicial;
-// echo $fechaFinal;
-// return;
 
 $ventas = ControladorVentas::ctrRango($rango);
 
@@ -205,23 +196,29 @@ if(!$ventas){
 
     $i = 1; //Contador
     $max = 12; //Maximo de registros a mostrar en una pagina
-
+    
     foreach ($ventas as $key => $value) {
+        // $decod = json_decode($value['productos']);
+        // foreach ($decod as $key => $val) {
+        //     $productos = $val->descripcion;
+        // }
 
         if(($i%$max) == 0){
             $pdf->AddPage();
 
-            $pdf->Ln(45);
+            $pdf->Ln(55);
             
             $pdf->SetFont('times', '', 13);
             $pdf->SetFillColor(225, 235, 255);
             $pdf->Cell(15, 5, 'No', 1, 0, 'C', 1);
-            $pdf->Cell(30, 5, 'Cod. Factura', 1, 0, 'C', 1);
+            $pdf->Cell(30, 5, 'Cód. Factura', 1, 0, 'C', 1);
             $pdf->Cell(50, 5, 'Cliente', 1, 0, 'C', 1);
             $pdf->Cell(40, 5, 'Productos', 1, 0, 'C', 1);
-            $pdf->Cell(40, 5, 'Impuesto', 1, 0, 'C', 1);
-            $pdf->Cell(40, 5, 'Neto', 1, 0, 'C', 1);
-            $pdf->Cell(40, 5, 'Total', 1, 0, 'C', 1);
+            $pdf->Cell(32, 5, 'Impuesto', 1, 0, 'C', 1);
+            $pdf->Cell(32, 5, 'Neto', 1, 0, 'C', 1);
+            $pdf->Cell(32, 5, 'Total', 1, 0, 'C', 1);
+            $pdf->Cell(38, 5, 'F. compra', 1, 0, 'C', 1);
+
         }
         // $pdf->Cell(15, 5, ''.$i.'', 1, 0, 'C');
 
@@ -231,40 +228,30 @@ if(!$ventas){
         $pdf->Cell(15, 4, ''.($key+1).'', 0, 0, 'C');
         $pdf->Cell(30, 4, ''.$value['numero_factura'].'', 0, 0, 'C');
         $pdf->Cell(50, 4, ''.$value['nombre'].' '.$value['apellidos'].'' , 0, 0, 'C');
-        $pdf->Cell(40, 4, 'Productos', 0, 0, 'C');
+        // $pdf->Cell(40, 4, 'Productos', 0, 0, 'C');
         
         // $decod = json_decode($value['productos']);
-        // //   $contador = count($val->descripcion);
-        // //   echo ($val->descripcion);
-        //   if($key = 0){
-        //         // echo 'mas de uno';
-        //         $decod = json_decode($value['productos']);
-        //         $pdf->Cell(40, 4, 'productos'. .'', 0, 0, 'C');
-        //         foreach ($decod as $key => $val) {
-        //         // echo  $val->descripcion.',';
-        //         }
-        //     }
-               
-
-            //  echo  $val->descripcion.',';
-        //   } 
-        //   else {
-            // echo  $val->descripcion.', ';
-            // echo 'solo uno';
-            // $pdf->Cell(55, 4, ''.$val->descripcion.'', 0, 0, 'C');
-            // echo  $val->descripcion;
-
-        //   }
+                
+        // $decod = json_decode($value['productos']);
+        // foreach ($decod as $key => $val) {
+        //     $pdf->Ln();
+        //     $pdf->MultiCell(40, 4, ''.$val->descripcion.'('.$val->cantidad.')', 1,'J', 0, 0, '', '', true, 0, true, 40);
         // }
 
-        $pdf->Cell(40, 4, ''.$value['impuesto'].'', 0, 0, 'C');
-        $pdf->Cell(40, 4, ''.$value['neto'].'', 0, 0, 'C');
-        $pdf->Cell(40, 4, ''.$value['total'].'', 0, 0, 'C');
+
+        $pdf->Cell(38, 4, 'Productos', 0, 0, 'C');
+        $pdf->Cell(32, 4, 'L. '.number_format($value['impuesto'],2).'', 0, 0, 'C');
+        $pdf->Cell(32, 4, 'L. '.number_format($value['neto'],2).'', 0, 0, 'C');
+        $pdf->Cell(32, 4, 'L. '.number_format($value['total'],2).'', 0, 0, 'C');
+        $pdf->Cell(38, 4, ''.$value['fecha'].'', 0, 0, 'C');
+        // $pdf->Ln();
         $i++;
 
     }
 
 }
+
+ob_end_clean();
 
 // Close and output PDF document
 $pdf->Output('reporte_ventas.pdf', 'I');

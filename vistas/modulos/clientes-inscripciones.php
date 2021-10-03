@@ -6,11 +6,11 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Clientes Inscripciones</h1>
+            <h1>Clientes inscripciones</h1>
           </div>
           <div class="col-sm-6">
           <button class="btn btn-orange float-right"  data-toggle="modal" data-target="#modalNuevaInsc">
-            Nueva Inscripción       
+            Nueva inscripción       
           </button>
           <button class="btn btn-danger btnExportarClientesInscripciones float-right mr-3">
               Exportar PDF          
@@ -26,128 +26,55 @@
         $permisoActualizar = $_SESSION['permisos']['Clientes']['actualizar'];
         $permisoConsulta = $_SESSION['permisos']['Clientes']['consulta'];
 
+        $descripcionEvento = "".$_SESSION['usuario']." Consultó la pantalla de clientes inscripciones";
+        $accion = "Consulta";
+
+        $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 5,$accion, $descripcionEvento);
+
         // var_dump($_SESSION['perm']);
 
         // foreach ($permisos_pantalla as $key => $value) {
         //   echo $key;
         // }
         
-        $descripcionEvento = " Consulto la pantalla de cliente";
-        $accion = "consulta";
-
-        $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 3,$accion, $descripcionEvento);
-
+        
       ?>
 
       <div class="card">
 
           <div class="card-body">
           
-            <table class="table table-striped table-bordered tablas text-center">
+            <table class="table table-bordered table-striped tablaClientesInscripciones text-center">
               <thead>
                 <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">No. Documento</th>
+                  <th scope="col">N.°</th>
+                  <th scope="col">Número de documento</th>
                   <th scope="col">Nombre</th>
-                  <th scope="col">T. Inscripcion</th>
-                  <th scope="col">F. Inscripcion</th>
-                  <th scope="col">F. Ultimo Pago</th>
-                  <th scope="col">F. Proximo Pago</th>
+                  <th scope="col">T. Inscripción</th>
+                  <th scope="col">F. Inscripción</th>
+                  <th scope="col">F. Último pago</th>
+                  <th scope="col">F. Próx. pago</th>
                   <th scope="col">Deuda</th>
                   <th scope="col">Estado</th>
                   <th scope="col">Acciones</th>
                 </tr>
               </thead>
-              <tbody>
-                <?php 
-
-                  $tabla = "tbl_clientes";
-                  $item1 = 'tipo_cliente';
-                  $valor1 = 'Gimnasio';
-                  $item2 = 'estado';
-                  $valor2 = 1;
-                  $max = null;
-                  $clientes = ControladorClientes::ctrMostrarClientesInscripcionPagos($tabla, $item1, $valor1, $item2, $valor2, $max);
-
-                  // echo "<pre>";
-                  // var_dump($clientes);
-                  // echo "</pre>";
-                  // return;
-
-                  
-                  foreach ($clientes as $key => $value) {
-
-                    echo '
-                        <tr>
-                        <th scope="row">'.($key+1).'</th>
-                        <td>'.$value["num_documento"].'</td>
-                        <td>'.$value["nombre"].' '.$value["apellidos"].'</td>
-                        <td>'.$value["tipo_inscripcion"].'</td>
-                        <td>'.$value["fecha_inscripcion"].'</td>
-                        <td>'.$value["fecha_pago"].'</td>';
-
-                  
-                        $fecha_actual = strtotime(date("Y-m-d"));
-                        $fecha_entrada = strtotime($value['fecha_proximo_pago']);
-
-                        if($fecha_actual < $fecha_entrada){  
-                            echo '<td class="badge badge-success mt-2" data-toggle="tooltip" data-placement="left" title="Inscrito">'.$value["fecha_proximo_pago"].'</td>';
-                            
-                        } else {
-                            echo '<td class="badge badge-danger mt-2" data-toggle="tooltip" data-placement="left" title="Inscripcion vencida">'.$value["fecha_proximo_pago"].'</td>';
-                        }
-
-                          if($fecha_actual > $fecha_entrada){
-                          
-                            $diasInscripcion = $value['cantidad_dias'];
-                            $segundos = $fecha_entrada - $fecha_actual;
-                            $dias = $segundos / 86400;
-                            $diasFinal = ceil($dias / $diasInscripcion);
-                            // echo $diasFinal;
-
-                            $deuda = abs($value['precio_inscripcion'] * $diasFinal);
-      
-                            echo '<td>L.'.$deuda.'</td>';
-                          
-                          } else {
-                            echo '<td data-toggle="tooltip" data-placement="left" title="No debe">L.0000.00</td>';
-
-                          }
-                      
-                          if($value['estado'] != 0){
-                            echo '<td><span class="badge badge-success p-3">A</span></td>';
-                          } else {
-                            echo '<td><span class="badge badge-danger p-3">D</span></td>';
-                          }
-                    
-
-                      echo
-                          '<td>
-                            <button class="btn btn-success btnEditarPago" data-toggle="tooltip" data-placement="left" title="Pagar" idCliente="'.$value["id_cliente"].'"><i class="fas fa-dollar-sign p-1"></i></button>
-
-                            <button class="btn btn-danger btnCancelarInscripcion" data-toggle="tooltip" data-placement="left" title="Cancelar Inscripcion" idClienteInscripcion="'.$value["id_cliente_inscripcion"].'" idClientePagoInscripcion="'.$value["id_cliente"].'"><i class="fas fa-strikethrough" style="color:#fff"></i></button>
-                          </td>
-                        </tr>
-                    ';
-                    
-                  }
-                ?>
-              </tbody>
+             
             </table>
           </div>
       </div>
     </section>
   </div>
 
- <!-- =======================================
-           MODAL ACTUALIZAR PAGO CLIENTE
+  <!-- =======================================
+  MODAL ACTUALIZAR PAGO CLIENTE
   ======================================----->
 
   <div class="modal fade" id="modalEditarPagos" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-md" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Actualizar Inscripción</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Actualizar inscripción</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -157,16 +84,16 @@
               <div class="container-fluid mt-4">
                 <!-- <div class="form-row"> -->
                   <div class="form-group col-md-12"> 
-                    <label>Tipo inscripcion</label>
-                    <select class="form-control select2 actualizarInscripcion" style="width: 100%;" name="actualizarTipoInscripcion">
+                    <label>Tipo inscripción</label>
+                    <select class="form-control actualizarInscripcion" style="width: 100%;" name="actualizarTipoInscripcion">
                         <option value="" id="actualizarInscripcion"></option>
                         <?php 
                             $tabla = "tbl_inscripcion";
-                            $item = null;
-                            $valor = null;
-                            
+                            $item = 'estado';
+                            $valor = 1;
+                            $all = true;
 
-                            $inscripciones = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);           
+                            $inscripciones = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all);           
  
                             foreach ($inscripciones as $key => $value) { ?>
                               <option value="<?php echo $value['id_inscripcion']?>"><?php echo $value['tipo_inscripcion']?></option>        
@@ -177,7 +104,7 @@
                     </select>
                   </div>
                   <div class="form-group col-md-12">
-                    <label for="">Precio inscripcion</label>
+                    <label for="">Precio inscripción</label>
                     <div class="input-group">
                       <div class="input-group-prepend">
                           <span class="input-group-text">$</span>  
@@ -370,7 +297,8 @@
                 
               </div>
               <div class="form-group mt-4 float-right">
-                <button type="" class="btn btn-primary">Actualiazar pago</button>
+                <!-- <button type="" class="btn btn-primary">Actualiazar pago</button> -->
+                <button type="" class="btn btn-primary" ID="btnConfirmarCambioInscripcion">Actualizar pago</button>
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
               </div> 
               <?php
@@ -393,14 +321,14 @@
 
 
 
- <!-- =======================================
+  <!-- =======================================
   MODAL NUEVA INSCRIPCION LUEGO DE CANCELAR
   ======================================----->
   <div class="modal fade" id="modalNuevaInscripcion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-md" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Nueva Inscripción</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Nueva inscripción</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -418,16 +346,16 @@
 
                 <!-- <div class="form-row"> -->
                   <div class="form-group col-md-12"> 
-                    <label>Tipo inscripcion</label>
+                    <label>Tipo inscripción</label>
                     <select class="form-control select2 actualizarNuevaInscripcion" style="width: 100%;" name="nuevaTipoInscripcion">
                         <option selected="selected">Seleccionar...</option>
                         <?php 
                             $tabla = "tbl_inscripcion";
-                            $item = null;
-                            $valor = null;
-                            
+                            $item = 'estado';
+                            $valor = 1;
+                            $all = true;
 
-                            $inscripciones = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);           
+                            $inscripciones = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all);           
  
                             foreach ($inscripciones as $key => $value) { ?>
                               <option value="<?php echo $value['id_inscripcion']?>"><?php echo $value['tipo_inscripcion']?></option>        
@@ -438,7 +366,7 @@
                     </select>
                   </div>
                   <div class="form-group col-md-12">
-                    <label for="">Precio inscripcion</label>
+                    <label for="">Precio inscripción</label>
                     <div class="input-group">
                       <div class="input-group-prepend">
                           <span class="input-group-text">$</span>  
@@ -490,14 +418,14 @@
   </div> 
 
 
-   <!-- =======================================
-      MODAL NUEVA INSCRIPCION 
+  <!-- =======================================
+  MODAL NUEVA INSCRIPCION 
   ======================================----->
   <div class="modal fade" id="modalNuevaInsc" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-md" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Nueva Inscripción</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Nueva inscripción</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -508,7 +436,7 @@
 
                   <div class="form-group col-md-12">
                     <label for="">Cliente</label>
-                    <select class="form-control select2" style="width: 100%;" name="nuevoClienteSinInscripcion">
+                    <select class="form-control select2" id="nuevoClienteSinInscripcion" style="width: 100%;" name="nuevoClienteSinInscripcion">
                         <option selected="selected">Seleccionar...</option>
                         <?php 
 
@@ -526,16 +454,16 @@
 
                 <!-- <div class="form-row"> -->
                   <div class="form-group col-md-12"> 
-                    <label>Tipo inscripcion</label>
+                    <label>Tipo inscripción</label>
                     <select class="form-control select2 nuevaTipoInscripcion2" style="width: 100%;" name="nuevaTipoInscripcion2">
                         <option selected="selected">Seleccionar...</option>
                         <?php 
                             $tabla = "tbl_inscripcion";
-                            $item = null;
-                            $valor = null;
-                            
+                            $item = 'estado';
+                            $valor = 1;
+                            $all = true;
 
-                            $inscripciones = ControladorUsuarios::ctrMostrar($tabla, $item, $valor);           
+                            $inscripciones = ControladorUsuarios::ctrMostrar($tabla, $item, $valor, $all);           
  
                             foreach ($inscripciones as $key => $value) { ?>
                               <option value="<?php echo $value['id_inscripcion']?>"><?php echo $value['tipo_inscripcion']?></option>        
@@ -546,7 +474,7 @@
                     </select>
                   </div>
                   <div class="form-group col-md-12">
-                    <label for="">Precio inscripcion</label>
+                    <label for="">Precio inscripción</label>
                     <div class="input-group">
                       <div class="input-group-prepend">
                           <span class="input-group-text">$</span>  
@@ -574,8 +502,9 @@
               </div>
               <!-- <div class="form-row"> -->
                 <div class="form-group mt-4">
-                  <button type="" class="btn btn-primary float-right mr-2">Guardar</button>
                   <button type="button" class="btn btn-danger float-right mr-2" data-dismiss="modal">Salir</button>
+                  <button type="" class="btn btn-primary float-right mr-2" id="btnConfirmarDatosInscripcion">Guardar</button>
+                  <!-- <button type="" class="btn btn-primary float-right mr-2" id="btnGuardarInscripcion">Guardar</button> -->
                 </div> 
               <!-- </div>   -->
 

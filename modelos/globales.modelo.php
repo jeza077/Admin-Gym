@@ -4,8 +4,8 @@ require_once "conexion.php";
 
 class ModeloGlobales{
     
-	  /*=============================================
-		  MOSTRAR PARAMETROS
+	/*=============================================
+	MOSTRAR PARAMETROS
     =============================================*/
     
     static public function mdlMostrarParametros($tabla, $item, $valor){
@@ -54,208 +54,9 @@ class ModeloGlobales{
         $stmt = null;
     }
 
-     /*=============================================
-          EDITAR ROLES
-    =============================================*/
-    
-    static public function mdlEditarRol($tabla,$datos){
-        
-        $stmt = Conexion::conectar()->prepare("UPDATE $tabla SET rol = :rol, descripcion = :descripcion WHERE id_rol = :id_rol");
-
-        $stmt -> bindParam(":rol", $datos["rol"], PDO::PARAM_STR);
-        $stmt -> bindParam(":descripcion", $datos["descripcion"], PDO::PARAM_STR);
-        $stmt -> bindParam(":id_rol", $datos["id_rol"], PDO::PARAM_INT);
-
-        if($stmt->execute()){
-
-            return true;
-
-        }else{
-
-            return false;
-        
-        }
-
-        $stmt->close();
-        $stmt = null;
-    }
 
 
-        /*=============================================
-          EDITAR INSCRIPCION
-    =============================================*/
-    
-    static public function mdlEditarInscripcion($tabla,$datos){
-        
-        $stmt = Conexion::conectar()->prepare("UPDATE $tabla SET tipo_inscripcion = :tipo_inscripcion, precio_inscripcion = :precio_inscripcion WHERE id_inscripcion = :id_inscripcion");
 
-        $stmt -> bindParam(":tipo_inscripcion", $datos["tipo_inscripcion"], PDO::PARAM_STR);
-        $stmt -> bindParam(":precio_inscripcion", $datos["precio_inscripcion"], PDO::PARAM_STR);
-        $stmt -> bindParam(":id_inscripcion", $datos["id_inscripcion"], PDO::PARAM_INT);
-
-        if($stmt->execute()){
-
-            return true;
-
-        }else{
-
-            return false;
-        
-        }
-
-        $stmt->close();
-        $stmt = null;
-    }
-
-    /*=============================================
-          EDITAR MATRICULA
-    =============================================*/
-    
-    static public function mdlEditarMatricula($tabla,$datos){
-        
-        $stmt = Conexion::conectar()->prepare("UPDATE $tabla SET tipo_matricula = :tipo_matricula, precio_matricula = :precio_matricula WHERE id_matricula = :id_matricula");
-
-        $stmt -> bindParam(":tipo_matricula", $datos["tipo_matricula"], PDO::PARAM_STR);
-        $stmt -> bindParam(":precio_matricula", $datos["precio_matricula"], PDO::PARAM_STR);
-        $stmt -> bindParam(":id_matricula", $datos["id_matricula"], PDO::PARAM_INT);
-
-        if($stmt->execute()){
-
-            return true;
-
-        }else{
-
-            return false;
-        
-        }
-
-        $stmt->close();
-        $stmt = null;
-    }
-
-
-        /*=============================================
-          EDITAR DESCUENTO
-    =============================================*/
-    
-    static public function mdlEditarDescuento($tabla,$datos){
-        
-        $stmt = Conexion::conectar()->prepare("UPDATE $tabla SET tipo_descuento = :tipo_descuento, valor_descuento = :valor_descuento WHERE id_descuento = :id_descuento");
-
-        $stmt -> bindParam(":tipo_descuento", $datos["tipo_descuento"], PDO::PARAM_STR);
-        $stmt -> bindParam(":valor_descuento", $datos["valor_descuento"], PDO::PARAM_STR);
-        $stmt -> bindParam(":id_descuento", $datos["id_descuento"], PDO::PARAM_INT);
-
-        if($stmt->execute()){
-
-            return true;
-
-        }else{
-
-            return false;
-        
-        }
-
-        $stmt->close();
-        $stmt = null;
-    }
-
-    /*=============================================
-            BORRAR INSCRIPCION
-	=============================================*/
-	static public function mdlBorrarInscripcion($tabla, $datos){
-
-		$stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE id_inscripcion = :id_inscripcion");
-
-		$stmt->bindParam(":id_inscripcion", $datos, PDO::PARAM_INT);
-
-		if($stmt->execute()){
-
-			return true;
-
-		} else {
-		
-			return $stmt->errorInfo();
-
-		}
-
-		$stmt->close();
-
-		$stmt = null;
-    }
-    
-    /*=============================================
-            BORRAR MATRICULA
-	=============================================*/
-	static public function mdlBorrarMatricula($tabla, $datos){
-
-		$stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE id_matricula = :id_matricula");
-
-		$stmt->bindParam(":id_matricula", $datos, PDO::PARAM_INT);
-
-		if($stmt->execute()){
-
-			return true;
-
-		} else {
-		
-			return $stmt->errorInfo();
-
-		}
-
-		$stmt->close();
-
-		$stmt = null;
-    }
-    
-    /*=============================================
-            BORRAR DESCUENTO
-	=============================================*/
-	static public function mdlBorrarDescuento($tabla, $datos){
-
-		$stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE id_descuento = :id_descuento");
-
-		$stmt->bindParam(":id_descuento", $datos, PDO::PARAM_INT);
-
-		if($stmt->execute()){
-
-			return true;
-
-		} else {
-		
-			return $stmt->errorInfo();
-
-		}
-
-		$stmt->close();
-
-		$stmt = null;
-    }
-    
-    /*=============================================
-            BORRAR ROLES
-	=============================================*/
-	static public function mdlBorrarRoles($tabla, $datos){
-
-		$stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE id_rol = :id_rol");
-
-		$stmt->bindParam(":id_rol", $datos, PDO::PARAM_INT);
-
-		if($stmt->execute()){
-
-			return true;
-
-		} else {
-		
-			return $stmt->errorInfo();
-
-		}
-
-		$stmt->close();
-
-		$stmt = null;
-    }
-    
     /*=============================================
 			RANGO DINAMICO INSCRIPCION
 	=============================================*/
@@ -269,7 +70,49 @@ class ModeloGlobales{
 			
 		} else {
 
-			$stmt = Conexion::conectar() ->prepare("SELECT * FROM $tabla  where inscripcion LIKE '%$rango%'");
+			$stmt = Conexion::conectar() ->prepare("SELECT * FROM $tabla WHERE tipo_inscripcion LIKE '%$rango%' OR precio_inscripcion LIKE '%$rango%' OR cantidad_dias LIKE '%$rango%'");
+
+            $stmt-> execute();
+			return $stmt ->fetchAll();
+			
+		} 	
+    }
+
+    /*=============================================
+			RANGO DINAMICO PROVEEDOR
+	=============================================*/
+	static public function mdlRangoObjetos($tabla, $rango){
+	
+		if($rango == null){
+
+			$stmt = Conexion::conectar() ->prepare("SELECT * FROM $tabla");
+            $stmt-> execute();
+			return $stmt ->fetchAll();
+			
+		} else {
+
+			$stmt = Conexion::conectar() ->prepare("SELECT * FROM $tabla WHERE objeto LIKE '%$rango%' OR link_objeto LIKE '%$rango%' OR icono LIKE '%$rango%'");
+
+            $stmt-> execute();
+			return $stmt ->fetchAll();
+			
+		} 	
+    }
+    
+    /*=============================================
+			RANGO DINAMICO PROVEEDOR
+	=============================================*/
+	static public function mdlRangoProveedor($tabla, $rango){
+	
+		if($rango == null){
+
+			$stmt = Conexion::conectar() ->prepare("SELECT * FROM $tabla");
+            $stmt-> execute();
+			return $stmt ->fetchAll();
+			
+		} else {
+
+			$stmt = Conexion::conectar() ->prepare("SELECT * FROM $tabla WHERE nombre LIKE '%$rango%' OR correo LIKE '%$rango%' OR telefono LIKE '%$rango%'");
 
             $stmt-> execute();
 			return $stmt ->fetchAll();
@@ -291,7 +134,28 @@ class ModeloGlobales{
 			
 		} else {
 
-			$stmt = Conexion::conectar() ->prepare("SELECT * FROM $tabla  where matricula LIKE '%$rango%'");
+			$stmt = Conexion::conectar() ->prepare("SELECT * FROM $tabla WHERE tipo_matricula LIKE '%$rango%' OR precio_matricula LIKE '%$rango%'");
+
+            $stmt-> execute();
+			return $stmt ->fetchAll();
+			
+		} 	
+    }
+
+    /*=============================================
+			RANGO DINAMICO DOCUMENTO
+	=============================================*/
+	static public function mdlRangoDocumento($tabla, $rango){
+	
+		if($rango == null){
+
+			$stmt = Conexion::conectar() ->prepare("SELECT * FROM $tabla");
+            $stmt-> execute();
+			return $stmt ->fetchAll();
+			
+		} else {
+
+			$stmt = Conexion::conectar() ->prepare("SELECT * FROM $tabla WHERE tipo_documento LIKE '%$rango%'");
 
             $stmt-> execute();
 			return $stmt ->fetchAll();
@@ -312,7 +176,28 @@ class ModeloGlobales{
 			
 		} else {
 
-			$stmt = Conexion::conectar() ->prepare("SELECT * FROM $tabla  where descuento LIKE '%$rango%'");
+			$stmt = Conexion::conectar() ->prepare("SELECT * FROM $tabla  WHERE tipo_descuento LIKE '%$rango%' OR valor_descuento LIKE '%$rango%'");
+
+            $stmt-> execute();
+			return $stmt ->fetchAll();
+			
+		} 	
+    }
+
+		/*=============================================
+			RANGO DINAMICO DOCUMENTO
+	=============================================*/
+	static public function mdlRangoGenero($tabla, $rango){
+	
+		if($rango == null){
+
+			$stmt = Conexion::conectar() ->prepare("SELECT * FROM $tabla");
+            $stmt-> execute();
+			return $stmt ->fetchAll();
+			
+		} else {
+
+			$stmt = Conexion::conectar() ->prepare("SELECT * FROM $tabla WHERE sexo LIKE '%$rango%'");
 
             $stmt-> execute();
 			return $stmt ->fetchAll();
@@ -333,7 +218,7 @@ class ModeloGlobales{
 			
 		} else {
 
-			$stmt = Conexion::conectar() ->prepare("SELECT * FROM $tabla  where roles LIKE '%$rango%'");
+			$stmt = Conexion::conectar() ->prepare("SELECT * FROM $tabla  WHERE rol LIKE '%$rango%' OR descripcion LIKE '%$rango%'");
 
             $stmt-> execute();
 			return $stmt ->fetchAll();
@@ -342,7 +227,7 @@ class ModeloGlobales{
     }
     
 
-     /*=============================================
+	/*=============================================
 			RANGO DINAMICO PARAMETRO
 	=============================================*/
 	static public function mdlRangoParametro($tabla, $rango){
@@ -355,7 +240,7 @@ class ModeloGlobales{
 			
 		} else {
 
-			$stmt = Conexion::conectar() ->prepare("SELECT * FROM $tabla  where parametross LIKE '%$rango%'");
+			$stmt = Conexion::conectar() ->prepare("SELECT * FROM $tabla WHERE parametro LIKE '%$rango%' OR valor LIKE '%$rango%'");
 
             $stmt-> execute();
 			return $stmt ->fetchAll();
@@ -366,17 +251,22 @@ class ModeloGlobales{
     /*=============================================
 			RANGO DINAMICO ADMINISTRAR
 	=============================================*/
-	static public function mdlRangoAdministrar($tabla, $rango){
+	static public function mdlRangoPermisosRol($tabla, $rango){
 	
 		if($rango == null){
 
-			$stmt = Conexion::conectar() ->prepare("SELECT * FROM $tabla");
+			$stmt = Conexion::conectar() ->prepare("SELECT * FROM $tabla AS pr\n"
+			. " LEFT JOIN tbl_roles AS r ON pr.id_rol = r.id_rol\n"
+			. " LEFT JOIN tbl_objetos AS o ON pr.id_objeto = o.id_objeto");
             $stmt-> execute();
 			return $stmt ->fetchAll();
 			
 		} else {
 
-			$stmt = Conexion::conectar() ->prepare("SELECT * FROM $tabla  where administrarrol LIKE '%$rango%'");
+			$stmt = Conexion::conectar() ->prepare("SELECT * FROM $tabla AS pr\n"
+			. " LEFT JOIN tbl_roles AS r ON pr.id_rol = r.id_rol\n" 
+			. " LEFT JOIN tbl_objetos AS o ON pr.id_objeto = o.id_objeto\n"
+			. " WHERE rol LIKE '%$rango%' OR objeto LIKE '%$rango%'");
 
             $stmt-> execute();
 			return $stmt ->fetchAll();

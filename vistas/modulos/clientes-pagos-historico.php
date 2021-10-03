@@ -6,7 +6,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Clientes Pagos Historico</h1>
+            <h1>Clientes pagos históricos</h1>
           </div>
           <div class="col-sm-6">
           <!-- <button class="btn btn-orange float-right"  data-toggle="modal" data-target="#modalAgregarCliente">
@@ -32,10 +32,10 @@
         //   echo $key;
         // }
         
-        $descripcionEvento = " Consulto la pantalla de Hsitorial de Pagos ";
-        $accion = "consulta";
+        $descripcionEvento = "".$_SESSION['usuario']." Consultó la pantalla de clientes pagos histórico";
+        $accion = "Consulta";
 
-        $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 3,$accion, $descripcionEvento);
+        $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 7,$accion, $descripcionEvento);
 
       ?>
 
@@ -43,56 +43,22 @@
 
           <div class="card-body">
           
-            <table class="table table-striped table-bordered tablas text-center">
+            <table class="table table-bordered table-striped tablaClientesPagosHistorico text-center">
               <thead>
                 <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">No. Documento</th>
+                  <th scope="col">N.°</th>
+                  <th scope="col">Número de documento</th>
                   <th scope="col">Nombre</th>
-                  <!-- <th scope="col">T. Inscripcion</th> -->
-                  <th scope="col">Pago Matricula</th>
-                  <th scope="col">Pago Inscripcion</th>
-                  <th scope="col">Pago Total</th>
-                  <th scope="col">Fecha de Pago</th>
+                  <th scope="col">Pago matrícula</th>
+                  <th scope="col">Valor descuento</th>
+                  <th scope="col">Pago inscripción</th>
+                  <th scope="col">Pago total</th>
+                  <th scope="col">Fecha de pago</th>
                   <th scope="col">Acciones</th>
-                  <!-- <th scope="col">F. Proxim Pago</th>
-                  <th scope="col">Deuda</th>
-                  <th scope="col">Estado</th> -->
+
                 </tr>
               </thead>
-              <tbody>
-                <?php 
-                  $item = null;
-                  $valor = null;
-                  $clientes = ControladorClientes::ctrMostrarPagosClientes($item, $valor);
 
-                //   echo "<pre>";
-                //   var_dump($clientes);
-                //   echo "</pre>";
-                  // return;
-
-
-                  foreach ($clientes as $key => $value) {
-
-                    echo '
-                        <tr>
-                        <th scope="row">'.($key+1).'</th>
-                        <td>'.$value["num_documento"].'</td>
-                        <td>'.$value["nombre"].' '.$value["apellidos"].'</td>
-                        <td>'.$value["pago_matricula"].'</td>
-                        <td>'.$value["pago_inscripcion"].'</td>
-                        <td>'.$value["pago_total"].'</td>
-                        <td>'.$value["fecha_de_pago"].'</td>
-                        <td>
-                        <button class="btn btn-info btnReciboPagoCliente" idClientePago="'.$value["id_pagos_cliente"].'"><i class="fa fa-print" style="color:#fff"></i></button>
-                        </td>';
-
-                          
-
-                               
-                  }
-                ?>
-              </tbody>
             </table>
           </div>
       </div>

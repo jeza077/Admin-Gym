@@ -3,14 +3,21 @@
 require_once("../../../controladores/usuarios.controlador.php");
 // require_once('../../../controladores/ventas.controlador.php');
 require_once('../../../controladores/clientes.controlador.php');
-// require_once('../../../controladores/productos.controlador.php');
-// require_once "../../../modelos/productos.modelo.php";
+require_once('../../../controladores/mantenimiento.controlador.php');
+require_once "../../../modelos/mantenimiento.modelo.php";
 require_once "../../../modelos/clientes.modelo.php";
 // require_once "../../../modelos/ventas.modelo.php";
 require_once "../../../modelos/usuarios.modelo.php";
 require_once('../examples/tcpdf_include.php');
 
 // echo $_GET["codigo"];
+
+session_start();
+
+$descripcionEvento = "".$_SESSION['usuario']." Generó recibo de pago del cliente";
+$accion = "Generar";
+$bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION['id_usuario'], 7, $accion,
+$descripcionEvento);
 
 
 class imprimirReciboPagoCliente{
@@ -21,6 +28,7 @@ class imprimirReciboPagoCliente{
 
 	
 	public function traerImpresionFactura(){
+		date_default_timezone_set("America/Tegucigalpa");
 
 		$fechaHoy = date('Y-m-d H:i:s');
 
@@ -50,14 +58,30 @@ class imprimirReciboPagoCliente{
 
 		$item = "id_pagos_cliente";
 		$valor = $this->codigo;
-
+		
 		$clientes = ControladorClientes::ctrMostrarPagosClientes($item, $valor);
-
 		// var_dump($clientes);
 
-		if(!empty($clientes)){
+		if($clientes['pago_matricula'] == null){
+			$pago_matricula = 0;
+		} else {
+			$pago_matricula = $clientes['pago_matricula'];
+		}
+		
+		if($clientes['pago_descuento'] == null){
+			$pago_descuento = 0;
+		} else {
+			$pago_descuento = $clientes['pago_descuento'];
+		}
 
-			
+		if($clientes['pago_inscripcion'] == null){
+			$pago_inscripcion = 0;
+		} else {
+			$pago_inscripcion = $clientes['pago_inscripcion'];
+		}
+
+
+		if(!empty($clientes)){			
 			
 		## 07/12/2020
 
@@ -183,7 +207,7 @@ $bloque4 = <<<EOF
 		<td style="font-size:11.5px; background-color:white; width:158px">
 
 			
-			<strong> Nombre Cliente: </strong> 
+			<strong> Nombre cliente: </strong> 
 			<br>
 			 $clientes[nombre] $clientes[apellidos]
 
@@ -191,7 +215,7 @@ $bloque4 = <<<EOF
 
 		<td style="font-size:11.5px; background-color:white; width:125px;">
 		
-			<strong> Fecha Emisión: </strong>
+			<strong> Fecha emisión: </strong>
 			<br>
 			 $fechaHoy
 
@@ -199,7 +223,7 @@ $bloque4 = <<<EOF
 
 		<td style="font-size:11.5px; background-color:white; width:100px;">
 		
-			<strong> Fecha Pago: </strong>
+			<strong> Fecha pago: </strong>
 			<br>
 			 $clientes[fecha_de_pago]
 
@@ -255,11 +279,11 @@ $bloque6 = <<<EOF
 		
 			<strong></strong>
 			<br>
-			  $clientes[pago_matricula] 
+			  $pago_matricula
 			<br>
-			 $clientes[pago_descuento] 
+			 $pago_descuento
 			<br>
-			 $clientes[pago_inscripcion] 
+			 $pago_inscripcion 
 
 		</td>
 
@@ -309,11 +333,11 @@ $pdf->writeHTML($bloque7, false, false, false, false, '');
 		## FIN 07/12/2020
 		$pdf->lastPage();
 
-		$pdf->Output('recibo-pdf.pdf', 'I');
+		$pdf->Output('recibo_pago_cliente-pdf.pdf', 'I');
 
 		}else{
 
-			echo "no hay datos, algo salio mal";
+			echo "No hay datos, algo salió mal";
 		}
 
 	}

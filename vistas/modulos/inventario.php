@@ -25,65 +25,30 @@
         $permisoActualizar = $_SESSION['permisos']['Usuarios']['actualizar'];
         $permisoConsulta = $_SESSION['permisos']['Usuarios']['consulta'];
 
-        // var_dump($_SESSION['perm']);
+        $descripcionEvento = "".$_SESSION['usuario']." Consultó la pantalla de inventario";
+        $accion = "Consulta";
 
-        // foreach ($permisos_pantalla as $key => $value) {
-        //   echo $key;
-        // }
+        $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 10,$accion, $descripcionEvento);
+
+
       ?>
 
       <div class="card">
 
         <div class="card-body">
                 <!-- CUERPPO INVENTARIO -->
-          <table class="table table-striped table-bordered tablas text-center">
+          <table class="table table-striped table-bordered tablaInventario text-center">
               <thead>
                   <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Codigo</th>
+                  <th scope="col">N.°</th>
+                  <th scope="col">Código</th>
                   <th scope="col">Nombre producto</th>
-                  <th scope="col">Tipo Producto</th>
+                  <th scope="col">Tipo producto</th>
                   <th scope="col">Stock</th>
 
                   </tr>
               </thead>
-              <tbody>
-                <?php
-                    $tabla = "tbl_inventario";
-                    $item = null;
-                    $valor = null;
-                    $order = null;
-                    $inventarios=ControladorInventario::ctrMostrarInventario($tabla, $item, $valor,$order);
-                    // echo"<pre>";
-                    // var_dump($inventarios);
-                    // echo"</pre>";
-                    foreach ($inventarios as $key => $value) {
-                      echo '
-                          <tr>
-                              <td scope="row">'.($key+1).'</td>
-                              <td>'.$value["codigo"].'</td>
-                              <td>'.$value["nombre_producto"].'</td>
-                              <td>'.$value["tipo_producto"].'</td>';   
-                              $stocktotal = $value["stock"] + $value["devolucion"];
 
-                              if($stocktotal <= $value['producto_minimo']){
-
-                                $stock = "<button class='btn btn-danger'>".$stocktotal."</button>";
-                      
-                              }else{
-                      
-                                $stock = "<button class='btn btn-success'>".$stocktotal."</button>";
-                      
-                              }
-                              echo'<td>'.$stock.'</td>
-                                
-                          
-                            
-                          </tr>
-                      ';
-                      }
-                ?>
-              </tbody>
           </table>
           
           </div> 

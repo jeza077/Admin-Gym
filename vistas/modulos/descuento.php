@@ -8,7 +8,7 @@
           </div>
           <div class="col-sm-6">
               <button class="btn btn-orange float-right"  data-toggle="modal" data-target="#modalNuevoDescuento">
-              Nuevo Descuento     
+              Nuevo descuento     
               </button>
               <button class="btn btn-danger btnExportarDescuento float-right mr-3 ">
                 Exportar PDF      
@@ -20,81 +20,74 @@
         </div>
       </div><!-- /.container-fluid -->
   </section>  
-         <?php
-            $descripcionEvento = " Consulto la pantalla de Descuento";
-            $accion = "consulta";
 
-            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
+         <?php
+            $descripcionEvento = "".$_SESSION["usuario"]." Consultó la pantalla de descuento";
+            $accion = "Consulta";
+
+            $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 23,$accion, $descripcionEvento);
 
           ?>
         
 
     <section class="content">
 
-        <div class="card">
+      <div class="card">
 
-            <div class="card-body">
+        <div class="card-body">
+            <?php
+            
+            ?>
+
+            <table class="table table-bordered table-striped tablas text-center">                
+              <thead>
+                <tr>
+                    <th scope="col">N.°</th>
+                    <th scope="col">Tipo de descuento</th>
+                    <th scope="col">Porcentaje</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Acciones</th>
+                    
+                </tr>
+              </thead>
+              <tbody>  
                 <?php
-                $descripcionEvento = " Consulto la pantalla de mantenimiento";
-                $accion = "consulta";
+                  // $tabla = "tbl_descuento";
+                  $item = null;
+                  $valor = null;
+                  
+                  $descuento = ControladorMantenimientos::ctrMostrarDescuento($item,$valor);
+                  // var_dump($descuento);
 
-                $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 6,$accion, $descripcionEvento);
-    
-                ?>
+                  foreach ($descuento as $key => $value){
+                  echo '
+                      <tr>
+                  
+                      <td>'.($key + 1).'</td>
+                      <td>'.$value["tipo_descuento"].'</td>
+                      <td>'.$value["valor_descuento"].'%</td>';
+                      if($value['estado'] != 0){
+                          echo '<td><button class="btn btn-success btn-md btnActivarDescuento" idDescuento="'.$value["id_descuento"].'" estadoDescuento="0">Activado</button></td>';
+                      }else{
+                          echo '<td><button class="btn btn-danger btn-md btnActivarDescuento" idDescuento="'.$value["id_descuento"].'" estadoDescuento="1">Desactivado</button></td>';
+                      } 
+                      echo'
+                        <td>
+                        <button class="btn btn-warning btnEditarDescuento" editarIdDescuento="'.$value["id_descuento"].'" data-toggle="modal" data-target="#modalEditarDescuento" data-toggle="tooltip" data-placement="left" title="Editar"><i class="fas fa-pencil-alt" style="color:#fff"></i></button>
 
-              <!--========================================================
-                      DESCUENTOS
-                  ==========================================================-->   
-                <table class="table table-striped table-bordered tablas text-center">
-                    
-                    <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Tipo descuento</th>
-                        <th scope="col">Precio</th>
-                        <th scope="col">Estado</th>
-                        <th scope="col">Acciones</th>
-                        
-                    </tr>
-                    </thead>
-                    <tbody>  
-                        <?php
-                                // $tabla = "tbl_descuento";
-                                $item = null;
-                                $valor = null;
-                                
-                                $descuento = ControladorMantenimientos::ctrMostrarDescuento($item,$valor);
-                                // var_dump($descuento);
-
-                                foreach ($descuento as $key => $value){
-                                echo '
-                                    <tr>
-                                
-                                    <td>'.($key + 1).'</td>
-                                    <td>'.$value["tipo_descuento"].'</td>
-                                    <td>'.$value["valor_descuento"].'</td>';
-                                    if($value['estado'] != 0){
-                                        echo '<td><button class="btn btn-success btn-md btnActivar" idDescuento="'.$value["id_descuento"].'" estadoDescuento="0">Activado</button></td>';
-                                    }else{
-                                        echo '<td><button class="btn btn-danger btn-md btnActivar" idDescuento="'.$value["id_descuento"].'" estadoDescuento="1">Desactivado</button></td>';
-                                    } 
-                                    echo'
-                                      <td>
-                                      <button class="btn btn-warning btnEditarDescuento" editarIdDescuento="'.$value["id_descuento"].'" data-toggle="modal" data-target="#modalEditarDescuento"><i class="fas fa-pencil-alt" style="color:#fff"></i></button>
-
-                                      <button class="btn btn-danger btnEliminarDescuento" ideliminarDescuento="'.$value["id_descuento"].'"><i class="fas fa-trash-alt"></i></button></td>
-                                    
-                                    </tr> ';
-                                    
-                                }       
-                        ?>                
-                    
-                    </tbody>
-                </table>
-               
-            </div>
-
+                        <button class="btn btn-danger btnEliminarDescuento" ideliminarDescuento="'.$value["id_descuento"].'" data-toggle="tooltip" data-placement="left" title="Borrar"><i class="fas fa-trash-alt"></i></button></td>
+                      
+                      </tr> ';
+                      
+                  }       
+                ?>                
+            
+              </tbody>
+            </table>
+            
         </div>
+
+      </div>
 
     </section>
 
@@ -117,7 +110,7 @@ MODAL NUEVO DESCUENTO
         ======================================-->
 
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Nuevo Descuento</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Nuevo descuento</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -128,19 +121,15 @@ MODAL NUEVO DESCUENTO
         ======================================-->
 
         <div class="modal-body">
-          <div class="card-body">
-            <div class="form-group col-md-12">
-              <label for="Rol">Descuento</label>
-              <input type="text" class="form-control nombre mayus" name="nuevoDescuento" value="" required>
-            </div>
-
-            <div class="form-group col-md-12">
-              <label for="Descripcion">Valor</label>
-              <input type="textarea" class="form-control preciom" name="nuevoValor" value="" required>
-            </div>
-
+          <div class="form-group col-md-12">
+            <label for="Rol">Tipo descuento</label>
+            <input type="text" class="form-control nombre mayus" name="nuevoDescuento" value="" placeholder="Ingrese el descuento" required>
           </div>
 
+          <div class="form-group col-md-12">
+            <label for="Descripcion">Porcentaje descuento</label>
+            <input type="textarea" class="form-control preciom sinCaracteres cantidadDecimal" name="nuevoValor" value="" placeholder="Ingrese el porcentaje" required>
+          </div>
         </div>
 
         <!--=====================================
@@ -149,7 +138,7 @@ MODAL NUEVO DESCUENTO
 
         <div class="modal-footer">
           <button type="submit" class="btn btn-primary">Guardar</button>
-          <button type="button" class="btn btn-orange" data-dismiss="modal">Salir</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
         </div>
 
         <?php
@@ -175,7 +164,7 @@ MODAL NUEVO DESCUENTO
 
 
 <!--=====================================
-MODAL NUEVO DESCUENTO
+MODAL EDITAR DESCUENTO
 ======================================-->
 
 <div class="modal fade" id="modalEditarDescuento" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -191,7 +180,7 @@ MODAL NUEVO DESCUENTO
         ======================================-->
 
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Editar Descuento</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Editar descuento</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -204,13 +193,13 @@ MODAL NUEVO DESCUENTO
         <div class="modal-body">
 
             <div class="form-group col-md-12">
-              <label for="Rol">Descuento</label>
+              <label for="Rol">Tipo descuento</label>
               <input type="text" class="form-control nombre mayus" id="editarDescuento" name="editarDescuento" value="" required>
             </div>
 
             <div class="form-group col-md-12">
-              <label for="Descripcion">Valor</label>
-              <input type="textarea" class="form-control preciom" id="editarValorDescuento" name="editarValorDescuento" value="" required>
+              <label for="Descripcion">Porcentaje descuento</label>
+              <input type="textarea" class="form-control preciom sinCaracteres cantidadDecimal" id="editarValorDescuento" name="editarValorDescuento" value="" required>
             </div>
             <input type="hidden" id="editarIdDescuento" name="editarIdDescuento">
         </div>
@@ -221,12 +210,12 @@ MODAL NUEVO DESCUENTO
 
         <div class="modal-footer">
           <button type="submit" class="btn btn-primary">Guardar</button>
-          <button type="button" class="btn btn-orange" data-dismiss="modal">Salir</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
         </div>
 
         <?php
 
-           $editarDescuento = new ControladorGlobales();
+           $editarDescuento = new ControladorMantenimientos();
            $editarDescuento->ctrEditarDescuento();
 
         ?>
@@ -248,7 +237,7 @@ MODAL NUEVO DESCUENTO
 
 <?php
 
- $borrarDescuento = new ControladorGlobales();
+ $borrarDescuento = new ControladorMantenimientos();
  $borrarDescuento->ctrBorrarDescuento();
 
 ?>

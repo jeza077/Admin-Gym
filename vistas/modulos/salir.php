@@ -1,5 +1,5 @@
 <?php
- $descripcionEvento = " Salio del sistema";
+ $descripcionEvento = " Salió del sistema";
  $accion = "salir";
  $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 1,$accion, $descripcionEvento);
 session_destroy();

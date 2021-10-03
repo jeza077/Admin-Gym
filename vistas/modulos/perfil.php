@@ -13,10 +13,10 @@
     <!--Bitacora cod.-->
 
       <?php
-          $descripcionEvento = "Consulta a Perfil";
+          $descripcionEvento = "".$_SESSION["usuario"]." Consultó el perfil";
           $accion = "Consulta";
 
-          $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 7,$accion, $descripcionEvento);
+          $bitacoraConsulta = ControladorMantenimientos::ctrBitacoraInsertar($_SESSION["id_usuario"], 28,$accion, $descripcionEvento);
       ?>
 
     <!-- Main content -->
@@ -27,15 +27,15 @@
           <div class="col-md-4">
             <div class="ajustes ajuste-cuenta" idUsuario="<?php echo $_SESSION["id_persona"]?>">
               <h3>Ajustes de cuenta</h3>
-              <p>Detalles acerca de tu informacion personal</p>
+              <p>Detalles acerca de su información personal</p>
             </div>
             <div class="ajustes ajuste-password">
               <h3>Contraseña</h3>
-              <p>Cambia la contraseña de tu cuenta</p>
+              <p>Cambie la contraseña de su cuenta</p>
             </div>
             <div class="ajustes ajuste-preguntas" idUsuario="<?php echo $_SESSION["id_usuario"]?>">
               <h3>Preguntas de seguridad</h3>
-              <p>Cambia las preguntas/respuestas asociadas a tu cuenta</p>
+              <p>Cambie las preguntas/respuestas asociadas a su cuenta</p>
             </div>
           </div>
             
@@ -68,7 +68,7 @@
                 </div>
                 
                 <div class="col-md-4 mt-4 contenedorBtnEditarFoto">
-                    <a href="javascript:void(0);" class="btn btn-outline-orange btn-block btnEditarFoto"><b>Cambia tu foto</b></a>                  
+                    <a href="javascript:void(0);" class="btn btn-outline-orange btn-block btnEditarFoto"><b>Cambie su foto</b></a>                  
                 </div>
 
                 <div class="col-md-8 mt-4 editarFotoUsuario">
@@ -99,13 +99,13 @@
 
               <ul class="list-group list-group-unbordered mb-3">
                 <li class="list-group-item">
-                  <b>Nombre Usuario:</b> <a class="float-right text-muted"><?php echo $usuario["usuario"]?></a>
+                  <b>Nombre usuario:</b> <a class="float-right text-muted"><?php echo $usuario["usuario"]?></a>
                 </li>
                 <li class="list-group-item">
                   <b>Correo:</b> <a class="float-right text-muted"><?php echo $usuario["correo"]?></a>
                 </li>
                 <li class="list-group-item">
-                  <b>Fecha de Vencimiento</b> <a class="float-right text-muted"><?php echo $usuario["fecha_vencimiento"]?></a>
+                  <b>Fecha de vencimiento:</b> <a class="float-right text-muted"><?php echo $usuario["fecha_vencimiento"]?></a>
                 </li>
               </ul>
 
