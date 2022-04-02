@@ -521,9 +521,10 @@ exportarPdf('.btnExportarCompras', 'compras');
 //** ------------------------------------*/
 //         BOTON EDITAR VENTAS
 // --------------------------------------*/ 
-$(".tablaVentas").on("click", ".btnEditarVenta", function(){
-
+$(".tablas").on("click", ".btnEditarVenta", function(){
+  // console.log('click')
 	var idVenta = $(this).attr("idVenta");
+  // console.log(idVenta);
 
 	window.location = "index.php?ruta=editar-venta&idVenta="+idVenta;
 
@@ -534,7 +535,7 @@ $(".tablaVentas").on("click", ".btnEditarVenta", function(){
 /*=============================================
 BORRAR VENTA
 =============================================*/
-$(".tablaVentas").on("click", ".btnEliminarVenta", function(){
+$(".tablas").on("click", ".btnEliminarVenta", function(){
 
   var idVenta = $(this).attr("idVenta");
 

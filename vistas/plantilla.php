@@ -35,6 +35,8 @@
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <!-- <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"> -->
+
+
 </head>
 <?php
 		date_default_timezone_set('America/Tegucigalpa');
@@ -239,8 +241,10 @@
 
     ?>
 
-<!-- jQuery -->
-<script src="vistas/plugins/jquery/jquery.min.js"></script>
+
+
+  <!-- jQuery -->
+  <script src="vistas/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
 <script src="vistas/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- SweetAlert 2 -->
@@ -286,6 +290,7 @@
 <script src="vistas/js/mantenimiento.js"></script>
 <script src="vistas/js/respaldo.js"></script>
 <script src="vistas/js/inventario.js"></script>
+
 
 </body>
 </html>
